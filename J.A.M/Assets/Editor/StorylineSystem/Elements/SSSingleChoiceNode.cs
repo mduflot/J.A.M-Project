@@ -4,6 +4,7 @@ using UnityEngine;
 namespace SS.Elements
 {
     using Enumerations;
+    using Utilities;
     
     public class SSSingleChoiceNode : SSNode
     {
@@ -24,8 +25,7 @@ namespace SS.Elements
             
             foreach (string choice in Choices)
             {
-                Port choicePort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single,
-                    typeof(bool));
+                Port choicePort = this.CreatePort(choice); 
 
                 choicePort.portName = choice;
                 

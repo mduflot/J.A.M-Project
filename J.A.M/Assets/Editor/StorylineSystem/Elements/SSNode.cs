@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 namespace SS.Elements
 {
     using Enumerations;
+    using Utilities;
     
     public class SSNode : Node
     {
@@ -29,21 +30,17 @@ namespace SS.Elements
         public virtual void Draw()
         {
             /* TITLE CONTAINER */
-            
-            TextField nodeNameTextField = new TextField()
-            {
-                value = NodeName
-            };
-            
-            nodeNameTextField.AddToClassList("ss-node__text-field");
-            nodeNameTextField.AddToClassList("ss-node__filename-text-field");
-            nodeNameTextField.AddToClassList("ss-node__text-field__hidden");
+
+            TextField nodeNameTextField = SSElementUtility.CreateTextField(NodeName);
+
+            nodeNameTextField.AddClasses("ss-node__text-field", "ss-node__filename-text-field",
+                "ss-node__text-field__hidden");
 
             titleContainer.Insert(0, nodeNameTextField);
 
             /* INPUT CONTAINER */
 
-            Port inputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(bool));
+            Port inputPort = this.CreatePort("Node Connection", Orientation.Horizontal, Direction.Input, Port.Capacity.Multi);
 
             inputPort.portName = "Node Connection";
 
@@ -55,18 +52,11 @@ namespace SS.Elements
             
             customDataContainer.AddToClassList("ss-node__custom-data-container");
 
-            Foldout textFoldout = new Foldout()
-            {
-                text = "Node Text."
-            };
+            Foldout textFoldout = SSElementUtility.CreateFoldout("Node Text");
 
-            TextField textTextField = new TextField()
-            {
-                value = Text
-            };
-            
-            textTextField.AddToClassList("ss-node__text-field");
-            textTextField.AddToClassList("ss-node__quote-text-field");
+            TextField textTextField = SSElementUtility.CreateTextArea(Text);
+
+            textTextField.AddClasses("ss-node__text-field", "ss-node__quote-text-field");
             
             textFoldout.Add(textTextField);
             

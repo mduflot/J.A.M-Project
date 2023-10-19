@@ -1,3 +1,4 @@
+using SS.Utilities;
 using UnityEditor;
 using UnityEngine.UIElements;
 
@@ -17,6 +18,8 @@ namespace SS.Windows
 
             AddStyles();
         }
+        
+        #region Elements Addition
 
         private void AddGraphView()
         {
@@ -29,9 +32,9 @@ namespace SS.Windows
 
         private void AddStyles()
         {
-            StyleSheet styleSheet = (StyleSheet) EditorGUIUtility.Load("StorylineSystem/SSVariables.uss");
-            
-            rootVisualElement.styleSheets.Add(styleSheet);
+            rootVisualElement.AddStyleSheets("StorylineSystem/SSVariables.uss");
         }
+        
+        #endregion
     }
 }
