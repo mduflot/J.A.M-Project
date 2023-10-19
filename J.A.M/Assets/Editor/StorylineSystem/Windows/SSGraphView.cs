@@ -1,4 +1,4 @@
-using SS.Elements;
+using System;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 namespace SS.Windows
 {
     using Elements;
+    using Enumerations;
 
     public class SSGraphView : GraphView
     {
@@ -22,25 +23,27 @@ namespace SS.Windows
         {
             SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
 
-            this.AddManipulator(CreateNodeContextualMenu());
+            this.AddManipulator(new ContentDragger());
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
-
-            this.AddManipulator(new ContentDragger());
+            
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Single Choice)", SSNodeType.SingleChoice));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Multiple Choice)", SSNodeType.MultipleChoice));
         }
 
-        private IManipulator CreateNodeContextualMenu()
+        private IManipulator CreateNodeContextualMenu(string actionTitle, SSNodeType nodeType)
         {
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
-                menuEvent => menuEvent.menu.AppendAction("Add Node", actionEvent => AddElement(CreateNode(actionEvent.eventInfo.localMousePosition)))
+                menuEvent => menuEvent.menu.AppendAction(actionTitle, actionEvent => AddElement(CreateNode(nodeType, actionEvent.eventInfo.localMousePosition)))
             );
 
             return contextualMenuManipulator;
         }
 
-        private SSNode CreateNode(Vector2 position)
+        private SSNode CreateNode(SSNodeType nodeType, Vector2 position)
         {
-            SSNode node = new SSNode();
+            Type nodeTypeSystem = Type.GetType($"SS.Elements.SS{nodeType}Node");
+            SSNode node = (SSNode) Activator.CreateInstance(nodeTypeSystem);
 
             node.Initialize(position);
             node.Draw();
@@ -59,9 +62,11 @@ namespace SS.Windows
 
         private void AddStyles()
         {
-            StyleSheet styleSheet = (StyleSheet)EditorGUIUtility.Load("StorylineSystem/SSGraphViewStyles.uss");
+            StyleSheet graphViewStyleSheet = (StyleSheet)EditorGUIUtility.Load("StorylineSystem/SSGraphViewStyles.uss");
+            StyleSheet nodeStyleSheet = (StyleSheet)EditorGUIUtility.Load("StorylineSystem/SSNodeStyles.uss");
 
-            styleSheets.Add(styleSheet);
+            styleSheets.Add(graphViewStyleSheet);
+            styleSheets.Add(nodeStyleSheet);
         }
     }
 }
