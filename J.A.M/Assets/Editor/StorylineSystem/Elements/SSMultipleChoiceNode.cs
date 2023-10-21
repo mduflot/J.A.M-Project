@@ -6,12 +6,13 @@ namespace SS.Elements
 {
     using Enumerations;
     using Utilities;
+    using Windows;
 
     public class SSMultipleChoiceNode : SSNode
     {
-        public override void Initialize(Vector2 position)
+        public override void Initialize(SSGraphView ssGraphView, Vector2 position)
         {
-            base.Initialize(position);
+            base.Initialize(ssGraphView, position);
 
             NodeType = SSNodeType.MultipleChoice;
 

@@ -7,6 +7,7 @@ namespace SS.Elements
 {
     using Enumerations;
     using Utilities;
+    using Windows;
     
     public class SSNode : Node
     {
@@ -14,12 +15,19 @@ namespace SS.Elements
         public List<string> Choices { get; set; }
         public string Text { get; set; }
         public SSNodeType NodeType { get; set; }
+        public SSGroup Group { get; set; }
 
-        public virtual void Initialize(Vector2 position)
+        private SSGraphView graphView;
+        private Color defaultBackgroundColor;
+
+        public virtual void Initialize(SSGraphView ssGraphView, Vector2 position)
         {
             NodeName = "NodeName";
             Choices = new List<string>();
             Text = "Node text.";
+
+            graphView = ssGraphView;
+            defaultBackgroundColor = new Color(29f / 255f, 29 / 255f, 30 / 255f);
             
             SetPosition(new Rect(position, Vector2.zero));
             
@@ -31,7 +39,27 @@ namespace SS.Elements
         {
             /* TITLE CONTAINER */
 
-            TextField nodeNameTextField = SSElementUtility.CreateTextField(NodeName);
+            TextField nodeNameTextField = SSElementUtility.CreateTextField(NodeName, callback =>
+            {
+                if (Group == null)
+                {
+                    graphView.RemoveUngroupedNode(this);
+
+                    NodeName = callback.newValue;
+                
+                    graphView.AddUngroupedNode(this);
+
+                    return;
+                }
+
+                SSGroup currentGroup = Group;
+                
+                graphView.RemoveGroupedNode(this, Group);
+
+                NodeName = callback.newValue;
+                
+                graphView.AddGroupedNode(this, currentGroup);
+            });
 
             nodeNameTextField.AddClasses("ss-node__text-field", "ss-node__filename-text-field",
                 "ss-node__text-field__hidden");
@@ -63,6 +91,16 @@ namespace SS.Elements
             customDataContainer.Add(textFoldout);
             
             extensionContainer.Add(customDataContainer);
+        }
+
+        public void SetErrorStyle(Color color)
+        {
+            mainContainer.style.backgroundColor = color;
+        }
+
+        public void ResetStyle()
+        {
+            mainContainer.style.backgroundColor = defaultBackgroundColor;
         }
     }
 }

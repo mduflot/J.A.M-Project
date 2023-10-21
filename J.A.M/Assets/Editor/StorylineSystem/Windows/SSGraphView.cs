@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 namespace SS.Windows
 {
+    using Data.Error;
     using Elements;
     using Enumerations;
     using Utilities;
@@ -14,14 +15,27 @@ namespace SS.Windows
     {
         private SSEditorWindow editorWindow;
         private SSSearchWindow searchWindow;
+
+        private SerializableDictionary<string, SSNodeErrorData> ungroupedNodes;
+        private SerializableDictionary<string, SSGroupErrorData> groups;
+        private SerializableDictionary<Group, SerializableDictionary<string, SSNodeErrorData>> groupedNodes;
         
         public SSGraphView(SSEditorWindow ssEditorWindow)
         {
             editorWindow = ssEditorWindow;
+
+            ungroupedNodes = new SerializableDictionary<string, SSNodeErrorData>();
+            groups = new SerializableDictionary<string, SSGroupErrorData>();
+            groupedNodes = new SerializableDictionary<Group, SerializableDictionary<string, SSNodeErrorData>>();
             
             AddManipulators();
             AddSearchWindow();
             AddGridBackground();
+
+            OnElementsDeleted();
+            OnGroupElementsAdded();
+            OnGroupElementsRemoved();
+            OnGroupRenamed();
 
             AddStyles();
         }
@@ -95,12 +109,11 @@ namespace SS.Windows
 
         #region Elements Creation
 
-        public GraphElement CreateGroup(string title, Vector2 position)
+        public SSGroup CreateGroup(string title, Vector2 position)
         {
-            Group group = new Group()
-            {
-                title = title
-            };
+            SSGroup group = new SSGroup(title, position);
+
+            AddGroup(group);
             
             group.SetPosition(new Rect(position, Vector2.zero));
 
@@ -112,12 +125,294 @@ namespace SS.Windows
             Type nodeTypeSystem = Type.GetType($"SS.Elements.SS{nodeType}Node");
             SSNode node = (SSNode) Activator.CreateInstance(nodeTypeSystem ?? throw new InvalidOperationException());
 
-            node.Initialize(position);
+            node.Initialize(this, position);
             node.Draw();
+
+            AddUngroupedNode(node);
 
             return node;
         }
         
+        #endregion
+        
+        #region Callbacks
+
+        private void OnElementsDeleted()
+        {
+            deleteSelection = (operationName, askUser) =>
+            {
+                Type groupType = typeof(SSGroup);
+
+                List<SSGroup> groupsToDelete = new List<SSGroup>();
+                
+                List<SSNode> nodesToDelete = new List<SSNode>();
+                
+                foreach (GraphElement element in selection)
+                {
+                    if (element is SSNode node)
+                    {
+                        nodesToDelete.Add(node);
+
+                        continue;
+                    }
+
+                    if (element.GetType() != groupType)
+                    {
+                        continue;
+                    }
+
+                    SSGroup group = (SSGroup)element;
+                    
+                    RemoveGroup(group);
+                    
+                    groupsToDelete.Add(group);
+                }
+
+                foreach (SSGroup group in groupsToDelete)
+                {
+                    RemoveElement(group);
+                }
+
+                foreach (SSNode node in nodesToDelete)
+                {
+                    if (node.Group != null)
+                    {
+                        node.Group.RemoveElement(node);
+                    }
+                    RemoveUngroupedNode(node);
+                    
+                    RemoveElement(node);
+                }
+            };
+        }
+
+        private void OnGroupElementsAdded()
+        {
+            elementsAddedToGroup = (group, elements) =>
+            {
+                foreach (GraphElement element in elements)
+                {
+                    if (!(element is SSNode))
+                    {
+                        continue;
+                    }
+
+                    SSGroup nodeGroup = (SSGroup) group;
+                    SSNode node = (SSNode) element;
+                    
+                    RemoveUngroupedNode(node);
+                    AddGroupedNode(node, nodeGroup);
+                }
+            };
+        }
+
+        private void OnGroupElementsRemoved()
+        {
+            elementsRemovedFromGroup = (group, elements) =>
+            {
+                foreach (GraphElement element in elements)
+                {
+                    if (!(element is SSNode))
+                    {
+                        continue;
+                    }
+
+                    SSNode node = (SSNode) element;
+
+                    RemoveGroupedNode(node, group);
+                    AddUngroupedNode(node);
+                }
+            };
+        }
+
+        private void OnGroupRenamed()
+        {
+            groupTitleChanged = (group, newTitle) =>
+            {
+                SSGroup ssGroup = (SSGroup)group;
+                
+                RemoveGroup(ssGroup);
+
+                ssGroup.oldTitle = newTitle;
+                
+                AddGroup(ssGroup);
+            };
+        }
+
+        #endregion
+        
+        #region Repeated Elements
+
+        public void AddUngroupedNode(SSNode node)
+        {
+            string nodeName = node.NodeName;
+
+            if (!ungroupedNodes.ContainsKey(nodeName))
+            {
+                SSNodeErrorData nodeErrorData = new SSNodeErrorData();
+                
+                nodeErrorData.Nodes.Add(node);
+                
+                ungroupedNodes.Add(nodeName, nodeErrorData);
+
+                return;
+            }
+
+            List<SSNode> ungroupedNodesList = ungroupedNodes[nodeName].Nodes;
+            
+            ungroupedNodesList.Add(node);
+
+            Color errorColor = ungroupedNodes[nodeName].ErrorData.Color;
+            
+            node.SetErrorStyle(errorColor);
+
+            if (ungroupedNodesList.Count == 2)
+            {
+                ungroupedNodesList[0].SetErrorStyle(errorColor);
+            }
+        }
+
+        public void RemoveUngroupedNode(SSNode node)
+        {
+            string nodeName = node.NodeName;
+            
+            List<SSNode> ungroupedNodesList = ungroupedNodes[nodeName].Nodes;
+
+            ungroupedNodesList.Remove(node);
+            
+            node.ResetStyle();
+
+            if (ungroupedNodesList.Count == 1)
+            {
+                ungroupedNodesList[0].ResetStyle();
+
+                return;
+            }
+            
+            if (ungroupedNodesList.Count == 0)
+            {
+                ungroupedNodes.Remove(nodeName);
+            }
+        }
+        
+        private void AddGroup(SSGroup group)
+        {
+            string groupName = group.title;
+
+            if (!groups.ContainsKey(groupName))
+            {
+                SSGroupErrorData groupErrorData = new SSGroupErrorData();
+                
+                groupErrorData.Groups.Add(group);
+                
+                groups.Add(groupName, groupErrorData);
+
+                return;
+            }
+
+            List<SSGroup> groupsList = groups[groupName].Groups;
+            
+            groupsList.Add(group);
+
+            Color errorColor = groups[groupName].ErrorData.Color;
+            
+            group.SetErrorStyle(errorColor);
+
+            if (groupsList.Count == 2)
+            {
+                groupsList[0].SetErrorStyle(errorColor);
+            }
+        }
+        
+        private void RemoveGroup(SSGroup group)
+        {
+            string oldGroupName = group.oldTitle;
+
+            List<SSGroup> groupsList = groups[oldGroupName].Groups;
+            
+            groupsList.Remove(group);
+            
+            group.ResetStyle();
+
+            if (groupsList.Count == 1)
+            {
+                groupsList[0].ResetStyle();
+
+                return;
+            }
+
+            if (groupsList.Count == 0)
+            {
+                groups.Remove(oldGroupName);
+            }
+        }
+        
+        public void AddGroupedNode(SSNode node, SSGroup group)
+        {
+            string nodeName = node.NodeName;
+
+            node.Group = group;
+
+            if (!groupedNodes.ContainsKey(group))
+            {
+                groupedNodes.Add(group, new SerializableDictionary<string, SSNodeErrorData>());
+            }
+
+            if (!groupedNodes[group].ContainsKey(nodeName))
+            {
+                SSNodeErrorData nodeErrorData = new SSNodeErrorData();
+                
+                nodeErrorData.Nodes.Add(node);
+                
+                groupedNodes[group].Add(nodeName, nodeErrorData);
+
+                return;
+            }
+
+            List<SSNode> groupedNodesList = groupedNodes[group][nodeName].Nodes;
+            
+            groupedNodesList.Add(node);
+
+            Color errorColor = groupedNodes[group][nodeName].ErrorData.Color;
+            
+            node.SetErrorStyle(errorColor);
+
+            if (groupedNodesList.Count == 2)
+            {
+                groupedNodesList[0].SetErrorStyle(errorColor);
+            }
+        }
+        
+        public void RemoveGroupedNode(SSNode node, Group group)
+        {
+            string nodeName = node.NodeName;
+
+            node.Group = null;
+
+            List<SSNode> groupedNodesList = groupedNodes[group][nodeName].Nodes;
+
+            groupedNodesList.Remove(node);
+            
+            node.ResetStyle();
+
+            if (groupedNodesList.Count == 1)
+            {
+                groupedNodesList[0].ResetStyle();
+
+                return;
+            }
+
+            if (groupedNodesList.Count == 0)
+            {
+                groupedNodes[group].Remove(nodeName);
+
+                if (groupedNodes[group].Count == 0)
+                {
+                    groupedNodes.Remove(group);
+                }
+            }
+        }
+
         #endregion
 
         #region Elements Addition
