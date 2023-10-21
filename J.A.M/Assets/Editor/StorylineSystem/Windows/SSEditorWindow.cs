@@ -23,7 +23,7 @@ namespace SS.Windows
 
         private void AddGraphView()
         {
-            SSGraphView graphView = new SSGraphView();
+            SSGraphView graphView = new SSGraphView(this);
             
             graphView.StretchToParentSize();
             
