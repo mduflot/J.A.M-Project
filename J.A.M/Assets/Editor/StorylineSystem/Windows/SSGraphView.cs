@@ -90,7 +90,7 @@ namespace SS.Windows
         private IManipulator CreateGroupContextualMenu()
         {
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
-                menuEvent => menuEvent.menu.AppendAction("Add Group", actionEvent => AddElement(CreateGroup("NodeGroup", GetLocalMousePosition(actionEvent.eventInfo.localMousePosition))))
+                menuEvent => menuEvent.menu.AppendAction("Add Group", actionEvent => CreateGroup("NodeGroup", GetLocalMousePosition(actionEvent.eventInfo.localMousePosition)))
             );
             
             return contextualMenuManipulator;
@@ -115,7 +115,21 @@ namespace SS.Windows
 
             AddGroup(group);
             
+            AddElement(group);
+            
             group.SetPosition(new Rect(position, Vector2.zero));
+
+            foreach (GraphElement selectedElement in selection)
+            {
+                if (!(selectedElement is SSNode))
+                {
+                    continue;
+                }
+
+                SSNode node = (SSNode)selectedElement;
+                
+                group.AddElement(node);
+            }
 
             return group;
         }
@@ -142,9 +156,10 @@ namespace SS.Windows
             deleteSelection = (operationName, askUser) =>
             {
                 Type groupType = typeof(SSGroup);
+                Type edgeType = typeof(Edge);
 
                 List<SSGroup> groupsToDelete = new List<SSGroup>();
-                
+                List<Edge> edgesToDelete = new List<Edge>();
                 List<SSNode> nodesToDelete = new List<SSNode>();
                 
                 foreach (GraphElement element in selection)
@@ -156,6 +171,15 @@ namespace SS.Windows
                         continue;
                     }
 
+                    if (element.GetType() == edgeType)
+                    {
+                        Edge edge = (Edge) element;
+                        
+                        edgesToDelete.Add(edge);
+
+                        continue;
+                    }
+
                     if (element.GetType() != groupType)
                     {
                         continue;
@@ -163,15 +187,33 @@ namespace SS.Windows
 
                     SSGroup group = (SSGroup)element;
                     
-                    RemoveGroup(group);
-                    
                     groupsToDelete.Add(group);
                 }
 
                 foreach (SSGroup group in groupsToDelete)
                 {
+                    List<SSNode> groupNodes = new List<SSNode>();
+
+                    foreach (GraphElement groupElement in group.containedElements)
+                    {
+                        if (!(groupElement is SSNode))
+                        {
+                            continue;
+                        }
+
+                        SSNode groupNode = (SSNode) groupElement;
+                        
+                        groupNodes.Add(groupNode);
+                    }
+                    
+                    group.RemoveElements(groupNodes);
+                    
+                    RemoveGroup(group);
+                    
                     RemoveElement(group);
                 }
+                
+                DeleteElements(edgesToDelete);
 
                 foreach (SSNode node in nodesToDelete)
                 {
@@ -179,7 +221,10 @@ namespace SS.Windows
                     {
                         node.Group.RemoveElement(node);
                     }
+                    
                     RemoveUngroupedNode(node);
+                    
+                    node.DisconnectAllPorts();
                     
                     RemoveElement(node);
                 }

@@ -74,9 +74,7 @@ namespace SS.Windows
                 
                 case Group _:
                 {
-                    SSGroup group = graphView.CreateGroup("NodeGroup", localMousePosition);
-
-                    graphView.AddElement(group);
+                    graphView.CreateGroup("NodeGroup", localMousePosition);
                     
                     return true;
                 }
