@@ -39,7 +39,7 @@ namespace SS.Elements
         {
             /* TITLE CONTAINER */
 
-            TextField nodeNameTextField = SSElementUtility.CreateTextField(NodeName, callback =>
+            TextField nodeNameTextField = SSElementUtility.CreateTextField(NodeName, null, callback =>
             {
                 if (Group == null)
                 {

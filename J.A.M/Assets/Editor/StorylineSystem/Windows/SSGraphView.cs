@@ -19,6 +19,31 @@ namespace SS.Windows
         private SerializableDictionary<string, SSNodeErrorData> ungroupedNodes;
         private SerializableDictionary<string, SSGroupErrorData> groups;
         private SerializableDictionary<Group, SerializableDictionary<string, SSNodeErrorData>> groupedNodes;
+
+        private int repeatedNamesAmount;
+
+        public int RepeatedNamesAmount
+        {
+            get
+            {
+                return repeatedNamesAmount;
+            }
+
+            set
+            {
+                repeatedNamesAmount = value;
+
+                if (repeatedNamesAmount == 0)
+                {
+                    editorWindow.EnableSaving();
+                }
+
+                if (repeatedNamesAmount == 1)
+                {
+                    editorWindow.DisableSaving();
+                }
+            }
+        }
         
         public SSGraphView(SSEditorWindow ssEditorWindow)
         {
@@ -313,6 +338,8 @@ namespace SS.Windows
 
             if (ungroupedNodesList.Count == 2)
             {
+                ++RepeatedNamesAmount;
+                
                 ungroupedNodesList[0].SetErrorStyle(errorColor);
             }
         }
@@ -329,6 +356,7 @@ namespace SS.Windows
 
             if (ungroupedNodesList.Count == 1)
             {
+                --RepeatedNamesAmount;
                 ungroupedNodesList[0].ResetStyle();
 
                 return;
@@ -365,6 +393,8 @@ namespace SS.Windows
 
             if (groupsList.Count == 2)
             {
+                ++RepeatedNamesAmount;
+                
                 groupsList[0].SetErrorStyle(errorColor);
             }
         }
@@ -381,6 +411,8 @@ namespace SS.Windows
 
             if (groupsList.Count == 1)
             {
+                --RepeatedNamesAmount;
+                
                 groupsList[0].ResetStyle();
 
                 return;
@@ -424,6 +456,8 @@ namespace SS.Windows
 
             if (groupedNodesList.Count == 2)
             {
+                ++RepeatedNamesAmount;
+                
                 groupedNodesList[0].SetErrorStyle(errorColor);
             }
         }
@@ -442,6 +476,8 @@ namespace SS.Windows
 
             if (groupedNodesList.Count == 1)
             {
+                --RepeatedNamesAmount;
+                
                 groupedNodesList[0].ResetStyle();
 
                 return;
