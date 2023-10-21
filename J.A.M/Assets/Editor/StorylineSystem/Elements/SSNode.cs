@@ -41,11 +41,15 @@ namespace SS.Elements
 
             TextField nodeNameTextField = SSElementUtility.CreateTextField(NodeName, null, callback =>
             {
+                TextField target = (TextField) callback.target;
+
+                target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
+                
                 if (Group == null)
                 {
                     graphView.RemoveUngroupedNode(this);
 
-                    NodeName = callback.newValue;
+                    NodeName = target.value;
                 
                     graphView.AddUngroupedNode(this);
 
@@ -56,7 +60,7 @@ namespace SS.Elements
                 
                 graphView.RemoveGroupedNode(this, Group);
 
-                NodeName = callback.newValue;
+                NodeName = target.value;
                 
                 graphView.AddGroupedNode(this, currentGroup);
             });

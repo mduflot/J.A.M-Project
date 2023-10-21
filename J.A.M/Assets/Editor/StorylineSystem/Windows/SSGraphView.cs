@@ -300,10 +300,12 @@ namespace SS.Windows
             groupTitleChanged = (group, newTitle) =>
             {
                 SSGroup ssGroup = (SSGroup)group;
+
+                ssGroup.title = newTitle.RemoveWhitespaces().RemoveSpecialCharacters();
                 
                 RemoveGroup(ssGroup);
 
-                ssGroup.oldTitle = newTitle;
+                ssGroup.oldTitle = ssGroup.title;
                 
                 AddGroup(ssGroup);
             };
@@ -315,7 +317,7 @@ namespace SS.Windows
 
         public void AddUngroupedNode(SSNode node)
         {
-            string nodeName = node.NodeName;
+            string nodeName = node.NodeName.ToLower();
 
             if (!ungroupedNodes.ContainsKey(nodeName))
             {
@@ -346,7 +348,7 @@ namespace SS.Windows
 
         public void RemoveUngroupedNode(SSNode node)
         {
-            string nodeName = node.NodeName;
+            string nodeName = node.NodeName.ToLower();
             
             List<SSNode> ungroupedNodesList = ungroupedNodes[nodeName].Nodes;
 
@@ -370,7 +372,7 @@ namespace SS.Windows
         
         private void AddGroup(SSGroup group)
         {
-            string groupName = group.title;
+            string groupName = group.title.ToLower();
 
             if (!groups.ContainsKey(groupName))
             {
@@ -401,7 +403,7 @@ namespace SS.Windows
         
         private void RemoveGroup(SSGroup group)
         {
-            string oldGroupName = group.oldTitle;
+            string oldGroupName = group.oldTitle.ToLower();
 
             List<SSGroup> groupsList = groups[oldGroupName].Groups;
             
@@ -426,7 +428,7 @@ namespace SS.Windows
         
         public void AddGroupedNode(SSNode node, SSGroup group)
         {
-            string nodeName = node.NodeName;
+            string nodeName = node.NodeName.ToLower();
 
             node.Group = group;
 
@@ -464,7 +466,7 @@ namespace SS.Windows
         
         public void RemoveGroupedNode(SSNode node, Group group)
         {
-            string nodeName = node.NodeName;
+            string nodeName = node.NodeName.ToLower();
 
             node.Group = null;
 

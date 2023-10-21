@@ -8,7 +8,8 @@ namespace SS.Windows
     
     public class SSEditorWindow : EditorWindow
     {
-        private readonly string defaultFileName = "NodesFileName";
+        private readonly string defaultFileName = "FileName";
+        private TextField fileNameTextField;
         private Button saveButton;
         
         [MenuItem("Window/SS/Storyline Graph")]
@@ -40,7 +41,10 @@ namespace SS.Windows
         {
             Toolbar toolbar = new Toolbar();
 
-            TextField fileNameTextField = SSElementUtility.CreateTextField(defaultFileName, "File Name:");
+            fileNameTextField = SSElementUtility.CreateTextField(defaultFileName, "File Name:", callback =>
+            {
+                fileNameTextField.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
+            });
 
             saveButton = SSElementUtility.CreateButton("Save");
             
