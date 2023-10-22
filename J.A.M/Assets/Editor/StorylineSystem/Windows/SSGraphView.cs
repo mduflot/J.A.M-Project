@@ -172,7 +172,6 @@ namespace SS.Windows
             {
                 node.Draw();
             }
-            node.Draw();
             
             AddUngroupedNode(node);
 
