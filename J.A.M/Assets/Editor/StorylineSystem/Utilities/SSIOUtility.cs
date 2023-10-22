@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SS.Data;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace SS.Utilities
@@ -11,11 +12,11 @@ namespace SS.Utilities
     using Elements;
     using ScriptableObjects;
     using Windows;
-    
+
     public static class SSIOUtility
     {
         private static SSGraphView graphView;
-        
+
         private static string graphFileName;
         private static string containerFolderPath;
 
@@ -24,11 +25,14 @@ namespace SS.Utilities
 
         private static Dictionary<string, SSNodeGroupSO> createdNodeGroups;
         private static Dictionary<string, SSNodeSO> createdNodes;
-        
+
+        private static Dictionary<string, SSGroup> loadedGroups;
+        private static Dictionary<string, SSNode> loadedNodes;
+
         public static void Initialize(SSGraphView ssGraphView, string graphName)
         {
             graphView = ssGraphView;
-            
+
             graphFileName = graphName;
             containerFolderPath = $"Assets/StorylineSystem/Storylines/{graphFileName}";
 
@@ -36,27 +40,32 @@ namespace SS.Utilities
             nodes = new List<SSNode>();
 
             createdNodeGroups = new Dictionary<string, SSNodeGroupSO>();
+            createdNodes = new Dictionary<string, SSNodeSO>();
+
+            loadedGroups = new Dictionary<string, SSGroup>();
+            loadedNodes = new Dictionary<string, SSNode>();
         }
-        
+
         #region Save Methods
-        
+
         public static void Save()
         {
             CreateStaticFolder();
 
             GetElementsFromGraphView();
 
-            SSGraphSaveDataSO graphData = CreateAsset<SSGraphSaveDataSO>("Assets/Editor/StorylineSystem/Graphs", $"{graphFileName}Graph");
-            
+            SSGraphSaveDataSO graphData =
+                CreateAsset<SSGraphSaveDataSO>("Assets/Editor/StorylineSystem/Graphs", $"{graphFileName}Graph");
+
             graphData.Initialize(graphFileName);
 
             SSNodeContainerSO nodeContainer = CreateAsset<SSNodeContainerSO>(containerFolderPath, graphFileName);
-            
+
             nodeContainer.Initialize(graphFileName);
 
             SaveGroups(graphData, nodeContainer);
             SaveNodes(graphData, nodeContainer);
-            
+
             SaveAsset(graphData);
             SaveAsset(nodeContainer);
         }
@@ -66,12 +75,12 @@ namespace SS.Utilities
         private static void SaveGroups(SSGraphSaveDataSO graphData, SSNodeContainerSO nodeContainer)
         {
             List<string> groupNames = new List<string>();
-            
+
             foreach (SSGroup group in groups)
             {
                 SaveGroupToGraph(group, graphData);
                 SaveGroupToScriptableObject(group, nodeContainer);
-                
+
                 groupNames.Add(group.title);
             }
 
@@ -85,30 +94,30 @@ namespace SS.Utilities
                 ID = group.ID,
                 Name = group.title,
                 Position = group.GetPosition().position
-                
             };
-            
+
             graphData.Groups.Add(groupData);
         }
 
         private static void SaveGroupToScriptableObject(SSGroup group, SSNodeContainerSO nodeContainer)
         {
-            string groupName = group.title; 
-            
+            string groupName = group.title;
+
             CreateFolder($"{containerFolderPath}/Groups", groupName);
             CreateFolder($"{containerFolderPath}/Groups/{groupName}", "Storylines");
 
-            SSNodeGroupSO nodeGroup = CreateAsset<SSNodeGroupSO>($"{containerFolderPath}/Groups/{groupName}", groupName);
-            
+            SSNodeGroupSO nodeGroup =
+                CreateAsset<SSNodeGroupSO>($"{containerFolderPath}/Groups/{groupName}", groupName);
+
             nodeGroup.Initialize(groupName);
-            
+
             createdNodeGroups.Add(group.ID, nodeGroup);
-            
+
             nodeContainer.NodeGroups.Add(nodeGroup, new List<SSNodeSO>());
 
             SaveAsset(nodeGroup);
         }
-        
+
         private static void UpdateOldGroups(List<string> currentGroupNames, SSGraphSaveDataSO graphData)
         {
             if (graphData.OldGroupNames != null && graphData.OldGroupNames.Count != 0)
@@ -125,15 +134,15 @@ namespace SS.Utilities
         }
 
         #endregion
-        
+
         #region Nodes
-        
+
         private static void SaveNodes(SSGraphSaveDataSO graphData, SSNodeContainerSO nodeContainer)
         {
             SerializableDictionary<string, List<string>> groupedNodeNames =
                 new SerializableDictionary<string, List<string>>();
             List<string> ungroupedNodeNames = new List<string>();
-            
+
             foreach (SSNode node in nodes)
             {
                 SaveNodeToGraph(node, graphData);
@@ -145,7 +154,7 @@ namespace SS.Utilities
 
                     continue;
                 }
-                
+
                 ungroupedNodeNames.Add(node.NodeName);
             }
 
@@ -157,19 +166,8 @@ namespace SS.Utilities
 
         private static void SaveNodeToGraph(SSNode node, SSGraphSaveDataSO graphData)
         {
-            List<SSChoiceSaveData> choices = new List<SSChoiceSaveData>();
+            List<SSChoiceSaveData> choices = CloneNodeChoices(node.Choices);
 
-            foreach (SSChoiceSaveData choice in node.Choices)
-            {
-                SSChoiceSaveData choiceData = new SSChoiceSaveData()
-                {
-                    Text = choice.Text,
-                    NodeID = choice.NodeID
-                };
-                
-                choices.Add(choiceData);
-            }
-            
             SSNodeSaveData nodeData = new SSNodeSaveData()
             {
                 ID = node.ID,
@@ -180,7 +178,7 @@ namespace SS.Utilities
                 NodeType = node.NodeType,
                 Position = node.GetPosition().position
             };
-            
+
             graphData.Nodes.Add(nodeData);
         }
 
@@ -191,20 +189,21 @@ namespace SS.Utilities
             if (node.Group != null)
             {
                 nodeSO = CreateAsset<SSNodeSO>($"{containerFolderPath}/Groups/{node.Group.title}/Nodes", node.NodeName);
-                
+
                 nodeContainer.NodeGroups.AddItem(createdNodeGroups[node.Group.ID], nodeSO);
             }
             else
             {
                 nodeSO = CreateAsset<SSNodeSO>($"{containerFolderPath}/Global/Nodes", node.NodeName);
-                
+
                 nodeContainer.UngroupedNodes.Add(nodeSO);
             }
-            
-            nodeSO.Initialize(node.NodeName, node.Text, ConvertNodeChoicesToNodeChoices(node.Choices), node.NodeType, node.IsStartingNode());
-            
+
+            nodeSO.Initialize(node.NodeName, node.Text, ConvertNodeChoicesToNodeChoices(node.Choices), node.NodeType,
+                node.IsStartingNode());
+
             createdNodes.Add(node.ID, nodeSO);
-            
+
             SaveAsset(nodeSO);
         }
 
@@ -218,13 +217,13 @@ namespace SS.Utilities
                 {
                     Text = nodeChoice.Text
                 };
-                
+
                 nodeChoicesData.Add(choiceData);
             }
 
             return nodeChoicesData;
         }
-        
+
         private static void UpdateNodeChoicesConnections()
         {
             foreach (SSNode node in nodes)
@@ -241,13 +240,14 @@ namespace SS.Utilities
                     }
 
                     nodeSO.Choices[choiceIndex].NextNode = createdNodes[nodeChoice.NodeID];
-                    
+
                     SaveAsset(nodeSO);
                 }
             }
         }
-        
-        private static void UpdateOldGroupedNodes(SerializableDictionary<string, List<string>> currentGroupedNodeNames, SSGraphSaveDataSO graphData)
+
+        private static void UpdateOldGroupedNodes(SerializableDictionary<string, List<string>> currentGroupedNodeNames,
+            SSGraphSaveDataSO graphData)
         {
             if (graphData.OldGroupedNodeNames != null && graphData.OldGroupedNodeNames.Count != 0)
             {
@@ -270,7 +270,7 @@ namespace SS.Utilities
 
             graphData.OldGroupedNodeNames = new SerializableDictionary<string, List<string>>(currentGroupedNodeNames);
         }
-        
+
         private static void UpdateOldUngroupedNodes(List<string> currentUngroupedNodeNames, SSGraphSaveDataSO graphData)
         {
             if (graphData.OldUngroupedNodeNames != null && graphData.OldUngroupedNodeNames.Count != 0)
@@ -290,29 +290,124 @@ namespace SS.Utilities
 
         #endregion
 
+        #region Load Methods
+
+        public static void Load()
+        {
+            SSGraphSaveDataSO graphData =
+                LoadAsset<SSGraphSaveDataSO>("Assets/Editor/StorylineSystem/Graphs", graphFileName);
+
+            if (graphData == null)
+            {
+                EditorUtility.DisplayDialog("Couldn't load the file!",
+                    "The file at the following path could not be found:\n\n" +
+                    $"Assets/Editor/StorylineSystem/Graphs/{graphFileName}\n\n" +
+                    "Make sure you chose the right file and it's placed at the folder path mentioned above.",
+                    "Thanks!");
+
+                return;
+            }
+            
+            SSEditorWindow.UpdateFileName(graphData.FileName);
+
+            LoadGroups(graphData.Groups);
+            LoadNodes(graphData.Nodes);
+            LoadNodesConnections();
+        }
+
+        private static void LoadGroups(List<SSGroupSaveData> groups)
+        {
+            foreach (SSGroupSaveData groupData in groups)
+            {
+                SSGroup group = graphView.CreateGroup(groupData.Name, groupData.Position);
+
+                group.ID = groupData.ID;
+                
+                loadedGroups.Add(group.ID, group);
+            }
+        }
+
+        private static void LoadNodes(List<SSNodeSaveData> nodes)
+        {
+            foreach (SSNodeSaveData nodeData in nodes)
+            {
+                List<SSChoiceSaveData> choices = CloneNodeChoices(nodeData.Choices);
+                SSNode node = graphView.CreateNode(nodeData.Name, nodeData.NodeType, nodeData.Position, false);
+
+                node.ID = nodeData.ID;
+                node.Choices = choices;
+                node.Text = nodeData.Text;
+                
+                node.Draw();
+                
+                graphView.AddElement(node);
+
+                loadedNodes.Add(node.ID, node);
+                
+                if (string.IsNullOrEmpty(nodeData.GroupID))
+                {
+                    continue;
+                }
+
+                SSGroup group = loadedGroups[nodeData.GroupID];
+
+                node.Group = group;
+                
+                group.AddElement(node);
+            }
+        }
+
+        private static void LoadNodesConnections()
+        {
+            foreach (KeyValuePair<string, SSNode> loadedNode in loadedNodes)
+            {
+                foreach (Port choicePort in loadedNode.Value.outputContainer.Children())
+                {
+                    SSChoiceSaveData choiceData = (SSChoiceSaveData) choicePort.userData;
+
+                    if (string.IsNullOrEmpty(choiceData.NodeID))
+                    {
+                        continue;
+                    }
+
+                    SSNode nextNode = loadedNodes[choiceData.NodeID];
+
+                    Port nextNodeInputPort = (Port) nextNode.inputContainer.Children().First();
+
+                    Edge edge = choicePort.ConnectTo(nextNodeInputPort);
+                    
+                    graphView.Add(edge);
+
+                    loadedNode.Value.RefreshPorts();
+                }
+            }
+        }
+
+        #endregion
+
         #region Creation Methods
-        
+
         private static void CreateStaticFolder()
         {
             CreateFolder("Assets/Editor/StorylineSystem", "Graphs");
-            
+
             CreateFolder("Assets", "StorylineSystem");
             CreateFolder("Assets/StorylineSystem", "Storylines");
-            
+
             CreateFolder("Assets/StorylineSystem/Storylines", graphFileName);
             CreateFolder(containerFolderPath, "Global");
             CreateFolder(containerFolderPath, "Groups");
             CreateFolder($"{containerFolderPath}/Global", "Storylines");
         }
-        
+
         #endregion
-        
+
         #region Fetch Methods
-        
+
         private static void GetElementsFromGraphView()
         {
             Type groupType = typeof(SSGroup);
-            
+
             graphView.graphElements.ForEach(graphElement =>
             {
                 if (graphElement is SSNode node)
@@ -325,16 +420,16 @@ namespace SS.Utilities
                 if (graphElement.GetType() == groupType)
                 {
                     SSGroup group = (SSGroup)graphElement;
-                    
+
                     groups.Add(group);
 
                     return;
                 }
             });
         }
-        
+
         #endregion
-        
+
         #region Utility Methods
 
         private static void CreateFolder(string path, string folderName)
@@ -346,18 +441,18 @@ namespace SS.Utilities
 
             AssetDatabase.CreateFolder(path, folderName);
         }
-        
+
         private static void RemoveFolder(string fullPath)
         {
             FileUtil.DeleteFileOrDirectory($"{fullPath}.meta");
             FileUtil.DeleteFileOrDirectory($"{fullPath}/");
         }
-        
+
         private static T CreateAsset<T>(string path, string assetName) where T : ScriptableObject
         {
             string fullPath = $"{path}/{assetName}.asset";
 
-            T asset = AssetDatabase.LoadAssetAtPath<T>(fullPath);
+            T asset = LoadAsset<T>(path, assetName);
 
             if (asset == null)
             {
@@ -365,21 +460,46 @@ namespace SS.Utilities
 
                 AssetDatabase.CreateAsset(asset, fullPath);
             }
-            
+
             return asset;
         }
-        
+
+        private static T LoadAsset<T>(string path, string assetName) where T : ScriptableObject
+        {
+            string fullPath = $"{path}/{assetName}.asset";
+            
+            return AssetDatabase.LoadAssetAtPath<T>(fullPath);
+        }
+
         private static void RemoveAsset(string path, string assetName)
         {
             AssetDatabase.DeleteAsset($"{path}/{assetName}.asset");
         }
-        
+
         private static void SaveAsset(UnityEngine.Object asset)
         {
             EditorUtility.SetDirty(asset);
-            
+
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+        }
+        
+        private static List<SSChoiceSaveData> CloneNodeChoices(List<SSChoiceSaveData> nodeChoices)
+        {
+            List<SSChoiceSaveData> choices = new List<SSChoiceSaveData>();
+
+            foreach (SSChoiceSaveData choice in nodeChoices)
+            {
+                SSChoiceSaveData choiceData = new SSChoiceSaveData()
+                {
+                    Text = choice.Text,
+                    NodeID = choice.NodeID
+                };
+
+                choices.Add(choiceData);
+            }
+
+            return choices;
         }
 
         #endregion

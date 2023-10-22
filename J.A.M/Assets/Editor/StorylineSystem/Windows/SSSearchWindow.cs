@@ -55,7 +55,7 @@ namespace SS.Windows
                 case SSNodeType.SingleChoice:
                 {
                     SSSingleChoiceNode singleChoiceNode =
-                        (SSSingleChoiceNode)graphView.CreateNode(SSNodeType.SingleChoice, localMousePosition);
+                        (SSSingleChoiceNode)graphView.CreateNode("NodeName", SSNodeType.SingleChoice, localMousePosition);
 
                     graphView.AddElement(singleChoiceNode);
 
@@ -65,7 +65,7 @@ namespace SS.Windows
                 case SSNodeType.MultipleChoice:
                 {
                     SSMultipleChoiceNode multipleChoiceNode =
-                        (SSMultipleChoiceNode)graphView.CreateNode(SSNodeType.MultipleChoice, localMousePosition);
+                        (SSMultipleChoiceNode)graphView.CreateNode("NodeName", SSNodeType.MultipleChoice, localMousePosition);
 
                     graphView.AddElement(multipleChoiceNode);
 

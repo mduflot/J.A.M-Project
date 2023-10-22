@@ -126,7 +126,7 @@ namespace SS.Windows
         private IManipulator CreateNodeContextualMenu(string actionTitle, SSNodeType nodeType)
         {
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
-                menuEvent => menuEvent.menu.AppendAction(actionTitle, actionEvent => AddElement(CreateNode(nodeType, GetLocalMousePosition(actionEvent.eventInfo.localMousePosition))))
+                menuEvent => menuEvent.menu.AppendAction(actionTitle, actionEvent => AddElement(CreateNode("NodeName", nodeType, GetLocalMousePosition(actionEvent.eventInfo.localMousePosition))))
             );
 
             return contextualMenuManipulator;
@@ -161,14 +161,19 @@ namespace SS.Windows
             return group;
         }
 
-        public SSNode CreateNode(SSNodeType nodeType, Vector2 position)
+        public SSNode CreateNode(string nodeName, SSNodeType nodeType, Vector2 position, bool shouldDraw = true)
         {
             Type nodeTypeSystem = Type.GetType($"SS.Elements.SS{nodeType}Node");
             SSNode node = (SSNode) Activator.CreateInstance(nodeTypeSystem ?? throw new InvalidOperationException());
 
-            node.Initialize(this, position);
-            node.Draw();
+            node.Initialize(nodeName, this, position);
 
+            if (shouldDraw)
+            {
+                node.Draw();
+            }
+            node.Draw();
+            
             AddUngroupedNode(node);
 
             return node;

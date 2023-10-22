@@ -11,9 +11,9 @@ namespace SS.Elements
 
     public class SSMultipleChoiceNode : SSNode
     {
-        public override void Initialize(SSGraphView ssGraphView, Vector2 position)
+        public override void Initialize(string nodeName, SSGraphView ssGraphView, Vector2 position)
         {
-            base.Initialize(ssGraphView, position);
+            base.Initialize(nodeName, ssGraphView, position);
 
             NodeType = SSNodeType.MultipleChoice;
 

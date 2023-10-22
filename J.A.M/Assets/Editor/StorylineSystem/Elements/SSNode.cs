@@ -25,10 +25,10 @@ namespace SS.Elements
         
         private Color defaultBackgroundColor;
 
-        public virtual void Initialize(SSGraphView ssGraphView, Vector2 position)
+        public virtual void Initialize(string nodeName, SSGraphView ssGraphView, Vector2 position)
         {
             ID = Guid.NewGuid().ToString();
-            NodeName = "NodeName";
+            NodeName = nodeName;
             Choices = new List<SSChoiceSaveData>();
             Text = "Node text.";
 

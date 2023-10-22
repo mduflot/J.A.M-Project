@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using System.IO;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
@@ -52,11 +52,13 @@ namespace SS.Windows
 
             saveButton = SSElementUtility.CreateButton("Save", () => Save());
 
+            Button loadButton = SSElementUtility.CreateButton("Load", () => Load());
             Button clearButton = SSElementUtility.CreateButton("Clear", () => Clear());
             Button resetButton = SSElementUtility.CreateButton("Reset", () => ResetGraph());
 
             toolbar.Add(fileNameTextField);
             toolbar.Add(saveButton);
+            toolbar.Add(loadButton);
             toolbar.Add(clearButton);
             toolbar.Add(resetButton);
 
@@ -64,7 +66,7 @@ namespace SS.Windows
 
             rootVisualElement.Add(toolbar);
         }
-        
+
         private void AddStyles()
         {
             rootVisualElement.AddStyleSheets("StorylineSystem/SSVariables.uss");
@@ -85,6 +87,21 @@ namespace SS.Windows
 
             SSIOUtility.Initialize(graphView, fileNameTextField.value);
             SSIOUtility.Save();
+        }
+        
+        private void Load()
+        {
+            string filePath = EditorUtility.OpenFilePanel("Node Graphs", "Assets/Editor/StorylineSystem/Graphs", "asset");
+
+            if (string.IsNullOrEmpty(filePath))
+            {
+                return;
+            }
+            
+            Clear();
+            
+            SSIOUtility.Initialize(graphView, Path.GetFileNameWithoutExtension(filePath));
+            SSIOUtility.Load();
         }
         
         private void Clear()
