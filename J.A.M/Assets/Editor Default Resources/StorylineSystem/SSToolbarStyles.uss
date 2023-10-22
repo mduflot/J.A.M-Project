@@ -1,0 +1,64 @@
+/* VISUAL ELEMENTS */
+
+Toolbar
+{
+    background-color: var(--ss-colors-window-dark-grey-1);
+    height: var(--ss-metrics-window-pixels-35);
+}
+
+TextField
+{
+    padding: var(--ss-metrics-window-pixels-4);
+}
+
+
+Button
+{
+    background-color: var(--ss-colors-window-dark-grey-5);
+    border-color: var(--ss-colors-window-dark-grey-1);
+    margin: var(--ss-metrics-window-pixels-4);
+    max-height: var(--ss-metrics-window-pixels-25);
+}
+
+Button:hover
+{
+    background-color: var(--ss-colors-window-dark-grey-2);
+}
+
+Button:active
+{
+    background-color: var(--ss-colors-window-dark-grey-3);
+    color: var(--ss-colors-window-yellow);
+}
+
+/* BUILT-IN */
+
+.unity-text-field__label
+{
+    padding: var(--ss-metrics-window-pixels-4);
+}
+
+TextField:focus > .unity-text-field__label
+{
+    color: var(--ss-colors-window-yellow);
+}
+
+.unity-text-field__input
+{
+    background-color: var(--ss-colors-window-dark-grey-1);
+    border-color: var(--ss-colors-window-dark-grey-6);
+    border-radius: var(--ss-metrics-window-pixels-4);
+    max-height: var(--ss-metrics-window-pixels-25);
+    min-width: var(--ss-metrics-window-pixels-120);
+    padding-left: var(--ss-metrics-window-pixels-6);
+}
+
+.unity-text-field__input:focus
+{
+    color: var(--ss-colors-window-yellow);
+}
+
+.ss-toolbar__button__selected
+{
+    color: var(--ss-colors-window-yellow);
+}
