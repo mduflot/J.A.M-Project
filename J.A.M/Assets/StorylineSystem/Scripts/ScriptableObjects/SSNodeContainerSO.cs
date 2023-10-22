@@ -16,5 +16,52 @@ namespace SS.ScriptableObjects
             NodeGroups = new SerializableDictionary<SSNodeGroupSO, List<SSNodeSO>>();
             UngroupedNodes = new List<SSNodeSO>();
         }
+
+        public List<string> GetNodeGroupNames()
+        {
+            List<string> nodeGroupNames = new List<string>();
+
+            foreach (SSNodeGroupSO nodeGroup in NodeGroups.Keys)
+            {
+                nodeGroupNames.Add(nodeGroup.GroupName);
+            }
+
+            return nodeGroupNames;
+        }
+
+        public List<string> GetGroupedNodeNames(SSNodeGroupSO nodeGroup, bool startingNodesOnly)
+        {
+            List<SSNodeSO> groupedNodes = NodeGroups[nodeGroup];
+
+            List<string> groupedNodeNames = new List<string>();
+
+            foreach (SSNodeSO groupedNode in groupedNodes)
+            {
+                if (startingNodesOnly && !groupedNode.IsStartingNode)
+                {
+                    continue;
+                }
+                
+                groupedNodeNames.Add(groupedNode.NodeName);
+            }
+
+            return groupedNodeNames;
+        }
+
+        public List<string> GetUngroupedNodeNames(bool startingNodesOnly)
+        {
+            List<string> ungroupedNodeNames = new List<string>();
+            
+            foreach (SSNodeSO ungroupedNode in UngroupedNodes)
+            {
+                if (startingNodesOnly && !ungroupedNode.IsStartingNode)
+                {
+                    continue;
+                }
+                ungroupedNodeNames.Add(ungroupedNode.NodeName);
+            }
+
+            return ungroupedNodeNames;
+        }
     }
 }
