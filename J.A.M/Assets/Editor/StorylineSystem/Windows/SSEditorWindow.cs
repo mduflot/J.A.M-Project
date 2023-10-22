@@ -14,6 +14,7 @@ namespace SS.Windows
 
         private static TextField fileNameTextField;
         private Button saveButton;
+        private Button miniMapButton;
 
         [MenuItem("Window/SS/Storyline Graph")]
         public static void ShowGraph()
@@ -55,12 +56,14 @@ namespace SS.Windows
             Button loadButton = SSElementUtility.CreateButton("Load", () => Load());
             Button clearButton = SSElementUtility.CreateButton("Clear", () => Clear());
             Button resetButton = SSElementUtility.CreateButton("Reset", () => ResetGraph());
+            miniMapButton = SSElementUtility.CreateButton("MiniMap", () => ToggleMiniMap());
 
             toolbar.Add(fileNameTextField);
             toolbar.Add(saveButton);
             toolbar.Add(loadButton);
             toolbar.Add(clearButton);
             toolbar.Add(resetButton);
+            toolbar.Add(miniMapButton);
 
             toolbar.AddStyleSheets("StorylineSystem/SSToolbarStyles.uss");
 
@@ -114,6 +117,13 @@ namespace SS.Windows
             Clear();
             
             UpdateFileName(defaultFileName);
+        }
+        
+        private void ToggleMiniMap()
+        {
+            graphView.ToggleMiniMap();
+            
+            miniMapButton.ToggleInClassList(".ss-toolbar__button__selected");
         }
 
         #endregion

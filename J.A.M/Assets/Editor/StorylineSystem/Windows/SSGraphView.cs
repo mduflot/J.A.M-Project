@@ -17,6 +17,8 @@ namespace SS.Windows
         private SSEditorWindow editorWindow;
         private SSSearchWindow searchWindow;
 
+        private MiniMap miniMap;
+
         private SerializableDictionary<string, SSNodeErrorData> ungroupedNodes;
         private SerializableDictionary<string, SSGroupErrorData> groups;
         private SerializableDictionary<Group, SerializableDictionary<string, SSNodeErrorData>> groupedNodes;
@@ -56,6 +58,7 @@ namespace SS.Windows
             
             AddManipulators();
             AddSearchWindow();
+            AddMinimap();
             AddGridBackground();
 
             OnElementsDeleted();
@@ -65,6 +68,7 @@ namespace SS.Windows
             OnGraphViewChanged();
 
             AddStyles();
+            AddMiniMapStyles();
         }
 
         #region Overrided Methods
@@ -572,6 +576,20 @@ namespace SS.Windows
             nodeCreationRequest = context => SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), searchWindow);
         }
         
+        private void AddMinimap()
+        {
+            miniMap = new MiniMap()
+            {
+                anchored = true
+            };
+            
+            miniMap.SetPosition(new Rect(15, 50, 200, 180));
+            
+            Add(miniMap);
+
+            miniMap.visible = false;
+        }
+        
         private void AddGridBackground()
         {
             GridBackground gridBackground = new GridBackground();
@@ -584,6 +602,18 @@ namespace SS.Windows
         private void AddStyles()
         {
             this.AddStyleSheets("StorylineSystem/SSGraphViewStyles.uss", "StorylineSystem/SSNodeStyles.uss");
+        }
+        
+        private void AddMiniMapStyles()
+        {
+            StyleColor backgroundColor = new StyleColor(new Color32(29, 29, 30, 255));
+            StyleColor borderColor = new StyleColor(new Color32(51, 51, 51, 255));
+
+            miniMap.style.backgroundColor = backgroundColor;
+            miniMap.style.borderTopColor = borderColor;
+            miniMap.style.borderRightColor = borderColor;
+            miniMap.style.borderBottomColor = borderColor;
+            miniMap.style.borderLeftColor = borderColor;
         }
         
         #endregion
@@ -613,6 +643,11 @@ namespace SS.Windows
             ungroupedNodes.Clear();
 
             NameErrorsAmount = 0;
+        }
+
+        public void ToggleMiniMap()
+        {
+            miniMap.visible = !miniMap.visible;
         }
         
         #endregion
