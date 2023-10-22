@@ -1,3 +1,4 @@
+using SS.Data.Save;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -16,7 +17,12 @@ namespace SS.Elements
 
             NodeType = SSNodeType.MultipleChoice;
 
-            Choices.Add("New Choice");
+            SSChoiceSaveData choiceData = new SSChoiceSaveData()
+            {
+                Text = "New Choice"
+            };
+
+            Choices.Add(choiceData);
         }
 
         public override void Draw()
@@ -27,9 +33,14 @@ namespace SS.Elements
 
             Button addChoiceButton = SSElementUtility.CreateButton("Add Choice", () =>
             {
-                Port choicePort = CreateChoicePort("New Choice");
+                SSChoiceSaveData choiceData = new SSChoiceSaveData()
+                {
+                    Text = "New Choice"
+                };
 
-                Choices.Add("New Choice");
+                Choices.Add(choiceData);
+                
+                Port choicePort = CreateChoicePort(choiceData);
 
                 outputContainer.Add(choicePort);
             });
@@ -40,7 +51,7 @@ namespace SS.Elements
 
             /* OUTPUT CONTAINER */
 
-            foreach (string choice in Choices)
+            foreach (SSChoiceSaveData choice in Choices)
             {
                 Port choicePort = CreateChoicePort(choice);
 
@@ -52,15 +63,37 @@ namespace SS.Elements
 
         #region Elements Creation
 
-        private Port CreateChoicePort(string choice)
+        private Port CreateChoicePort(object userData)
         {
             Port choicePort = this.CreatePort();
 
-            Button deleteChoiceButton = SSElementUtility.CreateButton("X");
+            choicePort.userData = userData;
+
+            SSChoiceSaveData choiceData = (SSChoiceSaveData) userData;
+
+            Button deleteChoiceButton = SSElementUtility.CreateButton("X", () =>
+            {
+                if (Choices.Count == 1)
+                {
+                    return;
+                }
+
+                if (choicePort.connected)
+                {
+                    graphView.DeleteElements(choicePort.connections);
+                }
+
+                Choices.Remove(choiceData);
+                
+                graphView.RemoveElement(choicePort);
+            });
 
             deleteChoiceButton.AddToClassList("ss-node__button");
 
-            TextField choiceTextField = SSElementUtility.CreateTextField(choice);
+            TextField choiceTextField = SSElementUtility.CreateTextField(choiceData.Text, null, callback =>
+            {
+                choiceData.Text = callback.newValue;
+            });
 
             choiceTextField.AddClasses("ss-node__text-field", "ss-node__choice-text-field", "ss-node__text-field__hidden");
 

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace SS.Elements
 {
+    using Data.Save;
     using Enumerations;
     using Utilities;
     using Windows;
@@ -14,8 +15,13 @@ namespace SS.Elements
             base.Initialize(ssGraphView, position);
 
             NodeType = SSNodeType.SingleChoice;
+
+            SSChoiceSaveData choiceData = new SSChoiceSaveData()
+            {
+                Text = "Next Node"
+            };
             
-            Choices.Add("Next Node");
+            Choices.Add(choiceData);
         }
 
         public override void Draw()
@@ -24,11 +30,11 @@ namespace SS.Elements
 
             /* OUTPUT CONTAINER */
             
-            foreach (string choice in Choices)
+            foreach (SSChoiceSaveData choice in Choices)
             {
-                Port choicePort = this.CreatePort(choice); 
+                Port choicePort = this.CreatePort(choice.Text);
 
-                choicePort.portName = choice;
+                choicePort.userData = choice;
                 
                 outputContainer.Add(choicePort);
             }

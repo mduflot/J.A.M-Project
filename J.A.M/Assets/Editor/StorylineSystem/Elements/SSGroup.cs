@@ -1,3 +1,4 @@
+using System;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -5,15 +6,18 @@ namespace SS.Elements
 {
     public class SSGroup : Group
     {
-        public string oldTitle;
+        public string ID { get; set; }
+        public string OldTitle { get; set; }
         
         private Color defaultBorderColor;
         private float defaultBorderWidth;
 
         public SSGroup(string groupTitle, Vector2 position)
         {
+            ID = Guid.NewGuid().ToString();
+            
             title = groupTitle;
-            oldTitle = groupTitle;
+            OldTitle = groupTitle;
             
             SetPosition(new Rect(position, Vector2.zero));
             

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -8,22 +9,26 @@ namespace SS.Elements
     using Enumerations;
     using Utilities;
     using Windows;
+    using Data.Save;
     
     public class SSNode : Node
     {
+        public string ID { get; set; }
         public string NodeName { get; set; }
-        public List<string> Choices { get; set; }
+        public List<SSChoiceSaveData> Choices { get; set; }
         public string Text { get; set; }
         public SSNodeType NodeType { get; set; }
         public SSGroup Group { get; set; }
 
-        private SSGraphView graphView;
+        protected SSGraphView graphView;
+        
         private Color defaultBackgroundColor;
 
         public virtual void Initialize(SSGraphView ssGraphView, Vector2 position)
         {
+            ID = Guid.NewGuid().ToString();
             NodeName = "NodeName";
-            Choices = new List<string>();
+            Choices = new List<SSChoiceSaveData>();
             Text = "Node text.";
 
             graphView = ssGraphView;

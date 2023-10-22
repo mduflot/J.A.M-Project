@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 namespace SS.Windows
 {
     using Data.Error;
+    using Data.Save;
     using Elements;
     using Enumerations;
     using Utilities;
@@ -61,6 +62,7 @@ namespace SS.Windows
             OnGroupElementsAdded();
             OnGroupElementsRemoved();
             OnGroupRenamed();
+            OnGraphViewChanged();
 
             AddStyles();
         }
@@ -305,9 +307,48 @@ namespace SS.Windows
                 
                 RemoveGroup(ssGroup);
 
-                ssGroup.oldTitle = ssGroup.title;
+                ssGroup.OldTitle = ssGroup.title;
                 
                 AddGroup(ssGroup);
+            };
+        }
+
+        private void OnGraphViewChanged()
+        {
+            graphViewChanged = (changes) =>
+            {
+                if (changes.edgesToCreate != null)
+                {
+                    foreach (Edge edge in changes.edgesToCreate)
+                    {
+                        SSNode nextNode = (SSNode) edge.input.node;
+
+                        SSChoiceSaveData choiceData = (SSChoiceSaveData) edge.output.userData;
+
+                        choiceData.NodeID = nextNode.ID;
+                    }
+                }
+
+                if (changes.elementsToRemove != null)
+                {
+                    Type edgeType = typeof(Edge);
+
+                    foreach (GraphElement element in changes.elementsToRemove)
+                    {
+                        if (element.GetType() != edgeType)
+                        {
+                            continue;
+                        }
+
+                        Edge edge = (Edge) element;
+
+                        SSChoiceSaveData choiceData = (SSChoiceSaveData)edge.output.userData;
+
+                        choiceData.NodeID = "";
+                    }
+                }
+                
+                return changes;
             };
         }
 
@@ -403,7 +444,7 @@ namespace SS.Windows
         
         private void RemoveGroup(SSGroup group)
         {
-            string oldGroupName = group.oldTitle.ToLower();
+            string oldGroupName = group.OldTitle.ToLower();
 
             List<SSGroup> groupsList = groups[oldGroupName].Groups;
             
