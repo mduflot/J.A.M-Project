@@ -21,25 +21,25 @@ namespace SS.Windows
         private SerializableDictionary<string, SSGroupErrorData> groups;
         private SerializableDictionary<Group, SerializableDictionary<string, SSNodeErrorData>> groupedNodes;
 
-        private int repeatedNamesAmount;
+        private int nameErrorsAmount;
 
-        public int RepeatedNamesAmount
+        public int NameErrorsAmount
         {
             get
             {
-                return repeatedNamesAmount;
+                return nameErrorsAmount;
             }
 
             set
             {
-                repeatedNamesAmount = value;
+                nameErrorsAmount = value;
 
-                if (repeatedNamesAmount == 0)
+                if (nameErrorsAmount == 0)
                 {
                     editorWindow.EnableSaving();
                 }
 
-                if (repeatedNamesAmount == 1)
+                if (nameErrorsAmount == 1)
                 {
                     editorWindow.DisableSaving();
                 }
@@ -305,6 +305,21 @@ namespace SS.Windows
 
                 ssGroup.title = newTitle.RemoveWhitespaces().RemoveSpecialCharacters();
                 
+                if (string.IsNullOrEmpty(ssGroup.title))
+                {
+                    if (!string.IsNullOrEmpty(ssGroup.OldTitle))
+                    {
+                        ++NameErrorsAmount;
+                    }
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(ssGroup.OldTitle))
+                    {
+                        --NameErrorsAmount;
+                    }
+                }
+                
                 RemoveGroup(ssGroup);
 
                 ssGroup.OldTitle = ssGroup.title;
@@ -381,7 +396,7 @@ namespace SS.Windows
 
             if (ungroupedNodesList.Count == 2)
             {
-                ++RepeatedNamesAmount;
+                ++NameErrorsAmount;
                 
                 ungroupedNodesList[0].SetErrorStyle(errorColor);
             }
@@ -399,7 +414,7 @@ namespace SS.Windows
 
             if (ungroupedNodesList.Count == 1)
             {
-                --RepeatedNamesAmount;
+                --NameErrorsAmount;
                 ungroupedNodesList[0].ResetStyle();
 
                 return;
@@ -436,7 +451,7 @@ namespace SS.Windows
 
             if (groupsList.Count == 2)
             {
-                ++RepeatedNamesAmount;
+                ++NameErrorsAmount;
                 
                 groupsList[0].SetErrorStyle(errorColor);
             }
@@ -454,7 +469,7 @@ namespace SS.Windows
 
             if (groupsList.Count == 1)
             {
-                --RepeatedNamesAmount;
+                --NameErrorsAmount;
                 
                 groupsList[0].ResetStyle();
 
@@ -499,7 +514,7 @@ namespace SS.Windows
 
             if (groupedNodesList.Count == 2)
             {
-                ++RepeatedNamesAmount;
+                ++NameErrorsAmount;
                 
                 groupedNodesList[0].SetErrorStyle(errorColor);
             }
@@ -519,7 +534,7 @@ namespace SS.Windows
 
             if (groupedNodesList.Count == 1)
             {
-                --RepeatedNamesAmount;
+                --NameErrorsAmount;
                 
                 groupedNodesList[0].ResetStyle();
 

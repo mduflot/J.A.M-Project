@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -49,6 +50,21 @@ namespace SS.Elements
                 TextField target = (TextField) callback.target;
 
                 target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
+
+                if (string.IsNullOrEmpty(target.value))
+                {
+                    if (!string.IsNullOrEmpty(NodeName))
+                    {
+                        ++graphView.NameErrorsAmount;
+                    }
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(NodeName))
+                    {
+                        --graphView.NameErrorsAmount;
+                    }
+                }
                 
                 if (Group == null)
                 {
@@ -91,7 +107,10 @@ namespace SS.Elements
 
             Foldout textFoldout = SSElementUtility.CreateFoldout("Node Text");
 
-            TextField textTextField = SSElementUtility.CreateTextArea(Text);
+            TextField textTextField = SSElementUtility.CreateTextArea(Text, null, callback =>
+            {
+                Text = callback.newValue;
+            });
 
             textTextField.AddClasses("ss-node__text-field", "ss-node__quote-text-field");
             
@@ -143,6 +162,13 @@ namespace SS.Elements
                 
                 graphView.DeleteElements(port.connections);
             }
+        }
+
+        public bool IsStartingNode()
+        {
+            Port inputPort = (Port) inputContainer.Children().First();
+
+            return !inputPort.connected;
         }
 
         public void SetErrorStyle(Color color)
