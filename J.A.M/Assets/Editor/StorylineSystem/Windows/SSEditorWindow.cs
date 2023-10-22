@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
@@ -11,7 +12,7 @@ namespace SS.Windows
         private SSGraphView graphView;
         private readonly string defaultFileName = "FileName";
 
-        private TextField fileNameTextField;
+        private static TextField fileNameTextField;
         private Button saveButton;
 
         [MenuItem("Window/SS/Storyline Graph")]
@@ -51,13 +52,24 @@ namespace SS.Windows
 
             saveButton = SSElementUtility.CreateButton("Save", () => Save());
 
+            Button clearButton = SSElementUtility.CreateButton("Clear", () => Clear());
+            Button resetButton = SSElementUtility.CreateButton("Reset", () => ResetGraph());
+
             toolbar.Add(fileNameTextField);
             toolbar.Add(saveButton);
+            toolbar.Add(clearButton);
+            toolbar.Add(resetButton);
 
             toolbar.AddStyleSheets("StorylineSystem/SSToolbarStyles.uss");
 
             rootVisualElement.Add(toolbar);
         }
+        
+        private void AddStyles()
+        {
+            rootVisualElement.AddStyleSheets("StorylineSystem/SSVariables.uss");
+        }
+        
 
         #region Toolbar Actions
 
@@ -74,18 +86,30 @@ namespace SS.Windows
             SSIOUtility.Initialize(graphView, fileNameTextField.value);
             SSIOUtility.Save();
         }
+        
+        private void Clear()
+        {
+            graphView.ClearGraph();
+        }
+        
+        private void ResetGraph()
+        {
+            Clear();
+            
+            UpdateFileName(defaultFileName);
+        }
 
         #endregion
-
-        private void AddStyles()
-        {
-            rootVisualElement.AddStyleSheets("StorylineSystem/SSVariables.uss");
-        }
 
         #endregion
 
         #region Utility Methods
 
+        public static void UpdateFileName(string newFileName)
+        {
+            fileNameTextField.value = newFileName;
+        }
+        
         public void EnableSaving()
         {
             saveButton.SetEnabled(true);
