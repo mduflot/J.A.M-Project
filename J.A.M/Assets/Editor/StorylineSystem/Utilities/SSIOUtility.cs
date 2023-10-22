@@ -104,7 +104,7 @@ namespace SS.Utilities
             string groupName = group.title;
 
             CreateFolder($"{containerFolderPath}/Groups", groupName);
-            CreateFolder($"{containerFolderPath}/Groups/{groupName}", "Storylines");
+            CreateFolder($"{containerFolderPath}/Groups/{groupName}", "Nodes");
 
             SSNodeGroupSO nodeGroup =
                 CreateAsset<SSNodeGroupSO>($"{containerFolderPath}/Groups/{groupName}", groupName);
@@ -397,7 +397,7 @@ namespace SS.Utilities
             CreateFolder("Assets/StorylineSystem/Storylines", graphFileName);
             CreateFolder(containerFolderPath, "Global");
             CreateFolder(containerFolderPath, "Groups");
-            CreateFolder($"{containerFolderPath}/Global", "Storylines");
+            CreateFolder($"{containerFolderPath}/Global", "Nodes");
         }
 
         #endregion
