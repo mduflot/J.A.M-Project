@@ -3,7 +3,7 @@ using UnityEngine;
 public class CharacterBehaviour : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
-    [SerializeField] private CharacterData data;
+    public CharacterDataScriptable data;
 
 
     public void MoveTo(Transform destination)

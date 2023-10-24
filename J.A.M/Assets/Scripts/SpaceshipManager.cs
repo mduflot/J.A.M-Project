@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class SpaceshipManager : MonoBehaviour
 {
     public Room[] rooms;
     public ShipSystem[] shipSystems;
+    [SerializeField] private float gaugesThreshold;
     public CharacterBehaviour[] characters;
 
     [Serializable]
@@ -25,13 +27,14 @@ public class SpaceshipManager : MonoBehaviour
         public float decreaseSpeed;
         [Range(0, 100)]
         public float gaugeValue;
+        public TaskDataScriptable task;
     }
 
     public enum System
     {
-        Electricity = 1,
+        Power = 1,
         Oxygen = 2,
-        Fuel = 3,
+        Food = 3,
     }
     private void InitializeSystems()
     {
@@ -57,8 +60,15 @@ public class SpaceshipManager : MonoBehaviour
         {
             system.gaugeValue -= system.decreaseSpeed;
             GameManager.Instance.UIManager.UpdateGauges(system.systemName, system.gaugeValue);
+            if ((int)system.gaugeValue == gaugesThreshold)
+            {
+                SpawnTask(system); 
+            }
         }
     }
     
-    
+    private void SpawnTask(ShipSystem system)
+    {
+        GameManager.Instance.UIManager.SpawnTaskUI(system.task);
+    }
 }
