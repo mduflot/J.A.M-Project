@@ -9,13 +9,13 @@ namespace SS.Elements
     using Utilities;
     using Windows;
 
-    public class SSMultipleChoiceNode : SSNode
+    public class SSEventMultipleChoiceNode : SSNode
     {
         public override void Initialize(string nodeName, SSGraphView ssGraphView, Vector2 position)
         {
             base.Initialize(nodeName, ssGraphView, position);
 
-            NodeType = SSNodeType.MultipleChoice;
+            NodeType = SSNodeType.EventMultipleChoice;
 
             SSChoiceSaveData choiceData = new SSChoiceSaveData()
             {
@@ -57,7 +57,7 @@ namespace SS.Elements
 
                 outputContainer.Add(choicePort);
             }
-
+            
             RefreshExpandedState();
         }
 

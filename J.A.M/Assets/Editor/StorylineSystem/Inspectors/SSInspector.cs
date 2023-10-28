@@ -109,7 +109,6 @@ namespace SS.Inspectors
             SSInspectorUtility.DrawHeader("Node Container");
 
             nodeContainerProperty.DrawPropertyField();
-            EditorGUILayout.PropertyField(nodeContainerProperty);
             
             SSInspectorUtility.DrawSpace();
         }

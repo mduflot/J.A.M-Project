@@ -1,8 +1,9 @@
-using SS.ScriptableObjects;
 using UnityEngine;
 
 namespace SS
 {
+    using ScriptableObjects;
+    
     public class SSNode : MonoBehaviour
     {
         /* Node Scriptable Objects */

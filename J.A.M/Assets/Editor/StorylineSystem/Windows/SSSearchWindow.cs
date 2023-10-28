@@ -31,10 +31,20 @@ namespace SS.Windows
                     level = 2,
                     userData = SSNodeType.SingleChoice
                 },
-                new SearchTreeEntry(new GUIContent("Multiple Choice", indentationIcon))
+                new SearchTreeEntry(new GUIContent("Event Multiple Choice", indentationIcon))
                 {
                     level = 2,
-                    userData = SSNodeType.MultipleChoice
+                    userData = SSNodeType.EventMultipleChoice
+                },
+                new SearchTreeEntry(new GUIContent("Start Choice", indentationIcon))
+                {
+                    level = 2,
+                    userData = SSNodeType.Start
+                },
+                new SearchTreeEntry(new GUIContent("End Choice", indentationIcon))
+                {
+                    level = 2,
+                    userData = SSNodeType.End
                 },
                 new SearchTreeGroupEntry(new GUIContent("Node Group"), 1),
                 new SearchTreeEntry(new GUIContent("Single Group", indentationIcon))
@@ -62,16 +72,36 @@ namespace SS.Windows
                     return true;
                 }
                 
-                case SSNodeType.MultipleChoice:
+                case SSNodeType.EventMultipleChoice:
                 {
-                    SSMultipleChoiceNode multipleChoiceNode =
-                        (SSMultipleChoiceNode)graphView.CreateNode("NodeName", SSNodeType.MultipleChoice, localMousePosition);
+                    SSEventMultipleChoiceNode eventMultipleChoiceNode =
+                        (SSEventMultipleChoiceNode)graphView.CreateNode("NodeName", SSNodeType.EventMultipleChoice, localMousePosition);
 
-                    graphView.AddElement(multipleChoiceNode);
+                    graphView.AddElement(eventMultipleChoiceNode);
 
                     return true;
                 }
-                
+
+                case SSNodeType.Start:
+                {
+                    SSStartNode startNode =
+                        (SSStartNode)graphView.CreateNode("NodeName", SSNodeType.Start, localMousePosition);
+                    
+                    graphView.AddElement(startNode);
+                    
+                    return true;
+                }
+
+                case SSNodeType.End:
+                {
+                    SSEndNode endNode =
+                        (SSEndNode)graphView.CreateNode("NodeName", SSNodeType.End, localMousePosition);
+                    
+                    graphView.AddElement(endNode);
+                    
+                    return true;
+                }
+
                 case Group _:
                 {
                     graphView.CreateGroup("NodeGroup", localMousePosition);

@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 namespace SS.Utilities
 {
     using Elements;
+    using Enumerations;
     
     public static class SSElementUtility
     {
@@ -66,5 +67,25 @@ namespace SS.Utilities
 
             return textArea;
         }
+
+        /*
+         public static EnumField CreateEnumField(SSLocation value,
+            EventCallback<ChangeEvent<SSLocation>> onValueChanged = null)
+        {
+            EnumField enumField = new EnumField()
+            {
+                value = value
+            };
+
+            enumField.Init(value);
+
+            if (onValueChanged != null)
+            {
+                enumField.RegisterValueChangedCallback(onValueChanged);
+            }
+
+            return enumField;
+        }
+        */
     }
 }
