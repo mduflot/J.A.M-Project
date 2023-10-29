@@ -16,7 +16,7 @@ namespace SS.Windows
         private Button saveButton;
         private Button miniMapButton;
 
-        [MenuItem("Window/SS/Storyline Graph")]
+        [MenuItem("Window/StorylineSystem/Storyline Graph")]
         public static void ShowGraph()
         {
             GetWindow<SSEditorWindow>("Storyline Graph");
@@ -75,7 +75,6 @@ namespace SS.Windows
             rootVisualElement.AddStyleSheets("StorylineSystem/SSVariables.uss");
         }
         
-
         #region Toolbar Actions
 
         private void Save()

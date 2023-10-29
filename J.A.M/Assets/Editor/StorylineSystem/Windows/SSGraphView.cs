@@ -27,10 +27,7 @@ namespace SS.Windows
 
         public int NameErrorsAmount
         {
-            get
-            {
-                return nameErrorsAmount;
-            }
+            get => nameErrorsAmount;
 
             set
             {
@@ -113,7 +110,9 @@ namespace SS.Windows
             this.AddManipulator(new RectangleSelector());
             
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Single Choice)", SSNodeType.SingleChoice));
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Multiple Choice)", SSNodeType.MultipleChoice));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Multiple Choice)", SSNodeType.EventMultipleChoice));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Start Choice)", SSNodeType.Start));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (End Choice)", SSNodeType.End));
 
             this.AddManipulator(CreateGroupContextualMenu());
         }

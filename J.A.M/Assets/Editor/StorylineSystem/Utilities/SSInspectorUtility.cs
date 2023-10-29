@@ -1,5 +1,6 @@
 using System;
 using UnityEditor;
+using UnityEngine;
 
 namespace SS.Utilities
 {
@@ -23,10 +24,17 @@ namespace SS.Utilities
         {
             EditorGUILayout.HelpBox(message, messageType, wide);
         }
-
-        public static void DrawPropertyField(this SerializedProperty serializedProperty)
+        
+        public static void DrawPropertyField(this SerializedProperty serializedProperty, bool includeChildren = false, string label = null)
         {
-            EditorGUILayout.PropertyField(serializedProperty);
+            if (label == null)
+            {
+                EditorGUILayout.PropertyField(serializedProperty, includeChildren);
+            }
+            else
+            {
+                EditorGUILayout.PropertyField(serializedProperty, new GUIContent(label), includeChildren);
+            }
         }
         
         public static int DrawPopup(string label, SerializedProperty selectedIndexProperty, string[] options)

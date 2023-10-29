@@ -9,12 +9,20 @@ namespace SS.Inspectors
     [CustomEditor(typeof(SSNode))]
     public class SSInspector : Editor
     {
+        /* UI GameObjects */
+        private SerializedProperty locationsProperty;
+        private SerializedProperty dialogueProperty;
+        private SerializedProperty popupCharactersProperty;
+        private SerializedProperty eventButtonProperty;
+        private SerializedProperty characterSlotProperty;
+        private SerializedProperty notificationProperty;
+        
         /* Node Scriptable Objects */
         private SerializedProperty nodeContainerProperty;
         private SerializedProperty nodeGroupProperty;
         private SerializedProperty nodeProperty;
         
-        /* Filters*/
+        /* Filters */
         private SerializedProperty groupedNodesProperty;
         private SerializedProperty startingNodesOnlyProperty;
         
@@ -24,6 +32,13 @@ namespace SS.Inspectors
 
         private void OnEnable()
         {
+            locationsProperty = serializedObject.FindProperty("locations");
+            dialogueProperty = serializedObject.FindProperty("dialogue");
+            popupCharactersProperty = serializedObject.FindProperty("popupCharacters");
+            eventButtonProperty = serializedObject.FindProperty("eventButton");
+            characterSlotProperty = serializedObject.FindProperty("characterSlot");
+            notificationProperty = serializedObject.FindProperty("notification");
+            
             nodeContainerProperty = serializedObject.FindProperty("nodeContainer");
             nodeGroupProperty = serializedObject.FindProperty("nodeGroup");
             nodeProperty = serializedObject.FindProperty("node");
@@ -39,6 +54,13 @@ namespace SS.Inspectors
         {
             serializedObject.Update();
             
+            locationsProperty.DrawPropertyField(true);
+            dialogueProperty.DrawPropertyField();
+            popupCharactersProperty.DrawPropertyField();
+            eventButtonProperty.DrawPropertyField();
+            characterSlotProperty.DrawPropertyField();
+            notificationProperty.DrawPropertyField();
+
             DrawNodeContainerArea();
 
             SSNodeContainerSO nodeContainer = (SSNodeContainerSO) nodeContainerProperty.objectReferenceValue;
@@ -46,7 +68,7 @@ namespace SS.Inspectors
             if (nodeContainer == null)
             { 
                 StopDrawing("Select a Node Container to see the rest of the Inspector");
-                
+
                 return;
             }
 
@@ -59,7 +81,7 @@ namespace SS.Inspectors
             string nodeFolderPath = $"Assets/StorylineSystem/Storylines/{nodeContainer.FileName}";
 
             string nodeInfoMessage;
-            
+
             if (groupedNodesProperty.boolValue)
             {
                 List<string> nodeGroupNames = nodeContainer.GetNodeGroupNames();
@@ -70,11 +92,11 @@ namespace SS.Inspectors
 
                     return;
                 }
-                
+
                 DrawNodeGroupArea(nodeContainer, nodeGroupNames);
 
                 SSNodeGroupSO nodeGroup = (SSNodeGroupSO) nodeGroupProperty.objectReferenceValue;
-                
+
                 nodeNames = nodeContainer.GetGroupedNodeNames(nodeGroup, currentStartingNodesOnlyFilter);
 
                 nodeFolderPath += $"/Groups/{nodeGroup.GroupName}/Nodes";
@@ -109,7 +131,6 @@ namespace SS.Inspectors
             SSInspectorUtility.DrawHeader("Node Container");
 
             nodeContainerProperty.DrawPropertyField();
-            EditorGUILayout.PropertyField(nodeContainerProperty);
             
             SSInspectorUtility.DrawSpace();
         }
