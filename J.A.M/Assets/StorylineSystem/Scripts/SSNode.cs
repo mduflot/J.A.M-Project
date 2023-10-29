@@ -1,13 +1,25 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SS
 {
+    using Enumerations;
     using ScriptableObjects;
     
     public class SSNode : MonoBehaviour
     {
+        /* UI GameObjects */
+        [SerializeField] private List<Button> locations;
+        [SerializeField] private GameObject dialogue;
+        [SerializeField] private GameObject popupCharacters;
+        [SerializeField] private Button eventButton;
+        [SerializeField] private GameObject characterSlot;
+        [SerializeField] private GameObject notification;
+
         /* Node Scriptable Objects */
         [SerializeField] private SSNodeContainerSO nodeContainer;
         [SerializeField] private SSNodeGroupSO nodeGroup;
@@ -20,27 +32,88 @@ namespace SS
         /* Indexes */
         [SerializeField] private int selectedNodeGroupIndex;
         [SerializeField] private int selectedNodeIndex;
-        
-        /* Locations */
-        [SerializeField] private List<GameObject> locations;
 
-        public void ShowTimeline()
+        [ContextMenu("StartTimeline")]
+        public void StartTimeline()
         {
-            if (node is SSStartNodeSO startNode)
+            CheckNodeType(node);
+        }
+
+        public void CheckNodeType(SSNodeSO nodeSO)
+        {
+            switch (nodeSO.NodeType)
             {
-                foreach (GameObject location in locations)
+                case SSNodeType.Start:
                 {
-                    if (location.name == startNode.LocationType.ToString())
-                    {
-                        location.SetActive(true);
-                    }
+                    RunNode(nodeSO as SSStartNodeSO);
+                    break;
+                }
+                case SSNodeType.SingleChoice:
+                {
+                    RunSingleNode(nodeSO);
+                    break;
+                }
+                case SSNodeType.EventMultipleChoice:
+                {
+                    RunEventNode(nodeSO);
+                    break;
+                }
+                case SSNodeType.End:
+                {
+                    RunNode(nodeSO as SSEndNodeSO);
+                    break;
+                }
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void RunNode(SSStartNodeSO startNodeSO)
+        {
+            foreach (var location in locations)
+            {
+                if (location.name == startNodeSO.LocationType.ToString())
+                {
+                    location.gameObject.SetActive(true);
+                    location.onClick.AddListener(() => CheckNodeType(startNodeSO.Choices[0].NextNode));
+                    location.onClick.AddListener(() => location.gameObject.SetActive(false));
                 }
             }
         }
 
-        public void StartTimeline()
+        private void RunNode(SSEndNodeSO endNodeSO)
         {
-            
+            foreach (var location in locations)
+            {
+                location.gameObject.SetActive(false);
+            }
+            popupCharacters.SetActive(false);
+            dialogue.SetActive(false);
+            eventButton.gameObject.SetActive(false);
+            notification.SetActive(true);
+            notification.GetComponent<TextMeshProUGUI>().text = "Timeline over !";
+        }
+
+        private void RunSingleNode(SSNodeSO nodeSO)
+        {
+            dialogue.SetActive(true);
+            dialogue.GetComponent<TextMeshProUGUI>().text = nodeSO.Text;
+            StartCoroutine(WaiterDialogue(nodeSO));
+        }
+        
+        private void RunEventNode(SSNodeSO nodeSO)
+        {
+            popupCharacters.SetActive(true);
+            eventButton.gameObject.SetActive(true);
+            eventButton.onClick.AddListener(() => CheckNodeType(nodeSO.Choices[0].NextNode));
+            eventButton.onClick.AddListener(() => popupCharacters.SetActive(false));
+        }
+
+        IEnumerator WaiterDialogue(SSNodeSO nodeSO)
+        {
+            yield return new WaitForSecondsRealtime(5);
+            dialogue.SetActive(false);
+            CheckNodeType(nodeSO.Choices[0].NextNode);
         }
     }
 }

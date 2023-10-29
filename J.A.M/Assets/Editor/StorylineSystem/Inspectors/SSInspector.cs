@@ -9,6 +9,14 @@ namespace SS.Inspectors
     [CustomEditor(typeof(SSNode))]
     public class SSInspector : Editor
     {
+        /* UI GameObjects */
+        private SerializedProperty locationsProperty;
+        private SerializedProperty dialogueProperty;
+        private SerializedProperty popupCharactersProperty;
+        private SerializedProperty eventButtonProperty;
+        private SerializedProperty characterSlotProperty;
+        private SerializedProperty notificationProperty;
+        
         /* Node Scriptable Objects */
         private SerializedProperty nodeContainerProperty;
         private SerializedProperty nodeGroupProperty;
@@ -24,6 +32,13 @@ namespace SS.Inspectors
 
         private void OnEnable()
         {
+            locationsProperty = serializedObject.FindProperty("locations");
+            dialogueProperty = serializedObject.FindProperty("dialogue");
+            popupCharactersProperty = serializedObject.FindProperty("popupCharacters");
+            eventButtonProperty = serializedObject.FindProperty("eventButton");
+            characterSlotProperty = serializedObject.FindProperty("characterSlot");
+            notificationProperty = serializedObject.FindProperty("notification");
+            
             nodeContainerProperty = serializedObject.FindProperty("nodeContainer");
             nodeGroupProperty = serializedObject.FindProperty("nodeGroup");
             nodeProperty = serializedObject.FindProperty("node");
@@ -38,6 +53,13 @@ namespace SS.Inspectors
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
+            
+            locationsProperty.DrawPropertyField(true);
+            dialogueProperty.DrawPropertyField();
+            popupCharactersProperty.DrawPropertyField();
+            eventButtonProperty.DrawPropertyField();
+            characterSlotProperty.DrawPropertyField();
+            notificationProperty.DrawPropertyField();
 
             DrawNodeContainerArea();
 
