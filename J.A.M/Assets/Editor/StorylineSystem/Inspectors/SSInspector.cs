@@ -14,7 +14,7 @@ namespace SS.Inspectors
         private SerializedProperty nodeGroupProperty;
         private SerializedProperty nodeProperty;
         
-        /* Filters*/
+        /* Filters */
         private SerializedProperty groupedNodesProperty;
         private SerializedProperty startingNodesOnlyProperty;
         
@@ -38,7 +38,7 @@ namespace SS.Inspectors
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-            
+
             DrawNodeContainerArea();
 
             SSNodeContainerSO nodeContainer = (SSNodeContainerSO) nodeContainerProperty.objectReferenceValue;
@@ -46,7 +46,7 @@ namespace SS.Inspectors
             if (nodeContainer == null)
             { 
                 StopDrawing("Select a Node Container to see the rest of the Inspector");
-                
+
                 return;
             }
 
@@ -59,7 +59,7 @@ namespace SS.Inspectors
             string nodeFolderPath = $"Assets/StorylineSystem/Storylines/{nodeContainer.FileName}";
 
             string nodeInfoMessage;
-            
+
             if (groupedNodesProperty.boolValue)
             {
                 List<string> nodeGroupNames = nodeContainer.GetNodeGroupNames();
@@ -70,11 +70,11 @@ namespace SS.Inspectors
 
                     return;
                 }
-                
+
                 DrawNodeGroupArea(nodeContainer, nodeGroupNames);
 
                 SSNodeGroupSO nodeGroup = (SSNodeGroupSO) nodeGroupProperty.objectReferenceValue;
-                
+
                 nodeNames = nodeContainer.GetGroupedNodeNames(nodeGroup, currentStartingNodesOnlyFilter);
 
                 nodeFolderPath += $"/Groups/{nodeGroup.GroupName}/Nodes";

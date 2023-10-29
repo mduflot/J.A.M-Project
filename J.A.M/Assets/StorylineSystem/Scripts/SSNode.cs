@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SS
@@ -18,5 +20,27 @@ namespace SS
         /* Indexes */
         [SerializeField] private int selectedNodeGroupIndex;
         [SerializeField] private int selectedNodeIndex;
+        
+        /* Locations */
+        [SerializeField] private List<GameObject> locations;
+
+        public void ShowTimeline()
+        {
+            if (node is SSStartNodeSO startNode)
+            {
+                foreach (GameObject location in locations)
+                {
+                    if (location.name == startNode.LocationType.ToString())
+                    {
+                        location.SetActive(true);
+                    }
+                }
+            }
+        }
+
+        public void StartTimeline()
+        {
+            
+        }
     }
 }
