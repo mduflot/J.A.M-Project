@@ -10,8 +10,8 @@ public class UIManager : MonoBehaviour
     public Transform charactersUIParent;
     public List<CharacterUI> characterUI;
     public CharacterUI characterUIPrefab;
-    public Task taskPrefab;
     public Transform taskParent;
+    public Task taskUI;
     
     [Serializable] 
     public struct Gauges
@@ -42,8 +42,7 @@ public class UIManager : MonoBehaviour
 
     public void SpawnTaskUI(TaskDataScriptable data)
     {
-        Task task = Instantiate(taskPrefab, taskParent);
-        task.Initialize(data);
+        taskUI.Initialize(data);
     }
 
     public void UpdateGauges(SpaceshipManager.System system, float value)

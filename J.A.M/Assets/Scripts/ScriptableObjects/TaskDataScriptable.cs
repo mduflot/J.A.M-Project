@@ -8,4 +8,5 @@ public class TaskDataScriptable : ScriptableObject
     public string taskName;
     public int mandatorySlots;
     public int optionalSlots;
+    public SpaceshipManager.System system;
 }

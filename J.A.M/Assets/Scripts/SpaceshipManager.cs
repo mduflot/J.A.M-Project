@@ -44,31 +44,32 @@ public class SpaceshipManager : MonoBehaviour
         }
     }
 
+    private void Initialize()
+    {
+        TimeTickSystem.OnTick += UpdateSystems;
+    }
+
     private void Start()
     {
+        Initialize();
         InitializeSystems();
     }
 
-    private void FixedUpdate()
-    {
-        UpdateSystems();
-    }
-
-    private void UpdateSystems()
+    private void UpdateSystems(object sender, TimeTickSystem.OnTickEventArgs e)
     {
         foreach (var system in shipSystems)
         {
             system.gaugeValue -= system.decreaseSpeed;
             GameManager.Instance.UIManager.UpdateGauges(system.systemName, system.gaugeValue);
-            if ((int)system.gaugeValue == gaugesThreshold)
+            /*if ((int)system.gaugeValue == gaugesThreshold)
             {
                 SpawnTask(system); 
-            }
+            }*/
         }
     }
     
-    private void SpawnTask(ShipSystem system)
+    public void SpawnTask(TaskDataScriptable taskDataScriptable)
     {
-        GameManager.Instance.UIManager.SpawnTaskUI(system.task);
+        GameManager.Instance.UIManager.SpawnTaskUI(taskDataScriptable);
     }
 }
