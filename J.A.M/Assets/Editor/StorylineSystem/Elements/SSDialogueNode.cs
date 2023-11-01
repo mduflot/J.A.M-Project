@@ -1,5 +1,6 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace SS.Elements
 {
@@ -8,13 +9,16 @@ namespace SS.Elements
     using Utilities;
     using Windows;
     
-    public class SSSingleChoiceNode : SSNode
+    public class SSDialogueNode : SSNode
     {
+        public string Text { get; set; }
+        
         public override void Initialize(string nodeName, SSGraphView ssGraphView, Vector2 position)
         {
             base.Initialize(nodeName, ssGraphView, position);
 
-            NodeType = SSNodeType.SingleChoice;
+            NodeType = SSNodeType.Dialogue;
+            Text = "Node text.";
 
             SSChoiceSaveData choiceData = new SSChoiceSaveData()
             {
@@ -38,6 +42,27 @@ namespace SS.Elements
                 
                 outputContainer.Add(choicePort);
             }
+            
+            /* EXTENSIONS CONTAINER */
+            
+            VisualElement customDataContainer = new VisualElement();
+            
+            customDataContainer.AddToClassList("ss-node__custom-data-container");
+
+            Foldout textFoldout = SSElementUtility.CreateFoldout("Node Text");
+
+            TextField textTextField = SSElementUtility.CreateTextArea(Text, null, callback =>
+            {
+                Text = callback.newValue;
+            });
+
+            textTextField.AddClasses("ss-node__text-field", "ss-node__quote-text-field");
+            
+            textFoldout.Add(textTextField);
+            
+            customDataContainer.Add(textFoldout);
+            
+            extensionContainer.Add(customDataContainer);
             
             RefreshExpandedState();
         }

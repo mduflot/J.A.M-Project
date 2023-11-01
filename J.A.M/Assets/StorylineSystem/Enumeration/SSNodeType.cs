@@ -2,8 +2,8 @@ namespace SS.Enumerations
 {
     public enum SSNodeType
     {
-        SingleChoice,
-        EventMultipleChoice,
+        Dialogue,
+        Event,
         Start,
         End
     }

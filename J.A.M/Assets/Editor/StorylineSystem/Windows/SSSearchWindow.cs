@@ -26,22 +26,22 @@ namespace SS.Windows
             {
                 new SearchTreeGroupEntry(new GUIContent("CreateElement")),
                 new SearchTreeGroupEntry(new GUIContent("Node"), 1),
-                new SearchTreeEntry(new GUIContent("Single Choice", indentationIcon))
+                new SearchTreeEntry(new GUIContent("Dialogue", indentationIcon))
                 {
                     level = 2,
-                    userData = SSNodeType.SingleChoice
+                    userData = SSNodeType.Dialogue
                 },
-                new SearchTreeEntry(new GUIContent("Event Multiple Choice", indentationIcon))
+                new SearchTreeEntry(new GUIContent("Event Multiple", indentationIcon))
                 {
                     level = 2,
-                    userData = SSNodeType.EventMultipleChoice
+                    userData = SSNodeType.Event
                 },
-                new SearchTreeEntry(new GUIContent("Start Choice", indentationIcon))
+                new SearchTreeEntry(new GUIContent("Start", indentationIcon))
                 {
                     level = 2,
                     userData = SSNodeType.Start
                 },
-                new SearchTreeEntry(new GUIContent("End Choice", indentationIcon))
+                new SearchTreeEntry(new GUIContent("End", indentationIcon))
                 {
                     level = 2,
                     userData = SSNodeType.End
@@ -62,22 +62,22 @@ namespace SS.Windows
             Vector2 localMousePosition = graphView.GetLocalMousePosition(context.screenMousePosition, true);
             switch (SearchTreeEntry.userData)
             {
-                case SSNodeType.SingleChoice:
+                case SSNodeType.Dialogue:
                 {
-                    SSSingleChoiceNode singleChoiceNode =
-                        (SSSingleChoiceNode)graphView.CreateNode("NodeName", SSNodeType.SingleChoice, localMousePosition);
+                    SSDialogueNode dialogueNode =
+                        (SSDialogueNode)graphView.CreateNode("NodeName", SSNodeType.Dialogue, localMousePosition);
 
-                    graphView.AddElement(singleChoiceNode);
+                    graphView.AddElement(dialogueNode);
 
                     return true;
                 }
                 
-                case SSNodeType.EventMultipleChoice:
+                case SSNodeType.Event:
                 {
-                    SSEventMultipleChoiceNode eventMultipleChoiceNode =
-                        (SSEventMultipleChoiceNode)graphView.CreateNode("NodeName", SSNodeType.EventMultipleChoice, localMousePosition);
+                    SSEventNode eventNode =
+                        (SSEventNode)graphView.CreateNode("NodeName", SSNodeType.Event, localMousePosition);
 
-                    graphView.AddElement(eventMultipleChoiceNode);
+                    graphView.AddElement(eventNode);
 
                     return true;
                 }

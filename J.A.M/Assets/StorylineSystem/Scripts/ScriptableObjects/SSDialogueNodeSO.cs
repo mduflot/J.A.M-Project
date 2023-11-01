@@ -6,17 +6,17 @@ namespace SS.ScriptableObjects
     using Enumerations;
     using Data;
     
-    public class SSEndNodeSO : SSNodeSO
+    public class SSDialogueNodeSO : SSNodeSO
     {
-        [field: SerializeField] public SSRewardType RewardType { get; set; }
+        [field: SerializeField] [field: TextArea()] public string Text { get; set; }
         
-        public void Initialize(string nodeName, List<SSNodeChoiceData> choices, SSNodeType nodeType, bool isStartingNode, SSRewardType rewardType)
+        public void Initialize(string nodeName, string text, List<SSNodeChoiceData> choices, SSNodeType nodeType, bool isStartingNode)
         {
             NodeName = nodeName;
+            Text = text;
             Choices = choices;
             NodeType = nodeType;
             IsStartingNode = isStartingNode;
-            RewardType = rewardType;
         }
     }
 }

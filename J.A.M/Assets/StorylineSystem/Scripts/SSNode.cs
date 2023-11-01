@@ -48,12 +48,12 @@ namespace SS
                     RunNode(nodeSO as SSStartNodeSO);
                     break;
                 }
-                case SSNodeType.SingleChoice:
+                case SSNodeType.Dialogue:
                 {
-                    RunSingleNode(nodeSO);
+                    RunSingleNode(nodeSO as SSDialogueNodeSO);
                     break;
                 }
-                case SSNodeType.EventMultipleChoice:
+                case SSNodeType.Event:
                 {
                     RunEventNode(nodeSO);
                     break;
@@ -94,7 +94,7 @@ namespace SS
             notification.GetComponent<TextMeshProUGUI>().text = "Timeline over !";
         }
 
-        private void RunSingleNode(SSNodeSO nodeSO)
+        private void RunSingleNode(SSDialogueNodeSO nodeSO)
         {
             dialogue.SetActive(true);
             dialogue.GetComponent<TextMeshProUGUI>().text = nodeSO.Text;

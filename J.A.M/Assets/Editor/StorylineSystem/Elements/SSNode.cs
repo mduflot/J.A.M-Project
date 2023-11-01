@@ -17,7 +17,6 @@ namespace SS.Elements
         public string ID { get; set; }
         public string NodeName { get; set; }
         public List<SSChoiceSaveData> Choices { get; set; }
-        public string Text { get; set; }
         public SSNodeType NodeType { get; set; }
         public SSGroup Group { get; set; }
 
@@ -30,7 +29,6 @@ namespace SS.Elements
             ID = Guid.NewGuid().ToString();
             NodeName = nodeName;
             Choices = new List<SSChoiceSaveData>();
-            Text = "Node text.";
 
             graphView = ssGraphView;
             defaultBackgroundColor = new Color(29f / 255f, 29 / 255f, 30 / 255f);
@@ -98,27 +96,6 @@ namespace SS.Elements
             inputPort.portName = "Node Connection";
 
             inputContainer.Add(inputPort);
-
-            /* EXTENSIONS CONTAINER */
-            
-            VisualElement customDataContainer = new VisualElement();
-            
-            customDataContainer.AddToClassList("ss-node__custom-data-container");
-
-            Foldout textFoldout = SSElementUtility.CreateFoldout("Node Text");
-
-            TextField textTextField = SSElementUtility.CreateTextArea(Text, null, callback =>
-            {
-                Text = callback.newValue;
-            });
-
-            textTextField.AddClasses("ss-node__text-field", "ss-node__quote-text-field");
-            
-            textFoldout.Add(textTextField);
-            
-            customDataContainer.Add(textFoldout);
-            
-            extensionContainer.Add(customDataContainer);
         }
         
         #region Overrided Methods

@@ -177,7 +177,6 @@ namespace SS.Utilities
                     ID = node.ID,
                     Name = node.NodeName,
                     Choices = choices,
-                    Text = node.Text,
                     GroupID = node.Group?.ID,
                     NodeType = node.NodeType,
                     Position = node.GetPosition().position,
@@ -191,11 +190,23 @@ namespace SS.Utilities
                     ID = node.ID,
                     Name = node.NodeName,
                     Choices = choices,
-                    Text = node.Text,
                     GroupID = node.Group?.ID,
                     NodeType = node.NodeType,
                     Position = node.GetPosition().position,
                     RewardType = ((SSEndNode)node).RewardType
+                };
+            }
+            else if (node is SSDialogueNode)
+            {
+                nodeData = new SSDialogueNodeSaveData()
+                {
+                    ID = node.ID,
+                    Name = node.NodeName,
+                    Choices = choices,
+                    GroupID = node.Group?.ID,
+                    NodeType = node.NodeType,
+                    Position = node.GetPosition().position,
+                    Text = ((SSDialogueNode)node).Text
                 };
             }
             else
@@ -205,7 +216,6 @@ namespace SS.Utilities
                     ID = node.ID,
                     Name = node.NodeName,
                     Choices = choices,
-                    Text = node.Text,
                     GroupID = node.Group?.ID,
                     NodeType = node.NodeType,
                     Position = node.GetPosition().position
@@ -234,7 +244,7 @@ namespace SS.Utilities
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(startNode.NodeName, startNode.Text, ConvertNodeChoicesToNodeChoices(startNode.Choices), startNode.NodeType,
+                nodeSO.Initialize(startNode.NodeName, ConvertNodeChoicesToNodeChoices(startNode.Choices), startNode.NodeType,
                     startNode.IsStartingNode(), startNode.LocationType);
 
                 createdNodes.Add(startNode.ID, nodeSO);
@@ -258,10 +268,58 @@ namespace SS.Utilities
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(endNode.NodeName, endNode.Text, ConvertNodeChoicesToNodeChoices(endNode.Choices), endNode.NodeType,
+                nodeSO.Initialize(endNode.NodeName, ConvertNodeChoicesToNodeChoices(endNode.Choices), endNode.NodeType,
                     endNode.IsStartingNode(), endNode.RewardType);
 
                 createdNodes.Add(endNode.ID, nodeSO);
+
+                SaveAsset(nodeSO);
+            }
+            else if (node is SSDialogueNode dialogueNode)
+            {
+                SSDialogueNodeSO nodeSO;
+
+                if (dialogueNode.Group != null)
+                {
+                    nodeSO = CreateAsset<SSDialogueNodeSO>($"{containerFolderPath}/Groups/{dialogueNode.Group.title}/Nodes", dialogueNode.NodeName);
+
+                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[dialogueNode.Group.ID], nodeSO);
+                }
+                else
+                {
+                    nodeSO = CreateAsset<SSDialogueNodeSO>($"{containerFolderPath}/Global/Nodes", dialogueNode.NodeName);
+
+                    nodeContainer.UngroupedNodes.Add(nodeSO);
+                }
+
+                nodeSO.Initialize(dialogueNode.NodeName, dialogueNode.Text, ConvertNodeChoicesToNodeChoices(dialogueNode.Choices), dialogueNode.NodeType,
+                    dialogueNode.IsStartingNode());
+
+                createdNodes.Add(dialogueNode.ID, nodeSO);
+
+                SaveAsset(nodeSO);
+            }
+            else if (node is SSEventNode eventMultipleNode)
+            {
+                SSEventNodeSO nodeSO;
+
+                if (eventMultipleNode.Group != null)
+                {
+                    nodeSO = CreateAsset<SSEventNodeSO>($"{containerFolderPath}/Groups/{eventMultipleNode.Group.title}/Nodes", eventMultipleNode.NodeName);
+
+                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[eventMultipleNode.Group.ID], nodeSO);
+                }
+                else
+                {
+                    nodeSO = CreateAsset<SSEventNodeSO>($"{containerFolderPath}/Global/Nodes", eventMultipleNode.NodeName);
+
+                    nodeContainer.UngroupedNodes.Add(nodeSO);
+                }
+
+                nodeSO.Initialize(eventMultipleNode.NodeName, eventMultipleNode.Text, ConvertNodeChoicesToNodeChoices(eventMultipleNode.Choices), eventMultipleNode.NodeType,
+                    eventMultipleNode.IsStartingNode());
+
+                createdNodes.Add(eventMultipleNode.ID, nodeSO);
 
                 SaveAsset(nodeSO);
             }
@@ -282,7 +340,7 @@ namespace SS.Utilities
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(node.NodeName, node.Text, ConvertNodeChoicesToNodeChoices(node.Choices), node.NodeType,
+                nodeSO.Initialize(node.NodeName, ConvertNodeChoicesToNodeChoices(node.Choices), node.NodeType,
                     node.IsStartingNode());
 
                 createdNodes.Add(node.ID, nodeSO);
@@ -420,7 +478,6 @@ namespace SS.Utilities
 
                 node.ID = nodeData.ID;
                 node.Choices = choices;
-                node.Text = nodeData.Text;
 
                 if (nodeData is SSStartNodeSaveData)
                 {
@@ -430,7 +487,15 @@ namespace SS.Utilities
                 {
                     ((SSEndNode)node).RewardType = ((SSEndNodeSaveData)nodeData).RewardType;
                 } 
-                
+                else if (nodeData is SSDialogueNodeSaveData)
+                {
+                    ((SSDialogueNode)node).Text = ((SSDialogueNodeSaveData)nodeData).Text;
+                }
+                else if (nodeData is SSEventNodeSaveData)
+                {
+                    ((SSEventNode)node).Text = ((SSEventNodeSaveData)nodeData).Text;
+                }
+
                 node.Draw();
                 
                 graphView.AddElement(node);
