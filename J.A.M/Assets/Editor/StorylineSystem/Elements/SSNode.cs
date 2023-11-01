@@ -32,9 +32,9 @@ namespace SS.Elements
 
             graphView = ssGraphView;
             defaultBackgroundColor = new Color(29f / 255f, 29 / 255f, 30 / 255f);
-            
+
             SetPosition(new Rect(position, Vector2.zero));
-            
+
             mainContainer.AddToClassList("ss-node_main-container");
             extensionContainer.AddToClassList("ss-node_extension-container");
         }
@@ -63,24 +63,24 @@ namespace SS.Elements
                         --graphView.NameErrorsAmount;
                     }
                 }
-                
+
                 if (Group == null)
                 {
                     graphView.RemoveUngroupedNode(this);
 
                     NodeName = target.value;
-                
+
                     graphView.AddUngroupedNode(this);
 
                     return;
                 }
 
                 SSGroup currentGroup = Group;
-                
+
                 graphView.RemoveGroupedNode(this, Group);
 
                 NodeName = target.value;
-                
+
                 graphView.AddGroupedNode(this, currentGroup);
             });
 
@@ -97,17 +97,17 @@ namespace SS.Elements
 
             inputContainer.Add(inputPort);
         }
-        
+
         #region Overrided Methods
-        
+
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
             evt.menu.AppendAction("Disconnect Input Ports", actionEvent => DisconnectInputPorts());
             evt.menu.AppendAction("Disconnect Input Ports", actionEvent => DisconnectOutputPorts());
-            
+
             base.BuildContextualMenu(evt);
         }
-        
+
         #endregion
 
         #region Utility Methods
@@ -136,7 +136,7 @@ namespace SS.Elements
                 {
                     continue;
                 }
-                
+
                 graphView.DeleteElements(port.connections);
             }
         }

@@ -1,10 +1,10 @@
-using SS.Data.Save;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace SS.Elements
 {
+    using Data.Save;
     using Enumerations;
     using Utilities;
     using Windows;
@@ -12,13 +12,15 @@ namespace SS.Elements
     public class SSEventNode : SSNode
     {
         public string Text { get; set; }
-        
+        public int LeaderCount { get; set; }
+
         public override void Initialize(string nodeName, SSGraphView ssGraphView, Vector2 position)
         {
             base.Initialize(nodeName, ssGraphView, position);
 
             NodeType = SSNodeType.Event;
             Text = "Node text.";
+            LeaderCount = 1;
 
             SSChoiceSaveData choiceData = new SSChoiceSaveData()
             {
@@ -60,9 +62,9 @@ namespace SS.Elements
 
                 outputContainer.Add(choicePort);
             }
-            
+
             /* EXTENSIONS CONTAINER */
-            
+
             VisualElement customDataContainer = new VisualElement();
             
             customDataContainer.AddToClassList("ss-node__custom-data-container");
@@ -77,11 +79,20 @@ namespace SS.Elements
             textTextField.AddClasses("ss-node__text-field", "ss-node__quote-text-field");
             
             textFoldout.Add(textTextField);
-            
+
             customDataContainer.Add(textFoldout);
-            
+
+            SliderInt sliderField = null;
+            sliderField = SSElementUtility.CreateSliderField(LeaderCount, "Leaders : ", callback =>
+            {
+                LeaderCount = Mathf.Min(callback.newValue, 5);
+                sliderField.label = "Leaders : " + callback.newValue;
+            });
+
+            customDataContainer.Add(sliderField);
+
             extensionContainer.Add(customDataContainer);
-            
+
             RefreshExpandedState();
         }
 

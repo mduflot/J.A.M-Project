@@ -5,8 +5,7 @@ using UnityEngine.UIElements;
 namespace SS.Utilities
 {
     using Elements;
-    using Enumerations;
-    
+
     public static class SSElementUtility
     {
         public static Button CreateButton(string text, Action onClick = null)
@@ -18,7 +17,7 @@ namespace SS.Utilities
 
             return button;
         }
-        
+
         public static Foldout CreateFoldout(string title, bool collapsed = false)
         {
             Foldout foldout = new Foldout()
@@ -37,10 +36,10 @@ namespace SS.Utilities
             Port port = node.InstantiatePort(orientation, direction, capacity, typeof(bool));
 
             port.portName = portName;
-            
+
             return port;
         }
-        
+
         public static TextField CreateTextField(string value = null, string label = null,
             EventCallback<ChangeEvent<string>> onValueChanged = null)
         {
@@ -68,24 +67,40 @@ namespace SS.Utilities
             return textArea;
         }
 
-        /*
-         public static EnumField CreateEnumField(SSLocation value,
-            EventCallback<ChangeEvent<SSLocation>> onValueChanged = null)
+        public static IntegerField CreateIntegerField(int value = 1, string label = null,
+            EventCallback<ChangeEvent<int>> onValueChanged = null)
         {
-            EnumField enumField = new EnumField()
+            IntegerField integerField = new IntegerField()
             {
-                value = value
+                value = value,
+                label = label
             };
-
-            enumField.Init(value);
 
             if (onValueChanged != null)
             {
-                enumField.RegisterValueChangedCallback(onValueChanged);
+                integerField.RegisterValueChangedCallback(onValueChanged);
             }
 
-            return enumField;
+            return integerField;
         }
-        */
+
+        public static SliderInt CreateSliderField(int value = 1, string label = null,
+            EventCallback<ChangeEvent<int>> onValueChanged = null)
+        {
+            SliderInt sliderField = new SliderInt()
+            {
+                value = value,
+                label = label + value,
+                lowValue = 1,
+                highValue = 5
+            };
+            
+            if (onValueChanged != null)
+            {
+                sliderField.RegisterValueChangedCallback(onValueChanged);
+            }
+
+            return sliderField;
+        }
     }
 }

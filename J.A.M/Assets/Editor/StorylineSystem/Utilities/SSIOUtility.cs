@@ -209,6 +209,20 @@ namespace SS.Utilities
                     Text = ((SSDialogueNode)node).Text
                 };
             }
+            else if (node is SSEventNode)
+            {
+                nodeData = new SSEventNodeSaveData()
+                {
+                    ID = node.ID,
+                    Name = node.NodeName,
+                    Choices = choices,
+                    GroupID = node.Group?.ID,
+                    NodeType = node.NodeType,
+                    Position = node.GetPosition().position,
+                    Text = ((SSEventNode)node).Text,
+                    LeaderCount =  ((SSEventNode)node).LeaderCount
+                };
+            }
             else
             {
                 nodeData = new SSNodeSaveData()
@@ -299,27 +313,27 @@ namespace SS.Utilities
 
                 SaveAsset(nodeSO);
             }
-            else if (node is SSEventNode eventMultipleNode)
+            else if (node is SSEventNode eventNode)
             {
                 SSEventNodeSO nodeSO;
 
-                if (eventMultipleNode.Group != null)
+                if (eventNode.Group != null)
                 {
-                    nodeSO = CreateAsset<SSEventNodeSO>($"{containerFolderPath}/Groups/{eventMultipleNode.Group.title}/Nodes", eventMultipleNode.NodeName);
+                    nodeSO = CreateAsset<SSEventNodeSO>($"{containerFolderPath}/Groups/{eventNode.Group.title}/Nodes", eventNode.NodeName);
 
-                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[eventMultipleNode.Group.ID], nodeSO);
+                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[eventNode.Group.ID], nodeSO);
                 }
                 else
                 {
-                    nodeSO = CreateAsset<SSEventNodeSO>($"{containerFolderPath}/Global/Nodes", eventMultipleNode.NodeName);
+                    nodeSO = CreateAsset<SSEventNodeSO>($"{containerFolderPath}/Global/Nodes", eventNode.NodeName);
 
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(eventMultipleNode.NodeName, eventMultipleNode.Text, ConvertNodeChoicesToNodeChoices(eventMultipleNode.Choices), eventMultipleNode.NodeType,
-                    eventMultipleNode.IsStartingNode());
+                nodeSO.Initialize(eventNode.NodeName, eventNode.Text, ConvertNodeChoicesToNodeChoices(eventNode.Choices), eventNode.NodeType,
+                    eventNode.IsStartingNode(), eventNode.LeaderCount);
 
-                createdNodes.Add(eventMultipleNode.ID, nodeSO);
+                createdNodes.Add(eventNode.ID, nodeSO);
 
                 SaveAsset(nodeSO);
             }
@@ -494,6 +508,7 @@ namespace SS.Utilities
                 else if (nodeData is SSEventNodeSaveData)
                 {
                     ((SSEventNode)node).Text = ((SSEventNodeSaveData)nodeData).Text;
+                    ((SSEventNode)node).LeaderCount = ((SSEventNodeSaveData)nodeData).LeaderCount;
                 }
 
                 node.Draw();
