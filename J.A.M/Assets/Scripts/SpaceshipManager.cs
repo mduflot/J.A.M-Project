@@ -9,6 +9,7 @@ public class SpaceshipManager : MonoBehaviour
     public ShipSystem[] shipSystems;
     [SerializeField] private float gaugesThreshold;
     public CharacterBehaviour[] characters;
+    private Dictionary<System, ShipSystem> systemsDictionary = new Dictionary<System, ShipSystem>();
 
     [Serializable]
     public struct Room
@@ -41,6 +42,7 @@ public class SpaceshipManager : MonoBehaviour
         foreach (var system in shipSystems)
         {
             system.gaugeValue = 100;
+            systemsDictionary.Add(system.systemName, system);
         }
     }
 
@@ -66,6 +68,16 @@ public class SpaceshipManager : MonoBehaviour
                 SpawnTask(system); 
             }*/
         }
+    }
+
+    public float GetGaugeValue(System system)
+    {
+        return systemsDictionary[system].gaugeValue;
+    }
+
+    public void GaugeValueOperation(System system, float value)
+    {
+        systemsDictionary[system].gaugeValue += value;
     }
     
     public void SpawnTask(TaskDataScriptable taskDataScriptable)

@@ -1,15 +1,14 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CharacterUISlot : MonoBehaviour, IDropHandler
+public class CharacterUISlot : CharacterUI
 {
-    public CharacterIcon character;
     public bool isMandatory;
-    public void OnDrop(PointerEventData eventData)
+    public UnityEngine.UI.Image image;
+
+    private void Start()
     {
-        GameObject dropped = eventData.pointerDrag;
-        CharacterIcon icon = dropped.GetComponent<CharacterIcon>();
-        character = icon;
-        icon.parentAfterDrag = transform;
+        image = GetComponent<UnityEngine.UI.Image>();
     }
+    
 }

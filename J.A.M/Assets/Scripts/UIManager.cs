@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     public CharacterUI characterUIPrefab;
     public Transform taskParent;
     public Task taskUI;
+    public Canvas canvas;
     
     [Serializable] 
     public struct Gauges
@@ -34,6 +35,7 @@ public class UIManager : MonoBehaviour
 
         foreach (var character in GameManager.Instance.SpaceshipManager.characters)
         {
+            Debug.Log(character.name);
             var ui = Instantiate(characterUIPrefab, charactersUIParent);
             ui.Initialize(character.data);
             characterUI.Add(ui);

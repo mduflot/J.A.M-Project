@@ -1,12 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "TaskData", fileName = "TaskData")]
+[CreateAssetMenu(menuName = "Task/TaskData", fileName = "TaskData")]
 public class TaskDataScriptable : ScriptableObject
 {
     public string taskName;
+    public float timeLeft;
+    public float baseDuration;
     public int mandatorySlots;
     public int optionalSlots;
     public SpaceshipManager.System system;
+    
+    
+    [Header("Permanent Task")]
+    public bool isPermanent;
+    public BaseTaskOutcome[] outcomes;
+
+
 }

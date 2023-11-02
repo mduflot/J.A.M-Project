@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class TimeTickSystem : MonoBehaviour
 {
+    public static float timePerTick = 1;
     public class OnTickEventArgs : EventArgs
     {
         public int tick;
@@ -28,7 +29,6 @@ public class TimeTickSystem : MonoBehaviour
             tickTimer -= tickTimerMax;
             tick++;
             if (OnTick != null) OnTick(this, new OnTickEventArgs { tick = tick });
-            Debug.Log("tick : " + tick);
         }
     }
 }
