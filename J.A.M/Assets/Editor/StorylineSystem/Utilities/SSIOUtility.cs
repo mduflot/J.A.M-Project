@@ -518,6 +518,7 @@ namespace SS.Utilities
                 else if (nodeData is SSDialogueNodeSaveData)
                 {
                     ((SSDialogueNode)node).Text = ((SSDialogueNodeSaveData)nodeData).Text;
+                    ((SSDialogueNode)node).SpeakerType = ((SSDialogueNodeSaveData)nodeData).SpeakerType;
                 }
                 else if (nodeData is SSTaskNodeSaveData)
                 {
