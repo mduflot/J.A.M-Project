@@ -135,9 +135,10 @@ namespace SS.Elements
                 choiceData.ChoiceTypes.Add(SSChoiceType.Assigned);
                 VisualElement choiceConditionsDataContainer = new();
 
-                EnumField enumField = SSElementUtility.CreateEnumField(choiceData.ChoiceTypes[^1], "Condition :", callback =>
+                var index = choiceData.ChoiceTypes.Count - 1;
+                EnumField enumField = SSElementUtility.CreateEnumField(choiceData.ChoiceTypes[index], "Condition :", callback =>
                 {
-                    choiceData.ChoiceTypes[^1] = (SSChoiceType)callback.newValue;
+                    choiceData.ChoiceTypes[index] = (SSChoiceType)callback.newValue;
                 });
                 
                 Button deleteConditionButton = SSElementUtility.CreateButton("X", () =>
@@ -163,30 +164,30 @@ namespace SS.Elements
                 
             choiceConditionsFoldout.Add(addConditionButton);
 
-            for(int i = 0; i < choiceData.ChoiceTypes.Count; i++)
+            for(int index = 0; index < choiceData.ChoiceTypes.Count; index++)
             {
-                var choiceTypeIndex = i;
-                
                 VisualElement choiceConditionsDataContainer = new();
-                
-                EnumField enumField = SSElementUtility.CreateEnumField(choiceData.ChoiceTypes[choiceTypeIndex], "Condition :", callback =>
+
+                var choiceIndex = index;
+
+                EnumField enumField = SSElementUtility.CreateEnumField(choiceData.ChoiceTypes[choiceIndex], "Condition :", callback =>
                 {
-                    choiceData.ChoiceTypes[choiceTypeIndex] = (SSChoiceType)callback.newValue;
+                    choiceData.ChoiceTypes[choiceIndex] = (SSChoiceType)callback.newValue;
                 });
-                
+
                 Button deleteConditionButton = SSElementUtility.CreateButton("X", () =>
                 {
                     if (choiceData.ChoiceTypes.Count == 1)
                     {
                         return;
                     }
-                
-                    choiceData.ChoiceTypes.RemoveAt(choiceTypeIndex);
+
+                    choiceData.ChoiceTypes.RemoveAt(choiceIndex);
                     choiceConditionsFoldout.Remove(choiceConditionsDataContainer);
                 });
                 
                 deleteConditionButton.AddToClassList("ss-node__button");
-                
+
                 choiceConditionsDataContainer.Add(deleteConditionButton);
                 choiceConditionsDataContainer.Add(enumField);
                 choiceConditionsFoldout.Add(choiceConditionsDataContainer);
@@ -207,9 +208,9 @@ namespace SS.Elements
                 }
 
                 choiceData.ChoiceTypes.Clear();
-                
+
                 Choices.Remove(choiceData);
-                
+
                 graphView.RemoveElement(choicePort);
                 customDataContainer.Remove(choiceConditionsFoldout);
             });
@@ -226,7 +227,7 @@ namespace SS.Elements
 
             choicePort.Add(choiceTextField);
             choicePort.Add(deleteChoiceButton);
-            
+
             outputContainer.Add(choicePort);
         }
 

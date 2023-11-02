@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -11,14 +12,17 @@ namespace SS.Elements
 
     public class SSRewardNode : SSNode
     {
-        public SSRewardType RewardType;
-        public EnumField EnumField;
+        public List<SSRewardType> RewardTypes { get; set; }
 
         public override void Initialize(string nodeName, SSGraphView ssGraphView, Vector2 position)
         {
             base.Initialize(nodeName, ssGraphView, position);
 
             NodeType = SSNodeType.Reward;
+            RewardTypes = new List<SSRewardType>()
+            {
+                SSRewardType.Money
+            };
 
             SSChoiceSaveData choiceData = new SSChoiceSaveData()
             {
@@ -42,26 +46,74 @@ namespace SS.Elements
 
                 outputContainer.Add(choicePort);
             }
-            
+
             /* EXTENSIONS CONTAINER */
-            
-            VisualElement customDataContainer = new VisualElement();
+
+            VisualElement customDataContainer = new();
 
             customDataContainer.AddToClassList("ss-node__custom-data-container");
 
-            EnumField = new EnumField()
+            Button addRewardButton = SSElementUtility.CreateButton("Add Reward", () =>
             {
-                value = RewardType
-            };
+                RewardTypes.Add(SSRewardType.Money);
+                VisualElement rewardDataContainer = new();
 
-            EnumField.Init(RewardType);
+                var index = RewardTypes.Count - 1;
+                EnumField enumField = SSElementUtility.CreateEnumField(RewardTypes[index], "Reward :", callback =>
+                {
+                    RewardTypes[index] = (SSRewardType)callback.newValue;
+                });
 
-            EnumField.RegisterValueChangedCallback((value) =>
-            {
-                RewardType = (SSRewardType)value.newValue;
+                Button removeRewardButton = SSElementUtility.CreateButton("X", () =>
+                {
+                    if (RewardTypes.Count == 1)
+                    {
+                        return;
+                    }
+
+                    RewardTypes.RemoveAt(RewardTypes.Count - 1);
+                    customDataContainer.Remove(rewardDataContainer);
+                });
+
+                removeRewardButton.AddToClassList("ss-node__button");
+
+                rewardDataContainer.Add(removeRewardButton);
+                rewardDataContainer.Add(enumField);
+                customDataContainer.Add(rewardDataContainer);
             });
 
-            customDataContainer.Add(EnumField);
+            addRewardButton.AddToClassList("ss-node__button");
+
+            customDataContainer.Add(addRewardButton);
+
+            for (var index = 0; index < RewardTypes.Count; index++)
+            {
+                VisualElement rewardDataContainer = new VisualElement();
+
+                var rewardIndex = index;
+                
+                EnumField enumField = SSElementUtility.CreateEnumField(RewardTypes[rewardIndex], "Reward :", callback =>
+                {
+                    RewardTypes[rewardIndex] = (SSRewardType)callback.newValue;
+                });
+
+                Button removeRewardButton = SSElementUtility.CreateButton("X", () =>
+                {
+                    if (RewardTypes.Count == 1)
+                    {
+                        return;
+                    }
+
+                    RewardTypes.RemoveAt(rewardIndex);
+                    customDataContainer.Remove(rewardDataContainer);
+                });
+
+                removeRewardButton.AddToClassList("ss-node__button");
+
+                rewardDataContainer.Add(removeRewardButton);
+                rewardDataContainer.Add(enumField);
+                customDataContainer.Add(rewardDataContainer);
+            }
 
             extensionContainer.Add(customDataContainer);
 

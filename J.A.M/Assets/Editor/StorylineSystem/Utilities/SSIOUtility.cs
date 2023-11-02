@@ -193,7 +193,7 @@ namespace SS.Utilities
                     GroupID = rewardNode.Group?.ID,
                     NodeType = rewardNode.NodeType,
                     Position = rewardNode.GetPosition().position,
-                    RewardType = rewardNode.RewardType
+                    RewardTypes = rewardNode.RewardTypes
                 };
             }
             else if (node is SSDialogueNode dialogueNode)
@@ -266,27 +266,27 @@ namespace SS.Utilities
 
                 SaveAsset(nodeSO);
             }
-            else if (node is SSRewardNode endNode)
+            else if (node is SSRewardNode rewardNode)
             {
                 SSRewardNodeSO nodeSO;
 
-                if (endNode.Group != null)
+                if (rewardNode.Group != null)
                 {
-                    nodeSO = CreateAsset<SSRewardNodeSO>($"{containerFolderPath}/Groups/{endNode.Group.title}/Nodes", endNode.NodeName);
+                    nodeSO = CreateAsset<SSRewardNodeSO>($"{containerFolderPath}/Groups/{rewardNode.Group.title}/Nodes", rewardNode.NodeName);
 
-                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[endNode.Group.ID], nodeSO);
+                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[rewardNode.Group.ID], nodeSO);
                 }
                 else
                 {
-                    nodeSO = CreateAsset<SSRewardNodeSO>($"{containerFolderPath}/Global/Nodes", endNode.NodeName);
+                    nodeSO = CreateAsset<SSRewardNodeSO>($"{containerFolderPath}/Global/Nodes", rewardNode.NodeName);
 
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
+                
+                nodeSO.Initialize(rewardNode.NodeName, ConvertNodeChoicesToNodeChoicesData(rewardNode.Choices), rewardNode.NodeType,
+                    rewardNode.IsStartingNode(), rewardNode.RewardTypes);
 
-                nodeSO.Initialize(endNode.NodeName, ConvertNodeChoicesToNodeChoicesData(endNode.Choices), endNode.NodeType,
-                    endNode.IsStartingNode(), endNode.RewardType);
-
-                createdNodes.Add(endNode.ID, nodeSO);
+                createdNodes.Add(rewardNode.ID, nodeSO);
 
                 SaveAsset(nodeSO);
             }
@@ -510,11 +510,11 @@ namespace SS.Utilities
                 if (nodeData is SSStartNodeSaveData)
                 {
                     ((SSStartNode)node).LocationType = ((SSStartNodeSaveData)nodeData).LocationType;
-                } 
+                }
                 else if (nodeData is SSRewardNodeSaveData)
                 {
-                    ((SSRewardNode)node).RewardType = ((SSRewardNodeSaveData)nodeData).RewardType;
-                } 
+                    ((SSRewardNode)node).RewardTypes = ((SSRewardNodeSaveData)nodeData).RewardTypes;
+                }
                 else if (nodeData is SSDialogueNodeSaveData)
                 {
                     ((SSDialogueNode)node).Text = ((SSDialogueNodeSaveData)nodeData).Text;
@@ -527,7 +527,7 @@ namespace SS.Utilities
                 }
 
                 node.Draw();
-                
+
                 graphView.AddElement(node);
 
                 loadedNodes.Add(node.ID, node);
@@ -540,7 +540,7 @@ namespace SS.Utilities
                 SSGroup group = loadedGroups[nodeData.GroupID];
 
                 node.Group = group;
-                
+
                 group.AddElement(node);
             }
         }
@@ -563,7 +563,7 @@ namespace SS.Utilities
                     Port nextNodeInputPort = (Port) nextNode.inputContainer.Children().First();
 
                     Edge edge = choicePort.ConnectTo(nextNodeInputPort);
-                    
+
                     graphView.Add(edge);
 
                     loadedNode.Value.RefreshPorts();
@@ -655,7 +655,7 @@ namespace SS.Utilities
         public static T LoadAsset<T>(string path, string assetName) where T : ScriptableObject
         {
             string fullPath = $"{path}/{assetName}.asset";
-            
+
             return AssetDatabase.LoadAssetAtPath<T>(fullPath);
         }
 
@@ -679,7 +679,7 @@ namespace SS.Utilities
             foreach (SSChoiceSaveData choice in nodeChoices)
             {
                 SSChoiceSaveData choiceData;
-                
+
                 if (choice is SSChoiceTaskSaveData choiceEvent)
                 {
                     choiceData = new SSChoiceTaskSaveData()

@@ -92,7 +92,7 @@ namespace SS
             dialogue.SetActive(false);
             eventButton.gameObject.SetActive(false);
             notification.SetActive(true);
-            notification.GetComponent<TextMeshProUGUI>().text = "You gain : " + rewardNodeSo.RewardType;
+            notification.GetComponent<TextMeshProUGUI>().text = "You gain : " + rewardNodeSo.RewardTypes;
         }
 
         private void RunNode(SSDialogueNodeSO nodeSO)
