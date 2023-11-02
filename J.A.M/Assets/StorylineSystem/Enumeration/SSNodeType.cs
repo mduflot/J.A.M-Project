@@ -3,8 +3,8 @@ namespace SS.Enumerations
     public enum SSNodeType
     {
         Dialogue,
-        Event,
+        Task,
         Start,
-        End
+        Reward
     }
 }

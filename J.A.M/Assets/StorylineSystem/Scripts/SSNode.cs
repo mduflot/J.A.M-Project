@@ -54,14 +54,14 @@ namespace SS
                     RunNode(nodeSO as SSDialogueNodeSO);
                     break;
                 }
-                case SSNodeType.Event:
+                case SSNodeType.Task:
                 {
-                    RunNode(nodeSO as SSEventNodeSO);
+                    RunNode(nodeSO as SSTaskNodeSO);
                     break;
                 }
-                case SSNodeType.End:
+                case SSNodeType.Reward:
                 {
-                    RunNode(nodeSO as SSEndNodeSO);
+                    RunNode(nodeSO as SSRewardNodeSO);
                     break;
                 }
                 default:
@@ -82,7 +82,7 @@ namespace SS
             }
         }
 
-        private void RunNode(SSEndNodeSO endNodeSO)
+        private void RunNode(SSRewardNodeSO rewardNodeSo)
         {
             foreach (var location in locations)
             {
@@ -92,7 +92,7 @@ namespace SS
             dialogue.SetActive(false);
             eventButton.gameObject.SetActive(false);
             notification.SetActive(true);
-            notification.GetComponent<TextMeshProUGUI>().text = "You gain : " + endNodeSO.RewardType;
+            notification.GetComponent<TextMeshProUGUI>().text = "You gain : " + rewardNodeSo.RewardType;
         }
 
         private void RunNode(SSDialogueNodeSO nodeSO)
@@ -102,7 +102,7 @@ namespace SS
             StartCoroutine(WaiterDialogue(nodeSO));
         }
         
-        private void RunNode(SSEventNodeSO nodeSO)
+        private void RunNode(SSTaskNodeSO nodeSO)
         {
             popupCharacters.SetActive(true);
             eventDescription.SetActive(true);

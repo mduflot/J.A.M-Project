@@ -6,7 +6,7 @@ namespace SS.Data.Save
     using Enumerations;
     
     [Serializable]
-    public class SSEndNodeSaveData : SSNodeSaveData
+    public class SSRewardNodeSaveData : SSNodeSaveData
     {
         [field: SerializeField] public SSRewardType RewardType { get; set; }
     }

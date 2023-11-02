@@ -6,7 +6,7 @@ namespace SS.ScriptableObjects
     using Data;
     using Enumerations;
     
-    public class SSEventNodeSO : SSNodeSO
+    public class SSTaskNodeSO : SSNodeSO
     {
         [field: SerializeField] [field: TextArea()] public string Text { get; set; }
         [field: SerializeField] public int LeaderCount { get; set; }

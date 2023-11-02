@@ -9,7 +9,7 @@ namespace SS.Elements
     using Enumerations;
     using Utilities;
 
-    public class SSEndNode : SSNode
+    public class SSRewardNode : SSNode
     {
         public SSRewardType RewardType;
         public EnumField EnumField;
@@ -18,7 +18,7 @@ namespace SS.Elements
         {
             base.Initialize(nodeName, ssGraphView, position);
 
-            NodeType = SSNodeType.End;
+            NodeType = SSNodeType.Reward;
 
             SSChoiceSaveData choiceData = new SSChoiceSaveData()
             {

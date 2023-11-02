@@ -170,57 +170,58 @@ namespace SS.Utilities
 
             SSNodeSaveData nodeData;
             
-            if (node is SSStartNode)
+            if (node is SSStartNode startNode)
             {
                 nodeData = new SSStartNodeSaveData()
                 {
-                    ID = node.ID,
-                    Name = node.NodeName,
+                    ID = startNode.ID,
+                    Name = startNode.NodeName,
                     Choices = choices,
-                    GroupID = node.Group?.ID,
-                    NodeType = node.NodeType,
-                    Position = node.GetPosition().position,
-                    LocationType = ((SSStartNode)node).LocationType
+                    GroupID = startNode.Group?.ID,
+                    NodeType = startNode.NodeType,
+                    Position = startNode.GetPosition().position,
+                    LocationType = startNode.LocationType
                 };
             } 
-            else if (node is SSEndNode)
+            else if (node is SSRewardNode rewardNode)
             {
-                nodeData = new SSEndNodeSaveData()
+                nodeData = new SSRewardNodeSaveData()
                 {
-                    ID = node.ID,
-                    Name = node.NodeName,
+                    ID = rewardNode.ID,
+                    Name = rewardNode.NodeName,
                     Choices = choices,
-                    GroupID = node.Group?.ID,
-                    NodeType = node.NodeType,
-                    Position = node.GetPosition().position,
-                    RewardType = ((SSEndNode)node).RewardType
+                    GroupID = rewardNode.Group?.ID,
+                    NodeType = rewardNode.NodeType,
+                    Position = rewardNode.GetPosition().position,
+                    RewardType = rewardNode.RewardType
                 };
             }
-            else if (node is SSDialogueNode)
+            else if (node is SSDialogueNode dialogueNode)
             {
                 nodeData = new SSDialogueNodeSaveData()
                 {
-                    ID = node.ID,
-                    Name = node.NodeName,
+                    ID = dialogueNode.ID,
+                    Name = dialogueNode.NodeName,
                     Choices = choices,
-                    GroupID = node.Group?.ID,
-                    NodeType = node.NodeType,
-                    Position = node.GetPosition().position,
-                    Text = ((SSDialogueNode)node).Text
+                    GroupID = dialogueNode.Group?.ID,
+                    NodeType = dialogueNode.NodeType,
+                    Position = dialogueNode.GetPosition().position,
+                    Text = dialogueNode.Text,
+                    SpeakerType = dialogueNode.SpeakerType
                 };
             }
-            else if (node is SSEventNode)
+            else if (node is SSTaskNode taskNode)
             {
-                nodeData = new SSEventNodeSaveData()
+                nodeData = new SSTaskNodeSaveData()
                 {
-                    ID = node.ID,
-                    Name = node.NodeName,
+                    ID = taskNode.ID,
+                    Name = taskNode.NodeName,
                     Choices = choices,
-                    GroupID = node.Group?.ID,
-                    NodeType = node.NodeType,
-                    Position = node.GetPosition().position,
-                    Text = ((SSEventNode)node).Text,
-                    LeaderCount =  ((SSEventNode)node).LeaderCount
+                    GroupID = taskNode.Group?.ID,
+                    NodeType = taskNode.NodeType,
+                    Position = taskNode.GetPosition().position,
+                    Text = taskNode.Text,
+                    LeaderCount =  taskNode.LeaderCount
                 };
             }
             else
@@ -265,19 +266,19 @@ namespace SS.Utilities
 
                 SaveAsset(nodeSO);
             }
-            else if (node is SSEndNode endNode)
+            else if (node is SSRewardNode endNode)
             {
-                SSEndNodeSO nodeSO;
+                SSRewardNodeSO nodeSO;
 
                 if (endNode.Group != null)
                 {
-                    nodeSO = CreateAsset<SSEndNodeSO>($"{containerFolderPath}/Groups/{endNode.Group.title}/Nodes", endNode.NodeName);
+                    nodeSO = CreateAsset<SSRewardNodeSO>($"{containerFolderPath}/Groups/{endNode.Group.title}/Nodes", endNode.NodeName);
 
                     nodeContainer.NodeGroups.AddItem(createdNodeGroups[endNode.Group.ID], nodeSO);
                 }
                 else
                 {
-                    nodeSO = CreateAsset<SSEndNodeSO>($"{containerFolderPath}/Global/Nodes", endNode.NodeName);
+                    nodeSO = CreateAsset<SSRewardNodeSO>($"{containerFolderPath}/Global/Nodes", endNode.NodeName);
 
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
@@ -307,25 +308,25 @@ namespace SS.Utilities
                 }
 
                 nodeSO.Initialize(dialogueNode.NodeName, dialogueNode.Text, ConvertNodeChoicesToNodeChoicesData(dialogueNode.Choices), dialogueNode.NodeType,
-                    dialogueNode.IsStartingNode());
+                    dialogueNode.IsStartingNode(), nodeSO.SpeakerType);
 
                 createdNodes.Add(dialogueNode.ID, nodeSO);
 
                 SaveAsset(nodeSO);
             }
-            else if (node is SSEventNode eventNode)
+            else if (node is SSTaskNode eventNode)
             {
-                SSEventNodeSO nodeSO;
+                SSTaskNodeSO nodeSO;
 
                 if (eventNode.Group != null)
                 {
-                    nodeSO = CreateAsset<SSEventNodeSO>($"{containerFolderPath}/Groups/{eventNode.Group.title}/Nodes", eventNode.NodeName);
+                    nodeSO = CreateAsset<SSTaskNodeSO>($"{containerFolderPath}/Groups/{eventNode.Group.title}/Nodes", eventNode.NodeName);
 
                     nodeContainer.NodeGroups.AddItem(createdNodeGroups[eventNode.Group.ID], nodeSO);
                 }
                 else
                 {
-                    nodeSO = CreateAsset<SSEventNodeSO>($"{containerFolderPath}/Global/Nodes", eventNode.NodeName);
+                    nodeSO = CreateAsset<SSTaskNodeSO>($"{containerFolderPath}/Global/Nodes", eventNode.NodeName);
 
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
@@ -371,7 +372,7 @@ namespace SS.Utilities
             {
                 SSNodeChoiceData choiceData;
                 
-                if (nodeChoice is SSChoiceEventSaveData nodeChoiceEvent)
+                if (nodeChoice is SSChoiceTaskSaveData nodeChoiceEvent)
                 {
                     choiceData = new SSNodeEventChoiceData()
                     {
@@ -510,18 +511,18 @@ namespace SS.Utilities
                 {
                     ((SSStartNode)node).LocationType = ((SSStartNodeSaveData)nodeData).LocationType;
                 } 
-                else if (nodeData is SSEndNodeSaveData)
+                else if (nodeData is SSRewardNodeSaveData)
                 {
-                    ((SSEndNode)node).RewardType = ((SSEndNodeSaveData)nodeData).RewardType;
+                    ((SSRewardNode)node).RewardType = ((SSRewardNodeSaveData)nodeData).RewardType;
                 } 
                 else if (nodeData is SSDialogueNodeSaveData)
                 {
                     ((SSDialogueNode)node).Text = ((SSDialogueNodeSaveData)nodeData).Text;
                 }
-                else if (nodeData is SSEventNodeSaveData)
+                else if (nodeData is SSTaskNodeSaveData)
                 {
-                    ((SSEventNode)node).Text = ((SSEventNodeSaveData)nodeData).Text;
-                    ((SSEventNode)node).LeaderCount = ((SSEventNodeSaveData)nodeData).LeaderCount;
+                    ((SSTaskNode)node).Text = ((SSTaskNodeSaveData)nodeData).Text;
+                    ((SSTaskNode)node).LeaderCount = ((SSTaskNodeSaveData)nodeData).LeaderCount;
                 }
 
                 node.Draw();
@@ -678,9 +679,9 @@ namespace SS.Utilities
             {
                 SSChoiceSaveData choiceData;
                 
-                if (choice is SSChoiceEventSaveData choiceEvent)
+                if (choice is SSChoiceTaskSaveData choiceEvent)
                 {
-                    choiceData = new SSChoiceEventSaveData()
+                    choiceData = new SSChoiceTaskSaveData()
                     {
                         Text = choiceEvent.Text,
                         NodeID = choiceEvent.NodeID,

@@ -10,7 +10,7 @@ namespace SS.Elements
     using Utilities;
     using Windows;
 
-    public class SSEventNode : SSNode
+    public class SSTaskNode : SSNode
     {
         public string Text { get; set; }
         public int LeaderCount { get; set; }
@@ -20,11 +20,11 @@ namespace SS.Elements
         {
             base.Initialize(nodeName, ssGraphView, position);
 
-            NodeType = SSNodeType.Event;
+            NodeType = SSNodeType.Task;
             Text = "Node text.";
             LeaderCount = 1;
 
-            SSChoiceEventSaveData choiceAssignedData = new SSChoiceEventSaveData()
+            SSChoiceTaskSaveData choiceAssignedData = new SSChoiceTaskSaveData()
             {
                 Text = "Assigned",
                 ChoiceTypes = new List<SSChoiceType>()
@@ -33,7 +33,7 @@ namespace SS.Elements
                 }
             };
             
-            SSChoiceEventSaveData choiceNotAssignedData = new SSChoiceEventSaveData()
+            SSChoiceTaskSaveData choiceNotAssignedData = new SSChoiceTaskSaveData()
             {
                 Text = "Not Assigned",
                 ChoiceTypes = new List<SSChoiceType>()
@@ -58,7 +58,7 @@ namespace SS.Elements
             {
                 /* OUTPUT CONTAINER */
 
-                SSChoiceEventSaveData choiceData = new SSChoiceEventSaveData()
+                SSChoiceTaskSaveData choiceData = new SSChoiceTaskSaveData()
                 {
                     Text = "New Choice",
                     ChoiceTypes = new List<SSChoiceType>()
@@ -78,7 +78,7 @@ namespace SS.Elements
 
             /* OUTPUT CONTAINER */
 
-            foreach (SSChoiceEventSaveData choice in Choices)
+            foreach (SSChoiceTaskSaveData choice in Choices)
             {
                 CreateChoicePort(choice);
             }
@@ -87,7 +87,7 @@ namespace SS.Elements
 
             /* TEXT CONTAINER */
 
-            Foldout textFoldout = SSElementUtility.CreateFoldout("Node Text");
+            Foldout textFoldout = SSElementUtility.CreateFoldout("Description :");
 
             TextField textTextField = SSElementUtility.CreateTextArea(Text, null, callback =>
             {
@@ -124,11 +124,11 @@ namespace SS.Elements
 
             choicePort.userData = userData;
 
-            SSChoiceEventSaveData choiceData = (SSChoiceEventSaveData) userData;
+            SSChoiceTaskSaveData choiceData = (SSChoiceTaskSaveData) userData;
             
             /* CHOICE CONDITIONS CONTAINER */
 
-            Foldout choiceConditionsFoldout = SSElementUtility.CreateFoldout($"{choiceData.Text} conditions");
+            Foldout choiceConditionsFoldout = SSElementUtility.CreateFoldout($"\"{choiceData.Text}\" :");
 
             Button addConditionButton = SSElementUtility.CreateButton("Add Condition", () =>
             {

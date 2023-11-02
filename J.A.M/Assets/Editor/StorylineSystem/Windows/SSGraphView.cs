@@ -109,10 +109,10 @@ namespace SS.Windows
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
             
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Dialogue)", SSNodeType.Dialogue));
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Event Multiple)", SSNodeType.Event));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Start)", SSNodeType.Start));
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (End)", SSNodeType.End));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Dialogue)", SSNodeType.Dialogue));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Task)", SSNodeType.Task));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Reward)", SSNodeType.Reward));
 
             this.AddManipulator(CreateGroupContextualMenu());
         }
@@ -129,7 +129,7 @@ namespace SS.Windows
         private IManipulator CreateNodeContextualMenu(string actionTitle, SSNodeType nodeType)
         {
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
-                menuEvent => menuEvent.menu.AppendAction(actionTitle, actionEvent => AddElement(CreateNode("NodeName", nodeType, GetLocalMousePosition(actionEvent.eventInfo.localMousePosition))))
+                menuEvent => menuEvent.menu.AppendAction(actionTitle, actionEvent => AddElement(CreateNode($"{nodeType.ToString()}Node", nodeType, GetLocalMousePosition(actionEvent.eventInfo.localMousePosition))))
             );
 
             return contextualMenuManipulator;

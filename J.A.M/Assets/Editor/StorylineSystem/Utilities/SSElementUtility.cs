@@ -1,5 +1,6 @@
 using System;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace SS.Utilities
@@ -111,7 +112,7 @@ namespace SS.Utilities
                 value = value,
                 label = label
             };
-            
+
             enumField.Init(value);
 
             if (onValueChanged != null)
@@ -120,6 +121,25 @@ namespace SS.Utilities
             }
 
             return enumField;
+        }
+
+        public static EnumFlagsField CreateEnumFlagsField(Enum value = null, string label = null,
+            EventCallback<ChangeEvent<Enum>> onValueChanged = null)
+        {
+            EnumFlagsField enumFlagsField = new EnumFlagsField()
+            {
+                value = value,
+                label = label
+            };
+
+            enumFlagsField.Init(value);
+
+            if (onValueChanged != null)
+            {
+                enumFlagsField.RegisterValueChangedCallback(onValueChanged);
+            }
+
+            return enumFlagsField;
         }
     }
 }

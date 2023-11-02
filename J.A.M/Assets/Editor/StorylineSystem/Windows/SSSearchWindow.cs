@@ -26,25 +26,25 @@ namespace SS.Windows
             {
                 new SearchTreeGroupEntry(new GUIContent("CreateElement")),
                 new SearchTreeGroupEntry(new GUIContent("Node"), 1),
-                new SearchTreeEntry(new GUIContent("Dialogue", indentationIcon))
-                {
-                    level = 2,
-                    userData = SSNodeType.Dialogue
-                },
-                new SearchTreeEntry(new GUIContent("Event Multiple", indentationIcon))
-                {
-                    level = 2,
-                    userData = SSNodeType.Event
-                },
                 new SearchTreeEntry(new GUIContent("Start", indentationIcon))
                 {
                     level = 2,
                     userData = SSNodeType.Start
                 },
-                new SearchTreeEntry(new GUIContent("End", indentationIcon))
+                new SearchTreeEntry(new GUIContent("Dialogue", indentationIcon))
                 {
                     level = 2,
-                    userData = SSNodeType.End
+                    userData = SSNodeType.Dialogue
+                },
+                new SearchTreeEntry(new GUIContent("Task", indentationIcon))
+                {
+                    level = 2,
+                    userData = SSNodeType.Task
+                },
+                new SearchTreeEntry(new GUIContent("Reward", indentationIcon))
+                {
+                    level = 2,
+                    userData = SSNodeType.Reward
                 },
                 new SearchTreeGroupEntry(new GUIContent("Node Group"), 1),
                 new SearchTreeEntry(new GUIContent("Single Group", indentationIcon))
@@ -62,50 +62,50 @@ namespace SS.Windows
             Vector2 localMousePosition = graphView.GetLocalMousePosition(context.screenMousePosition, true);
             switch (SearchTreeEntry.userData)
             {
+                case SSNodeType.Start:
+                {
+                    SSStartNode startNode =
+                        (SSStartNode)graphView.CreateNode("StartName", SSNodeType.Start, localMousePosition);
+
+                    graphView.AddElement(startNode);
+
+                    return true;
+                }
+
                 case SSNodeType.Dialogue:
                 {
                     SSDialogueNode dialogueNode =
-                        (SSDialogueNode)graphView.CreateNode("NodeName", SSNodeType.Dialogue, localMousePosition);
+                        (SSDialogueNode)graphView.CreateNode("DialogueNode", SSNodeType.Dialogue, localMousePosition);
 
                     graphView.AddElement(dialogueNode);
 
                     return true;
                 }
-                
-                case SSNodeType.Event:
-                {
-                    SSEventNode eventNode =
-                        (SSEventNode)graphView.CreateNode("NodeName", SSNodeType.Event, localMousePosition);
 
-                    graphView.AddElement(eventNode);
+                case SSNodeType.Task:
+                {
+                    SSTaskNode taskNode =
+                        (SSTaskNode)graphView.CreateNode("TaskNode", SSNodeType.Task, localMousePosition);
+
+                    graphView.AddElement(taskNode);
 
                     return true;
                 }
 
-                case SSNodeType.Start:
+                case SSNodeType.Reward:
                 {
-                    SSStartNode startNode =
-                        (SSStartNode)graphView.CreateNode("NodeName", SSNodeType.Start, localMousePosition);
-                    
-                    graphView.AddElement(startNode);
-                    
-                    return true;
-                }
+                    SSRewardNode rewardNode =
+                        (SSRewardNode)graphView.CreateNode("RewardName", SSNodeType.Reward, localMousePosition);
 
-                case SSNodeType.End:
-                {
-                    SSEndNode endNode =
-                        (SSEndNode)graphView.CreateNode("NodeName", SSNodeType.End, localMousePosition);
-                    
-                    graphView.AddElement(endNode);
-                    
+                    graphView.AddElement(rewardNode);
+
                     return true;
                 }
 
                 case Group _:
                 {
                     graphView.CreateGroup("NodeGroup", localMousePosition);
-                    
+
                     return true;
                 }
 

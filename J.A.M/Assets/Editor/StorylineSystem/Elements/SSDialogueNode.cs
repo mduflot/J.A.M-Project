@@ -1,4 +1,5 @@
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,6 +13,7 @@ namespace SS.Elements
     public class SSDialogueNode : SSNode
     {
         public string Text { get; set; }
+        public SSSpeakerType SpeakerType { get; set; }
 
         public override void Initialize(string nodeName, SSGraphView ssGraphView, Vector2 position)
         {
@@ -49,7 +51,7 @@ namespace SS.Elements
 
             customDataContainer.AddToClassList("ss-node__custom-data-container");
 
-            Foldout textFoldout = SSElementUtility.CreateFoldout("Node Text");
+            Foldout textFoldout = SSElementUtility.CreateFoldout("Dialogue :");
 
             TextField textTextField = SSElementUtility.CreateTextArea(Text, null, callback =>
             {
@@ -61,6 +63,13 @@ namespace SS.Elements
             textFoldout.Add(textTextField);
 
             customDataContainer.Add(textFoldout);
+
+            EnumField enumField = SSElementUtility.CreateEnumField(SpeakerType, "Speaker :", callback =>
+            {
+                SpeakerType = (SSSpeakerType)callback.newValue;
+            });
+
+            customDataContainer.Add(enumField);
 
             extensionContainer.Add(customDataContainer);
 

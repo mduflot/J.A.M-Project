@@ -6,7 +6,7 @@ namespace SS.ScriptableObjects
     using Enumerations;
     using Data;
     
-    public class SSEndNodeSO : SSNodeSO
+    public class SSRewardNodeSO : SSNodeSO
     {
         [field: SerializeField] public SSRewardType RewardType { get; set; }
         

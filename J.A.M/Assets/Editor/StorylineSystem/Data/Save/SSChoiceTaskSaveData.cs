@@ -5,7 +5,7 @@ namespace SS.Data.Save
 {
     using Enumerations;
     
-    public class SSChoiceEventSaveData : SSChoiceSaveData
+    public class SSChoiceTaskSaveData : SSChoiceSaveData
     {
         [field: SerializeField] public List<SSChoiceType> ChoiceTypes;
     }
