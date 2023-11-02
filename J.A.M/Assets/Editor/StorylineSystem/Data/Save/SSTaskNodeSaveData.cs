@@ -6,5 +6,6 @@ namespace SS.Data.Save
     {
         [field: SerializeField] public string Text { get; set; }
         [field: SerializeField] public int LeaderCount { get; set; }
+        [field: SerializeField] public float ResolutionTime { get; set; }
     }
 }

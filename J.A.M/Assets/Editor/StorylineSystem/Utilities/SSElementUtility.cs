@@ -85,6 +85,23 @@ namespace SS.Utilities
             return integerField;
         }
 
+        public static FloatField CreateFloatField(float value = 1.0f, string label = null,
+            EventCallback<ChangeEvent<float>> onValueChanged = null)
+        {
+            FloatField floatField = new FloatField()
+            {
+                value = value,
+                label = label
+            };
+
+            if (onValueChanged != null)
+            {
+                floatField.RegisterValueChangedCallback(onValueChanged);
+            }
+
+            return floatField;
+        }
+
         public static SliderInt CreateSliderField(int value = 1, string label = null,
             EventCallback<ChangeEvent<int>> onValueChanged = null)
         {

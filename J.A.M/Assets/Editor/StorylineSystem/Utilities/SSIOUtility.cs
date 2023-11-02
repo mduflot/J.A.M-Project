@@ -221,7 +221,8 @@ namespace SS.Utilities
                     NodeType = taskNode.NodeType,
                     Position = taskNode.GetPosition().position,
                     Text = taskNode.Text,
-                    LeaderCount =  taskNode.LeaderCount
+                    LeaderCount =  taskNode.LeaderCount,
+                    ResolutionTime = taskNode.ResolutionTime
                 };
             }
             else
@@ -314,27 +315,27 @@ namespace SS.Utilities
 
                 SaveAsset(nodeSO);
             }
-            else if (node is SSTaskNode eventNode)
+            else if (node is SSTaskNode taskNode)
             {
                 SSTaskNodeSO nodeSO;
 
-                if (eventNode.Group != null)
+                if (taskNode.Group != null)
                 {
-                    nodeSO = CreateAsset<SSTaskNodeSO>($"{containerFolderPath}/Groups/{eventNode.Group.title}/Nodes", eventNode.NodeName);
+                    nodeSO = CreateAsset<SSTaskNodeSO>($"{containerFolderPath}/Groups/{taskNode.Group.title}/Nodes", taskNode.NodeName);
 
-                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[eventNode.Group.ID], nodeSO);
+                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[taskNode.Group.ID], nodeSO);
                 }
                 else
                 {
-                    nodeSO = CreateAsset<SSTaskNodeSO>($"{containerFolderPath}/Global/Nodes", eventNode.NodeName);
+                    nodeSO = CreateAsset<SSTaskNodeSO>($"{containerFolderPath}/Global/Nodes", taskNode.NodeName);
 
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(eventNode.NodeName, eventNode.Text, ConvertNodeChoicesToNodeChoicesData(eventNode.Choices), eventNode.NodeType,
-                    eventNode.IsStartingNode(), eventNode.LeaderCount);
+                nodeSO.Initialize(taskNode.NodeName, taskNode.Text, ConvertNodeChoicesToNodeChoicesData(taskNode.Choices), taskNode.NodeType,
+                    taskNode.IsStartingNode(), taskNode.LeaderCount, taskNode.ResolutionTime);
 
-                createdNodes.Add(eventNode.ID, nodeSO);
+                createdNodes.Add(taskNode.ID, nodeSO);
 
                 SaveAsset(nodeSO);
             }
@@ -524,6 +525,7 @@ namespace SS.Utilities
                 {
                     ((SSTaskNode)node).Text = ((SSTaskNodeSaveData)nodeData).Text;
                     ((SSTaskNode)node).LeaderCount = ((SSTaskNodeSaveData)nodeData).LeaderCount;
+                    ((SSTaskNode)node).ResolutionTime = ((SSTaskNodeSaveData)nodeData).ResolutionTime;
                 }
 
                 node.Draw();

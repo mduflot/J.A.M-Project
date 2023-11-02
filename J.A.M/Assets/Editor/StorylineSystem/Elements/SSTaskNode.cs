@@ -14,6 +14,8 @@ namespace SS.Elements
     {
         public string Text { get; set; }
         public int LeaderCount { get; set; }
+        public float ResolutionTime { get; set; }
+        
         private VisualElement customDataContainer = new();
 
         public override void Initialize(string nodeName, SSGraphView ssGraphView, Vector2 position)
@@ -23,6 +25,7 @@ namespace SS.Elements
             NodeType = SSNodeType.Task;
             Text = "Node text.";
             LeaderCount = 1;
+            ResolutionTime = 120.0f;
 
             SSChoiceTaskSaveData choiceAssignedData = new SSChoiceTaskSaveData()
             {
@@ -110,6 +113,13 @@ namespace SS.Elements
             });
 
             customDataContainer.Add(sliderField);
+
+            FloatField floatField = SSElementUtility.CreateFloatField(ResolutionTime, "Resolution Time :", callback =>
+            {
+                ResolutionTime = callback.newValue;
+            });
+            
+            customDataContainer.Add(floatField);
 
             extensionContainer.Add(customDataContainer);
 
