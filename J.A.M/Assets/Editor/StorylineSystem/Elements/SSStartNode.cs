@@ -12,7 +12,6 @@ namespace SS.Elements
     public class SSStartNode : SSNode
     {
         public SSLocationType LocationType { get; set; }
-        public EnumField EnumField;
 
         public override void Initialize(string nodeName, SSGraphView ssGraphView, Vector2 position)
         {
@@ -49,19 +48,10 @@ namespace SS.Elements
 
             customDataContainer.AddToClassList("ss-node__custom-data-container");
 
-            EnumField = new EnumField()
-            {
-                value = LocationType
-            };
+            EnumField enumField = SSElementUtility.CreateEnumField(LocationType, "Location :",
+                callback => { LocationType = (SSLocationType)callback.newValue; });
 
-            EnumField.Init(LocationType);
-
-            EnumField.RegisterValueChangedCallback((value) =>
-            {
-                LocationType = (SSLocationType)value.newValue;
-            });
-
-            customDataContainer.Add(EnumField);
+            customDataContainer.Add(enumField);
 
             extensionContainer.Add(customDataContainer);
 

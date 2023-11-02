@@ -258,7 +258,7 @@ namespace SS.Utilities
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(startNode.NodeName, ConvertNodeChoicesToNodeChoices(startNode.Choices), startNode.NodeType,
+                nodeSO.Initialize(startNode.NodeName, ConvertNodeChoicesToNodeChoicesData(startNode.Choices), startNode.NodeType,
                     startNode.IsStartingNode(), startNode.LocationType);
 
                 createdNodes.Add(startNode.ID, nodeSO);
@@ -282,7 +282,7 @@ namespace SS.Utilities
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(endNode.NodeName, ConvertNodeChoicesToNodeChoices(endNode.Choices), endNode.NodeType,
+                nodeSO.Initialize(endNode.NodeName, ConvertNodeChoicesToNodeChoicesData(endNode.Choices), endNode.NodeType,
                     endNode.IsStartingNode(), endNode.RewardType);
 
                 createdNodes.Add(endNode.ID, nodeSO);
@@ -306,7 +306,7 @@ namespace SS.Utilities
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(dialogueNode.NodeName, dialogueNode.Text, ConvertNodeChoicesToNodeChoices(dialogueNode.Choices), dialogueNode.NodeType,
+                nodeSO.Initialize(dialogueNode.NodeName, dialogueNode.Text, ConvertNodeChoicesToNodeChoicesData(dialogueNode.Choices), dialogueNode.NodeType,
                     dialogueNode.IsStartingNode());
 
                 createdNodes.Add(dialogueNode.ID, nodeSO);
@@ -330,7 +330,7 @@ namespace SS.Utilities
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(eventNode.NodeName, eventNode.Text, ConvertNodeChoicesToNodeChoices(eventNode.Choices), eventNode.NodeType,
+                nodeSO.Initialize(eventNode.NodeName, eventNode.Text, ConvertNodeChoicesToNodeChoicesData(eventNode.Choices), eventNode.NodeType,
                     eventNode.IsStartingNode(), eventNode.LeaderCount);
 
                 createdNodes.Add(eventNode.ID, nodeSO);
@@ -354,7 +354,7 @@ namespace SS.Utilities
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(node.NodeName, ConvertNodeChoicesToNodeChoices(node.Choices), node.NodeType,
+                nodeSO.Initialize(node.NodeName, ConvertNodeChoicesToNodeChoicesData(node.Choices), node.NodeType,
                     node.IsStartingNode());
 
                 createdNodes.Add(node.ID, nodeSO);
@@ -363,16 +363,29 @@ namespace SS.Utilities
             }
         }
 
-        private static List<SSNodeChoiceData> ConvertNodeChoicesToNodeChoices(List<SSChoiceSaveData> nodeChoices)
+        private static List<SSNodeChoiceData> ConvertNodeChoicesToNodeChoicesData(List<SSChoiceSaveData> nodeChoices)
         {
             List<SSNodeChoiceData> nodeChoicesData = new List<SSNodeChoiceData>();
 
             foreach (SSChoiceSaveData nodeChoice in nodeChoices)
             {
-                SSNodeChoiceData choiceData = new SSNodeChoiceData()
+                SSNodeChoiceData choiceData;
+                
+                if (nodeChoice is SSChoiceEventSaveData nodeChoiceEvent)
                 {
-                    Text = nodeChoice.Text
-                };
+                    choiceData = new SSNodeEventChoiceData()
+                    {
+                        Text = nodeChoiceEvent.Text,
+                        ChoiceTypes = nodeChoiceEvent.ChoiceTypes
+                    };
+                }
+                else
+                {
+                    choiceData = new SSNodeChoiceData()
+                    {
+                        Text = nodeChoice.Text
+                    };
+                }
 
                 nodeChoicesData.Add(choiceData);
             }
@@ -663,12 +676,26 @@ namespace SS.Utilities
 
             foreach (SSChoiceSaveData choice in nodeChoices)
             {
-                SSChoiceSaveData choiceData = new SSChoiceSaveData()
+                SSChoiceSaveData choiceData;
+                
+                if (choice is SSChoiceEventSaveData choiceEvent)
                 {
-                    Text = choice.Text,
-                    NodeID = choice.NodeID
-                };
-
+                    choiceData = new SSChoiceEventSaveData()
+                    {
+                        Text = choiceEvent.Text,
+                        NodeID = choiceEvent.NodeID,
+                        ChoiceTypes = choiceEvent.ChoiceTypes
+                    };
+                }
+                else
+                {
+                    choiceData = new SSChoiceSaveData()
+                    {
+                        Text = choice.Text,
+                        NodeID = choice.NodeID
+                    };
+                }
+                
                 choices.Add(choiceData);
             }
 

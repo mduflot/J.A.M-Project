@@ -102,5 +102,24 @@ namespace SS.Utilities
 
             return sliderField;
         }
+
+        public static EnumField CreateEnumField(Enum value = null, string label = null,
+            EventCallback<ChangeEvent<Enum>> onValueChanged = null)
+        {
+            EnumField enumField = new EnumField()
+            {
+                value = value,
+                label = label
+            };
+            
+            enumField.Init(value);
+
+            if (onValueChanged != null)
+            {
+                enumField.RegisterValueChangedCallback(onValueChanged);
+            }
+
+            return enumField;
+        }
     }
 }
