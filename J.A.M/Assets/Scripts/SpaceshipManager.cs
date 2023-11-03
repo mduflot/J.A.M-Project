@@ -65,8 +65,8 @@ public class SpaceshipManager : MonoBehaviour
         {
             system.gaugeValue -= system.decreaseSpeed;
             GameManager.Instance.UIManager.UpdateGauges(system.systemName, system.gaugeValue);
-            
         }
+        GameManager.Instance.UIManager.UpdateInGameDate(TimeTickSystem.GetTimeAsInGameDate(e));
     }
 
     public float GetGaugeValue(System system)

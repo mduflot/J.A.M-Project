@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class TimeTickSystem : MonoBehaviour
 {
-    public static float timePerTick = 1;
+    public static uint timePerTick = 1; // InGame Time Unit
     public class OnTickEventArgs : EventArgs
     {
-        public int tick;
+        public uint tick;
     }
 
     public static event EventHandler<OnTickEventArgs> OnTick;
     
     private const float tickTimerMax = .2f;
 
-    private int tick;
+    private uint tick;
     private float tickTimer;
 
     private void Awake()
@@ -31,4 +31,23 @@ public class TimeTickSystem : MonoBehaviour
             if (OnTick != null) OnTick(this, new OnTickEventArgs { tick = tick });
         }
     }
+    
+    public static string GetTimeAsInGameDate(OnTickEventArgs e)
+    {
+        uint currentTicks = e.tick;
+        uint ticksPerTenMinutes = 5;
+        uint ticksPerHour = ticksPerTenMinutes * 6;
+        uint ticksPerDay = ticksPerHour * 24;
+        
+        uint days = currentTicks / ticksPerDay;
+        currentTicks %= ticksPerDay;
+
+        uint hours = currentTicks / ticksPerHour;
+        currentTicks %= ticksPerHour;
+
+        uint minutes = (currentTicks / ticksPerTenMinutes) * 10;
+        
+        return "Day : " + days.ToString("D2") + " // " + hours.ToString("D2") + ":" + minutes.ToString("D2");
+    }
 }
+
