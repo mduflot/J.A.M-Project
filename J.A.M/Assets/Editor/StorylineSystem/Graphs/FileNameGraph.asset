@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: FileNameGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: FileName
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: e4cc7a80-d2a8-42fc-9e54-42f1b28cd3f0
+    <Name>k__BackingField: MotorProblem
+    <Position>k__BackingField: {x: 524.8, y: 196.80005}
+  <Nodes>k__BackingField:
+  - <ID>k__BackingField: 3b06a78c-8185-4f42-83be-e067982fe8a4
+    <Name>k__BackingField: First
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Node
+      <NodeID>k__BackingField: 90c6a908-04a1-4114-af3e-f5ee17ae0566
+    <GroupID>k__BackingField: e4cc7a80-d2a8-42fc-9e54-42f1b28cd3f0
+    <NodeType>k__BackingField: 0
+    <Position>k__BackingField: {x: 550.4, y: 256.8}
+  - <ID>k__BackingField: 90c6a908-04a1-4114-af3e-f5ee17ae0566
+    <Name>k__BackingField: DialogueNode
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Node
+      <NodeID>k__BackingField: 3ebee83f-9a09-4b0b-b1f6-1655e48e7617
+    <GroupID>k__BackingField: e4cc7a80-d2a8-42fc-9e54-42f1b28cd3f0
+    <NodeType>k__BackingField: 0
+    <Position>k__BackingField: {x: 848, y: 256.8}
+  - <ID>k__BackingField: 3ebee83f-9a09-4b0b-b1f6-1655e48e7617
+    <Name>k__BackingField: TaskNode
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Assigned
+      <NodeID>k__BackingField: 
+    <GroupID>k__BackingField: e4cc7a80-d2a8-42fc-9e54-42f1b28cd3f0
+    <NodeType>k__BackingField: 1
+    <Position>k__BackingField: {x: 1091.2, y: 256.8}
+  <OldGroupNames>k__BackingField:
+  - MotorProblem
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: MotorProblem
+      Value:
+      - First
+      - DialogueNode
+      - TaskNode

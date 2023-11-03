@@ -462,23 +462,18 @@ namespace SS.Utilities
 
                 node.ID = nodeData.ID;
                 node.Choices = choices;
-
-                Debug.Log("Loading");
                 
                 if (nodeData.NodeType == SSNodeType.Reward)
                 {
-                    Debug.Log("Reward");
                     ((SSRewardNode)node).RewardTypes = ((SSRewardNodeSaveData)nodeData).RewardTypes;
                 }
                 else if (nodeData.NodeType == SSNodeType.Dialogue)
                 {
-                    Debug.Log("Dialogue");
                     ((SSDialogueNode)node).Text = ((SSDialogueNodeSaveData)nodeData).Text;
                     ((SSDialogueNode)node).SpeakerType = ((SSDialogueNodeSaveData)nodeData).SpeakerType;
                 }
                 else if (nodeData.NodeType == SSNodeType.Task)
                 {
-                    Debug.Log("Task");
                     ((SSTaskNode)node).TaskData = ((SSTaskNodeSaveData)nodeData).TaskData;
                 }
 
