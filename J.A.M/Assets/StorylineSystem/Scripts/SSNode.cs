@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace SS
@@ -15,7 +14,8 @@ namespace SS
     public class SSNode : MonoBehaviour
     {
         /* UI GameObjects */
-        [FormerlySerializedAs("dialogue")] [SerializeField] private TextMeshProUGUI dialogueText;
+        [SerializeField] private GameObject dialogueLayout;
+        [SerializeField] private TextMeshProUGUI dialogueText;
         [SerializeField] private TextMeshProUGUI nameSpeaker;
         [SerializeField] private List<CharacterBehaviour> characters;
         [SerializeField] private SpaceshipManager spaceshipManager;
@@ -75,6 +75,7 @@ namespace SS
 
         private void RunNode(SSDialogueNodeSO nodeSO)
         {
+            dialogueLayout.SetActive(true);
             dialogueText.gameObject.SetActive(true);
             nameSpeaker.gameObject.SetActive(true);
             dialogueText.text = nodeSO.Text;
@@ -110,6 +111,7 @@ namespace SS
         IEnumerator WaiterDialogue(SSNodeSO nodeSO)
         {
             yield return new WaitForSecondsRealtime(5);
+            dialogueLayout.SetActive(false);
             dialogueText.gameObject.SetActive(false);
             nameSpeaker.gameObject.SetActive(false);
             if (nodeSO.Choices.Count == 0)
