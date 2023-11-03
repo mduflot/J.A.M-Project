@@ -158,5 +158,24 @@ namespace SS.Utilities
 
             return enumFlagsField;
         }
+
+        public static ObjectField CreateObjectField(UnityEngine.Object value = null, string label = null,
+            EventCallback<ChangeEvent<UnityEngine.Object>> onValueChanged = null)
+        {
+            ObjectField objectField = new ObjectField()
+            {
+                objectType = value.GetType(),
+                allowSceneObjects = false,
+                value = value,
+                label = label
+            };
+        
+            if (onValueChanged != null)
+            {
+                objectField.RegisterValueChangedCallback(onValueChanged);
+            }
+        
+            return objectField;
+        }
     }
 }
