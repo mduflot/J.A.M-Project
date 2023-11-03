@@ -108,8 +108,7 @@ namespace SS.Windows
             this.AddManipulator(new ContentDragger());
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
-            
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Start)", SSNodeType.Start));
+
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Dialogue)", SSNodeType.Dialogue));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Task)", SSNodeType.Task));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Reward)", SSNodeType.Reward));

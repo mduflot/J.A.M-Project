@@ -26,11 +26,6 @@ namespace SS.Windows
             {
                 new SearchTreeGroupEntry(new GUIContent("CreateElement")),
                 new SearchTreeGroupEntry(new GUIContent("Node"), 1),
-                new SearchTreeEntry(new GUIContent("Start", indentationIcon))
-                {
-                    level = 2,
-                    userData = SSNodeType.Start
-                },
                 new SearchTreeEntry(new GUIContent("Dialogue", indentationIcon))
                 {
                     level = 2,
@@ -62,16 +57,6 @@ namespace SS.Windows
             Vector2 localMousePosition = graphView.GetLocalMousePosition(context.screenMousePosition, true);
             switch (SearchTreeEntry.userData)
             {
-                case SSNodeType.Start:
-                {
-                    SSStartNode startNode =
-                        (SSStartNode)graphView.CreateNode("StartName", SSNodeType.Start, localMousePosition);
-
-                    graphView.AddElement(startNode);
-
-                    return true;
-                }
-
                 case SSNodeType.Dialogue:
                 {
                     SSDialogueNode dialogueNode =

@@ -6,46 +6,36 @@ namespace SS.Inspectors
 {
     using Utilities;
     using ScriptableObjects;
-    
+
     [CustomEditor(typeof(SSNode))]
     public class SSInspector : Editor
     {
         /* UI GameObjects */
-        private SerializedProperty locationsProperty;
         private SerializedProperty dialogueProperty;
-        private SerializedProperty popupCharactersProperty;
-        private SerializedProperty eventDescriptionProperty;
-        private SerializedProperty eventButtonProperty;
-        private SerializedProperty characterSlotProperty;
-        private SerializedProperty notificationProperty;
-        
+        private SerializedProperty spaceshipManagerProperty;
+
         /* Node Scriptable Objects */
         private SerializedProperty nodeContainerProperty;
         private SerializedProperty nodeGroupProperty;
         private SerializedProperty nodeProperty;
-        
+
         /* Filters */
         private SerializedProperty groupedNodesProperty;
         private SerializedProperty startingNodesOnlyProperty;
-        
+
         /* Indexes */
         private SerializedProperty selectedNodeGroupIndexProperty;
         private SerializedProperty selectedNodeIndexProperty;
 
         private void OnEnable()
         {
-            locationsProperty = serializedObject.FindProperty("locations");
             dialogueProperty = serializedObject.FindProperty("dialogue");
-            popupCharactersProperty = serializedObject.FindProperty("popupCharacters");
-            eventDescriptionProperty = serializedObject.FindProperty("eventDescription");
-            eventButtonProperty = serializedObject.FindProperty("eventButton");
-            characterSlotProperty = serializedObject.FindProperty("characterSlot");
-            notificationProperty = serializedObject.FindProperty("notification");
+            spaceshipManagerProperty = serializedObject.FindProperty("spaceshipManager");
             
             nodeContainerProperty = serializedObject.FindProperty("nodeContainer");
             nodeGroupProperty = serializedObject.FindProperty("nodeGroup");
             nodeProperty = serializedObject.FindProperty("node");
-            
+
             groupedNodesProperty = serializedObject.FindProperty("groupedNodes");
             startingNodesOnlyProperty = serializedObject.FindProperty("startingNodesOnly");
 
@@ -56,14 +46,9 @@ namespace SS.Inspectors
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-            
-            locationsProperty.DrawPropertyField(true);
+
             dialogueProperty.DrawPropertyField();
-            popupCharactersProperty.DrawPropertyField();
-            eventDescriptionProperty.DrawPropertyField();
-            eventButtonProperty.DrawPropertyField();
-            characterSlotProperty.DrawPropertyField();
-            notificationProperty.DrawPropertyField();
+            spaceshipManagerProperty.DrawPropertyField();
 
             DrawNodeContainerArea();
 
@@ -122,7 +107,7 @@ namespace SS.Inspectors
 
                 return;
             }
-            
+
             DrawNodeArea(nodeNames, nodeFolderPath);
 
             serializedObject.ApplyModifiedProperties();
@@ -135,17 +120,17 @@ namespace SS.Inspectors
             SSInspectorUtility.DrawHeader("Node Container");
 
             nodeContainerProperty.DrawPropertyField();
-            
+
             SSInspectorUtility.DrawSpace();
         }
 
         private void DrawFiltersArea()
         {
             SSInspectorUtility.DrawHeader("Filters");
-            
+
             groupedNodesProperty.DrawPropertyField();
             startingNodesOnlyProperty.DrawPropertyField();
-            
+
             SSInspectorUtility.DrawSpace();
         }
 
@@ -171,9 +156,9 @@ namespace SS.Inspectors
                 $"Assets/StorylineSystem/Storylines/{nodeContainer.FileName}/Groups/{selectedNodeGroupName}", selectedNodeGroupName);
 
             nodeGroupProperty.objectReferenceValue = selectedNodeGroup;
-            
+
             SSInspectorUtility.DrawDisabledFields(() => nodeGroupProperty.DrawPropertyField());
-            
+
             SSInspectorUtility.DrawSpace();
         }
 
@@ -184,11 +169,11 @@ namespace SS.Inspectors
             int oldSelectedNodeIndex = selectedNodeIndexProperty.intValue;
 
             SSNodeSO oldNode = (SSNodeSO) nodeProperty.objectReferenceValue;
-            
+
             bool isOldNodeNull = oldNode == null;
 
             string oldNodeName = isOldNodeNull ? "" : oldNode.NodeName;
-            
+
             UpdateIndexOnNamesListUpdate(nodeNames, selectedNodeIndexProperty, oldSelectedNodeIndex, oldNodeName, isOldNodeNull);
 
             selectedNodeIndexProperty.intValue = SSInspectorUtility.DrawPopup("Node", selectedNodeIndexProperty, nodeNames.ToArray());
@@ -198,16 +183,16 @@ namespace SS.Inspectors
             SSNodeSO selectedNode = SSIOUtility.LoadAsset<SSNodeSO>(nodeFolderPath, selectedNodeName);
 
             nodeProperty.objectReferenceValue = selectedNode;
-            
+
             SSInspectorUtility.DrawDisabledFields(() => nodeProperty.DrawPropertyField());
         }
-        
+
         private void StopDrawing(string reason, MessageType messageType = MessageType.Info)
         {
             SSInspectorUtility.DrawHelpBox(reason, messageType);
-            
+
             SSInspectorUtility.DrawSpace();
-            
+
             SSInspectorUtility.DrawHelpBox("You need to select a Node for this component to work properly at Runtime!", MessageType.Warning);
 
             serializedObject.ApplyModifiedProperties();

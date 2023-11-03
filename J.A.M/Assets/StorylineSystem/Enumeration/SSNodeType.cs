@@ -4,7 +4,6 @@ namespace SS.Enumerations
     {
         Dialogue,
         Task,
-        Start,
         Reward
     }
 }

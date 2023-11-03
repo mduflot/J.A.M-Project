@@ -169,21 +169,8 @@ namespace SS.Utilities
             List<SSChoiceSaveData> choices = CloneNodeChoices(node.Choices);
 
             SSNodeSaveData nodeData;
-            
-            if (node is SSStartNode startNode)
-            {
-                nodeData = new SSStartNodeSaveData()
-                {
-                    ID = startNode.ID,
-                    Name = startNode.NodeName,
-                    Choices = choices,
-                    GroupID = startNode.Group?.ID,
-                    NodeType = startNode.NodeType,
-                    Position = startNode.GetPosition().position,
-                    LocationType = startNode.LocationType
-                };
-            } 
-            else if (node is SSRewardNode rewardNode)
+
+            if (node is SSRewardNode rewardNode)
             {
                 nodeData = new SSRewardNodeSaveData()
                 {
@@ -241,31 +228,7 @@ namespace SS.Utilities
 
         private static void SaveNodeToScriptableObject(SSNode node, SSNodeContainerSO nodeContainer)
         {
-            if (node is SSStartNode startNode)
-            {
-                SSStartNodeSO nodeSO;
-
-                if (startNode.Group != null)
-                {
-                    nodeSO = CreateAsset<SSStartNodeSO>($"{containerFolderPath}/Groups/{startNode.Group.title}/Nodes", startNode.NodeName);
-
-                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[startNode.Group.ID], nodeSO);
-                }
-                else
-                {
-                    nodeSO = CreateAsset<SSStartNodeSO>($"{containerFolderPath}/Global/Nodes", startNode.NodeName);
-
-                    nodeContainer.UngroupedNodes.Add(nodeSO);
-                }
-
-                nodeSO.Initialize(startNode.NodeName, ConvertNodeChoicesToNodeChoicesData(startNode.Choices), startNode.NodeType,
-                    startNode.IsStartingNode(), startNode.LocationType);
-
-                createdNodes.Add(startNode.ID, nodeSO);
-
-                SaveAsset(nodeSO);
-            }
-            else if (node is SSRewardNode rewardNode)
+            if (node is SSRewardNode rewardNode)
             {
                 SSRewardNodeSO nodeSO;
 
@@ -506,11 +469,7 @@ namespace SS.Utilities
                 node.ID = nodeData.ID;
                 node.Choices = choices;
 
-                if (nodeData is SSStartNodeSaveData)
-                {
-                    ((SSStartNode)node).LocationType = ((SSStartNodeSaveData)nodeData).LocationType;
-                }
-                else if (nodeData is SSRewardNodeSaveData)
+                if (nodeData is SSRewardNodeSaveData)
                 {
                     ((SSRewardNode)node).RewardTypes = ((SSRewardNodeSaveData)nodeData).RewardTypes;
                 }
