@@ -91,11 +91,8 @@ namespace SS
                 case SSSpeakerType.Character2 :
                     nameSpeaker.text = characters[1].data.firstName;
                     break;
-                case SSSpeakerType.Character3 :
-                    nameSpeaker.text = characters[2].data.firstName;
-                    break;
-                case SSSpeakerType.Character4 :
-                    nameSpeaker.text = characters[4].data.firstName;
+                default:
+                    nameSpeaker.text = "Wait... is not working for now";
                     break;
             }
             StartCoroutine(WaiterDialogue(nodeSO));

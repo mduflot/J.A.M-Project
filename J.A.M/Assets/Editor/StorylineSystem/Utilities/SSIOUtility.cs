@@ -215,20 +215,6 @@ namespace SS.Utilities
                 
                 graphData.Nodes.Add(nodeData);
             }
-            else
-            {
-                SSNodeSaveData nodeData = new SSNodeSaveData()
-                {
-                    ID = node.ID,
-                    Name = node.NodeName,
-                    Choices = choices,
-                    GroupID = node.Group?.ID,
-                    NodeType = node.NodeType,
-                    Position = node.GetPosition().position
-                };
-                
-                graphData.Nodes.Add(nodeData);
-            }
         }
 
         private static void SaveNodeToScriptableObject(SSNode node, SSNodeContainerSO nodeContainer)
@@ -275,7 +261,7 @@ namespace SS.Utilities
                 }
 
                 nodeSO.Initialize(dialogueNode.NodeName, dialogueNode.Text, ConvertNodeChoicesToNodeChoicesData(dialogueNode.Choices), dialogueNode.NodeType,
-                    dialogueNode.IsStartingNode(), nodeSO.SpeakerType);
+                    dialogueNode.IsStartingNode(), dialogueNode.SpeakerType);
 
                 createdNodes.Add(dialogueNode.ID, nodeSO);
 
@@ -302,30 +288,6 @@ namespace SS.Utilities
                     taskNode.IsStartingNode(), taskNode.TaskData);
 
                 createdNodes.Add(taskNode.ID, nodeSO);
-
-                SaveAsset(nodeSO);
-            }
-            else
-            {
-                SSNodeSO nodeSO;
-
-                if (node.Group != null)
-                {
-                    nodeSO = CreateAsset<SSNodeSO>($"{containerFolderPath}/Groups/{node.Group.title}/Nodes", node.NodeName);
-
-                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[node.Group.ID], nodeSO);
-                }
-                else
-                {
-                    nodeSO = CreateAsset<SSNodeSO>($"{containerFolderPath}/Global/Nodes", node.NodeName);
-
-                    nodeContainer.UngroupedNodes.Add(nodeSO);
-                }
-
-                nodeSO.Initialize(node.NodeName, ConvertNodeChoicesToNodeChoicesData(node.Choices), node.NodeType,
-                    node.IsStartingNode());
-
-                createdNodes.Add(node.ID, nodeSO);
 
                 SaveAsset(nodeSO);
             }

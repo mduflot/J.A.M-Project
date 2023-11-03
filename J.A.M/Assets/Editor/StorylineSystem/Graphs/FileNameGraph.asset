@@ -14,34 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: FileName
   <Groups>k__BackingField:
-  - <ID>k__BackingField: e4cc7a80-d2a8-42fc-9e54-42f1b28cd3f0
+  - <ID>k__BackingField: 850f8866-bea8-4b0a-b464-796070d0c240
     <Name>k__BackingField: MotorProblem
-    <Position>k__BackingField: {x: 524.8, y: 196.80005}
+    <Position>k__BackingField: {x: -242.4, y: 167.2}
   <Nodes>k__BackingField:
-  - <ID>k__BackingField: 3b06a78c-8185-4f42-83be-e067982fe8a4
-    <Name>k__BackingField: First
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Node
-      <NodeID>k__BackingField: 90c6a908-04a1-4114-af3e-f5ee17ae0566
-    <GroupID>k__BackingField: e4cc7a80-d2a8-42fc-9e54-42f1b28cd3f0
-    <NodeType>k__BackingField: 0
-    <Position>k__BackingField: {x: 550.4, y: 256.8}
-  - <ID>k__BackingField: 90c6a908-04a1-4114-af3e-f5ee17ae0566
-    <Name>k__BackingField: DialogueNode
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Node
-      <NodeID>k__BackingField: 3ebee83f-9a09-4b0b-b1f6-1655e48e7617
-    <GroupID>k__BackingField: e4cc7a80-d2a8-42fc-9e54-42f1b28cd3f0
-    <NodeType>k__BackingField: 0
-    <Position>k__BackingField: {x: 848, y: 256.8}
-  - <ID>k__BackingField: 3ebee83f-9a09-4b0b-b1f6-1655e48e7617
-    <Name>k__BackingField: TaskNode
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Assigned
-      <NodeID>k__BackingField: 
-    <GroupID>k__BackingField: e4cc7a80-d2a8-42fc-9e54-42f1b28cd3f0
-    <NodeType>k__BackingField: 1
-    <Position>k__BackingField: {x: 1091.2, y: 256.8}
+  - rid: 6273748561554047020
+  - rid: 6273748561554047021
+  - rid: 6273748561554047022
+  - rid: 6273748561554047023
+  - rid: 6273748561554047024
   <OldGroupNames>k__BackingField:
   - MotorProblem
   <OldUngroupedNodeNames>k__BackingField: []
@@ -50,5 +31,75 @@ MonoBehaviour:
     - Key: MotorProblem
       Value:
       - First
+      - Second
+      - Third
       - DialogueNode
       - TaskNode
+  references:
+    version: 2
+    RefIds:
+    - rid: 6273748561554047020
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: d7b0cf02-7a70-4912-b5bc-ab75e5dd2d1a
+        <Name>k__BackingField: First
+        <Choices>k__BackingField:
+        - <Text>k__BackingField: Next Node
+          <NodeID>k__BackingField: 78d00942-d50e-411c-acf1-3274c8e13aaf
+        <GroupID>k__BackingField: 850f8866-bea8-4b0a-b464-796070d0c240
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: -216.8, y: 227.2}
+        <Text>k__BackingField: Hello World !
+        <SpeakerType>k__BackingField: 2
+    - rid: 6273748561554047021
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 78d00942-d50e-411c-acf1-3274c8e13aaf
+        <Name>k__BackingField: Second
+        <Choices>k__BackingField:
+        - <Text>k__BackingField: Next Node
+          <NodeID>k__BackingField: 197bebe0-0eb5-43ad-998f-25d5f379e413
+        <GroupID>k__BackingField: 850f8866-bea8-4b0a-b464-796070d0c240
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 100.8, y: 227.2}
+        <Text>k__BackingField: Problem with power !
+        <SpeakerType>k__BackingField: 3
+    - rid: 6273748561554047022
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 0b2f41d7-bd9e-4d60-b621-0d7f9d5d4964
+        <Name>k__BackingField: Third
+        <Choices>k__BackingField:
+        - <Text>k__BackingField: Next Node
+          <NodeID>k__BackingField: 0efff5e1-cf92-4249-a650-f67020c42f8b
+        <GroupID>k__BackingField: 850f8866-bea8-4b0a-b464-796070d0c240
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 859.2, y: 227.2}
+        <Text>k__BackingField: It's done !
+        <SpeakerType>k__BackingField: 2
+    - rid: 6273748561554047023
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 0efff5e1-cf92-4249-a650-f67020c42f8b
+        <Name>k__BackingField: DialogueNode
+        <Choices>k__BackingField:
+        - <Text>k__BackingField: Next Node
+          <NodeID>k__BackingField: 
+        <GroupID>k__BackingField: 850f8866-bea8-4b0a-b464-796070d0c240
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1168.8, y: 227.2}
+        <Text>k__BackingField: Thank you !
+        <SpeakerType>k__BackingField: 3
+    - rid: 6273748561554047024
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 197bebe0-0eb5-43ad-998f-25d5f379e413
+        <Name>k__BackingField: TaskNode
+        <Choices>k__BackingField:
+        - <Text>k__BackingField: Assigned
+          <NodeID>k__BackingField: 0b2f41d7-bd9e-4d60-b621-0d7f9d5d4964
+        <GroupID>k__BackingField: 850f8866-bea8-4b0a-b464-796070d0c240
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 400.8, y: 227.2}
+        <TaskData>k__BackingField: {fileID: 11400000, guid: a59de71c2f7916345bb5539062676f73,
+          type: 2}
