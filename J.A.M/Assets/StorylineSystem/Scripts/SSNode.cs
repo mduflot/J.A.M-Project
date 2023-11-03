@@ -106,7 +106,6 @@ namespace SS
         {
             popupCharacters.SetActive(true);
             eventDescription.SetActive(true);
-            eventDescription.GetComponent<TextMeshProUGUI>().text = nodeSO.Text;
             eventButton.gameObject.SetActive(true);
             eventButton.onClick.AddListener(() => CheckNodeType(nodeSO.Choices[0].NextNode));
             eventButton.onClick.AddListener(() => popupCharacters.SetActive(false));

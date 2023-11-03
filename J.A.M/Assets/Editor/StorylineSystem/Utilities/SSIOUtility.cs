@@ -220,9 +220,7 @@ namespace SS.Utilities
                     GroupID = taskNode.Group?.ID,
                     NodeType = taskNode.NodeType,
                     Position = taskNode.GetPosition().position,
-                    Text = taskNode.Text,
-                    LeaderCount =  taskNode.LeaderCount,
-                    ResolutionTime = taskNode.ResolutionTime
+                    TaskData = taskNode.TaskData
                 };
             }
             else
@@ -332,8 +330,8 @@ namespace SS.Utilities
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(taskNode.NodeName, taskNode.Text, ConvertNodeChoicesToNodeChoicesData(taskNode.Choices), taskNode.NodeType,
-                    taskNode.IsStartingNode(), taskNode.LeaderCount, taskNode.ResolutionTime);
+                nodeSO.Initialize(taskNode.NodeName, ConvertNodeChoicesToNodeChoicesData(taskNode.Choices), taskNode.NodeType,
+                    taskNode.IsStartingNode(), taskNode.TaskData);
 
                 createdNodes.Add(taskNode.ID, nodeSO);
 
@@ -523,9 +521,7 @@ namespace SS.Utilities
                 }
                 else if (nodeData is SSTaskNodeSaveData)
                 {
-                    ((SSTaskNode)node).Text = ((SSTaskNodeSaveData)nodeData).Text;
-                    ((SSTaskNode)node).LeaderCount = ((SSTaskNodeSaveData)nodeData).LeaderCount;
-                    ((SSTaskNode)node).ResolutionTime = ((SSTaskNodeSaveData)nodeData).ResolutionTime;
+                    ((SSTaskNode)node).TaskData = ((SSTaskNodeSaveData)nodeData).TaskData;
                 }
 
                 node.Draw();

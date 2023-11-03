@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,9 +13,7 @@ namespace SS.Elements
 
     public class SSTaskNode : SSNode
     {
-        public string Text { get; set; }
-        public int LeaderCount { get; set; }
-        public float ResolutionTime { get; set; }
+        public TaskDataScriptable TaskData { get; set; }
         
         private VisualElement customDataContainer = new();
 
@@ -23,9 +22,6 @@ namespace SS.Elements
             base.Initialize(nodeName, ssGraphView, position);
 
             NodeType = SSNodeType.Task;
-            Text = "Node text.";
-            LeaderCount = 1;
-            ResolutionTime = 120.0f;
 
             SSChoiceTaskSaveData choiceAssignedData = new SSChoiceTaskSaveData()
             {
@@ -88,38 +84,12 @@ namespace SS.Elements
 
             /* EXTENSIONS CONTAINER */
 
-            /* TEXT CONTAINER */
-
-            Foldout textFoldout = SSElementUtility.CreateFoldout("Description :");
-
-            TextField textTextField = SSElementUtility.CreateTextArea(Text, null, callback =>
+            ObjectField objectField = SSElementUtility.CreateObjectField(TaskData, typeof(TaskDataScriptable), "TaskData :", callback =>
             {
-                Text = callback.newValue;
-            });
-
-            textTextField.AddClasses("ss-node__text-field", "ss-node__quote-text-field");
-            
-            textFoldout.Add(textTextField);
-
-            customDataContainer.Add(textFoldout);
-
-            /* SLIDER CONTAINER */
-            
-            SliderInt sliderField = null;
-            sliderField = SSElementUtility.CreateSliderField(LeaderCount, "Leaders : ", callback =>
-            {
-                LeaderCount = Mathf.Min(callback.newValue, 5);
-                sliderField.label = "Leaders : " + callback.newValue;
-            });
-
-            customDataContainer.Add(sliderField);
-
-            FloatField floatField = SSElementUtility.CreateFloatField(ResolutionTime, "Resolution Time :", callback =>
-            {
-                ResolutionTime = callback.newValue;
+                TaskData = (TaskDataScriptable)callback.newValue;
             });
             
-            customDataContainer.Add(floatField);
+            customDataContainer.Add(objectField);
 
             extensionContainer.Add(customDataContainer);
 

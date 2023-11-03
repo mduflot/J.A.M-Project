@@ -1,6 +1,7 @@
 using System;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace SS.Utilities
@@ -159,12 +160,12 @@ namespace SS.Utilities
             return enumFlagsField;
         }
 
-        public static ObjectField CreateObjectField(UnityEngine.Object value = null, string label = null,
+        public static ObjectField CreateObjectField(UnityEngine.Object value = null, Type type = null, string label = null,
             EventCallback<ChangeEvent<UnityEngine.Object>> onValueChanged = null)
         {
             ObjectField objectField = new ObjectField()
             {
-                objectType = value.GetType(),
+                objectType = type,
                 allowSceneObjects = false,
                 value = value,
                 label = label

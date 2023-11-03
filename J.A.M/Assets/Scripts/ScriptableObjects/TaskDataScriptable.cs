@@ -4,6 +4,7 @@ using UnityEngine;
 public class TaskDataScriptable : ScriptableObject
 {
     public string taskName;
+    public string descriptionTask;
     public float timeLeft;
     public float baseDuration;
     public int mandatorySlots;
