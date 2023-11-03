@@ -166,7 +166,20 @@ namespace SS.Windows
         public SSNode CreateNode(string nodeName, SSNodeType nodeType, Vector2 position, bool shouldDraw = true)
         {
             Type nodeTypeSystem = Type.GetType($"SS.Elements.SS{nodeType}Node");
-            SSNode node = (SSNode) Activator.CreateInstance(nodeTypeSystem ?? throw new InvalidOperationException());
+            SSNode node = (SSNode) Activator.CreateInstance(nodeTypeSystem);
+            
+            switch (nodeType)
+            {
+                case SSNodeType.Dialogue:
+                    node = (SSDialogueNode) Activator.CreateInstance(nodeTypeSystem);
+                    break;
+                case SSNodeType.Task:
+                    node = (SSTaskNode) Activator.CreateInstance(nodeTypeSystem);
+                    break;
+                case SSNodeType.Reward:
+                    node = (SSRewardNode) Activator.CreateInstance(nodeTypeSystem);
+                    break;
+            }
 
             node.Initialize(nodeName, this, position);
 

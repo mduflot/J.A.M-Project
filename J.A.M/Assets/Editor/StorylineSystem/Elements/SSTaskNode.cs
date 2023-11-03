@@ -23,26 +23,12 @@ namespace SS.Elements
 
             NodeType = SSNodeType.Task;
 
-            SSChoiceTaskSaveData choiceAssignedData = new SSChoiceTaskSaveData()
+            SSChoiceSaveData choiceAssignedData = new SSChoiceSaveData()
             {
-                Text = "Assigned",
-                ChoiceTypes = new List<SSChoiceType>()
-                {
-                    SSChoiceType.Assigned
-                }
-            };
-            
-            SSChoiceTaskSaveData choiceNotAssignedData = new SSChoiceTaskSaveData()
-            {
-                Text = "Not Assigned",
-                ChoiceTypes = new List<SSChoiceType>()
-                {
-                    SSChoiceType.NotAssigned
-                }
+                Text = "Assigned"
             };
 
             Choices.Add(choiceAssignedData);
-            Choices.Add(choiceNotAssignedData);
         }
 
         public override void Draw()
@@ -50,34 +36,10 @@ namespace SS.Elements
             base.Draw();
 
             customDataContainer.AddToClassList("ss-node__custom-data-container");
-
-            /* MAIN CONTAINER */
-
-            Button addChoiceButton = SSElementUtility.CreateButton("Add Choice", () =>
-            {
-                /* OUTPUT CONTAINER */
-
-                SSChoiceTaskSaveData choiceData = new SSChoiceTaskSaveData()
-                {
-                    Text = "New Choice",
-                    ChoiceTypes = new List<SSChoiceType>()
-                    {
-                        SSChoiceType.Assigned
-                    }
-                };
-
-                Choices.Add(choiceData);
-
-                CreateChoicePort(choiceData);
-            });
-
-            addChoiceButton.AddToClassList("ss-node__button");
-
-            mainContainer.Insert(1, addChoiceButton);
-
+            
             /* OUTPUT CONTAINER */
 
-            foreach (SSChoiceTaskSaveData choice in Choices)
+            foreach (SSChoiceSaveData choice in Choices)
             {
                 CreateChoicePort(choice);
             }
@@ -104,76 +66,7 @@ namespace SS.Elements
 
             choicePort.userData = userData;
 
-            SSChoiceTaskSaveData choiceData = (SSChoiceTaskSaveData) userData;
-            
-            /* CHOICE CONDITIONS CONTAINER */
-
-            Foldout choiceConditionsFoldout = SSElementUtility.CreateFoldout($"\"{choiceData.Text}\" :");
-
-            Button addConditionButton = SSElementUtility.CreateButton("Add Condition", () =>
-            {
-                choiceData.ChoiceTypes.Add(SSChoiceType.Assigned);
-                VisualElement choiceConditionsDataContainer = new();
-
-                var index = choiceData.ChoiceTypes.Count - 1;
-                EnumField enumField = SSElementUtility.CreateEnumField(choiceData.ChoiceTypes[index], "Condition :", callback =>
-                {
-                    choiceData.ChoiceTypes[index] = (SSChoiceType)callback.newValue;
-                });
-                
-                Button deleteConditionButton = SSElementUtility.CreateButton("X", () =>
-                {
-                    if (choiceData.ChoiceTypes.Count == 1)
-                    {
-                        return;
-                    }
-                
-                    choiceData.ChoiceTypes.RemoveAt(choiceData.ChoiceTypes.Count - 1);
-                    choiceConditionsFoldout.Remove(choiceConditionsDataContainer);
-                });
-                
-                deleteConditionButton.AddToClassList("ss-node__button");
-                
-                choiceConditionsDataContainer.Add(deleteConditionButton);
-                choiceConditionsDataContainer.Add(enumField);
-
-                choiceConditionsFoldout.Add(choiceConditionsDataContainer);
-            });
-            
-            addConditionButton.AddToClassList("ss-node__button");
-                
-            choiceConditionsFoldout.Add(addConditionButton);
-
-            for(int index = 0; index < choiceData.ChoiceTypes.Count; index++)
-            {
-                VisualElement choiceConditionsDataContainer = new();
-
-                var choiceIndex = index;
-
-                EnumField enumField = SSElementUtility.CreateEnumField(choiceData.ChoiceTypes[choiceIndex], "Condition :", callback =>
-                {
-                    choiceData.ChoiceTypes[choiceIndex] = (SSChoiceType)callback.newValue;
-                });
-
-                Button deleteConditionButton = SSElementUtility.CreateButton("X", () =>
-                {
-                    if (choiceData.ChoiceTypes.Count == 1)
-                    {
-                        return;
-                    }
-
-                    choiceData.ChoiceTypes.RemoveAt(choiceIndex);
-                    choiceConditionsFoldout.Remove(choiceConditionsDataContainer);
-                });
-                
-                deleteConditionButton.AddToClassList("ss-node__button");
-
-                choiceConditionsDataContainer.Add(deleteConditionButton);
-                choiceConditionsDataContainer.Add(enumField);
-                choiceConditionsFoldout.Add(choiceConditionsDataContainer);
-            }
-
-            customDataContainer.Insert(Choices.IndexOf(choiceData), choiceConditionsFoldout);
+            SSChoiceSaveData choiceData = (SSChoiceSaveData) userData;
 
             Button deleteChoiceButton = SSElementUtility.CreateButton("X", () =>
             {
@@ -187,23 +80,23 @@ namespace SS.Elements
                     graphView.DeleteElements(choicePort.connections);
                 }
 
-                choiceData.ChoiceTypes.Clear();
-
                 Choices.Remove(choiceData);
 
                 graphView.RemoveElement(choicePort);
-                customDataContainer.Remove(choiceConditionsFoldout);
             });
 
-            deleteChoiceButton.AddToClassList("ss-node__button");
+            deleteChoiceButton.AddToClassList("ds-node__button");
 
             TextField choiceTextField = SSElementUtility.CreateTextField(choiceData.Text, null, callback =>
             {
                 choiceData.Text = callback.newValue;
-                choiceConditionsFoldout.text = callback.newValue;
             });
 
-            choiceTextField.AddClasses("ss-node__text-field", "ss-node__choice-text-field", "ss-node__text-field__hidden");
+            choiceTextField.AddClasses(
+                "ss-node__text-field",
+                "ss-node__text-field__hidden",
+                "ss-node__choice-text-field"
+            );
 
             choicePort.Add(choiceTextField);
             choicePort.Add(deleteChoiceButton);
