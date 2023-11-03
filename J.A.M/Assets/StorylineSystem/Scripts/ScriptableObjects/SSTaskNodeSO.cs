@@ -8,19 +8,15 @@ namespace SS.ScriptableObjects
     
     public class SSTaskNodeSO : SSNodeSO
     {
-        [field: SerializeField] [field: TextArea()] public string Text { get; set; }
-        [field: SerializeField] public int LeaderCount { get; set; }
-        [field: SerializeField] public float ResolutionTime { get; set; }
+        [field: SerializeField] public TaskDataScriptable TaskData { get; set; }
         
-        public void Initialize(string nodeName, string text, List<SSNodeChoiceData> choices, SSNodeType nodeType, bool isStartingNode, int leaderCount, float resolutionTime)
+        public void Initialize(string nodeName, List<SSNodeChoiceData> choices, SSNodeType nodeType, bool isStartingNode, TaskDataScriptable taskData)
         {
             NodeName = nodeName;
-            Text = text;
             Choices = choices;
             NodeType = nodeType;
             IsStartingNode = isStartingNode;
-            LeaderCount = leaderCount;
-            ResolutionTime = resolutionTime;
+            TaskData = taskData;
         }
     }
 }

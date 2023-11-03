@@ -1,40 +1,40 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace SS
 {
     using Enumerations;
     using ScriptableObjects;
-    
+
     public class SSNode : MonoBehaviour
     {
         /* UI GameObjects */
-        [SerializeField] private List<Button> locations;
-        [SerializeField] private GameObject dialogue;
-        [SerializeField] private GameObject popupCharacters;
-        [SerializeField] private GameObject eventDescription;
-        [SerializeField] private Button eventButton;
-        [SerializeField] private GameObject characterSlot;
-        [SerializeField] private GameObject notification;
+        [SerializeField] private GameObject dialogueLayout;
+        [SerializeField] private TextMeshProUGUI dialogueText;
+        [SerializeField] private TextMeshProUGUI nameSpeaker;
+        [SerializeField] private List<CharacterBehaviour> characters;
+        [SerializeField] private SpaceshipManager spaceshipManager;
+
+        private Dictionary<SSSpeakerType, CharacterBehaviour> speakersDictionary;
 
         /* Node Scriptable Objects */
         [SerializeField] private SSNodeContainerSO nodeContainer;
         [SerializeField] private SSNodeGroupSO nodeGroup;
         [SerializeField] private SSNodeSO node;
-        
+
         /* Filters */
         [SerializeField] private bool groupedNodes;
         [SerializeField] private bool startingNodesOnly;
-        
+
         /* Indexes */
         [SerializeField] private int selectedNodeGroupIndex;
         [SerializeField] private int selectedNodeIndex;
 
-        [ContextMenu("StartTimeline")]
         public void StartTimeline()
         {
             CheckNodeType(node);
@@ -44,11 +44,6 @@ namespace SS
         {
             switch (nodeSO.NodeType)
             {
-                case SSNodeType.Start:
-                {
-                    RunNode(nodeSO as SSStartNodeSO);
-                    break;
-                }
                 case SSNodeType.Dialogue:
                 {
                     RunNode(nodeSO as SSDialogueNodeSO);
@@ -69,54 +64,61 @@ namespace SS
             }
         }
 
-        private void RunNode(SSStartNodeSO startNodeSO)
+        private void RunNode(SSRewardNodeSO nodeSO)
         {
-            foreach (var location in locations)
+            if (nodeSO.Choices.Count == 0)
             {
-                if (location.name == startNodeSO.LocationType.ToString())
-                {
-                    location.gameObject.SetActive(true);
-                    location.onClick.AddListener(() => CheckNodeType(startNodeSO.Choices[0].NextNode));
-                    location.onClick.AddListener(() => location.gameObject.SetActive(false));
-                }
+                return;
             }
-        }
-
-        private void RunNode(SSRewardNodeSO rewardNodeSo)
-        {
-            foreach (var location in locations)
-            {
-                location.gameObject.SetActive(false);
-            }
-            popupCharacters.SetActive(false);
-            dialogue.SetActive(false);
-            eventButton.gameObject.SetActive(false);
-            notification.SetActive(true);
-            notification.GetComponent<TextMeshProUGUI>().text = "You gain : " + rewardNodeSo.RewardTypes;
+            CheckNodeType(nodeSO.Choices.First().NextNode);
         }
 
         private void RunNode(SSDialogueNodeSO nodeSO)
         {
-            dialogue.SetActive(true);
-            dialogue.GetComponent<TextMeshProUGUI>().text = nodeSO.Text;
+            dialogueLayout.SetActive(true);
+            dialogueText.gameObject.SetActive(true);
+            nameSpeaker.gameObject.SetActive(true);
+            dialogueText.text = nodeSO.Text;
+            switch (nodeSO.SpeakerType)
+            {
+                case SSSpeakerType.Random :
+                    nameSpeaker.text = characters[Random.Range(0, characters.Count)].data.firstName;
+                    break;
+                case SSSpeakerType.Sensor :
+                    nameSpeaker.text = "Sensor";
+                    break;
+                case SSSpeakerType.Character1 :
+                    nameSpeaker.text = characters[0].data.firstName;
+                    break;
+                case SSSpeakerType.Character2 :
+                    nameSpeaker.text = characters[1].data.firstName;
+                    break;
+                case SSSpeakerType.Character3 :
+                    nameSpeaker.text = characters[2].data.firstName;
+                    break;
+                case SSSpeakerType.Character4 :
+                    nameSpeaker.text = characters[4].data.firstName;
+                    break;
+            }
             StartCoroutine(WaiterDialogue(nodeSO));
         }
-        
+
         private void RunNode(SSTaskNodeSO nodeSO)
         {
-            popupCharacters.SetActive(true);
-            eventDescription.SetActive(true);
-            eventDescription.GetComponent<TextMeshProUGUI>().text = nodeSO.Text;
-            eventButton.gameObject.SetActive(true);
-            eventButton.onClick.AddListener(() => CheckNodeType(nodeSO.Choices[0].NextNode));
-            eventButton.onClick.AddListener(() => popupCharacters.SetActive(false));
+            spaceshipManager.SpawnTask(nodeSO.TaskData);
         }
 
         IEnumerator WaiterDialogue(SSNodeSO nodeSO)
         {
             yield return new WaitForSecondsRealtime(5);
-            dialogue.SetActive(false);
-            CheckNodeType(nodeSO.Choices[0].NextNode);
+            dialogueLayout.SetActive(false);
+            dialogueText.gameObject.SetActive(false);
+            nameSpeaker.gameObject.SetActive(false);
+            if (nodeSO.Choices.Count == 0)
+            {
+                yield break;
+            }
+            CheckNodeType(nodeSO.Choices.First().NextNode);
         }
     }
 }
