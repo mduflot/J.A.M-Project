@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class SpaceshipManager : MonoBehaviour
@@ -65,7 +64,6 @@ public class SpaceshipManager : MonoBehaviour
         {
             system.gaugeValue -= system.decreaseSpeed;
             GameManager.Instance.UIManager.UpdateGauges(system.systemName, system.gaugeValue);
-            
         }
     }
 
@@ -76,7 +74,18 @@ public class SpaceshipManager : MonoBehaviour
 
     public void GaugeValueOperation(System system, float value)
     {
-        systemsDictionary[system].gaugeValue += value;
+        var gaugeValue = systemsDictionary[system].gaugeValue;
+        gaugeValue += value;
+        if (gaugeValue > 100)
+        {
+            gaugeValue = 100;
+        }
+        else if(gaugeValue < 0)
+        {
+            gaugeValue = 0;
+        }
+
+        systemsDictionary[system].gaugeValue = gaugeValue;
     }
 
     public Transform GetTaskPosition(System system)
@@ -86,14 +95,54 @@ public class SpaceshipManager : MonoBehaviour
     
     public void SpawnTask(TaskDataScriptable taskDataScriptable)
     {
-        var position = systemsDictionary[taskDataScriptable.system].systemObject.transform.position;
-        Debug.Log(systemsDictionary[taskDataScriptable.system].systemObject);
-        var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity, GameManager.Instance.UIManager.taskNotificationParent);
-        taskNote.InitTask(taskDataScriptable);
+        if (!IsTaskActive(taskDataScriptable))
+        {
+            var position = systemsDictionary[taskDataScriptable.system].systemObject.transform.position;
+            Debug.Log(systemsDictionary[taskDataScriptable.system].systemObject);
+            var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity, GameManager.Instance.UIManager.taskNotificationParent);
+            taskNote.InitTask(taskDataScriptable);
+            AddTask(taskNote);
+        }
     }
 
     public void OpenTaskUI(TaskDataScriptable taskDataScriptable, TaskNotification tn)
     {
         GameManager.Instance.UIManager.SpawnTaskUI(taskDataScriptable, tn);
+    }
+
+    public void AddTask(TaskNotification task)
+    {
+        activeTasks.Add(task);
+    }
+
+    public bool IsTaskActive(TaskDataScriptable task)
+    {
+        foreach (var activeTask in activeTasks)
+        {
+            return activeTask.taskData == task;
+        }
+
+        return false;
+    }
+
+    public TaskNotification GetTaskNotification(TaskDataScriptable task)
+    {
+        foreach (var activeTask in activeTasks)
+        {
+            if(activeTask.taskData == task) return activeTask;
+        }
+
+        return null;
+    }
+
+    public void CancelTask(TaskDataScriptable task)
+    {
+        foreach (var activeTask in activeTasks)
+        {
+            if (activeTask.taskData == task)
+            {
+                activeTask.CancelTask();
+            }
+        }
     }
 }

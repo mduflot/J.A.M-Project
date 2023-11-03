@@ -8,8 +8,8 @@ public class TaskNotification : MonoBehaviour
     [SerializeField] private Image image;
     private float duration;
     private float timeLeft;
-    private List<CharacterDataScriptable> leaderCharacters = new List<CharacterDataScriptable>();
-    private List<CharacterDataScriptable> assistantCharacters = new List<CharacterDataScriptable>();
+    private List<CharacterBehaviour> leaderCharacters = new List<CharacterBehaviour>();
+    private List<CharacterBehaviour> assistantCharacters = new List<CharacterBehaviour>();
     
     public void StartTask(TaskDataScriptable t, List<CharacterUISlot> characters)
     {
@@ -20,12 +20,16 @@ public class TaskNotification : MonoBehaviour
             if (character.isMandatory)
             {
                 leaderCharacters.Add(character.icon.character);
+                character.icon.character.currentTask = this;
+                character.icon.character.isWorking = true;
             }
             else
             {
                 if (character.icon != null)
                 {
                     assistantCharacters.Add(character.icon.character);
+                    character.character.currentTask = this;
+                    character.icon.character.isWorking = true;
                 }
             }
         }
@@ -64,6 +68,28 @@ public class TaskNotification : MonoBehaviour
             outcome.Outcome();
         }
         taskData = null;
+        ResetCharacters();
+        TimeTickSystem.OnTick -= UpdateTask;
+        Destroy(gameObject);
+    }
+
+    private void ResetCharacters()
+    {
+        foreach (var character in leaderCharacters)
+        {
+            character.isWorking = false;
+            character.currentTask = null;
+        }
+        foreach (var character in assistantCharacters)
+        {
+            character.isWorking = false;
+            character.currentTask = null;
+        }
+    }
+    public void CancelTask()
+    {
+        taskData = null;
+        ResetCharacters();
         TimeTickSystem.OnTick -= UpdateTask;
         Destroy(gameObject);
     }

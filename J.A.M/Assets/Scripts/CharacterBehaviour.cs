@@ -3,6 +3,8 @@ using UnityEngine;
 public class CharacterBehaviour : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
+    public bool isWorking;
+    public TaskNotification currentTask;
     public CharacterDataScriptable data;
 
 

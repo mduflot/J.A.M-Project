@@ -3,12 +3,12 @@ using UnityEngine.EventSystems;
 
 public class CharacterUI : MonoBehaviour, IDropHandler
 {
-    public CharacterDataScriptable character;
+    public CharacterBehaviour character;
     public CharacterIcon icon;
 
-    public void Initialize(CharacterDataScriptable characterData)
+    public void Initialize(CharacterBehaviour c)
     {
-        character = characterData;
+        character = c;
         icon.Initialize(character, this);
     }
     
@@ -19,7 +19,7 @@ public class CharacterUI : MonoBehaviour, IDropHandler
 
     public void SetCharacter(CharacterIcon icon)
     {
-        this.icon = icon;
+        this.icon = icon; 
     }
     
     public void OnDrop(PointerEventData eventData)

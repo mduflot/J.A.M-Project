@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
         foreach (var character in GameManager.Instance.SpaceshipManager.characters)
         {
             var ui = Instantiate(characterUIPrefab, charactersUIParent);
-            ui.Initialize(character.data);
+            ui.Initialize(character);
             characterUI.Add(ui);
         }
     }
