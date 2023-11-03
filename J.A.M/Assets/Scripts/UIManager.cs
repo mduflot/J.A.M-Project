@@ -36,16 +36,15 @@ public class UIManager : MonoBehaviour
 
         foreach (var character in GameManager.Instance.SpaceshipManager.characters)
         {
-            Debug.Log(character.name);
             var ui = Instantiate(characterUIPrefab, charactersUIParent);
             ui.Initialize(character.data);
             characterUI.Add(ui);
         }
     }
 
-    public void SpawnTaskUI(TaskDataScriptable data)
+    public void SpawnTaskUI(TaskDataScriptable data, TaskNotification tn)
     {
-        //taskUI.Initialize(data);
+        taskUI.Initialize(data, tn);
     }
 
     public void UpdateGauges(SpaceshipManager.System system, float value)

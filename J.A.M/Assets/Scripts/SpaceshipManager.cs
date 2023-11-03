@@ -87,12 +87,13 @@ public class SpaceshipManager : MonoBehaviour
     public void SpawnTask(TaskDataScriptable taskDataScriptable)
     {
         var position = systemsDictionary[taskDataScriptable.system].systemObject.transform.position;
+        Debug.Log(systemsDictionary[taskDataScriptable.system].systemObject);
         var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity, GameManager.Instance.UIManager.taskNotificationParent);
         taskNote.InitTask(taskDataScriptable);
     }
 
-    public void OpenTaskUI(TaskDataScriptable taskDataScriptable)
+    public void OpenTaskUI(TaskDataScriptable taskDataScriptable, TaskNotification tn)
     {
-        GameManager.Instance.UIManager.SpawnTaskUI(taskDataScriptable);
+        GameManager.Instance.UIManager.SpawnTaskUI(taskDataScriptable, tn);
     }
 }

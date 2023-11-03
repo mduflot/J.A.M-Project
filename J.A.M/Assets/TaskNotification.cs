@@ -7,6 +7,7 @@ public class TaskNotification : MonoBehaviour
     public TaskDataScriptable taskData;
     [SerializeField] private Image image;
     private float duration;
+    private float timeLeft;
     private List<CharacterDataScriptable> leaderCharacters = new List<CharacterDataScriptable>();
     private List<CharacterDataScriptable> assistantCharacters = new List<CharacterDataScriptable>();
     
@@ -31,9 +32,15 @@ public class TaskNotification : MonoBehaviour
         TimeTickSystem.OnTick += UpdateTask;
     }
 
+    public void DisplayTaskInfo()
+    {
+        GameManager.Instance.UIManager.SpawnTaskUI(taskData, this);
+    }
+    
     public void InitTask(TaskDataScriptable t)
     {
-        
+        taskData = t;
+        timeLeft = t.timeLeft;
     }
 
     private void UpdateTask(object sender, TimeTickSystem.OnTickEventArgs e)
@@ -58,6 +65,7 @@ public class TaskNotification : MonoBehaviour
         }
         taskData = null;
         TimeTickSystem.OnTick -= UpdateTask;
+        Destroy(gameObject);
     }
     
 }

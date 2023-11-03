@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09a3b1ce65db60b42b321361bc90c8d6, type: 3}
-  m_Name: Power_Task
+  m_Name: Oxygen_Task
   m_EditorClassIdentifier: 
-  taskName: Power Surge
+  taskName: Oxygen Leak
   timeLeft: 0
-  baseDuration: 30
-  mandatorySlots: 2
-  optionalSlots: 2
-  system: 1
+  baseDuration: 20
+  mandatorySlots: 1
+  optionalSlots: 3
+  system: 2
   isPermanent: 1
   outcomes:
-  - {fileID: 11400000, guid: a2879a283b4336b4cbf19623c7d341a7, type: 2}
+  - {fileID: 11400000, guid: 0dcb021aa7faa854581d8ecac0a33321, type: 2}
