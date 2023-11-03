@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SS.Data;
+using SS.Enumerations;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -168,11 +169,9 @@ namespace SS.Utilities
         {
             List<SSChoiceSaveData> choices = CloneNodeChoices(node.Choices);
 
-            SSNodeSaveData nodeData;
-
             if (node is SSRewardNode rewardNode)
             {
-                nodeData = new SSRewardNodeSaveData()
+                SSRewardNodeSaveData nodeData = new SSRewardNodeSaveData()
                 {
                     ID = rewardNode.ID,
                     Name = rewardNode.NodeName,
@@ -182,10 +181,12 @@ namespace SS.Utilities
                     Position = rewardNode.GetPosition().position,
                     RewardTypes = rewardNode.RewardTypes
                 };
+                
+                graphData.Nodes.Add(nodeData);
             }
             else if (node is SSDialogueNode dialogueNode)
             {
-                nodeData = new SSDialogueNodeSaveData()
+                SSDialogueNodeSaveData nodeData = new SSDialogueNodeSaveData()
                 {
                     ID = dialogueNode.ID,
                     Name = dialogueNode.NodeName,
@@ -196,10 +197,12 @@ namespace SS.Utilities
                     Text = dialogueNode.Text,
                     SpeakerType = dialogueNode.SpeakerType
                 };
+                
+                graphData.Nodes.Add(nodeData);
             }
             else if (node is SSTaskNode taskNode)
             {
-                nodeData = new SSTaskNodeSaveData()
+                SSTaskNodeSaveData nodeData = new SSTaskNodeSaveData()
                 {
                     ID = taskNode.ID,
                     Name = taskNode.NodeName,
@@ -209,10 +212,12 @@ namespace SS.Utilities
                     Position = taskNode.GetPosition().position,
                     TaskData = taskNode.TaskData
                 };
+                
+                graphData.Nodes.Add(nodeData);
             }
             else
             {
-                nodeData = new SSNodeSaveData()
+                SSNodeSaveData nodeData = new SSNodeSaveData()
                 {
                     ID = node.ID,
                     Name = node.NodeName,
@@ -221,9 +226,9 @@ namespace SS.Utilities
                     NodeType = node.NodeType,
                     Position = node.GetPosition().position
                 };
+                
+                graphData.Nodes.Add(nodeData);
             }
-
-            graphData.Nodes.Add(nodeData);
         }
 
         private static void SaveNodeToScriptableObject(SSNode node, SSNodeContainerSO nodeContainer)
@@ -334,22 +339,11 @@ namespace SS.Utilities
             {
                 SSNodeChoiceData choiceData;
                 
-                if (nodeChoice is SSChoiceTaskSaveData nodeChoiceEvent)
+                choiceData = new SSNodeChoiceData()
                 {
-                    choiceData = new SSNodeEventChoiceData()
-                    {
-                        Text = nodeChoiceEvent.Text,
-                        ChoiceTypes = nodeChoiceEvent.ChoiceTypes
-                    };
-                }
-                else
-                {
-                    choiceData = new SSNodeChoiceData()
-                    {
-                        Text = nodeChoice.Text
-                    };
-                }
-
+                    Text = nodeChoice.Text
+                };
+                
                 nodeChoicesData.Add(choiceData);
             }
 
@@ -469,17 +463,22 @@ namespace SS.Utilities
                 node.ID = nodeData.ID;
                 node.Choices = choices;
 
-                if (nodeData is SSRewardNodeSaveData)
+                Debug.Log("Loading");
+                
+                if (nodeData.NodeType == SSNodeType.Reward)
                 {
+                    Debug.Log("Reward");
                     ((SSRewardNode)node).RewardTypes = ((SSRewardNodeSaveData)nodeData).RewardTypes;
                 }
-                else if (nodeData is SSDialogueNodeSaveData)
+                else if (nodeData.NodeType == SSNodeType.Dialogue)
                 {
+                    Debug.Log("Dialogue");
                     ((SSDialogueNode)node).Text = ((SSDialogueNodeSaveData)nodeData).Text;
                     ((SSDialogueNode)node).SpeakerType = ((SSDialogueNodeSaveData)nodeData).SpeakerType;
                 }
-                else if (nodeData is SSTaskNodeSaveData)
+                else if (nodeData.NodeType == SSNodeType.Task)
                 {
+                    Debug.Log("Task");
                     ((SSTaskNode)node).TaskData = ((SSTaskNodeSaveData)nodeData).TaskData;
                 }
 
@@ -636,24 +635,12 @@ namespace SS.Utilities
             foreach (SSChoiceSaveData choice in nodeChoices)
             {
                 SSChoiceSaveData choiceData;
-
-                if (choice is SSChoiceTaskSaveData choiceEvent)
+                
+                choiceData = new SSChoiceSaveData()
                 {
-                    choiceData = new SSChoiceTaskSaveData()
-                    {
-                        Text = choiceEvent.Text,
-                        NodeID = choiceEvent.NodeID,
-                        ChoiceTypes = choiceEvent.ChoiceTypes
-                    };
-                }
-                else
-                {
-                    choiceData = new SSChoiceSaveData()
-                    {
-                        Text = choice.Text,
-                        NodeID = choice.NodeID
-                    };
-                }
+                    Text = choice.Text,
+                    NodeID = choice.NodeID
+                };
                 
                 choices.Add(choiceData);
             }

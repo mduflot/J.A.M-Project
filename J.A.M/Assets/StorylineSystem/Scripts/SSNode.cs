@@ -20,8 +20,6 @@ namespace SS
         [SerializeField] private List<CharacterBehaviour> characters;
         [SerializeField] private SpaceshipManager spaceshipManager;
 
-        private Dictionary<SSSpeakerType, CharacterBehaviour> speakersDictionary;
-
         /* Node Scriptable Objects */
         [SerializeField] private SSNodeContainerSO nodeContainer;
         [SerializeField] private SSNodeGroupSO nodeGroup;
@@ -66,7 +64,7 @@ namespace SS
 
         private void RunNode(SSRewardNodeSO nodeSO)
         {
-            if (nodeSO.Choices.Count == 0)
+            if (nodeSO.Choices.First().NextNode == null)
             {
                 return;
             }
@@ -106,15 +104,26 @@ namespace SS
         private void RunNode(SSTaskNodeSO nodeSO)
         {
             spaceshipManager.SpawnTask(nodeSO.TaskData);
+            StartCoroutine(WaiterTask(nodeSO));
         }
 
-        IEnumerator WaiterDialogue(SSNodeSO nodeSO)
+        IEnumerator WaiterDialogue(SSDialogueNodeSO nodeSO)
         {
             yield return new WaitForSecondsRealtime(5);
             dialogueLayout.SetActive(false);
             dialogueText.gameObject.SetActive(false);
             nameSpeaker.gameObject.SetActive(false);
-            if (nodeSO.Choices.Count == 0)
+            if (nodeSO.Choices.First().NextNode == null)
+            {
+                yield break;
+            }
+            CheckNodeType(nodeSO.Choices.First().NextNode);
+        }
+
+        IEnumerator WaiterTask(SSTaskNodeSO nodeSO)
+        {
+            yield return new WaitUntil(() => spaceshipManager.IsTaskActive(nodeSO.TaskData));
+            if (nodeSO.Choices.First().NextNode == null)
             {
                 yield break;
             }
