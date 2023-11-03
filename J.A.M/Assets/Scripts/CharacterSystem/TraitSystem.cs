@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class TraitSystem
 {
+    [Flags]
     public enum Job
     {
         None = 0,
