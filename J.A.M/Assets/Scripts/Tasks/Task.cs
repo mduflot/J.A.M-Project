@@ -113,10 +113,7 @@ public class Task : MonoBehaviour
             if (character.icon != null && character.icon.character.isWorking)
             {
                 warningUI.gameObject.SetActive(true);
-                warningUI.character = character.icon.character;
-                warningUI.characterIcon.sprite = character.icon.character.data.characterIcon;
-                warningUI.warningDescription.text = character.icon.character.data.firstName + " is already assigned to " 
-                    + character.icon.character.currentTask.taskData.taskName + ". Assigning him here will cancel his current Task. Do you want to proceed?";
+                warningUI.Init(character.character);
                 return true;
             }
         }

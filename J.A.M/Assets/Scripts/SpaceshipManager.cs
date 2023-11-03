@@ -6,7 +6,6 @@ public class SpaceshipManager : MonoBehaviour
 {
     public Room[] rooms;
     public ShipSystem[] shipSystems;
-    [SerializeField] private float gaugesThreshold;
     public CharacterBehaviour[] characters;
     private Dictionary<System, ShipSystem> systemsDictionary = new Dictionary<System, ShipSystem>();
     [SerializeField] private TaskNotification taskNotificationPrefab;
@@ -50,6 +49,7 @@ public class SpaceshipManager : MonoBehaviour
     private void Initialize()
     {
         TimeTickSystem.OnTick += UpdateSystems;
+        TimeTickSystem.OnTick += UpdateTasks;
     }
 
     private void Start()
@@ -89,23 +89,36 @@ public class SpaceshipManager : MonoBehaviour
         systemsDictionary[system].gaugeValue = gaugeValue;
     }
 
-    public Transform GetTaskPosition(System system)
+    #region Tasks
+
+    private void UpdateTasks(object sender, TimeTickSystem.OnTickEventArgs e)
     {
-        return systemsDictionary[system].systemObject.transform;
+        foreach (var activeTask in activeTasks)
+        {
+            if (activeTask.isCompleted)
+            {
+                RemoveTask(activeTask);
+                break;
+            }
+            activeTask.UpdateTask();
+        }
     }
     
     public void SpawnTask(TaskDataScriptable taskDataScriptable)
     {
         if (!IsTaskActive(taskDataScriptable))
         {
-            var position = systemsDictionary[taskDataScriptable.system].systemObject.transform.position;
-            Debug.Log(systemsDictionary[taskDataScriptable.system].systemObject);
+            var position = GetTaskPosition(taskDataScriptable.system).position;
             var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity, GameManager.Instance.UIManager.taskNotificationParent);
             taskNote.InitTask(taskDataScriptable);
             AddTask(taskNote);
         }
     }
 
+    public Transform GetTaskPosition(System system)
+    {
+        return systemsDictionary[system].systemObject.transform;
+    }
     public void OpenTaskUI(TaskDataScriptable taskDataScriptable, TaskNotification tn)
     {
         GameManager.Instance.UIManager.SpawnTaskUI(taskDataScriptable, tn);
@@ -122,7 +135,6 @@ public class SpaceshipManager : MonoBehaviour
         {
             return activeTask.taskData == task;
         }
-
         return false;
     }
 
@@ -138,12 +150,21 @@ public class SpaceshipManager : MonoBehaviour
 
     public void CancelTask(TaskDataScriptable task)
     {
+        TaskNotification taskToRemove = null;
         foreach (var activeTask in activeTasks)
         {
             if (activeTask.taskData == task)
             {
                 activeTask.CancelTask();
+                taskToRemove = activeTask;
             }
         }
+        if(taskToRemove != null) RemoveTask(taskToRemove);
     }
+
+    public void RemoveTask(TaskNotification task)
+    {
+        activeTasks.Remove(task);
+    }
+    #endregion
 }

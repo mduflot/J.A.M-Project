@@ -4,6 +4,7 @@ public class CharacterBehaviour : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     public bool isWorking;
+    public bool isTaskLeader;
     public TaskNotification currentTask;
     public CharacterDataScriptable data;
 

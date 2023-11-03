@@ -8,6 +8,8 @@ public class TaskNotification : MonoBehaviour
     [SerializeField] private Image image;
     private float duration;
     private float timeLeft;
+    public bool isCompleted = false;
+    private bool taskStarted = false;
     private List<CharacterBehaviour> leaderCharacters = new List<CharacterBehaviour>();
     private List<CharacterBehaviour> assistantCharacters = new List<CharacterBehaviour>();
     
@@ -33,7 +35,7 @@ public class TaskNotification : MonoBehaviour
                 }
             }
         }
-        TimeTickSystem.OnTick += UpdateTask;
+        taskStarted = true;
     }
 
     public void DisplayTaskInfo()
@@ -47,8 +49,9 @@ public class TaskNotification : MonoBehaviour
         timeLeft = t.timeLeft;
     }
 
-    private void UpdateTask(object sender, TimeTickSystem.OnTickEventArgs e)
+    public void UpdateTask()
     {
+        if(!taskStarted) return;
         if (duration > 0)
         {
             duration -= TimeTickSystem.timePerTick;
@@ -67,9 +70,9 @@ public class TaskNotification : MonoBehaviour
         {
             outcome.Outcome();
         }
+        isCompleted = true;
         taskData = null;
         ResetCharacters();
-        TimeTickSystem.OnTick -= UpdateTask;
         Destroy(gameObject);
     }
 
@@ -90,7 +93,6 @@ public class TaskNotification : MonoBehaviour
     {
         taskData = null;
         ResetCharacters();
-        TimeTickSystem.OnTick -= UpdateTask;
         Destroy(gameObject);
     }
     
