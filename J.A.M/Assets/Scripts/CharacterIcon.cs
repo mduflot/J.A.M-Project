@@ -8,7 +8,7 @@ public class CharacterIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Transform parentAfterDrag;
     public CharacterUI parentScript;
     [SerializeField] private Image image;
-    private CharacterDataScriptable character;
+    public CharacterDataScriptable character;
     
     public void Initialize(CharacterDataScriptable c, CharacterUI script)
     {

@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public Transform charactersUIParent;
     public List<CharacterUI> characterUI;
     public CharacterUI characterUIPrefab;
+    public Transform taskNotificationParent;
     public Transform taskParent;
     public Task taskUI;
     public Canvas canvas;
@@ -44,7 +45,7 @@ public class UIManager : MonoBehaviour
 
     public void SpawnTaskUI(TaskDataScriptable data)
     {
-        taskUI.Initialize(data);
+        //taskUI.Initialize(data);
     }
 
     public void UpdateGauges(SpaceshipManager.System system, float value)

@@ -1,6 +1,3 @@
-using UnityEngine;
-using UnityEngine.EventSystems;
-
 public class CharacterUISlot : CharacterUI
 {
     public bool isMandatory;
@@ -10,5 +7,4 @@ public class CharacterUISlot : CharacterUI
     {
         image = GetComponent<UnityEngine.UI.Image>();
     }
-    
 }

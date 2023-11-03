@@ -1,5 +1,6 @@
 using TMPro;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Task : MonoBehaviour
@@ -12,6 +13,7 @@ public class Task : MonoBehaviour
     [SerializeField] private Transform leaderSlotsParent;
     [SerializeField] private Transform assistantSlotsParent;
     [SerializeField] private CharacterUISlot[] inactiveSlots;
+    [SerializeField] private TaskNotification taskNotification;
     
     [Header("Values")]
     [SerializeField] private float timeLeft;
@@ -21,13 +23,14 @@ public class Task : MonoBehaviour
     private List<CharacterUISlot> characterSlots = new List<CharacterUISlot>();
     private bool taskStarted;
     
-    public void Initialize(TaskDataScriptable data)
+    public void Initialize(TaskDataScriptable data, TaskNotification tn)
     {
         taskData = data;
         titleText.text = taskData.taskName;
         timeLeft = data.timeLeft;
         duration = data.baseDuration;
-        Debug.Log("J'initialise");
+        taskStarted = false;
+        taskNotification = tn;
         for (int i = 0; i < taskData.mandatorySlots; i++)
         {
             var slot = inactiveSlots[i];
@@ -45,13 +48,10 @@ public class Task : MonoBehaviour
             slot.gameObject.SetActive(true);
             characterSlots.Add(slot);
         }
+        TimeTickSystem.OnTick += UpdateTask;
         gameObject.SetActive(true);
     }
-
-    private void Start()
-    {
-        TimeTickSystem.OnTick += UpdateTask;
-    }
+    
 
     public void UpdateTask(object sender, TimeTickSystem.OnTickEventArgs e)
     {
@@ -66,25 +66,16 @@ public class Task : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            Debug.Log(duration);
-            if (duration > 0)
-            {
-                duration -= TimeTickSystem.timePerTick;
-            }
-            else
-            {
-                OnTaskComplete();
-            }
-        }
     }
 
     public void StartTask()
     {
         if (CanStartTask())
         {
+            var position = GameManager.Instance.SpaceshipManager.GetTaskPosition(taskData.system).position;
+            taskNotification.StartTask(taskData, characterSlots);
             taskStarted = true;
+            TimeTickSystem.OnTick -= UpdateTask;
             CloseTask();
         }
     }
@@ -110,14 +101,5 @@ public class Task : MonoBehaviour
         }
 
         return true;
-    }
-
-    private void OnTaskComplete()
-    {
-        foreach (var outcome in taskData.outcomes)
-        {
-            outcome.Outcome();
-        }
-        taskData = null;
     }
 }

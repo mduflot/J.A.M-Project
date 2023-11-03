@@ -10,6 +10,8 @@ public class SpaceshipManager : MonoBehaviour
     [SerializeField] private float gaugesThreshold;
     public CharacterBehaviour[] characters;
     private Dictionary<System, ShipSystem> systemsDictionary = new Dictionary<System, ShipSystem>();
+    [SerializeField] private TaskNotification taskNotificationPrefab;
+    [SerializeField] private List<TaskNotification> activeTasks = new List<TaskNotification>();
 
     [Serializable]
     public struct Room
@@ -63,10 +65,7 @@ public class SpaceshipManager : MonoBehaviour
         {
             system.gaugeValue -= system.decreaseSpeed;
             GameManager.Instance.UIManager.UpdateGauges(system.systemName, system.gaugeValue);
-            /*if ((int)system.gaugeValue == gaugesThreshold)
-            {
-                SpawnTask(system); 
-            }*/
+            
         }
     }
 
@@ -79,8 +78,20 @@ public class SpaceshipManager : MonoBehaviour
     {
         systemsDictionary[system].gaugeValue += value;
     }
+
+    public Transform GetTaskPosition(System system)
+    {
+        return systemsDictionary[system].systemObject.transform;
+    }
     
     public void SpawnTask(TaskDataScriptable taskDataScriptable)
+    {
+        var position = systemsDictionary[taskDataScriptable.system].systemObject.transform.position;
+        var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity, GameManager.Instance.UIManager.taskNotificationParent);
+        taskNote.InitTask(taskDataScriptable);
+    }
+
+    public void OpenTaskUI(TaskDataScriptable taskDataScriptable)
     {
         GameManager.Instance.UIManager.SpawnTaskUI(taskDataScriptable);
     }
