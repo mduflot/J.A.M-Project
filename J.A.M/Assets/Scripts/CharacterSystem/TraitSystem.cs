@@ -37,6 +37,27 @@ public class TraitSystem
         Unfocused = 4,
         Depressed = 8,
     }
+
+    [System.Serializable]
+    public class Traits
+    {
+        [SerializeField] private SerializableTuple<TraitSystem.Job, TraitSystem.PositiveTraits, TraitSystem.NegativeTraits> traits;
+        public Job GetJob()
+        {
+            return traits.Item1;
+        }
+
+        public PositiveTraits GetPositiveTraits()
+        {
+            return traits.Item2;
+        }
+
+        public NegativeTraits GetNegativeTraits()
+        {
+            return traits.Item3;
+        }
+
+    }
     
     public static Job MatchJobFlags(Job job, Job flagsToMatch)
     {
