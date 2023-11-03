@@ -13,6 +13,11 @@ public class TaskNotification : MonoBehaviour
     private List<CharacterBehaviour> leaderCharacters = new List<CharacterBehaviour>();
     private List<CharacterBehaviour> assistantCharacters = new List<CharacterBehaviour>();
     
+    public bool TaskStarted
+    {
+        get => taskStarted;
+    }
+    
     public void StartTask(TaskDataScriptable t, List<CharacterUISlot> characters)
     {
         taskData = t;
