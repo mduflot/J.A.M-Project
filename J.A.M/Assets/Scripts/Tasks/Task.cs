@@ -14,6 +14,7 @@ public class Task : MonoBehaviour
     [SerializeField] private Transform assistantSlotsParent;
     [SerializeField] private CharacterUISlot[] inactiveSlots;
     [SerializeField] private TaskNotification taskNotification;
+    [SerializeField] private WarningUI warningUI;
     
     [Header("Values")]
     [SerializeField] private float timeLeft;
@@ -72,11 +73,13 @@ public class Task : MonoBehaviour
     {
         if (CanStartTask())
         {
-            var position = GameManager.Instance.SpaceshipManager.GetTaskPosition(taskData.system).position;
-            taskNotification.StartTask(taskData, characterSlots);
-            taskStarted = true;
-            TimeTickSystem.OnTick -= UpdateTask;
-            CloseTask();
+            if (!CharactersWorking())
+            {
+                taskNotification.StartTask(taskData, characterSlots);
+                taskStarted = true;
+                TimeTickSystem.OnTick -= UpdateTask;
+                CloseTask();
+            }
         }
     }
     public void CloseTask()
@@ -85,6 +88,7 @@ public class Task : MonoBehaviour
         {
             if (slot.icon != null) slot.icon.ResetTransform();
             slot.ClearCharacter();
+            slot.gameObject.SetActive(false);
         }
         characterSlots.Clear();
         gameObject.SetActive(false);
@@ -99,7 +103,24 @@ public class Task : MonoBehaviour
                 return false;
             }
         }
-
         return true;
+    }
+
+    private bool CharactersWorking()
+    {
+        foreach (var character in characterSlots)
+        {
+            if (character.icon != null && character.icon.character.isWorking)
+            {
+                warningUI.gameObject.SetActive(true);
+                warningUI.character = character.icon.character;
+                warningUI.characterIcon.sprite = character.icon.character.data.characterIcon;
+                warningUI.warningDescription.text = character.icon.character.data.firstName + " is already assigned to " 
+                    + character.icon.character.currentTask.taskData.taskName + ". Assigning him here will cancel his current Task. Do you want to proceed?";
+                return true;
+            }
+        }
+
+        return false;
     }
 }
