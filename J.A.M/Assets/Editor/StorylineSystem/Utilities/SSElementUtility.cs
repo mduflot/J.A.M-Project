@@ -1,12 +1,12 @@
 using System;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace SS.Utilities
 {
     using Elements;
-    using Enumerations;
-    
+
     public static class SSElementUtility
     {
         public static Button CreateButton(string text, Action onClick = null)
@@ -18,7 +18,7 @@ namespace SS.Utilities
 
             return button;
         }
-        
+
         public static Foldout CreateFoldout(string title, bool collapsed = false)
         {
             Foldout foldout = new Foldout()
@@ -37,10 +37,10 @@ namespace SS.Utilities
             Port port = node.InstantiatePort(orientation, direction, capacity, typeof(bool));
 
             port.portName = portName;
-            
+
             return port;
         }
-        
+
         public static TextField CreateTextField(string value = null, string label = null,
             EventCallback<ChangeEvent<string>> onValueChanged = null)
         {
@@ -68,13 +68,66 @@ namespace SS.Utilities
             return textArea;
         }
 
-        /*
-         public static EnumField CreateEnumField(SSLocation value,
-            EventCallback<ChangeEvent<SSLocation>> onValueChanged = null)
+        public static IntegerField CreateIntegerField(int value = 1, string label = null,
+            EventCallback<ChangeEvent<int>> onValueChanged = null)
+        {
+            IntegerField integerField = new IntegerField()
+            {
+                value = value,
+                label = label
+            };
+
+            if (onValueChanged != null)
+            {
+                integerField.RegisterValueChangedCallback(onValueChanged);
+            }
+
+            return integerField;
+        }
+
+        public static FloatField CreateFloatField(float value = 1.0f, string label = null,
+            EventCallback<ChangeEvent<float>> onValueChanged = null)
+        {
+            FloatField floatField = new FloatField()
+            {
+                value = value,
+                label = label
+            };
+
+            if (onValueChanged != null)
+            {
+                floatField.RegisterValueChangedCallback(onValueChanged);
+            }
+
+            return floatField;
+        }
+
+        public static SliderInt CreateSliderField(int value = 1, string label = null,
+            EventCallback<ChangeEvent<int>> onValueChanged = null)
+        {
+            SliderInt sliderField = new SliderInt()
+            {
+                value = value,
+                label = label + value,
+                lowValue = 1,
+                highValue = 5
+            };
+            
+            if (onValueChanged != null)
+            {
+                sliderField.RegisterValueChangedCallback(onValueChanged);
+            }
+
+            return sliderField;
+        }
+
+        public static EnumField CreateEnumField(Enum value = null, string label = null,
+            EventCallback<ChangeEvent<Enum>> onValueChanged = null)
         {
             EnumField enumField = new EnumField()
             {
-                value = value
+                value = value,
+                label = label
             };
 
             enumField.Init(value);
@@ -86,6 +139,24 @@ namespace SS.Utilities
 
             return enumField;
         }
-        */
+
+        public static EnumFlagsField CreateEnumFlagsField(Enum value = null, string label = null,
+            EventCallback<ChangeEvent<Enum>> onValueChanged = null)
+        {
+            EnumFlagsField enumFlagsField = new EnumFlagsField()
+            {
+                value = value,
+                label = label
+            };
+
+            enumFlagsField.Init(value);
+
+            if (onValueChanged != null)
+            {
+                enumFlagsField.RegisterValueChangedCallback(onValueChanged);
+            }
+
+            return enumFlagsField;
+        }
     }
 }

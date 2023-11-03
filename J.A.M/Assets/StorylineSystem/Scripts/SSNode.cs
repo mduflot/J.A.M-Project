@@ -16,6 +16,7 @@ namespace SS
         [SerializeField] private List<Button> locations;
         [SerializeField] private GameObject dialogue;
         [SerializeField] private GameObject popupCharacters;
+        [SerializeField] private GameObject eventDescription;
         [SerializeField] private Button eventButton;
         [SerializeField] private GameObject characterSlot;
         [SerializeField] private GameObject notification;
@@ -48,19 +49,19 @@ namespace SS
                     RunNode(nodeSO as SSStartNodeSO);
                     break;
                 }
-                case SSNodeType.SingleChoice:
+                case SSNodeType.Dialogue:
                 {
-                    RunSingleNode(nodeSO);
+                    RunNode(nodeSO as SSDialogueNodeSO);
                     break;
                 }
-                case SSNodeType.EventMultipleChoice:
+                case SSNodeType.Task:
                 {
-                    RunEventNode(nodeSO);
+                    RunNode(nodeSO as SSTaskNodeSO);
                     break;
                 }
-                case SSNodeType.End:
+                case SSNodeType.Reward:
                 {
-                    RunNode(nodeSO as SSEndNodeSO);
+                    RunNode(nodeSO as SSRewardNodeSO);
                     break;
                 }
                 default:
@@ -81,7 +82,7 @@ namespace SS
             }
         }
 
-        private void RunNode(SSEndNodeSO endNodeSO)
+        private void RunNode(SSRewardNodeSO rewardNodeSo)
         {
             foreach (var location in locations)
             {
@@ -91,19 +92,21 @@ namespace SS
             dialogue.SetActive(false);
             eventButton.gameObject.SetActive(false);
             notification.SetActive(true);
-            notification.GetComponent<TextMeshProUGUI>().text = "Timeline over !";
+            notification.GetComponent<TextMeshProUGUI>().text = "You gain : " + rewardNodeSo.RewardTypes;
         }
 
-        private void RunSingleNode(SSNodeSO nodeSO)
+        private void RunNode(SSDialogueNodeSO nodeSO)
         {
             dialogue.SetActive(true);
             dialogue.GetComponent<TextMeshProUGUI>().text = nodeSO.Text;
             StartCoroutine(WaiterDialogue(nodeSO));
         }
         
-        private void RunEventNode(SSNodeSO nodeSO)
+        private void RunNode(SSTaskNodeSO nodeSO)
         {
             popupCharacters.SetActive(true);
+            eventDescription.SetActive(true);
+            eventDescription.GetComponent<TextMeshProUGUI>().text = nodeSO.Text;
             eventButton.gameObject.SetActive(true);
             eventButton.onClick.AddListener(() => CheckNodeType(nodeSO.Choices[0].NextNode));
             eventButton.onClick.AddListener(() => popupCharacters.SetActive(false));

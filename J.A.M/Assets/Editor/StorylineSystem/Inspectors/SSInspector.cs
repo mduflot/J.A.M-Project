@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.Rendering;
 
 namespace SS.Inspectors
 {
@@ -13,6 +14,7 @@ namespace SS.Inspectors
         private SerializedProperty locationsProperty;
         private SerializedProperty dialogueProperty;
         private SerializedProperty popupCharactersProperty;
+        private SerializedProperty eventDescriptionProperty;
         private SerializedProperty eventButtonProperty;
         private SerializedProperty characterSlotProperty;
         private SerializedProperty notificationProperty;
@@ -35,6 +37,7 @@ namespace SS.Inspectors
             locationsProperty = serializedObject.FindProperty("locations");
             dialogueProperty = serializedObject.FindProperty("dialogue");
             popupCharactersProperty = serializedObject.FindProperty("popupCharacters");
+            eventDescriptionProperty = serializedObject.FindProperty("eventDescription");
             eventButtonProperty = serializedObject.FindProperty("eventButton");
             characterSlotProperty = serializedObject.FindProperty("characterSlot");
             notificationProperty = serializedObject.FindProperty("notification");
@@ -57,6 +60,7 @@ namespace SS.Inspectors
             locationsProperty.DrawPropertyField(true);
             dialogueProperty.DrawPropertyField();
             popupCharactersProperty.DrawPropertyField();
+            eventDescriptionProperty.DrawPropertyField();
             eventButtonProperty.DrawPropertyField();
             characterSlotProperty.DrawPropertyField();
             notificationProperty.DrawPropertyField();
