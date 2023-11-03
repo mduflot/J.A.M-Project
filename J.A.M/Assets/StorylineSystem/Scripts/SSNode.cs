@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace SS
 {
@@ -12,8 +15,12 @@ namespace SS
     public class SSNode : MonoBehaviour
     {
         /* UI GameObjects */
-        [SerializeField] private GameObject dialogue;
+        [FormerlySerializedAs("dialogue")] [SerializeField] private TextMeshProUGUI dialogueText;
+        [SerializeField] private TextMeshProUGUI nameSpeaker;
+        [SerializeField] private List<CharacterBehaviour> characters;
         [SerializeField] private SpaceshipManager spaceshipManager;
+
+        private Dictionary<SSSpeakerType, CharacterBehaviour> speakersDictionary;
 
         /* Node Scriptable Objects */
         [SerializeField] private SSNodeContainerSO nodeContainer;
@@ -68,8 +75,30 @@ namespace SS
 
         private void RunNode(SSDialogueNodeSO nodeSO)
         {
-            dialogue.SetActive(true);
-            dialogue.GetComponent<TextMeshProUGUI>().text = nodeSO.Text;
+            dialogueText.gameObject.SetActive(true);
+            nameSpeaker.gameObject.SetActive(true);
+            dialogueText.text = nodeSO.Text;
+            switch (nodeSO.SpeakerType)
+            {
+                case SSSpeakerType.Random :
+                    nameSpeaker.text = characters[Random.Range(0, characters.Count)].data.firstName;
+                    break;
+                case SSSpeakerType.Sensor :
+                    nameSpeaker.text = "Sensor";
+                    break;
+                case SSSpeakerType.Character1 :
+                    nameSpeaker.text = characters[0].data.firstName;
+                    break;
+                case SSSpeakerType.Character2 :
+                    nameSpeaker.text = characters[1].data.firstName;
+                    break;
+                case SSSpeakerType.Character3 :
+                    nameSpeaker.text = characters[2].data.firstName;
+                    break;
+                case SSSpeakerType.Character4 :
+                    nameSpeaker.text = characters[4].data.firstName;
+                    break;
+            }
             StartCoroutine(WaiterDialogue(nodeSO));
         }
 
@@ -81,7 +110,8 @@ namespace SS
         IEnumerator WaiterDialogue(SSNodeSO nodeSO)
         {
             yield return new WaitForSecondsRealtime(5);
-            dialogue.SetActive(false);
+            dialogueText.gameObject.SetActive(false);
+            nameSpeaker.gameObject.SetActive(false);
             if (nodeSO.Choices.Count == 0)
             {
                 yield break;
