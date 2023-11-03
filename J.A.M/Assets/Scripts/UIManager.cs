@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class UIManager : MonoBehaviour
     public Transform taskParent;
     public Task taskUI;
     public Canvas canvas;
+    public TextMeshProUGUI date;
     
     [Serializable] 
     public struct Gauges
@@ -51,5 +53,10 @@ public class UIManager : MonoBehaviour
     public void UpdateGauges(SpaceshipManager.System system, float value)
     {
         gaugeReferences[system].fillAmount = value/100;
+    }
+
+    public void UpdateInGameDate(string newDate)
+    {
+        date.text = newDate;
     }
 }
