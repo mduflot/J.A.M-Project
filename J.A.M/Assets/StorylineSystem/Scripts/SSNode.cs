@@ -119,7 +119,7 @@ namespace SS
 
         IEnumerator WaiterTask(SSTaskNodeSO nodeSO)
         {
-            yield return new WaitUntil(() => spaceshipManager.IsTaskActive(nodeSO.TaskData));
+            yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(nodeSO.TaskData).TaskStarted);
             if (nodeSO.Choices.First().NextNode == null)
             {
                 yield break;
