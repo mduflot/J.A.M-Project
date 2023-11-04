@@ -6,8 +6,7 @@ public class CharacterDataScriptable : ScriptableObject
 {
     [Header("Statistics")] 
     public int baseVolition;
-    public int currentVolition;
-    public int currentMorale;
+    public int baseMood;
     public Relationship[] relationships;
     //public Traits[] traits; 
     public Sprite characterIcon;

@@ -1,14 +1,28 @@
+using System;
 using UnityEngine;
 
 public class CharacterBehaviour : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
+    private int currentVolition;
+    private int currentMood;
     private bool isWorking;
     private bool isTaskLeader;
     private TaskNotification currentTask;
     [SerializeField] private CharacterDataScriptable data;
 
 
+    private void Start()
+    {
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        currentMood = data.baseMood;
+        currentVolition = data.baseVolition;
+    }
+    
     public void MoveTo(Transform destination)
     {
         float timeToTravel = Vector2.Distance(transform.position, destination.position) * moveSpeed;
