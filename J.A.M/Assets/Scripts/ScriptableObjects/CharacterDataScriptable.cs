@@ -8,7 +8,7 @@ public class CharacterDataScriptable : ScriptableObject
     public int baseVolition;
     public int baseMood;
     public Relationship[] relationships;
-    //public Traits[] traits; 
+    public TraitsData.Traits traits;
     public Sprite characterIcon;
     public string firstName, lastName;
 

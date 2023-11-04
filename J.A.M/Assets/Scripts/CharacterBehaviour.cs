@@ -3,13 +3,20 @@ using UnityEngine;
 
 public class CharacterBehaviour : MonoBehaviour
 {
+    [SerializeField] private CharacterDataScriptable data;
     [SerializeField] private float moveSpeed;
-    private int currentVolition;
-    private int currentMood;
+    
+    [Range(0,100)]
+    private float mood = 50.0f; 
+    
+    [Range(0,100)]
+    
+    [SerializeField] private TraitsData.Traits traits;
+    
+    private float volition = 10.0f;
     private bool isWorking;
     private bool isTaskLeader;
     private TaskNotification currentTask;
-    [SerializeField] private CharacterDataScriptable data;
 
 
     private void Start()
@@ -19,9 +26,19 @@ public class CharacterBehaviour : MonoBehaviour
 
     private void Initialize()
     {
-        currentMood = data.baseMood;
-        currentVolition = data.baseVolition;
+        mood = data.baseMood;
+        volition = data.baseVolition;
+        traits = data.traits;
     }
+    
+    public TraitsData.Job GetJob() { return traits.GetJob(); }
+
+    public TraitsData.PositiveTraits GetPositiveTraits() { return traits.GetPositiveTraits(); }
+
+    public TraitsData.NegativeTraits GetNegativeTraits() { return traits.GetNegativeTraits(); }
+
+    private void CapMood() { volition = mood < volition ? mood : volition; }
+    
     
     public void MoveTo(Transform destination)
     {
