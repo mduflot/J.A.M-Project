@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 2741074354938305354}
   - component: {fileID: 8263029507457322975}
   m_Layer: 5
-  m_Name: Room10
+  m_Name: Room9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 6793363424141236114}
   - component: {fileID: 5489457416466712585}
   m_Layer: 5
-  m_Name: Room11
+  m_Name: Room10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -977,7 +977,7 @@ GameObject:
   - component: {fileID: 6065491625247629712}
   - component: {fileID: 3409011517982957906}
   m_Layer: 5
-  m_Name: Room9
+  m_Name: HullRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1025,7 +1025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+  m_Color: {r: 0.7735849, g: 0.20069422, b: 0.20069422, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1396,6 +1396,11 @@ MonoBehaviour:
     decreaseSpeed: 0.15
     gaugeValue: 0
     task: {fileID: 11400000, guid: a59de71c2f7916345bb5539062676f73, type: 2}
+  - systemName: 4
+    systemObject: {fileID: 6707227285709997278}
+    decreaseSpeed: 0.1
+    gaugeValue: 0
+    task: {fileID: 11400000, guid: a59de71c2f7916345bb5539062676f73, type: 2}
   characters:
   - {fileID: 0}
   - {fileID: 0}
@@ -1569,7 +1574,7 @@ GameObject:
   - component: {fileID: 2480130327774654442}
   - component: {fileID: 4890417709111891272}
   m_Layer: 5
-  m_Name: Room12
+  m_Name: Room11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2167,17 +2172,17 @@ PrefabInstance:
     - target: {fileID: 8278086388085138227, guid: 40b70b30bf42cbe419b9c7039add332b,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.26415092
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8278086388085138227, guid: 40b70b30bf42cbe419b9c7039add332b,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.26415092
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8278086388085138227, guid: 40b70b30bf42cbe419b9c7039add332b,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.26415092
+      value: 0.3584906
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5642,17 +5647,17 @@ PrefabInstance:
     - target: {fileID: 8278086388085138227, guid: 9849161ba7465294e87baf9ebcb15ae3,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.26415092
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8278086388085138227, guid: 9849161ba7465294e87baf9ebcb15ae3,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.26415092
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8278086388085138227, guid: 9849161ba7465294e87baf9ebcb15ae3,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.26415092
+      value: 0.3584906
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

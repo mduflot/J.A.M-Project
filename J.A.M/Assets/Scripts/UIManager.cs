@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     private Dictionary<SpaceshipManager.System, Image> gaugeReferences = new Dictionary<SpaceshipManager.System, Image>();
     public Transform charactersUIParent;
     public List<CharacterUI> charactersUI;
+    private List<CharacterIcon> characterIcons = new List<CharacterIcon>();
     public CharacterUI characterUIPrefab;
     public Transform taskNotificationParent;
     public Transform taskParent;
@@ -41,6 +42,7 @@ public class UIManager : MonoBehaviour
             var ui = Instantiate(characterUIPrefab, charactersUIParent);
             ui.Initialize(character);
             charactersUI.Add(ui);
+            characterIcons.Add(ui.icon);
         }
     }
 
@@ -61,9 +63,9 @@ public class UIManager : MonoBehaviour
 
     public void RefreshCharacterIcons()
     {
-        foreach (var characterUI in charactersUI)
+        foreach (var icon in characterIcons)
         {
-            characterUI.icon.RefreshIcon();
+            icon.RefreshIcon();
         }
     }
 }
