@@ -28,7 +28,7 @@ public class CharacterUI : MonoBehaviour, IDropHandler
         Debug.Log(transform.name + " récupère");
         GameObject dropped = eventData.pointerDrag;
         icon = dropped.GetComponent<CharacterIcon>();
-        icon.parentAfterDrag = transform;
-        icon.parentScript = this;
+        icon.SetupIcon(transform, this);
+        
     }
 }

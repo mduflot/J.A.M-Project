@@ -115,13 +115,25 @@ public class SpaceshipManager : MonoBehaviour
         }
     }
 
+    public void SpawnPermanentTask(TaskDataScriptable taskDataScriptable)
+    {
+        if (!IsTaskActive(taskDataScriptable))
+        {
+            var position = GetTaskPosition(taskDataScriptable.system).position;
+            var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity, GameManager.Instance.UIManager.taskNotificationParent);
+            taskNote.InitTask(taskDataScriptable);
+            OpenTaskUI(taskNote);
+            AddTask(taskNote);
+        }
+    }
+
     public Transform GetTaskPosition(System system)
     {
         return systemsDictionary[system].systemObject.transform;
     }
-    public void OpenTaskUI(TaskDataScriptable taskDataScriptable, TaskNotification tn)
+    public void OpenTaskUI(TaskNotification tn)
     {
-        GameManager.Instance.UIManager.SpawnTaskUI(taskDataScriptable, tn);
+        GameManager.Instance.UIManager.SpawnTaskUI(tn);
     }
 
     public void AddTask(TaskNotification task)

@@ -80,16 +80,16 @@ namespace SS
             switch (nodeSO.SpeakerType)
             {
                 case SSSpeakerType.Random :
-                    nameSpeaker.text = characters[Random.Range(0, characters.Count)].data.firstName;
+                    nameSpeaker.text = characters[Random.Range(0, characters.Count)].GetCharacterData().firstName;
                     break;
                 case SSSpeakerType.Sensor :
                     nameSpeaker.text = "Sensor";
                     break;
                 case SSSpeakerType.Character1 :
-                    nameSpeaker.text = characters[0].data.firstName;
+                    nameSpeaker.text = characters[0].GetCharacterData().firstName;
                     break;
                 case SSSpeakerType.Character2 :
-                    nameSpeaker.text = characters[1].data.firstName;
+                    nameSpeaker.text = characters[1].GetCharacterData().firstName;
                     break;
                 default:
                     nameSpeaker.text = "Wait... is not working for now";

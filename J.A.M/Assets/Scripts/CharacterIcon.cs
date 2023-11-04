@@ -1,23 +1,24 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CharacterIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public CharacterUI baseParentScript;
-    public Transform parentAfterDrag;
-    public CharacterUI parentScript;
+    private CharacterUI baseParentScript;
+    private Transform parentAfterDrag;
+    private CharacterUI parentScript;
     [SerializeField] private Image image;
+    [SerializeField] private Image currentTaskImage;
     public CharacterBehaviour character;
     
     public void Initialize(CharacterBehaviour c, CharacterUI script)
     {
         baseParentScript = script;
         character = c;
-        image.sprite = character.data.characterIcon;
+        image.sprite = character.GetCharacterData().characterIcon;
         parentScript = script;
     }
-
     public void ResetTransform()
     {
         transform.SetParent(baseParentScript.transform);
@@ -44,5 +45,34 @@ public class CharacterIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         //transform.position = parentAfterDrag.position;
         parentScript.icon = this;
         image.raycastTarget = true;
+    }
+
+    public void AssignTask(TaskDataScriptable t)
+    {
+        currentTaskImage.sprite = t.taskIcon;
+        currentTaskImage.enabled = true;
+    }
+
+    public void RefreshIcon()
+    {
+        if (character.IsWorking())
+        {
+            AssignTask(character.GetTask().taskData);
+        }
+        else
+        {
+            StopTask();
+        }
+    }
+
+    private void StopTask()
+    {
+        currentTaskImage.enabled = false;
+    }
+
+    public void SetupIcon(Transform parent, CharacterUI script)
+    {
+        parentAfterDrag = parent;
+        parentScript = script;
     }
 }

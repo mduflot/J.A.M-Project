@@ -9,4 +9,9 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
     }
+
+    public void RefreshCharacterIcons()
+    {
+        UIManager.RefreshCharacterIcons();
+    }
 }
