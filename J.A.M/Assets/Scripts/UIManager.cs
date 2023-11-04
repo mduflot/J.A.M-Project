@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     public Gauges[] gauges;
     private Dictionary<SpaceshipManager.System, Image> gaugeReferences = new Dictionary<SpaceshipManager.System, Image>();
     public Transform charactersUIParent;
-    public List<CharacterUI> characterUI;
+    public List<CharacterUI> charactersUI;
     public CharacterUI characterUIPrefab;
     public Transform taskNotificationParent;
     public Transform taskParent;
@@ -40,13 +40,13 @@ public class UIManager : MonoBehaviour
         {
             var ui = Instantiate(characterUIPrefab, charactersUIParent);
             ui.Initialize(character);
-            characterUI.Add(ui);
+            charactersUI.Add(ui);
         }
     }
 
-    public void SpawnTaskUI(TaskDataScriptable data, TaskNotification tn)
+    public void SpawnTaskUI(TaskNotification tn)
     {
-        taskUI.Initialize(data, tn);
+        taskUI.Initialize(tn);
     }
 
     public void UpdateGauges(SpaceshipManager.System system, float value)
@@ -57,5 +57,13 @@ public class UIManager : MonoBehaviour
     public void UpdateInGameDate(string newDate)
     {
         date.text = newDate;
+    }
+
+    public void RefreshCharacterIcons()
+    {
+        foreach (var characterUI in charactersUI)
+        {
+            characterUI.icon.RefreshIcon();
+        }
     }
 }

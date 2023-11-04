@@ -24,12 +24,12 @@ public class Task : MonoBehaviour
     private List<CharacterUISlot> characterSlots = new List<CharacterUISlot>();
     private bool taskStarted;
     
-    public void Initialize(TaskDataScriptable data, TaskNotification tn)
+    public void Initialize(TaskNotification tn)
     {
-        taskData = data;
+        taskData = tn.taskData;
         titleText.text = taskData.taskName;
-        timeLeft = data.timeLeft;
-        duration = data.baseDuration;
+        timeLeft = taskData.timeLeft;
+        duration = taskData.baseDuration;
         taskStarted = false;
         taskNotification = tn;
         for (int i = 0; i < taskData.mandatorySlots; i++)
@@ -86,11 +86,12 @@ public class Task : MonoBehaviour
     {
         foreach (var slot in characterSlots)
         {
-            if (slot.icon != null) slot.icon.ResetTransform();
+            if(slot.icon != null)slot.icon.ResetTransform();
             slot.ClearCharacter();
             slot.gameObject.SetActive(false);
         }
         characterSlots.Clear();
+        GameManager.Instance.RefreshCharacterIcons();
         gameObject.SetActive(false);
     }
 
@@ -110,7 +111,7 @@ public class Task : MonoBehaviour
     {
         foreach (var character in characterSlots)
         {
-            if (character.icon != null && character.icon.character.isWorking)
+            if (character.icon != null && character.icon.character.IsWorking())
             {
                 warningUI.gameObject.SetActive(true);
                 warningUI.Init(character.character);

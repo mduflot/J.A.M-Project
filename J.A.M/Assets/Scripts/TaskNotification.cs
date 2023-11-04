@@ -5,11 +5,12 @@ using UnityEngine.UI;
 public class TaskNotification : MonoBehaviour
 {
     public TaskDataScriptable taskData;
-    [SerializeField] private Image image;
+    [SerializeField] private Image completionGauge;
     private float duration;
     private float timeLeft;
     public bool isCompleted = false;
     private bool taskStarted = false;
+    [SerializeField] private Image taskIcon;
     private List<CharacterBehaviour> leaderCharacters = new List<CharacterBehaviour>();
     private List<CharacterBehaviour> assistantCharacters = new List<CharacterBehaviour>();
     
@@ -27,16 +28,14 @@ public class TaskNotification : MonoBehaviour
             if (character.isMandatory)
             {
                 leaderCharacters.Add(character.icon.character);
-                character.icon.character.currentTask = this;
-                character.icon.character.isWorking = true;
+                character.icon.character.AssignTask(this, true);
             }
             else
             {
                 if (character.icon != null)
                 {
                     assistantCharacters.Add(character.icon.character);
-                    character.character.currentTask = this;
-                    character.icon.character.isWorking = true;
+                    character.icon.character.AssignTask(this);
                 }
             }
         }
@@ -45,13 +44,14 @@ public class TaskNotification : MonoBehaviour
 
     public void DisplayTaskInfo()
     {
-        GameManager.Instance.UIManager.SpawnTaskUI(taskData, this);
+        GameManager.Instance.UIManager.SpawnTaskUI(this);
     }
     
     public void InitTask(TaskDataScriptable t)
     {
         taskData = t;
         timeLeft = t.timeLeft;
+        taskIcon.sprite = t.taskIcon;
     }
 
     public void UpdateTask()
@@ -61,7 +61,7 @@ public class TaskNotification : MonoBehaviour
         {
             duration -= TimeTickSystem.timePerTick;
             var completionValue = 1 - duration / taskData.baseDuration;
-            image.fillAmount = completionValue;
+            completionGauge.fillAmount = completionValue;
         }
         else
         {
@@ -78,6 +78,7 @@ public class TaskNotification : MonoBehaviour
         isCompleted = true;
         taskData = null;
         ResetCharacters();
+        GameManager.Instance.RefreshCharacterIcons();
         Destroy(gameObject);
     }
 
@@ -85,13 +86,11 @@ public class TaskNotification : MonoBehaviour
     {
         foreach (var character in leaderCharacters)
         {
-            character.isWorking = false;
-            character.currentTask = null;
+            character.StopTask();
         }
         foreach (var character in assistantCharacters)
         {
-            character.isWorking = false;
-            character.currentTask = null;
+            character.StopTask();
         }
     }
     public void CancelTask()

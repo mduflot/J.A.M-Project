@@ -199,9 +199,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  isWorking: 0
-  isTaskLeader: 0
-  currentTask: {fileID: 0}
   data: {fileID: 11400000, guid: eecd134c5ff2dd447a551e8f59ff27aa, type: 2}
 --- !u!23 &195778727
 MeshRenderer:
@@ -286,6 +283,11 @@ PrefabInstance:
       propertyPath: characters.Array.data[1]
       value: 
       objectReference: {fileID: 195778726}
+    - target: {fileID: 3384025564898997709, guid: ba1ad1a4c651c4b458bff78a38e3e3ab,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3488218566356834535, guid: ba1ad1a4c651c4b458bff78a38e3e3ab,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -573,9 +575,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  isWorking: 0
-  isTaskLeader: 0
-  currentTask: {fileID: 0}
   data: {fileID: 11400000, guid: 0d86f15e24679ad49b13e3214559207a, type: 2}
 --- !u!1 &1473250545
 GameObject:
@@ -632,6 +631,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 156231370371742284, guid: cd48a9106dc08db449fe7c8159846151,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1281086295}
+    - target: {fileID: 156231370371742284, guid: cd48a9106dc08db449fe7c8159846151,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SpawnPermanentTask
+      objectReference: {fileID: 0}
     - target: {fileID: 2132042751293531491, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -651,6 +660,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2147346543067568688, guid: cd48a9106dc08db449fe7c8159846151,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2359439157800779338, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
@@ -751,6 +765,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5256314253687176813, guid: cd48a9106dc08db449fe7c8159846151,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1281086295}
+    - target: {fileID: 5256314253687176813, guid: cd48a9106dc08db449fe7c8159846151,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SpawnPermanentTask
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358695199955384565, guid: cd48a9106dc08db449fe7c8159846151,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1281086295}
+    - target: {fileID: 5358695199955384565, guid: cd48a9106dc08db449fe7c8159846151,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SpawnPermanentTask
       objectReference: {fileID: 0}
     - target: {fileID: 5953736376398734007, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
@@ -976,6 +1010,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSpeed: 0
   zoomSpeed: 0
+  maxZoom: 0
+  minZoom: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

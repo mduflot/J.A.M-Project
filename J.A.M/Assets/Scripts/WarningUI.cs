@@ -16,31 +16,30 @@ public class WarningUI : MonoBehaviour
     public void Init(CharacterBehaviour c)
     {
         character = c;
-        characterIcon.sprite = c.data.characterIcon;
-        if (c.isTaskLeader)
+        characterIcon.sprite = c.GetCharacterData().characterIcon;
+        if (c.IsTaskLeader())
         {
-            warningDescription.text = character.data.firstName + " is already assigned to " +
-                                      character.currentTask.taskData.taskName +
+            warningDescription.text = character.GetCharacterData().firstName + " is already assigned to " +
+                                      character.GetTask().taskData.taskName +
                                       ". Assigning him here will cancel his current Task. Do you want to proceed?";
         }
         else
         {
-            warningDescription.text = character.data.firstName + " is already assigned to " +
-                                      character.currentTask.taskData.taskName +
+            warningDescription.text = character.GetCharacterData().firstName + " is already assigned to " +
+                                      character.GetTask().taskData.taskName +
                                       ". Assigning him here will slow down his current Task. Do you want to proceed?";
         }
     }
     public void CancelTask()
     {
-        character.isWorking = false;
-        if (character.isTaskLeader)
+        if (character.IsTaskLeader())
         {
-            GameManager.Instance.SpaceshipManager.CancelTask(character.currentTask.taskData);
+            GameManager.Instance.SpaceshipManager.CancelTask(character.GetTask().taskData);
             
         }
         else
         {
-            //calculate new duration
+            character.StopTask();
         }
         gameObject.SetActive(false);
     }
