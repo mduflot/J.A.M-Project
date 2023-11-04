@@ -90,14 +90,17 @@ public class Task : MonoBehaviour
             slot.ClearCharacter();
             slot.gameObject.SetActive(false);
         }
-        
+        characterSlots.Clear();
+        GameManager.Instance.RefreshCharacterIcons();
+        gameObject.SetActive(false);
+    }
+
+    public void CloseNotification()
+    {
         if (taskData.isPermanent)
         {
             taskNotification.CancelTask();
         }
-        characterSlots.Clear();
-        GameManager.Instance.RefreshCharacterIcons();
-        gameObject.SetActive(false);
     }
 
     private bool CanStartTask()
