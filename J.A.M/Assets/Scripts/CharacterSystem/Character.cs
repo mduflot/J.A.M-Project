@@ -1,16 +1,13 @@
+using System;
 using UnityEngine;
 
 public class Character : MonoBehaviour
 {
     [SerializeField] private string characterName;
     //[SerializeField] private Image characterPortrait;
-
-    [SerializeField] private TraitSystem.Job job; //Rename to archetype to fit documentation
-
-    [SerializeField] private TraitSystem.PositiveTraits positiveTraits;
-
-    [SerializeField] private TraitSystem.NegativeTraits negativeTraits;
-
+    
+    [SerializeField] private TraitSystem.Traits traits;
+    
     [Range(0,100)]
     private float mood = 50.0f; 
     [Range(0,100)]
@@ -23,11 +20,11 @@ public class Character : MonoBehaviour
         TraitSystem.ApplyBonuses(this, TraitSystem.Job.Mechanic, TraitSystem.PositiveTraits.Crafty | TraitSystem.PositiveTraits.GreenHanded, TraitSystem.NegativeTraits.Dull | TraitSystem.NegativeTraits.Slow);
     }
 
-    public TraitSystem.Job GetJob() { return job; }
+    public TraitSystem.Job GetJob() { return traits.GetJob(); }
 
-    public TraitSystem.PositiveTraits GetPositiveTraits() { return positiveTraits; }
+    public TraitSystem.PositiveTraits GetPositiveTraits() { return traits.GetPositiveTraits(); }
 
-    public TraitSystem.NegativeTraits GetNegativeTraits() { return negativeTraits; }
+    public TraitSystem.NegativeTraits GetNegativeTraits() { return traits.GetNegativeTraits(); }
 
     private void CapMood() { mood = mood > stress ? stress : mood; }
 }
