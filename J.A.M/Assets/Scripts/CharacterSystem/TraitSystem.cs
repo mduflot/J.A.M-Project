@@ -1,92 +1,50 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-
 
 public class TraitSystem
 {
-    [Flags]
-    public enum Job
-    {
-        None = 0,
-        Medic = 1,
-        Mechanic = 2,
-        Cook = 4,
-        Security = 8,
-        Pilot = 16,
-        Scientist = 32,
-    };
-
-    [Flags]
-    public enum PositiveTraits
-    {
-        None = 0,
-        Crafty = 1,
-        Smart = 2,
-        Quick = 4,
-        GreenHanded = 8,
-    };
-
-    [Flags]
-    public enum NegativeTraits
-    {
-        None = 0,
-        Slow = 1,
-        Dull = 2,
-        Unfocused = 4,
-        Depressed = 8,
-    }
-
-    [System.Serializable]
-    public class Traits
-    {
-        [SerializeField] private SerializableTuple<TraitSystem.Job, TraitSystem.PositiveTraits, TraitSystem.NegativeTraits> traits;
-        public Job GetJob()
-        {
-            return traits.Item1;
-        }
-
-        public PositiveTraits GetPositiveTraits()
-        {
-            return traits.Item2;
-        }
-
-        public NegativeTraits GetNegativeTraits()
-        {
-            return traits.Item3;
-        }
-
-    }
-    
-    public static Job MatchJobFlags(Job job, Job flagsToMatch)
+    public static TraitsData.Job MatchJobFlags(TraitsData.Job job, TraitsData.Job flagsToMatch)
     {
         return job & flagsToMatch;
     }
     
-    public static PositiveTraits MatchPositiveFlags(PositiveTraits flags, PositiveTraits flagsToMatch)
+    public static TraitsData.PositiveTraits MatchPositiveFlags(TraitsData.PositiveTraits flags, TraitsData.PositiveTraits flagsToMatch)
     {
         return flags & flagsToMatch;
     }
     
-    public static NegativeTraits MatchNegativeFlags(NegativeTraits flags, NegativeTraits flagsToMatch)
+    public static TraitsData.NegativeTraits MatchNegativeFlags(TraitsData.NegativeTraits flags, TraitsData.NegativeTraits flagsToMatch)
     {
         return flags & flagsToMatch;
+    }
+
+    public static TraitsData.StatTraits GetStatFlags(float mood, float stress)
+    {
+        TraitsData.StatTraits statTraits = TraitsData.StatTraits.None;
+        if (mood >= .75f) statTraits |= TraitsData.StatTraits.GoodMood;
+        else if (mood <= .25f) statTraits |= TraitsData.StatTraits.BadMood;
+        if (stress >= .75f) statTraits |= TraitsData.StatTraits.Peaceful;
+        else if (stress <= .25f) statTraits |= TraitsData.StatTraits.Stressed;
+
+        return statTraits;
     }
     
     // Add task to param to get all flags in one param
-    public static void ApplyBonuses(Character character, Job taskJob, PositiveTraits taskPosTraits, NegativeTraits taskNegTraits)
+    public static void ApplyBonuses(Character character, TraitsData.Job taskJob, TraitsData.PositiveTraits taskPosTraits, TraitsData.NegativeTraits taskNegTraits)
     {
-        Job matchedJob = MatchJobFlags(character.GetJob(), taskJob);
-        PositiveTraits pTraits = MatchPositiveFlags(character.GetPositiveTraits(), taskPosTraits);
-        NegativeTraits nTraits = MatchNegativeFlags(character.GetNegativeTraits(), taskNegTraits);
+        TraitsData.Job matchedJob = MatchJobFlags(character.GetJob(), taskJob);
+        TraitsData.PositiveTraits pTraits = MatchPositiveFlags(character.GetPositiveTraits(), taskPosTraits);
+        TraitsData.NegativeTraits nTraits = MatchNegativeFlags(character.GetNegativeTraits(), taskNegTraits);
 
         Debug.Log("Character Job :");
         ApplyJobBonus(matchedJob);
 
         //Apply positive bonus for all flags
         Debug.Log("Character Positives : ");
-        foreach(PositiveTraits matchedValue in Enum.GetValues(typeof(PositiveTraits)))
+        foreach(TraitsData.PositiveTraits matchedValue in Enum.GetValues(typeof(TraitsData.PositiveTraits)))
         {
             if((matchedValue & pTraits) != 0)
             {
@@ -96,7 +54,7 @@ public class TraitSystem
 
         //Apply negative bonus for all flags
         Debug.Log("Character Negatives : ");
-        foreach(NegativeTraits matchedValue in Enum.GetValues(typeof(NegativeTraits)))
+        foreach(TraitsData.NegativeTraits matchedValue in Enum.GetValues(typeof(TraitsData.NegativeTraits)))
         {
             if((matchedValue & nTraits) != 0)
             {
@@ -106,30 +64,30 @@ public class TraitSystem
     }
 
     // call like : ApplyJobBonus(MatchJobFlags(NPC.Job, Task.Job))
-    public static void ApplyJobBonus(Job jobMatch)
+    public static void ApplyJobBonus(TraitsData.Job jobMatch)
     {
         switch(jobMatch)
         {
-            case Job.None:
+            case TraitsData.Job.None:
                 //No bonus ?
                 Debug.Log("no job");
                 break;
-            case Job.Medic:
+            case TraitsData.Job.Medic:
                 Debug.Log("medic");
                 break;
-            case Job.Mechanic:
+            case TraitsData.Job.Mechanic:
                 Debug.Log("mechanic");
                 break;
-            case Job.Cook:
+            case TraitsData.Job.Cook:
                 Debug.Log("cook");
                 break;
-            case Job.Security:
+            case TraitsData.Job.Security:
                 Debug.Log("security");
                 break;
-            case Job.Pilot:
+            case TraitsData.Job.Pilot:
                 Debug.Log("pilot");
                 break;
-            case Job.Scientist:
+            case TraitsData.Job.Scientist:
                 Debug.Log("scientist");
                 break;
             default:
@@ -137,26 +95,26 @@ public class TraitSystem
         }
     }
     
-    public static void ApplyPositiveTraitBonus(PositiveTraits pt)
+    public static void ApplyPositiveTraitBonus(TraitsData.PositiveTraits pt)
     {
         switch(pt)
         {
-            case PositiveTraits.None:
+            case TraitsData.PositiveTraits.None:
                 //No bonus ?
                 Debug.Log("nothing positive about you");
                 break;
-            case PositiveTraits.Crafty:
+            case TraitsData.PositiveTraits.Crafty:
                 Debug.Log("crafty guy");
                 break;
-            case PositiveTraits.Smart:
+            case TraitsData.PositiveTraits.Smart:
                 //durée * 0.9, efficacité +
                 Debug.Log("smart guy");
                 break;
-            case PositiveTraits.Quick:
+            case TraitsData.PositiveTraits.Quick:
                 //durée * 0.5 ?
                 Debug.Log("quick guy");
                 break;
-            case PositiveTraits.GreenHanded:
+            case TraitsData.PositiveTraits.GreenHanded:
                 // + 15 food généré ?
                 Debug.Log("greenhanded guy");
                 break;
@@ -165,31 +123,52 @@ public class TraitSystem
         }
     }
     
-    public static void ApplyNegativeTraitBonus(NegativeTraits nt)
+    public static void ApplyNegativeTraitBonus(TraitsData.NegativeTraits nt)
     {
         switch(nt)
         {
-            case NegativeTraits.None:
+            case TraitsData.NegativeTraits.None:
                 //No bonus ?
                 Debug.Log("nothing negative about you");
                 break;
-            case NegativeTraits.Slow:
+            case TraitsData.NegativeTraits.Slow:
                 //durée tache * 1.5 ?
                 Debug.Log("slow guy");
                 break;
-            case NegativeTraits.Dull:
+            case TraitsData.NegativeTraits.Dull:
                 //durée +, efficacité - ?
                 Debug.Log("dull guy");
                 break;
-            case NegativeTraits.Unfocused:
+            case TraitsData.NegativeTraits.Unfocused:
                 //durée +, efficacité - ?
                 Debug.Log("unfocused guy");
                 break;
-            case NegativeTraits.Depressed:
+            case TraitsData.NegativeTraits.Depressed:
                 //morale - 10 ?
                 Debug.Log("depressed guy");
                 break;
             default:
+                break;
+        }
+    }
+
+    public static void ApplyStatBonus(TraitsData.StatTraits st)
+    {
+        switch (st)
+        {
+            case TraitsData.StatTraits.None:
+                break;
+            case TraitsData.StatTraits.BadMood:
+                Debug.Log("Character is in a bad mood");
+                break;
+            case TraitsData.StatTraits.GoodMood:
+                Debug.Log("Character is in a good mood");
+                break;
+            case TraitsData.StatTraits.Stressed:
+                Debug.Log("Character is stressed");
+                break;
+            case TraitsData.StatTraits.Peaceful:
+                Debug.Log("Character is peaceful");
                 break;
         }
     }

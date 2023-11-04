@@ -6,7 +6,7 @@ public class Character : MonoBehaviour
     [SerializeField] private string characterName;
     //[SerializeField] private Image characterPortrait;
     
-    [SerializeField] private TraitSystem.Traits traits;
+    [SerializeField] private TraitsData.Traits traits;
     
     [Range(0,100)]
     private float mood = 50.0f; 
@@ -17,14 +17,14 @@ public class Character : MonoBehaviour
 
     void Start()
     {
-        TraitSystem.ApplyBonuses(this, TraitSystem.Job.Mechanic, TraitSystem.PositiveTraits.Crafty | TraitSystem.PositiveTraits.GreenHanded, TraitSystem.NegativeTraits.Dull | TraitSystem.NegativeTraits.Slow);
+        TraitSystem.ApplyBonuses(this, TraitsData.Job.Mechanic, TraitsData.PositiveTraits.Crafty | TraitsData.PositiveTraits.GreenHanded, TraitsData.NegativeTraits.Dull | TraitsData.NegativeTraits.Slow);
     }
 
-    public TraitSystem.Job GetJob() { return traits.GetJob(); }
+    public TraitsData.Job GetJob() { return traits.GetJob(); }
 
-    public TraitSystem.PositiveTraits GetPositiveTraits() { return traits.GetPositiveTraits(); }
+    public TraitsData.PositiveTraits GetPositiveTraits() { return traits.GetPositiveTraits(); }
 
-    public TraitSystem.NegativeTraits GetNegativeTraits() { return traits.GetNegativeTraits(); }
+    public TraitsData.NegativeTraits GetNegativeTraits() { return traits.GetNegativeTraits(); }
 
     private void CapMood() { mood = mood > stress ? stress : mood; }
 }

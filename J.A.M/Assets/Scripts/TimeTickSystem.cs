@@ -1,9 +1,13 @@
 using System;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class TimeTickSystem : MonoBehaviour
 {
     public static uint timePerTick = 1; // InGame Time Unit
+    private const float maxTimeScale = 5.0f;
+    private const float minTimeScale = .5f;
+    [SerializeField] private float timeScale = 1.0f;
     public class OnTickEventArgs : EventArgs
     {
         public uint tick;
@@ -15,7 +19,7 @@ public class TimeTickSystem : MonoBehaviour
 
     private uint tick;
     private float tickTimer;
-
+    
     private void Awake()
     {
         tick = 0;
@@ -23,7 +27,7 @@ public class TimeTickSystem : MonoBehaviour
 
     private void Update()
     {
-        tickTimer += Time.deltaTime;
+        tickTimer += Time.deltaTime * timeScale;
         if (tickTimer >= tickTimerMax)
         {
             tickTimer -= tickTimerMax;
@@ -48,6 +52,17 @@ public class TimeTickSystem : MonoBehaviour
         uint minutes = (currentTicks / ticksPerTenMinutes) * 10;
         
         return "Day : " + days.ToString("D2") + " // " + hours.ToString("D2") + ":" + minutes.ToString("D2");
+    }
+
+    public void ModifyTimeScale(float newScale)
+    {
+        timeScale = newScale;
+    }
+
+    public void IncreaseTimeScale(float factor)
+    {
+        timeScale += factor;
+        timeScale = Mathf.Clamp(timeScale, minTimeScale, maxTimeScale);
     }
 }
 
