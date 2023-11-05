@@ -24,6 +24,13 @@ public class Task : MonoBehaviour
     private List<CharacterUISlot> characterSlots = new List<CharacterUISlot>();
     private bool taskStarted;
     
+    /*
+     * NOTES :
+     *      fix : Notif icon grabs raycast
+     *      fix : opening menu with notif icon doesnt show assigned characters
+     *      add : refreshDisplay to update values after assigning characters
+     *      fix : remove characterIcon from task if menu is closed without starting task 
+     */
     public void Initialize(TaskNotification tn)
     {
         taskData = tn.taskData;
@@ -49,6 +56,8 @@ public class Task : MonoBehaviour
             slot.gameObject.SetActive(true);
             characterSlots.Add(slot);
         }
+        timeLeftText.SetText(timeLeft.ToString());
+        
         TimeTickSystem.OnTick += UpdateTask;
         gameObject.SetActive(true);
     }
