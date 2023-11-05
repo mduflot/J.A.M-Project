@@ -8,6 +8,7 @@ public class TimeTickSystem : MonoBehaviour
     private const float maxTimeScale = 5.0f;
     private const float minTimeScale = .5f;
     [SerializeField] private float timeScale = 1.0f;
+    [SerializeField] private const uint ticksPerTenMinutes = 5;
     public class OnTickEventArgs : EventArgs
     {
         public uint tick;
@@ -39,7 +40,6 @@ public class TimeTickSystem : MonoBehaviour
     public static string GetTimeAsInGameDate(OnTickEventArgs e)
     {
         uint currentTicks = e.tick;
-        uint ticksPerTenMinutes = 5;
         uint ticksPerHour = ticksPerTenMinutes * 6;
         uint ticksPerDay = ticksPerHour * 24;
         

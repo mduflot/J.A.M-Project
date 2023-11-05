@@ -18,7 +18,7 @@ public class GaugeLevelOutcome : BaseTaskOutcome
     {
         if (operation == Operation.Add)
         {
-            GameManager.Instance.SpaceshipManager.GaugeValueOperation(targetGauge, value);
+            GameManager.Instance.SpaceshipManager.GaugeValueOperation(targetGauge, leaderCharacters[0].GetVolition());
         }
         else
         {
