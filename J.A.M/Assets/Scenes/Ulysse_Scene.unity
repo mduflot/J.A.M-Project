@@ -225,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032e6290968897c4b9ca443e5d6634be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeScale: 1
 --- !u!114 &109014174 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2829008691371120385, guid: ba1ad1a4c651c4b458bff78a38e3e3ab,
@@ -268,11 +269,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893f73608c389a649b4e1d0522a649bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  isWorking: 0
-  isTaskLeader: 0
-  currentTask: {fileID: 0}
   data: {fileID: 11400000, guid: eecd134c5ff2dd447a551e8f59ff27aa, type: 2}
+  moveSpeed: 10
+  traits:
+    traits:
+      Item1: 0
+      Item2: 0
+      Item3: 0
 --- !u!23 &195778727
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1042,11 +1045,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893f73608c389a649b4e1d0522a649bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  isWorking: 0
-  isTaskLeader: 0
-  currentTask: {fileID: 0}
   data: {fileID: 11400000, guid: 0d86f15e24679ad49b13e3214559207a, type: 2}
+  moveSpeed: 10
+  traits:
+    traits:
+      Item1: 0
+      Item2: 0
+      Item3: 0
 --- !u!1 &1411269733
 GameObject:
   m_ObjectHideFlags: 0

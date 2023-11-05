@@ -41,6 +41,7 @@ public class WarningUI : MonoBehaviour
         {
             character.StopTask();
         }
+        GameManager.Instance.RefreshCharacterIcons();
         gameObject.SetActive(false);
     }
 }

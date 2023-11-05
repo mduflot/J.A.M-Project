@@ -112,6 +112,7 @@ public class SpaceshipManager : MonoBehaviour
         if (!IsTaskActive(taskDataScriptable))
         {
             var position = GetTaskPosition(taskDataScriptable.system).position;
+            position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
             var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity, GameManager.Instance.UIManager.taskNotificationParent);
             taskNote.InitTask(taskDataScriptable);
             AddTask(taskNote);
@@ -123,6 +124,7 @@ public class SpaceshipManager : MonoBehaviour
         if (!IsTaskActive(taskDataScriptable))
         {
             var position = GetTaskPosition(taskDataScriptable.system).position;
+            position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
             var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity, GameManager.Instance.UIManager.taskNotificationParent);
             taskNote.InitTask(taskDataScriptable);
             OpenTaskUI(taskNote);
