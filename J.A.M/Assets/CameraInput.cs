@@ -186,7 +186,7 @@ namespace UnityEngine.InputSystem
                     ""id"": ""2922e772-110e-4a1e-b684-00ceefee013f"",
                     ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""groups"": """",
                     ""action"": ""Zoom"",
                     ""isComposite"": false,

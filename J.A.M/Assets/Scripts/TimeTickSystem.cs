@@ -5,8 +5,7 @@ using UnityEngine;
 public class TimeTickSystem : MonoBehaviour
 {
     public static uint timePerTick = 1; // InGame Time Unit
-    private const float maxTimeScale = 5.0f;
-    private const float minTimeScale = .5f;
+    public static uint ticksPerHour = 30;
     [SerializeField] private float timeScale = 1.0f;
     public class OnTickEventArgs : EventArgs
     {
@@ -39,8 +38,8 @@ public class TimeTickSystem : MonoBehaviour
     public static string GetTimeAsInGameDate(OnTickEventArgs e)
     {
         uint currentTicks = e.tick;
-        uint ticksPerTenMinutes = 5;
-        uint ticksPerHour = ticksPerTenMinutes * 6;
+        //ticksPerHour = ticksPerTenMinutes * 6;
+        uint ticksPerTenMinutes = ticksPerHour/6;
         uint ticksPerDay = ticksPerHour * 24;
         
         uint days = currentTicks / ticksPerDay;
@@ -59,10 +58,10 @@ public class TimeTickSystem : MonoBehaviour
         timeScale = newScale;
     }
 
-    public void IncreaseTimeScale(float factor)
+    /*public void IncreaseTimeScale(float factor)
     {
         timeScale += factor;
         timeScale = Mathf.Clamp(timeScale, minTimeScale, maxTimeScale);
-    }
+    }*/
 }
 

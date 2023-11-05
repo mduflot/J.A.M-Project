@@ -15,7 +15,7 @@ public class GaugeLevelCondition : BaseTaskCondition
 
     public Operation operation;
 
-    [Range(0, 100)] public float threshold;
+    [Range(0, 20)] public float threshold;
 
     public override bool Condition()
     {

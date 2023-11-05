@@ -8,7 +8,7 @@ public class GaugeLevelOutcome : BaseTaskOutcome
 
     public Operation operation;
     
-    [Range(0, 100)] public float value;
+    [Range(0, 20)] public float value;
 
     public enum Operation
     {

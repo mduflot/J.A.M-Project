@@ -26,7 +26,7 @@ public class SpaceshipManager : MonoBehaviour
         public System systemName;
         public GameObject systemObject;
         public float decreaseSpeed;
-        [Range(0, 100)]
+        [Range(0, 20)]
         public float gaugeValue;
         public TaskDataScriptable task;
     }
@@ -42,7 +42,7 @@ public class SpaceshipManager : MonoBehaviour
     {
         foreach (var system in shipSystems)
         {
-            system.gaugeValue = 100;
+            system.gaugeValue = 20;
             systemsDictionary.Add(system.systemName, system);
         }
     }
@@ -63,7 +63,7 @@ public class SpaceshipManager : MonoBehaviour
     {
         foreach (var system in shipSystems)
         {
-            system.gaugeValue -= system.decreaseSpeed;
+            system.gaugeValue -= system.decreaseSpeed/TimeTickSystem.ticksPerHour;
             GameManager.Instance.UIManager.UpdateGauges(system.systemName, system.gaugeValue);
         }
         GameManager.Instance.UIManager.UpdateInGameDate(TimeTickSystem.GetTimeAsInGameDate(e));
@@ -78,9 +78,9 @@ public class SpaceshipManager : MonoBehaviour
     {
         var gaugeValue = systemsDictionary[system].gaugeValue;
         gaugeValue += value;
-        if (gaugeValue > 100)
+        if (gaugeValue > 20)
         {
-            gaugeValue = 100;
+            gaugeValue = 20;
         }
         else if(gaugeValue < 0)
         {

@@ -22,7 +22,7 @@ public class TaskNotification : MonoBehaviour
     public void StartTask(TaskDataScriptable t, List<CharacterUISlot> characters)
     {
         taskData = t;
-        duration = t.baseDuration;
+        duration = t.baseDuration*TimeTickSystem.ticksPerHour;
         foreach (var character in characters)
         {
             if (character.isMandatory)
@@ -60,7 +60,7 @@ public class TaskNotification : MonoBehaviour
         if (duration > 0)
         {
             duration -= TimeTickSystem.timePerTick;
-            var completionValue = 1 - duration / taskData.baseDuration;
+            var completionValue = 1 - duration / (taskData.baseDuration * TimeTickSystem.ticksPerHour);
             completionGauge.fillAmount = completionValue;
         }
         else

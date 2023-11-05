@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateGauges(SpaceshipManager.System system, float value)
     {
-        gaugeReferences[system].fillAmount = value/100;
+        gaugeReferences[system].fillAmount = value/20;
     }
 
     public void UpdateInGameDate(string newDate)
