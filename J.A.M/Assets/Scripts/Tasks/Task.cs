@@ -131,7 +131,7 @@ public class Task : MonoBehaviour
             if (character.icon != null && character.icon.character.IsWorking())
             {
                 warningUI.gameObject.SetActive(true);
-                warningUI.Init(character.character);
+                warningUI.Init(character.icon.character);
                 return true;
             }
         }

@@ -1,0 +1,150 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: TheExpertGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: TheExpert
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: 2d63a7d5-d36f-4422-b18a-c0fd88eab54a
+    <Name>k__BackingField: TheExpert
+    <Position>k__BackingField: {x: -498, y: 216}
+  <Nodes>k__BackingField:
+  - rid: 4566418154435903488
+  - rid: 4566418154435903489
+  - rid: 4566418154435903490
+  - rid: 4566418154435903491
+  - rid: 4566418154435903492
+  - rid: 4566418154435903493
+  - rid: 4566418154435903494
+  - rid: 4566418154435903495
+  <OldGroupNames>k__BackingField:
+  - TheExpert
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: TheExpert
+      Value:
+      - Detection
+      - Reaction
+      - AnUnexpectedVisitor
+      - Yes
+      - Reaction2
+      - MeetingTheExpert
+      - Safe
+      - ItsSafe
+  references:
+    version: 2
+    RefIds:
+    - rid: 4566418154435903488
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 6075fe02-1796-4eff-8f71-7fec34e1a848
+        <Name>k__BackingField: Detection
+        <Choices>k__BackingField:
+        - <Text>k__BackingField: Next Node
+          <NodeID>k__BackingField: 010cb254-ad01-40b4-9081-782fc58dcd80
+        <GroupID>k__BackingField: 2d63a7d5-d36f-4422-b18a-c0fd88eab54a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: -473, y: 275}
+        <Text>k__BackingField: An unidentified Spaceship is approaching.
+        <SpeakerType>k__BackingField: 1
+    - rid: 4566418154435903489
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 010cb254-ad01-40b4-9081-782fc58dcd80
+        <Name>k__BackingField: Reaction
+        <Choices>k__BackingField:
+        - <Text>k__BackingField: Next Node
+          <NodeID>k__BackingField: d5135e0e-10e2-4d3a-aaf7-262755fbafc0
+        <GroupID>k__BackingField: 2d63a7d5-d36f-4422-b18a-c0fd88eab54a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 348, y: 310}
+        <Text>k__BackingField: Hey, I hear we got compagny. It might mean trouble.
+        <SpeakerType>k__BackingField: 0
+    - rid: 4566418154435903490
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 1e082ca1-105d-4224-949c-c495a101a94a
+        <Name>k__BackingField: AnUnexpectedVisitor
+        <Choices>k__BackingField:
+        - <Text>k__BackingField: Assigned
+          <NodeID>k__BackingField: c8834850-5d15-49b0-b651-c08967c1401a
+        <GroupID>k__BackingField: 2d63a7d5-d36f-4422-b18a-c0fd88eab54a
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 2005, y: 352}
+        <TaskData>k__BackingField: {fileID: 0}
+    - rid: 4566418154435903491
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: c8834850-5d15-49b0-b651-c08967c1401a
+        <Name>k__BackingField: Yes
+        <Choices>k__BackingField:
+        - <Text>k__BackingField: Next Node
+          <NodeID>k__BackingField: 9c1b07f3-2f7c-4ad4-9265-4b3c88244d91
+        <GroupID>k__BackingField: 2d63a7d5-d36f-4422-b18a-c0fd88eab54a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2453, y: 369}
+        <Text>k__BackingField: Well, best way to know about their intentions is to
+          let them in.
+        <SpeakerType>k__BackingField: 6
+    - rid: 4566418154435903492
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 9c1b07f3-2f7c-4ad4-9265-4b3c88244d91
+        <Name>k__BackingField: Reaction2
+        <Choices>k__BackingField:
+        - <Text>k__BackingField: Next Node
+          <NodeID>k__BackingField: 862edffc-e6f1-4fcc-bc20-029be9e60f0a
+        <GroupID>k__BackingField: 2d63a7d5-d36f-4422-b18a-c0fd88eab54a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3248, y: 352}
+        <Text>k__BackingField: Humans should be safe visitors, but we should still
+          be careful.
+        <SpeakerType>k__BackingField: 18
+    - rid: 4566418154435903493
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 6d67a39d-1609-45b8-a431-01766bfab7ea
+        <Name>k__BackingField: MeetingTheExpert
+        <Choices>k__BackingField:
+        - <Text>k__BackingField: Assigned
+          <NodeID>k__BackingField: 
+        <GroupID>k__BackingField: 2d63a7d5-d36f-4422-b18a-c0fd88eab54a
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 4693, y: 390}
+        <TaskData>k__BackingField: {fileID: 0}
+    - rid: 4566418154435903494
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: d5135e0e-10e2-4d3a-aaf7-262755fbafc0
+        <Name>k__BackingField: Safe
+        <Choices>k__BackingField:
+        - <Text>k__BackingField: Next Node
+          <NodeID>k__BackingField: 1e082ca1-105d-4224-949c-c495a101a94a
+        <GroupID>k__BackingField: 2d63a7d5-d36f-4422-b18a-c0fd88eab54a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1211, y: 310}
+        <Text>k__BackingField: This ship is man-made, no doubt about it.
+        <SpeakerType>k__BackingField: 0
+    - rid: 4566418154435903495
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 862edffc-e6f1-4fcc-bc20-029be9e60f0a
+        <Name>k__BackingField: ItsSafe
+        <Choices>k__BackingField:
+        - <Text>k__BackingField: Next Node
+          <NodeID>k__BackingField: 6d67a39d-1609-45b8-a431-01766bfab7ea
+        <GroupID>k__BackingField: 2d63a7d5-d36f-4422-b18a-c0fd88eab54a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3967, y: 352}
+        <Text>k__BackingField: Look, it's an old guy... He looks pretty friendly.
+        <SpeakerType>k__BackingField: 6

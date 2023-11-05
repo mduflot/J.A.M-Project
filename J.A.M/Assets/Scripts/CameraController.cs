@@ -43,7 +43,6 @@ public class CameraController : MonoBehaviour
     
     private void Update()
     {
-        Debug.Log(zoomVector);
         camera.orthographicSize += zoomVector.y;
         camera.orthographicSize = Mathf.Clamp(camera.orthographicSize, minZoom, maxZoom);
     }

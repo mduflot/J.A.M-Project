@@ -1889,33 +1889,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rooms:
   - name: Eletricity
-    transform: {fileID: 0}
+    transform: {fileID: 3173952042905870052}
     doorPosition: {fileID: 0}
     roomObjects: []
   - name: Food
-    transform: {fileID: 0}
+    transform: {fileID: 4739245400921703811}
     doorPosition: {fileID: 0}
     roomObjects: []
-  - name: Oxygen
-    transform: {fileID: 0}
+  - name: Ventilation
+    transform: {fileID: 207184545892958356}
+    doorPosition: {fileID: 0}
+    roomObjects: []
+  - name: Hull
+    transform: {fileID: 1113380260559595826}
     doorPosition: {fileID: 0}
     roomObjects: []
   shipSystems:
   - systemName: 1
-    systemObject: {fileID: 0}
+    systemObject: {fileID: 9203435017712485670}
     decreaseSpeed: 0.3
     gaugeValue: 0
     task: {fileID: 11400000, guid: a59de71c2f7916345bb5539062676f73, type: 2}
   - systemName: 2
-    systemObject: {fileID: 0}
+    systemObject: {fileID: 3309848308192400204}
     decreaseSpeed: 0.2
     gaugeValue: 0
-    task: {fileID: 11400000, guid: a59de71c2f7916345bb5539062676f73, type: 2}
+    task: {fileID: 11400000, guid: 1af36496842188d498882351e85e9667, type: 2}
   - systemName: 3
-    systemObject: {fileID: 0}
+    systemObject: {fileID: 5302695586191320199}
     decreaseSpeed: 0.15
     gaugeValue: 0
-    task: {fileID: 11400000, guid: a59de71c2f7916345bb5539062676f73, type: 2}
+    task: {fileID: 11400000, guid: a7e40e2287d60b14cb3a9908eaaace7c, type: 2}
+  - systemName: 4
+    systemObject: {fileID: 3286734122856121808}
+    decreaseSpeed: 0.15
+    gaugeValue: 0
+    task: {fileID: 11400000, guid: 4e5103ed65f36a84785996f01306825c, type: 2}
   characters:
   - {fileID: 0}
   - {fileID: 0}
