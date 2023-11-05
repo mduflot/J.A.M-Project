@@ -10,6 +10,7 @@ public class TaskDataScriptable : ScriptableObject
     public float baseDuration;
     public int mandatorySlots;
     public int optionalSlots;
+    public float taskHelpFactor = .75f;
     public SpaceshipManager.System system;
     
     

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpaceshipManager : MonoBehaviour
@@ -51,6 +52,7 @@ public class SpaceshipManager : MonoBehaviour
     {
         TimeTickSystem.OnTick += UpdateSystems;
         TimeTickSystem.OnTick += UpdateTasks;
+        TimeTickSystem.OnTick += UpdateCharacters;
     }
 
     private void Start()
@@ -179,5 +181,28 @@ public class SpaceshipManager : MonoBehaviour
     {
         activeTasks.Remove(task);
     }
+    #endregion
+
+    #region characters
+
+    private void UpdateCharacters(object sender, TimeTickSystem.OnTickEventArgs e)
+    {
+        foreach(var character in characters)
+        {
+            if (!character.IsWorking())
+            {
+                float moodIncrease = 3.0f / TimeTickSystem.ticksPerHour;
+                foreach (var system in shipSystems)
+                {
+                    if (system.gaugeValue <= 0)
+                    {
+                        moodIncrease -= 1.0f/TimeTickSystem.ticksPerHour;
+                    }
+                }
+                character.IncreaseMood(moodIncrease);
+            }
+        }
+    }
+
     #endregion
 }

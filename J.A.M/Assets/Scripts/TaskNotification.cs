@@ -39,8 +39,8 @@ public class TaskNotification : MonoBehaviour
                 }
             }
         }
-        duration = assistantCharacters.Count > 0 ? t.baseDuration/(Mathf.Pow(assistantCharacters.Count + leaderCharacters.Count, .75f)) : t.baseDuration; // based on formula time/helpers^0.75
-        
+        duration = assistantCharacters.Count > 0 ? t.baseDuration/(Mathf.Pow(assistantCharacters.Count + leaderCharacters.Count, taskData.taskHelpFactor)) : t.baseDuration; // based on formula time/helpers^0.75
+        duration *= TimeTickSystem.ticksPerHour;
         taskStarted = true;
     }
 

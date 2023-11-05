@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -18,7 +19,15 @@ public class GaugeLevelOutcome : BaseTaskOutcome
     {
         if (operation == Operation.Add)
         {
-            GameManager.Instance.SpaceshipManager.GaugeValueOperation(targetGauge, leaderCharacters[0].GetVolition());
+            //float newGaugeValue = leaderCharacters[0].GetVolition();
+            float newGaugeValue = 0.0f;
+            foreach (var leader in leaderCharacters)
+            {
+                newGaugeValue += leader.GetVolition();
+            }
+            newGaugeValue = value/leaderCharacters.Count;
+
+            GameManager.Instance.SpaceshipManager.GaugeValueOperation(targetGauge, newGaugeValue);
         }
         else
         {

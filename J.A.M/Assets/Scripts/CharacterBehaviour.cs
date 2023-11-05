@@ -7,9 +7,6 @@ public class CharacterBehaviour : MonoBehaviour
     [SerializeField] private float moveSpeed;
     
     /*
-     * task assign -> mood - 3
-     * 1H w/o assign -> mood +1
-     * 1H w/ gauge = 0 -> mood -1
      * gauge = 0 -> mood + param
      */
     
@@ -49,21 +46,13 @@ public class CharacterBehaviour : MonoBehaviour
     public void IncreaseMood(float value)
     {
         mood += value;
-        Debug.Log("new mood is : " + mood);
-        CapVolition();
+        CapStats();
     }
 
-    public void IncreaseVolition(float value)
+    private void CapStats()
     {
-        volition += value;
-        Debug.Log("new volition is : " + volition);
-        CapVolition();
-    }
-    private void CapVolition() { volition = mood < volition ? mood :  baseVolition; }
-
-    private void UpdateStats()
-    {
-        
+        mood = mood < 0 ? 0 : mood;
+        volition = mood < baseVolition ? mood :  baseVolition;
     }
     
     public void MoveTo(Transform destination)
