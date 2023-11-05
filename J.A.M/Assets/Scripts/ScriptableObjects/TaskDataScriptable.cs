@@ -4,6 +4,8 @@ using UnityEngine;
 public class TaskDataScriptable : ScriptableObject
 {
     public string taskName;
+    
+    [TextArea(5, 10)]
     public string descriptionTask;
     public Sprite taskIcon;
     public float timeLeft;
