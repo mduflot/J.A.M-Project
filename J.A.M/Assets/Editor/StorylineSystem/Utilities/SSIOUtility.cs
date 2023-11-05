@@ -593,11 +593,23 @@ namespace SS.Utilities
             {
                 SSChoiceSaveData choiceData;
                 
-                choiceData = new SSChoiceSaveData()
+                if (choice is SSChoiceTaskSaveData choiceTask)
                 {
-                    Text = choice.Text,
-                    NodeID = choice.NodeID
-                };
+                    choiceData = new SSChoiceTaskSaveData()
+                    {
+                        Text = choiceTask.Text,
+                        NodeID = choiceTask.NodeID,
+                        ChoiceTypes = choiceTask.ChoiceTypes
+                    };
+                }
+                else
+                {
+                    choiceData = new SSChoiceSaveData()
+                    {
+                        Text = choice.Text,
+                        NodeID = choice.NodeID
+                    };
+                }
                 
                 choices.Add(choiceData);
             }
