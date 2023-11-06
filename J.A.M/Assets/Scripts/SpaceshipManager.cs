@@ -83,7 +83,9 @@ public class SpaceshipManager : MonoBehaviour
     {
         foreach (var system in shipSystems)
         {
-            system.gaugeValue -= system.decreaseSpeed/TimeTickSystem.ticksPerHour;
+            if (system.gaugeValue < 0) system.gaugeValue = 0;
+            else
+                system.gaugeValue -= system.decreaseSpeed/TimeTickSystem.ticksPerHour;
             GameManager.Instance.UIManager.UpdateGauges(system.systemName, system.gaugeValue);
         }
         GameManager.Instance.UIManager.UpdateInGameDate(TimeTickSystem.GetTimeAsInGameDate(e));
