@@ -118,11 +118,14 @@ public class SpaceshipManager : MonoBehaviour
     {
         foreach (var activeTask in activeTasks)
         {
+            var position = GetTaskPosition(activeTask.taskData.room).position;
+            activeTask.transform.position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
             if (activeTask.isCompleted)
             {
                 RemoveTask(activeTask);
                 break;
             }
+
             activeTask.UpdateTask();
         }
     }
