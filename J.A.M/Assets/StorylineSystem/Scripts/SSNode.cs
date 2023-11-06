@@ -16,8 +16,9 @@ namespace SS
     {
         /* UI GameObjects */
         [SerializeField] private GameObject dialogueLayout;
-        [SerializeField] private TextMeshProUGUI dialogueText;
         [SerializeField] private TextMeshProUGUI nameSpeaker;
+        [SerializeField] private TextMeshProUGUI dialogueText;
+        [SerializeField] private TextMeshProUGUI currentStoryline;
         [SerializeField] private SpaceshipManager spaceshipManager;
 
         private List<CharacterBehaviour> characters = new();
@@ -41,6 +42,7 @@ namespace SS
         public void StartTimeline()
         {
             characters.AddRange(spaceshipManager.characters);
+            currentStoryline.text = nodeContainer.name;
             CheckNodeType(node);
         }
 

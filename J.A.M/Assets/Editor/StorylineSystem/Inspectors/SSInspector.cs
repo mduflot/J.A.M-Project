@@ -14,6 +14,7 @@ namespace SS.Inspectors
         private SerializedProperty dialogueLayoutProperty;
         private SerializedProperty dialogueTextProperty;
         private SerializedProperty nameSpeakerProperty;
+        private SerializedProperty currentStorylineProperty;
         private SerializedProperty spaceshipManagerProperty;
 
         /* Node Scriptable Objects */
@@ -32,8 +33,9 @@ namespace SS.Inspectors
         private void OnEnable()
         {
             dialogueLayoutProperty = serializedObject.FindProperty("dialogueLayout");
-            dialogueTextProperty = serializedObject.FindProperty("dialogueText");
             nameSpeakerProperty = serializedObject.FindProperty("nameSpeaker");
+            dialogueTextProperty = serializedObject.FindProperty("dialogueText");
+            currentStorylineProperty = serializedObject.FindProperty("currentStoryline");
             spaceshipManagerProperty = serializedObject.FindProperty("spaceshipManager");
             
             nodeContainerProperty = serializedObject.FindProperty("nodeContainer");
@@ -52,8 +54,9 @@ namespace SS.Inspectors
             serializedObject.Update();
 
             dialogueLayoutProperty.DrawPropertyField();
-            dialogueTextProperty.DrawPropertyField();
             nameSpeakerProperty.DrawPropertyField();
+            dialogueTextProperty.DrawPropertyField();
+            currentStorylineProperty.DrawPropertyField();
             spaceshipManagerProperty.DrawPropertyField();
 
             DrawNodeContainerArea();
