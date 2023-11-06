@@ -103,10 +103,17 @@ namespace SS
                     nameSpeaker.text = characters[1].GetCharacterData().firstName;
                     break;
                 case SSSpeakerType.Assigned1 :
-                    // nameSpeaker.text = assignedCharacters[0].GetCharacterData().firstName;
+                    nameSpeaker.text = assignedCharacters[0].GetCharacterData().firstName;
                     break;
                 case SSSpeakerType.Assigned2 :
-                    // nameSpeaker.text = assignedCharacters[1].GetCharacterData().firstName;
+                    nameSpeaker.text = assignedCharacters[1].GetCharacterData().firstName;
+                    break;
+                case SSSpeakerType.Other1 :
+                    List<CharacterBehaviour> randomOther = characters.Except(assignedCharacters).ToList();
+                    nameSpeaker.text = randomOther[Random.Range(0, randomOther.Count)].GetCharacterData().firstName;
+                    break;
+                case SSSpeakerType.Expert1 :
+                    nameSpeaker.text = "Expert";
                     break;
                 default:
                     nameSpeaker.text = "Narrator";
@@ -118,8 +125,6 @@ namespace SS
         private void RunNode(SSTaskNodeSO nodeSO)
         {
             spaceshipManager.SpawnTask(nodeSO.TaskData);
-            assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).LeaderCharacters);
-            assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).AssistantCharacters);
             StartCoroutine(WaiterTask(nodeSO));
         }
 
@@ -160,6 +165,8 @@ namespace SS
         IEnumerator WaiterTask(SSTaskNodeSO nodeSO)
         {
             yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(nodeSO.TaskData).TaskStarted);
+            assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).LeaderCharacters);
+            assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).AssistantCharacters);
             if (nodeSO.Choices.First().NextNode == null)
             {
                 yield break;
