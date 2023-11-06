@@ -75,6 +75,15 @@ public class SpaceshipManager : MonoBehaviour
         TimeTickSystem.OnTick += UpdateCharacters;
     }
 
+    private void Update()
+    {
+        foreach (var activeTask in activeTasks)
+        {
+            var position = GetTaskPosition(activeTask.taskData.room).position;
+            activeTask.transform.position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
+        }
+    }
+
     private void Start()
     {
         Initialize();
@@ -120,8 +129,6 @@ public class SpaceshipManager : MonoBehaviour
     {
         foreach (var activeTask in activeTasks)
         {
-            var position = GetTaskPosition(activeTask.taskData.room).position;
-            activeTask.transform.position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
             if (activeTask.isCompleted)
             {
                 RemoveTask(activeTask);
