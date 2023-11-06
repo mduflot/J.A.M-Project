@@ -112,6 +112,7 @@ namespace SS.Windows
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Dialogue)", SSNodeType.Dialogue));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Task)", SSNodeType.Task));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Reward)", SSNodeType.Reward));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Time)", SSNodeType.Time));
 
             this.AddManipulator(CreateGroupContextualMenu());
         }
@@ -171,14 +172,25 @@ namespace SS.Windows
             switch (nodeType)
             {
                 case SSNodeType.Dialogue:
-                    node = (SSDialogueNode) Activator.CreateInstance(nodeTypeSystem);
+                {
+                    node = (SSDialogueNode)Activator.CreateInstance(nodeTypeSystem);
                     break;
+                }
                 case SSNodeType.Task:
-                    node = (SSTaskNode) Activator.CreateInstance(nodeTypeSystem);
+                {
+                    node = (SSTaskNode)Activator.CreateInstance(nodeTypeSystem);
                     break;
+                }
                 case SSNodeType.Reward:
-                    node = (SSRewardNode) Activator.CreateInstance(nodeTypeSystem);
+                {
+                    node = (SSRewardNode)Activator.CreateInstance(nodeTypeSystem);
                     break;
+                }
+                case SSNodeType.Time:
+                {
+                    node = (SSTimeNode)Activator.CreateInstance(nodeTypeSystem);
+                    break;
+                }
             }
 
             node.Initialize(nodeName, this, position);

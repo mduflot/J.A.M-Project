@@ -9,13 +9,14 @@ public class SpaceshipManager : MonoBehaviour
     public ShipSystem[] shipSystems;
     public CharacterBehaviour[] characters;
     private Dictionary<System, ShipSystem> systemsDictionary = new Dictionary<System, ShipSystem>();
+    private Dictionary<ShipRooms, Room> roomsDictionnary = new Dictionary<ShipRooms, Room>();
     [SerializeField] private TaskNotification taskNotificationPrefab;
     [SerializeField] private List<TaskNotification> activeTasks = new List<TaskNotification>();
 
     [Serializable]
     public struct Room
     {
-        public string name;
+        public ShipRooms roomName;
         public Transform transform;
         public Transform doorPosition;
         public GameObject[] roomObjects;
@@ -39,12 +40,29 @@ public class SpaceshipManager : MonoBehaviour
         Food = 3,
         Hull = 4,
     }
+    
+    public enum ShipRooms
+    {
+        Electrical = 1,
+        Airflow = 2,
+        Food = 3,
+        Hull = 4,
+        Bedrooms = 5,
+        Cafeteria = 6,
+        Control = 7,
+        Warehouse = 8,
+    }
     private void InitializeSystems()
     {
         foreach (var system in shipSystems)
         {
             system.gaugeValue = 20;
             systemsDictionary.Add(system.systemName, system);
+        }
+
+        foreach (var room in rooms)
+        {
+            roomsDictionnary.Add(room.roomName, room);
         }
     }
 
@@ -111,7 +129,7 @@ public class SpaceshipManager : MonoBehaviour
     {
         if (!IsTaskActive(taskDataScriptable))
         {
-            var position = GetTaskPosition(taskDataScriptable.system).position;
+            var position = GetTaskPosition(taskDataScriptable.room).position;
             position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
             var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity, GameManager.Instance.UIManager.taskNotificationParent);
             taskNote.InitTask(taskDataScriptable);
@@ -123,7 +141,7 @@ public class SpaceshipManager : MonoBehaviour
     {
         if (!IsTaskActive(taskDataScriptable))
         {
-            var position = GetTaskPosition(taskDataScriptable.system).position;
+            var position = GetTaskPosition(taskDataScriptable.room).position;
             position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
             var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity, GameManager.Instance.UIManager.taskNotificationParent);
             taskNote.InitTask(taskDataScriptable);
@@ -132,9 +150,9 @@ public class SpaceshipManager : MonoBehaviour
         }
     }
 
-    public Transform GetTaskPosition(System system)
+    public Transform GetTaskPosition(ShipRooms room)
     {
-        return systemsDictionary[system].systemObject.transform;
+        return roomsDictionnary[room].transform;
     }
     public void OpenTaskUI(TaskNotification tn)
     {

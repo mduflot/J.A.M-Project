@@ -4,6 +4,8 @@ using UnityEngine;
 public class TaskDataScriptable : ScriptableObject
 {
     public string taskName;
+    
+    [TextArea(5, 10)]
     public string descriptionTask;
     public Sprite taskIcon;
     public float timeLeft;
@@ -11,12 +13,13 @@ public class TaskDataScriptable : ScriptableObject
     public int mandatorySlots;
     public int optionalSlots;
     public float taskHelpFactor = .75f;
-    public SpaceshipManager.System system;
+    public SpaceshipManager.ShipRooms room;
     
     
     [Header("Permanent Task")]
     public bool isPermanent;
     public BaseTaskOutcome[] outcomes;
+    public string previewOutcome;
 
 
 }

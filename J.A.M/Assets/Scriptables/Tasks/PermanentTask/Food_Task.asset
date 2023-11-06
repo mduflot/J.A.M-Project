@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09a3b1ce65db60b42b321361bc90c8d6, type: 3}
-  m_Name: Power_Task
+  m_Name: Food_Task
   m_EditorClassIdentifier: 
-  taskName: Tuning Generator
-  descriptionTask: 
-  taskIcon: {fileID: 21300000, guid: ea698d351bd4748449aada363e59d6a3, type: 3}
+  taskName: Nurture Crops
+  descriptionTask: Our crops need love to sustain our food supply.
+  taskIcon: {fileID: 21300000, guid: 16241ca68beab624daa21b7813874b15, type: 3}
   timeLeft: 0
-  baseDuration: 3
-  mandatorySlots: 2
-  optionalSlots: 2
-  system: 1
+  baseDuration: 1
+  mandatorySlots: 1
+  optionalSlots: 1
+  taskHelpFactor: 0.75
+  room: 3
   isPermanent: 1
   outcomes:
-  - {fileID: 11400000, guid: a2879a283b4336b4cbf19623c7d341a7, type: 2}
+  - {fileID: 11400000, guid: 30b95558a99828e479b9c1b4e9b0a186, type: 2}
+  previewOutcome: Food

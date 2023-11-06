@@ -85,6 +85,23 @@ namespace SS.Utilities
 
             return integerField;
         }
+        
+        public static UnsignedIntegerField CreateUnsignedIntegerField(uint value = 1, string label = null,
+            EventCallback<ChangeEvent<uint>> onValueChanged = null)
+        {
+            UnsignedIntegerField unsignedIntegerField = new UnsignedIntegerField()
+            {
+                value = value,
+                label = label
+            };
+
+            if (onValueChanged != null)
+            {
+                unsignedIntegerField.RegisterValueChangedCallback(onValueChanged);
+            }
+
+            return unsignedIntegerField;
+        }
 
         public static FloatField CreateFloatField(float value = 1.0f, string label = null,
             EventCallback<ChangeEvent<float>> onValueChanged = null)

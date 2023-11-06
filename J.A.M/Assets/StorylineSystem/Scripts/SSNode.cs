@@ -57,6 +57,11 @@ namespace SS
                     RunNode(nodeSO as SSRewardNodeSO);
                     break;
                 }
+                case SSNodeType.Time:
+                {
+                    RunNode(nodeSO as SSTimeNodeSO);
+                    break;
+                }
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -104,6 +109,11 @@ namespace SS
             StartCoroutine(WaiterTask(nodeSO));
         }
 
+        private void RunNode(SSTimeNodeSO nodeSO)
+        {
+            StartCoroutine(WaiterTime(nodeSO));
+        }
+
         IEnumerator WaiterDialogue(SSDialogueNodeSO nodeSO)
         {
             yield return new WaitForSecondsRealtime(5);
@@ -120,6 +130,16 @@ namespace SS
         IEnumerator WaiterTask(SSTaskNodeSO nodeSO)
         {
             yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(nodeSO.TaskData).TaskStarted);
+            if (nodeSO.Choices.First().NextNode == null)
+            {
+                yield break;
+            }
+            CheckNodeType(nodeSO.Choices.First().NextNode);
+        }
+
+        IEnumerator WaiterTime(SSTimeNodeSO nodeSO)
+        {
+            yield return new WaitForSeconds(nodeSO.TimeToWait);
             if (nodeSO.Choices.First().NextNode == null)
             {
                 yield break;

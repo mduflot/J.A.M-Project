@@ -10,16 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09a3b1ce65db60b42b321361bc90c8d6, type: 3}
-  m_Name: Hull_Task
+  m_Name: Power_Task
   m_EditorClassIdentifier: 
-  taskName: Hull Maintenance
-  descriptionTask: 
-  taskIcon: {fileID: 21300000, guid: 7d944ed3842671f45b0afda12595792b, type: 3}
+  taskName: Tuning Generator
+  descriptionTask: The generator needs tuning in order to bring us safely to our
+    destination.
+  taskIcon: {fileID: 21300000, guid: ea698d351bd4748449aada363e59d6a3, type: 3}
   timeLeft: 0
-  baseDuration: 10
-  mandatorySlots: 1
+  baseDuration: 3
+  mandatorySlots: 2
   optionalSlots: 2
-  system: 4
+  taskHelpFactor: 0.75
+  room: 1
   isPermanent: 1
   outcomes:
-  - {fileID: 11400000, guid: edf4c11471e9e064ca316416bd3b985d, type: 2}
+  - {fileID: 11400000, guid: a2879a283b4336b4cbf19623c7d341a7, type: 2}
+  previewOutcome: electricity
