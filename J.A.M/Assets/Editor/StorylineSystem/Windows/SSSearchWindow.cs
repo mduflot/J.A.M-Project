@@ -41,6 +41,11 @@ namespace SS.Windows
                     level = 2,
                     userData = SSNodeType.Reward
                 },
+                new SearchTreeEntry(new GUIContent("Time", indentationIcon))
+                {
+                    level = 2,
+                    userData = SSNodeType.Time
+                },
                 new SearchTreeGroupEntry(new GUIContent("Node Group"), 1),
                 new SearchTreeEntry(new GUIContent("Single Group", indentationIcon))
                 {
@@ -84,6 +89,15 @@ namespace SS.Windows
 
                     graphView.AddElement(rewardNode);
 
+                    return true;
+                }
+
+                case SSNodeType.Time:
+                {
+                    SSTimeNode timeNode = (SSTimeNode)graphView.CreateNode("TimeName", SSNodeType.Time, localMousePosition);
+
+                    graphView.AddElement(timeNode);
+                    
                     return true;
                 }
 
