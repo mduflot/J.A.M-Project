@@ -96,7 +96,7 @@ public class Task : MonoBehaviour
                 {
                     if (!slot.isMandatory && slot.icon != null) assistantCharacters++;
                 }
-                Debug.Log(assistantCharacters);
+                //Debug.Log(assistantCharacters);
                 duration = assistantCharacters > 0 ? taskData.baseDuration/(Mathf.Pow(assistantCharacters + 1, taskData.taskHelpFactor)) : taskData.baseDuration;
                 durationText.text = duration.ToString("F2") + " hours";
             }

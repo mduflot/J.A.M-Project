@@ -21,6 +21,28 @@ MonoBehaviour:
   optionalSlots: 1
   taskHelpFactor: 0.75
   room: 3
+  taskTraits:
+    traits:
+      Item1: 4
+      Item2: 0
+      Item3: 0
+  taskJobEvents:
+  - trait: 8
+    TraitEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   isPermanent: 1
   outcomes:
   - {fileID: 11400000, guid: 30b95558a99828e479b9c1b4e9b0a186, type: 2}

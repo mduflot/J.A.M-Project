@@ -85,9 +85,7 @@ public class TaskNotification : MonoBehaviour
     {
         foreach (var outcome in taskData.outcomes)
         {
-            outcome.leaderCharacters = leaderCharacters;
-            outcome.assistantCharacters = assistantCharacters;
-            outcome.Outcome();
+            outcome.Outcome(this);
         }
         isCompleted = true;
         taskData = null;

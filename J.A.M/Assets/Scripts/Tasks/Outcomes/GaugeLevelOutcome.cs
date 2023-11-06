@@ -15,18 +15,21 @@ public class GaugeLevelOutcome : BaseTaskOutcome
     {
         Add, Substract
     }
-    public override void Outcome()
+    public override void Outcome(TaskNotification tn)
     {
         if (operation == Operation.Add)
         {
-            //float newGaugeValue = leaderCharacters[0].GetVolition();
             float newGaugeValue = 0.0f;
-            foreach (var leader in leaderCharacters)
+            foreach (var leader in tn.LeaderCharacters)
             {
                 newGaugeValue += leader.GetVolition();
+                newGaugeValue += TraitSystem.ApplyJobBonus(TraitSystem.MatchJobFlags(leader.GetJob(), tn.taskData.taskTraits.GetJob()));
             }
-            newGaugeValue = value/leaderCharacters.Count;
+            newGaugeValue = newGaugeValue/tn.LeaderCharacters.Count;
+            Debug.Log(newGaugeValue);
 
+            if(tn.taskData.taskJobEvents.Length < 1 ) Debug.Log("No job events");
+            else TraitSystem.ApplyJobBonus(tn.taskData);
             GameManager.Instance.SpaceshipManager.GaugeValueOperation(targetGauge, newGaugeValue);
         }
         else

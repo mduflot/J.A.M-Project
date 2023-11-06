@@ -9,12 +9,10 @@ public class TraitsData
     public enum Job
     {
         None = 0,
-        Medic = 1,
-        Mechanic = 2,
-        Cook = 4,
-        Security = 8,
-        Pilot = 16,
-        Scientist = 32,
+        Soldier = 1,
+        Electrician = 2,
+        Gardener = 4,
+        Mechanic = 8
     };
 
     [Flags]
