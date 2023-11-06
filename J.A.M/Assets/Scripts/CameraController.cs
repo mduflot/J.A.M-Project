@@ -50,7 +50,8 @@ public class CameraController : MonoBehaviour
     private void FixedUpdate()
     {
         transform.Translate(moveVector * moveSpeed);
-        
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -750, 700),
+            Mathf.Clamp(transform.position.y, -300, 300), -500);
     }
 
     private void OnEnable()
