@@ -83,6 +83,14 @@ public class Task : MonoBehaviour
             {
                 if(characterSlots[0] == null) return;
                 previewOutcomeText.text = "+ " + (int)characterSlots[0].icon.character.GetVolition() + " " + taskData.previewOutcome;
+                var assistantCharacters = 0;
+                foreach (var slot in characterSlots)
+                {
+                    if (!slot.isMandatory && slot.icon != null) assistantCharacters++;
+                }
+                Debug.Log(assistantCharacters);
+                duration = assistantCharacters > 0 ? taskData.baseDuration/(Mathf.Pow(assistantCharacters + 1, taskData.taskHelpFactor)) : taskData.baseDuration;
+                durationText.text = duration.ToString("F2") + " hours";
             }
             else
             {
