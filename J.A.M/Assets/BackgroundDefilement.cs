@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BackgroundDefilement : MonoBehaviour
 {
-    [SerializeField] private GameObject background1;
-    [SerializeField] private GameObject background2;
+    [SerializeField] private Transform background1;
+    [SerializeField] private Transform background2;
     [SerializeField] private float defilementSpeed;
 
-    private GameObject leftBackground;
+    private Transform leftBackground;
     
     // Start is called before the first frame update
     void Start()
@@ -19,12 +19,20 @@ public class BackgroundDefilement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        background1.transform.Translate(Vector3.left*defilementSpeed);
-        background2.transform.Translate(Vector3.left*defilementSpeed);
-        if (leftBackground.transform.position.x < -4000)
+        background1.Translate(Vector3.left*defilementSpeed);
+        background2.Translate(Vector3.left*defilementSpeed);
+        if (leftBackground.position.x < -4000)
         {
             Vector3 resetPos = new Vector3(4000, 0, 500);
-            leftBackground.transform.position = resetPos;
+            leftBackground.position = resetPos;
+            if (leftBackground == background1)
+            {
+                leftBackground = background2;
+            }
+            else
+            {
+                leftBackground = background1;
+            }
         }
     }
 }
