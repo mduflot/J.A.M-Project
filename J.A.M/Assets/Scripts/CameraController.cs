@@ -43,15 +43,16 @@ public class CameraController : MonoBehaviour
     
     private void Update()
     {
-        camera.orthographicSize += zoomVector.y;
-        camera.orthographicSize = Mathf.Clamp(camera.orthographicSize, minZoom, maxZoom);
+        Debug.Log(zoomVector.y);
+        transform.position += new Vector3(0, 0, zoomVector.y * zoomSpeed);
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -750, 700),
+            Mathf.Clamp(transform.position.y, -300, 300),
+            Mathf.Clamp(transform.position.z, minZoom, maxZoom));
     }
 
     private void FixedUpdate()
     {
         transform.Translate(moveVector * moveSpeed);
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -750, 700),
-            Mathf.Clamp(transform.position.y, -300, 300), -500);
     }
 
     private void OnEnable()
