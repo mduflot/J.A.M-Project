@@ -82,7 +82,15 @@ public class Task : MonoBehaviour
             if (CanStartTask())
             {
                 if(characterSlots[0] == null) return;
-                previewOutcomeText.text = "+ " + (int)characterSlots[0].icon.character.GetVolition() + " " + taskData.previewOutcome;
+                if (taskData.isPermanent)
+                {
+                    previewOutcomeText.text = "+ " + (int)characterSlots[0].icon.character.GetVolition() + " " + taskData.previewOutcome;
+                    
+                }
+                else
+                {
+                    previewOutcomeText.text = characterSlots[0].icon.character.GetCharacterData().firstName + " " + taskData.previewOutcome;
+                }
                 var assistantCharacters = 0;
                 foreach (var slot in characterSlots)
                 {
