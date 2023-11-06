@@ -204,6 +204,7 @@ public class SpaceshipManager : MonoBehaviour
                 character.IncreaseMood(moodIncrease);
             }
         }
+        GameManager.Instance.UIManager.UpdateCharacterGauges();
     }
 
     #endregion

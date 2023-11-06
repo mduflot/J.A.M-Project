@@ -10,10 +10,11 @@ public class CharacterBehaviour : MonoBehaviour
      * gauge = 0 -> mood + param
      */
     
+    private const float MaxMood = 20.0f;
+    
     [Range(0,100)]
     private float mood = 50.0f;
 
-    [Range(0, 100)] private const float baseVolition = 70.0f;
     
     [Range(0,100)]
     private float volition = 10.0f;
@@ -46,14 +47,14 @@ public class CharacterBehaviour : MonoBehaviour
     public void IncreaseMood(float value)
     {
         mood += value;
-        CapStats();
+        //CapStats();
     }
 
-    private void CapStats()
+    /*private void CapStats()
     {
         mood = mood < 0 ? 0 : mood;
         volition = mood < baseVolition ? mood :  baseVolition;
-    }
+    }*/
     
     public void MoveTo(Transform destination)
     {
@@ -89,7 +90,22 @@ public class CharacterBehaviour : MonoBehaviour
         return data;
     }
 
+    public float GetMood()
+    {
+        return mood;
+    }
+
+    public float GetMaxMood()
+    {
+        return MaxMood;
+    }
+    
     public float GetVolition()
+    {
+        return mood < volition ? mood : volition;
+    }
+
+    public float GetBaseVolition()
     {
         return volition;
     }

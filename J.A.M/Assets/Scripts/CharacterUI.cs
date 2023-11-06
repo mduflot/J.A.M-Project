@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CharacterUI : MonoBehaviour, IDropHandler
 {
     public CharacterBehaviour character;
     public CharacterIcon icon;
-
+    public Image moodGauge;
+    public Image volitionGauge;
+    public CharacterUISlot slot;
     public void Initialize(CharacterBehaviour c)
     {
         character = c;
@@ -24,11 +27,9 @@ public class CharacterUI : MonoBehaviour, IDropHandler
     
     public void OnDrop(PointerEventData eventData)
     {
-        
         Debug.Log(transform.name + " récupère");
         GameObject dropped = eventData.pointerDrag;
         icon = dropped.GetComponent<CharacterIcon>();
         icon.SetupIcon(transform, this);
-        
     }
 }

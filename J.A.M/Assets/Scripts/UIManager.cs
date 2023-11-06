@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class UIManager : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class UIManager : MonoBehaviour
         public SpaceshipManager.System system;
         public Image gauge;
     }
-
+    
     private void Start()
     {
         Initialize();
@@ -66,6 +67,15 @@ public class UIManager : MonoBehaviour
         foreach (var icon in characterIcons)
         {
             icon.RefreshIcon();
+        }
+    }
+
+    public void UpdateCharacterGauges()
+    {
+        foreach (var charUi in charactersUI)
+        {
+            charUi.moodGauge.fillAmount = charUi.character.GetMood() / charUi.character.GetMaxMood();
+            charUi.volitionGauge.fillAmount = charUi.character.GetVolition() / charUi.character.GetMaxMood();
         }
     }
 }
