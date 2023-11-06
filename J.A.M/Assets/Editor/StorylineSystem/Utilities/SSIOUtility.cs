@@ -215,6 +215,21 @@ namespace SS.Utilities
                 
                 graphData.Nodes.Add(nodeData);
             }
+            else if (node is SSTimeNode timeNode)
+            {
+                SSTimeNodeSaveData nodeData = new SSTimeNodeSaveData()
+                {
+                    ID = timeNode.ID,
+                    Name = timeNode.NodeName,
+                    Choices = choices,
+                    GroupID = timeNode.Group?.ID,
+                    NodeType = timeNode.NodeType,
+                    Position = timeNode.GetPosition().position,
+                    TimeToWait = timeNode.TimeToWait
+                };
+                
+                graphData.Nodes.Add(nodeData);
+            }
         }
 
         private static void SaveNodeToScriptableObject(SSNode node, SSNodeContainerSO nodeContainer)
@@ -288,6 +303,30 @@ namespace SS.Utilities
                     taskNode.IsStartingNode(), taskNode.TaskData);
 
                 createdNodes.Add(taskNode.ID, nodeSO);
+
+                SaveAsset(nodeSO);
+            }
+            else if (node is SSTimeNode timeNode)
+            {
+                SSTimeNodeSO nodeSO;
+                
+                if (timeNode.Group != null)
+                {
+                    nodeSO = CreateAsset<SSTimeNodeSO>($"{containerFolderPath}/Groups/{timeNode.Group.title}/Nodes", timeNode.NodeName);
+
+                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[timeNode.Group.ID], nodeSO);
+                }
+                else
+                {
+                    nodeSO = CreateAsset<SSTimeNodeSO>($"{containerFolderPath}/Global/Nodes", timeNode.NodeName);
+
+                    nodeContainer.UngroupedNodes.Add(nodeSO);
+                }
+
+                nodeSO.Initialize(timeNode.NodeName, ConvertNodeChoicesToNodeChoicesData(timeNode.Choices), timeNode.NodeType,
+                    timeNode.IsStartingNode(), timeNode.TimeToWait);
+
+                createdNodes.Add(timeNode.ID, nodeSO);
 
                 SaveAsset(nodeSO);
             }
@@ -437,6 +476,10 @@ namespace SS.Utilities
                 else if (nodeData.NodeType == SSNodeType.Task)
                 {
                     ((SSTaskNode)node).TaskData = ((SSTaskNodeSaveData)nodeData).TaskData;
+                }
+                else if (nodeData.NodeType == SSNodeType.Time)
+                {
+                    ((SSTimeNode)node).TimeToWait = ((SSTimeNodeSaveData)nodeData).TimeToWait;
                 }
 
                 node.Draw();
