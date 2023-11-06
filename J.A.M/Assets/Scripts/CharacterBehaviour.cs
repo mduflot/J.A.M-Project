@@ -47,14 +47,13 @@ public class CharacterBehaviour : MonoBehaviour
     public void IncreaseMood(float value)
     {
         mood += value;
-        //CapStats();
+        CapStats();
     }
 
-    /*private void CapStats()
+    private void CapStats()
     {
-        mood = mood < 0 ? 0 : mood;
-        volition = mood < baseVolition ? mood :  baseVolition;
-    }*/
+        mood = Mathf.Clamp(mood, 0, MaxMood);
+    }
     
     public void MoveTo(Transform destination)
     {

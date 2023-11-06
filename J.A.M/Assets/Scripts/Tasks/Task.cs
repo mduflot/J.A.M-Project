@@ -1,6 +1,5 @@
 using TMPro;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class Task : MonoBehaviour
@@ -79,9 +78,10 @@ public class Task : MonoBehaviour
                     StartTask();
                 }
             }
-
+            
             if (CanStartTask())
             {
+                if(characterSlots[0] == null) return;
                 previewOutcomeText.text = "+ " + (int)characterSlots[0].icon.character.GetVolition() + " " + taskData.previewOutcome;
             }
             else
@@ -97,7 +97,6 @@ public class Task : MonoBehaviour
         {
             if (!CharactersWorking())
             {
-                TimeTickSystem.OnTick -= UpdateTask;
                 taskNotification.StartTask(taskData, characterSlots);
                 taskStarted = true;
                 CloseTask();
@@ -112,7 +111,7 @@ public class Task : MonoBehaviour
             slot.ClearCharacter();
             slot.gameObject.SetActive(false);
         }
-
+        TimeTickSystem.OnTick -= UpdateTask;
         previewOutcomeText.text = null;
         characterSlots.Clear();
         GameManager.Instance.RefreshCharacterIcons();
