@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace SS
 {
@@ -16,15 +14,18 @@ namespace SS
     {
         /* UI GameObjects */
         [SerializeField] private GameObject dialogueLayout;
-        [SerializeField] private TextMeshProUGUI nameSpeaker;
         [SerializeField] private TextMeshProUGUI dialogueText;
         [SerializeField] private TextMeshProUGUI currentStoryline;
         [SerializeField] private SpaceshipManager spaceshipManager;
 
         private List<CharacterBehaviour> characters = new();
         private List<CharacterBehaviour> assignedCharacters = new();
+        
         private SSTimeNodeSO timeNodeSO;
-        private uint duration;
+        private uint durationTimeNode;
+
+        private SSDialogueNodeSO dialogueNodeSO;
+        private uint durationDialogueNode;
         
         /* Node Scriptable Objects */
         [SerializeField] private SSNodeContainerSO nodeContainer;
@@ -88,40 +89,10 @@ namespace SS
         {
             dialogueLayout.SetActive(true);
             dialogueText.gameObject.SetActive(true);
-            nameSpeaker.gameObject.SetActive(true);
             dialogueText.text = nodeSO.Text;
-            switch (nodeSO.SpeakerType)
-            {
-                case SSSpeakerType.Random :
-                    nameSpeaker.text = characters[Random.Range(0, characters.Count)].GetCharacterData().firstName;
-                    break;
-                case SSSpeakerType.Sensor :
-                    nameSpeaker.text = "Sensor";
-                    break;
-                case SSSpeakerType.Character1 :
-                    nameSpeaker.text = characters[0].GetCharacterData().firstName;
-                    break;
-                case SSSpeakerType.Character2 :
-                    nameSpeaker.text = characters[1].GetCharacterData().firstName;
-                    break;
-                case SSSpeakerType.Assigned1 :
-                    nameSpeaker.text = assignedCharacters[0].GetCharacterData().firstName;
-                    break;
-                case SSSpeakerType.Assigned2 :
-                    nameSpeaker.text = assignedCharacters[1].GetCharacterData().firstName;
-                    break;
-                case SSSpeakerType.Other1 :
-                    List<CharacterBehaviour> randomOther = characters.Except(assignedCharacters).ToList();
-                    nameSpeaker.text = randomOther[Random.Range(0, randomOther.Count)].GetCharacterData().firstName;
-                    break;
-                case SSSpeakerType.Expert1 :
-                    nameSpeaker.text = "Expert";
-                    break;
-                default:
-                    nameSpeaker.text = "Narrator";
-                    break;
-            }
-            StartCoroutine(WaiterDialogue(nodeSO));
+            dialogueNodeSO = nodeSO;
+            // durationDialogueNode = nodeSO.TimeToWait; 
+            TimeTickSystem.OnTick += WaitingDialogue;
         }
 
         private void RunNode(SSTaskNodeSO nodeSO)
@@ -133,17 +104,18 @@ namespace SS
         private void RunNode(SSTimeNodeSO nodeSO)
         {
             timeNodeSO = nodeSO;
-            duration = nodeSO.TimeToWait * TimeTickSystem.ticksPerHour;
+            durationTimeNode = nodeSO.TimeToWait * TimeTickSystem.ticksPerHour;
             TimeTickSystem.OnTick += WaitingTime;
         }
 
         private void WaitingTime(object sender, TimeTickSystem.OnTickEventArgs e)
         {
-            duration -= TimeTickSystem.timePerTick;
-            if (duration <= 0)
+            durationTimeNode -= TimeTickSystem.timePerTick;
+            if (durationTimeNode <= 0)
             {
                 if (timeNodeSO.Choices.First().NextNode == null)
                 {
+                    TimeTickSystem.OnTick -= WaitingTime;
                     return;
                 }
                 CheckNodeType(timeNodeSO.Choices.First().NextNode);
@@ -151,22 +123,26 @@ namespace SS
             }
         }
 
-        IEnumerator WaiterDialogue(SSDialogueNodeSO nodeSO)
+        private void WaitingDialogue(object sender, TimeTickSystem.OnTickEventArgs e)
         {
-            yield return new WaitForSecondsRealtime(5);
-            dialogueLayout.SetActive(false);
-            dialogueText.gameObject.SetActive(false);
-            nameSpeaker.gameObject.SetActive(false);
-            if (nodeSO.Choices.First().NextNode == null)
+            durationDialogueNode -= TimeTickSystem.timePerTick;
+            if (durationDialogueNode <= 0)
             {
-                yield break;
+                dialogueLayout.SetActive(false);
+                dialogueText.gameObject.SetActive(false);
+                if (dialogueNodeSO.Choices.First().NextNode == null)
+                {
+                    TimeTickSystem.OnTick -= WaitingDialogue;
+                    return;
+                }
+                CheckNodeType(dialogueNodeSO.Choices.First().NextNode);
+                TimeTickSystem.OnTick -= WaitingDialogue;
             }
-            CheckNodeType(nodeSO.Choices.First().NextNode);
         }
 
         IEnumerator WaiterTask(SSTaskNodeSO nodeSO)
         {
-            yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(nodeSO.TaskData).TaskStarted);
+            yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(nodeSO.TaskData).isCompleted);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).LeaderCharacters);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).AssistantCharacters);
             if (nodeSO.Choices.First().NextNode == null)
