@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 7617298142483531531}
   - component: {fileID: 1163246191294023526}
   m_Layer: 5
-  m_Name: CharacterUI
+  m_Name: CharacterUILayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262,6 +262,7 @@ MonoBehaviour:
   icon: {fileID: 5201853348538345956}
   moodGauge: {fileID: 6226731652882005519}
   volitionGauge: {fileID: 2072116281360211049}
+  slot: {fileID: 0}
 --- !u!114 &1163246191294023526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.20784314, g: 0.20784314, b: 0.20784314, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -382,6 +383,7 @@ MonoBehaviour:
   icon: {fileID: 5201853348538345956}
   moodGauge: {fileID: 6226731652882005519}
   volitionGauge: {fileID: 2072116281360211049}
+  slot: {fileID: 0}
 --- !u!1 &5759086439292264194
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,7 +443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
