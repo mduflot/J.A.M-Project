@@ -10,6 +10,8 @@ public class Task : MonoBehaviour
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI timeLeftText;
     [SerializeField] private TextMeshProUGUI durationText;
+    [SerializeField] private TextMeshProUGUI descriptionText;
+    [SerializeField] private TextMeshProUGUI previewOutcomeText;
     [SerializeField] private Transform leaderSlotsParent;
     [SerializeField] private Transform assistantSlotsParent;
     [SerializeField] private CharacterUISlot[] inactiveSlots;
@@ -33,10 +35,12 @@ public class Task : MonoBehaviour
      */
     public void Initialize(TaskNotification tn)
     {
+        warningUI.gameObject.SetActive(false);
         taskData = tn.taskData;
         titleText.text = taskData.taskName;
         timeLeft = taskData.timeLeft;
         duration = taskData.baseDuration;
+        descriptionText.text = taskData.descriptionTask;
         taskStarted = false;
         taskNotification = tn;
         for (int i = 0; i < taskData.mandatorySlots; i++)
@@ -75,6 +79,15 @@ public class Task : MonoBehaviour
                     StartTask();
                 }
             }
+
+            if (CanStartTask())
+            {
+                previewOutcomeText.text = "+ " + (int)characterSlots[0].icon.character.GetVolition() + " " + taskData.previewOutcome;
+            }
+            else
+            {
+                previewOutcomeText.text = null;
+            }
         }
     }
 
@@ -84,9 +97,9 @@ public class Task : MonoBehaviour
         {
             if (!CharactersWorking())
             {
+                TimeTickSystem.OnTick -= UpdateTask;
                 taskNotification.StartTask(taskData, characterSlots);
                 taskStarted = true;
-                TimeTickSystem.OnTick -= UpdateTask;
                 CloseTask();
             }
         }

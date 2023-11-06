@@ -19,6 +19,7 @@ public class TaskDataScriptable : ScriptableObject
     [Header("Permanent Task")]
     public bool isPermanent;
     public BaseTaskOutcome[] outcomes;
+    public string previewOutcome;
 
 
 }
