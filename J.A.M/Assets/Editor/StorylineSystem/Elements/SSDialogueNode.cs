@@ -13,6 +13,9 @@ namespace SS.Elements
     {
         public string Text { get; set; }
         public SSSpeakerType SpeakerType { get; set; }
+        public uint TimeToWait { get; set; }
+        public bool IsDialogueTask { get; set; }
+        public int PercentageTask { get; set; }
 
         public override void Initialize(string nodeName, SSGraphView ssGraphView, Vector2 position)
         {
@@ -20,6 +23,9 @@ namespace SS.Elements
 
             NodeType = SSNodeType.Dialogue;
             Text = "Node text.";
+            TimeToWait = 1;
+            IsDialogueTask = false;
+            PercentageTask = 50;
 
             SSChoiceSaveData choiceData = new SSChoiceSaveData()
             {
@@ -69,6 +75,49 @@ namespace SS.Elements
             });
 
             customDataContainer.Add(enumField);
+            
+            UnsignedIntegerField unsignedIntegerField = SSElementUtility.CreateUnsignedIntegerField(TimeToWait, "Time to wait :", callback =>
+            {
+                TimeToWait = callback.newValue;
+            });
+            
+            customDataContainer.Add(unsignedIntegerField);
+
+            SliderInt sliderInt = null;
+            
+            Toggle toggle = SSElementUtility.CreateToggle(IsDialogueTask, "Is dialogue task:", callback =>
+            {
+                IsDialogueTask = callback.newValue;
+                if (callback.newValue)
+                {
+                    sliderInt = SSElementUtility.CreateSliderIntField(PercentageTask, "Percentage task:", 0, 100,
+                        callback =>
+                        {
+                            PercentageTask = callback.newValue;
+                            sliderInt.label = "Percentage task: " + callback.newValue;
+                        });
+            
+                    customDataContainer.Add(sliderInt);
+                }
+                else
+                {
+                    customDataContainer.Remove(sliderInt);
+                }
+            });
+            
+            customDataContainer.Add(toggle);
+            
+            if (IsDialogueTask)
+            {
+                sliderInt = SSElementUtility.CreateSliderIntField(PercentageTask, "Percentage task:", 0, 100,
+                    callback =>
+                    {
+                        PercentageTask = callback.newValue;
+                        sliderInt.label = "Percentage task: " + callback.newValue;
+                    });
+            
+                customDataContainer.Add(sliderInt);
+            }
 
             extensionContainer.Add(customDataContainer);
 

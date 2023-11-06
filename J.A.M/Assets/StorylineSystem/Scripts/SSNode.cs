@@ -20,6 +20,8 @@ namespace SS
 
         private List<CharacterBehaviour> characters = new();
         private List<CharacterBehaviour> assignedCharacters = new();
+
+        private List<Tuple<CharacterBehaviour, string>> dialogues;
         
         private SSTimeNodeSO timeNodeSO;
         private uint durationTimeNode;
@@ -43,6 +45,7 @@ namespace SS
         public void StartTimeline()
         {
             characters.AddRange(spaceshipManager.characters);
+            dialogues = new();
             currentStoryline.text = nodeContainer.name;
             CheckNodeType(node);
         }
@@ -90,8 +93,9 @@ namespace SS
             dialogueLayout.SetActive(true);
             dialogueText.gameObject.SetActive(true);
             dialogueText.text = nodeSO.Text;
+            // dialogues.Add(new Tuple<CharacterBehaviour, string>(characters[0], nodeSO.Text));
             dialogueNodeSO = nodeSO;
-            // durationDialogueNode = nodeSO.TimeToWait; 
+            durationDialogueNode = nodeSO.TimeToWait * TimeTickSystem.ticksPerHour;
             TimeTickSystem.OnTick += WaitingDialogue;
         }
 

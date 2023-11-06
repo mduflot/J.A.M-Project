@@ -2,6 +2,7 @@ using System;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 namespace SS.Utilities
@@ -120,23 +121,23 @@ namespace SS.Utilities
             return floatField;
         }
 
-        public static SliderInt CreateSliderField(int value = 1, string label = null,
+        public static SliderInt CreateSliderIntField(int value = 1, string label = null, int lowValue = 0, int highValue = 1,
             EventCallback<ChangeEvent<int>> onValueChanged = null)
         {
-            SliderInt sliderField = new SliderInt()
+            SliderInt sliderIntField = new SliderInt()
             {
                 value = value,
-                label = label + value,
-                lowValue = 1,
-                highValue = 5
+                label = $"{label} {value}",
+                lowValue = lowValue,
+                highValue = highValue
             };
             
             if (onValueChanged != null)
             {
-                sliderField.RegisterValueChangedCallback(onValueChanged);
+                sliderIntField.RegisterValueChangedCallback(onValueChanged);
             }
 
-            return sliderField;
+            return sliderIntField;
         }
 
         public static EnumField CreateEnumField(Enum value = null, string label = null,
@@ -194,6 +195,22 @@ namespace SS.Utilities
             }
         
             return objectField;
+        }
+
+        public static Toggle CreateToggle(bool value = false, string label = null, EventCallback<ChangeEvent<bool>> onValueChanged = null)
+        {
+            Toggle toggle = new Toggle()
+            {
+                value = value,
+                label = label
+            };
+
+            if (onValueChanged != null)
+            {
+                toggle.RegisterValueChangedCallback(onValueChanged);
+            }
+            
+            return toggle;
         }
     }
 }
