@@ -185,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIManager: {fileID: 5141046857822228766}
   SpaceshipManager: {fileID: 2253770339199655299}
+  mainCamera: {fileID: 0}
 --- !u!1001 &3677315064026946176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -208,11 +209,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5446113749012790081}
+    - target: {fileID: 1092416839231301419, guid: cd48a9106dc08db449fe7c8159846151,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3856842352646121332, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5446113749012790081}
+    - target: {fileID: 3856842352646121332, guid: cd48a9106dc08db449fe7c8159846151,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4511900732294307786, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

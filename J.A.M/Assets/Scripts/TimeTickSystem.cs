@@ -5,9 +5,9 @@ using UnityEngine;
 public class TimeTickSystem : MonoBehaviour
 {
     public static uint timePerTick = 1; // InGame Time Unit
-    public static uint ticksPerHour = 30;
+    public static uint ticksPerHour = 48;
     [SerializeField] private float timeScale = 1.0f;
-    [SerializeField] private const uint ticksPerTenMinutes = 5;
+    //[SerializeField] private const uint ticksPerTenMinutes = 5;
     public class OnTickEventArgs : EventArgs
     {
         public uint tick;
