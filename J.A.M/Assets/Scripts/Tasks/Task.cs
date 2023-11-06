@@ -70,14 +70,14 @@ public class Task : MonoBehaviour
     {
         if (!taskStarted)
         {
-            if (!taskData.isPermanent)
+            /*if (!taskData.isPermanent)
             {
                 timeLeft -= TimeTickSystem.timePerTick;
                 if (timeLeft <= 0)
                 {
                     StartTask();
                 }
-            }
+            }*/
             
             if (CanStartTask())
             {
