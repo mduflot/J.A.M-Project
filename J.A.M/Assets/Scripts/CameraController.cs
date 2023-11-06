@@ -43,7 +43,6 @@ public class CameraController : MonoBehaviour
     
     private void Update()
     {
-        Debug.Log(zoomVector.y);
         transform.position += new Vector3(0, 0, zoomVector.y * zoomSpeed);
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -750, 700),
             Mathf.Clamp(transform.position.y, -300, 300),

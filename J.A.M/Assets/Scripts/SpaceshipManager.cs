@@ -60,6 +60,8 @@ public class SpaceshipManager : MonoBehaviour
             systemsDictionary.Add(system.systemName, system);
         }
 
+        systemsDictionary[System.Hull].gaugeValue = 10;
+
         foreach (var room in rooms)
         {
             roomsDictionnary.Add(room.roomName, room);
