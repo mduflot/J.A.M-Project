@@ -216,7 +216,7 @@ public class SpaceshipManager : MonoBehaviour
                 {
                     if (system.gaugeValue <= 0)
                     {
-                        moodIncrease -= 1.0f/TimeTickSystem.ticksPerHour;
+                        moodIncrease -= 2.5f/TimeTickSystem.ticksPerHour;
                     }
                 }
                 character.IncreaseMood(moodIncrease);
