@@ -4,12 +4,15 @@ using UnityEngine;
 public class TaskDataScriptable : ScriptableObject
 {
     public string taskName;
+    
+    [TextArea(5, 10)]
     public string descriptionTask;
     public Sprite taskIcon;
     public float timeLeft;
     public float baseDuration;
     public int mandatorySlots;
     public int optionalSlots;
+    public float taskHelpFactor = .75f;
     public SpaceshipManager.System system;
     
     

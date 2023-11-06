@@ -6,14 +6,20 @@ public class CharacterBehaviour : MonoBehaviour
     [SerializeField] private CharacterDataScriptable data;
     [SerializeField] private float moveSpeed;
     
-    [Range(0,100)]
-    private float mood = 50.0f; 
+    /*
+     * gauge = 0 -> mood + param
+     */
     
     [Range(0,100)]
+    private float mood = 50.0f;
+
+    [Range(0, 100)] private const float baseVolition = 70.0f;
+    
+    [Range(0,100)]
+    private float volition = 10.0f;
     
     [SerializeField] private TraitsData.Traits traits;
     
-    private float volition = 10.0f;
     private bool isWorking;
     private bool isTaskLeader;
     private TaskNotification currentTask;
@@ -37,8 +43,17 @@ public class CharacterBehaviour : MonoBehaviour
 
     public TraitsData.NegativeTraits GetNegativeTraits() { return traits.GetNegativeTraits(); }
 
-    private void CapMood() { volition = mood < volition ? mood : volition; }
-    
+    public void IncreaseMood(float value)
+    {
+        mood += value;
+        CapStats();
+    }
+
+    private void CapStats()
+    {
+        mood = mood < 0 ? 0 : mood;
+        volition = mood < baseVolition ? mood :  baseVolition;
+    }
     
     public void MoveTo(Transform destination)
     {
@@ -51,6 +66,7 @@ public class CharacterBehaviour : MonoBehaviour
         isWorking = true;
         currentTask = t;
         isTaskLeader = leader;
+        mood -= 3.0f;
     }
 
     public bool IsWorking()
@@ -73,6 +89,11 @@ public class CharacterBehaviour : MonoBehaviour
         return data;
     }
 
+    public float GetVolition()
+    {
+        return volition;
+    }
+    
     public void StopTask()
     {
         isWorking = false;

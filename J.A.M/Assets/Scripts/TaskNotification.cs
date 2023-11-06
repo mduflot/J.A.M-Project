@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +23,6 @@ public class TaskNotification : MonoBehaviour
     public void StartTask(TaskDataScriptable t, List<CharacterUISlot> characters)
     {
         taskData = t;
-        duration = t.baseDuration;
         foreach (var character in characters)
         {
             if (character.isMandatory)
@@ -39,6 +39,8 @@ public class TaskNotification : MonoBehaviour
                 }
             }
         }
+        duration = assistantCharacters.Count > 0 ? t.baseDuration/(Mathf.Pow(assistantCharacters.Count + leaderCharacters.Count, taskData.taskHelpFactor)) : t.baseDuration; // based on formula time/helpers^0.75
+        duration *= TimeTickSystem.ticksPerHour;
         taskStarted = true;
     }
 
@@ -60,7 +62,7 @@ public class TaskNotification : MonoBehaviour
         if (duration > 0)
         {
             duration -= TimeTickSystem.timePerTick;
-            var completionValue = 1 - duration / taskData.baseDuration;
+            var completionValue = 1 - duration / (taskData.baseDuration * TimeTickSystem.ticksPerHour);
             completionGauge.fillAmount = completionValue;
         }
         else
@@ -73,6 +75,8 @@ public class TaskNotification : MonoBehaviour
     {
         foreach (var outcome in taskData.outcomes)
         {
+            outcome.leaderCharacters = leaderCharacters;
+            outcome.assistantCharacters = assistantCharacters;
             outcome.Outcome();
         }
         isCompleted = true;

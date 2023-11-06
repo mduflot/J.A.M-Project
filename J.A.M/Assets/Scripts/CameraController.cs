@@ -3,28 +3,72 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private float cameraSpeed;
+    [SerializeField] private float moveSpeed; 
     [SerializeField] private float zoomSpeed;
     [SerializeField] private float maxZoom;
     [SerializeField] private float minZoom;
 
-    private PlayerInputs movement;
-    private PlayerInputs.CameraActions cameraMovement;
-    
-    private Vector2 horizontalInput;
-    private Vector2 verticalInput;
+    private Camera camera;
+    private CameraInput movement;
+    private CameraInput.CameraActions cameraMovement;
+    private Vector2 moveVector;
+    private Vector2 zoomVector;
 
     private void Awake()
     {
-        movement = new PlayerInputs();
+        movement = new CameraInput();
         cameraMovement = movement.Camera;
+        camera = GetComponent<Camera>();
+    }
 
-        cameraMovement.Move.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();
+    private void OnMovementPerformed(InputAction.CallbackContext c)
+    {
+        moveVector = c.ReadValue<Vector2>();
+    }
+
+    private void OnMovementCancelled(InputAction.CallbackContext c)
+    {
+        moveVector = Vector2.zero;
+    }
+
+    private void OnZoomPerformed(InputAction.CallbackContext c)
+    {
+        zoomVector = c.ReadValue<Vector2>();
+    }
+
+    private void OnZoomCancelled(InputAction.CallbackContext c)
+    {
+        zoomVector = Vector2.zero;
+    }
+    
+    private void Update()
+    {
+        camera.orthographicSize += zoomVector.y;
+        camera.orthographicSize = Mathf.Clamp(camera.orthographicSize, minZoom, maxZoom);
+    }
+
+    private void FixedUpdate()
+    {
+        transform.Translate(moveVector * moveSpeed);
+        
+    }
+
+    private void OnEnable()
+    {
+        movement.Enable();
+        cameraMovement.Move.performed += OnMovementPerformed;
+        cameraMovement.Move.canceled += OnMovementCancelled;
+        cameraMovement.Zoom.performed += OnZoomPerformed;
+        cameraMovement.Zoom.canceled += OnZoomCancelled;
 
     }
 
-    private void Move()
+    private void OnDisable()
     {
-        
+        movement.Disable();
+        movement.Camera.Move.performed -= OnMovementPerformed;
+        cameraMovement.Move.canceled -= OnMovementCancelled;
+        cameraMovement.Zoom.performed -= OnZoomPerformed;
+        cameraMovement.Zoom.canceled -= OnZoomCancelled;
     }
 }

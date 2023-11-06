@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpaceshipManager : MonoBehaviour
@@ -26,7 +27,7 @@ public class SpaceshipManager : MonoBehaviour
         public System systemName;
         public GameObject systemObject;
         public float decreaseSpeed;
-        [Range(0, 100)]
+        [Range(0, 20)]
         public float gaugeValue;
         public TaskDataScriptable task;
     }
@@ -34,14 +35,15 @@ public class SpaceshipManager : MonoBehaviour
     public enum System
     {
         Power = 1,
-        Oxygen = 2,
+        Airflow = 2,
         Food = 3,
+        Hull = 4,
     }
     private void InitializeSystems()
     {
         foreach (var system in shipSystems)
         {
-            system.gaugeValue = 100;
+            system.gaugeValue = 20;
             systemsDictionary.Add(system.systemName, system);
         }
     }
@@ -50,6 +52,7 @@ public class SpaceshipManager : MonoBehaviour
     {
         TimeTickSystem.OnTick += UpdateSystems;
         TimeTickSystem.OnTick += UpdateTasks;
+        TimeTickSystem.OnTick += UpdateCharacters;
     }
 
     private void Start()
@@ -62,7 +65,7 @@ public class SpaceshipManager : MonoBehaviour
     {
         foreach (var system in shipSystems)
         {
-            system.gaugeValue -= system.decreaseSpeed;
+            system.gaugeValue -= system.decreaseSpeed/TimeTickSystem.ticksPerHour;
             GameManager.Instance.UIManager.UpdateGauges(system.systemName, system.gaugeValue);
         }
         GameManager.Instance.UIManager.UpdateInGameDate(TimeTickSystem.GetTimeAsInGameDate(e));
@@ -77,9 +80,9 @@ public class SpaceshipManager : MonoBehaviour
     {
         var gaugeValue = systemsDictionary[system].gaugeValue;
         gaugeValue += value;
-        if (gaugeValue > 100)
+        if (gaugeValue > 20)
         {
-            gaugeValue = 100;
+            gaugeValue = 20;
         }
         else if(gaugeValue < 0)
         {
@@ -109,6 +112,7 @@ public class SpaceshipManager : MonoBehaviour
         if (!IsTaskActive(taskDataScriptable))
         {
             var position = GetTaskPosition(taskDataScriptable.system).position;
+            position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
             var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity, GameManager.Instance.UIManager.taskNotificationParent);
             taskNote.InitTask(taskDataScriptable);
             AddTask(taskNote);
@@ -120,6 +124,7 @@ public class SpaceshipManager : MonoBehaviour
         if (!IsTaskActive(taskDataScriptable))
         {
             var position = GetTaskPosition(taskDataScriptable.system).position;
+            position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
             var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity, GameManager.Instance.UIManager.taskNotificationParent);
             taskNote.InitTask(taskDataScriptable);
             OpenTaskUI(taskNote);
@@ -178,5 +183,28 @@ public class SpaceshipManager : MonoBehaviour
     {
         activeTasks.Remove(task);
     }
+    #endregion
+
+    #region characters
+
+    private void UpdateCharacters(object sender, TimeTickSystem.OnTickEventArgs e)
+    {
+        foreach(var character in characters)
+        {
+            if (!character.IsWorking())
+            {
+                float moodIncrease = 3.0f / TimeTickSystem.ticksPerHour;
+                foreach (var system in shipSystems)
+                {
+                    if (system.gaugeValue <= 0)
+                    {
+                        moodIncrease -= 1.0f/TimeTickSystem.ticksPerHour;
+                    }
+                }
+                character.IncreaseMood(moodIncrease);
+            }
+        }
+    }
+
     #endregion
 }
