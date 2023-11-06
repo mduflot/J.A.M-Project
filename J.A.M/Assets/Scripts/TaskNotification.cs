@@ -12,12 +12,22 @@ public class TaskNotification : MonoBehaviour
     public bool isCompleted = false;
     private bool taskStarted = false;
     [SerializeField] private Image taskIcon;
-    private List<CharacterBehaviour> leaderCharacters = new List<CharacterBehaviour>();
-    private List<CharacterBehaviour> assistantCharacters = new List<CharacterBehaviour>();
+    private List<CharacterBehaviour> leaderCharacters = new();
+    private List<CharacterBehaviour> assistantCharacters = new();
     
     public bool TaskStarted
     {
         get => taskStarted;
+    }
+
+    public List<CharacterBehaviour> LeaderCharacters
+    {
+        get => leaderCharacters;
+    }
+
+    public List<CharacterBehaviour> AssistantCharacters
+    {
+        get => assistantCharacters;
     }
     
     public void StartTask(TaskDataScriptable t, List<CharacterUISlot> characters)

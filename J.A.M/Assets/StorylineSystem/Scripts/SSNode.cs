@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,9 +18,13 @@ namespace SS
         [SerializeField] private GameObject dialogueLayout;
         [SerializeField] private TextMeshProUGUI dialogueText;
         [SerializeField] private TextMeshProUGUI nameSpeaker;
-        [SerializeField] private List<CharacterBehaviour> characters;
         [SerializeField] private SpaceshipManager spaceshipManager;
 
+        private List<CharacterBehaviour> characters = new();
+        private List<CharacterBehaviour> assignedCharacters = new();
+        private SSTimeNodeSO timeNodeSO;
+        private uint duration;
+        
         /* Node Scriptable Objects */
         [SerializeField] private SSNodeContainerSO nodeContainer;
         [SerializeField] private SSNodeGroupSO nodeGroup;
@@ -35,6 +40,7 @@ namespace SS
 
         public void StartTimeline()
         {
+            characters.AddRange(spaceshipManager.characters);
             CheckNodeType(node);
         }
 
@@ -96,8 +102,14 @@ namespace SS
                 case SSSpeakerType.Character2 :
                     nameSpeaker.text = characters[1].GetCharacterData().firstName;
                     break;
+                case SSSpeakerType.Assigned1 :
+                    // nameSpeaker.text = assignedCharacters[0].GetCharacterData().firstName;
+                    break;
+                case SSSpeakerType.Assigned2 :
+                    // nameSpeaker.text = assignedCharacters[1].GetCharacterData().firstName;
+                    break;
                 default:
-                    nameSpeaker.text = "Wait... is not working for now";
+                    nameSpeaker.text = "Narrator";
                     break;
             }
             StartCoroutine(WaiterDialogue(nodeSO));
@@ -106,12 +118,30 @@ namespace SS
         private void RunNode(SSTaskNodeSO nodeSO)
         {
             spaceshipManager.SpawnTask(nodeSO.TaskData);
+            assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).LeaderCharacters);
+            assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).AssistantCharacters);
             StartCoroutine(WaiterTask(nodeSO));
         }
 
         private void RunNode(SSTimeNodeSO nodeSO)
         {
-            StartCoroutine(WaiterTime(nodeSO));
+            timeNodeSO = nodeSO;
+            duration = nodeSO.TimeToWait * TimeTickSystem.ticksPerHour;
+            TimeTickSystem.OnTick += WaitingTime;
+        }
+
+        private void WaitingTime(object sender, TimeTickSystem.OnTickEventArgs e)
+        {
+            duration -= TimeTickSystem.timePerTick;
+            if (duration <= 0)
+            {
+                if (timeNodeSO.Choices.First().NextNode == null)
+                {
+                    return;
+                }
+                CheckNodeType(timeNodeSO.Choices.First().NextNode);
+                TimeTickSystem.OnTick -= WaitingTime;
+            }
         }
 
         IEnumerator WaiterDialogue(SSDialogueNodeSO nodeSO)
@@ -130,16 +160,6 @@ namespace SS
         IEnumerator WaiterTask(SSTaskNodeSO nodeSO)
         {
             yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(nodeSO.TaskData).TaskStarted);
-            if (nodeSO.Choices.First().NextNode == null)
-            {
-                yield break;
-            }
-            CheckNodeType(nodeSO.Choices.First().NextNode);
-        }
-
-        IEnumerator WaiterTime(SSTimeNodeSO nodeSO)
-        {
-            yield return new WaitForSeconds(nodeSO.TimeToWait);
             if (nodeSO.Choices.First().NextNode == null)
             {
                 yield break;
