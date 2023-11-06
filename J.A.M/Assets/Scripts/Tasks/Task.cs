@@ -112,6 +112,8 @@ public class Task : MonoBehaviour
             slot.ClearCharacter();
             slot.gameObject.SetActive(false);
         }
+
+        previewOutcomeText.text = null;
         characterSlots.Clear();
         GameManager.Instance.RefreshCharacterIcons();
         gameObject.SetActive(false);
