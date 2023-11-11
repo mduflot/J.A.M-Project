@@ -6,7 +6,7 @@ public class DraggableCharacter : MonoBehaviour, IBeginDragHandler, IDragHandler
 {
     public Image image;
     [HideInInspector] public Transform parentAfterDrag;
-    
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         parentAfterDrag = transform.parent;
@@ -14,7 +14,7 @@ public class DraggableCharacter : MonoBehaviour, IBeginDragHandler, IDragHandler
         transform.SetAsLastSibling();
         image.raycastTarget = false;
     }
-    
+
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = Input.mousePosition;
