@@ -25,7 +25,7 @@ namespace SS
 
         private SSTimeNodeSO timeNode;
         private uint durationTimeNode;
-        
+
         private SSTaskNodeSO taskNode;
 
         /* Node Scriptable Objects */
@@ -105,7 +105,7 @@ namespace SS
                     actualSpeaker = spaceshipManager.characters[Random.Range(0, spaceshipManager.characters.Length)];
                     dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
                         actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
-                    actualSpeaker.speaker.StartDialogue(nodeSO);
+                    StartCoroutine(DisplayDialogue(actualSpeaker, nodeSO));
                     characters.Add(actualSpeaker);
                     break;
                 }
@@ -115,7 +115,7 @@ namespace SS
                     actualSpeaker = spaceshipManager.characters[Random.Range(0, tempCharacters.Count)];
                     dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
                         actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
-                    actualSpeaker.speaker.StartDialogue(nodeSO);
+                    StartCoroutine(DisplayDialogue(actualSpeaker, nodeSO));
                     characters.Add(actualSpeaker);
                     break;
                 }
@@ -137,7 +137,7 @@ namespace SS
                     {
                         dialogues.Add(new Tuple<Sprite, string, string>(characters[0].GetCharacterData().characterIcon,
                             characters[0].GetCharacterData().firstName, nodeSO.Text));
-                        characters[0].speaker.StartDialogue(nodeSO);
+                        StartCoroutine(DisplayDialogue(characters[0], nodeSO));
                     }
 
                     break;
@@ -148,7 +148,7 @@ namespace SS
                     {
                         dialogues.Add(new Tuple<Sprite, string, string>(characters[1].GetCharacterData().characterIcon,
                             characters[1].GetCharacterData().firstName, nodeSO.Text));
-                        characters[1].speaker.StartDialogue(nodeSO);
+                        StartCoroutine(DisplayDialogue(characters[1], nodeSO));
                     }
 
                     break;
@@ -159,7 +159,7 @@ namespace SS
                     {
                         dialogues.Add(new Tuple<Sprite, string, string>(characters[2].GetCharacterData().characterIcon,
                             characters[2].GetCharacterData().firstName, nodeSO.Text));
-                        characters[2].speaker.StartDialogue(nodeSO);
+                        StartCoroutine(DisplayDialogue(characters[2], nodeSO));
                     }
 
                     break;
@@ -170,7 +170,7 @@ namespace SS
                     {
                         dialogues.Add(new Tuple<Sprite, string, string>(characters[3].GetCharacterData().characterIcon,
                             characters[3].GetCharacterData().firstName, nodeSO.Text));
-                        characters[3].speaker.StartDialogue(nodeSO);
+                        StartCoroutine(DisplayDialogue(characters[3], nodeSO));
                     }
 
                     break;
@@ -182,7 +182,7 @@ namespace SS
                         dialogues.Add(new Tuple<Sprite, string, string>(
                             assignedCharacters[0].GetCharacterData().characterIcon,
                             assignedCharacters[0].GetCharacterData().firstName, nodeSO.Text));
-                        assignedCharacters[0].speaker.StartDialogue(nodeSO);
+                        StartCoroutine(DisplayDialogue(assignedCharacters[0], nodeSO));
                     }
 
                     break;
@@ -194,7 +194,7 @@ namespace SS
                         dialogues.Add(new Tuple<Sprite, string, string>(
                             assignedCharacters[1].GetCharacterData().characterIcon,
                             assignedCharacters[1].GetCharacterData().firstName, nodeSO.Text));
-                        assignedCharacters[1].speaker.StartDialogue(nodeSO);
+                        StartCoroutine(DisplayDialogue(assignedCharacters[1], nodeSO));
                     }
 
                     break;
@@ -206,7 +206,7 @@ namespace SS
                         dialogues.Add(new Tuple<Sprite, string, string>(
                             assignedCharacters[2].GetCharacterData().characterIcon,
                             assignedCharacters[2].GetCharacterData().firstName, nodeSO.Text));
-                        assignedCharacters[2].speaker.StartDialogue(nodeSO);
+                        StartCoroutine(DisplayDialogue(assignedCharacters[2], nodeSO));
                     }
 
                     break;
@@ -218,7 +218,7 @@ namespace SS
                         dialogues.Add(new Tuple<Sprite, string, string>(
                             assignedCharacters[3].GetCharacterData().characterIcon,
                             assignedCharacters[3].GetCharacterData().firstName, nodeSO.Text));
-                        assignedCharacters[3].speaker.StartDialogue(nodeSO);
+                        StartCoroutine(DisplayDialogue(assignedCharacters[3], nodeSO));
                     }
 
                     break;
@@ -230,7 +230,7 @@ namespace SS
                         dialogues.Add(new Tuple<Sprite, string, string>(
                             notAssignedCharacters[0].GetCharacterData().characterIcon,
                             notAssignedCharacters[0].GetCharacterData().firstName, nodeSO.Text));
-                        notAssignedCharacters[0].speaker.StartDialogue(nodeSO);
+                        StartCoroutine(DisplayDialogue(notAssignedCharacters[0], nodeSO));
                     }
 
                     break;
@@ -242,7 +242,7 @@ namespace SS
                         dialogues.Add(new Tuple<Sprite, string, string>(
                             notAssignedCharacters[1].GetCharacterData().characterIcon,
                             notAssignedCharacters[1].GetCharacterData().firstName, nodeSO.Text));
-                        notAssignedCharacters[1].speaker.StartDialogue(nodeSO);
+                        StartCoroutine(DisplayDialogue(notAssignedCharacters[1], nodeSO));
                     }
 
                     break;
@@ -254,7 +254,7 @@ namespace SS
                         dialogues.Add(new Tuple<Sprite, string, string>(
                             notAssignedCharacters[2].GetCharacterData().characterIcon,
                             notAssignedCharacters[2].GetCharacterData().firstName, nodeSO.Text));
-                        notAssignedCharacters[2].speaker.StartDialogue(nodeSO);
+                        StartCoroutine(DisplayDialogue(notAssignedCharacters[2], nodeSO));
                     }
 
                     break;
@@ -266,7 +266,7 @@ namespace SS
                         dialogues.Add(new Tuple<Sprite, string, string>(
                             notAssignedCharacters[3].GetCharacterData().characterIcon,
                             notAssignedCharacters[3].GetCharacterData().firstName, nodeSO.Text));
-                        notAssignedCharacters[3].speaker.StartDialogue(nodeSO);
+                        StartCoroutine(DisplayDialogue(notAssignedCharacters[3], nodeSO));
                     }
 
                     break;
@@ -302,6 +302,20 @@ namespace SS
                 TimeTickSystem.OnTick -= WaitingTime;
                 CheckNodeType(timeNode.Choices.First().NextNode);
             }
+        }
+
+        IEnumerator DisplayDialogue(CharacterBehaviour characterBehaviour, SSDialogueNodeSO nodeSO)
+        {
+            characterBehaviour.speaker.StartDialogue(nodeSO);
+            yield return new WaitUntil(() => characterBehaviour.speaker.isSpeaking == false);
+
+            if (nodeSO.Choices.First().NextNode == null)
+            {
+                ResetTimeline();
+                yield break;
+            }
+
+            CheckNodeType(nodeSO.Choices.First().NextNode);
         }
 
         IEnumerator WaiterTask(SSTaskNodeSO nodeSO)

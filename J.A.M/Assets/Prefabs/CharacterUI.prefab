@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3136476994552380654}
   - component: {fileID: 6519182664343168928}
   - component: {fileID: 5201853348538345956}
+  - component: {fileID: 1441811540089672189}
   m_Layer: 5
   m_Name: CharacterIcon
   m_TagString: Untagged
@@ -92,6 +93,21 @@ MonoBehaviour:
   image: {fileID: 6519182664343168928}
   currentTaskImage: {fileID: 5100400100025934499}
   character: {fileID: 0}
+--- !u!114 &1441811540089672189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384737287070536577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c4d52347c54988b1824f2ac2d5a508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueContainer: {fileID: 1757171181099838863}
+  characterName: {fileID: 7117163078414300022}
+  dialogue: {fileID: 7130150128141947162}
 --- !u!1 &1757171181099838863
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +119,6 @@ GameObject:
   - component: {fileID: 4793870686923322767}
   - component: {fileID: 3177568779315872737}
   - component: {fileID: 6880700079180561065}
-  - component: {fileID: 3185814202303304682}
   m_Layer: 5
   m_Name: DialogueContainer
   m_TagString: Untagged
@@ -170,21 +185,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3185814202303304682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757171181099838863}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41c4d52347c54988b1824f2ac2d5a508, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueContainer: {fileID: 1757171181099838863}
-  characterName: {fileID: 7117163078414300022}
-  dialogue: {fileID: 7130150128141947162}
 --- !u!1 &2443174222975002684
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +357,7 @@ MonoBehaviour:
   moodGauge: {fileID: 6226731652882005519}
   volitionGauge: {fileID: 2072116281360211049}
   slot: {fileID: 0}
-  speaker: {fileID: 3185814202303304682}
+  speaker: {fileID: 1441811540089672189}
 --- !u!114 &1163246191294023526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,7 +479,7 @@ MonoBehaviour:
   moodGauge: {fileID: 6226731652882005519}
   volitionGauge: {fileID: 2072116281360211049}
   slot: {fileID: 0}
-  speaker: {fileID: 3185814202303304682}
+  speaker: {fileID: 1441811540089672189}
 --- !u!1 &5503222690781661672
 GameObject:
   m_ObjectHideFlags: 0

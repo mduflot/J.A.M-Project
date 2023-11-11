@@ -10,8 +10,6 @@ namespace SS.Inspectors
     public class SSInspector : Editor
     {
         /* UI GameObjects */
-        private SerializedProperty dialogueLayoutProperty;
-        private SerializedProperty dialogueTextProperty;
         private SerializedProperty currentStorylineProperty;
         private SerializedProperty spaceshipManagerProperty;
 
@@ -30,8 +28,6 @@ namespace SS.Inspectors
 
         private void OnEnable()
         {
-            dialogueLayoutProperty = serializedObject.FindProperty("dialogueLayout");
-            dialogueTextProperty = serializedObject.FindProperty("dialogueText");
             currentStorylineProperty = serializedObject.FindProperty("currentStoryline");
             spaceshipManagerProperty = serializedObject.FindProperty("spaceshipManager");
             
@@ -50,8 +46,6 @@ namespace SS.Inspectors
         {
             serializedObject.Update();
 
-            dialogueLayoutProperty.DrawPropertyField();
-            dialogueTextProperty.DrawPropertyField();
             currentStorylineProperty.DrawPropertyField();
             spaceshipManagerProperty.DrawPropertyField();
 

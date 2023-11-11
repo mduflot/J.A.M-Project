@@ -10,7 +10,7 @@ public class CharacterSpeaker : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogue;
     
     private CharacterBehaviour characterBehaviour;
-    private bool isSpeaking;
+    public bool isSpeaking;
 
     public void Initialize(CharacterBehaviour behaviour)
     {

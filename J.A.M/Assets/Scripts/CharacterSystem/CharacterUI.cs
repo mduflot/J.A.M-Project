@@ -16,6 +16,7 @@ public class CharacterUI : MonoBehaviour, IDropHandler
     {
         character = c;
         c.speaker = speaker;
+        speaker.Initialize(c);
         icon.Initialize(character, this);
     }
 

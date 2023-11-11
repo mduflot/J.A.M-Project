@@ -340,7 +340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 701981758}
-  - component: {fileID: 701981757}
+  - component: {fileID: 701981759}
   m_Layer: 0
   m_Name: Storyline
   m_TagString: Untagged
@@ -348,27 +348,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &701981757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701981756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentStoryline: {fileID: 908526471}
-  spaceshipManager: {fileID: 1360174038}
-  nodeContainer: {fileID: 11400000, guid: 7c501749fcc44874f9deefe19b353aac, type: 2}
-  nodeGroup: {fileID: 11400000, guid: 1b22e7a27aec1934a8c6e49a0152d20f, type: 2}
-  node: {fileID: 11400000, guid: 592226f523bab234ab953a568c477657, type: 2}
-  groupedNodes: 1
-  startingNodesOnly: 0
-  selectedNodeGroupIndex: 0
-  selectedNodeIndex: 0
 --- !u!4 &701981758
 Transform:
   m_ObjectHideFlags: 0
@@ -384,6 +363,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &701981759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701981756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStoryline: {fileID: 908526471}
+  spaceshipManager: {fileID: 1360174038}
+  nodeContainer: {fileID: 11400000, guid: 6204d0e7909433c49a9e2d98917f69a8, type: 2}
+  nodeGroup: {fileID: 11400000, guid: e63d7338a576b5e4db7f7475b1bdda4d, type: 2}
+  node: {fileID: 11400000, guid: 9c99308996e0c144a8563d2d82bd6e23, type: 2}
+  groupedNodes: 1
+  startingNodesOnly: 0
+  selectedNodeGroupIndex: 0
+  selectedNodeIndex: 0
 --- !u!1 &709174312
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 701981757}
+      - m_Target: {fileID: 701981759}
         m_TargetAssemblyTypeName: SS.SSNode, Assembly-CSharp
         m_MethodName: StartTimeline
         m_Mode: 1
