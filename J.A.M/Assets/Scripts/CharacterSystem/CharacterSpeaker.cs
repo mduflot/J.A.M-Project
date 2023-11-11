@@ -5,13 +5,18 @@ using UnityEngine;
 
 public class CharacterSpeaker : MonoBehaviour
 {
-    [SerializeField] private CharacterBehaviour characterBehaviour;
     [SerializeField] private GameObject dialogueContainer;
     [SerializeField] private TextMeshProUGUI characterName;
     [SerializeField] private TextMeshProUGUI dialogue;
-
+    
+    private CharacterBehaviour characterBehaviour;
     private bool isSpeaking;
 
+    public void Initialize(CharacterBehaviour behaviour)
+    {
+        characterBehaviour = behaviour;
+    }
+    
     public void StartDialogue(SSDialogueNodeSO node)
     {
         StartCoroutine(DisplayDialogue(node));

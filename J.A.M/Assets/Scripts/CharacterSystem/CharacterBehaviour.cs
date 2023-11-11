@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class CharacterBehaviour : MonoBehaviour
 {
+    public CharacterSpeaker speaker;
+    
     [SerializeField] private CharacterDataScriptable data;
-    [SerializeField] private CharacterSpeaker speaker;
     [SerializeField] private float moveSpeed;
     
     /*
@@ -85,11 +86,6 @@ public class CharacterBehaviour : MonoBehaviour
     public CharacterDataScriptable GetCharacterData()
     {
         return data;
-    }
-    
-    public CharacterSpeaker GetCharacterSpeaker()
-    {
-        return speaker;
     }
 
     public float GetMood()
