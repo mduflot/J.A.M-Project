@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace SS
 {
@@ -13,22 +14,20 @@ namespace SS
     public class SSNode : MonoBehaviour
     {
         /* UI GameObjects */
-        [SerializeField] private GameObject dialogueLayout;
-        [SerializeField] private TextMeshProUGUI dialogueText;
         [SerializeField] private TextMeshProUGUI currentStoryline;
         [SerializeField] private SpaceshipManager spaceshipManager;
 
         private List<CharacterBehaviour> characters = new();
         private List<CharacterBehaviour> assignedCharacters = new();
+        private List<CharacterBehaviour> notAssignedCharacters = new();
 
-        private List<Tuple<CharacterBehaviour, string>> dialogues;
-        
-        private SSTimeNodeSO timeNodeSO;
+        private List<Tuple<Sprite, string, string>> dialogues;
+
+        private SSTimeNodeSO timeNode;
         private uint durationTimeNode;
-
-        private SSDialogueNodeSO dialogueNodeSO;
-        private uint durationDialogueNode;
         
+        private SSTaskNodeSO taskNode;
+
         /* Node Scriptable Objects */
         [SerializeField] private SSNodeContainerSO nodeContainer;
         [SerializeField] private SSNodeGroupSO nodeGroup;
@@ -44,10 +43,15 @@ namespace SS
 
         public void StartTimeline()
         {
-            characters.AddRange(spaceshipManager.characters);
             dialogues = new();
             currentStoryline.text = nodeContainer.name;
             CheckNodeType(node);
+        }
+
+        private void ResetTimeline()
+        {
+            dialogues.Clear();
+            currentStoryline.text = "No timeline";
         }
 
         public void CheckNodeType(SSNodeSO nodeSO)
@@ -83,31 +87,188 @@ namespace SS
         {
             if (nodeSO.Choices.First().NextNode == null)
             {
+                ResetTimeline();
                 return;
             }
+
             CheckNodeType(nodeSO.Choices.First().NextNode);
         }
 
         private void RunNode(SSDialogueNodeSO nodeSO)
         {
-            dialogueLayout.SetActive(true);
-            dialogueText.gameObject.SetActive(true);
-            dialogueText.text = nodeSO.Text;
-            // dialogues.Add(new Tuple<CharacterBehaviour, string>(characters[0], nodeSO.Text));
-            dialogueNodeSO = nodeSO;
-            durationDialogueNode = nodeSO.TimeToWait * TimeTickSystem.ticksPerHour;
-            TimeTickSystem.OnTick += WaitingDialogue;
+            CharacterBehaviour actualSpeaker;
+            List<CharacterBehaviour> tempCharacters;
+            switch (nodeSO.SpeakerType)
+            {
+                case SSSpeakerType.Random:
+                {
+                    actualSpeaker = spaceshipManager.characters[Random.Range(0, spaceshipManager.characters.Length)];
+                    dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
+                        actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
+                    characters.Add(actualSpeaker);
+                    break;
+                }
+                case SSSpeakerType.RandomOther:
+                {
+                    tempCharacters = spaceshipManager.characters.Except(characters).ToList();
+                    actualSpeaker = spaceshipManager.characters[Random.Range(0, tempCharacters.Count)];
+                    dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
+                        actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
+                    characters.Add(actualSpeaker);
+                    break;
+                }
+                case SSSpeakerType.Sensor:
+                {
+                    // TODO : How to handle the sprite sensor in this list ?
+                    // dialogues.Add(new Tuple<Sprite, string, string>(null, "Sensor", nodeSO.Text));
+                    break;
+                }
+                case SSSpeakerType.Expert:
+                {
+                    // TODO : How to handle the sprite expert in this list ?
+                    // dialogues.Add(new Tuple<Sprite, string, string>(null, "Expert", nodeSO.Text));
+                    break;
+                }
+                case SSSpeakerType.Character1:
+                {
+                    if (characters[0])
+                    {
+                        dialogues.Add(new Tuple<Sprite, string, string>(characters[0].GetCharacterData().characterIcon,
+                            characters[0].GetCharacterData().firstName, nodeSO.Text));
+                    }
+
+                    break;
+                }
+                case SSSpeakerType.Character2:
+                {
+                    if (characters[1])
+                    {
+                        dialogues.Add(new Tuple<Sprite, string, string>(characters[1].GetCharacterData().characterIcon,
+                            characters[1].GetCharacterData().firstName, nodeSO.Text));
+                    }
+
+                    break;
+                }
+                case SSSpeakerType.Character3:
+                {
+                    if (characters[2])
+                    {
+                        dialogues.Add(new Tuple<Sprite, string, string>(characters[2].GetCharacterData().characterIcon,
+                            characters[2].GetCharacterData().firstName, nodeSO.Text));
+                    }
+
+                    break;
+                }
+                case SSSpeakerType.Character4:
+                {
+                    if (characters[3])
+                    {
+                        dialogues.Add(new Tuple<Sprite, string, string>(characters[3].GetCharacterData().characterIcon,
+                            characters[3].GetCharacterData().firstName, nodeSO.Text));
+                    }
+
+                    break;
+                }
+                case SSSpeakerType.Assigned1:
+                {
+                    if (assignedCharacters[0])
+                    {
+                        dialogues.Add(new Tuple<Sprite, string, string>(
+                            assignedCharacters[0].GetCharacterData().characterIcon,
+                            assignedCharacters[0].GetCharacterData().firstName, nodeSO.Text));
+                    }
+
+                    break;
+                }
+                case SSSpeakerType.Assigned2:
+                {
+                    if (assignedCharacters[1])
+                    {
+                        dialogues.Add(new Tuple<Sprite, string, string>(
+                            assignedCharacters[1].GetCharacterData().characterIcon,
+                            assignedCharacters[1].GetCharacterData().firstName, nodeSO.Text));
+                    }
+
+                    break;
+                }
+                case SSSpeakerType.Assigned3:
+                {
+                    if (assignedCharacters[2])
+                    {
+                        dialogues.Add(new Tuple<Sprite, string, string>(
+                            assignedCharacters[2].GetCharacterData().characterIcon,
+                            assignedCharacters[2].GetCharacterData().firstName, nodeSO.Text));
+                    }
+
+                    break;
+                }
+                case SSSpeakerType.Assigned4:
+                {
+                    if (assignedCharacters[3])
+                    {
+                        dialogues.Add(new Tuple<Sprite, string, string>(
+                            assignedCharacters[3].GetCharacterData().characterIcon,
+                            assignedCharacters[3].GetCharacterData().firstName, nodeSO.Text));
+                    }
+
+                    break;
+                }
+                case SSSpeakerType.NotAssigned1:
+                {
+                    if (notAssignedCharacters[0])
+                    {
+                        dialogues.Add(new Tuple<Sprite, string, string>(
+                            notAssignedCharacters[0].GetCharacterData().characterIcon,
+                            notAssignedCharacters[0].GetCharacterData().firstName, nodeSO.Text));
+                    }
+
+                    break;
+                }
+                case SSSpeakerType.NotAssigned2:
+                {
+                    if (notAssignedCharacters[1])
+                    {
+                        dialogues.Add(new Tuple<Sprite, string, string>(
+                            notAssignedCharacters[1].GetCharacterData().characterIcon,
+                            notAssignedCharacters[1].GetCharacterData().firstName, nodeSO.Text));
+                    }
+
+                    break;
+                }
+                case SSSpeakerType.NotAssigned3:
+                {
+                    if (notAssignedCharacters[2])
+                    {
+                        dialogues.Add(new Tuple<Sprite, string, string>(
+                            notAssignedCharacters[2].GetCharacterData().characterIcon,
+                            notAssignedCharacters[2].GetCharacterData().firstName, nodeSO.Text));
+                    }
+
+                    break;
+                }
+                case SSSpeakerType.NotAssigned4:
+                {
+                    if (notAssignedCharacters[3])
+                    {
+                        dialogues.Add(new Tuple<Sprite, string, string>(
+                            notAssignedCharacters[3].GetCharacterData().characterIcon,
+                            notAssignedCharacters[3].GetCharacterData().firstName, nodeSO.Text));
+                    }
+
+                    break;
+                }
+            }
         }
 
         private void RunNode(SSTaskNodeSO nodeSO)
         {
-            spaceshipManager.SpawnTask(nodeSO.TaskData);
+            spaceshipManager.SpawnTask(nodeSO.TaskData, dialogues);
             StartCoroutine(WaiterTask(nodeSO));
         }
 
         private void RunNode(SSTimeNodeSO nodeSO)
         {
-            timeNodeSO = nodeSO;
+            timeNode = nodeSO;
             durationTimeNode = nodeSO.TimeToWait * TimeTickSystem.ticksPerHour;
             TimeTickSystem.OnTick += WaitingTime;
         }
@@ -117,30 +278,15 @@ namespace SS
             durationTimeNode -= TimeTickSystem.timePerTick;
             if (durationTimeNode <= 0)
             {
-                if (timeNodeSO.Choices.First().NextNode == null)
+                if (timeNode.Choices.First().NextNode == null)
                 {
+                    ResetTimeline();
                     TimeTickSystem.OnTick -= WaitingTime;
                     return;
                 }
-                CheckNodeType(timeNodeSO.Choices.First().NextNode);
-                TimeTickSystem.OnTick -= WaitingTime;
-            }
-        }
 
-        private void WaitingDialogue(object sender, TimeTickSystem.OnTickEventArgs e)
-        {
-            durationDialogueNode -= TimeTickSystem.timePerTick;
-            if (durationDialogueNode <= 0)
-            {
-                dialogueLayout.SetActive(false);
-                dialogueText.gameObject.SetActive(false);
-                if (dialogueNodeSO.Choices.First().NextNode == null)
-                {
-                    TimeTickSystem.OnTick -= WaitingDialogue;
-                    return;
-                }
-                CheckNodeType(dialogueNodeSO.Choices.First().NextNode);
-                TimeTickSystem.OnTick -= WaitingDialogue;
+                TimeTickSystem.OnTick -= WaitingTime;
+                CheckNodeType(timeNode.Choices.First().NextNode);
             }
         }
 
@@ -149,10 +295,13 @@ namespace SS
             yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(nodeSO.TaskData).isCompleted);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).LeaderCharacters);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).AssistantCharacters);
+            notAssignedCharacters.AddRange(spaceshipManager.characters.Except(assignedCharacters));
             if (nodeSO.Choices.First().NextNode == null)
             {
+                ResetTimeline();
                 yield break;
             }
+
             CheckNodeType(nodeSO.Choices.First().NextNode);
         }
     }

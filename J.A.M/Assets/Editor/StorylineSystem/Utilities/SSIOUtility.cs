@@ -196,7 +196,7 @@ namespace SS.Utilities
                     Position = dialogueNode.GetPosition().position,
                     Text = dialogueNode.Text,
                     SpeakerType = dialogueNode.SpeakerType,
-                    TimeToWait = dialogueNode.TimeToWait,
+                    Duration = dialogueNode.Duration,
                     IsDialogueTask = dialogueNode.IsDialogueTask,
                     PercentageTask = dialogueNode.PercentageTask
                 };
@@ -279,7 +279,7 @@ namespace SS.Utilities
                 }
 
                 nodeSO.Initialize(dialogueNode.NodeName, dialogueNode.Text, ConvertNodeChoicesToNodeChoicesData(dialogueNode.Choices), dialogueNode.NodeType,
-                    dialogueNode.IsStartingNode(), dialogueNode.SpeakerType, dialogueNode.TimeToWait, dialogueNode.IsDialogueTask, dialogueNode.PercentageTask);
+                    dialogueNode.IsStartingNode(), dialogueNode.SpeakerType, dialogueNode.Duration, dialogueNode.IsDialogueTask, dialogueNode.PercentageTask);
 
                 createdNodes.Add(dialogueNode.ID, nodeSO);
 
@@ -475,7 +475,7 @@ namespace SS.Utilities
                 {
                     ((SSDialogueNode)node).Text = ((SSDialogueNodeSaveData)nodeData).Text;
                     ((SSDialogueNode)node).SpeakerType = ((SSDialogueNodeSaveData)nodeData).SpeakerType;
-                    ((SSDialogueNode)node).TimeToWait = ((SSDialogueNodeSaveData)nodeData).TimeToWait;
+                    ((SSDialogueNode)node).Duration = ((SSDialogueNodeSaveData)nodeData).Duration;
                     ((SSDialogueNode)node).IsDialogueTask = ((SSDialogueNodeSaveData)nodeData).IsDialogueTask;
                     ((SSDialogueNode)node).PercentageTask = ((SSDialogueNodeSaveData)nodeData).PercentageTask;
                 }

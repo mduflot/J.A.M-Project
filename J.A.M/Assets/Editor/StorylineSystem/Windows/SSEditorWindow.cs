@@ -45,18 +45,18 @@ namespace SS.Windows
         {
             Toolbar toolbar = new Toolbar();
 
-            fileNameTextField = SSElementUtility.CreateTextField(defaultFileName, "File Name:",
+            fileNameTextField = ElementUtility.CreateTextField(defaultFileName, "File Name:",
                 callback =>
                 {
                     fileNameTextField.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
                 });
 
-            saveButton = SSElementUtility.CreateButton("Save", () => Save());
+            saveButton = ElementUtility.CreateButton("Save", () => Save());
 
-            Button loadButton = SSElementUtility.CreateButton("Load", () => Load());
-            Button clearButton = SSElementUtility.CreateButton("Clear", () => Clear());
-            Button resetButton = SSElementUtility.CreateButton("Reset", () => ResetGraph());
-            miniMapButton = SSElementUtility.CreateButton("MiniMap", () => ToggleMiniMap());
+            Button loadButton = ElementUtility.CreateButton("Load", () => Load());
+            Button clearButton = ElementUtility.CreateButton("Clear", () => Clear());
+            Button resetButton = ElementUtility.CreateButton("Reset", () => ResetGraph());
+            miniMapButton = ElementUtility.CreateButton("MiniMap", () => ToggleMiniMap());
 
             toolbar.Add(fileNameTextField);
             toolbar.Add(saveButton);

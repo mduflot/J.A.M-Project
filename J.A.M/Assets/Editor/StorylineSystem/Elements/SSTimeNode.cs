@@ -7,7 +7,6 @@ namespace SS.Elements
     using Data.Save;
     using Enumerations;
     using Windows;
-    using Utilities;
     
     public class SSTimeNode : SSNode
     {
@@ -49,7 +48,7 @@ namespace SS.Elements
 
             customDataContainer.AddToClassList("ss-node__custom-data-container");
             
-            UnsignedIntegerField unsignedIntegerField = SSElementUtility.CreateUnsignedIntegerField(TimeToWait, "Time to wait :", callback =>
+            UnsignedIntegerField unsignedIntegerField = ElementUtility.CreateUnsignedIntegerField(TimeToWait, "WaitingTime", callback =>
             {
                 TimeToWait = callback.newValue;
             });

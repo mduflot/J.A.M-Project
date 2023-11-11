@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Task : MonoBehaviour
 {
-    
-    [Header("Display")]
+    [Header("Task")]
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI timeLeftText;
     [SerializeField] private TextMeshProUGUI durationText;
@@ -17,12 +16,15 @@ public class Task : MonoBehaviour
     [SerializeField] private TaskNotification taskNotification;
     [SerializeField] private WarningUI warningUI;
     
+    [Header("Dialogues")]
+    [SerializeField] private GameObject dialogueContainer;
+
     [Header("Values")]
     [SerializeField] private float timeLeft;
     [SerializeField] private float duration;
     
     private TaskDataScriptable taskData;
-    private List<CharacterUISlot> characterSlots = new List<CharacterUISlot>();
+    private List<CharacterUISlot> characterSlots = new();
     private bool taskStarted;
     
     /*
@@ -60,11 +62,16 @@ public class Task : MonoBehaviour
             characterSlots.Add(slot);
         }
         timeLeftText.SetText(timeLeft.ToString());
+
+        for (int i = 0; i < tn.dialogues.Count; i++)
+        {
+            // var gameDialogue = Instantiate(dialogueGO, dialogueContainer.transform);
+            // gameDialogue.Initialize(tn.dialogues[i].Item1, tn.dialogues[i].Item2,tn.dialogues[i].Item3);
+        }
         
         TimeTickSystem.OnTick += UpdateTask;
         gameObject.SetActive(true);
     }
-    
 
     public void UpdateTask(object sender, TimeTickSystem.OnTickEventArgs e)
     {
@@ -119,6 +126,7 @@ public class Task : MonoBehaviour
             }
         }
     }
+
     public void CloseTask()
     {
         foreach (var slot in characterSlots)
@@ -131,6 +139,7 @@ public class Task : MonoBehaviour
         previewOutcomeText.text = null;
         characterSlots.Clear();
         GameManager.Instance.RefreshCharacterIcons();
+        // TODO : push Pool<>
         gameObject.SetActive(false);
     }
 

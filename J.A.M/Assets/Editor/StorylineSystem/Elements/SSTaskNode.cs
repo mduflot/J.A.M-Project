@@ -8,7 +8,6 @@ namespace SS.Elements
 {
     using Data.Save;
     using Enumerations;
-    using Utilities;
     using Windows;
 
     public class SSTaskNode : SSNode
@@ -53,7 +52,7 @@ namespace SS.Elements
             
             /* MAIN CONTAINER */
 
-            Button addChoiceButton = SSElementUtility.CreateButton("Add Choice", () =>
+            Button addChoiceButton = ElementUtility.CreateButton("Add Choice", () =>
             {
                 /* OUTPUT CONTAINER */
 
@@ -84,7 +83,7 @@ namespace SS.Elements
 
             /* EXTENSIONS CONTAINER */
 
-            ObjectField objectField = SSElementUtility.CreateObjectField(TaskData, typeof(TaskDataScriptable), "TaskData :", callback =>
+            ObjectField objectField = ElementUtility.CreateObjectField(TaskData, typeof(TaskDataScriptable), "TaskData", callback =>
             {
                 TaskData = (TaskDataScriptable)callback.newValue;
             });
@@ -108,20 +107,20 @@ namespace SS.Elements
             
             /* CHOICE CONDITIONS CONTAINER */
 
-            Foldout choiceConditionsFoldout = SSElementUtility.CreateFoldout($"\"{choiceData.Text}\" :");
+            Foldout choiceConditionsFoldout = ElementUtility.CreateFoldout($"\"{choiceData.Text}\" :");
 
-            Button addConditionButton = SSElementUtility.CreateButton("Add Condition", () =>
+            Button addConditionButton = ElementUtility.CreateButton("Add Condition", () =>
             {
                 choiceData.ChoiceTypes.Add(SSChoiceType.Assigned);
                 VisualElement choiceConditionsDataContainer = new();
 
                 var index = choiceData.ChoiceTypes.Count - 1;
-                EnumField enumField = SSElementUtility.CreateEnumField(choiceData.ChoiceTypes[index], "Condition :", callback =>
+                EnumField enumField = ElementUtility.CreateEnumField(choiceData.ChoiceTypes[index], "Condition :", callback =>
                 {
                     choiceData.ChoiceTypes[index] = (SSChoiceType)callback.newValue;
                 });
                 
-                Button deleteConditionButton = SSElementUtility.CreateButton("X", () =>
+                Button deleteConditionButton = ElementUtility.CreateButton("X", () =>
                 {
                     if (choiceData.ChoiceTypes.Count == 1)
                     {
@@ -149,12 +148,12 @@ namespace SS.Elements
 
                 var choiceIndex = index;
 
-                EnumField enumField = SSElementUtility.CreateEnumField(choiceData.ChoiceTypes[choiceIndex], "Condition :", callback =>
+                EnumField enumField = ElementUtility.CreateEnumField(choiceData.ChoiceTypes[choiceIndex], "Condition :", callback =>
                 {
                     choiceData.ChoiceTypes[choiceIndex] = (SSChoiceType)callback.newValue;
                 });
 
-                Button deleteConditionButton = SSElementUtility.CreateButton("X", () =>
+                Button deleteConditionButton = ElementUtility.CreateButton("X", () =>
                 {
                     if (choiceData.ChoiceTypes.Count == 1)
                     {
@@ -174,7 +173,7 @@ namespace SS.Elements
 
             customDataContainer.Insert(Choices.IndexOf(choiceData), choiceConditionsFoldout);
 
-            Button deleteChoiceButton = SSElementUtility.CreateButton("X", () =>
+            Button deleteChoiceButton = ElementUtility.CreateButton("X", () =>
             {
                 if (Choices.Count == 1)
                 {
@@ -195,7 +194,7 @@ namespace SS.Elements
 
             deleteChoiceButton.AddToClassList("ss-node__button");
 
-            TextField choiceTextField = SSElementUtility.CreateTextField(choiceData.Text, null, callback =>
+            TextField choiceTextField = ElementUtility.CreateTextField(choiceData.Text, null, callback =>
             {
                 choiceData.Text = callback.newValue;
                 choiceConditionsFoldout.text = $"\"{callback.newValue}\" :";

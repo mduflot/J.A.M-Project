@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpaceshipManager : MonoBehaviour
@@ -52,6 +51,7 @@ public class SpaceshipManager : MonoBehaviour
         Control = 7,
         Warehouse = 8,
     }
+
     private void InitializeSystems()
     {
         foreach (var system in shipSystems)
@@ -138,15 +138,15 @@ public class SpaceshipManager : MonoBehaviour
             activeTask.UpdateTask();
         }
     }
-    
-    public void SpawnTask(TaskDataScriptable taskDataScriptable)
+
+    public void SpawnTask(TaskDataScriptable taskDataScriptable, List<Tuple<Sprite, string, string>> dialoguesTask)
     {
         if (!IsTaskActive(taskDataScriptable))
         {
             var position = GetTaskPosition(taskDataScriptable.room).position;
             position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
             var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity, GameManager.Instance.UIManager.taskNotificationParent);
-            taskNote.InitTask(taskDataScriptable);
+            taskNote.InitTask(taskDataScriptable, dialoguesTask);
             AddTask(taskNote);
         }
     }
@@ -168,6 +168,7 @@ public class SpaceshipManager : MonoBehaviour
     {
         return roomsDictionnary[room].transform;
     }
+
     public void OpenTaskUI(TaskNotification tn)
     {
         GameManager.Instance.UIManager.SpawnTaskUI(tn);

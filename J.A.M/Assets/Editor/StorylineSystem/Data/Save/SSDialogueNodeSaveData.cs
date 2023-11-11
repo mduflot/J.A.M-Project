@@ -10,7 +10,7 @@ namespace SS.Data.Save
     {
         [field: SerializeField] public string Text { get; set; }
         [field: SerializeField] public SSSpeakerType SpeakerType { get; set; }
-        [field: SerializeField] public uint TimeToWait { get; set; }
+        [field: SerializeField] public uint Duration { get; set; }
         [field: SerializeField] public bool IsDialogueTask { get; set; }
         [field: SerializeField] public int PercentageTask { get; set; }
     }
