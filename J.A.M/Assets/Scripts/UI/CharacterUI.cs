@@ -32,7 +32,6 @@ public class CharacterUI : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log(transform.name + " récupère");
         if (transform.childCount > 0) return;
         GameObject dropped = eventData.pointerDrag;
         icon = dropped.GetComponent<CharacterIcon>();

@@ -62,14 +62,6 @@ public class Task : MonoBehaviour
             characterSlots.Add(slot);
         }
         timeLeftText.SetText(timeLeft.ToString());
-
-        /*
-        for (int i = 0; i < tn.dialogues.Count; i++)
-        {
-            var gameDialogue = Instantiate(dialogueGO, dialogueContainer.transform);
-            gameDialogue.Initialize(tn.dialogues[i].Item1, tn.dialogues[i].Item2,tn.dialogues[i].Item3);
-        }
-        */
         
         TimeTickSystem.OnTick += UpdateTask;
         gameObject.SetActive(true);
@@ -105,7 +97,6 @@ public class Task : MonoBehaviour
                 {
                     if (!slot.isMandatory && slot.icon != null) assistantCharacters++;
                 }
-                Debug.Log(assistantCharacters);
                 duration = assistantCharacters > 0 ? taskData.baseDuration/(Mathf.Pow(assistantCharacters + 1, taskData.taskHelpFactor)) : taskData.baseDuration;
                 durationText.text = duration.ToString("F2") + " hours";
             }
@@ -141,7 +132,6 @@ public class Task : MonoBehaviour
         previewOutcomeText.text = null;
         characterSlots.Clear();
         GameManager.Instance.RefreshCharacterIcons();
-        // TODO : push Pool<>
         gameObject.SetActive(false);
     }
 

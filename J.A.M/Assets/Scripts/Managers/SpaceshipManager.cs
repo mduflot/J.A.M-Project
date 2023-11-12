@@ -7,10 +7,12 @@ public class SpaceshipManager : MonoBehaviour
     public Room[] rooms;
     public ShipSystem[] shipSystems;
     public CharacterBehaviour[] characters;
-    private Dictionary<System, ShipSystem> systemsDictionary = new Dictionary<System, ShipSystem>();
-    private Dictionary<ShipRooms, Room> roomsDictionnary = new Dictionary<ShipRooms, Room>();
+
     [SerializeField] private TaskNotification taskNotificationPrefab;
-    [SerializeField] private List<TaskNotification> activeTasks = new List<TaskNotification>();
+    [SerializeField] private List<TaskNotification> activeTasks = new();
+
+    private Dictionary<System, ShipSystem> systemsDictionary = new();
+    private Dictionary<ShipRooms, Room> roomsDictionary = new();
 
     [Serializable]
     public struct Room
@@ -27,8 +29,7 @@ public class SpaceshipManager : MonoBehaviour
         public System systemName;
         public GameObject systemObject;
         public float decreaseSpeed;
-        [Range(0, 20)]
-        public float gaugeValue;
+        [Range(0, 20)] public float gaugeValue;
         public TaskDataScriptable task;
     }
 
@@ -39,7 +40,7 @@ public class SpaceshipManager : MonoBehaviour
         Food = 3,
         Hull = 4,
     }
-    
+
     public enum ShipRooms
     {
         Electrical = 1,
@@ -64,7 +65,7 @@ public class SpaceshipManager : MonoBehaviour
 
         foreach (var room in rooms)
         {
-            roomsDictionnary.Add(room.roomName, room);
+            roomsDictionary.Add(room.roomName, room);
         }
     }
 
@@ -96,9 +97,10 @@ public class SpaceshipManager : MonoBehaviour
         {
             if (system.gaugeValue < 0) system.gaugeValue = 0;
             else
-                system.gaugeValue -= system.decreaseSpeed/TimeTickSystem.ticksPerHour;
+                system.gaugeValue -= system.decreaseSpeed / TimeTickSystem.ticksPerHour;
             GameManager.Instance.UIManager.UpdateGauges(system.systemName, system.gaugeValue);
         }
+
         GameManager.Instance.UIManager.UpdateInGameDate(TimeTickSystem.GetTimeAsInGameDate(e));
     }
 
@@ -115,7 +117,7 @@ public class SpaceshipManager : MonoBehaviour
         {
             gaugeValue = 20;
         }
-        else if(gaugeValue < 0)
+        else if (gaugeValue < 0)
         {
             gaugeValue = 0;
         }
@@ -145,7 +147,8 @@ public class SpaceshipManager : MonoBehaviour
         {
             var position = GetTaskPosition(taskDataScriptable.room).position;
             position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
-            var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity, GameManager.Instance.UIManager.taskNotificationParent);
+            var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity,
+                GameManager.Instance.UIManager.taskNotificationParent);
             taskNote.InitTask(taskDataScriptable, dialoguesTask);
             AddTask(taskNote);
         }
@@ -157,7 +160,8 @@ public class SpaceshipManager : MonoBehaviour
         {
             var position = GetTaskPosition(taskDataScriptable.room).position;
             position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
-            var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity, GameManager.Instance.UIManager.taskNotificationParent);
+            var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity,
+                GameManager.Instance.UIManager.taskNotificationParent);
             taskNote.InitTask(taskDataScriptable);
             OpenTaskUI(taskNote);
             AddTask(taskNote);
@@ -166,7 +170,7 @@ public class SpaceshipManager : MonoBehaviour
 
     public Transform GetTaskPosition(ShipRooms room)
     {
-        return roomsDictionnary[room].transform;
+        return roomsDictionary[room].transform;
     }
 
     public void OpenTaskUI(TaskNotification tn)
@@ -185,6 +189,7 @@ public class SpaceshipManager : MonoBehaviour
         {
             return activeTask.taskData == task;
         }
+
         return false;
     }
 
@@ -192,7 +197,7 @@ public class SpaceshipManager : MonoBehaviour
     {
         foreach (var activeTask in activeTasks)
         {
-            if(activeTask.taskData == task) return activeTask;
+            if (activeTask.taskData == task) return activeTask;
         }
 
         return null;
@@ -209,20 +214,22 @@ public class SpaceshipManager : MonoBehaviour
                 taskToRemove = activeTask;
             }
         }
-        if(taskToRemove != null) RemoveTask(taskToRemove);
+
+        if (taskToRemove != null) RemoveTask(taskToRemove);
     }
 
     public void RemoveTask(TaskNotification task)
     {
         activeTasks.Remove(task);
     }
+
     #endregion
 
-    #region characters
+    #region Characters
 
     private void UpdateCharacters(object sender, TimeTickSystem.OnTickEventArgs e)
     {
-        foreach(var character in characters)
+        foreach (var character in characters)
         {
             if (!character.IsWorking())
             {
@@ -231,12 +238,14 @@ public class SpaceshipManager : MonoBehaviour
                 {
                     if (system.gaugeValue <= 0)
                     {
-                        moodIncrease -= 2.5f/TimeTickSystem.ticksPerHour;
+                        moodIncrease -= 2.5f / TimeTickSystem.ticksPerHour;
                     }
                 }
+
                 character.IncreaseMood(moodIncrease);
             }
         }
+
         GameManager.Instance.UIManager.UpdateCharacterGauges();
     }
 

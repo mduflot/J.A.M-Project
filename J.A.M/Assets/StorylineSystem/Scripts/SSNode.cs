@@ -17,17 +17,6 @@ namespace SS
         [SerializeField] private TextMeshProUGUI currentStoryline;
         [SerializeField] private SpaceshipManager spaceshipManager;
 
-        private List<CharacterBehaviour> characters = new();
-        private List<CharacterBehaviour> assignedCharacters = new();
-        private List<CharacterBehaviour> notAssignedCharacters = new();
-
-        private List<Tuple<Sprite, string, string>> dialogues;
-
-        private SSTimeNodeSO timeNode;
-        private uint durationTimeNode;
-
-        private SSTaskNodeSO taskNode;
-
         /* Node Scriptable Objects */
         [SerializeField] private SSNodeContainerSO nodeContainer;
         [SerializeField] private SSNodeGroupSO nodeGroup;
@@ -40,6 +29,17 @@ namespace SS
         /* Indexes */
         [SerializeField] private int selectedNodeGroupIndex;
         [SerializeField] private int selectedNodeIndex;
+
+        private List<CharacterBehaviour> characters = new();
+        private List<CharacterBehaviour> assignedCharacters = new();
+        private List<CharacterBehaviour> notAssignedCharacters = new();
+
+        private List<Tuple<Sprite, string, string>> dialogues;
+
+        private SSTimeNodeSO timeNode;
+        private uint durationTimeNode;
+
+        private SSTaskNodeSO taskNode;
 
         public void StartTimeline()
         {
