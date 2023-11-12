@@ -63,11 +63,13 @@ public class Task : MonoBehaviour
         }
         timeLeftText.SetText(timeLeft.ToString());
 
+        /*
         for (int i = 0; i < tn.dialogues.Count; i++)
         {
-            // var gameDialogue = Instantiate(dialogueGO, dialogueContainer.transform);
-            // gameDialogue.Initialize(tn.dialogues[i].Item1, tn.dialogues[i].Item2,tn.dialogues[i].Item3);
+            var gameDialogue = Instantiate(dialogueGO, dialogueContainer.transform);
+            gameDialogue.Initialize(tn.dialogues[i].Item1, tn.dialogues[i].Item2,tn.dialogues[i].Item3);
         }
+        */
         
         TimeTickSystem.OnTick += UpdateTask;
         gameObject.SetActive(true);
