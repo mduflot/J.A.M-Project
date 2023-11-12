@@ -8,7 +8,7 @@ public class CharacterSpeaker : MonoBehaviour
     [SerializeField] private GameObject dialogueContainer;
     [SerializeField] private TextMeshProUGUI characterName;
     [SerializeField] private TextMeshProUGUI dialogue;
-    
+
     private CharacterBehaviour characterBehaviour;
     public bool isSpeaking;
 
@@ -16,26 +16,23 @@ public class CharacterSpeaker : MonoBehaviour
     {
         characterBehaviour = behaviour;
     }
-    
+
     public void StartDialogue(SSDialogueNodeSO node)
     {
-        StartCoroutine(DisplayDialogue(node));
-    } 
-    
-    private IEnumerator DisplayDialogue(SSDialogueNodeSO node)
-    {
-        yield return new WaitUntil(() => isSpeaking == false);
+        isSpeaking = true;
         if (node.IsDialogueTask)
         {
-            // TODO : Get PercentageTask here
+            // TODO : Call TaskNotification here to get the percentage of the task
             // yield return new WaitUntil();
         }
+
         dialogue.text = node.Text;
         characterName.text = characterBehaviour.GetCharacterData().firstName;
         dialogueContainer.SetActive(true);
-        isSpeaking = true;
-        
-        yield return new WaitForSeconds(node.Duration);
+    }
+
+    public void EndDialogue()
+    {
         dialogueContainer.SetActive(false);
         isSpeaking = false;
     }

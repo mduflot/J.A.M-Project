@@ -121,13 +121,13 @@ namespace SS
                 }
                 case SSSpeakerType.Sensor:
                 {
-                    // TODO : Where ? How ?
+                    // TODO : Where ? How ? Is this a bubble in the spaceship ? 
                     // dialogues.Add(new Tuple<Sprite, string, string>(null, "Sensor", nodeSO.Text));
                     break;
                 }
                 case SSSpeakerType.Expert:
                 {
-                    // TODO : Where ? How ?
+                    // TODO : Where ? How ? Is this a bubble in the spaceship ? 
                     // dialogues.Add(new Tuple<Sprite, string, string>(null, "Expert", nodeSO.Text));
                     break;
                 }
@@ -306,9 +306,11 @@ namespace SS
 
         IEnumerator DisplayDialogue(CharacterBehaviour characterBehaviour, SSDialogueNodeSO nodeSO)
         {
-            characterBehaviour.speaker.StartDialogue(nodeSO);
             yield return new WaitUntil(() => characterBehaviour.speaker.isSpeaking == false);
+            characterBehaviour.speaker.StartDialogue(nodeSO);
 
+            yield return new WaitForSeconds(nodeSO.Duration);
+            characterBehaviour.speaker.EndDialogue();
             if (nodeSO.Choices.First().NextNode == null)
             {
                 ResetTimeline();
