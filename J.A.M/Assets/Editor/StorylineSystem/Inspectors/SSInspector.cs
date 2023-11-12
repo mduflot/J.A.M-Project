@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Rendering;
 
 namespace SS.Inspectors
 {
@@ -11,9 +10,6 @@ namespace SS.Inspectors
     public class SSInspector : Editor
     {
         /* UI GameObjects */
-        private SerializedProperty dialogueLayoutProperty;
-        private SerializedProperty dialogueTextProperty;
-        private SerializedProperty nameSpeakerProperty;
         private SerializedProperty currentStorylineProperty;
         private SerializedProperty spaceshipManagerProperty;
 
@@ -32,9 +28,6 @@ namespace SS.Inspectors
 
         private void OnEnable()
         {
-            dialogueLayoutProperty = serializedObject.FindProperty("dialogueLayout");
-            nameSpeakerProperty = serializedObject.FindProperty("nameSpeaker");
-            dialogueTextProperty = serializedObject.FindProperty("dialogueText");
             currentStorylineProperty = serializedObject.FindProperty("currentStoryline");
             spaceshipManagerProperty = serializedObject.FindProperty("spaceshipManager");
             
@@ -53,9 +46,6 @@ namespace SS.Inspectors
         {
             serializedObject.Update();
 
-            dialogueLayoutProperty.DrawPropertyField();
-            nameSpeakerProperty.DrawPropertyField();
-            dialogueTextProperty.DrawPropertyField();
             currentStorylineProperty.DrawPropertyField();
             spaceshipManagerProperty.DrawPropertyField();
 
@@ -126,26 +116,26 @@ namespace SS.Inspectors
 
         private void DrawNodeContainerArea()
         {
-            SSInspectorUtility.DrawHeader("Node Container");
+            InspectorUtility.DrawHeader("Node Container");
 
             nodeContainerProperty.DrawPropertyField();
 
-            SSInspectorUtility.DrawSpace();
+            InspectorUtility.DrawSpace();
         }
 
         private void DrawFiltersArea()
         {
-            SSInspectorUtility.DrawHeader("Filters");
+            InspectorUtility.DrawHeader("Filters");
 
             groupedNodesProperty.DrawPropertyField();
             startingNodesOnlyProperty.DrawPropertyField();
 
-            SSInspectorUtility.DrawSpace();
+            InspectorUtility.DrawSpace();
         }
 
         private void DrawNodeGroupArea(SSNodeContainerSO nodeContainer, List<string> nodeGroupNames)
         {
-            SSInspectorUtility.DrawHeader("Node Group");
+            InspectorUtility.DrawHeader("Node Group");
 
             int oldSelectedNodeGroupIndex = selectedNodeGroupIndexProperty.intValue;
 
@@ -157,7 +147,7 @@ namespace SS.Inspectors
 
             UpdateIndexOnNamesListUpdate(nodeGroupNames, selectedNodeGroupIndexProperty, oldSelectedNodeGroupIndex, oldNodeGroupName, isOldNodeGroupNull);
 
-            selectedNodeGroupIndexProperty.intValue = SSInspectorUtility.DrawPopup("Node Group", selectedNodeGroupIndexProperty, nodeGroupNames.ToArray());
+            selectedNodeGroupIndexProperty.intValue = InspectorUtility.DrawPopup("Node Group", selectedNodeGroupIndexProperty, nodeGroupNames.ToArray());
 
             string selectedNodeGroupName = nodeGroupNames[selectedNodeGroupIndexProperty.intValue];
 
@@ -166,14 +156,14 @@ namespace SS.Inspectors
 
             nodeGroupProperty.objectReferenceValue = selectedNodeGroup;
 
-            SSInspectorUtility.DrawDisabledFields(() => nodeGroupProperty.DrawPropertyField());
+            InspectorUtility.DrawDisabledFields(() => nodeGroupProperty.DrawPropertyField());
 
-            SSInspectorUtility.DrawSpace();
+            InspectorUtility.DrawSpace();
         }
 
         private void DrawNodeArea(List<string> nodeNames, string nodeFolderPath)
         {
-            SSInspectorUtility.DrawHeader("Node");
+            InspectorUtility.DrawHeader("Node");
 
             int oldSelectedNodeIndex = selectedNodeIndexProperty.intValue;
 
@@ -185,7 +175,7 @@ namespace SS.Inspectors
 
             UpdateIndexOnNamesListUpdate(nodeNames, selectedNodeIndexProperty, oldSelectedNodeIndex, oldNodeName, isOldNodeNull);
 
-            selectedNodeIndexProperty.intValue = SSInspectorUtility.DrawPopup("Node", selectedNodeIndexProperty, nodeNames.ToArray());
+            selectedNodeIndexProperty.intValue = InspectorUtility.DrawPopup("Node", selectedNodeIndexProperty, nodeNames.ToArray());
 
             string selectedNodeName = nodeNames[selectedNodeIndexProperty.intValue];
 
@@ -193,16 +183,16 @@ namespace SS.Inspectors
 
             nodeProperty.objectReferenceValue = selectedNode;
 
-            SSInspectorUtility.DrawDisabledFields(() => nodeProperty.DrawPropertyField());
+            InspectorUtility.DrawDisabledFields(() => nodeProperty.DrawPropertyField());
         }
 
         private void StopDrawing(string reason, MessageType messageType = MessageType.Info)
         {
-            SSInspectorUtility.DrawHelpBox(reason, messageType);
+            InspectorUtility.DrawHelpBox(reason, messageType);
 
-            SSInspectorUtility.DrawSpace();
+            InspectorUtility.DrawSpace();
 
-            SSInspectorUtility.DrawHelpBox("You need to select a Node for this component to work properly at Runtime!", MessageType.Warning);
+            InspectorUtility.DrawHelpBox("You need to select a Node for this component to work properly at Runtime!", MessageType.Warning);
 
             serializedObject.ApplyModifiedProperties();
         }

@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
 
 public class UIManager : MonoBehaviour
 {
     public Gauges[] gauges;
-    private Dictionary<SpaceshipManager.System, Image> gaugeReferences = new Dictionary<SpaceshipManager.System, Image>();
+    private Dictionary<SpaceshipManager.System, Image> gaugeReferences = new();
     public Transform charactersUIParent;
     public List<CharacterUI> charactersUI;
-    private List<CharacterIcon> characterIcons = new List<CharacterIcon>();
+    private List<CharacterIcon> characterIcons = new();
     public CharacterUI characterUIPrefab;
     public Transform taskNotificationParent;
     public Transform taskParent;

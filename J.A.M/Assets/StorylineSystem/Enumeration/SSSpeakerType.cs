@@ -3,7 +3,9 @@ namespace SS.Enumerations
     public enum SSSpeakerType
     {
         Random,
+        RandomOther,
         Sensor,
+        Expert,
         Character1,
         Character2,
         Character3,
@@ -15,14 +17,6 @@ namespace SS.Enumerations
         NotAssigned1,
         NotAssigned2,
         NotAssigned3,
-        NotAssigned4,
-        Expert1,
-        Expert2,
-        Expert3,
-        Expert4,
-        Other1,
-        Other2,
-        Other3,
-        Other4,
+        NotAssigned4
     }
 }

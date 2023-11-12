@@ -8,7 +8,6 @@ namespace SS.Elements
     using Windows;
     using Data.Save;
     using Enumerations;
-    using Utilities;
 
     public class SSRewardNode : SSNode
     {
@@ -53,18 +52,18 @@ namespace SS.Elements
 
             customDataContainer.AddToClassList("ss-node__custom-data-container");
 
-            Button addRewardButton = SSElementUtility.CreateButton("Add Reward", () =>
+            Button addRewardButton = ElementUtility.CreateButton("Add Reward", () =>
             {
                 RewardTypes.Add(SSRewardType.Money);
                 VisualElement rewardDataContainer = new();
 
                 var index = RewardTypes.Count - 1;
-                EnumField enumField = SSElementUtility.CreateEnumField(RewardTypes[index], "Reward :", callback =>
+                EnumField enumField = ElementUtility.CreateEnumField(RewardTypes[index], "Reward :", callback =>
                 {
                     RewardTypes[index] = (SSRewardType)callback.newValue;
                 });
 
-                Button removeRewardButton = SSElementUtility.CreateButton("X", () =>
+                Button removeRewardButton = ElementUtility.CreateButton("X", () =>
                 {
                     if (RewardTypes.Count == 1)
                     {
@@ -92,12 +91,12 @@ namespace SS.Elements
 
                 var rewardIndex = index;
                 
-                EnumField enumField = SSElementUtility.CreateEnumField(RewardTypes[rewardIndex], "Reward :", callback =>
+                EnumField enumField = ElementUtility.CreateEnumField(RewardTypes[rewardIndex], "Reward", callback =>
                 {
                     RewardTypes[rewardIndex] = (SSRewardType)callback.newValue;
                 });
 
-                Button removeRewardButton = SSElementUtility.CreateButton("X", () =>
+                Button removeRewardButton = ElementUtility.CreateButton("X", () =>
                 {
                     if (RewardTypes.Count == 1)
                     {

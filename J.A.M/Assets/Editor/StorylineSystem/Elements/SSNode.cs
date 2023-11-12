@@ -8,7 +8,6 @@ using UnityEngine.UIElements;
 namespace SS.Elements
 {
     using Enumerations;
-    using Utilities;
     using Windows;
     using Data.Save;
     
@@ -43,7 +42,7 @@ namespace SS.Elements
         {
             /* TITLE CONTAINER */
 
-            TextField nodeNameTextField = SSElementUtility.CreateTextField(NodeName, null, callback =>
+            TextField nodeNameTextField = ElementUtility.CreateTextField(NodeName, null, callback =>
             {
                 TextField target = (TextField) callback.target;
 

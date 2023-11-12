@@ -1,8 +1,9 @@
-using System;
 using UnityEngine;
 
 public class CharacterBehaviour : MonoBehaviour
 {
+    public CharacterSpeaker speaker;
+    
     [SerializeField] private CharacterDataScriptable data;
     [SerializeField] private float moveSpeed;
     
@@ -14,7 +15,6 @@ public class CharacterBehaviour : MonoBehaviour
     
     [Range(0,100)]
     private float mood = 50.0f;
-
     
     [Range(0,100)]
     private float volition = 10.0f;
@@ -24,7 +24,6 @@ public class CharacterBehaviour : MonoBehaviour
     private bool isWorking;
     private bool isTaskLeader;
     private TaskNotification currentTask;
-
 
     private void Start()
     {

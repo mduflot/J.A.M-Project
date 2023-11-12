@@ -369,9 +369,11 @@ namespace SS.Windows
                     {
                         SSNode nextNode = (SSNode) edge.input.node;
 
+                        SSNode previousNode = (SSNode) edge.output.node;
+
                         SSChoiceSaveData choiceData = (SSChoiceSaveData) edge.output.userData;
 
-                        choiceData.NodeID = nextNode.ID;
+                        choiceData.NextNodeID = nextNode.ID;
                     }
                 }
 
@@ -388,9 +390,9 @@ namespace SS.Windows
 
                         Edge edge = (Edge) element;
 
-                        SSChoiceSaveData choiceData = (SSChoiceSaveData)edge.output.userData;
+                        SSChoiceSaveData choiceData = (SSChoiceSaveData) edge.output.userData;
 
-                        choiceData.NodeID = "";
+                        choiceData.NextNodeID = "";
                     }
                 }
                 

@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,12 +9,13 @@ public class TaskNotification : MonoBehaviour
     [SerializeField] private Image completionGauge;
     private float duration;
     private float timeLeft;
-    public bool isCompleted = false;
-    private bool taskStarted = false;
+    public bool isCompleted;
+    private bool taskStarted;
     [SerializeField] private Image taskIcon;
     private List<CharacterBehaviour> leaderCharacters = new();
     private List<CharacterBehaviour> assistantCharacters = new();
-    
+    public List<Tuple<Sprite, string, string>> dialogues;
+
     public bool TaskStarted
     {
         get => taskStarted;
@@ -29,7 +30,7 @@ public class TaskNotification : MonoBehaviour
     {
         get => assistantCharacters;
     }
-    
+
     public void StartTask(TaskDataScriptable t, List<CharacterUISlot> characters)
     {
         taskData = t;
@@ -49,7 +50,10 @@ public class TaskNotification : MonoBehaviour
                 }
             }
         }
-        duration = assistantCharacters.Count > 0 ? t.baseDuration/(Mathf.Pow(assistantCharacters.Count + leaderCharacters.Count, taskData.taskHelpFactor)) : t.baseDuration; // based on formula time/helpers^0.75
+
+        duration = assistantCharacters.Count > 0
+            ? t.baseDuration / (Mathf.Pow(assistantCharacters.Count + leaderCharacters.Count, taskData.taskHelpFactor))
+            : t.baseDuration; // based on formula time/helpers^0.75
         duration *= TimeTickSystem.ticksPerHour;
         taskStarted = true;
     }
@@ -58,17 +62,18 @@ public class TaskNotification : MonoBehaviour
     {
         GameManager.Instance.UIManager.SpawnTaskUI(this);
     }
-    
-    public void InitTask(TaskDataScriptable t)
+
+    public void InitTask(TaskDataScriptable t, List<Tuple<Sprite, string, string>> dialoguesTask = null)
     {
         taskData = t;
         timeLeft = t.timeLeft;
         taskIcon.sprite = t.taskIcon;
+        dialogues = dialoguesTask;
     }
 
     public void UpdateTask()
     {
-        if(!taskStarted) return;
+        if (!taskStarted) return;
         if (duration > 0)
         {
             duration -= TimeTickSystem.timePerTick;
@@ -80,7 +85,7 @@ public class TaskNotification : MonoBehaviour
             OnTaskComplete();
         }
     }
-    
+
     private void OnTaskComplete()
     {
         foreach (var outcome in taskData.outcomes)
@@ -89,6 +94,7 @@ public class TaskNotification : MonoBehaviour
             outcome.assistantCharacters = assistantCharacters;
             outcome.Outcome();
         }
+
         isCompleted = true;
         taskData = null;
         ResetCharacters();
@@ -102,16 +108,17 @@ public class TaskNotification : MonoBehaviour
         {
             character.StopTask();
         }
+
         foreach (var character in assistantCharacters)
         {
             character.StopTask();
         }
     }
+
     public void CancelTask()
     {
         taskData = null;
         ResetCharacters();
         Destroy(gameObject);
     }
-    
 }

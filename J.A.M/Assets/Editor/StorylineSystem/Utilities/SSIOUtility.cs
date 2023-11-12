@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SS.Data;
-using SS.Enumerations;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace SS.Utilities
 {
+    using Data;
     using Data.Save;
     using Elements;
+    using Enumerations;
     using ScriptableObjects;
     using Windows;
 
@@ -195,7 +195,10 @@ namespace SS.Utilities
                     NodeType = dialogueNode.NodeType,
                     Position = dialogueNode.GetPosition().position,
                     Text = dialogueNode.Text,
-                    SpeakerType = dialogueNode.SpeakerType
+                    SpeakerType = dialogueNode.SpeakerType,
+                    Duration = dialogueNode.Duration,
+                    IsDialogueTask = dialogueNode.IsDialogueTask,
+                    PercentageTask = dialogueNode.PercentageTask
                 };
                 
                 graphData.Nodes.Add(nodeData);
@@ -276,7 +279,7 @@ namespace SS.Utilities
                 }
 
                 nodeSO.Initialize(dialogueNode.NodeName, dialogueNode.Text, ConvertNodeChoicesToNodeChoicesData(dialogueNode.Choices), dialogueNode.NodeType,
-                    dialogueNode.IsStartingNode(), dialogueNode.SpeakerType);
+                    dialogueNode.IsStartingNode(), dialogueNode.SpeakerType, dialogueNode.Duration, dialogueNode.IsDialogueTask, dialogueNode.PercentageTask);
 
                 createdNodes.Add(dialogueNode.ID, nodeSO);
 
@@ -361,12 +364,12 @@ namespace SS.Utilities
                 {
                     SSChoiceSaveData nodeChoice = node.Choices[choiceIndex];
 
-                    if (string.IsNullOrEmpty(nodeChoice.NodeID))
+                    if (string.IsNullOrEmpty(nodeChoice.NextNodeID))
                     {
                         continue;
                     }
 
-                    nodeSO.Choices[choiceIndex].NextNode = createdNodes[nodeChoice.NodeID];
+                    nodeSO.Choices[choiceIndex].NextNode = createdNodes[nodeChoice.NextNodeID];
 
                     SaveAsset(nodeSO);
                 }
@@ -472,6 +475,9 @@ namespace SS.Utilities
                 {
                     ((SSDialogueNode)node).Text = ((SSDialogueNodeSaveData)nodeData).Text;
                     ((SSDialogueNode)node).SpeakerType = ((SSDialogueNodeSaveData)nodeData).SpeakerType;
+                    ((SSDialogueNode)node).Duration = ((SSDialogueNodeSaveData)nodeData).Duration;
+                    ((SSDialogueNode)node).IsDialogueTask = ((SSDialogueNodeSaveData)nodeData).IsDialogueTask;
+                    ((SSDialogueNode)node).PercentageTask = ((SSDialogueNodeSaveData)nodeData).PercentageTask;
                 }
                 else if (nodeData.NodeType == SSNodeType.Task)
                 {
@@ -509,12 +515,12 @@ namespace SS.Utilities
                 {
                     SSChoiceSaveData choiceData = (SSChoiceSaveData) choicePort.userData;
 
-                    if (string.IsNullOrEmpty(choiceData.NodeID))
+                    if (string.IsNullOrEmpty(choiceData.NextNodeID))
                     {
                         continue;
                     }
 
-                    SSNode nextNode = loadedNodes[choiceData.NodeID];
+                    SSNode nextNode = loadedNodes[choiceData.NextNodeID];
 
                     Port nextNodeInputPort = (Port) nextNode.inputContainer.Children().First();
 
@@ -636,11 +642,23 @@ namespace SS.Utilities
             {
                 SSChoiceSaveData choiceData;
                 
-                choiceData = new SSChoiceSaveData()
+                if (choice is SSChoiceTaskSaveData choiceTask)
                 {
-                    Text = choice.Text,
-                    NodeID = choice.NodeID
-                };
+                    choiceData = new SSChoiceTaskSaveData()
+                    {
+                        Text = choiceTask.Text,
+                        NextNodeID = choiceTask.NextNodeID,
+                        ChoiceTypes = choiceTask.ChoiceTypes
+                    };
+                }
+                else
+                {
+                    choiceData = new SSChoiceSaveData()
+                    {
+                        Text = choice.Text,
+                        NextNodeID = choice.NextNodeID
+                    };
+                }
                 
                 choices.Add(choiceData);
             }
