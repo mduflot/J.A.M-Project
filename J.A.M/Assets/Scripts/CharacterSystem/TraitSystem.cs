@@ -10,10 +10,10 @@ public class TraitSystem
     [Serializable] public class TraitEvent : UnityEvent<string> {}
 
     [Serializable]
-    public class TraitEventDictionary <T>
+    public class TraitEventElement <T>
     {
         public T trait;
-        public TraitEvent TraitEvent;
+        public TraitEvent traitEvent;
     }
     
     public static TraitsData.Job MatchJobFlags(TraitsData.Job job, TraitsData.Job flagsToMatch)
@@ -73,6 +73,39 @@ public class TraitSystem
         }
     }
 
+    public static void ApplyBonuses(CharacterBehaviour character, TaskNotification tn)
+    {
+        Debug.Log($"Applying bonuses for : {character.name}");
+        
+        Debug.Log($"Expected Job : {tn.taskTraits.GetJob()}");
+        Debug.Log($"Character Job : {character.GetJob()}");
+        TraitsData.Job matchedJob = MatchJobFlags(character.GetJob(), tn.taskTraits.GetJob());
+        TraitsData.PositiveTraits pTraits = MatchPositiveFlags(character.GetPositiveTraits(), tn.taskTraits.GetPositiveTraits());
+        TraitsData.NegativeTraits nTraits = MatchNegativeFlags(character.GetNegativeTraits(), tn.taskTraits.GetNegativeTraits());
+
+        ApplyJobBonus(tn, matchedJob);
+
+        Debug.Log($"PT : {pTraits}");
+        //Apply positive bonus for all flags
+        foreach(TraitsData.PositiveTraits matchedValue in Enum.GetValues(typeof(TraitsData.PositiveTraits)))
+        {
+            if((matchedValue & pTraits) != 0)
+            {
+                ApplyPositiveTraitBonus(tn, matchedValue);
+            }
+        }
+
+        Debug.Log($"PT : {nTraits}");
+        //Apply negative bonus for all flags
+        foreach(TraitsData.NegativeTraits matchedValue in Enum.GetValues(typeof(TraitsData.NegativeTraits)))
+        {
+            if((matchedValue & nTraits) != 0)
+            {
+                ApplyNegativeTraitBonus(tn, matchedValue);
+            }
+        }
+    }
+    
     // call like : ApplyJobBonus(MatchJobFlags(NPC.Job, Task.Job))
     // returns volition bonus
     public static float ApplyJobBonus(TraitsData.Job jobMatch)
@@ -99,26 +132,30 @@ public class TraitSystem
                 return 0.0f;
         }
     }
-    public static float ApplyJobBonus(TaskDataScriptable ts)
+    public static float ApplyJobBonus(TaskNotification tn, TraitsData.Job jobMatch)
     {
-        ts.taskJobEvents[0].TraitEvent.Invoke("test");
-        switch(ts.taskTraits.GetJob())
+        switch(jobMatch)
         {
             case TraitsData.Job.None:
                 //No bonus ?
-                Debug.Log("no job");
+                if(tn.taskJobEvents.ContainsKey(TraitsData.Job.None))
+                    tn.taskJobEvents[TraitsData.Job.None].Invoke("None :");
                 return 0.0f;
             case TraitsData.Job.Soldier:
-                Debug.Log("soldier");
+                if(tn.taskJobEvents.ContainsKey(TraitsData.Job.Soldier))
+                    tn.taskJobEvents[TraitsData.Job.Soldier].Invoke("Soldier :");
                 return 0.0f;
             case TraitsData.Job.Electrician:
-                Debug.Log("electrician");
+                if(tn.taskJobEvents.ContainsKey(TraitsData.Job.Electrician))
+                    tn.taskJobEvents[TraitsData.Job.Electrician].Invoke("Electrician : ");
                 return 7.0f;
             case TraitsData.Job.Gardener:
-                Debug.Log("gardener");
+                if(tn.taskJobEvents.ContainsKey(TraitsData.Job.Gardener))
+                    tn.taskJobEvents[TraitsData.Job.Gardener].Invoke("Gardener : ");
                 return 5.0f;
             case TraitsData.Job.Mechanic:
-                Debug.Log("mechanic");
+                if(tn.taskJobEvents.ContainsKey(TraitsData.Job.Mechanic))
+                    tn.taskJobEvents[TraitsData.Job.Mechanic].Invoke("Electrician : ");
                 return 1.0f;
             default:
                 return 0.0f;
@@ -147,6 +184,35 @@ public class TraitSystem
             case TraitsData.PositiveTraits.GreenHanded:
                 // + 15 food généré ?
                 Debug.Log("greenhanded guy");
+                break;
+            default:
+                break;
+        }
+    }
+    public static void ApplyPositiveTraitBonus(TaskNotification tn, TraitsData.PositiveTraits ptMatch)
+    {
+        switch(ptMatch)
+        {
+            case TraitsData.PositiveTraits.None:
+                //No bonus ?
+                if(tn.taskPTEvents.ContainsKey(TraitsData.PositiveTraits.None))
+                    tn.taskPTEvents[TraitsData.PositiveTraits.None].Invoke("None :");
+                break;
+            case TraitsData.PositiveTraits.Crafty:
+                if(tn.taskPTEvents.ContainsKey(TraitsData.PositiveTraits.Crafty))
+                    tn.taskPTEvents[TraitsData.PositiveTraits.Crafty].Invoke("Crafty :");
+                break;
+            case TraitsData.PositiveTraits.Smart:
+                if(tn.taskPTEvents.ContainsKey(TraitsData.PositiveTraits.Smart))
+                    tn.taskPTEvents[TraitsData.PositiveTraits.Smart].Invoke("Smart :");
+                break;
+            case TraitsData.PositiveTraits.Quick:
+                if(tn.taskPTEvents.ContainsKey(TraitsData.PositiveTraits.Quick))
+                    tn.taskPTEvents[TraitsData.PositiveTraits.Quick].Invoke("Quick :");
+                break;
+            case TraitsData.PositiveTraits.GreenHanded:
+                if(tn.taskPTEvents.ContainsKey(TraitsData.PositiveTraits.GreenHanded))
+                    tn.taskPTEvents[TraitsData.PositiveTraits.GreenHanded].Invoke("Greenhanded :");
                 break;
             default:
                 break;
@@ -182,6 +248,35 @@ public class TraitSystem
         }
     }
 
+    public static void ApplyNegativeTraitBonus(TaskNotification tn, TraitsData.NegativeTraits ntMatch)
+    {
+        switch(ntMatch)
+        {
+            case TraitsData.NegativeTraits.None:
+                if(tn.taskNTEvents.ContainsKey(TraitsData.NegativeTraits.None))
+                    tn.taskNTEvents[TraitsData.NegativeTraits.None].Invoke("None :");
+                break;
+            case TraitsData.NegativeTraits.Slow:
+                if(tn.taskNTEvents.ContainsKey(TraitsData.NegativeTraits.Slow))
+                    tn.taskNTEvents[TraitsData.NegativeTraits.Slow].Invoke("Slow :");
+                break;
+            case TraitsData.NegativeTraits.Dull:
+                if(tn.taskNTEvents.ContainsKey(TraitsData.NegativeTraits.Dull))
+                    tn.taskNTEvents[TraitsData.NegativeTraits.Dull].Invoke("Dull :");
+                break;
+            case TraitsData.NegativeTraits.Unfocused:
+                if(tn.taskNTEvents.ContainsKey(TraitsData.NegativeTraits.Unfocused))
+                    tn.taskNTEvents[TraitsData.NegativeTraits.Unfocused].Invoke("Unfocused :");
+                break;
+            case TraitsData.NegativeTraits.Depressed:
+                if(tn.taskNTEvents.ContainsKey(TraitsData.NegativeTraits.Depressed))
+                    tn.taskNTEvents[TraitsData.NegativeTraits.Depressed].Invoke("Depressed :");
+                break;
+            default:
+                break;
+        }
+    }
+    
     public static void ApplyStatBonus(TraitsData.StatTraits st)
     {
         switch (st)

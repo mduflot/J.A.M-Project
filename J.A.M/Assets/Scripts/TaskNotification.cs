@@ -14,6 +14,12 @@ public class TaskNotification : MonoBehaviour
     [SerializeField] private Image taskIcon;
     private List<CharacterBehaviour> leaderCharacters = new();
     private List<CharacterBehaviour> assistantCharacters = new();
+
+    public TraitsData.Traits taskTraits;
+    public Dictionary<TraitsData.Job, TraitSystem.TraitEvent> taskJobEvents = new();
+    public Dictionary<TraitsData.PositiveTraits, TraitSystem.TraitEvent> taskPTEvents = new();
+    public Dictionary<TraitsData.NegativeTraits, TraitSystem.TraitEvent> taskNTEvents = new();
+
     
     public bool TaskStarted
     {
@@ -49,6 +55,22 @@ public class TaskNotification : MonoBehaviour
                 }
             }
         }
+
+        taskTraits = t.taskTraits;
+        
+        foreach (var elem in taskData.taskJobEvents)
+        {
+            taskJobEvents.Add(elem.trait, elem.traitEvent);
+        }
+        foreach (var elem in taskData.taskPTEvents)
+        {
+            taskPTEvents.Add(elem.trait, elem.traitEvent);
+        }
+        foreach (var elem in taskData.taskNTEvents)
+        {
+            taskNTEvents.Add(elem.trait, elem.traitEvent);
+        }
+        
         duration = assistantCharacters.Count > 0 ? t.baseDuration/(Mathf.Pow(assistantCharacters.Count + leaderCharacters.Count, taskData.taskHelpFactor)) : t.baseDuration; // based on formula time/helpers^0.75
         duration *= TimeTickSystem.ticksPerHour;
         taskStarted = true;
@@ -86,6 +108,10 @@ public class TaskNotification : MonoBehaviour
         foreach (var outcome in taskData.outcomes)
         {
             outcome.Outcome(this);
+            foreach (var leader in LeaderCharacters)
+            {
+                TraitSystem.ApplyBonuses(leader, this);
+            }
         }
         isCompleted = true;
         taskData = null;

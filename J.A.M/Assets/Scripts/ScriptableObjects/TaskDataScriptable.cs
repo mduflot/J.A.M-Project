@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Task/TaskData", fileName = "TaskData")]
@@ -16,8 +17,10 @@ public class TaskDataScriptable : ScriptableObject
     public SpaceshipManager.ShipRooms room;
 
     public TraitsData.Traits taskTraits;
-    public TraitSystem.TraitEventDictionary<TraitsData.Job>[] taskJobEvents;
-    
+    public TraitSystem.TraitEventElement<TraitsData.Job>[] taskJobEvents;
+    public TraitSystem.TraitEventElement<TraitsData.PositiveTraits>[] taskPTEvents;
+    public TraitSystem.TraitEventElement<TraitsData.NegativeTraits>[] taskNTEvents;
+
     [Header("Permanent Task")]
     public bool isPermanent;
     public BaseTaskOutcome[] outcomes;

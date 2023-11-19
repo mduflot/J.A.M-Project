@@ -66,7 +66,7 @@ public class SpaceshipManager : MonoBehaviour
         }
     }
 
-    public void Test(string arg) { Debug.Log("test : " + arg);}
+    public void Test(string arg) { Debug.Log($"test : {arg}");}
     
     private void Initialize()
     {
