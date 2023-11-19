@@ -74,7 +74,7 @@ namespace SS.Windows
         {
             rootVisualElement.AddStyleSheets("StorylineSystem/SSVariables.uss");
         }
-        
+
         #region Toolbar Actions
 
         private void Save()
@@ -90,38 +90,39 @@ namespace SS.Windows
             SSIOUtility.Initialize(graphView, fileNameTextField.value);
             SSIOUtility.Save();
         }
-        
+
         private void Load()
         {
-            string filePath = EditorUtility.OpenFilePanel("Node Graphs", "Assets/Editor/StorylineSystem/Graphs", "asset");
+            string filePath =
+                EditorUtility.OpenFilePanel("Node Graphs", "Assets/Editor/StorylineSystem/Graphs", "asset");
 
             if (string.IsNullOrEmpty(filePath))
             {
                 return;
             }
-            
+
             Clear();
-            
+
             SSIOUtility.Initialize(graphView, Path.GetFileNameWithoutExtension(filePath));
             SSIOUtility.Load();
         }
-        
+
         private void Clear()
         {
             graphView.ClearGraph();
         }
-        
+
         private void ResetGraph()
         {
             Clear();
-            
+
             UpdateFileName(defaultFileName);
         }
-        
+
         private void ToggleMiniMap()
         {
             graphView.ToggleMiniMap();
-            
+
             miniMapButton.ToggleInClassList(".ss-toolbar__button__selected");
         }
 
@@ -135,7 +136,7 @@ namespace SS.Windows
         {
             fileNameTextField.value = newFileName;
         }
-        
+
         public void EnableSaving()
         {
             saveButton.SetEnabled(true);

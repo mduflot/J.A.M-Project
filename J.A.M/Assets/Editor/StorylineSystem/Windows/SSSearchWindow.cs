@@ -6,11 +6,12 @@ namespace SS.Windows
 {
     using Elements;
     using Enumerations;
+
     public class SSSearchWindow : ScriptableObject, ISearchWindowProvider
     {
         private SSGraphView graphView;
         private Texture2D indentationIcon;
-        
+
         public void Initialize(SSGraphView ssGraphView)
         {
             graphView = ssGraphView;
@@ -19,7 +20,7 @@ namespace SS.Windows
             indentationIcon.SetPixel(0, 0, Color.clear);
             indentationIcon.Apply();
         }
-        
+
         public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
         {
             List<SearchTreeEntry> searchTreeEntries = new List<SearchTreeEntry>()
@@ -94,10 +95,11 @@ namespace SS.Windows
 
                 case SSNodeType.Time:
                 {
-                    SSTimeNode timeNode = (SSTimeNode)graphView.CreateNode("TimeName", SSNodeType.Time, localMousePosition);
+                    SSTimeNode timeNode =
+                        (SSTimeNode)graphView.CreateNode("TimeName", SSNodeType.Time, localMousePosition);
 
                     graphView.AddElement(timeNode);
-                    
+
                     return true;
                 }
 
