@@ -13,13 +13,15 @@ namespace SS.Windows
 
     public class SSGraphView : GraphView
     {
+        public SSStatus Status;
+        public SerializableDictionary<string, SSGroupErrorData> Groups;
+
         private SSEditorWindow editorWindow;
         private SSSearchWindow searchWindow;
 
         private MiniMap miniMap;
 
         private SerializableDictionary<string, SSNodeErrorData> ungroupedNodes;
-        private SerializableDictionary<string, SSGroupErrorData> groups;
         private SerializableDictionary<Group, SerializableDictionary<string, SSNodeErrorData>> groupedNodes;
 
         private int nameErrorsAmount;
@@ -49,7 +51,7 @@ namespace SS.Windows
             editorWindow = ssEditorWindow;
 
             ungroupedNodes = new SerializableDictionary<string, SSNodeErrorData>();
-            groups = new SerializableDictionary<string, SSGroupErrorData>();
+            Groups = new SerializableDictionary<string, SSGroupErrorData>();
             groupedNodes = new SerializableDictionary<Group, SerializableDictionary<string, SSNodeErrorData>>();
 
             AddManipulators();
@@ -466,22 +468,22 @@ namespace SS.Windows
         {
             string groupName = group.title.ToLower();
 
-            if (!groups.ContainsKey(groupName))
+            if (!Groups.ContainsKey(groupName))
             {
                 SSGroupErrorData groupErrorData = new SSGroupErrorData();
 
                 groupErrorData.Groups.Add(group);
 
-                groups.Add(groupName, groupErrorData);
+                Groups.Add(groupName, groupErrorData);
 
                 return;
             }
 
-            List<SSGroup> groupsList = groups[groupName].Groups;
+            List<SSGroup> groupsList = Groups[groupName].Groups;
 
             groupsList.Add(group);
 
-            Color errorColor = groups[groupName].ErrorData.Color;
+            Color errorColor = Groups[groupName].ErrorData.Color;
 
             group.SetErrorStyle(errorColor);
 
@@ -497,7 +499,7 @@ namespace SS.Windows
         {
             string oldGroupName = group.OldTitle.ToLower();
 
-            List<SSGroup> groupsList = groups[oldGroupName].Groups;
+            List<SSGroup> groupsList = Groups[oldGroupName].Groups;
 
             groupsList.Remove(group);
 
@@ -514,7 +516,7 @@ namespace SS.Windows
 
             if (groupsList.Count == 0)
             {
-                groups.Remove(oldGroupName);
+                Groups.Remove(oldGroupName);
             }
         }
 
@@ -667,7 +669,7 @@ namespace SS.Windows
         {
             graphElements.ForEach(graphElement => RemoveElement(graphElement));
 
-            groups.Clear();
+            Groups.Clear();
             groupedNodes.Clear();
             ungroupedNodes.Clear();
 

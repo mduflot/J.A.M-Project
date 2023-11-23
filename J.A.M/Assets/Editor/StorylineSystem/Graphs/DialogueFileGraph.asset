@@ -13,105 +13,70 @@ MonoBehaviour:
   m_Name: DialogueFileGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: DialogueFile
+  <Status>k__BackingField: 1
   <Groups>k__BackingField:
-  - <ID>k__BackingField: d4685afe-9e6f-4368-b78e-d937ebe537be
-    <Name>k__BackingField: FirstDialogue
-    <Position>k__BackingField: {x: 111.200005, y: 106.40003}
+  - <ID>k__BackingField: dd54776a-02fa-4960-bd9e-66a361cd21c4
+    <Status>k__BackingField: 3
+    <Name>k__BackingField: Expert
+    <Position>k__BackingField: {x: 533, y: 156}
+  - <ID>k__BackingField: f5d2026c-8e26-497a-aced-ab256d2a5f3e
+    <Status>k__BackingField: 0
+    <Name>k__BackingField: Fire
+    <Position>k__BackingField: {x: 87, y: 171}
   <Nodes>k__BackingField:
-  - rid: 6273748743265714184
-  - rid: 6273748743265714185
-  - rid: 6273748743265714186
-  - rid: 6273748743265714187
+  - rid: 7018499915064803328
+  - rid: 7018499915064803329
   <OldGroupNames>k__BackingField:
-  - FirstDialogue
+  - Expert
+  - Fire
   <OldUngroupedNodeNames>k__BackingField: []
   <OldGroupedNodeNames>k__BackingField:
     list:
-    - Key: FirstDialogue
+    - Key: Fire
       Value:
-      - First
-      - Second
-      - Third
-      - Fourth
+      - DialogueNode
+    - Key: Expert
+      Value:
+      - DialogueNode
   references:
     version: 2
     RefIds:
-    - rid: 6273748743265714184
+    - rid: 7018499915064803328
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
-        <ID>k__BackingField: 7c1063bf-6975-4a73-bf88-b1f9a151e46d
-        <Name>k__BackingField: First
+        <ID>k__BackingField: 14325cf1-7818-419d-8add-f8c975b48900
+        <Name>k__BackingField: DialogueNode
         <Choices>k__BackingField:
-        - rid: 6273748743265714188
-        <GroupID>k__BackingField: d4685afe-9e6f-4368-b78e-d937ebe537be
+        - rid: 7018499915064803330
+        <GroupID>k__BackingField: f5d2026c-8e26-497a-aced-ab256d2a5f3e
         <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 136.8, y: 166.40001}
-        <Text>k__BackingField: 'Hello ! '
+        <Position>k__BackingField: {x: 112, y: 230}
+        <Text>k__BackingField: Node text.
         <SpeakerType>k__BackingField: 0
-        <Duration>k__BackingField: 5
+        <Duration>k__BackingField: 1
         <IsDialogueTask>k__BackingField: 0
         <PercentageTask>k__BackingField: 50
-    - rid: 6273748743265714185
+    - rid: 7018499915064803329
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
-        <ID>k__BackingField: fd86dcf9-fa4d-4805-b094-28b3a8aabaaf
-        <Name>k__BackingField: Second
+        <ID>k__BackingField: 2976bd6c-bcb1-4cd9-b5ee-f9cb72c509dc
+        <Name>k__BackingField: DialogueNode
         <Choices>k__BackingField:
-        - rid: 6273748743265714189
-        <GroupID>k__BackingField: d4685afe-9e6f-4368-b78e-d937ebe537be
+        - rid: 7018499915064803331
+        <GroupID>k__BackingField: dd54776a-02fa-4960-bd9e-66a361cd21c4
         <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 392.8, y: 166.40001}
-        <Text>k__BackingField: How are you ?
-        <SpeakerType>k__BackingField: 1
-        <Duration>k__BackingField: 5
+        <Position>k__BackingField: {x: 558, y: 215}
+        <Text>k__BackingField: Node text.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
         <IsDialogueTask>k__BackingField: 0
         <PercentageTask>k__BackingField: 50
-    - rid: 6273748743265714186
-      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <ID>k__BackingField: 620970e6-3da4-43f7-ab47-25c2f56ae31f
-        <Name>k__BackingField: Third
-        <Choices>k__BackingField:
-        - rid: 6273748743265714190
-        <GroupID>k__BackingField: d4685afe-9e6f-4368-b78e-d937ebe537be
-        <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 700.8, y: 166.40001}
-        <Text>k__BackingField: 'Fine ! And you ? '
-        <SpeakerType>k__BackingField: 4
-        <Duration>k__BackingField: 5
-        <IsDialogueTask>k__BackingField: 0
-        <PercentageTask>k__BackingField: 50
-    - rid: 6273748743265714187
-      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <ID>k__BackingField: fa4ce778-34df-417c-bc3c-473461fef2af
-        <Name>k__BackingField: Fourth
-        <Choices>k__BackingField:
-        - rid: 6273748743265714191
-        <GroupID>k__BackingField: d4685afe-9e6f-4368-b78e-d937ebe537be
-        <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 992.8, y: 166.40001}
-        <Text>k__BackingField: Fine too ! Thank you !
-        <SpeakerType>k__BackingField: 5
-        <Duration>k__BackingField: 5
-        <IsDialogueTask>k__BackingField: 0
-        <PercentageTask>k__BackingField: 50
-    - rid: 6273748743265714188
+    - rid: 7018499915064803330
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
-        <NextNodeID>k__BackingField: fd86dcf9-fa4d-4805-b094-28b3a8aabaaf
-    - rid: 6273748743265714189
-      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <Text>k__BackingField: Next Node
-        <NextNodeID>k__BackingField: 620970e6-3da4-43f7-ab47-25c2f56ae31f
-    - rid: 6273748743265714190
-      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <Text>k__BackingField: Next Node
-        <NextNodeID>k__BackingField: fa4ce778-34df-417c-bc3c-473461fef2af
-    - rid: 6273748743265714191
+        <NextNodeID>k__BackingField: 
+    - rid: 7018499915064803331
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
