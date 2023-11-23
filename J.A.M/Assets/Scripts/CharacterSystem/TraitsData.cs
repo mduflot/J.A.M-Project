@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TraitsData
@@ -51,6 +49,12 @@ public class TraitsData
     public class Traits
     {
         [SerializeField] private SerializableTuple<Job, PositiveTraits, NegativeTraits> traits;
+        
+        public Traits(Job job, PositiveTraits positiveTraits, NegativeTraits negativeTraits)
+        {
+            traits = new SerializableTuple<Job, PositiveTraits, NegativeTraits>(job, positiveTraits, negativeTraits);
+        }
+        
         public Job GetJob()
         {
             return traits.Item1;

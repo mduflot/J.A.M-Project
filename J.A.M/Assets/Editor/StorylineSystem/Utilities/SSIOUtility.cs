@@ -213,8 +213,7 @@ namespace SS.Utilities
                     Choices = choices,
                     GroupID = taskNode.Group?.ID,
                     NodeType = taskNode.NodeType,
-                    Position = taskNode.GetPosition().position,
-                    TaskData = taskNode.TaskData
+                    Position = taskNode.GetPosition().position
                 };
                 
                 graphData.Nodes.Add(nodeData);
@@ -304,7 +303,7 @@ namespace SS.Utilities
                 }
 
                 nodeSO.Initialize(taskNode.NodeName, ConvertNodeChoicesToNodeChoicesData(taskNode.Choices), taskNode.NodeType,
-                    taskNode.IsStartingNode(), taskNode.TaskData);
+                    taskNode.IsStartingNode());
 
                 createdNodes.Add(taskNode.ID, nodeSO);
 
@@ -482,7 +481,7 @@ namespace SS.Utilities
                 }
                 else if (nodeData.NodeType == SSNodeType.Task)
                 {
-                    ((SSTaskNode)node).TaskData = ((SSTaskNodeSaveData)nodeData).TaskData;
+                    
                 }
                 else if (nodeData.NodeType == SSNodeType.Time)
                 {
