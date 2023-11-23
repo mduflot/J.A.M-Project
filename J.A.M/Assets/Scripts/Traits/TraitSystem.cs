@@ -83,13 +83,14 @@ public class TraitSystem
         TraitsData.PositiveTraits pTraits = MatchPositiveFlags(character.GetPositiveTraits(), tn.taskTraits.GetPositiveTraits());
         TraitsData.NegativeTraits nTraits = MatchNegativeFlags(character.GetNegativeTraits(), tn.taskTraits.GetNegativeTraits());
 
-        ApplyJobBonus(tn, matchedJob);
+        if((matchedJob & tn.taskTraits.GetJob()) != 0)
+            ApplyJobBonus(tn, matchedJob);
 
         Debug.Log($"PT : {pTraits}");
         //Apply positive bonus for all flags
         foreach(TraitsData.PositiveTraits matchedValue in Enum.GetValues(typeof(TraitsData.PositiveTraits)))
         {
-            if((matchedValue & pTraits) != 0)
+            if((matchedValue & pTraits) != 0 && (matchedValue & tn.taskTraits.GetPositiveTraits()) != 0)
             {
                 ApplyPositiveTraitBonus(tn, matchedValue);
             }
@@ -99,7 +100,7 @@ public class TraitSystem
         //Apply negative bonus for all flags
         foreach(TraitsData.NegativeTraits matchedValue in Enum.GetValues(typeof(TraitsData.NegativeTraits)))
         {
-            if((matchedValue & nTraits) != 0)
+            if((matchedValue & nTraits) != 0 && (matchedValue & tn.taskTraits.GetNegativeTraits()) != 0)
             {
                 ApplyNegativeTraitBonus(tn, matchedValue);
             }

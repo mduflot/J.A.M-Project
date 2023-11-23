@@ -50,6 +50,11 @@ public class CharacterBehaviour : MonoBehaviour
         CapStats();
     }
 
+    public void IncreaseVolition(float value)
+    {
+        volition += value;
+    }
+    
     private void CapStats()
     {
         mood = Mathf.Clamp(mood, 0, MaxMood);

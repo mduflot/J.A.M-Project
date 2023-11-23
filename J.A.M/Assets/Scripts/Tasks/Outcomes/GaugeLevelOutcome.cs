@@ -28,8 +28,8 @@ public class GaugeLevelOutcome : BaseTaskOutcome
             newGaugeValue = newGaugeValue/tn.LeaderCharacters.Count;
             Debug.Log(newGaugeValue);
 
-            if(tn.taskData.taskJobEvents.Length < 1 ) Debug.Log("No job events");
-            else TraitSystem.ApplyJobBonus(tn.taskData);
+            //if(tn.taskData.taskJobEvents.Length < 1 ) Debug.Log("No job events");
+            //else TraitSystem.ApplyJobBonus(tn.taskData);
             GameManager.Instance.SpaceshipManager.GaugeValueOperation(targetGauge, newGaugeValue);
         }
         else
