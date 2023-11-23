@@ -112,7 +112,7 @@ namespace SS
                 case SSSpeakerType.RandomOther:
                 {
                     tempCharacters = spaceshipManager.characters.Except(characters).ToList();
-                    actualSpeaker = spaceshipManager.characters[Random.Range(0, tempCharacters.Count)];
+                    actualSpeaker = tempCharacters[Random.Range(0, tempCharacters.Count)];
                     dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
                         actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
                     StartCoroutine(DisplayDialogue(actualSpeaker, nodeSO));

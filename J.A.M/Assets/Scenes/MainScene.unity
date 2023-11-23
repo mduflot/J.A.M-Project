@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893f73608c389a649b4e1d0522a649bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speaker: {fileID: 0}
   data: {fileID: 11400000, guid: eecd134c5ff2dd447a551e8f59ff27aa, type: 2}
   moveSpeed: 10
   traits:
@@ -257,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893f73608c389a649b4e1d0522a649bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speaker: {fileID: 0}
   data: {fileID: 11400000, guid: eefdd547100ada140ae03a793102445a, type: 2}
   moveSpeed: 10
   traits:
@@ -358,14 +360,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueLayout: {fileID: 1360174042}
-  nameSpeaker: {fileID: 1360174040}
-  dialogueText: {fileID: 1360174041}
   currentStoryline: {fileID: 908526471}
   spaceshipManager: {fileID: 1360174038}
-  nodeContainer: {fileID: 11400000, guid: 7c501749fcc44874f9deefe19b353aac, type: 2}
-  nodeGroup: {fileID: 11400000, guid: 1b22e7a27aec1934a8c6e49a0152d20f, type: 2}
-  node: {fileID: 11400000, guid: 592226f523bab234ab953a568c477657, type: 2}
+  nodeContainer: {fileID: 11400000, guid: 6204d0e7909433c49a9e2d98917f69a8, type: 2}
+  nodeGroup: {fileID: 11400000, guid: e63d7338a576b5e4db7f7475b1bdda4d, type: 2}
+  node: {fileID: 11400000, guid: 9c99308996e0c144a8563d2d82bd6e23, type: 2}
   groupedNodes: 1
   startingNodesOnly: 0
   selectedNodeGroupIndex: 0
@@ -814,6 +813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893f73608c389a649b4e1d0522a649bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speaker: {fileID: 0}
   data: {fileID: 11400000, guid: 4434a74d5d0dcf0439c81d6d2c6e6641, type: 2}
   moveSpeed: 10
   traits:
@@ -1306,36 +1306,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1360174037}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1360174040 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 728721238513933331, guid: f4b0ad034b47349458511baeb5fff145,
-    type: 3}
-  m_PrefabInstance: {fileID: 1360174037}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1360174041 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6117117999467705664, guid: f4b0ad034b47349458511baeb5fff145,
-    type: 3}
-  m_PrefabInstance: {fileID: 1360174037}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1360174042 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4606710602375931047, guid: f4b0ad034b47349458511baeb5fff145,
-    type: 3}
-  m_PrefabInstance: {fileID: 1360174037}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1407804381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1432,6 +1402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893f73608c389a649b4e1d0522a649bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speaker: {fileID: 0}
   data: {fileID: 11400000, guid: 0d86f15e24679ad49b13e3214559207a, type: 2}
   moveSpeed: 10
   traits:
