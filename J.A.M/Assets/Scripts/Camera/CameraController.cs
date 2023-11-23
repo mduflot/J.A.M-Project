@@ -1,12 +1,13 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed; 
+    [SerializeField] private float moveSpeed;
     [SerializeField] private float zoomSpeed;
     [SerializeField] private float maxZoom;
     [SerializeField] private float minZoom;
+    [SerializeField] private GameObject menuContainer;
 
     private Camera camera;
     private CameraInput movement;
@@ -40,7 +41,12 @@ public class CameraController : MonoBehaviour
     {
         zoomVector = Vector2.zero;
     }
-    
+
+    private void OnEscapePerformed(InputAction.CallbackContext obj)
+    {
+        menuContainer.SetActive(!menuContainer.activeSelf);
+    }
+
     private void Update()
     {
         transform.position += new Vector3(0, 0, zoomVector.y * zoomSpeed);
@@ -61,7 +67,7 @@ public class CameraController : MonoBehaviour
         cameraMovement.Move.canceled += OnMovementCancelled;
         cameraMovement.Zoom.performed += OnZoomPerformed;
         cameraMovement.Zoom.canceled += OnZoomCancelled;
-
+        cameraMovement.Escape.performed += OnEscapePerformed;
     }
 
     private void OnDisable()
@@ -71,5 +77,6 @@ public class CameraController : MonoBehaviour
         cameraMovement.Move.canceled -= OnMovementCancelled;
         cameraMovement.Zoom.performed -= OnZoomPerformed;
         cameraMovement.Zoom.canceled -= OnZoomCancelled;
+        cameraMovement.Escape.performed -= OnEscapePerformed;
     }
 }
