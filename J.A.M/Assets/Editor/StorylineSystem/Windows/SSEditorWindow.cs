@@ -57,6 +57,7 @@ namespace SS.Windows
             Button clearButton = ElementUtility.CreateButton("Clear", () => Clear());
             Button resetButton = ElementUtility.CreateButton("Reset", () => ResetGraph());
             miniMapButton = ElementUtility.CreateButton("MiniMap", () => ToggleMiniMap());
+            Button inspectorButton = ElementUtility.CreateButton("Inspector", () => ToggleInspector());
 
             toolbar.Add(fileNameTextField);
             toolbar.Add(saveButton);
@@ -64,6 +65,7 @@ namespace SS.Windows
             toolbar.Add(clearButton);
             toolbar.Add(resetButton);
             toolbar.Add(miniMapButton);
+            toolbar.Add(inspectorButton);
 
             toolbar.AddStyleSheets("StorylineSystem/SSToolbarStyles.uss");
 
@@ -124,6 +126,12 @@ namespace SS.Windows
             graphView.ToggleMiniMap();
 
             miniMapButton.ToggleInClassList(".ss-toolbar__button__selected");
+        }
+        
+        private void ToggleInspector()
+        {
+            SSInspectorWindow inspectorWindow = GetWindow<SSInspectorWindow>("SS Inspector");
+            inspectorWindow.Initialize(graphView);
         }
 
         #endregion

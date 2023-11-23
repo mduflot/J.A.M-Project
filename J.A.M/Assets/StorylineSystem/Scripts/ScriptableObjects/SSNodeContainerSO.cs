@@ -3,16 +3,19 @@ using UnityEngine;
 
 namespace SS.ScriptableObjects
 {
+    using Enumerations;
+
     public class SSNodeContainerSO : ScriptableObject
     {
         [field: SerializeField] public string FileName { get; set; }
+        [field: SerializeField] public SSStatus Status { get; set; }
         [field: SerializeField] public SerializableDictionary<SSNodeGroupSO, List<SSNodeSO>> NodeGroups { get; set; }
         [field: SerializeField] public List<SSNodeSO> UngroupedNodes { get; set; }
 
-        public void Initialize(string fileName)
+        public void Initialize(string fileName, SSStatus status)
         {
             FileName = fileName;
-
+            Status = status;
             NodeGroups = new SerializableDictionary<SSNodeGroupSO, List<SSNodeSO>>();
             UngroupedNodes = new List<SSNodeSO>();
         }
@@ -41,7 +44,7 @@ namespace SS.ScriptableObjects
                 {
                     continue;
                 }
-                
+
                 groupedNodeNames.Add(groupedNode.NodeName);
             }
 
@@ -51,13 +54,14 @@ namespace SS.ScriptableObjects
         public List<string> GetUngroupedNodeNames(bool startingNodesOnly)
         {
             List<string> ungroupedNodeNames = new List<string>();
-            
+
             foreach (SSNodeSO ungroupedNode in UngroupedNodes)
             {
                 if (startingNodesOnly && !ungroupedNode.IsStartingNode)
                 {
                     continue;
                 }
+
                 ungroupedNodeNames.Add(ungroupedNode.NodeName);
             }
 

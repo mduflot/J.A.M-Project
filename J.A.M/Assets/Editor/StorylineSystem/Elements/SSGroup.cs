@@ -4,9 +4,12 @@ using UnityEngine;
 
 namespace SS.Elements
 {
+    using Enumerations;
+
     public class SSGroup : Group
     {
         public string ID { get; set; }
+        public SSStatus Status { get; set; }
         public string OldTitle { get; set; }
 
         private Color defaultBorderColor;
