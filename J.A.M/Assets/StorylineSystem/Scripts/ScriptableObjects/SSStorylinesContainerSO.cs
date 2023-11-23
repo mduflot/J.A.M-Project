@@ -15,6 +15,7 @@ namespace SS.ScriptableObjects
 
             foreach (var storyline in Storylines)
             {
+                if (storyline.NodeContainer == null) continue;
                 if (storyline.NodeGroups.Count != 0) continue;
                 FillGroups(storyline);
             }
@@ -25,7 +26,8 @@ namespace SS.ScriptableObjects
             foreach (var nodeGroup in storyline.NodeContainer.NodeGroups)
             {
                 storyline.NodeGroups.Add(
-                    new SerializableTuple<SSStatus, SSNodeGroupSO>(SSStatus.Disabled, nodeGroup.Key));
+                    new SerializableTuple<SSStatus, SSNodeGroupSO, List<SerializableTuple<SSStatus, SSNodeGroupSO>>>(
+                        SSStatus.Disabled, nodeGroup.Key, new List<SerializableTuple<SSStatus, SSNodeGroupSO>>()));
             }
         }
 
@@ -37,7 +39,9 @@ namespace SS.ScriptableObjects
             foreach (var storyline in Storylines)
             {
                 if (storyline.NodeContainer == null) continue;
-                storyline.NodeGroups = new List<SerializableTuple<SSStatus, SSNodeGroupSO>>();
+                storyline.NodeGroups =
+                    new List<SerializableTuple<SSStatus, SSNodeGroupSO,
+                        List<SerializableTuple<SSStatus, SSNodeGroupSO>>>>();
                 FillGroups(storyline);
             }
         }

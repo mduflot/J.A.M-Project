@@ -121,13 +121,13 @@ namespace SS
                 }
                 case SSSpeakerType.Sensor:
                 {
-                    // TODO : Where ? How ? Is this a bubble in the spaceship ? 
+                    // TODO : Place on furniture / List of Furniture
                     // dialogues.Add(new Tuple<Sprite, string, string>(null, "Sensor", nodeSO.Text));
                     break;
                 }
                 case SSSpeakerType.Expert:
                 {
-                    // TODO : Where ? How ? Is this a bubble in the spaceship ? 
+                    // TODO : Place on furniture / List of Furniture
                     // dialogues.Add(new Tuple<Sprite, string, string>(null, "Expert", nodeSO.Text));
                     break;
                 }

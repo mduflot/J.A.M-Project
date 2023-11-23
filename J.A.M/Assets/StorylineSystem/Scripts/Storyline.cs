@@ -10,6 +10,6 @@ namespace SS
     {
         public SSNodeContainerSO NodeContainer;
         public SSStatus Status;
-        public List<SerializableTuple<SSStatus, SSNodeGroupSO>> NodeGroups;
+        public List<SerializableTuple<SSStatus, SSNodeGroupSO, List<SerializableTuple<SSStatus, SSNodeGroupSO>>>> NodeGroups;
     }
 }
