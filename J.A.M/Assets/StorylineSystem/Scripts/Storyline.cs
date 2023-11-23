@@ -9,7 +9,7 @@ namespace SS
     public class Storyline
     {
         public SSNodeContainerSO NodeContainer;
-        public SSStorylineStatus Status;
-        public List<SerializableTuple<SSStorylineStatus, SSNodeGroupSO>> NodeGroups;
+        public SSStatus Status;
+        public List<SerializableTuple<SSStatus, SSNodeGroupSO>> NodeGroups;
     }
 }
