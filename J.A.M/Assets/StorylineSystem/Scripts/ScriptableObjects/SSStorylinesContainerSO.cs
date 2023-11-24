@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using SS.Enumerations;
 using UnityEngine;
 
 namespace SS.ScriptableObjects
 {
+    using Enumerations;
+
     [CreateAssetMenu(fileName = "StorylinesContainer", menuName = "StorylineSystem/StorylinesContainer")]
     public class SSStorylinesContainerSO : ScriptableObject
     {

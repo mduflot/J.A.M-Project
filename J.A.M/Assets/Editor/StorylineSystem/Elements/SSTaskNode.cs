@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -12,15 +11,15 @@ namespace SS.Elements
 
     public class SSTaskNode : SSNode
     {
-        public string descriptionTask { get; set; }
-        public Sprite taskIcon { get; set; }
-        public float timeLeft { get; set; }
-        public float baseDuration { get; set; }
-        public int mandatorySlots { get; set; }
-        public int optionalSlots { get; set; }
-        public float taskHelpFactor { get; set; }
-        public SpaceshipManager.ShipRooms room { get; set; }
-        public bool isPermanent { get; set; }
+        public string DescriptionTask { get; set; }
+        public Sprite TaskIcon { get; set; }
+        public float TimeLeft { get; set; }
+        public float BaseDuration { get; set; }
+        public int MandatorySlots { get; set; }
+        public int OptionalSlots { get; set; }
+        public float TaskHelpFactor { get; set; }
+        public SpaceshipManager.ShipRooms Room { get; set; }
+        public bool IsPermanent { get; set; }
 
         private VisualElement customDataContainer = new();
 
@@ -29,36 +28,34 @@ namespace SS.Elements
             base.Initialize(nodeName, ssGraphView, position);
 
             NodeType = SSNodeType.Task;
-            descriptionTask = "Description Task";
-            taskIcon = null;
-            timeLeft = 0f;
-            baseDuration = 0f;
-            mandatorySlots = 1;
-            optionalSlots = 0;
-            taskHelpFactor = 0f;
-            room = SpaceshipManager.ShipRooms.Bedrooms;
-            isPermanent = false;
+            DescriptionTask = "Description Task";
+            TaskIcon = null;
+            TimeLeft = 0f;
+            BaseDuration = 0f;
+            MandatorySlots = 1;
+            OptionalSlots = 0;
+            TaskHelpFactor = 0.75f;
+            Room = SpaceshipManager.ShipRooms.Bedrooms;
+            IsPermanent = false;
 
-            SSChoiceTaskSaveData choiceAssignedData = new SSChoiceTaskSaveData()
+            SSChoiceTaskSaveData firstChoiceData = new SSChoiceTaskSaveData()
             {
-                Text = "Assigned",
-                ChoiceTypes = new List<SSChoiceType>()
-                {
-                    SSChoiceType.Assigned
-                }
+                Text = "FirstChoice",
+                Jobs = TraitsData.Job.None,
+                PositiveTraits = TraitsData.PositiveTraits.None,
+                NegativeTraits = TraitsData.NegativeTraits.None
             };
 
-            SSChoiceTaskSaveData choiceNotAssignedData = new SSChoiceTaskSaveData()
+            SSChoiceTaskSaveData lastChoiceData = new SSChoiceTaskSaveData()
             {
-                Text = "Not Assigned",
-                ChoiceTypes = new List<SSChoiceType>()
-                {
-                    SSChoiceType.NotAssigned
-                }
+                Text = "LastChoice",
+                Jobs = TraitsData.Job.None,
+                PositiveTraits = TraitsData.PositiveTraits.None,
+                NegativeTraits = TraitsData.NegativeTraits.None
             };
 
-            Choices.Add(choiceAssignedData);
-            Choices.Add(choiceNotAssignedData);
+            Choices.Add(firstChoiceData);
+            Choices.Add(lastChoiceData);
         }
 
         public override void Draw()
@@ -76,10 +73,9 @@ namespace SS.Elements
                 SSChoiceTaskSaveData choiceData = new SSChoiceTaskSaveData()
                 {
                     Text = "New Choice",
-                    ChoiceTypes = new List<SSChoiceType>()
-                    {
-                        SSChoiceType.Assigned
-                    }
+                    Jobs = TraitsData.Job.None,
+                    PositiveTraits = TraitsData.PositiveTraits.None,
+                    NegativeTraits = TraitsData.NegativeTraits.None
                 };
 
                 Choices.Add(choiceData);
@@ -100,11 +96,11 @@ namespace SS.Elements
 
             /* EXTENSIONS CONTAINER */
 
-            Foldout textFoldout = ElementUtility.CreateFoldout("Description Task");
+            Foldout textFoldout = ElementUtility.CreateFoldout("Description Task :");
 
             TextField textTextField =
-                ElementUtility.CreateTextArea(descriptionTask, null,
-                    callback => { descriptionTask = callback.newValue; });
+                ElementUtility.CreateTextArea(DescriptionTask, null,
+                    callback => { DescriptionTask = callback.newValue; });
 
             textTextField.AddClasses("ss-node__text-field", "ss-node__quote-text-field");
 
@@ -112,45 +108,45 @@ namespace SS.Elements
 
             customDataContainer.Add(textFoldout);
 
-            ObjectField iconObjectField = ElementUtility.CreateObjectField(taskIcon, typeof(Sprite), "Task Icon :",
-                callback => { taskIcon = (Sprite)callback.newValue; });
+            ObjectField iconObjectField = ElementUtility.CreateObjectField(TaskIcon, typeof(Sprite), "Task Icon :",
+                callback => { TaskIcon = (Sprite)callback.newValue; });
 
             customDataContainer.Add(iconObjectField);
 
-            FloatField timeLeftFloatField = ElementUtility.CreateFloatField(timeLeft, "Time Left :",
-                callback => { timeLeft = callback.newValue; });
+            FloatField timeLeftFloatField = ElementUtility.CreateFloatField(TimeLeft, "Time Left :",
+                callback => { TimeLeft = callback.newValue; });
 
             customDataContainer.Add(timeLeftFloatField);
 
-            FloatField baseDurationFloatField = ElementUtility.CreateFloatField(baseDuration, "Base Duration :",
-                callback => { baseDuration = callback.newValue; });
+            FloatField baseDurationFloatField = ElementUtility.CreateFloatField(BaseDuration, "Base Duration :",
+                callback => { BaseDuration = callback.newValue; });
 
             customDataContainer.Add(baseDurationFloatField);
 
-            IntegerField mandatorySlotsIntegerField = ElementUtility.CreateIntegerField(mandatorySlots,
+            IntegerField mandatorySlotsIntegerField = ElementUtility.CreateIntegerField(MandatorySlots,
                 "Mandatory Slots :",
-                callback => { mandatorySlots = callback.newValue; });
+                callback => { MandatorySlots = callback.newValue; });
 
             customDataContainer.Add(mandatorySlotsIntegerField);
 
-            IntegerField optionalSlotsIntegerField = ElementUtility.CreateIntegerField(optionalSlots,
+            IntegerField optionalSlotsIntegerField = ElementUtility.CreateIntegerField(OptionalSlots,
                 "Optional Slots :",
-                callback => { optionalSlots = callback.newValue; });
+                callback => { OptionalSlots = callback.newValue; });
 
             customDataContainer.Add(optionalSlotsIntegerField);
 
-            FloatField taskHelpFactorFloatField = ElementUtility.CreateFloatField(taskHelpFactor, "Task Help Factor :",
-                callback => { taskHelpFactor = callback.newValue; });
+            FloatField taskHelpFactorFloatField = ElementUtility.CreateFloatField(TaskHelpFactor, "Task Help Factor :",
+                callback => { TaskHelpFactor = callback.newValue; });
 
             customDataContainer.Add(taskHelpFactorFloatField);
 
-            EnumField roomEnumField = ElementUtility.CreateEnumField(room, "Room :",
-                callback => { room = (SpaceshipManager.ShipRooms)callback.newValue; });
+            EnumField roomEnumField = ElementUtility.CreateEnumField(Room, "Room :",
+                callback => { Room = (SpaceshipManager.ShipRooms)callback.newValue; });
 
             customDataContainer.Add(roomEnumField);
 
-            Toggle isPermanentToggle = ElementUtility.CreateToggle(isPermanent, "Is Permanent :",
-                callback => { isPermanent = callback.newValue; });
+            Toggle isPermanentToggle = ElementUtility.CreateToggle(IsPermanent, "Is Permanent :",
+                callback => { IsPermanent = callback.newValue; });
 
             customDataContainer.Add(isPermanentToggle);
 
@@ -171,71 +167,32 @@ namespace SS.Elements
 
             /* CHOICE CONDITIONS CONTAINER */
 
-            Foldout choiceConditionsFoldout = ElementUtility.CreateFoldout($"\"{choiceData.Text}\" :");
+            Foldout choiceFoldout = ElementUtility.CreateFoldout($"{choiceData.Text} :");
 
-            Button addConditionButton = ElementUtility.CreateButton("Add Condition", () =>
-            {
-                choiceData.ChoiceTypes.Add(SSChoiceType.Assigned);
-                VisualElement choiceConditionsDataContainer = new();
+            EnumFlagsField jobEnumFlagsField = ElementUtility.CreateEnumFlagsField(choiceData.Jobs, "Jobs :",
+                callback => { choiceData.Jobs = (TraitsData.Job)callback.newValue; });
 
-                var index = choiceData.ChoiceTypes.Count - 1;
-                EnumField enumField = ElementUtility.CreateEnumField(choiceData.ChoiceTypes[index], "Condition :",
-                    callback => { choiceData.ChoiceTypes[index] = (SSChoiceType)callback.newValue; });
+            choiceFoldout.Add(jobEnumFlagsField);
 
-                Button deleteConditionButton = ElementUtility.CreateButton("X", () =>
-                {
-                    if (choiceData.ChoiceTypes.Count == 1)
-                    {
-                        return;
-                    }
+            EnumFlagsField positiveTraitsEnumFlagsField = ElementUtility.CreateEnumFlagsField(choiceData.PositiveTraits,
+                "Positive Traits :",
+                callback => { choiceData.PositiveTraits = (TraitsData.PositiveTraits)callback.newValue; });
 
-                    choiceData.ChoiceTypes.RemoveAt(choiceData.ChoiceTypes.Count - 1);
-                    choiceConditionsFoldout.Remove(choiceConditionsDataContainer);
-                });
+            choiceFoldout.Add(positiveTraitsEnumFlagsField);
 
-                deleteConditionButton.AddToClassList("ss-node__button");
+            EnumFlagsField negativeTraitsEnumFlagsField = ElementUtility.CreateEnumFlagsField(choiceData.NegativeTraits,
+                "Negative Traits :",
+                callback => { choiceData.NegativeTraits = (TraitsData.NegativeTraits)callback.newValue; });
 
-                choiceConditionsDataContainer.Add(deleteConditionButton);
-                choiceConditionsDataContainer.Add(enumField);
-                choiceConditionsFoldout.Add(choiceConditionsDataContainer);
-            });
+            choiceFoldout.Add(negativeTraitsEnumFlagsField);
 
-            addConditionButton.AddToClassList("ss-node__button");
+            // TODO : Add outcomes
 
-            choiceConditionsFoldout.Add(addConditionButton);
-
-            for (int index = 0; index < choiceData.ChoiceTypes.Count; index++)
-            {
-                VisualElement choiceConditionsDataContainer = new();
-
-                var choiceIndex = index;
-
-                EnumField enumField = ElementUtility.CreateEnumField(choiceData.ChoiceTypes[choiceIndex], "Condition :",
-                    callback => { choiceData.ChoiceTypes[choiceIndex] = (SSChoiceType)callback.newValue; });
-
-                Button deleteConditionButton = ElementUtility.CreateButton("X", () =>
-                {
-                    if (choiceData.ChoiceTypes.Count == 1)
-                    {
-                        return;
-                    }
-
-                    choiceData.ChoiceTypes.RemoveAt(choiceIndex);
-                    choiceConditionsFoldout.Remove(choiceConditionsDataContainer);
-                });
-
-                deleteConditionButton.AddToClassList("ss-node__button");
-
-                choiceConditionsDataContainer.Add(deleteConditionButton);
-                choiceConditionsDataContainer.Add(enumField);
-                choiceConditionsFoldout.Add(choiceConditionsDataContainer);
-            }
-
-            customDataContainer.Insert(Choices.IndexOf(choiceData), choiceConditionsFoldout);
+            customDataContainer.Insert(Choices.IndexOf(choiceData), choiceFoldout);
 
             Button deleteChoiceButton = ElementUtility.CreateButton("X", () =>
             {
-                if (Choices.Count == 1)
+                if (Choices.Count == 2)
                 {
                     return;
                 }
@@ -245,11 +202,12 @@ namespace SS.Elements
                     graphView.DeleteElements(choicePort.connections);
                 }
 
-                choiceData.ChoiceTypes.Clear();
+                // TODO: Remove traits from choiceData
+                // choiceData.Traits.Clear();
                 Choices.Remove(choiceData);
 
                 graphView.RemoveElement(choicePort);
-                customDataContainer.Remove(choiceConditionsFoldout);
+                customDataContainer.Remove(choiceFoldout);
             });
 
             deleteChoiceButton.AddToClassList("ss-node__button");
@@ -257,7 +215,7 @@ namespace SS.Elements
             TextField choiceTextField = ElementUtility.CreateTextField(choiceData.Text, null, callback =>
             {
                 choiceData.Text = callback.newValue;
-                choiceConditionsFoldout.text = $"\"{callback.newValue}\" :";
+                choiceFoldout.text = $"{callback.newValue} :";
             });
 
             choiceTextField.AddClasses(

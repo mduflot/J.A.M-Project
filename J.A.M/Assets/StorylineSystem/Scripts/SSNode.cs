@@ -276,7 +276,7 @@ namespace SS
 
         private void RunNode(SSTaskNodeSO nodeSO)
         {
-            spaceshipManager.SpawnTask(nodeSO.TaskData, dialogues);
+            // spaceshipManager.SpawnTask(nodeSO.TaskData, dialogues);
             StartCoroutine(WaiterTask(nodeSO));
         }
 
@@ -322,9 +322,9 @@ namespace SS
 
         IEnumerator WaiterTask(SSTaskNodeSO nodeSO)
         {
-            yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(nodeSO.TaskData).isCompleted);
-            assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).LeaderCharacters);
-            assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).AssistantCharacters);
+            // yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(nodeSO.TaskData).isCompleted);
+            // assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).LeaderCharacters);
+            // assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).AssistantCharacters);
             notAssignedCharacters.AddRange(spaceshipManager.characters.Except(assignedCharacters));
             if (nodeSO.Choices.First().NextNode == null)
             {

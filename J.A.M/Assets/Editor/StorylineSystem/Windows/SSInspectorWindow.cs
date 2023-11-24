@@ -12,20 +12,19 @@ namespace SS.Windows
         public void Initialize(SSGraphView ssGraphView)
         {
             graphView = ssGraphView;
-            CreateWindow();
         }
 
         protected override void OnGraphViewChanging()
         {
-            CreateWindow();
+            
         }
 
         protected override void OnGraphViewChanged()
         {
-            CreateWindow();
+            
         }
 
-        private void CreateWindow()
+        private void Show()
         {
             rootVisualElement.Clear();
             if (graphView == null) return;
