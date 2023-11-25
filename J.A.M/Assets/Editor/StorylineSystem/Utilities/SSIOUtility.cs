@@ -363,6 +363,25 @@ namespace SS.Utilities
             foreach (SSChoiceSaveData nodeChoice in nodeChoices)
             {
                 SSNodeChoiceData choiceData;
+                
+                if (nodeChoice is SSChoiceTaskSaveData choiceTask)
+                {
+                    choiceData = new SSNodeChoiceTaskData()
+                    {
+                        Text = choiceTask.Text,
+                        Jobs = choiceTask.Jobs,
+                        PositiveTraits = choiceTask.PositiveTraits,
+                        NegativeTraits = choiceTask.NegativeTraits,
+                        IsUnlockStoryline = choiceTask.IsUnlockStoryline,
+                        IsUnlockTimeline = choiceTask.IsUnlockTimeline,
+                        StatusNodeContainers = choiceTask.StatusNodeContainers,
+                        StatusNodeGroups = choiceTask.StatusNodeGroups
+                    };
+
+                    nodeChoicesData.Add(choiceData);
+
+                    continue;
+                }
 
                 choiceData = new SSNodeChoiceData()
                 {
@@ -679,7 +698,11 @@ namespace SS.Utilities
                         NextNodeID = choiceTask.NextNodeID,
                         Jobs = choiceTask.Jobs,
                         PositiveTraits = choiceTask.PositiveTraits,
-                        NegativeTraits = choiceTask.NegativeTraits
+                        NegativeTraits = choiceTask.NegativeTraits,
+                        IsUnlockStoryline = choiceTask.IsUnlockStoryline,
+                        IsUnlockTimeline = choiceTask.IsUnlockTimeline,
+                        StatusNodeContainers = choiceTask.StatusNodeContainers,
+                        StatusNodeGroups = choiceTask.StatusNodeGroups
                     };
                 }
                 else

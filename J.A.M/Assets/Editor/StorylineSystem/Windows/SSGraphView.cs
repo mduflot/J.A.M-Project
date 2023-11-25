@@ -374,8 +374,6 @@ namespace SS.Windows
                     {
                         SSNode nextNode = (SSNode)edge.input.node;
 
-                        SSNode previousNode = (SSNode)edge.output.node;
-
                         SSChoiceSaveData choiceData = (SSChoiceSaveData)edge.output.userData;
 
                         choiceData.NextNodeID = nextNode.ID;

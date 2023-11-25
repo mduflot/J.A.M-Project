@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using SS.Enumerations;
-using SS.ScriptableObjects;
 using UnityEngine;
 
-namespace SS.Data.Save
+namespace SS.Data
 {
+    using Enumerations;
+    using ScriptableObjects;
+
     [Serializable]
-    public class SSChoiceTaskSaveData : SSChoiceSaveData
+    public class SSNodeChoiceTaskData : SSNodeChoiceData
     {
         [field: SerializeField] public TraitsData.Job Jobs { get; set; }
         [field: SerializeField] public TraitsData.PositiveTraits PositiveTraits { get; set; }

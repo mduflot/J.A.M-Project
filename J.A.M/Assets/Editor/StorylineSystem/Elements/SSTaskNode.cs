@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -7,6 +9,7 @@ namespace SS.Elements
 {
     using Data.Save;
     using Enumerations;
+    using ScriptableObjects;
     using Windows;
 
     public class SSTaskNode : SSNode
@@ -43,7 +46,11 @@ namespace SS.Elements
                 Text = "FirstChoice",
                 Jobs = TraitsData.Job.None,
                 PositiveTraits = TraitsData.PositiveTraits.None,
-                NegativeTraits = TraitsData.NegativeTraits.None
+                NegativeTraits = TraitsData.NegativeTraits.None,
+                IsUnlockStoryline = false,
+                IsUnlockTimeline = false,
+                StatusNodeContainers = new List<SerializableTuple<SSStatus, SSNodeContainerSO>>(),
+                StatusNodeGroups = new List<SerializableTuple<SSStatus, SSNodeGroupSO>>()
             };
 
             SSChoiceTaskSaveData lastChoiceData = new SSChoiceTaskSaveData()
@@ -51,7 +58,11 @@ namespace SS.Elements
                 Text = "LastChoice",
                 Jobs = TraitsData.Job.None,
                 PositiveTraits = TraitsData.PositiveTraits.None,
-                NegativeTraits = TraitsData.NegativeTraits.None
+                NegativeTraits = TraitsData.NegativeTraits.None,
+                IsUnlockStoryline = false,
+                IsUnlockTimeline = false,
+                StatusNodeContainers = new List<SerializableTuple<SSStatus, SSNodeContainerSO>>(),
+                StatusNodeGroups = new List<SerializableTuple<SSStatus, SSNodeGroupSO>>()
             };
 
             Choices.Add(firstChoiceData);
@@ -186,7 +197,54 @@ namespace SS.Elements
 
             choiceFoldout.Add(negativeTraitsEnumFlagsField);
 
-            // TODO : Add outcomes
+            ListView listViewStoryline = null;
+            ListView listViewTimeline = null;
+
+            Toggle isUnlockStorylineToggle = ElementUtility.CreateToggle(choiceData.IsUnlockStoryline, "Is Unlock Storyline :",
+                callback =>
+                {
+                    choiceData.IsUnlockStoryline = callback.newValue;
+                    if (callback.newValue)
+                    {
+                        listViewStoryline = ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeContainers, "Node Containers :");
+                        choiceFoldout.Add(listViewStoryline);
+                    }
+                    else
+                    {
+                        choiceFoldout.Remove(listViewStoryline);
+                    }
+                });
+
+            choiceFoldout.Add(isUnlockStorylineToggle);
+
+            Toggle isUnlockTimelineToggle = ElementUtility.CreateToggle(choiceData.IsUnlockTimeline, "Is Unlock Timeline :",
+                callback =>
+                {
+                    choiceData.IsUnlockTimeline = callback.newValue;
+                    if (callback.newValue)
+                    {
+                        listViewTimeline = ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeGroups, "Node Groups :");
+                        choiceFoldout.Add(listViewTimeline);
+                    }
+                    else
+                    {
+                        choiceFoldout.Remove(listViewTimeline);
+                    }
+                });
+
+            choiceFoldout.Add(isUnlockTimelineToggle);
+
+            if (choiceData.IsUnlockStoryline)
+            {
+                listViewStoryline = ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeContainers, "Node Containers :");
+                choiceFoldout.Add(listViewStoryline);
+            }
+
+            if (choiceData.IsUnlockTimeline)
+            {
+                listViewTimeline = ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeGroups, "Node Groups :");
+                choiceFoldout.Add(listViewTimeline);
+            }
 
             customDataContainer.Insert(Choices.IndexOf(choiceData), choiceFoldout);
 
@@ -202,8 +260,9 @@ namespace SS.Elements
                     graphView.DeleteElements(choicePort.connections);
                 }
 
-                // TODO: Remove traits from choiceData
-                // choiceData.Traits.Clear();
+                choiceData.Jobs = TraitsData.Job.None;
+                choiceData.PositiveTraits = TraitsData.PositiveTraits.None;
+                choiceData.NegativeTraits = TraitsData.NegativeTraits.None;
                 Choices.Remove(choiceData);
 
                 graphView.RemoveElement(choicePort);
