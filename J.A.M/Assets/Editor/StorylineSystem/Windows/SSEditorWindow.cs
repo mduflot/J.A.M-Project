@@ -1,6 +1,7 @@
 using System.IO;
 using UnityEditor;
 using UnityEditor.UIElements;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace SS.Windows
@@ -130,8 +131,9 @@ namespace SS.Windows
         
         private void ToggleInspector()
         {
-            SSInspectorWindow inspectorWindow = GetWindow<SSInspectorWindow>("SS Inspector");
+            SSInspectorWindow inspectorWindow = ScriptableObject.CreateInstance<SSInspectorWindow>();
             inspectorWindow.Initialize(graphView);
+            inspectorWindow.Show();
         }
 
         #endregion

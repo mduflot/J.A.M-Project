@@ -10,6 +10,5 @@ namespace SS.Data
     {
         [field: SerializeField] public string Text { get; set; }
         [field: SerializeField] public SSNodeSO NextNode { get; set; }
-        [field: SerializeField] public SSNodeSO PreviousNode { get; set; }
     }
 }
