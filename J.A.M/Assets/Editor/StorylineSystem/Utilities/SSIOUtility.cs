@@ -222,7 +222,8 @@ namespace SS.Utilities
                     OptionalSlots = taskNode.OptionalSlots,
                     TaskHelpFactor = taskNode.TaskHelpFactor,
                     Room = taskNode.Room,
-                    IsPermanent = taskNode.IsPermanent
+                    IsPermanent = taskNode.IsPermanent,
+                    PreviewOutcome = taskNode.PreviewOutcome
                 };
 
                 graphData.Nodes.Add(nodeData);
@@ -322,7 +323,7 @@ namespace SS.Utilities
                     taskNode.NodeType,
                     taskNode.IsStartingNode(), taskNode.DescriptionTask, taskNode.TaskIcon, taskNode.TimeLeft,
                     taskNode.BaseDuration, taskNode.MandatorySlots, taskNode.OptionalSlots, taskNode.TaskHelpFactor,
-                    taskNode.Room, taskNode.IsPermanent);
+                    taskNode.Room, taskNode.IsPermanent, taskNode.PreviewOutcome);
 
                 createdNodes.Add(taskNode.ID, nodeSO);
 
@@ -530,6 +531,7 @@ namespace SS.Utilities
                     ((SSTaskNode)node).TaskHelpFactor = ((SSTaskNodeSaveData)nodeData).TaskHelpFactor;
                     ((SSTaskNode)node).Room = ((SSTaskNodeSaveData)nodeData).Room;
                     ((SSTaskNode)node).IsPermanent = ((SSTaskNodeSaveData)nodeData).IsPermanent;
+                    ((SSTaskNode)node).PreviewOutcome = ((SSTaskNodeSaveData)nodeData).PreviewOutcome;
                 }
                 else if (nodeData.NodeType == SSNodeType.Time)
                 {

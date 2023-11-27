@@ -276,8 +276,16 @@ namespace SS
 
         private void RunNode(SSTaskNodeSO nodeSO)
         {
-            // spaceshipManager.SpawnTask(nodeSO.TaskData, dialogues);
-            StartCoroutine(WaiterTask(nodeSO));
+            var position = spaceshipManager.GetTaskPosition(nodeSO.Room).position;
+            var notifGO = spaceshipManager.taskNotificationPool.GetFromPool();
+            var taskNote = notifGO.GetComponent<TaskNotification>();
+            taskNote.transform.position = position;
+            Task task = new Task(nodeSO.name, nodeSO.Description, nodeSO.Icon, nodeSO.TimeLeft, nodeSO.Duration,
+                nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room, nodeSO.IsPermanent,
+                nodeSO.PreviewOutcome);
+            taskNote.Initialize(task, spaceshipManager, dialogues);
+            spaceshipManager.AddTask(taskNote);
+            StartCoroutine(WaiterTask(nodeSO, task));
         }
 
         private void RunNode(SSTimeNodeSO nodeSO)
@@ -320,11 +328,11 @@ namespace SS
             CheckNodeType(nodeSO.Choices.First().NextNode);
         }
 
-        IEnumerator WaiterTask(SSTaskNodeSO nodeSO)
+        IEnumerator WaiterTask(SSTaskNodeSO nodeSO, Task task)
         {
-            // yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(nodeSO.TaskData).isCompleted);
-            // assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).LeaderCharacters);
-            // assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(nodeSO.TaskData).AssistantCharacters);
+            yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(task).IsCompleted);
+            assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).LeaderCharacters);
+            assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).AssistantCharacters);
             notAssignedCharacters.AddRange(spaceshipManager.characters.Except(assignedCharacters));
             if (nodeSO.Choices.First().NextNode == null)
             {

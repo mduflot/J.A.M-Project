@@ -7,10 +7,11 @@ public class SpaceshipManager : MonoBehaviour
     public Room[] rooms;
     public ShipSystem[] shipSystems;
     public CharacterBehaviour[] characters;
+    public Pool<GameObject> taskNotificationPool;
 
-    [SerializeField] private TaskNotification taskNotificationPrefab;
     [SerializeField] private List<TaskNotification> activeTasks = new();
-
+    [SerializeField] private GameObject taskNotificationPrefab;
+    
     private Dictionary<System, ShipSystem> systemsDictionary = new();
     private Dictionary<ShipRooms, Room> roomsDictionary = new();
 
@@ -53,6 +54,20 @@ public class SpaceshipManager : MonoBehaviour
         Warehouse = 8,
     }
 
+    private void Start()
+    {
+        Initialize();
+        InitializeSystems();
+        taskNotificationPool = new Pool<GameObject>(taskNotificationPrefab, 5);
+    }
+
+    private void Initialize()
+    {
+        TimeTickSystem.OnTick += UpdateSystems;
+        TimeTickSystem.OnTick += UpdateTasks;
+        TimeTickSystem.OnTick += UpdateCharacters;
+    }
+
     private void InitializeSystems()
     {
         foreach (var system in shipSystems)
@@ -67,28 +82,6 @@ public class SpaceshipManager : MonoBehaviour
         {
             roomsDictionary.Add(room.roomName, room);
         }
-    }
-
-    private void Initialize()
-    {
-        TimeTickSystem.OnTick += UpdateSystems;
-        TimeTickSystem.OnTick += UpdateTasks;
-        TimeTickSystem.OnTick += UpdateCharacters;
-    }
-
-    private void Update()
-    {
-        foreach (var activeTask in activeTasks)
-        {
-            var position = GetTaskPosition(activeTask.taskData.room).position;
-            activeTask.transform.position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
-        }
-    }
-
-    private void Start()
-    {
-        Initialize();
-        InitializeSystems();
     }
 
     private void UpdateSystems(object sender, TimeTickSystem.OnTickEventArgs e)
@@ -131,41 +124,28 @@ public class SpaceshipManager : MonoBehaviour
     {
         foreach (var activeTask in activeTasks)
         {
-            if (activeTask.isCompleted)
+            if (activeTask.IsCompleted)
             {
                 RemoveTask(activeTask);
                 break;
             }
 
-            activeTask.UpdateTask();
-        }
-    }
-
-    public void SpawnTask(TaskDataScriptable taskDataScriptable, List<Tuple<Sprite, string, string>> dialoguesTask)
-    {
-        if (!IsTaskActive(taskDataScriptable))
-        {
-            var position = GetTaskPosition(taskDataScriptable.room).position;
-            position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
-            var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity,
-                GameManager.Instance.UIManager.taskNotificationParent);
-            taskNote.InitTask(taskDataScriptable, dialoguesTask);
-            AddTask(taskNote);
+            activeTask.OnUpdate();
         }
     }
 
     public void SpawnPermanentTask(TaskDataScriptable taskDataScriptable)
     {
-        if (!IsTaskActive(taskDataScriptable))
-        {
-            var position = GetTaskPosition(taskDataScriptable.room).position;
-            position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
-            var taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity,
-                GameManager.Instance.UIManager.taskNotificationParent);
-            taskNote.InitTask(taskDataScriptable);
-            OpenTaskUI(taskNote);
-            AddTask(taskNote);
-        }
+        // if (!IsTaskActive(taskDataScriptable))
+        // {
+        //     var position = GetTaskPosition(taskDataScriptable.room).position;
+        //     position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
+        //     TaskNotification taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity,
+        //         GameManager.Instance.UIManager.taskNotificationParent);
+        //     // taskNote.Initialize(taskDataScriptable);
+        //     OpenTaskUI(taskNote);
+        //     AddTask(taskNote);
+        // }
     }
 
     public Transform GetTaskPosition(ShipRooms room)
@@ -183,34 +163,34 @@ public class SpaceshipManager : MonoBehaviour
         activeTasks.Add(task);
     }
 
-    public bool IsTaskActive(TaskDataScriptable task)
+    public bool IsTaskActive(Task task)
     {
         foreach (var activeTask in activeTasks)
         {
-            return activeTask.taskData == task;
+            return activeTask.Task == task;
         }
 
         return false;
     }
 
-    public TaskNotification GetTaskNotification(TaskDataScriptable task)
+    public TaskNotification GetTaskNotification(Task task)
     {
         foreach (var activeTask in activeTasks)
         {
-            if (activeTask.taskData == task) return activeTask;
+            if (activeTask.Task == task) return activeTask;
         }
 
         return null;
     }
 
-    public void CancelTask(TaskDataScriptable task)
+    public void CancelTask(Task task)
     {
         TaskNotification taskToRemove = null;
         foreach (var activeTask in activeTasks)
         {
-            if (activeTask.taskData == task)
+            if (activeTask.Task == task)
             {
-                activeTask.CancelTask();
+                activeTask.OnCancel();
                 taskToRemove = activeTask;
             }
         }

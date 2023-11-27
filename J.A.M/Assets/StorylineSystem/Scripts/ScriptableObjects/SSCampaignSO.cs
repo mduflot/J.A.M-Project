@@ -5,10 +5,10 @@ namespace SS.ScriptableObjects
 {
     using Enumerations;
 
-    [CreateAssetMenu(fileName = "StorylinesContainer", menuName = "StorylineSystem/StorylinesContainer")]
-    public class SSStorylinesContainerSO : ScriptableObject
+    [CreateAssetMenu(fileName = "New Campaign", menuName = "SSSystem/Campaign")]
+    public class SSCampaignSO : ScriptableObject
     {
-        [field: SerializeField] private List<Storyline> Storylines { get; set; }
+        [field: SerializeField] public List<Storyline> Storylines { get; set; }
 
         private void OnValidate()
         {
@@ -27,8 +27,7 @@ namespace SS.ScriptableObjects
             foreach (var nodeGroup in storyline.NodeContainer.NodeGroups)
             {
                 storyline.NodeGroups.Add(
-                    new SerializableTuple<SSStatus, SSNodeGroupSO, List<SerializableTuple<SSStatus, SSNodeGroupSO>>>(
-                        SSStatus.Disabled, nodeGroup.Key, new List<SerializableTuple<SSStatus, SSNodeGroupSO>>()));
+                    new SerializableTuple<SSStatus, SSNodeGroupSO>(nodeGroup.Key.Status, nodeGroup.Key));
             }
         }
 
@@ -40,9 +39,7 @@ namespace SS.ScriptableObjects
             foreach (var storyline in Storylines)
             {
                 if (storyline.NodeContainer == null) continue;
-                storyline.NodeGroups =
-                    new List<SerializableTuple<SSStatus, SSNodeGroupSO,
-                        List<SerializableTuple<SSStatus, SSNodeGroupSO>>>>();
+                storyline.NodeGroups = new List<SerializableTuple<SSStatus, SSNodeGroupSO>>();
                 FillGroups(storyline);
             }
         }

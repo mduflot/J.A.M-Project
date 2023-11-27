@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-
 
 [CreateAssetMenu(menuName = "Task/TaskOutcome/GaugeLevelOutcome")]
 public class GaugeLevelOutcome : BaseTaskOutcome
@@ -8,13 +6,15 @@ public class GaugeLevelOutcome : BaseTaskOutcome
     public SpaceshipManager.System targetGauge;
 
     public Operation operation;
-    
+
     [Range(0, 20)] public float value;
 
     public enum Operation
     {
-        Add, Substract
+        Add,
+        Substract
     }
+
     public override void Outcome()
     {
         if (operation == Operation.Add)
@@ -25,7 +25,8 @@ public class GaugeLevelOutcome : BaseTaskOutcome
             {
                 newGaugeValue += leader.GetVolition();
             }
-            newGaugeValue = value/leaderCharacters.Count;
+
+            newGaugeValue = value / leaderCharacters.Count;
 
             GameManager.Instance.SpaceshipManager.GaugeValueOperation(targetGauge, newGaugeValue);
         }

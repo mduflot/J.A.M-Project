@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using SS.Enumerations;
-using SS.ScriptableObjects;
 using UnityEngine;
 
 namespace SS.Data.Save
@@ -18,9 +15,6 @@ namespace SS.Data.Save
         [field: SerializeField] public float TaskHelpFactor { get; set; }
         [field: SerializeField] public SpaceshipManager.ShipRooms Room { get; set; }
         [field: SerializeField] public bool IsPermanent { get; set; }
-        [field: SerializeField] public bool IsUnlockStoryline { get; set; }
-        [field: SerializeField] public bool IsUnlockTimeline { get; set; }
-        [field: SerializeField] public List<SerializableTuple<SSStatus, SSNodeContainerSO>> StatusNodeContainers { get; set; }
-        [field: SerializeField] public List<SerializableTuple<SSStatus, SSNodeGroupSO>> StatusNodeGroups { get; set; }
+        [field: SerializeField] public string PreviewOutcome { get; set; }
     }
 }

@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: FileNameGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: FileName
+  <Status>k__BackingField: 0
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: c38bdc53-e7ab-4d57-ae69-68d842b09e77
+    <Status>k__BackingField: 0
+    <Name>k__BackingField: TestTL
+    <Position>k__BackingField: {x: 378, y: 35}
+  <Nodes>k__BackingField:
+  - rid: 7018500001940111396
+  - rid: 7018500001940111397
+  - rid: 7018500001940111398
+  <OldGroupNames>k__BackingField:
+  - TestTL
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: TestTL
+      Value:
+      - First
+      - Second
+      - DefendSpaceship
+  references:
+    version: 2
+    RefIds:
+    - rid: 7018500001940111396
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: bdf18f6b-cd3b-49df-aea6-66565872022c
+        <Name>k__BackingField: First
+        <Choices>k__BackingField:
+        - rid: 7018500001940111399
+        <GroupID>k__BackingField: c38bdc53-e7ab-4d57-ae69-68d842b09e77
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 403, y: 94}
+        <Text>k__BackingField: Yo biloute !
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+    - rid: 7018500001940111397
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 111d8e37-e415-4304-af2e-e4a78158aa1b
+        <Name>k__BackingField: Second
+        <Choices>k__BackingField:
+        - rid: 7018500001940111400
+        <GroupID>k__BackingField: c38bdc53-e7ab-4d57-ae69-68d842b09e77
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1130, y: 94}
+        <Text>k__BackingField: "Termin\xE9 biloute !"
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+    - rid: 7018500001940111398
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 73f533ef-ab1f-4e34-8c13-108899dedeba
+        <Name>k__BackingField: DefendSpaceship
+        <Choices>k__BackingField:
+        - rid: 7018500001940111401
+        - rid: 7018500001940111402
+        <GroupID>k__BackingField: c38bdc53-e7ab-4d57-ae69-68d842b09e77
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 731, y: 94}
+        <DescriptionTask>k__BackingField: Description Task
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: ea698d351bd4748449aada363e59d6a3,
+          type: 3}
+        <TimeLeft>k__BackingField: 5
+        <BaseDuration>k__BackingField: 5
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 1
+        <IsPermanent>k__BackingField: 0
+        <PreviewOutcome>k__BackingField: trololol
+    - rid: 7018500001940111399
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 73f533ef-ab1f-4e34-8c13-108899dedeba
+    - rid: 7018500001940111400
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 7018500001940111401
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 111d8e37-e415-4304-af2e-e4a78158aa1b
+        <Jobs>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+        <IsUnlockStoryline>k__BackingField: 0
+        <IsUnlockTimeline>k__BackingField: 0
+        <StatusNodeContainers>k__BackingField: []
+        <StatusNodeGroups>k__BackingField: []
+    - rid: 7018500001940111402
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: LastChoice
+        <NextNodeID>k__BackingField: 
+        <Jobs>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+        <IsUnlockStoryline>k__BackingField: 0
+        <IsUnlockTimeline>k__BackingField: 0
+        <StatusNodeContainers>k__BackingField: []
+        <StatusNodeGroups>k__BackingField: []

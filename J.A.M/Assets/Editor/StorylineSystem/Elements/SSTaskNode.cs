@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
@@ -23,6 +22,7 @@ namespace SS.Elements
         public float TaskHelpFactor { get; set; }
         public SpaceshipManager.ShipRooms Room { get; set; }
         public bool IsPermanent { get; set; }
+        public string PreviewOutcome { get; set; }
 
         private VisualElement customDataContainer = new();
 
@@ -31,7 +31,7 @@ namespace SS.Elements
             base.Initialize(nodeName, ssGraphView, position);
 
             NodeType = SSNodeType.Task;
-            DescriptionTask = "Description Task";
+            DescriptionTask = "Description";
             TaskIcon = null;
             TimeLeft = 0f;
             BaseDuration = 0f;
@@ -107,7 +107,7 @@ namespace SS.Elements
 
             /* EXTENSIONS CONTAINER */
 
-            Foldout textFoldout = ElementUtility.CreateFoldout("Description Task :");
+            Foldout textFoldout = ElementUtility.CreateFoldout("Description :");
 
             TextField textTextField =
                 ElementUtility.CreateTextArea(DescriptionTask, null,
@@ -129,19 +129,19 @@ namespace SS.Elements
 
             customDataContainer.Add(timeLeftFloatField);
 
-            FloatField baseDurationFloatField = ElementUtility.CreateFloatField(BaseDuration, "Base Duration :",
+            FloatField baseDurationFloatField = ElementUtility.CreateFloatField(BaseDuration, "Duration :",
                 callback => { BaseDuration = callback.newValue; });
 
             customDataContainer.Add(baseDurationFloatField);
 
             IntegerField mandatorySlotsIntegerField = ElementUtility.CreateIntegerField(MandatorySlots,
-                "Mandatory Slots :",
+                "Leader Slots :",
                 callback => { MandatorySlots = callback.newValue; });
 
             customDataContainer.Add(mandatorySlotsIntegerField);
 
             IntegerField optionalSlotsIntegerField = ElementUtility.CreateIntegerField(OptionalSlots,
-                "Optional Slots :",
+                "Assistant Slots :",
                 callback => { OptionalSlots = callback.newValue; });
 
             customDataContainer.Add(optionalSlotsIntegerField);
@@ -160,6 +160,17 @@ namespace SS.Elements
                 callback => { IsPermanent = callback.newValue; });
 
             customDataContainer.Add(isPermanentToggle);
+
+            Foldout previewOutcomeFoldout = ElementUtility.CreateFoldout("Preview Outcome :");
+
+            TextField previewOutcomeTextField = ElementUtility.CreateTextField(PreviewOutcome, null,
+                callback => { PreviewOutcome = callback.newValue; });
+
+            previewOutcomeTextField.AddClasses("ss-node__text-field", "ss-node__quote-text-field");
+
+            previewOutcomeFoldout.Add(previewOutcomeTextField);
+
+            customDataContainer.Add(previewOutcomeFoldout);
 
             extensionContainer.Add(customDataContainer);
 
@@ -200,13 +211,16 @@ namespace SS.Elements
             ListView listViewStoryline = null;
             ListView listViewTimeline = null;
 
-            Toggle isUnlockStorylineToggle = ElementUtility.CreateToggle(choiceData.IsUnlockStoryline, "Is Unlock Storyline :",
+            Toggle isUnlockStorylineToggle = ElementUtility.CreateToggle(choiceData.IsUnlockStoryline,
+                "Is Unlock Storyline :",
                 callback =>
                 {
                     choiceData.IsUnlockStoryline = callback.newValue;
                     if (callback.newValue)
                     {
-                        listViewStoryline = ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeContainers, "Node Containers :");
+                        listViewStoryline =
+                            ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeContainers,
+                                "Node Containers :");
                         choiceFoldout.Add(listViewStoryline);
                     }
                     else
@@ -217,13 +231,15 @@ namespace SS.Elements
 
             choiceFoldout.Add(isUnlockStorylineToggle);
 
-            Toggle isUnlockTimelineToggle = ElementUtility.CreateToggle(choiceData.IsUnlockTimeline, "Is Unlock Timeline :",
+            Toggle isUnlockTimelineToggle = ElementUtility.CreateToggle(choiceData.IsUnlockTimeline,
+                "Is Unlock Timeline :",
                 callback =>
                 {
                     choiceData.IsUnlockTimeline = callback.newValue;
                     if (callback.newValue)
                     {
-                        listViewTimeline = ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeGroups, "Node Groups :");
+                        listViewTimeline =
+                            ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeGroups, "Node Groups :");
                         choiceFoldout.Add(listViewTimeline);
                     }
                     else
@@ -236,13 +252,15 @@ namespace SS.Elements
 
             if (choiceData.IsUnlockStoryline)
             {
-                listViewStoryline = ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeContainers, "Node Containers :");
+                listViewStoryline =
+                    ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeContainers, "Node Containers :");
                 choiceFoldout.Add(listViewStoryline);
             }
 
             if (choiceData.IsUnlockTimeline)
             {
-                listViewTimeline = ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeGroups, "Node Groups :");
+                listViewTimeline =
+                    ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeGroups, "Node Groups :");
                 choiceFoldout.Add(listViewTimeline);
             }
 
