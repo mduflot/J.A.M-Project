@@ -10,8 +10,7 @@ public class Task : MonoBehaviour
     [SerializeField] private TextMeshProUGUI durationText;
     [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private TextMeshProUGUI previewOutcomeText;
-    [SerializeField] private Transform leaderSlotsParent;
-    [SerializeField] private Transform assistantSlotsParent;
+    [SerializeField] private Transform characterSlotsParent;
     [SerializeField] private CharacterUISlot[] inactiveSlots;
     [SerializeField] private TaskNotification taskNotification;
     [SerializeField] private WarningUI warningUI;
@@ -48,16 +47,15 @@ public class Task : MonoBehaviour
         {
             var slot = inactiveSlots[i];
             slot.isMandatory = true;
-            slot.transform.SetParent(leaderSlotsParent);
+            slot.transform.SetParent(characterSlotsParent);
             slot.gameObject.SetActive(true);
             characterSlots.Add(slot);
         }
-
         for (int i = 3; i < taskData.optionalSlots + 3; i++)
         {
             var slot = inactiveSlots[i];
             slot.isMandatory = false;
-            slot.transform.SetParent(assistantSlotsParent);
+            slot.transform.SetParent(characterSlotsParent);
             slot.gameObject.SetActive(true);
             characterSlots.Add(slot);
         }
@@ -86,7 +84,6 @@ public class Task : MonoBehaviour
                 if (taskData.isPermanent)
                 {
                     previewOutcomeText.text = "+ " + (int)characterSlots[0].icon.character.GetVolition() + " " + taskData.previewOutcome;
-                    
                 }
                 else
                 {

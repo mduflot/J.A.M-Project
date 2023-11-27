@@ -99,6 +99,7 @@ public class TaskNotification : MonoBehaviour
         taskData = null;
         ResetCharacters();
         GameManager.Instance.RefreshCharacterIcons();
+        GameManager.Instance.SpaceshipManager.RemoveTask(this);
         Destroy(gameObject);
     }
 
