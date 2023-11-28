@@ -30,7 +30,7 @@ namespace SS.Elements
         {
             base.Initialize(nodeName, ssGraphView, position);
 
-            NodeType = SSNodeType.Task;
+            NodeType = SSNodeType.TASK;
             DescriptionTask = "Description";
             TaskIcon = null;
             TimeLeft = 0f;
@@ -49,8 +49,8 @@ namespace SS.Elements
                 NegativeTraits = TraitsData.NegativeTraits.None,
                 IsUnlockStoryline = false,
                 IsUnlockTimeline = false,
-                StatusNodeContainers = new List<SerializableTuple<SSStatus, SSNodeContainerSO>>(),
-                StatusNodeGroups = new List<SerializableTuple<SSStatus, SSNodeGroupSO>>()
+                StatusNodeContainers = new List<SerializableTuple<SSStoryStatus, SSNodeContainerSO>>(),
+                StatusNodeGroups = new List<SerializableTuple<SSStoryStatus, SSNodeGroupSO>>()
             };
 
             SSChoiceTaskSaveData lastChoiceData = new SSChoiceTaskSaveData()
@@ -61,8 +61,8 @@ namespace SS.Elements
                 NegativeTraits = TraitsData.NegativeTraits.None,
                 IsUnlockStoryline = false,
                 IsUnlockTimeline = false,
-                StatusNodeContainers = new List<SerializableTuple<SSStatus, SSNodeContainerSO>>(),
-                StatusNodeGroups = new List<SerializableTuple<SSStatus, SSNodeGroupSO>>()
+                StatusNodeContainers = new List<SerializableTuple<SSStoryStatus, SSNodeContainerSO>>(),
+                StatusNodeGroups = new List<SerializableTuple<SSStoryStatus, SSNodeGroupSO>>()
             };
 
             Choices.Add(firstChoiceData);
@@ -223,10 +223,11 @@ namespace SS.Elements
                         listViewStoryline =
                             ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeContainers,
                                 "Node Containers :");
-                        choiceFoldout.Add(listViewStoryline);
+                        choiceFoldout.Insert(4, listViewStoryline);
                     }
                     else
                     {
+                        choiceData.StatusNodeContainers.Clear();
                         choiceFoldout.Remove(listViewStoryline);
                     }
                 });
@@ -246,6 +247,7 @@ namespace SS.Elements
                     }
                     else
                     {
+                        choiceData.StatusNodeGroups.Clear();
                         choiceFoldout.Remove(listViewTimeline);
                     }
                 });
@@ -256,7 +258,7 @@ namespace SS.Elements
             {
                 listViewStoryline =
                     ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeContainers, "Node Containers :");
-                choiceFoldout.Add(listViewStoryline);
+                choiceFoldout.Insert(4, listViewStoryline);
             }
 
             if (choiceData.IsUnlockTimeline)
@@ -268,6 +270,11 @@ namespace SS.Elements
             
             // TODO : Add conditions foldout
             // TODO : Add addButton and deleteButton to conditions foldout
+            Button addConditionButton = ElementUtility.CreateButton("Add Condition", () =>
+            {
+                // TODO : Add condition
+                // TODO : Create method for adding conditions & outcomes
+            });
 
             customDataContainer.Insert(Choices.IndexOf(choiceData), choiceFoldout);
 

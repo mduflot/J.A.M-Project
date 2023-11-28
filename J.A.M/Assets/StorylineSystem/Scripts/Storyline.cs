@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine.Serialization;
 
 namespace SS
 {
@@ -9,14 +10,14 @@ namespace SS
     public class Storyline
     {
         public SSNodeContainerSO NodeContainer;
-        public SSStatus Status;
-        public List<SerializableTuple<SSStatus, SSNodeGroupSO>> NodeGroups;
+        [FormerlySerializedAs("Status")] public SSStoryStatus storyStatus;
+        public List<SerializableTuple<SSStoryStatus, SSNodeGroupSO>> NodeGroups;
 
-        public Storyline(SSNodeContainerSO nodeContainer, SSStatus status,
-            List<SerializableTuple<SSStatus, SSNodeGroupSO>> nodeGroups)
+        public Storyline(SSNodeContainerSO nodeContainer, SSStoryStatus storyStatus,
+            List<SerializableTuple<SSStoryStatus, SSNodeGroupSO>> nodeGroups)
         {
             NodeContainer = nodeContainer;
-            Status = status;
+            this.storyStatus = storyStatus;
             NodeGroups = nodeGroups;
         }
     }

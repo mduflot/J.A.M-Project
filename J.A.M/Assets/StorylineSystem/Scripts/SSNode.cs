@@ -60,22 +60,17 @@ namespace SS
         {
             switch (nodeSO.NodeType)
             {
-                case SSNodeType.Dialogue:
+                case SSNodeType.DIALOGUE:
                 {
                     RunNode(nodeSO as SSDialogueNodeSO);
                     break;
                 }
-                case SSNodeType.Task:
+                case SSNodeType.TASK:
                 {
                     RunNode(nodeSO as SSTaskNodeSO);
                     break;
                 }
-                case SSNodeType.Reward:
-                {
-                    RunNode(nodeSO as SSRewardNodeSO);
-                    break;
-                }
-                case SSNodeType.Time:
+                case SSNodeType.TIME:
                 {
                     RunNode(nodeSO as SSTimeNodeSO);
                     break;
@@ -83,17 +78,6 @@ namespace SS
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        private void RunNode(SSRewardNodeSO nodeSO)
-        {
-            if (nodeSO.Choices.First().NextNode == null)
-            {
-                ResetTimeline();
-                return;
-            }
-
-            CheckNodeType(nodeSO.Choices.First().NextNode);
         }
 
         // REWORK : Refactor the speakerType

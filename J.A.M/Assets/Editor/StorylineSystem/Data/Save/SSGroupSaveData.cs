@@ -9,7 +9,7 @@ namespace SS.Data.Save
     public class SSGroupSaveData
     {
         [field: SerializeField] public string ID { get; set; }
-        [field: SerializeField] public SSStatus Status { get; set; }
+        [field: SerializeField] public SSStoryStatus StoryStatus { get; set; }
         [field: SerializeField] public string Name { get; set; }
         [field: SerializeField] public Vector2 Position { get; set; }
     }

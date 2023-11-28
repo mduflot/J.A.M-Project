@@ -14,8 +14,8 @@ namespace SS.Data.Save
         [field: SerializeField] public TraitsData.NegativeTraits NegativeTraits { get; set; }
         [field: SerializeField] public bool IsUnlockStoryline { get; set; }
         [field: SerializeField] public bool IsUnlockTimeline { get; set; }
-        [field: SerializeField] public List<SerializableTuple<SSStatus, SSNodeContainerSO>> StatusNodeContainers { get; set; }
-        [field: SerializeField] public List<SerializableTuple<SSStatus, SSNodeGroupSO>> StatusNodeGroups { get; set; }
+        [field: SerializeField] public List<SerializableTuple<SSStoryStatus, SSNodeContainerSO>> StatusNodeContainers { get; set; }
+        [field: SerializeField] public List<SerializableTuple<SSStoryStatus, SSNodeGroupSO>> StatusNodeGroups { get; set; }
 
         // TODO : Maybe think about a way to store the conditions of the storylines and timelines
         // Maybe a class that stores the conditions

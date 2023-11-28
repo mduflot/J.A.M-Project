@@ -13,7 +13,7 @@ namespace SS.Windows
 
     public class SSGraphView : GraphView
     {
-        public SSStatus Status;
+        public SSStoryStatus storyStatus;
         public SerializableDictionary<string, SSGroupErrorData> Groups;
 
         private SSEditorWindow editorWindow;
@@ -110,10 +110,9 @@ namespace SS.Windows
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
 
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Dialogue)", SSNodeType.Dialogue));
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Task)", SSNodeType.Task));
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Reward)", SSNodeType.Reward));
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Time)", SSNodeType.Time));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Dialogue)", SSNodeType.DIALOGUE));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Task)", SSNodeType.TASK));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Time)", SSNodeType.TIME));
 
             this.AddManipulator(CreateGroupContextualMenu());
         }
@@ -176,22 +175,17 @@ namespace SS.Windows
 
             switch (nodeType)
             {
-                case SSNodeType.Dialogue:
+                case SSNodeType.DIALOGUE:
                 {
                     node = (SSDialogueNode)Activator.CreateInstance(nodeTypeSystem);
                     break;
                 }
-                case SSNodeType.Task:
+                case SSNodeType.TASK:
                 {
                     node = (SSTaskNode)Activator.CreateInstance(nodeTypeSystem);
                     break;
                 }
-                case SSNodeType.Reward:
-                {
-                    node = (SSRewardNode)Activator.CreateInstance(nodeTypeSystem);
-                    break;
-                }
-                case SSNodeType.Time:
+                case SSNodeType.TIME:
                 {
                     node = (SSTimeNode)Activator.CreateInstance(nodeTypeSystem);
                     break;

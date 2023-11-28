@@ -20,7 +20,7 @@ namespace SS.Elements
         {
             base.Initialize(nodeName, ssGraphView, position);
 
-            NodeType = SSNodeType.Dialogue;
+            NodeType = SSNodeType.DIALOGUE;
             Text = "Node text.";
             Duration = 1;
             IsDialogueTask = false;

@@ -1,8 +1,8 @@
 namespace SS.Enumerations
 {
-    public enum SSStatus
+    public enum SSStoryStatus
     {
-        First,
+        Beginning,
         Activatable,
         Activated,
         Disabled,

@@ -58,11 +58,11 @@ namespace SS.Utilities
             SSGraphSaveDataSO graphData =
                 CreateAsset<SSGraphSaveDataSO>("Assets/Editor/StorylineSystem/Graphs", $"{graphFileName}Graph");
 
-            graphData.Initialize(graphFileName, graphView.Status);
+            graphData.Initialize(graphFileName, graphView.storyStatus);
 
             SSNodeContainerSO nodeContainer = CreateAsset<SSNodeContainerSO>(containerFolderPath, graphFileName);
 
-            nodeContainer.Initialize(graphFileName, graphView.Status);
+            nodeContainer.Initialize(graphFileName, graphView.storyStatus);
 
             SaveGroups(graphData, nodeContainer);
             SaveNodes(graphData, nodeContainer);
@@ -93,7 +93,7 @@ namespace SS.Utilities
             SSGroupSaveData groupData = new SSGroupSaveData()
             {
                 ID = group.ID,
-                Status = group.Status,
+                StoryStatus = group.StoryStatus,
                 Name = group.title,
                 Position = group.GetPosition().position
             };
@@ -111,7 +111,7 @@ namespace SS.Utilities
             SSNodeGroupSO nodeGroup =
                 CreateAsset<SSNodeGroupSO>($"{containerFolderPath}/Groups/{groupName}", groupName);
 
-            nodeGroup.Initialize(groupName, group.Status);
+            nodeGroup.Initialize(groupName, group.StoryStatus);
 
             createdNodeGroups.Add(group.ID, nodeGroup);
 
@@ -170,22 +170,7 @@ namespace SS.Utilities
         {
             List<SSChoiceSaveData> choices = CloneNodeChoices(node.Choices);
 
-            if (node is SSRewardNode rewardNode)
-            {
-                SSRewardNodeSaveData nodeData = new SSRewardNodeSaveData()
-                {
-                    ID = rewardNode.ID,
-                    Name = rewardNode.NodeName,
-                    Choices = choices,
-                    GroupID = rewardNode.Group?.ID,
-                    NodeType = rewardNode.NodeType,
-                    Position = rewardNode.GetPosition().position,
-                    RewardTypes = rewardNode.RewardTypes
-                };
-
-                graphData.Nodes.Add(nodeData);
-            }
-            else if (node is SSDialogueNode dialogueNode)
+            if (node is SSDialogueNode dialogueNode)
             {
                 SSDialogueNodeSaveData nodeData = new SSDialogueNodeSaveData()
                 {
@@ -247,33 +232,7 @@ namespace SS.Utilities
 
         private static void SaveNodeToScriptableObject(SSNode node, SSNodeContainerSO nodeContainer)
         {
-            if (node is SSRewardNode rewardNode)
-            {
-                SSRewardNodeSO nodeSO;
-
-                if (rewardNode.Group != null)
-                {
-                    nodeSO = CreateAsset<SSRewardNodeSO>($"{containerFolderPath}/Groups/{rewardNode.Group.title}/Nodes",
-                        rewardNode.NodeName);
-
-                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[rewardNode.Group.ID], nodeSO);
-                }
-                else
-                {
-                    nodeSO = CreateAsset<SSRewardNodeSO>($"{containerFolderPath}/Global/Nodes", rewardNode.NodeName);
-
-                    nodeContainer.UngroupedNodes.Add(nodeSO);
-                }
-
-                nodeSO.Initialize(rewardNode.NodeName, ConvertNodeChoicesToNodeChoicesData(rewardNode.Choices),
-                    rewardNode.NodeType,
-                    rewardNode.IsStartingNode(), rewardNode.RewardTypes);
-
-                createdNodes.Add(rewardNode.ID, nodeSO);
-
-                SaveAsset(nodeSO);
-            }
-            else if (node is SSDialogueNode dialogueNode)
+            if (node is SSDialogueNode dialogueNode)
             {
                 SSDialogueNodeSO nodeSO;
 
@@ -508,11 +467,7 @@ namespace SS.Utilities
                 node.ID = nodeData.ID;
                 node.Choices = choices;
 
-                if (nodeData.NodeType == SSNodeType.Reward)
-                {
-                    ((SSRewardNode)node).RewardTypes = ((SSRewardNodeSaveData)nodeData).RewardTypes;
-                }
-                else if (nodeData.NodeType == SSNodeType.Dialogue)
+                if (nodeData.NodeType == SSNodeType.DIALOGUE)
                 {
                     ((SSDialogueNode)node).Text = ((SSDialogueNodeSaveData)nodeData).Text;
                     ((SSDialogueNode)node).SpeakerType = ((SSDialogueNodeSaveData)nodeData).SpeakerType;
@@ -520,7 +475,7 @@ namespace SS.Utilities
                     ((SSDialogueNode)node).IsDialogueTask = ((SSDialogueNodeSaveData)nodeData).IsDialogueTask;
                     ((SSDialogueNode)node).PercentageTask = ((SSDialogueNodeSaveData)nodeData).PercentageTask;
                 }
-                else if (nodeData.NodeType == SSNodeType.Task)
+                else if (nodeData.NodeType == SSNodeType.TASK)
                 {
                     ((SSTaskNode)node).DescriptionTask = ((SSTaskNodeSaveData)nodeData).DescriptionTask;
                     ((SSTaskNode)node).TaskIcon = ((SSTaskNodeSaveData)nodeData).TaskIcon;
@@ -533,7 +488,7 @@ namespace SS.Utilities
                     ((SSTaskNode)node).IsPermanent = ((SSTaskNodeSaveData)nodeData).IsPermanent;
                     ((SSTaskNode)node).PreviewOutcome = ((SSTaskNodeSaveData)nodeData).PreviewOutcome;
                 }
-                else if (nodeData.NodeType == SSNodeType.Time)
+                else if (nodeData.NodeType == SSNodeType.TIME)
                 {
                     ((SSTimeNode)node).TimeToWait = ((SSTimeNodeSaveData)nodeData).TimeToWait;
                 }

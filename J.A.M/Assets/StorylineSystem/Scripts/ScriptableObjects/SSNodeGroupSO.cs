@@ -7,12 +7,12 @@ namespace SS.ScriptableObjects
     public class SSNodeGroupSO : ScriptableObject
     {
         [field: SerializeField] public string GroupName { get; set; }
-        [field: SerializeField] public SSStatus Status { get; set; }
+        [field: SerializeField] public SSStoryStatus StoryStatus { get; set; }
 
-        public void Initialize(string groupName, SSStatus status)
+        public void Initialize(string groupName, SSStoryStatus storyStatus)
         {
             GroupName = groupName;
-            Status = status;
+            StoryStatus = storyStatus;
         }
     }
 }

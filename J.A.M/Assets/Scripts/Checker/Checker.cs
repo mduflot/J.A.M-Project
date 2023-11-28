@@ -40,7 +40,7 @@ public class Checker : MonoBehaviour
         allStorylines = new List<Storyline>();
         foreach (var storyline in campaign.Storylines)
         {
-            allStorylines.Add(new Storyline(storyline.NodeContainer, storyline.Status, storyline.NodeGroups));
+            allStorylines.Add(new Storyline(storyline.NodeContainer, storyline.storyStatus, storyline.NodeGroups));
         }
     }
 

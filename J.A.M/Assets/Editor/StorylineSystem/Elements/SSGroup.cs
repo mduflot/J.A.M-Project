@@ -9,7 +9,7 @@ namespace SS.Elements
     public class SSGroup : Group
     {
         public string ID { get; set; }
-        public SSStatus Status { get; set; }
+        public SSStoryStatus StoryStatus { get; set; }
         public string OldTitle { get; set; }
 
         private Color defaultBorderColor;

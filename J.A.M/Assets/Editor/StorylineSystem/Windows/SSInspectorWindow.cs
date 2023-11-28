@@ -29,15 +29,15 @@ namespace SS.Windows
             rootVisualElement.Clear();
             if (graphView == null) return;
 
-            EnumField enumField = ElementUtility.CreateEnumField(graphView.Status, "SS Status:",
-                callback => { graphView.Status = (SSStatus)callback.newValue; });
+            EnumField enumField = ElementUtility.CreateEnumField(graphView.storyStatus, "SS Status:",
+                callback => { graphView.storyStatus = (SSStoryStatus)callback.newValue; });
 
             rootVisualElement.Add(enumField);
 
             foreach (var group in graphView.Groups)
             {
-                EnumField enumFieldGroup = ElementUtility.CreateEnumField(group.Value.Groups[0].Status, $"{group.Value.Groups[0].title} Status:",
-                    callback => { group.Value.Groups[0].Status = (SSStatus)callback.newValue; });
+                EnumField enumFieldGroup = ElementUtility.CreateEnumField(group.Value.Groups[0].StoryStatus, $"{group.Value.Groups[0].title} Status:",
+                    callback => { group.Value.Groups[0].StoryStatus = (SSStoryStatus)callback.newValue; });
 
                 rootVisualElement.Add(enumFieldGroup);
             }
