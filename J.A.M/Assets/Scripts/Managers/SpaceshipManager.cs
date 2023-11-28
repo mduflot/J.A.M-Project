@@ -148,6 +148,11 @@ public class SpaceshipManager : MonoBehaviour
         // }
     }
 
+    /// <summary>
+    /// Returns the position of the task in the room
+    /// </summary>
+    /// <param name="room"> Room of the task </param>
+    /// <returns> Position of the room in the ship </returns>
     public Transform GetTaskPosition(ShipRooms room)
     {
         return roomsDictionary[room].transform;

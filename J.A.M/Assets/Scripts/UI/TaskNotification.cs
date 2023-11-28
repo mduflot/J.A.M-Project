@@ -25,15 +25,17 @@ public class TaskNotification : MonoBehaviour
     
     private void Update()
     {
-        if (!isStarted) return;
+        if (isStarted) return;
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("Mouse clicked");
             RaycastHit hit; 
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.transform == transform)
                 {
+                    Debug.Log("Display");
                     Display();
                 }
             }

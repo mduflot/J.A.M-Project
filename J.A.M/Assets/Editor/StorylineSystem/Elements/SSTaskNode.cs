@@ -208,6 +208,8 @@ namespace SS.Elements
 
             choiceFoldout.Add(negativeTraitsEnumFlagsField);
 
+            // TODO : Insert at the right index (not at the end)
+            
             ListView listViewStoryline = null;
             ListView listViewTimeline = null;
 
@@ -263,6 +265,9 @@ namespace SS.Elements
                     ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeGroups, "Node Groups :");
                 choiceFoldout.Add(listViewTimeline);
             }
+            
+            // TODO : Add conditions foldout
+            // TODO : Add addButton and deleteButton to conditions foldout
 
             customDataContainer.Insert(Choices.IndexOf(choiceData), choiceFoldout);
 

@@ -47,30 +47,23 @@ public class Checker : MonoBehaviour
     private void ChooseOutcome()
     {
         if (activeStorylines.Count == 0) ChooseNewStoryline();
-
-        // todo: 
     }
 
-    private void ChooseNewStoryline()
-    {
-    }
-}
-
-public class OldChecker
-{
-    //currently assumes that the max number of storylines is 3
-    public static void GenerateRandomEvent()
+    // currently assumes that the max number of storylines is 3
+    public void GenerateRandomEvent()
     {
         /*
          * parameters :
          */
+
         //activeStorylines : List<StoryLines>, list of currently active Storylines (max 3)
         //inactiveStoryLines : List<StoryLines>, list of currently inactive Storylines
         //priorityFactor : float, factor for active StoryLine selection
 
         /*
-         * var :
+         * variables :
          */
+
         //pickPercent : float, % chance for an outcome
         //weighedActivePercent : float, probability for an active timeline to be selected
         //weighedInactivePercent : float, probability for an inactive timeline to be selected
@@ -96,52 +89,19 @@ public class OldChecker
         //         PickEventFromActiveStoryline(activeStoryline[1])
     }
 
-    private static void ChoseNewStoryline()
+    public void PickTimelineFromActiveStoryline()
     {
         /*
          * parameters :
          */
-        //inactiveStorylines : List<StoryLines>, list of all inactive storylines
-        //conditions : Traits, current set of conditions to match to Storylines conditions
 
-        /*
-         * var :
-         */
-        //availableStorylines : List<Storylines>, stores available storylines based on their conditions
-        //numberOfASL : int, number of available storylines
-        //pickPercent : float, % chance for a single Storyline to be chosen (supposing equiprobability)
-        //randPicker : float, random value in [0,100] used to chose among available storylines
-        //i : int, index used in for loop
-
-        /*
-         * Algorithm :
-         */
-
-        //foreach(var sl in Storylines) do :
-        //   if conditions match sl then :
-        //       availableStoryLines.add(sl)
-
-        //numberOfASL = availableStoryLines.length
-        //pickPercent = 100.0/numberOfASL
-        //randPicker = random(0.0,100.0)
-
-        //for i = 1, i <= numberOfASL, i++
-        //  if randPicker <= pickPercent * i
-        //      StartStoryLine(availableStoryLines[i-1]);
-        //      break
-    }
-
-    private static void PickTimelineFromActiveStoryline()
-    {
-        /*
-         * parameters :
-         */
         //chosenStoryline : Storyline, Storyline to pick Timelines from
         //conditions : Traits, Traits Tuple giving current state of ship / available characters / etc..
 
         /*
-         * var :
+         * variables :
          */
+
         //availableTimelines : List<Timeline>, list of all available timelines in the current Storyline based on conditions
         //numberOfTL : int, number of available Timelines
         //pickPercent : float, % chance of a single timeline being chosen (based on equiprobability)
@@ -167,30 +127,69 @@ public class OldChecker
         //      break;
     }
 
-    private static void StartStoryline()
+    private void ChooseNewStoryline()
     {
         /*
          * parameters :
          */
+        //inactiveStorylines : List<StoryLines>, list of all inactive storylines
+        //conditions : Traits, current set of conditions to match to Storylines conditions
+
+        /*
+         * variables :
+         */
+        //availableStorylines : List<Storylines>, stores available storylines based on their conditions
+        //numberOfASL : int, number of available storylines
+        //pickPercent : float, % chance for a single Storyline to be chosen (supposing equiprobability)
+        //randPicker : float, random value in [0,100] used to chose among available storylines
+        //i : int, index used in for loop
+
+        /*
+         * Algorithm :
+         */
+
+        //foreach(var sl in Storylines) do :
+        //   if conditions match sl then :
+        //       availableStoryLines.add(sl)
+
+        //numberOfASL = availableStoryLines.length
+        //pickPercent = 100.0/numberOfASL
+        //randPicker = random(0.0,100.0)
+
+        //for i = 1, i <= numberOfASL, i++
+        //  if randPicker <= pickPercent * i
+        //      StartStoryLine(availableStoryLines[i-1]);
+        //      break
+    }
+
+    public void StartStoryline()
+    {
+        /*
+         * parameters :
+         */
+
         //chosenStoryline : StoryLine, Storyline to start
 
         /*
          * Algorithm :
          */
+
         //choseStoryline.setActive(true)
         //PickTimelineFromActiveStoryline(chosenStoryline)
     }
 
-    private static void PlayTimeline()
+    public void PlayTimeline()
     {
         /*
          * parameters :
          */
+
         //chosenTimeline : TimeLine, Timeline to play
 
         /*
          * Algorithm :
          */
+
         //chosenTimeline.setActive(true)
         //choseTimeline.StartFirstTask() // Supposes that task start is handled outside of checker script 
     }
