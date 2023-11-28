@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class UIManager : MonoBehaviour
     public CharacterUI characterUIPrefab;
     public Transform taskNotificationParent;
     public Transform taskParent;
-    public Task taskUI;
+    public TaskUI taskUI;
     public Canvas canvas;
     public TextMeshProUGUI date;
     

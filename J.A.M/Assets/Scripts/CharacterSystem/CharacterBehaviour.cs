@@ -78,9 +78,9 @@ public class CharacterBehaviour : MonoBehaviour
         return isTaskLeader;
     }
 
-    public TaskNotification GetTask()
+    public Task GetTask()
     {
-        return currentTask;
+        return currentTask.Task;
     }
 
     public CharacterDataScriptable GetCharacterData()

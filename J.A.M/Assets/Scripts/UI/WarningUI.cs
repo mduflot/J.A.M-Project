@@ -20,13 +20,13 @@ public class WarningUI : MonoBehaviour
         if (c.IsTaskLeader())
         {
             warningDescription.text = character.GetCharacterData().firstName + " is already assigned to " +
-                                      character.GetTask().taskData.taskName +
+                                      character.GetTask().Name +
                                       ". Assigning him here will cancel his current Task. Do you want to proceed?";
         }
         else
         {
             warningDescription.text = character.GetCharacterData().firstName + " is already assigned to " +
-                                      character.GetTask().taskData.taskName +
+                                      character.GetTask().Name +
                                       ". Assigning him here will slow down his current Task. Do you want to proceed?";
         }
     }
@@ -34,8 +34,7 @@ public class WarningUI : MonoBehaviour
     {
         if (character.IsTaskLeader())
         {
-            GameManager.Instance.SpaceshipManager.CancelTask(character.GetTask().taskData);
-            
+            GameManager.Instance.SpaceshipManager.CancelTask(character.GetTask());
         }
         else
         {

@@ -1,124 +1,126 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TaskNotification : MonoBehaviour
 {
-    public TaskDataScriptable taskData;
-    [SerializeField] private Image completionGauge;
-    private float duration;
-    private float timeLeft;
-    public bool isCompleted;
-    private bool taskStarted;
-    [SerializeField] private Image taskIcon;
-    private List<CharacterBehaviour> leaderCharacters = new();
-    private List<CharacterBehaviour> assistantCharacters = new();
-    public List<Tuple<Sprite, string, string>> dialogues;
+    public bool IsCompleted;
+    public List<Tuple<Sprite, string, string>> Dialogues;
+    public Task Task;
+    public List<CharacterBehaviour> LeaderCharacters = new();
+    public List<CharacterBehaviour> AssistantCharacters = new();
 
-    public bool TaskStarted
+    [SerializeField] private SpriteRenderer icon;
+    [SerializeField] private TextMeshPro time;
+
+    private bool isStarted;
+    private Camera camera;
+    private SpaceshipManager spaceshipManager;
+
+    private void Start()
     {
-        get => taskStarted;
+        camera = Camera.main;
+    }
+    
+    private void Update()
+    {
+        if (isStarted) return;
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Mouse clicked");
+            RaycastHit hit; 
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform == transform)
+                {
+                    Debug.Log("Display");
+                    Display();
+                }
+            }
+        }
     }
 
-    public List<CharacterBehaviour> LeaderCharacters
+    public void Initialize(Task task, SpaceshipManager spaceshipManager, List<Tuple<Sprite, string, string>> dialogues = null)
     {
-        get => leaderCharacters;
+        Task = task;
+        icon.sprite = task.Icon;
+        Dialogues = dialogues;
+        this.spaceshipManager = spaceshipManager;
     }
 
-    public List<CharacterBehaviour> AssistantCharacters
+    public void Display()
     {
-        get => assistantCharacters;
+        GameManager.Instance.UIManager.SpawnTaskUI(this);
     }
 
-    public void StartTask(TaskDataScriptable t, List<CharacterUISlot> characters)
+    public void OnStart(List<CharacterUISlot> characters)
     {
-        taskData = t;
         foreach (var character in characters)
         {
             if (character.isMandatory)
             {
-                leaderCharacters.Add(character.icon.character);
+                LeaderCharacters.Add(character.icon.character);
                 character.icon.character.AssignTask(this, true);
             }
             else
             {
                 if (character.icon != null)
                 {
-                    assistantCharacters.Add(character.icon.character);
+                    AssistantCharacters.Add(character.icon.character);
                     character.icon.character.AssignTask(this);
                 }
             }
         }
 
-        duration = assistantCharacters.Count > 0
-            ? t.baseDuration / (Mathf.Pow(assistantCharacters.Count + leaderCharacters.Count, taskData.taskHelpFactor))
-            : t.baseDuration; // based on formula time/helpers^0.75
-        duration *= TimeTickSystem.ticksPerHour;
-        taskStarted = true;
+        Task.Duration = AssistantCharacters.Count > 0
+            ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
+            : Task.Duration;
+        Task.Duration *= TimeTickSystem.ticksPerHour;
+        isStarted = true;
     }
 
-    public void DisplayTaskInfo()
+    public void OnUpdate()
     {
-        GameManager.Instance.UIManager.SpawnTaskUI(this);
-    }
-
-    public void InitTask(TaskDataScriptable t, List<Tuple<Sprite, string, string>> dialoguesTask = null)
-    {
-        taskData = t;
-        timeLeft = t.timeLeft;
-        taskIcon.sprite = t.taskIcon;
-        dialogues = dialoguesTask;
-    }
-
-    public void UpdateTask()
-    {
-        if (!taskStarted) return;
-        if (duration > 0)
+        if (!isStarted) return;
+        if (Task.Duration > 0)
         {
-            duration -= TimeTickSystem.timePerTick;
-            var completionValue = 1 - duration / (taskData.baseDuration * TimeTickSystem.ticksPerHour);
-            completionGauge.fillAmount = completionValue;
+            Task.Duration -= TimeTickSystem.timePerTick;
+            // var completionValue = 1 - Task.Duration / (Task.Duration * TimeTickSystem.ticksPerHour);
+            // completionGauge.fillAmount = completionValue;
+            time.text = Task.Duration.ToString("F2") + " hours";
         }
         else
         {
-            OnTaskComplete();
+            OnComplete();
         }
     }
 
-    private void OnTaskComplete()
+    private void OnComplete()
     {
-        foreach (var outcome in taskData.outcomes)
-        {
-            outcome.leaderCharacters = leaderCharacters;
-            outcome.assistantCharacters = assistantCharacters;
-            outcome.Outcome();
-        }
-
-        isCompleted = true;
-        taskData = null;
+        IsCompleted = true;
         ResetCharacters();
         GameManager.Instance.RefreshCharacterIcons();
-        Destroy(gameObject);
+        spaceshipManager.taskNotificationPool.AddToPool(gameObject);
+    }
+
+    public void OnCancel()
+    {
+        ResetCharacters();
+        spaceshipManager.taskNotificationPool.AddToPool(gameObject);
     }
 
     private void ResetCharacters()
     {
-        foreach (var character in leaderCharacters)
+        foreach (var character in LeaderCharacters)
         {
             character.StopTask();
         }
 
-        foreach (var character in assistantCharacters)
+        foreach (var character in AssistantCharacters)
         {
             character.StopTask();
         }
-    }
-
-    public void CancelTask()
-    {
-        taskData = null;
-        ResetCharacters();
-        Destroy(gameObject);
     }
 }

@@ -46,9 +46,9 @@ public class CharacterIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         image.raycastTarget = true;
     }
 
-    public void AssignTask(TaskDataScriptable t)
+    public void AssignTask(Task t)
     {
-        currentTaskImage.sprite = t.taskIcon;
+        currentTaskImage.sprite = t.Icon;
         currentTaskImage.enabled = true;
     }
 
@@ -56,7 +56,7 @@ public class CharacterIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         if (character.IsWorking())
         {
-            AssignTask(character.GetTask().taskData);
+            AssignTask(character.GetTask());
         }
         else
         {
