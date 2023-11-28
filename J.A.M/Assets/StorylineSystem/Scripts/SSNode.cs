@@ -48,7 +48,7 @@ namespace SS
         private void ResetTimeline()
         {
             dialogues.Clear();
-            currentStoryline.text = "No timeline";
+            if (currentStoryline) currentStoryline.text = "No timeline";
         }
 
         /// <summary>
