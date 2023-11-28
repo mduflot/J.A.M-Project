@@ -45,6 +45,27 @@ public class TraitsData
         GoodMood = 8,
     }
     
+    [Flags]
+    public enum SpaceshipTraits
+    {
+        None,
+    }
+    
+    [Flags]
+    public enum HiddenSpaceshipTraits
+    {
+        None,
+    }
+    
+    public enum TraitOperator
+    {
+        AND,
+        OR,
+        XOR,
+        NAND,
+        NOT
+    }
+    
     [System.Serializable]
     public class Traits
     {
