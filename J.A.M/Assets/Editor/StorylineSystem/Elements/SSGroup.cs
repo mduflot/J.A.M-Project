@@ -10,6 +10,7 @@ namespace SS.Elements
     {
         public string ID { get; set; }
         public SSStoryStatus StoryStatus { get; set; }
+        public SSStoryType StoryType { get; set; }
         public string OldTitle { get; set; }
 
         private Color defaultBorderColor;

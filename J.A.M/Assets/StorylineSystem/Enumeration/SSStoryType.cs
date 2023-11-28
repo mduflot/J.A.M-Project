@@ -2,8 +2,8 @@
 {
     public enum SSStoryType
     {
-        PRINCIPAL,
-        SECONDARY,
-        TRIVIAL
+        Principal,
+        Secondary,
+        Trivial
     }
 }

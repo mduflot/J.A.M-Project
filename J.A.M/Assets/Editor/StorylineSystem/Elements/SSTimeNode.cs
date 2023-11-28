@@ -16,7 +16,7 @@ namespace SS.Elements
         {
             base.Initialize(nodeName, ssGraphView, position);
 
-            NodeType = SSNodeType.TIME;
+            NodeType = SSNodeType.Time;
             TimeToWait = 1;
 
             SSChoiceSaveData choiceData = new SSChoiceSaveData()

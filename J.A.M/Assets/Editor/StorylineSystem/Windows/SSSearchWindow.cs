@@ -30,17 +30,17 @@ namespace SS.Windows
                 new SearchTreeEntry(new GUIContent("Dialogue", indentationIcon))
                 {
                     level = 2,
-                    userData = SSNodeType.DIALOGUE
+                    userData = SSNodeType.Dialogue
                 },
                 new SearchTreeEntry(new GUIContent("Task", indentationIcon))
                 {
                     level = 2,
-                    userData = SSNodeType.TASK
+                    userData = SSNodeType.Task
                 },
                 new SearchTreeEntry(new GUIContent("Time", indentationIcon))
                 {
                     level = 2,
-                    userData = SSNodeType.TIME
+                    userData = SSNodeType.Time
                 },
                 new SearchTreeGroupEntry(new GUIContent("Node Group"), 1),
                 new SearchTreeEntry(new GUIContent("Single Group", indentationIcon))
@@ -58,30 +58,30 @@ namespace SS.Windows
             Vector2 localMousePosition = graphView.GetLocalMousePosition(context.screenMousePosition, true);
             switch (SearchTreeEntry.userData)
             {
-                case SSNodeType.DIALOGUE:
+                case SSNodeType.Dialogue:
                 {
                     SSDialogueNode dialogueNode =
-                        (SSDialogueNode)graphView.CreateNode("DialogueNode", SSNodeType.DIALOGUE, localMousePosition);
+                        (SSDialogueNode)graphView.CreateNode("DialogueNode", SSNodeType.Dialogue, localMousePosition);
 
                     graphView.AddElement(dialogueNode);
 
                     return true;
                 }
 
-                case SSNodeType.TASK:
+                case SSNodeType.Task:
                 {
                     SSTaskNode taskNode =
-                        (SSTaskNode)graphView.CreateNode("TaskNode", SSNodeType.TASK, localMousePosition);
+                        (SSTaskNode)graphView.CreateNode("TaskNode", SSNodeType.Task, localMousePosition);
 
                     graphView.AddElement(taskNode);
 
                     return true;
                 }
 
-                case SSNodeType.TIME:
+                case SSNodeType.Time:
                 {
                     SSTimeNode timeNode =
-                        (SSTimeNode)graphView.CreateNode("TimeName", SSNodeType.TIME, localMousePosition);
+                        (SSTimeNode)graphView.CreateNode("TimeName", SSNodeType.Time, localMousePosition);
 
                     graphView.AddElement(timeNode);
 

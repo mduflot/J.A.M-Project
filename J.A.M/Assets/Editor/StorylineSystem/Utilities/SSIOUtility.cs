@@ -58,11 +58,11 @@ namespace SS.Utilities
             SSGraphSaveDataSO graphData =
                 CreateAsset<SSGraphSaveDataSO>("Assets/Editor/StorylineSystem/Graphs", $"{graphFileName}Graph");
 
-            graphData.Initialize(graphFileName, graphView.storyStatus);
+            graphData.Initialize(graphFileName, graphView.storyStatus, graphView.storyType);
 
             SSNodeContainerSO nodeContainer = CreateAsset<SSNodeContainerSO>(containerFolderPath, graphFileName);
 
-            nodeContainer.Initialize(graphFileName, graphView.storyStatus);
+            nodeContainer.Initialize(graphFileName, graphView.storyStatus, graphView.storyType);
 
             SaveGroups(graphData, nodeContainer);
             SaveNodes(graphData, nodeContainer);
@@ -111,7 +111,7 @@ namespace SS.Utilities
             SSNodeGroupSO nodeGroup =
                 CreateAsset<SSNodeGroupSO>($"{containerFolderPath}/Groups/{groupName}", groupName);
 
-            nodeGroup.Initialize(groupName, group.StoryStatus);
+            nodeGroup.Initialize(groupName, group.StoryStatus, group.StoryType);
 
             createdNodeGroups.Add(group.ID, nodeGroup);
 
@@ -452,6 +452,8 @@ namespace SS.Utilities
                 SSGroup group = graphView.CreateGroup(groupData.Name, groupData.Position);
 
                 group.ID = groupData.ID;
+                group.StoryStatus = groupData.StoryStatus;
+                group.StoryType = groupData.StoryType;
 
                 loadedGroups.Add(group.ID, group);
             }
@@ -467,7 +469,7 @@ namespace SS.Utilities
                 node.ID = nodeData.ID;
                 node.Choices = choices;
 
-                if (nodeData.NodeType == SSNodeType.DIALOGUE)
+                if (nodeData.NodeType == SSNodeType.Dialogue)
                 {
                     ((SSDialogueNode)node).Text = ((SSDialogueNodeSaveData)nodeData).Text;
                     ((SSDialogueNode)node).SpeakerType = ((SSDialogueNodeSaveData)nodeData).SpeakerType;
@@ -475,7 +477,7 @@ namespace SS.Utilities
                     ((SSDialogueNode)node).IsDialogueTask = ((SSDialogueNodeSaveData)nodeData).IsDialogueTask;
                     ((SSDialogueNode)node).PercentageTask = ((SSDialogueNodeSaveData)nodeData).PercentageTask;
                 }
-                else if (nodeData.NodeType == SSNodeType.TASK)
+                else if (nodeData.NodeType == SSNodeType.Task)
                 {
                     ((SSTaskNode)node).DescriptionTask = ((SSTaskNodeSaveData)nodeData).DescriptionTask;
                     ((SSTaskNode)node).TaskIcon = ((SSTaskNodeSaveData)nodeData).TaskIcon;
@@ -488,7 +490,7 @@ namespace SS.Utilities
                     ((SSTaskNode)node).IsPermanent = ((SSTaskNodeSaveData)nodeData).IsPermanent;
                     ((SSTaskNode)node).PreviewOutcome = ((SSTaskNodeSaveData)nodeData).PreviewOutcome;
                 }
-                else if (nodeData.NodeType == SSNodeType.TIME)
+                else if (nodeData.NodeType == SSNodeType.Time)
                 {
                     ((SSTimeNode)node).TimeToWait = ((SSTimeNodeSaveData)nodeData).TimeToWait;
                 }

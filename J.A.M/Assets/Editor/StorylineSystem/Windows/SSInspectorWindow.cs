@@ -1,5 +1,6 @@
 ﻿using SS.Enumerations;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace SS.Windows
@@ -16,30 +17,41 @@ namespace SS.Windows
 
         protected override void OnGraphViewChanging()
         {
-            
         }
 
         protected override void OnGraphViewChanged()
         {
-            
         }
 
-        private void Show()
+        public void DisplayInspector()
         {
             rootVisualElement.Clear();
             if (graphView == null) return;
 
-            EnumField enumField = ElementUtility.CreateEnumField(graphView.storyStatus, "SS Status:",
+            EnumField enumFieldGraphStatus = ElementUtility.CreateEnumField(graphView.storyStatus, "SS Status:",
                 callback => { graphView.storyStatus = (SSStoryStatus)callback.newValue; });
 
-            rootVisualElement.Add(enumField);
+            rootVisualElement.Add(enumFieldGraphStatus);
+
+            EnumField enumFieldGraphType = ElementUtility.CreateEnumField(graphView.storyType, "SS Type:",
+                callback => { graphView.storyType = (SSStoryType)callback.newValue; });
+
+            rootVisualElement.Add(enumFieldGraphType);
 
             foreach (var group in graphView.Groups)
             {
-                EnumField enumFieldGroup = ElementUtility.CreateEnumField(group.Value.Groups[0].StoryStatus, $"{group.Value.Groups[0].title} Status:",
+                EnumField enumFieldGroupStatus = ElementUtility.CreateEnumField(group.Value.Groups[0].StoryStatus,
+                    $"{group.Value.Groups[0].title} Status:",
                     callback => { group.Value.Groups[0].StoryStatus = (SSStoryStatus)callback.newValue; });
 
-                rootVisualElement.Add(enumFieldGroup);
+                rootVisualElement.Add(enumFieldGroupStatus);
+
+
+                EnumField enumFieldGroupType = ElementUtility.CreateEnumField(group.Value.Groups[0].StoryType,
+                    $"{group.Value.Groups[0].title} Type:",
+                    callback => { group.Value.Groups[0].StoryType = (SSStoryType)callback.newValue; });
+
+                rootVisualElement.Add(enumFieldGroupType);
             }
         }
     }

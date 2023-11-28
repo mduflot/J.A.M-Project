@@ -32,7 +32,6 @@ namespace SS
 
         private List<CharacterBehaviour> characters = new();
         private List<CharacterBehaviour> assignedCharacters = new();
-        private List<CharacterBehaviour> notAssignedCharacters = new();
         private List<Tuple<Sprite, string, string>> dialogues;
         private SSTimeNodeSO timeNode;
         private uint durationTimeNode;
@@ -60,17 +59,17 @@ namespace SS
         {
             switch (nodeSO.NodeType)
             {
-                case SSNodeType.DIALOGUE:
+                case SSNodeType.Dialogue:
                 {
                     RunNode(nodeSO as SSDialogueNodeSO);
                     break;
                 }
-                case SSNodeType.TASK:
+                case SSNodeType.Task:
                 {
                     RunNode(nodeSO as SSTaskNodeSO);
                     break;
                 }
-                case SSNodeType.TIME:
+                case SSNodeType.Time:
                 {
                     RunNode(nodeSO as SSTimeNodeSO);
                     break;
@@ -81,6 +80,7 @@ namespace SS
         }
 
         // REWORK : Refactor the speakerType
+        // FIX : Problem with empty list if GD not set correctly
         private void RunNode(SSDialogueNodeSO nodeSO)
         {
             CharacterBehaviour actualSpeaker;
@@ -210,51 +210,13 @@ namespace SS
 
                     break;
                 }
-                case SSSpeakerType.NotAssigned1:
+                case SSSpeakerType.NotAssigned:
                 {
-                    if (notAssignedCharacters[0])
-                    {
-                        dialogues.Add(new Tuple<Sprite, string, string>(
-                            notAssignedCharacters[0].GetCharacterData().characterIcon,
-                            notAssignedCharacters[0].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(notAssignedCharacters[0], nodeSO));
-                    }
-
-                    break;
-                }
-                case SSSpeakerType.NotAssigned2:
-                {
-                    if (notAssignedCharacters[1])
-                    {
-                        dialogues.Add(new Tuple<Sprite, string, string>(
-                            notAssignedCharacters[1].GetCharacterData().characterIcon,
-                            notAssignedCharacters[1].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(notAssignedCharacters[1], nodeSO));
-                    }
-
-                    break;
-                }
-                case SSSpeakerType.NotAssigned3:
-                {
-                    if (notAssignedCharacters[2])
-                    {
-                        dialogues.Add(new Tuple<Sprite, string, string>(
-                            notAssignedCharacters[2].GetCharacterData().characterIcon,
-                            notAssignedCharacters[2].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(notAssignedCharacters[2], nodeSO));
-                    }
-
-                    break;
-                }
-                case SSSpeakerType.NotAssigned4:
-                {
-                    if (notAssignedCharacters[3])
-                    {
-                        dialogues.Add(new Tuple<Sprite, string, string>(
-                            notAssignedCharacters[3].GetCharacterData().characterIcon,
-                            notAssignedCharacters[3].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(notAssignedCharacters[3], nodeSO));
-                    }
+                    tempCharacters = spaceshipManager.characters.Except(assignedCharacters).ToList();
+                    actualSpeaker = tempCharacters[Random.Range(0, tempCharacters.Count)];
+                    dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
+                        actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
+                    StartCoroutine(DisplayDialogue(actualSpeaker, nodeSO));
 
                     break;
                 }
@@ -322,7 +284,6 @@ namespace SS
             yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(task).IsCompleted);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).LeaderCharacters);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).AssistantCharacters);
-            notAssignedCharacters.AddRange(spaceshipManager.characters.Except(assignedCharacters));
             if (nodeSO.Choices.First().NextNode == null)
             {
                 ResetTimeline();

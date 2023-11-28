@@ -30,7 +30,7 @@ namespace SS.Elements
         {
             base.Initialize(nodeName, ssGraphView, position);
 
-            NodeType = SSNodeType.TASK;
+            NodeType = SSNodeType.Task;
             DescriptionTask = "Description";
             TaskIcon = null;
             TimeLeft = 0f;

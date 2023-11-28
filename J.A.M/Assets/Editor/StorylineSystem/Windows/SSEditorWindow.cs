@@ -131,9 +131,9 @@ namespace SS.Windows
         
         private void ToggleInspector()
         {
-            SSInspectorWindow inspectorWindow = ScriptableObject.CreateInstance<SSInspectorWindow>();
+            SSInspectorWindow inspectorWindow = GetWindow<SSInspectorWindow>();
             inspectorWindow.Initialize(graphView);
-            inspectorWindow.Show();
+            inspectorWindow.DisplayInspector();
         }
 
         #endregion

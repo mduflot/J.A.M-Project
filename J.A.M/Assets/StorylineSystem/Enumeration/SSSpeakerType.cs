@@ -14,9 +14,6 @@ namespace SS.Enumerations
         Assigned2,
         Assigned3,
         Assigned4,
-        NotAssigned1,
-        NotAssigned2,
-        NotAssigned3,
-        NotAssigned4
+        NotAssigned
     }
 }

@@ -14,6 +14,7 @@ namespace SS.Windows
     public class SSGraphView : GraphView
     {
         public SSStoryStatus storyStatus;
+        public SSStoryType storyType;
         public SerializableDictionary<string, SSGroupErrorData> Groups;
 
         private SSEditorWindow editorWindow;
@@ -110,9 +111,9 @@ namespace SS.Windows
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
 
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Dialogue)", SSNodeType.DIALOGUE));
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Task)", SSNodeType.TASK));
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Time)", SSNodeType.TIME));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Dialogue)", SSNodeType.Dialogue));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Task)", SSNodeType.Task));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Time)", SSNodeType.Time));
 
             this.AddManipulator(CreateGroupContextualMenu());
         }
@@ -175,17 +176,17 @@ namespace SS.Windows
 
             switch (nodeType)
             {
-                case SSNodeType.DIALOGUE:
+                case SSNodeType.Dialogue:
                 {
                     node = (SSDialogueNode)Activator.CreateInstance(nodeTypeSystem);
                     break;
                 }
-                case SSNodeType.TASK:
+                case SSNodeType.Task:
                 {
                     node = (SSTaskNode)Activator.CreateInstance(nodeTypeSystem);
                     break;
                 }
-                case SSNodeType.TIME:
+                case SSNodeType.Time:
                 {
                     node = (SSTimeNode)Activator.CreateInstance(nodeTypeSystem);
                     break;
