@@ -20,7 +20,7 @@ namespace SS.Elements
         public int MandatorySlots { get; set; }
         public int OptionalSlots { get; set; }
         public float TaskHelpFactor { get; set; }
-        public SpaceshipManager.FurnitureType Room { get; set; }
+        public SpaceshipManager.RoomType Room { get; set; }
         public bool IsPermanent { get; set; }
         public string PreviewOutcome { get; set; }
 
@@ -38,7 +38,7 @@ namespace SS.Elements
             MandatorySlots = 1;
             OptionalSlots = 0;
             TaskHelpFactor = 0.75f;
-            Room = SpaceshipManager.FurnitureType.Bedrooms;
+            Room = SpaceshipManager.RoomType.Bedrooms;
             IsPermanent = false;
             PreviewOutcome = "Preview Outcome";
 
@@ -153,7 +153,7 @@ namespace SS.Elements
             customDataContainer.Add(taskHelpFactorFloatField);
 
             EnumField roomEnumField = ElementUtility.CreateEnumField(Room, "Room :",
-                callback => { Room = (SpaceshipManager.FurnitureType)callback.newValue; });
+                callback => { Room = (SpaceshipManager.RoomType)callback.newValue; });
 
             customDataContainer.Add(roomEnumField);
 

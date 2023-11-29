@@ -15,13 +15,13 @@ namespace SS.ScriptableObjects
         [field: SerializeField] public int MandatorySlots { get; set; }
         [field: SerializeField] public int OptionalSlots { get; set; }
         [field: SerializeField] public float TaskHelpFactor { get; set; }
-        [field: SerializeField] public SpaceshipManager.FurnitureType Room { get; set; }
+        [field: SerializeField] public SpaceshipManager.RoomType Room { get; set; }
         [field: SerializeField] public bool IsPermanent { get; set; }
         [field: SerializeField] public string PreviewOutcome { get; set; }
 
         public void Initialize(string nodeName, List<SSNodeChoiceData> choices, SSNodeType nodeType,
             bool isStartingNode, string descriptionTask, Sprite taskIcon, float timeLeft, float duration,
-            int mandatorySlots, int optionalSlots, float taskHelpFactor, SpaceshipManager.FurnitureType room,
+            int mandatorySlots, int optionalSlots, float taskHelpFactor, SpaceshipManager.RoomType room,
             bool isPermanent, string previewOutcome)
         {
             NodeName = nodeName;

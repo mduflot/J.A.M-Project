@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class SpaceshipManager : MonoBehaviour
 {
-    public Furniture[] rooms;
-    public System[] shipSystems;
+    public Room[] rooms;
+    public System[] systems;
     public CharacterBehaviour[] characters;
     public Pool<GameObject> notificationPool;
 
@@ -14,25 +13,31 @@ public class SpaceshipManager : MonoBehaviour
     [SerializeField] private GameObject taskNotificationPrefab;
 
     private Dictionary<SystemType, System> systemsDictionary = new();
-    private Dictionary<FurnitureType, Furniture> roomsDictionary = new();
+    private Dictionary<RoomType, Room> roomsDictionary = new();
+
+    [Serializable]
+    public struct Room
+    {
+        public RoomType type;
+        public Transform transform;
+        public Transform doorPosition;
+        public Furniture[] roomObjects;
+    }
 
     [Serializable]
     public struct Furniture
     {
-        [FormerlySerializedAs("roomName")] public FurnitureType name;
+        public FurnitureType furnitureType;
         public Transform transform;
-        public Transform doorPosition;
-        public GameObject[] roomObjects;
     }
 
     [Serializable]
     public class System
     {
-        [FormerlySerializedAs("systemName")] public SystemType systemTypeName;
+        public SystemType type;
         public GameObject systemObject;
         public float decreaseSpeed;
         [Range(0, 20)] public float gaugeValue;
-        public TaskDataScriptable task;
     }
 
     public enum SystemType
@@ -54,7 +59,7 @@ public class SpaceshipManager : MonoBehaviour
         Control = 7,
         Warehouse = 8
     }
-
+    
     public enum FurnitureType
     {
         Electrical = 1,
@@ -83,28 +88,28 @@ public class SpaceshipManager : MonoBehaviour
 
     private void InitializeSystems()
     {
-        foreach (var system in shipSystems)
+        foreach (var system in systems)
         {
             system.gaugeValue = 20;
-            systemsDictionary.Add(system.systemTypeName, system);
+            systemsDictionary.Add(system.type, system);
         }
 
         systemsDictionary[SystemType.Hull].gaugeValue = 10;
 
         foreach (var room in rooms)
         {
-            roomsDictionary.Add(room.name, room);
+            roomsDictionary.Add(room.type, room);
         }
     }
 
     private void UpdateSystems(object sender, TimeTickSystem.OnTickEventArgs e)
     {
-        foreach (var system in shipSystems)
+        foreach (var system in systems)
         {
             if (system.gaugeValue < 0) system.gaugeValue = 0;
             else
                 system.gaugeValue -= system.decreaseSpeed / TimeTickSystem.ticksPerHour;
-            GameManager.Instance.UIManager.UpdateGauges(system.systemTypeName, system.gaugeValue);
+            GameManager.Instance.UIManager.UpdateGauges(system.type, system.gaugeValue);
         }
 
         GameManager.Instance.UIManager.UpdateInGameDate(TimeTickSystem.GetTimeAsInGameDate(e));
@@ -152,7 +157,7 @@ public class SpaceshipManager : MonoBehaviour
     /// </summary>
     /// <param name="room"> Room of the task </param>
     /// <returns> Position of the room in the ship </returns>
-    public Transform GetTaskPosition(FurnitureType room)
+    public Transform GetTaskPosition(RoomType room)
     {
         return roomsDictionary[room].transform;
     }
@@ -213,7 +218,7 @@ public class SpaceshipManager : MonoBehaviour
             if (!character.IsWorking())
             {
                 float moodIncrease = 3.0f / TimeTickSystem.ticksPerHour;
-                foreach (var system in shipSystems)
+                foreach (var system in systems)
                 {
                     if (system.gaugeValue <= 0)
                     {
