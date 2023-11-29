@@ -28,14 +28,12 @@ public class TaskNotification : MonoBehaviour
         if (isStarted) return;
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Mouse clicked");
             RaycastHit hit; 
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.transform == transform)
                 {
-                    Debug.Log("Display");
                     Display();
                 }
             }
@@ -89,7 +87,7 @@ public class TaskNotification : MonoBehaviour
             Task.Duration -= TimeTickSystem.timePerTick;
             // var completionValue = 1 - Task.Duration / (Task.Duration * TimeTickSystem.ticksPerHour);
             // completionGauge.fillAmount = completionValue;
-            time.text = Task.Duration.ToString("F2") + " hours";
+            time.text = Task.Duration + " hours";
         }
         else
         {

@@ -67,6 +67,7 @@ public class TaskUI : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    // TODO : Player can StartTask() without assigning characters
     public void UpdateTask(object sender, TimeTickSystem.OnTickEventArgs e)
     {
         if (!taskStarted)

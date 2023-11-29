@@ -40,6 +40,7 @@ namespace SS.Elements
             TaskHelpFactor = 0.75f;
             Room = SpaceshipManager.ShipRooms.Bedrooms;
             IsPermanent = false;
+            PreviewOutcome = "Preview Outcome";
 
             SSChoiceTaskSaveData firstChoiceData = new SSChoiceTaskSaveData()
             {
@@ -208,8 +209,6 @@ namespace SS.Elements
 
             choiceFoldout.Add(negativeTraitsEnumFlagsField);
 
-            // TODO : Insert at the right index (not at the end)
-            
             ListView listViewStoryline = null;
             ListView listViewTimeline = null;
 
@@ -267,13 +266,11 @@ namespace SS.Elements
                     ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeGroups, "Node Groups :");
                 choiceFoldout.Add(listViewTimeline);
             }
-            
-            // TODO : Add conditions foldout
-            // TODO : Add addButton and deleteButton to conditions foldout
+
+            // TODO : Add addButton
             Button addConditionButton = ElementUtility.CreateButton("Add Condition", () =>
             {
-                // TODO : Add condition
-                // TODO : Create method for adding conditions & outcomes
+                // TODO : Use CreateConditionFoldout()
             });
 
             customDataContainer.Insert(Choices.IndexOf(choiceData), choiceFoldout);
@@ -317,6 +314,15 @@ namespace SS.Elements
             choicePort.Add(deleteChoiceButton);
 
             outputContainer.Add(choicePort);
+        }
+
+        private void CreateConditionFoldout()
+        {
+            Foldout conditionFoldout = ElementUtility.CreateFoldout("Condition :");
+
+            // TODO : Add conditions
+            // TODO : Add outcomes
+            // TODO : Add deleteButton
         }
 
         #endregion
