@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Task/TaskOutcome/GaugeLevelOutcome")]
 public class GaugeLevelOutcome : BaseTaskOutcome
 {
-    public SpaceshipManager.SystemType targetGauge;
+    public SystemType targetGauge;
 
     public Operation operation;
 

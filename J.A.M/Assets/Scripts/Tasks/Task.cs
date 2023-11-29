@@ -10,12 +10,12 @@ public class Task
     public int MandatorySlots;
     public int OptionalSlots;
     public float HelpFactor;
-    public SpaceshipManager.RoomType Room;
+    public RoomType Room;
     public bool IsPermanent;
     public string PreviewOutcome;
 
     public Task(string name, string description, Sprite icon, float timeLeft, float duration, int mandatorySlots,
-        int optionalSlots, float helpFactor, SpaceshipManager.RoomType room, bool isPermanent, string previewOutcome)
+        int optionalSlots, float helpFactor, RoomType room, bool isPermanent, string previewOutcome)
     {
         Name = name;
         Description = description;

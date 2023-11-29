@@ -1,76 +1,18 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpaceshipManager : MonoBehaviour
 {
     public Room[] rooms;
-    public System[] systems;
+    public ShipSystem[] systems;
     public CharacterBehaviour[] characters;
     public Pool<GameObject> notificationPool;
 
     [SerializeField] private List<Notification> activeTasks = new();
     [SerializeField] private GameObject taskNotificationPrefab;
 
-    private Dictionary<SystemType, System> systemsDictionary = new();
+    private Dictionary<SystemType, ShipSystem> systemsDictionary = new();
     private Dictionary<RoomType, Room> roomsDictionary = new();
-
-    [Serializable]
-    public struct Room
-    {
-        public RoomType type;
-        public Transform transform;
-        public Transform doorPosition;
-        public Furniture[] roomObjects;
-    }
-
-    [Serializable]
-    public struct Furniture
-    {
-        public FurnitureType furnitureType;
-        public Transform transform;
-    }
-
-    [Serializable]
-    public class System
-    {
-        public SystemType type;
-        public GameObject systemObject;
-        public float decreaseSpeed;
-        [Range(0, 20)] public float gaugeValue;
-    }
-
-    public enum SystemType
-    {
-        Power = 1,
-        Airflow = 2,
-        Food = 3,
-        Hull = 4,
-    }
-
-    public enum RoomType
-    {
-        Electrical = 1,
-        Airflow = 2,
-        Food = 3,
-        Hull = 4,
-        Bedrooms = 5,
-        Cafeteria = 6,
-        Control = 7,
-        Warehouse = 8
-    }
-    
-    public enum FurnitureType
-    {
-        Electrical = 1,
-        Airflow = 2,
-        Food = 3,
-        Hull = 4,
-        Bedrooms = 5,
-        Cafeteria = 6,
-        Control = 7,
-        Warehouse = 8
-    }
 
     private void Start()
     {

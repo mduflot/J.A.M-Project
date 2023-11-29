@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 public class UIManager : MonoBehaviour
 {
     public Gauges[] gauges;
-    private Dictionary<SpaceshipManager.SystemType, Image> gaugeReferences = new();
+    private Dictionary<SystemType, Image> gaugeReferences = new();
     public Transform charactersUIParent;
     public List<CharacterUI> charactersUI;
     private List<CharacterIcon> characterIcons = new();
@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     [Serializable] 
     public struct Gauges
     {
-        [FormerlySerializedAs("system")] public SpaceshipManager.SystemType systemType;
+        [FormerlySerializedAs("system")] public SystemType systemType;
         public Image gauge;
     }
     
@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateGauges(SpaceshipManager.SystemType systemType, float value)
+    public void UpdateGauges(SystemType systemType, float value)
     {
         gaugeReferences[systemType].fillAmount = value/20;
     }

@@ -13,7 +13,7 @@ namespace SS.Data.Save
         [field: SerializeField] public int MandatorySlots { get; set; }
         [field: SerializeField] public int OptionalSlots { get; set; }
         [field: SerializeField] public float TaskHelpFactor { get; set; }
-        [field: SerializeField] public SpaceshipManager.RoomType Room { get; set; }
+        [field: SerializeField] public RoomType Room { get; set; }
         [field: SerializeField] public bool IsPermanent { get; set; }
         [field: SerializeField] public string PreviewOutcome { get; set; }
     }

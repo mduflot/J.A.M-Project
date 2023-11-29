@@ -13,7 +13,7 @@ public class TaskDataScriptable : ScriptableObject
     public int mandatorySlots;
     public int optionalSlots;
     public float taskHelpFactor = .75f;
-    public SpaceshipManager.RoomType room;
+    public RoomType room;
 
     [Header("Permanent Task")]
     public bool isPermanent;
