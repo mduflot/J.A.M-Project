@@ -35,7 +35,7 @@ namespace SS
         private List<Tuple<Sprite, string, string>> dialogues;
         private SSTimeNodeSO timeNode;
         private uint durationTimeNode;
-        private SSTaskNodeSO taskNode;
+        private Task task;
 
         public void StartTimeline()
         {
@@ -230,7 +230,7 @@ namespace SS
             if (notificationGO.TryGetComponent(out Notification notification))
             {
                 notification.transform.position = position;
-                Task task = new Task(nodeSO.name, nodeSO.Description, nodeSO.Icon, nodeSO.TimeLeft, nodeSO.Duration,
+                task = new Task(nodeSO.name, nodeSO.Description, nodeSO.Icon, nodeSO.TimeLeft, nodeSO.Duration,
                     nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room, nodeSO.IsPermanent,
                     nodeSO.PreviewOutcome);
                 notification.Initialize(task, spaceshipManager, dialogues);
@@ -265,7 +265,12 @@ namespace SS
 
         IEnumerator DisplayDialogue(CharacterBehaviour characterBehaviour, SSDialogueNodeSO nodeSO)
         {
-            yield return new WaitUntil(() => characterBehaviour.speaker.isSpeaking == false);
+            yield return new WaitUntil(() => characterBehaviour.speaker.IsSpeaking == false);
+            if (nodeSO.IsDialogueTask)
+            {
+                yield return new WaitUntil(() => 100 - Mathf.Clamp(task.Duration / task.BaseDuration, 0, 100) * 100 > nodeSO.PercentageTask);
+            }
+
             characterBehaviour.speaker.StartDialogue(nodeSO);
 
             yield return new WaitForSeconds(nodeSO.Duration);
@@ -281,7 +286,7 @@ namespace SS
 
         IEnumerator WaiterTask(SSTaskNodeSO nodeSO, Task task)
         {
-            yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(task).IsCompleted);
+            yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(task).IsStarted);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).LeaderCharacters);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).AssistantCharacters);
             if (nodeSO.Choices.First().NextNode == null)

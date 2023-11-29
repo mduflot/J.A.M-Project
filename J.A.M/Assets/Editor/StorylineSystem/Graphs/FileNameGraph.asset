@@ -13,20 +13,22 @@ MonoBehaviour:
   m_Name: FileNameGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: FileName
-  <Status>k__BackingField: 0
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
   <Groups>k__BackingField:
   - <ID>k__BackingField: c38bdc53-e7ab-4d57-ae69-68d842b09e77
-    <Status>k__BackingField: 0
+    <StoryStatus>k__BackingField: 0
+    <StoryType>k__BackingField: 0
     <Name>k__BackingField: TestTL
     <Position>k__BackingField: {x: 378, y: 35}
   <Nodes>k__BackingField:
-  - rid: 7018500023120035840
-  - rid: 7018500023120035841
-  - rid: 7018500023120035842
-  - rid: 7018500023120035843
-  - rid: 7018500023120035844
-  - rid: 7018500023120035845
-  - rid: 7018500023120035846
+  - rid: 7018500050529026048
+  - rid: 7018500050529026049
+  - rid: 7018500050529026050
+  - rid: 7018500050529026051
+  - rid: 7018500050529026052
+  - rid: 7018500050529026053
+  - rid: 7018500050529026054
   <OldGroupNames>k__BackingField:
   - TestTL
   <OldUngroupedNodeNames>k__BackingField:
@@ -44,13 +46,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7018500023120035840
+    - rid: 7018500050529026048
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: bdf18f6b-cd3b-49df-aea6-66565872022c
         <Name>k__BackingField: First
         <Choices>k__BackingField:
-        - rid: 7018500023120035847
+        - rid: 7018500050529026055
         <GroupID>k__BackingField: c38bdc53-e7ab-4d57-ae69-68d842b09e77
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 403, y: 94}
@@ -59,29 +61,29 @@ MonoBehaviour:
         <Duration>k__BackingField: 5
         <IsDialogueTask>k__BackingField: 0
         <PercentageTask>k__BackingField: 50
-    - rid: 7018500023120035841
+    - rid: 7018500050529026049
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 111d8e37-e415-4304-af2e-e4a78158aa1b
         <Name>k__BackingField: Second
         <Choices>k__BackingField:
-        - rid: 7018500023120035848
+        - rid: 7018500050529026056
         <GroupID>k__BackingField: c38bdc53-e7ab-4d57-ae69-68d842b09e77
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1130, y: 94}
         <Text>k__BackingField: "Termin\xE9 biloute !"
         <SpeakerType>k__BackingField: 0
         <Duration>k__BackingField: 5
-        <IsDialogueTask>k__BackingField: 0
+        <IsDialogueTask>k__BackingField: 1
         <PercentageTask>k__BackingField: 50
-    - rid: 7018500023120035842
+    - rid: 7018500050529026050
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 73f533ef-ab1f-4e34-8c13-108899dedeba
         <Name>k__BackingField: DefendSpaceship
         <Choices>k__BackingField:
-        - rid: 7018500023120035849
-        - rid: 7018500023120035850
+        - rid: 7018500050529026057
+        - rid: 7018500050529026058
         <GroupID>k__BackingField: c38bdc53-e7ab-4d57-ae69-68d842b09e77
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 731, y: 94}
@@ -96,14 +98,14 @@ MonoBehaviour:
         <Room>k__BackingField: 1
         <IsPermanent>k__BackingField: 0
         <PreviewOutcome>k__BackingField: trololol
-    - rid: 7018500023120035843
+    - rid: 7018500050529026051
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 78c8d6ba-f705-4d20-8537-dd1d6519ec99
         <Name>k__BackingField: OxygenTask
         <Choices>k__BackingField:
-        - rid: 7018500023120035851
-        - rid: 7018500023120035852
+        - rid: 7018500050529026059
+        - rid: 7018500050529026060
         <GroupID>k__BackingField: 
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: -469, y: -76}
@@ -118,14 +120,14 @@ MonoBehaviour:
         <Room>k__BackingField: 2
         <IsPermanent>k__BackingField: 1
         <PreviewOutcome>k__BackingField: Airflow
-    - rid: 7018500023120035844
+    - rid: 7018500050529026052
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 5f019f8b-b151-40b9-a893-28acfb5b1946
         <Name>k__BackingField: FoodTask
         <Choices>k__BackingField:
-        - rid: 7018500023120035853
-        - rid: 7018500023120035854
+        - rid: 7018500050529026061
+        - rid: 7018500050529026062
         <GroupID>k__BackingField: 
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: -469, y: 455}
@@ -141,14 +143,14 @@ MonoBehaviour:
         <Room>k__BackingField: 3
         <IsPermanent>k__BackingField: 1
         <PreviewOutcome>k__BackingField: Food
-    - rid: 7018500023120035845
+    - rid: 7018500050529026053
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 8b80c32a-c161-4771-a942-95bcd8b5a470
         <Name>k__BackingField: HullTask
         <Choices>k__BackingField:
-        - rid: 7018500023120035855
-        - rid: 7018500023120035856
+        - rid: 7018500050529026063
+        - rid: 7018500050529026064
         <GroupID>k__BackingField: 
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: -469, y: 991}
@@ -164,14 +166,14 @@ MonoBehaviour:
         <Room>k__BackingField: 4
         <IsPermanent>k__BackingField: 1
         <PreviewOutcome>k__BackingField: Hull
-    - rid: 7018500023120035846
+    - rid: 7018500050529026054
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 5a408429-531f-4cc8-b0bd-759769c93925
         <Name>k__BackingField: TaskNode
         <Choices>k__BackingField:
-        - rid: 7018500023120035857
-        - rid: 7018500023120035858
+        - rid: 7018500050529026065
+        - rid: 7018500050529026066
         <GroupID>k__BackingField: 
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 234, y: 991}
@@ -187,17 +189,17 @@ MonoBehaviour:
         <Room>k__BackingField: 1
         <IsPermanent>k__BackingField: 1
         <PreviewOutcome>k__BackingField: electricity
-    - rid: 7018500023120035847
+    - rid: 7018500050529026055
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 73f533ef-ab1f-4e34-8c13-108899dedeba
-    - rid: 7018500023120035848
+    - rid: 7018500050529026056
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 
-    - rid: 7018500023120035849
+    - rid: 7018500050529026057
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -209,7 +211,7 @@ MonoBehaviour:
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500023120035850
+    - rid: 7018500050529026058
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: LastChoice
@@ -221,7 +223,7 @@ MonoBehaviour:
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500023120035851
+    - rid: 7018500050529026059
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -233,7 +235,7 @@ MonoBehaviour:
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500023120035852
+    - rid: 7018500050529026060
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: LastChoice
@@ -245,7 +247,7 @@ MonoBehaviour:
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500023120035853
+    - rid: 7018500050529026061
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -257,7 +259,7 @@ MonoBehaviour:
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500023120035854
+    - rid: 7018500050529026062
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: LastChoice
@@ -269,7 +271,7 @@ MonoBehaviour:
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500023120035855
+    - rid: 7018500050529026063
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -281,7 +283,7 @@ MonoBehaviour:
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500023120035856
+    - rid: 7018500050529026064
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: LastChoice
@@ -293,7 +295,7 @@ MonoBehaviour:
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500023120035857
+    - rid: 7018500050529026065
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -305,7 +307,7 @@ MonoBehaviour:
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500023120035858
+    - rid: 7018500050529026066
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: LastChoice

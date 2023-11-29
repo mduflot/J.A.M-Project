@@ -1,5 +1,6 @@
 using TMPro;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TaskUI : MonoBehaviour
@@ -67,57 +68,35 @@ public class TaskUI : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    // TODO : Player can StartTask() without assigning characters
     public void UpdateTask(object sender, TimeTickSystem.OnTickEventArgs e)
     {
         if (!taskStarted)
         {
-            if (CanStartTask())
-            {
-                if (characterSlots[0] == null) return;
-                if (notification.Task.IsPermanent)
-                {
-                    previewOutcomeText.text = "+ " + (int)characterSlots[0].icon.character.GetVolition() + " " +
-                                              notification.Task.PreviewOutcome;
-                }
-                else
-                {
-                    previewOutcomeText.text = characterSlots[0].icon.character.GetCharacterData().firstName + " " +
-                                              notification.Task.PreviewOutcome;
-                }
+            // TODO : Update PreviewOutcome
+            previewOutcomeText.text = notification.Task.PreviewOutcome;
 
-                var assistantCharacters = 0;
-                foreach (var slot in characterSlots)
-                {
-                    if (!slot.isMandatory && slot.icon != null) assistantCharacters++;
-                }
+            var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
 
-                duration = assistantCharacters > 0
-                    ? notification.Task.Duration /
-                      (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
-                    : notification.Task.Duration;
-                durationText.text = duration.ToString("F2") + " hours";
-            }
-            else
-            {
-                previewOutcomeText.text = null;
-            }
+            duration = assistantCharacters > 0
+                ? notification.Task.Duration /
+                  (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
+                : notification.Task.Duration;
+            durationText.text = duration.ToString("F2") + " hours";
         }
     }
 
     public void StartTask()
     {
-        if (CanStartTask())
-        {
-            if (!CharactersWorking())
-            {
-                notification.OnStart(characterSlots);
-                taskStarted = true;
-                CloseTask();
-            }
-        }
+        // TODO : Feedback on characters are working
+        if (CharactersWorking()) return;
+        notification.OnStart(characterSlots);
+        taskStarted = true;
+        CloseTask();
     }
 
+    /// <summary>
+    /// Close the task UI
+    /// </summary>
     public void CloseTask()
     {
         foreach (var slot in characterSlots)
@@ -134,25 +113,12 @@ public class TaskUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Close the notification if it is permanent
+    /// </summary>
     public void CloseNotification()
     {
-        if (notification.Task.IsPermanent)
-        {
-            notification.OnCancel();
-        }
-    }
-
-    private bool CanStartTask()
-    {
-        foreach (var slot in characterSlots)
-        {
-            if (slot.isMandatory && slot.icon == null)
-            {
-                return false;
-            }
-        }
-
-        return true;
+        if (notification.Task.IsPermanent) notification.OnCancel();
     }
 
     private bool CharactersWorking()

@@ -7,6 +7,7 @@ public class Task
     public Sprite Icon;
     public float TimeLeft;
     public float Duration;
+    public float BaseDuration;
     public int MandatorySlots;
     public int OptionalSlots;
     public float HelpFactor;
@@ -22,6 +23,7 @@ public class Task
         Icon = icon;
         TimeLeft = timeLeft;
         Duration = duration;
+        BaseDuration = duration;
         MandatorySlots = mandatorySlots;
         OptionalSlots = optionalSlots;
         HelpFactor = helpFactor;

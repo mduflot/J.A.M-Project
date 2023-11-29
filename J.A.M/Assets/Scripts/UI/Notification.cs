@@ -6,6 +6,7 @@ using UnityEngine;
 public class Notification : MonoBehaviour
 {
     [HideInInspector] public bool IsCompleted;
+    [HideInInspector] public bool IsStarted;
     [HideInInspector] public List<Tuple<Sprite, string, string>> Dialogues;
     [HideInInspector] public Task Task;
     [HideInInspector] public List<CharacterBehaviour> LeaderCharacters = new();
@@ -14,7 +15,6 @@ public class Notification : MonoBehaviour
     [SerializeField] private SpriteRenderer icon;
     [SerializeField] private TextMeshPro time;
 
-    private bool isStarted;
     private Camera camera;
     private SpaceshipManager spaceshipManager;
 
@@ -22,13 +22,13 @@ public class Notification : MonoBehaviour
     {
         camera = Camera.main;
     }
-    
+
     private void Update()
     {
-        if (isStarted) return;
+        if (IsStarted) return;
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit hit; 
+            RaycastHit hit;
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
@@ -40,7 +40,8 @@ public class Notification : MonoBehaviour
         }
     }
 
-    public void Initialize(Task task, SpaceshipManager spaceshipManager, List<Tuple<Sprite, string, string>> dialogues = null)
+    public void Initialize(Task task, SpaceshipManager spaceshipManager,
+        List<Tuple<Sprite, string, string>> dialogues = null)
     {
         Task = task;
         icon.sprite = task.Icon;
@@ -76,12 +77,13 @@ public class Notification : MonoBehaviour
             ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
             : Task.Duration;
         Task.Duration *= TimeTickSystem.ticksPerHour;
-        isStarted = true;
+        Task.BaseDuration = Task.Duration;
+        IsStarted = true;
     }
 
     public void OnUpdate()
     {
-        if (!isStarted) return;
+        if (!IsStarted) return;
         if (Task.Duration > 0)
         {
             Task.Duration -= TimeTickSystem.timePerTick;
