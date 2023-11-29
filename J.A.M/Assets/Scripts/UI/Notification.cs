@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class TaskNotification : MonoBehaviour
+public class Notification : MonoBehaviour
 {
-    public bool IsCompleted;
-    public List<Tuple<Sprite, string, string>> Dialogues;
-    public Task Task;
-    public List<CharacterBehaviour> LeaderCharacters = new();
-    public List<CharacterBehaviour> AssistantCharacters = new();
+    [HideInInspector] public bool IsCompleted;
+    [HideInInspector] public List<Tuple<Sprite, string, string>> Dialogues;
+    [HideInInspector] public Task Task;
+    [HideInInspector] public List<CharacterBehaviour> LeaderCharacters = new();
+    [HideInInspector] public List<CharacterBehaviour> AssistantCharacters = new();
 
     [SerializeField] private SpriteRenderer icon;
     [SerializeField] private TextMeshPro time;
@@ -50,7 +50,7 @@ public class TaskNotification : MonoBehaviour
 
     public void Display()
     {
-        GameManager.Instance.UIManager.SpawnTaskUI(this);
+        GameManager.Instance.UIManager.taskUI.Initialize(this);
     }
 
     public void OnStart(List<CharacterUISlot> characters)
@@ -85,8 +85,6 @@ public class TaskNotification : MonoBehaviour
         if (Task.Duration > 0)
         {
             Task.Duration -= TimeTickSystem.timePerTick;
-            // var completionValue = 1 - Task.Duration / (Task.Duration * TimeTickSystem.ticksPerHour);
-            // completionGauge.fillAmount = completionValue;
             time.text = Task.Duration + " hours";
         }
         else
@@ -100,13 +98,13 @@ public class TaskNotification : MonoBehaviour
         IsCompleted = true;
         ResetCharacters();
         GameManager.Instance.RefreshCharacterIcons();
-        spaceshipManager.taskNotificationPool.AddToPool(gameObject);
+        spaceshipManager.notificationPool.AddToPool(gameObject);
     }
 
     public void OnCancel()
     {
         ResetCharacters();
-        spaceshipManager.taskNotificationPool.AddToPool(gameObject);
+        spaceshipManager.notificationPool.AddToPool(gameObject);
     }
 
     private void ResetCharacters()

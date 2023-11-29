@@ -22,7 +22,7 @@ public class TaskUI : MonoBehaviour
     [SerializeField] private float timeLeft;
     [SerializeField] private float duration;
 
-    private TaskNotification taskNotification;
+    private Notification notification;
     private List<CharacterUISlot> characterSlots = new();
     private bool taskStarted;
 
@@ -33,17 +33,17 @@ public class TaskUI : MonoBehaviour
      *      add : refreshDisplay to update values after assigning characters
      *      fix : remove characterIcon from task if menu is closed without starting task
      */
-    public void Initialize(TaskNotification tn)
+    public void Initialize(Notification tn)
     {
-        taskNotification = tn;
+        notification = tn;
         warningUI.gameObject.SetActive(false);
-        titleText.text = taskNotification.Task.Name;
-        timeLeft = taskNotification.Task.TimeLeft;
-        duration = taskNotification.Task.Duration;
-        descriptionText.text = taskNotification.Task.Description;
+        titleText.text = notification.Task.Name;
+        timeLeft = notification.Task.TimeLeft;
+        duration = notification.Task.Duration;
+        descriptionText.text = notification.Task.Description;
         taskStarted = false;
-        taskNotification = tn;
-        for (int i = 0; i < taskNotification.Task.MandatorySlots; i++)
+        notification = tn;
+        for (int i = 0; i < notification.Task.MandatorySlots; i++)
         {
             var slot = inactiveSlots[i];
             slot.isMandatory = true;
@@ -52,7 +52,7 @@ public class TaskUI : MonoBehaviour
             characterSlots.Add(slot);
         }
 
-        for (int i = 3; i < taskNotification.Task.OptionalSlots + 3; i++)
+        for (int i = 3; i < notification.Task.OptionalSlots + 3; i++)
         {
             var slot = inactiveSlots[i];
             slot.isMandatory = false;
@@ -75,15 +75,15 @@ public class TaskUI : MonoBehaviour
             if (CanStartTask())
             {
                 if (characterSlots[0] == null) return;
-                if (taskNotification.Task.IsPermanent)
+                if (notification.Task.IsPermanent)
                 {
                     previewOutcomeText.text = "+ " + (int)characterSlots[0].icon.character.GetVolition() + " " +
-                                              taskNotification.Task.PreviewOutcome;
+                                              notification.Task.PreviewOutcome;
                 }
                 else
                 {
                     previewOutcomeText.text = characterSlots[0].icon.character.GetCharacterData().firstName + " " +
-                                              taskNotification.Task.PreviewOutcome;
+                                              notification.Task.PreviewOutcome;
                 }
 
                 var assistantCharacters = 0;
@@ -93,9 +93,9 @@ public class TaskUI : MonoBehaviour
                 }
 
                 duration = assistantCharacters > 0
-                    ? taskNotification.Task.Duration /
-                      (Mathf.Pow(assistantCharacters + 1, taskNotification.Task.HelpFactor))
-                    : taskNotification.Task.Duration;
+                    ? notification.Task.Duration /
+                      (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
+                    : notification.Task.Duration;
                 durationText.text = duration.ToString("F2") + " hours";
             }
             else
@@ -111,7 +111,7 @@ public class TaskUI : MonoBehaviour
         {
             if (!CharactersWorking())
             {
-                taskNotification.OnStart(characterSlots);
+                notification.OnStart(characterSlots);
                 taskStarted = true;
                 CloseTask();
             }
@@ -136,9 +136,9 @@ public class TaskUI : MonoBehaviour
 
     public void CloseNotification()
     {
-        if (taskNotification.Task.IsPermanent)
+        if (notification.Task.IsPermanent)
         {
-            taskNotification.OnCancel();
+            notification.OnCancel();
         }
     }
 

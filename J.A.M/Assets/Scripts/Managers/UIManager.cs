@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class UIManager : MonoBehaviour
 {
     public Gauges[] gauges;
-    private Dictionary<SpaceshipManager.System, Image> gaugeReferences = new();
+    private Dictionary<SpaceshipManager.SystemType, Image> gaugeReferences = new();
     public Transform charactersUIParent;
     public List<CharacterUI> charactersUI;
     private List<CharacterIcon> characterIcons = new();
@@ -21,7 +22,7 @@ public class UIManager : MonoBehaviour
     [Serializable] 
     public struct Gauges
     {
-        public SpaceshipManager.System system;
+        [FormerlySerializedAs("system")] public SpaceshipManager.SystemType systemType;
         public Image gauge;
     }
     
@@ -34,7 +35,7 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < gauges.Length; i++)
         {
-            gaugeReferences.Add(gauges[i].system, gauges[i].gauge);
+            gaugeReferences.Add(gauges[i].systemType, gauges[i].gauge);
         }
 
         foreach (var character in GameManager.Instance.SpaceshipManager.characters)
@@ -46,14 +47,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void SpawnTaskUI(TaskNotification tn)
+    public void UpdateGauges(SpaceshipManager.SystemType systemType, float value)
     {
-        taskUI.Initialize(tn);
-    }
-
-    public void UpdateGauges(SpaceshipManager.System system, float value)
-    {
-        gaugeReferences[system].fillAmount = value/20;
+        gaugeReferences[systemType].fillAmount = value/20;
     }
 
     public void UpdateInGameDate(string newDate)

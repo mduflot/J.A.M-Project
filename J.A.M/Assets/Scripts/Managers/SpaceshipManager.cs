@@ -1,40 +1,41 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SpaceshipManager : MonoBehaviour
 {
-    public Room[] rooms;
-    public ShipSystem[] shipSystems;
+    public Furniture[] rooms;
+    public System[] shipSystems;
     public CharacterBehaviour[] characters;
-    public Pool<GameObject> taskNotificationPool;
+    public Pool<GameObject> notificationPool;
 
-    [SerializeField] private List<TaskNotification> activeTasks = new();
+    [SerializeField] private List<Notification> activeTasks = new();
     [SerializeField] private GameObject taskNotificationPrefab;
-    
-    private Dictionary<System, ShipSystem> systemsDictionary = new();
-    private Dictionary<ShipRooms, Room> roomsDictionary = new();
+
+    private Dictionary<SystemType, System> systemsDictionary = new();
+    private Dictionary<FurnitureType, Furniture> roomsDictionary = new();
 
     [Serializable]
-    public struct Room
+    public struct Furniture
     {
-        public ShipRooms roomName;
+        [FormerlySerializedAs("roomName")] public FurnitureType name;
         public Transform transform;
         public Transform doorPosition;
         public GameObject[] roomObjects;
     }
 
     [Serializable]
-    public class ShipSystem
+    public class System
     {
-        public System systemName;
+        [FormerlySerializedAs("systemName")] public SystemType systemTypeName;
         public GameObject systemObject;
         public float decreaseSpeed;
         [Range(0, 20)] public float gaugeValue;
         public TaskDataScriptable task;
     }
 
-    public enum System
+    public enum SystemType
     {
         Power = 1,
         Airflow = 2,
@@ -42,7 +43,7 @@ public class SpaceshipManager : MonoBehaviour
         Hull = 4,
     }
 
-    public enum ShipRooms
+    public enum RoomType
     {
         Electrical = 1,
         Airflow = 2,
@@ -51,14 +52,26 @@ public class SpaceshipManager : MonoBehaviour
         Bedrooms = 5,
         Cafeteria = 6,
         Control = 7,
-        Warehouse = 8,
+        Warehouse = 8
+    }
+
+    public enum FurnitureType
+    {
+        Electrical = 1,
+        Airflow = 2,
+        Food = 3,
+        Hull = 4,
+        Bedrooms = 5,
+        Cafeteria = 6,
+        Control = 7,
+        Warehouse = 8
     }
 
     private void Start()
     {
         Initialize();
         InitializeSystems();
-        taskNotificationPool = new Pool<GameObject>(taskNotificationPrefab, 5);
+        notificationPool = new Pool<GameObject>(taskNotificationPrefab, 5);
     }
 
     private void Initialize()
@@ -73,14 +86,14 @@ public class SpaceshipManager : MonoBehaviour
         foreach (var system in shipSystems)
         {
             system.gaugeValue = 20;
-            systemsDictionary.Add(system.systemName, system);
+            systemsDictionary.Add(system.systemTypeName, system);
         }
 
-        systemsDictionary[System.Hull].gaugeValue = 10;
+        systemsDictionary[SystemType.Hull].gaugeValue = 10;
 
         foreach (var room in rooms)
         {
-            roomsDictionary.Add(room.roomName, room);
+            roomsDictionary.Add(room.name, room);
         }
     }
 
@@ -91,20 +104,20 @@ public class SpaceshipManager : MonoBehaviour
             if (system.gaugeValue < 0) system.gaugeValue = 0;
             else
                 system.gaugeValue -= system.decreaseSpeed / TimeTickSystem.ticksPerHour;
-            GameManager.Instance.UIManager.UpdateGauges(system.systemName, system.gaugeValue);
+            GameManager.Instance.UIManager.UpdateGauges(system.systemTypeName, system.gaugeValue);
         }
 
         GameManager.Instance.UIManager.UpdateInGameDate(TimeTickSystem.GetTimeAsInGameDate(e));
     }
 
-    public float GetGaugeValue(System system)
+    public float GetGaugeValue(SystemType systemType)
     {
-        return systemsDictionary[system].gaugeValue;
+        return systemsDictionary[systemType].gaugeValue;
     }
 
-    public void GaugeValueOperation(System system, float value)
+    public void GaugeValueOperation(SystemType systemType, float value)
     {
-        var gaugeValue = systemsDictionary[system].gaugeValue;
+        var gaugeValue = systemsDictionary[systemType].gaugeValue;
         gaugeValue += value;
         if (gaugeValue > 20)
         {
@@ -115,7 +128,7 @@ public class SpaceshipManager : MonoBehaviour
             gaugeValue = 0;
         }
 
-        systemsDictionary[system].gaugeValue = gaugeValue;
+        systemsDictionary[systemType].gaugeValue = gaugeValue;
     }
 
     #region Tasks
@@ -134,36 +147,17 @@ public class SpaceshipManager : MonoBehaviour
         }
     }
 
-    public void SpawnPermanentTask(TaskDataScriptable taskDataScriptable)
-    {
-        // if (!IsTaskActive(taskDataScriptable))
-        // {
-        //     var position = GetTaskPosition(taskDataScriptable.room).position;
-        //     position = GameManager.Instance.mainCamera.WorldToScreenPoint(position);
-        //     TaskNotification taskNote = Instantiate(taskNotificationPrefab, position, Quaternion.identity,
-        //         GameManager.Instance.UIManager.taskNotificationParent);
-        //     // taskNote.Initialize(taskDataScriptable);
-        //     OpenTaskUI(taskNote);
-        //     AddTask(taskNote);
-        // }
-    }
-
     /// <summary>
     /// Returns the position of the task in the room
     /// </summary>
     /// <param name="room"> Room of the task </param>
     /// <returns> Position of the room in the ship </returns>
-    public Transform GetTaskPosition(ShipRooms room)
+    public Transform GetTaskPosition(FurnitureType room)
     {
         return roomsDictionary[room].transform;
     }
 
-    public void OpenTaskUI(TaskNotification tn)
-    {
-        GameManager.Instance.UIManager.SpawnTaskUI(tn);
-    }
-
-    public void AddTask(TaskNotification task)
+    public void AddTask(Notification task)
     {
         activeTasks.Add(task);
     }
@@ -178,7 +172,7 @@ public class SpaceshipManager : MonoBehaviour
         return false;
     }
 
-    public TaskNotification GetTaskNotification(Task task)
+    public Notification GetTaskNotification(Task task)
     {
         foreach (var activeTask in activeTasks)
         {
@@ -190,20 +184,20 @@ public class SpaceshipManager : MonoBehaviour
 
     public void CancelTask(Task task)
     {
-        TaskNotification taskToRemove = null;
+        Notification toRemove = null;
         foreach (var activeTask in activeTasks)
         {
             if (activeTask.Task == task)
             {
                 activeTask.OnCancel();
-                taskToRemove = activeTask;
+                toRemove = activeTask;
             }
         }
 
-        if (taskToRemove != null) RemoveTask(taskToRemove);
+        if (toRemove != null) RemoveTask(toRemove);
     }
 
-    public void RemoveTask(TaskNotification task)
+    public void RemoveTask(Notification task)
     {
         activeTasks.Remove(task);
     }

@@ -226,8 +226,8 @@ namespace SS
         private void RunNode(SSTaskNodeSO nodeSO)
         {
             var position = spaceshipManager.GetTaskPosition(nodeSO.Room).position;
-            var notificationGO = spaceshipManager.taskNotificationPool.GetFromPool();
-            if (notificationGO.TryGetComponent(out TaskNotification notification))
+            var notificationGO = spaceshipManager.notificationPool.GetFromPool();
+            if (notificationGO.TryGetComponent(out Notification notification))
             {
                 notification.transform.position = position;
                 Task task = new Task(nodeSO.name, nodeSO.Description, nodeSO.Icon, nodeSO.TimeLeft, nodeSO.Duration,

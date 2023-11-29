@@ -11,7 +11,7 @@ public class GaugeLevelCondition : BaseTaskCondition
         Higher, Smaller
     }
     
-    public SpaceshipManager.System targetGauge;
+    public SpaceshipManager.SystemType targetGauge;
 
     public Operation operation;
 

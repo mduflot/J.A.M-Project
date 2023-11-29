@@ -23,7 +23,7 @@ public class CharacterBehaviour : MonoBehaviour
     
     private bool isWorking;
     private bool isTaskLeader;
-    private TaskNotification currentTask;
+    private Notification currentNotification;
 
     private void Start()
     {
@@ -60,10 +60,10 @@ public class CharacterBehaviour : MonoBehaviour
         //Ajouter une étape avec la porte de la pièce active
     }
 
-    public void AssignTask(TaskNotification t, bool leader = false)
+    public void AssignTask(Notification t, bool leader = false)
     {
         isWorking = true;
-        currentTask = t;
+        currentNotification = t;
         isTaskLeader = leader;
         mood -= 3.0f;
     }
@@ -80,7 +80,7 @@ public class CharacterBehaviour : MonoBehaviour
 
     public Task GetTask()
     {
-        return currentTask.Task;
+        return currentNotification.Task;
     }
 
     public CharacterDataScriptable GetCharacterData()
@@ -111,6 +111,6 @@ public class CharacterBehaviour : MonoBehaviour
     public void StopTask()
     {
         isWorking = false;
-        currentTask = null;
+        currentNotification = null;
     }
 }
