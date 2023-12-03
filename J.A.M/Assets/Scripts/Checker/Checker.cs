@@ -6,21 +6,20 @@ using UnityEngine;
 
 public class Checker : MonoBehaviour
 {
-    private SSCampaignSO campaign;
-    private List<Storyline> activeStorylines;
+    [SerializeField] private SSNode node;
+    [SerializeField] private SSCampaignSO campaign;
+    
+    private List<Storyline> activeStorylines = new();
     private float priorityFactor;
-
     private Storyline chosenStoryline;
     private SSNodeGroupSO chosenTimeline;
 
-    // TODO : Revoir les probabilités de l'ensemble du script
-    // TODO : Revoir la gestion du choix de la storyline
-    
     public void Initialize(SSCampaignSO ssCampaign)
     {
         campaign = ssCampaign;
     }
 
+    [ContextMenu("GenerateRandomEvent")]
     public void GenerateRandomEvent()
     {
         if (activeStorylines.Count < 3)
@@ -31,7 +30,7 @@ public class Checker : MonoBehaviour
             //randPicker : float, random value in [0,100] used to chose among available or unavailable storylines
             var pickPercent = 1.0f / 3.0f;
             var weighedInactivePercent = pickPercent * (1 - 1.0f / priorityFactor);
-            var weighedActivePercent = 1 - weighedInactivePercent;
+            // var weighedActivePercent = 1 - weighedInactivePercent;
             var randPicker = Random.Range(0, 1);
             if (activeStorylines.Count == 0)
             {
@@ -47,44 +46,38 @@ public class Checker : MonoBehaviour
             }
             else
             {
-                // TODO : ???
-                if (randPicker <= (weighedActivePercent / 2.0) + weighedInactivePercent)
-                {
-                    PickTimelineFromStoryline(activeStorylines);
-                }
-                else
-                {
-                    PickTimelineFromStoryline(activeStorylines);
-                }
+                PickTimelineFromStoryline();
             }
+
+            return;
         }
-        else
-        {
-            PickTimelineFromStoryline(activeStorylines);
-        }
+
+        PickTimelineFromStoryline();
     }
 
-    private void ChooseNewStoryline(List<Storyline> activatableStorylines = null)
+    private void ChooseNewStoryline(List<Storyline> activatableStorylines)
     {
         /*
          * parameters :
          */
         //conditions : Traits, current set of conditions to match to Storylines conditions
-        
-        List<Storyline> availableStorylines = new List<Storyline>();
 
         //numberOfASL = availableStoryLines.length
         //pickPercent = 100.0/numberOfASL
         //randPicker = random(0.0,100.0)
-        var numberOfASL = availableStorylines.Count;
+        var numberOfASL = activatableStorylines.Count;
         var pickPercent = 100.0f / numberOfASL;
         var randPicker = Random.Range(0, 100);
+
+        List<Storyline> availableStorylines = new List<Storyline>();
 
         foreach (var availableStoryline in activatableStorylines)
         {
             // TODO : Add conditions check
+            availableStorylines.Add(availableStoryline);
         }
 
+        // TODO : Revoir la gestion des probabilités
         for (int i = 0; i < numberOfASL; i++)
         {
             if (randPicker <= pickPercent * i)
@@ -98,14 +91,15 @@ public class Checker : MonoBehaviour
         }
     }
 
-    private void PickTimelineFromStoryline(List<Storyline> activeStoryline = null)
+    private void PickTimelineFromStoryline(bool isNewStoryline = false)
     {
         /*
          * parameters :
          */
         //conditions : Traits, Traits Tuple giving current state of ship / available characters / etc..
 
-        if (activeStorylines != null)
+        // TODO : Ajouter des probabilités entre les trois à sélectionner
+        if (!isNewStoryline)
         {
             chosenStoryline = activeStorylines[Random.Range(0, activeStorylines.Count)];
         }
@@ -115,6 +109,7 @@ public class Checker : MonoBehaviour
         foreach (var nodeGroup in chosenStoryline.ActivatableTimelines)
         {
             // TODO : Add conditions check
+            availableTimelines.Add(nodeGroup.Item2);
         }
 
         var numberOfASL = availableTimelines.Count;
@@ -134,11 +129,13 @@ public class Checker : MonoBehaviour
 
     private void StartStoryline()
     {
-        PickTimelineFromStoryline();
+        PickTimelineFromStoryline(true);
     }
 
     private void PlayTimeline()
     {
-        // chosenTimeline // Supposes that task start is handled outside of checker script 
+        node.nodeContainer = chosenStoryline.StorylineContainer;
+        node.nodeGroup = chosenTimeline;
+        node.StartTimeline();
     }
 }

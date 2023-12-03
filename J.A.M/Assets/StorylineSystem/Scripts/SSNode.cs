@@ -18,9 +18,9 @@ namespace SS
         [SerializeField] private SpaceshipManager spaceshipManager;
 
         /* Node Scriptable Objects */
-        [SerializeField] private SSNodeContainerSO nodeContainer;
-        [SerializeField] private SSNodeGroupSO nodeGroup;
-        [SerializeField] private SSNodeSO node;
+        [SerializeField] public SSNodeContainerSO nodeContainer;
+        [SerializeField] public SSNodeGroupSO nodeGroup;
+        [SerializeField] public SSNodeSO node;
 
         /* Filters */
         [SerializeField] private bool groupedNodes;
@@ -55,7 +55,7 @@ namespace SS
         /// </summary>
         /// <param name="nodeSO"> Node you need to run </param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public void CheckNodeType(SSNodeSO nodeSO)
+        private void CheckNodeType(SSNodeSO nodeSO)
         {
             switch (nodeSO.NodeType)
             {
