@@ -9,6 +9,9 @@ namespace SS.ScriptableObjects
     public class SSCampaignSO : ScriptableObject
     {
         [field: SerializeField] public List<Storyline> Storylines { get; set; }
+        
+        [HideInInspector] public List<Storyline> ActivatableStorylines;
+        [HideInInspector] public List<Storyline> DisabledStorylines;
 
         private void OnValidate()
         {
@@ -16,18 +19,27 @@ namespace SS.ScriptableObjects
 
             foreach (var storyline in Storylines)
             {
-                if (storyline.NodeContainer == null) continue;
-                if (storyline.NodeGroups.Count != 0) continue;
+                if (storyline.StorylineContainer == null) continue;
+                if (storyline.StorylineContainer.StoryStatus == SSStoryStatus.Activatable || storyline.StorylineContainer.StoryStatus == SSStoryStatus.Beginning)
+                    ActivatableStorylines.Add(storyline);
+                else
+                    DisabledStorylines.Add(storyline);
+                if (storyline.ActivatableTimelines.Count != 0) continue;
+                if (storyline.DisabledTimelines.Count != 0) continue;
                 FillGroups(storyline);
             }
         }
 
         private void FillGroups(Storyline storyline)
         {
-            foreach (var nodeGroup in storyline.NodeContainer.NodeGroups)
+            foreach (var nodeGroup in storyline.StorylineContainer.NodeGroups)
             {
-                storyline.NodeGroups.Add(
-                    new SerializableTuple<SSStoryStatus, SSNodeGroupSO>(nodeGroup.Key.StoryStatus, nodeGroup.Key));
+                if (nodeGroup.Key.StoryStatus == SSStoryStatus.Activatable || nodeGroup.Key.StoryStatus == SSStoryStatus.Beginning)
+                    storyline.ActivatableTimelines.Add(
+                        new SerializableTuple<SSStoryStatus, SSNodeGroupSO>(nodeGroup.Key.StoryStatus, nodeGroup.Key));
+                else
+                    storyline.DisabledTimelines.Add(
+                        new SerializableTuple<SSStoryStatus, SSNodeGroupSO>(nodeGroup.Key.StoryStatus, nodeGroup.Key));
             }
         }
 
@@ -38,8 +50,9 @@ namespace SS.ScriptableObjects
 
             foreach (var storyline in Storylines)
             {
-                if (storyline.NodeContainer == null) continue;
-                storyline.NodeGroups = new List<SerializableTuple<SSStoryStatus, SSNodeGroupSO>>();
+                if (storyline.StorylineContainer == null) continue;
+                storyline.ActivatableTimelines = new List<SerializableTuple<SSStoryStatus, SSNodeGroupSO>>();
+                storyline.DisabledTimelines = new List<SerializableTuple<SSStoryStatus, SSNodeGroupSO>>();
                 FillGroups(storyline);
             }
         }
