@@ -55,11 +55,6 @@ public class Checker : MonoBehaviour
 
     private void ChooseNewStoryline(List<Storyline> activatableStorylines)
     {
-        /*
-         * parameters :
-         */
-        //conditions : Traits, current set of conditions to match to Storylines conditions
-
         //numberOfASL = availableStoryLines.length
         //pickPercent = 100.0/numberOfASL
         //randPicker = random(0.0,100.0)
@@ -92,11 +87,6 @@ public class Checker : MonoBehaviour
 
     private void PickTimelineFromStoryline(bool isNewStoryline = false)
     {
-        /*
-         * parameters :
-         */
-        //conditions : Traits, Traits Tuple giving current state of ship / available characters / etc..
-
         // TODO : Ajouter des probabilités entre les trois à sélectionner
         if (!isNewStoryline)
         {

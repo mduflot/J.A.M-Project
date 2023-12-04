@@ -15,11 +15,9 @@ public class TaskDataScriptable : ScriptableObject
     public int mandatorySlots;
     public int optionalSlots;
     public float taskHelpFactor = .75f;
-    public SpaceshipManager.ShipRooms room;
 
     public ConditionSO[] conditions;
     
     public bool isPermanent;
-    public BaseTaskOutcome[] outcomes;
     [TextArea(3, 5)] public string previewOutcome;
 }

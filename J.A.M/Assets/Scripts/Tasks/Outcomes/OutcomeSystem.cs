@@ -17,7 +17,7 @@ public class OutcomeSystem
         public TraitsData.Traits outcomeTargetTrait;
         
         public CharacterBehaviour[] targets;
-        public SpaceshipManager.System gauge;
+        public SystemType gauge;
         public uint outcomeFunctionFlag;
     }
     
@@ -25,7 +25,7 @@ public class OutcomeSystem
     {
         var newOutcome = FillArgsData(outcome, 1);
         newOutcome.targets[0] = singleCharacter;
-        newOutcome.gauge = SpaceshipManager.System.None;
+        newOutcome.gauge = SystemType.None;
         newOutcome.outcomeFunctionFlag = (uint) outcome.OutcomeType | (uint) outcome.OutcomeOperation | (uint) outcome.OutcomeTargetStat;
         return newOutcome;
     }
@@ -38,12 +38,12 @@ public class OutcomeSystem
             newOutcome.targets[i] = multipleCharacter[i];
         }
 
-        newOutcome.gauge = SpaceshipManager.System.None;
+        newOutcome.gauge = SystemType.None;
         newOutcome.outcomeFunctionFlag = (uint) outcome.OutcomeType | (uint) outcome.OutcomeOperation | (uint) outcome.OutcomeTargetStat;
         return newOutcome;
     }
 
-    public static OutcomeEventArgs GenerateEventArgs(Outcome outcome, SpaceshipManager.System system)
+    public static OutcomeEventArgs GenerateEventArgs(Outcome outcome, SystemType system)
     {
         var newOutcome = FillArgsData(outcome, 0);
         newOutcome.gauge = system;

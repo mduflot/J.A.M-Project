@@ -17,6 +17,9 @@ public class Notification : MonoBehaviour
 
     private Camera camera;
     private SpaceshipManager spaceshipManager;
+    private ConditionSO taskCondition;
+    private OutcomeSystem.OutcomeEvent[] outcomeEvents;
+    private OutcomeSystem.OutcomeEventArgs[] outcomeEventArgs;
 
     private void Start()
     {
@@ -72,6 +75,60 @@ public class Notification : MonoBehaviour
                 }
             }
         }
+        
+        //checkCondition & reference
+        var validatedCondition = false;
+        
+        /*
+        for (uint i = 0; i < t.conditions.Length; i++)
+        {
+            taskCondition = t.conditions[i];
+            validatedCondition = RouteCondition(taskCondition.target);
+            if (validatedCondition)
+                break;
+        }
+        */
+        
+        if (validatedCondition)
+        {
+            //Generate event args
+            outcomeEventArgs = new OutcomeSystem.OutcomeEventArgs[taskCondition.outcomes.Outcomes.Length];
+            for (var i = 0; i < taskCondition.outcomes.Outcomes.Length; i++)
+            {
+                var outcome = taskCondition.outcomes.Outcomes[i];
+                switch (outcome.OutcomeTarget)
+                {
+                    case OutcomeData.OutcomeTarget.Leader:
+                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, LeaderCharacters[0]);
+                        break;
+
+                    case OutcomeData.OutcomeTarget.Assistant:
+                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, AssistantCharacters[0]);
+                        break;
+
+                    case OutcomeData.OutcomeTarget.Crew:
+                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, GameManager.Instance.SpaceshipManager.characters);
+                        break;
+                    
+                    case OutcomeData.OutcomeTarget.Gauge:
+                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
+                        break;
+                }
+            }
+
+            //Generate events
+            outcomeEvents = new OutcomeSystem.OutcomeEvent[taskCondition.outcomes.Outcomes.Length];
+            for (var i = 0; i < outcomeEventArgs.Length; i++)
+            {
+                outcomeEvents[i] = OutcomeSystem.GenerateOutcomeEvent(outcomeEventArgs[i]);
+            }
+        }
+        else
+        {
+            
+            outcomeEventArgs = Array.Empty<OutcomeSystem.OutcomeEventArgs>();
+            outcomeEvents = Array.Empty<OutcomeSystem.OutcomeEvent>();
+        }
 
         Task.Duration = AssistantCharacters.Count > 0
             ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
@@ -79,6 +136,24 @@ public class Notification : MonoBehaviour
         Task.Duration *= TimeTickSystem.ticksPerHour;
         Task.BaseDuration = Task.Duration;
         IsStarted = true;
+    }
+    
+    private bool RouteCondition(OutcomeData.OutcomeTarget target)
+    {
+        bool validateCondition = false;
+        switch (target)
+        {
+            case OutcomeData.OutcomeTarget.Leader:
+                validateCondition = ConditionSystem.CheckCondition(LeaderCharacters[0].GetTraits(), TraitsData.SpaceshipTraits.None, TraitsData.HiddenSpaceshipTraits.None, taskCondition);
+                break;
+            
+            case OutcomeData.OutcomeTarget.Assistant:
+                if(AssistantCharacters.Count >= 1)
+                    validateCondition = ConditionSystem.CheckCondition(AssistantCharacters[0].GetTraits(), TraitsData.SpaceshipTraits.None, TraitsData.HiddenSpaceshipTraits.None, taskCondition);
+                break;
+        }
+
+        return validateCondition;
     }
 
     public void OnUpdate()
@@ -97,6 +172,7 @@ public class Notification : MonoBehaviour
 
     private void OnComplete()
     {
+        for(uint i = 0; i < outcomeEvents.Length; i++) outcomeEvents[i].Invoke(outcomeEventArgs[i]);
         IsCompleted = true;
         ResetCharacters();
         GameManager.Instance.RefreshCharacterIcons();

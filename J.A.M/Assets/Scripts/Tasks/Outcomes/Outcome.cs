@@ -20,7 +20,7 @@ public class Outcome
     public OutcomeData.OutcomeTargetStat OutcomeTargetStat;
 
     [Tooltip("Targeted gauge to which the value will be added")]
-    public SpaceshipManager.System OutcomeTargetGauge;
+    public SystemType OutcomeTargetGauge;
     
     [Tooltip("Numerical value that will be added / substracted (only affects Character stats or Gauge")]
     public float value;

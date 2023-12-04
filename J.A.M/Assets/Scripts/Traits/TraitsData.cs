@@ -76,17 +76,17 @@ public class TraitsData
         
         public Job GetJob()
         {
-            return traits.Job;
+            return traits.Item1;
         }
 
         public PositiveTraits GetPositiveTraits()
         {
-            return traits.Positive;
+            return traits.Item2;
         }
 
         public NegativeTraits GetNegativeTraits()
         {
-            return traits.Negative;
+            return traits.Item3;
         }
 
         public void AddTraits(Traits traits)
@@ -106,33 +106,33 @@ public class TraitsData
         
         private void AddJob(Job j)
         {
-            traits.Job |= j;
+            traits.Item1 |= j;
         }
  
         private void RemoveJob(Job j)
         {
             Debug.Log("Trait removed");
-            traits.Job &= ~j;
+            traits.Item1 &= ~j;
         }
 
         private void AddPositiveTrait(PositiveTraits pt)
         {
-            traits.Positive |= pt;
+            traits.Item2 |= pt;
         }
 
         private void RemovePositiveTrait(PositiveTraits pt)
         {
-            traits.Positive &= ~pt;
+            traits.Item2 &= ~pt;
         }
 
         private void AddNegativeTrait(NegativeTraits nt)
         {
-            traits.Negative |= nt;
+            traits.Item3 |= nt;
         }
         
         private void RemoveNegativeTrait(NegativeTraits nt)
         {
-            traits.Negative &= ~nt;
+            traits.Item3 &= ~nt;
         }
     }
 }
