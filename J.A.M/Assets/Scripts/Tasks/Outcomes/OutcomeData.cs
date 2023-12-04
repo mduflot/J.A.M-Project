@@ -3,24 +3,22 @@ using UnityEngine;
 
 public class OutcomeData : MonoBehaviour
 {
-    [Flags]
-    public enum OutcomeType
+    public enum OutcomeType : uint
     {
         CharacterStat = 1,
         Trait = 2,
         Gauge = 4
     }
-
-    [Flags]
-    public enum OutcomeOperation
+    
+    public enum OutcomeOperation : uint
     {
         Add = 8,
         Sub = 16
     }
-
-    [Flags]
-    public enum OutcomeTargetStat
+    
+    public enum OutcomeTargetStat : uint 
     {
+        None = 0,
         Mood = 32,
         Volition = 64
     }

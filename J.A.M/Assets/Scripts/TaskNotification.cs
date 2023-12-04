@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class TaskNotification : MonoBehaviour
@@ -15,8 +18,7 @@ public class TaskNotification : MonoBehaviour
     private List<CharacterBehaviour> leaderCharacters = new();
     private List<CharacterBehaviour> assistantCharacters = new();
 
-    private Condition taskCondition;
-    private Outcome[] outcome;
+    private ConditionSO taskCondition;
     private OutcomeSystem.OutcomeEvent[] outcomeEvents;
     private OutcomeSystem.OutcomeEventArgs[] outcomeEventArgs;
     
@@ -55,22 +57,57 @@ public class TaskNotification : MonoBehaviour
             }
         }
 
-        taskCondition = t.condition;
 
         //checkCondition & reference
-        //var validatedCondition = ConditionSystem.CheckCondition(leaderCharacters[0].GetTraits(), TraitsData.SpaceshipTraits.None, TraitsData.HiddenSpaceshipTraits.None, taskCondition);
+        var validatedCondition = false;
         
-        outcome.Append(t.outcome);
-
-        foreach (var o in outcome)
+        for (uint i = 0; i < t.conditions.Length; i++)
         {
-            /*
-            switch (taskCondition.)
+            taskCondition = t.conditions[i];
+            validatedCondition = RouteCondition(taskCondition.target);
+            if (validatedCondition)
+                break;
+        }
+        
+        if (validatedCondition)
+        {
+            //Generate event args
+            outcomeEventArgs = new OutcomeSystem.OutcomeEventArgs[taskCondition.outcomes.Outcomes.Length];
+            for (var i = 0; i < taskCondition.outcomes.Outcomes.Length; i++)
             {
-                
+                var outcome = taskCondition.outcomes.Outcomes[i];
+                switch (outcome.OutcomeTarget)
+                {
+                    case OutcomeData.OutcomeTarget.Leader:
+                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, leaderCharacters[0]);
+                        break;
+
+                    case OutcomeData.OutcomeTarget.Assistant:
+                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, assistantCharacters[0]);
+                        break;
+
+                    case OutcomeData.OutcomeTarget.Crew:
+                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, GameManager.Instance.SpaceshipManager.characters);
+                        break;
+                    
+                    case OutcomeData.OutcomeTarget.Gauge:
+                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
+                        break;
+                }
             }
-            outcomeEventArgs.Append(OutcomeSystem.GenerateEventArgs())
-            */
+
+            //Generate events
+            outcomeEvents = new OutcomeSystem.OutcomeEvent[taskCondition.outcomes.Outcomes.Length];
+            for (var i = 0; i < outcomeEventArgs.Length; i++)
+            {
+                outcomeEvents[i] = OutcomeSystem.GenerateOutcomeEvent(outcomeEventArgs[i]);
+            }
+        }
+        else
+        {
+            
+            outcomeEventArgs = Array.Empty<OutcomeSystem.OutcomeEventArgs>();
+            outcomeEvents = Array.Empty<OutcomeSystem.OutcomeEvent>();
         }
         
         duration = assistantCharacters.Count > 0 ? t.baseDuration/(Mathf.Pow(assistantCharacters.Count + leaderCharacters.Count, taskData.taskHelpFactor)) : t.baseDuration; // based on formula time/helpers^0.75
@@ -78,6 +115,23 @@ public class TaskNotification : MonoBehaviour
         taskStarted = true;
     }
 
+    private bool RouteCondition(OutcomeData.OutcomeTarget target)
+    {
+        bool validateCondition = false;
+        switch (target)
+        {
+            case OutcomeData.OutcomeTarget.Leader:
+                validateCondition = ConditionSystem.CheckCondition(leaderCharacters[0].GetTraits(), TraitsData.SpaceshipTraits.None, TraitsData.HiddenSpaceshipTraits.None, taskCondition);
+                break;
+            
+            case OutcomeData.OutcomeTarget.Assistant:
+                if(assistantCharacters.Count >= 1)
+                    validateCondition = ConditionSystem.CheckCondition(assistantCharacters[0].GetTraits(), TraitsData.SpaceshipTraits.None, TraitsData.HiddenSpaceshipTraits.None, taskCondition);
+                break;
+        }
+
+        return validateCondition;
+    }
     
     public void DisplayTaskInfo()
     {
@@ -111,11 +165,11 @@ public class TaskNotification : MonoBehaviour
         foreach (var outcome in taskData.outcomes)
         {
             outcome.Outcome(this);
-            foreach (var leader in LeaderCharacters)
-            {
-                
-            }
         }
+        
+        for(uint i = 0; i < outcomeEvents.Length; i++)
+            outcomeEvents[i].Invoke(outcomeEventArgs[i]);
+        
         isCompleted = true;
         taskData = null;
         ResetCharacters();

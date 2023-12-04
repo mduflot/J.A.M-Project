@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 
@@ -16,43 +17,44 @@ public class OutcomeFunctions
 
     public static OutcomeSystem.OutcomeEvent GetOutcomeFunction(uint outcomeFlag)
     {
-        var outcomeEvent = new OutcomeSystem.OutcomeEvent();
+        var evt = new OutcomeSystem.OutcomeEvent();
+        
         switch (outcomeFlag)
         {
             case ADD_MOOD:
-                outcomeEvent.AddListener(AddMood);
+                evt.AddListener(AddMood);
                 break;
             
             case SUB_MOOD:
-                outcomeEvent.AddListener(SubMood);
+                evt.AddListener(SubMood);
                 break;
             
             case ADD_VOLITION:
-                outcomeEvent.AddListener(AddVolition);
+                evt.AddListener(AddVolition);
                 break;
             
             case SUB_VOLITION:
-                outcomeEvent.AddListener(SubVolition);
+                evt.AddListener(SubVolition);
                 break;
             
             case ADD_TRAIT:
-                outcomeEvent.AddListener(AddTrait);
+                evt.AddListener(AddTrait);
                 break;
             
             case SUB_TRAIT:
-                outcomeEvent.AddListener(SubTrait);
+                evt.AddListener(SubTrait);
                 break;
             
             case ADD_GAUGE:
-                outcomeEvent.AddListener(AddGauge);
+                evt.AddListener(AddGauge);
                 break;
             
             case SUB_GAUGE:
-                outcomeEvent.AddListener(SubGauge);
+                evt.AddListener(SubGauge);
                 break;
         }
 
-        return outcomeEvent;
+        return evt;
     }
     
     private static void AddMood(OutcomeSystem.OutcomeEventArgs e)
@@ -105,11 +107,11 @@ public class OutcomeFunctions
 
     private static void AddGauge(OutcomeSystem.OutcomeEventArgs e)
     {
-        Debug.LogWarning("ADD GAUGE NOT IMPLEMENTED");
+        GameManager.Instance.SpaceshipManager.GaugeValueOperation(e.gauge, e.value);
     }
 
     private static void SubGauge(OutcomeSystem.OutcomeEventArgs e)
     {
-        Debug.LogWarning("SUB GAUGE NOT IMPLEMENTED");
+        GameManager.Instance.SpaceshipManager.GaugeValueOperation(e.gauge, -e.value);
     }
 }

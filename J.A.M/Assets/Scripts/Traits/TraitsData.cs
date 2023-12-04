@@ -94,6 +94,7 @@ public class TraitsData
         
         public void RemoveTraits(Traits traits)
         {
+            Debug.Log("Trait removed");
             RemoveJob(traits.GetJob());
             RemovePositiveTrait(traits.GetPositiveTraits());
             RemoveNegativeTrait(traits.GetNegativeTraits());
@@ -106,6 +107,7 @@ public class TraitsData
  
         private void RemoveJob(Job j)
         {
+            Debug.Log("Trait removed");
             traits.Job &= ~j;
         }
 

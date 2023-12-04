@@ -35,6 +35,7 @@ public class SpaceshipManager : MonoBehaviour
 
     public enum System
     {
+        None = 0,
         Power = 1,
         Airflow = 2,
         Food = 3,

@@ -17,34 +17,54 @@ public class OutcomeSystem
         public TraitsData.Traits outcomeTargetTrait;
         
         public CharacterBehaviour[] targets;
+        public SpaceshipManager.System gauge;
         public uint outcomeFunctionFlag;
     }
     
     public static OutcomeEventArgs GenerateEventArgs(Outcome outcome, CharacterBehaviour singleCharacter)
     {
-        var newOutcome = FillArgsData(outcome);
-        newOutcome.targets.Append(singleCharacter);
+        var newOutcome = FillArgsData(outcome, 1);
+        newOutcome.targets[0] = singleCharacter;
+        newOutcome.gauge = SpaceshipManager.System.None;
         newOutcome.outcomeFunctionFlag = (uint) outcome.OutcomeType | (uint) outcome.OutcomeOperation | (uint) outcome.OutcomeTargetStat;
         return newOutcome;
     }
     
     public static OutcomeEventArgs GenerateEventArgs(Outcome outcome, CharacterBehaviour[] multipleCharacter)
     {
-        var newOutcome = FillArgsData(outcome);
-        newOutcome.targets.AddRange(multipleCharacter);
+        var newOutcome = FillArgsData(outcome, multipleCharacter.Length);
+        for (uint i = 0; i < multipleCharacter.Length; i++)
+        {
+            newOutcome.targets[i] = multipleCharacter[i];
+        }
+
+        newOutcome.gauge = SpaceshipManager.System.None;
+        newOutcome.outcomeFunctionFlag = (uint) outcome.OutcomeType | (uint) outcome.OutcomeOperation | (uint) outcome.OutcomeTargetStat;
+        return newOutcome;
+    }
+
+    public static OutcomeEventArgs GenerateEventArgs(Outcome outcome, SpaceshipManager.System system)
+    {
+        var newOutcome = FillArgsData(outcome, 0);
+        newOutcome.gauge = system;
         newOutcome.outcomeFunctionFlag = (uint) outcome.OutcomeType | (uint) outcome.OutcomeOperation | (uint) outcome.OutcomeTargetStat;
         return newOutcome;
     }
     
-    private static OutcomeEventArgs FillArgsData(Outcome outcome)
+    private static OutcomeEventArgs FillArgsData(Outcome outcome, int numberOfTargets)
     {
-        var outcomeArgs = new OutcomeEventArgs();
         var newOutcome = new OutcomeEventArgs();
         newOutcome.outcomeType = outcome.OutcomeType;
         newOutcome.outcomeOperation = outcome.OutcomeOperation;
         newOutcome.value = outcome.value;
         newOutcome.outcomeTargetTrait = outcome.OutcomeTargetTrait;
-
-        return outcomeArgs;
+        newOutcome.targets = new CharacterBehaviour[numberOfTargets];
+        newOutcome.gauge = outcome.OutcomeTargetGauge;
+        return newOutcome;
+    }
+    
+    public static OutcomeEvent GenerateOutcomeEvent(OutcomeEventArgs evtArgs)
+    {
+         return OutcomeFunctions.GetOutcomeFunction(evtArgs.outcomeFunctionFlag);
     }
 }

@@ -26,47 +26,47 @@ public class ConditionSystem
                 taskCondition.BaseCondition.HiddenSpaceshipTraits)) 
             validateCondition = false;
 
-        if (taskCondition.additionnalConditions.Count < 1)
-            validateCondition = true;
+        if (taskCondition.supplementaryConditions.Count < 1)
+            return validateCondition;
         
         /*Additionnal Condition Check*/
 
-        bool additionnalCondition = true;
-        foreach (var cond in taskCondition.additionnalConditions)
+        bool supplementaryCondition = true;
+        foreach (var cond in taskCondition.supplementaryConditions)
         {
             if(!CheckJob(characterTraits.GetJob(), taskCondition.BaseCondition.Traits.GetJob())) 
-                additionnalCondition = false;
+                supplementaryCondition = false;
         
             if (!CheckPositiveTraits(characterTraits.GetPositiveTraits(),
                     taskCondition.BaseCondition.Traits.GetPositiveTraits()))
-                additionnalCondition = false;
+                supplementaryCondition = false;
         
             if (!CheckNegativeTraits(characterTraits.GetNegativeTraits(),
                     taskCondition.BaseCondition.Traits.GetNegativeTraits()))
-                additionnalCondition = false;
+                supplementaryCondition = false;
         
             if (!CheckSpaceshipTraits(spaceshipTraits, hiddenSpaceshipTraits, taskCondition.BaseCondition.SpaceshipTraits,
                     taskCondition.BaseCondition.HiddenSpaceshipTraits)) 
-                additionnalCondition = false;
+                supplementaryCondition = false;
 
 
             //Apply logical operator
             switch (cond.Key)
             {
                 case TraitsData.TraitOperator.OR:
-                    validateCondition |= additionnalCondition;
+                    validateCondition |= supplementaryCondition;
                     break;
                 case TraitsData.TraitOperator.AND:
-                    validateCondition &= additionnalCondition;
+                    validateCondition &= supplementaryCondition;
                     break;
                 case TraitsData.TraitOperator.XOR:
-                    validateCondition ^= additionnalCondition;
+                    validateCondition ^= supplementaryCondition;
                     break;
                 case TraitsData.TraitOperator.NAND:
-                    validateCondition = !(validateCondition && additionnalCondition);
+                    validateCondition = !(validateCondition && supplementaryCondition);
                     break;
                 case TraitsData.TraitOperator.NOT:
-                    validateCondition = (validateCondition != additionnalCondition);
+                    validateCondition = (validateCondition != supplementaryCondition);
                     break;
                 
                 default:

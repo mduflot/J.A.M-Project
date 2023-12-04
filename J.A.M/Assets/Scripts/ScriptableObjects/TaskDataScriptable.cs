@@ -17,8 +17,7 @@ public class TaskDataScriptable : ScriptableObject
     public float taskHelpFactor = .75f;
     public SpaceshipManager.ShipRooms room;
 
-    public Condition condition;
-    public Outcome outcome;
+    public ConditionSO[] conditions;
     
     public bool isPermanent;
     public BaseTaskOutcome[] outcomes;

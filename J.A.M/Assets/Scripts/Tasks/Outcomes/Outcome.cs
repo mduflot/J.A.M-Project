@@ -7,6 +7,9 @@ using UnityEngine;
 [Serializable]
 public class Outcome
 {
+    [Tooltip("The element affected by the outcome")]
+    public OutcomeData.OutcomeTarget OutcomeTarget;
+    
     [Tooltip("The desired outcome.")]
     public OutcomeData.OutcomeType OutcomeType;
 
@@ -15,14 +18,13 @@ public class Outcome
 
     [Tooltip("Targeted stat to which value will be added / substracted (only affects Character stats)")]
     public OutcomeData.OutcomeTargetStat OutcomeTargetStat;
+
+    [Tooltip("Targeted gauge to which the value will be added")]
+    public SpaceshipManager.System OutcomeTargetGauge;
     
     [Tooltip("Numerical value that will be added / substracted (only affects Character stats or Gauge")]
-    [Range(0,30)]
     public float value;
     
     [Tooltip("Trait that will be added / removed (only affects Trait")]
     public TraitsData.Traits OutcomeTargetTrait;
-    
-    [Tooltip("The element affected by the outcome")]
-    public OutcomeData.OutcomeTarget OutcomeTarget;
 }
