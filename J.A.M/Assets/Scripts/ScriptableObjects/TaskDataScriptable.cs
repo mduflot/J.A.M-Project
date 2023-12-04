@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Task/TaskData", fileName = "TaskData")]
@@ -13,9 +15,10 @@ public class TaskDataScriptable : ScriptableObject
     public int mandatorySlots;
     public int optionalSlots;
     public float taskHelpFactor = .75f;
-    public RoomType room;
+    public SpaceshipManager.ShipRooms room;
 
-    [Header("Permanent Task")]
+    public ConditionSO[] conditions;
+    
     public bool isPermanent;
     public BaseTaskOutcome[] outcomes;
     [TextArea(3, 5)] public string previewOutcome;

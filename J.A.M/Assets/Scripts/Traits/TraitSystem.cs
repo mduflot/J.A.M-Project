@@ -3,9 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TraitSystem
 {
+    [Serializable] public class TraitEvent : UnityEvent<string> {}
+
+    [Serializable]
+    public class TraitEventElement <T>
+    {
+        public T trait;
+        public TraitEvent traitEvent;
+    }
+    
     public static TraitsData.Job MatchJobFlags(TraitsData.Job job, TraitsData.Job flagsToMatch)
     {
         return job & flagsToMatch;
@@ -63,35 +73,31 @@ public class TraitSystem
         }
     }
 
+    
     // call like : ApplyJobBonus(MatchJobFlags(NPC.Job, Task.Job))
-    public static void ApplyJobBonus(TraitsData.Job jobMatch)
+    // returns volition bonus
+    public static float ApplyJobBonus(TraitsData.Job jobMatch)
     {
         switch(jobMatch)
         {
             case TraitsData.Job.None:
                 //No bonus ?
                 Debug.Log("no job");
-                break;
-            case TraitsData.Job.Medic:
-                Debug.Log("medic");
-                break;
+                return 0.0f;
+            case TraitsData.Job.Soldier:
+                Debug.Log("soldier");
+                return 0.0f;
+            case TraitsData.Job.Electrician:
+                Debug.Log("electrician");
+                return 7.0f;
+            case TraitsData.Job.Gardener:
+                Debug.Log("gardener");
+                return 5.0f;
             case TraitsData.Job.Mechanic:
                 Debug.Log("mechanic");
-                break;
-            case TraitsData.Job.Cook:
-                Debug.Log("cook");
-                break;
-            case TraitsData.Job.Security:
-                Debug.Log("security");
-                break;
-            case TraitsData.Job.Pilot:
-                Debug.Log("pilot");
-                break;
-            case TraitsData.Job.Scientist:
-                Debug.Log("scientist");
-                break;
+                return 1.0f;
             default:
-                break;
+                return 0.0f;
         }
     }
     
@@ -101,7 +107,7 @@ public class TraitSystem
         {
             case TraitsData.PositiveTraits.None:
                 //No bonus ?
-                Debug.Log("nothing positive about you");
+                Debug.Log("no positives");
                 break;
             case TraitsData.PositiveTraits.Crafty:
                 Debug.Log("crafty guy");
@@ -122,14 +128,14 @@ public class TraitSystem
                 break;
         }
     }
-    
+   
     public static void ApplyNegativeTraitBonus(TraitsData.NegativeTraits nt)
     {
         switch(nt)
         {
             case TraitsData.NegativeTraits.None:
                 //No bonus ?
-                Debug.Log("nothing negative about you");
+                Debug.Log("no negatives");
                 break;
             case TraitsData.NegativeTraits.Slow:
                 //durée tache * 1.5 ?
@@ -152,6 +158,7 @@ public class TraitSystem
         }
     }
 
+   
     public static void ApplyStatBonus(TraitsData.StatTraits st)
     {
         switch (st)

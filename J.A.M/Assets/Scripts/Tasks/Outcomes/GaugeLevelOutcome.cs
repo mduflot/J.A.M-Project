@@ -19,11 +19,11 @@ public class GaugeLevelOutcome : BaseTaskOutcome
     {
         if (operation == Operation.Add)
         {
-            //float newGaugeValue = leaderCharacters[0].GetVolition();
             float newGaugeValue = 0.0f;
-            foreach (var leader in leaderCharacters)
+            foreach (var leader in tn.LeaderCharacters)
             {
                 newGaugeValue += leader.GetVolition();
+                //newGaugeValue += TraitSystem.ApplyJobBonus(TraitSystem.MatchJobFlags(leader.GetJob(), tn.taskData.taskTraits.GetJob()));
             }
 
             newGaugeValue = value / leaderCharacters.Count;

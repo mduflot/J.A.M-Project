@@ -43,12 +43,27 @@ public class CharacterBehaviour : MonoBehaviour
 
     public TraitsData.NegativeTraits GetNegativeTraits() { return traits.GetNegativeTraits(); }
 
+    public void AddTrait(TraitsData.Traits argTraits)
+    {
+        traits.AddTraits(argTraits);
+    }
+
+    public void SubTrait(TraitsData.Traits argTraits)
+    {
+        traits.RemoveTraits(argTraits);
+    }
+    
     public void IncreaseMood(float value)
     {
         mood += value;
         CapStats();
     }
 
+    public void IncreaseVolition(float value)
+    {
+        volition += value;
+    }
+    
     private void CapStats()
     {
         mood = Mathf.Clamp(mood, 0, MaxMood);
@@ -106,6 +121,11 @@ public class CharacterBehaviour : MonoBehaviour
     public float GetBaseVolition()
     {
         return volition;
+    }
+
+    public TraitsData.Traits GetTraits()
+    {
+        return traits;
     }
     
     public void StopTask()

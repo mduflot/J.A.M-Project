@@ -21,6 +21,65 @@ MonoBehaviour:
   optionalSlots: 1
   taskHelpFactor: 0.75
   room: 3
+  taskTraits:
+    traits:
+      Item1: 4
+      Item2: 8
+      Item3: 4
+  taskJobEvents:
+  - trait: 4
+    traitEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2829008691371120385, guid: ba1ad1a4c651c4b458bff78a38e3e3ab,
+            type: 3}
+          m_TargetAssemblyTypeName: SpaceshipManager, Assembly-CSharp
+          m_MethodName: Test
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Gardener
+            m_BoolArgument: 0
+          m_CallState: 2
+  taskPTEvents:
+  - trait: 8
+    traitEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2829008691371120385, guid: ba1ad1a4c651c4b458bff78a38e3e3ab,
+            type: 3}
+          m_TargetAssemblyTypeName: SpaceshipManager, Assembly-CSharp
+          m_MethodName: Test
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Greenhanded
+            m_BoolArgument: 0
+          m_CallState: 2
+  taskNTEvents:
+  - trait: 4
+    traitEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2829008691371120385, guid: ba1ad1a4c651c4b458bff78a38e3e3ab,
+            type: 3}
+          m_TargetAssemblyTypeName: SpaceshipManager, Assembly-CSharp
+          m_MethodName: Test
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Unfocused
+            m_BoolArgument: 0
+          m_CallState: 2
   isPermanent: 1
   outcomes:
   - {fileID: 11400000, guid: 30b95558a99828e479b9c1b4e9b0a186, type: 2}
