@@ -44,6 +44,16 @@ public class CharacterBehaviour : MonoBehaviour
 
     public TraitsData.NegativeTraits GetNegativeTraits() { return traits.GetNegativeTraits(); }
 
+    public void AddTrait(TraitsData.Traits argTraits)
+    {
+        traits.AddTraits(argTraits);
+    }
+
+    public void SubTrait(TraitsData.Traits argTraits)
+    {
+        traits.RemoveTraits(argTraits);
+    }
+    
     public void IncreaseMood(float value)
     {
         mood += value;
@@ -112,6 +122,11 @@ public class CharacterBehaviour : MonoBehaviour
     public float GetBaseVolition()
     {
         return volition;
+    }
+
+    public TraitsData.Traits GetTraits()
+    {
+        return traits;
     }
     
     public void StopTask()

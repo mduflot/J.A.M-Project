@@ -8,42 +8,26 @@ public class ConditionSystem
         TraitsData.HiddenSpaceshipTraits hiddenSpaceshipTraits, ConditionSO taskCondition)
     {
         bool validateCondition = true;
-        //If at anypoint match becomes false, return
-        
+
         /*Base Condition Check*/
         
-        //If match Job
-        //continue
-        
         if(!CheckJob(characterTraits.GetJob(), taskCondition.BaseCondition.Traits.GetJob())) 
-            return false;
+            validateCondition = false;
         
-        //If match Ptraits
-        //continue
-
         if (!CheckPositiveTraits(characterTraits.GetPositiveTraits(),
                 taskCondition.BaseCondition.Traits.GetPositiveTraits()))
-            return false;
+            validateCondition = false;
         
-        //If match Ntraits
-        //continue
-
         if (!CheckNegativeTraits(characterTraits.GetNegativeTraits(),
                 taskCondition.BaseCondition.Traits.GetNegativeTraits()))
-            return false;
+            validateCondition = false;
         
-        //If match STraits
-        //continue
-
-        //If match HSTraits
-        //continue
-
         if (!CheckSpaceshipTraits(spaceshipTraits, hiddenSpaceshipTraits, taskCondition.BaseCondition.SpaceshipTraits,
                 taskCondition.BaseCondition.HiddenSpaceshipTraits)) 
-            return false;
+            validateCondition = false;
 
         if (taskCondition.additionnalConditions.Count < 1)
-            return true;
+            validateCondition = true;
         
         /*Additionnal Condition Check*/
 

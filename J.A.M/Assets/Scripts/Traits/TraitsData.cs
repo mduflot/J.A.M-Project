@@ -72,17 +72,61 @@ public class TraitsData
         [SerializeField] private SerializableTuple<Job, PositiveTraits, NegativeTraits> traits;
         public Job GetJob()
         {
-            return traits.Item1;
+            return traits.Job;
         }
 
         public PositiveTraits GetPositiveTraits()
         {
-            return traits.Item2;
+            return traits.Positive;
         }
 
         public NegativeTraits GetNegativeTraits()
         {
-            return traits.Item3;
+            return traits.Negative;
+        }
+
+        public void AddTraits(Traits traits)
+        {
+            AddJob(traits.GetJob());
+            AddPositiveTrait(traits.GetPositiveTraits());
+            AddNegativeTrait(traits.GetNegativeTraits());
+        }
+        
+        public void RemoveTraits(Traits traits)
+        {
+            RemoveJob(traits.GetJob());
+            RemovePositiveTrait(traits.GetPositiveTraits());
+            RemoveNegativeTrait(traits.GetNegativeTraits());
+        }
+        
+        private void AddJob(Job j)
+        {
+            traits.Job |= j;
+        }
+ 
+        private void RemoveJob(Job j)
+        {
+            traits.Job &= ~j;
+        }
+
+        private void AddPositiveTrait(PositiveTraits pt)
+        {
+            traits.Positive |= pt;
+        }
+
+        private void RemovePositiveTrait(PositiveTraits pt)
+        {
+            traits.Positive &= ~pt;
+        }
+
+        private void AddNegativeTrait(NegativeTraits nt)
+        {
+            traits.Negative |= nt;
+        }
+        
+        private void RemoveNegativeTrait(NegativeTraits nt)
+        {
+            traits.Negative &= ~nt;
         }
     }
 }

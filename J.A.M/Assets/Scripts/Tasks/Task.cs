@@ -30,7 +30,7 @@ public class Task : MonoBehaviour
      *      fix : Notif icon grabs raycast
      *      fix : opening menu with notif icon doesnt show assigned characters
      *      add : refreshDisplay to update values after assigning characters
-     *      fix : remove characterIcon from task if menu is closed without starting task 
+     *      fix : remove characterIcon from task if menu is closed without starting task
      */
     public void Initialize(TaskNotification tn)
     {

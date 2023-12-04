@@ -23,13 +23,15 @@ public class GaugeLevelOutcome : BaseTaskOutcome
             foreach (var leader in tn.LeaderCharacters)
             {
                 newGaugeValue += leader.GetVolition();
-                newGaugeValue += TraitSystem.ApplyJobBonus(TraitSystem.MatchJobFlags(leader.GetJob(), tn.taskData.taskTraits.GetJob()));
+                //newGaugeValue += TraitSystem.ApplyJobBonus(TraitSystem.MatchJobFlags(leader.GetJob(), tn.taskData.taskTraits.GetJob()));
             }
             newGaugeValue = newGaugeValue/tn.LeaderCharacters.Count;
-            Debug.Log(newGaugeValue);
-
+                
+//<<<<<<< Updated upstream
             //if(tn.taskData.taskJobEvents.Length < 1 ) Debug.Log("No job events");
             //else TraitSystem.ApplyJobBonus(tn.taskData);
+//=======
+//>>>>>>> Stashed changes
             GameManager.Instance.SpaceshipManager.GaugeValueOperation(targetGauge, newGaugeValue);
         }
         else

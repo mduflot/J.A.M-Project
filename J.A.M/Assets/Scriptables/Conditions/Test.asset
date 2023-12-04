@@ -12,6 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3a298838b420346a8b6588d8248e9c, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  BaseCondition: {fileID: 0}
+  BaseCondition:
+    Traits:
+      traits:
+        Job: 0
+        Positive: 0
+        Negative: 0
+    SpaceshipTraits: -1
+    HiddenSpaceshipTraits: 0
   additionnalConditions:
-    list: []
+    list:
+    - Key: 1
+      Value:
+        Traits:
+          traits:
+            Job: 0
+            Positive: 0
+            Negative: 0
+        SpaceshipTraits: 0
+        HiddenSpaceshipTraits: -1

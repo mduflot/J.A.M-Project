@@ -15,11 +15,10 @@ public class TaskNotification : MonoBehaviour
     private List<CharacterBehaviour> leaderCharacters = new();
     private List<CharacterBehaviour> assistantCharacters = new();
 
-    public TraitsData.Traits taskTraits;
-    public Dictionary<TraitsData.Job, TraitSystem.TraitEvent> taskJobEvents = new();
-    public Dictionary<TraitsData.PositiveTraits, TraitSystem.TraitEvent> taskPTEvents = new();
-    public Dictionary<TraitsData.NegativeTraits, TraitSystem.TraitEvent> taskNTEvents = new();
-
+    private Condition taskCondition;
+    private Outcome[] outcome;
+    private OutcomeSystem.OutcomeEvent[] outcomeEvents;
+    private OutcomeSystem.OutcomeEventArgs[] outcomeEventArgs;
     
     public bool TaskStarted
     {
@@ -56,19 +55,22 @@ public class TaskNotification : MonoBehaviour
             }
         }
 
-        taskTraits = t.taskTraits;
+        taskCondition = t.condition;
+
+        //checkCondition & reference
+        //var validatedCondition = ConditionSystem.CheckCondition(leaderCharacters[0].GetTraits(), TraitsData.SpaceshipTraits.None, TraitsData.HiddenSpaceshipTraits.None, taskCondition);
         
-        foreach (var elem in taskData.taskJobEvents)
+        outcome.Append(t.outcome);
+
+        foreach (var o in outcome)
         {
-            taskJobEvents.Add(elem.trait, elem.traitEvent);
-        }
-        foreach (var elem in taskData.taskPTEvents)
-        {
-            taskPTEvents.Add(elem.trait, elem.traitEvent);
-        }
-        foreach (var elem in taskData.taskNTEvents)
-        {
-            taskNTEvents.Add(elem.trait, elem.traitEvent);
+            /*
+            switch (taskCondition.)
+            {
+                
+            }
+            outcomeEventArgs.Append(OutcomeSystem.GenerateEventArgs())
+            */
         }
         
         duration = assistantCharacters.Count > 0 ? t.baseDuration/(Mathf.Pow(assistantCharacters.Count + leaderCharacters.Count, taskData.taskHelpFactor)) : t.baseDuration; // based on formula time/helpers^0.75
@@ -76,6 +78,7 @@ public class TaskNotification : MonoBehaviour
         taskStarted = true;
     }
 
+    
     public void DisplayTaskInfo()
     {
         GameManager.Instance.UIManager.SpawnTaskUI(this);
@@ -110,7 +113,7 @@ public class TaskNotification : MonoBehaviour
             outcome.Outcome(this);
             foreach (var leader in LeaderCharacters)
             {
-                TraitSystem.ApplyBonuses(leader, this);
+                
             }
         }
         isCompleted = true;

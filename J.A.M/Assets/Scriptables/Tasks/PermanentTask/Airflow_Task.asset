@@ -27,8 +27,8 @@ MonoBehaviour:
       Item2: 0
       Item3: 0
   taskJobEvents:
-  - trait: 1
-    TraitEvent:
+  - trait: -1
+    traitEvent:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 2829008691371120385, guid: ba1ad1a4c651c4b458bff78a38e3e3ab,
@@ -41,37 +41,43 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 'Quoi ? '
-            m_BoolArgument: 0
-          m_CallState: 1
-        - m_Target: {fileID: 2829008691371120385, guid: ba1ad1a4c651c4b458bff78a38e3e3ab,
-            type: 3}
-          m_TargetAssemblyTypeName: SpaceshipManager, Assembly-CSharp
-          m_MethodName: Test
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Feur
+            m_StringArgument: Soldier
             m_BoolArgument: 0
           m_CallState: 2
-  - trait: 2
-    TraitEvent:
+  taskPTEvents:
+  - trait: 1
+    traitEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8381436889343003550, guid: cd48a9106dc08db449fe7c8159846151,
+        - m_Target: {fileID: 2829008691371120385, guid: ba1ad1a4c651c4b458bff78a38e3e3ab,
             type: 3}
-          m_TargetAssemblyTypeName: UnityEngine.Component, UnityEngine
-          m_MethodName: SendMessage
+          m_TargetAssemblyTypeName: SpaceshipManager, Assembly-CSharp
+          m_MethodName: Test
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: FEUR
+            m_StringArgument: Crafty
+            m_BoolArgument: 0
+          m_CallState: 2
+  taskNTEvents:
+  - trait: 1
+    traitEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2829008691371120385, guid: ba1ad1a4c651c4b458bff78a38e3e3ab,
+            type: 3}
+          m_TargetAssemblyTypeName: SpaceshipManager, Assembly-CSharp
+          m_MethodName: Test
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Slow
             m_BoolArgument: 0
           m_CallState: 2
   isPermanent: 1

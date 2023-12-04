@@ -17,14 +17,9 @@ public class TaskDataScriptable : ScriptableObject
     public float taskHelpFactor = .75f;
     public SpaceshipManager.ShipRooms room;
 
-    public TraitsData.Traits taskTraits;
-
-    //public TraitEventManager.CharacterTraitEventArgs[] JobEventsArgs;
-    public TraitSystem.TraitEventElement<TraitsData.Job>[] taskJobEvents;
-    public TraitSystem.TraitEventElement<TraitsData.PositiveTraits>[] taskPTEvents;
-    public TraitSystem.TraitEventElement<TraitsData.NegativeTraits>[] taskNTEvents;
+    public Condition condition;
+    public Outcome outcome;
     
-    [Header("Permanent Task")]
     public bool isPermanent;
     public BaseTaskOutcome[] outcomes;
     [TextArea(3, 5)]
