@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using SS.Data;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -39,7 +40,6 @@ namespace SS
 
         public void StartTimeline()
         {
-            Debug.Log($"Starting timeline {nodeContainer.name}");
             dialogues = new();
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
             CheckNodeType(node);
@@ -231,9 +231,14 @@ namespace SS
             if (notificationGO.TryGetComponent(out Notification notification))
             {
                 notification.transform.position = position;
+                var conditions = new List<ConditionSO>();
+                foreach (var choiceData in nodeSO.Choices)
+                {
+                    conditions.Add(((SSNodeChoiceTaskData)choiceData).Condition);
+                }
                 task = new Task(nodeSO.name, nodeSO.Description, nodeSO.Icon, nodeSO.TimeLeft, nodeSO.Duration,
                     nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room, nodeSO.IsPermanent,
-                    nodeSO.PreviewOutcome);
+                    nodeSO.PreviewOutcome, conditions);
                 notification.Initialize(task, spaceshipManager, dialogues);
                 spaceshipManager.AddTask(notification);
                 StartCoroutine(WaiterTask(nodeSO, task));
@@ -290,13 +295,13 @@ namespace SS
             yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(task).IsStarted);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).LeaderCharacters);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).AssistantCharacters);
-            if (nodeSO.Choices.First().NextNode == null)
+            if (nodeSO.Choices[task.conditionIndex].NextNode == null)
             {
                 ResetTimeline();
                 yield break;
             }
 
-            CheckNodeType(nodeSO.Choices.First().NextNode);
+            CheckNodeType(nodeSO.Choices[task.conditionIndex].NextNode);
         }
     }
 }

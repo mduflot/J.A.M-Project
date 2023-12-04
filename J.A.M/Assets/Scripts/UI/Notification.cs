@@ -75,20 +75,21 @@ public class Notification : MonoBehaviour
                 }
             }
         }
-        
+
         //checkCondition & reference
         var validatedCondition = false;
-        
-        /*
-        for (uint i = 0; i < t.conditions.Length; i++)
+
+        for (int i = 0; i < Task.Conditions.Count; i++)
         {
-            taskCondition = t.conditions[i];
+            taskCondition = Task.Conditions[i];
             validatedCondition = RouteCondition(taskCondition.target);
             if (validatedCondition)
+            {
+                Task.conditionIndex = i;
                 break;
+            }
         }
-        */
-        
+
         if (validatedCondition)
         {
             //Generate event args
@@ -107,9 +108,10 @@ public class Notification : MonoBehaviour
                         break;
 
                     case OutcomeData.OutcomeTarget.Crew:
-                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, GameManager.Instance.SpaceshipManager.characters);
+                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
+                            GameManager.Instance.SpaceshipManager.characters);
                         break;
-                    
+
                     case OutcomeData.OutcomeTarget.Gauge:
                         outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
                         break;
@@ -125,7 +127,6 @@ public class Notification : MonoBehaviour
         }
         else
         {
-            
             outcomeEventArgs = Array.Empty<OutcomeSystem.OutcomeEventArgs>();
             outcomeEvents = Array.Empty<OutcomeSystem.OutcomeEvent>();
         }
@@ -137,19 +138,21 @@ public class Notification : MonoBehaviour
         Task.BaseDuration = Task.Duration;
         IsStarted = true;
     }
-    
+
     private bool RouteCondition(OutcomeData.OutcomeTarget target)
     {
         bool validateCondition = false;
         switch (target)
         {
             case OutcomeData.OutcomeTarget.Leader:
-                validateCondition = ConditionSystem.CheckCondition(LeaderCharacters[0].GetTraits(), TraitsData.SpaceshipTraits.None, TraitsData.HiddenSpaceshipTraits.None, taskCondition);
+                validateCondition = ConditionSystem.CheckCondition(LeaderCharacters[0].GetTraits(),
+                    TraitsData.SpaceshipTraits.None, TraitsData.HiddenSpaceshipTraits.None, taskCondition);
                 break;
-            
+
             case OutcomeData.OutcomeTarget.Assistant:
-                if(AssistantCharacters.Count >= 1)
-                    validateCondition = ConditionSystem.CheckCondition(AssistantCharacters[0].GetTraits(), TraitsData.SpaceshipTraits.None, TraitsData.HiddenSpaceshipTraits.None, taskCondition);
+                if (AssistantCharacters.Count >= 1)
+                    validateCondition = ConditionSystem.CheckCondition(AssistantCharacters[0].GetTraits(),
+                        TraitsData.SpaceshipTraits.None, TraitsData.HiddenSpaceshipTraits.None, taskCondition);
                 break;
         }
 
@@ -172,7 +175,7 @@ public class Notification : MonoBehaviour
 
     private void OnComplete()
     {
-        for(uint i = 0; i < outcomeEvents.Length; i++) outcomeEvents[i].Invoke(outcomeEventArgs[i]);
+        for (uint i = 0; i < outcomeEvents.Length; i++) outcomeEvents[i].Invoke(outcomeEventArgs[i]);
         IsCompleted = true;
         ResetCharacters();
         GameManager.Instance.RefreshCharacterIcons();

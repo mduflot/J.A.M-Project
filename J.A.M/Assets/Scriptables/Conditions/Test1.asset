@@ -10,24 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f3a298838b420346a8b6588d8248e9c, type: 3}
-  m_Name: Test
+  m_Name: Test1
   m_EditorClassIdentifier: 
+  target: 0
   BaseCondition:
     Traits:
       traits:
-        Job: 0
-        Positive: 0
-        Negative: 0
-    SpaceshipTraits: -1
+        Item1: 1
+        Item2: 0
+        Item3: 0
+    SpaceshipTraits: 0
     HiddenSpaceshipTraits: 0
-  additionnalConditions:
-    list:
-    - Key: 1
-      Value:
-        Traits:
-          traits:
-            Job: 0
-            Positive: 0
-            Negative: 0
-        SpaceshipTraits: 0
-        HiddenSpaceshipTraits: -1
+  supplementaryConditions:
+    list: []
+  additionnalConditions: []
+  outcomes: {fileID: 11400000, guid: 7c3098aa87987fb49a1945dd99637c5e, type: 2}

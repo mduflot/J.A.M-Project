@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: First
   <Choices>k__BackingField:
-  - <Text>k__BackingField: Next Node
-    <NextNode>k__BackingField: {fileID: 11400000, guid: 3a48a03ae66d5174c81fee8e3548e5cf,
-      type: 2}
+  - rid: 9116668935928545330
   <NodeType>k__BackingField: 0
   <IsStartingNode>k__BackingField: 1
   <Text>k__BackingField: Yo biloute !
@@ -24,3 +22,12 @@ MonoBehaviour:
   <Duration>k__BackingField: 5
   <IsDialogueTask>k__BackingField: 0
   <PercentageTask>k__BackingField: 50
+  references:
+    version: 2
+    RefIds:
+    - rid: 9116668935928545330
+      type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 3a48a03ae66d5174c81fee8e3548e5cf,
+          type: 2}

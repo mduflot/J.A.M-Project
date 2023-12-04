@@ -22,20 +22,20 @@ MonoBehaviour:
     <Name>k__BackingField: TestTL
     <Position>k__BackingField: {x: 378, y: 35}
   <Nodes>k__BackingField:
-  - rid: 7018500050529026048
-  - rid: 7018500050529026049
-  - rid: 7018500050529026050
-  - rid: 7018500050529026051
-  - rid: 7018500050529026052
-  - rid: 7018500050529026053
-  - rid: 7018500050529026054
+  - rid: 9116668935928545342
+  - rid: 9116668935928545343
+  - rid: 9116668935928545344
+  - rid: 9116668935928545345
+  - rid: 9116668935928545346
+  - rid: 9116668935928545347
+  - rid: 9116668935928545348
   <OldGroupNames>k__BackingField:
   - TestTL
   <OldUngroupedNodeNames>k__BackingField:
   - OxygenTask
-  - FoodTask
   - HullTask
   - TaskNode
+  - FoodTask
   <OldGroupedNodeNames>k__BackingField:
     list:
     - Key: TestTL
@@ -46,13 +46,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7018500050529026048
+    - rid: 9116668935928545342
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: bdf18f6b-cd3b-49df-aea6-66565872022c
         <Name>k__BackingField: First
         <Choices>k__BackingField:
-        - rid: 7018500050529026055
+        - rid: 9116668935928545349
         <GroupID>k__BackingField: c38bdc53-e7ab-4d57-ae69-68d842b09e77
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 403, y: 94}
@@ -61,13 +61,13 @@ MonoBehaviour:
         <Duration>k__BackingField: 5
         <IsDialogueTask>k__BackingField: 0
         <PercentageTask>k__BackingField: 50
-    - rid: 7018500050529026049
+    - rid: 9116668935928545343
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 111d8e37-e415-4304-af2e-e4a78158aa1b
         <Name>k__BackingField: Second
         <Choices>k__BackingField:
-        - rid: 7018500050529026056
+        - rid: 9116668935928545350
         <GroupID>k__BackingField: c38bdc53-e7ab-4d57-ae69-68d842b09e77
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1130, y: 94}
@@ -76,14 +76,14 @@ MonoBehaviour:
         <Duration>k__BackingField: 5
         <IsDialogueTask>k__BackingField: 1
         <PercentageTask>k__BackingField: 50
-    - rid: 7018500050529026050
+    - rid: 9116668935928545344
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 73f533ef-ab1f-4e34-8c13-108899dedeba
         <Name>k__BackingField: DefendSpaceship
         <Choices>k__BackingField:
-        - rid: 7018500050529026057
-        - rid: 7018500050529026058
+        - rid: 9116668935928545351
+        - rid: 9116668935928545352
         <GroupID>k__BackingField: c38bdc53-e7ab-4d57-ae69-68d842b09e77
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 731, y: 94}
@@ -98,14 +98,14 @@ MonoBehaviour:
         <Room>k__BackingField: 1
         <IsPermanent>k__BackingField: 0
         <PreviewOutcome>k__BackingField: trololol
-    - rid: 7018500050529026051
+    - rid: 9116668935928545345
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 78c8d6ba-f705-4d20-8537-dd1d6519ec99
         <Name>k__BackingField: OxygenTask
         <Choices>k__BackingField:
-        - rid: 7018500050529026059
-        - rid: 7018500050529026060
+        - rid: 9116668935928545353
+        - rid: 9116668935928545354
         <GroupID>k__BackingField: 
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: -469, y: -76}
@@ -120,37 +120,14 @@ MonoBehaviour:
         <Room>k__BackingField: 2
         <IsPermanent>k__BackingField: 1
         <PreviewOutcome>k__BackingField: Airflow
-    - rid: 7018500050529026052
-      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <ID>k__BackingField: 5f019f8b-b151-40b9-a893-28acfb5b1946
-        <Name>k__BackingField: FoodTask
-        <Choices>k__BackingField:
-        - rid: 7018500050529026061
-        - rid: 7018500050529026062
-        <GroupID>k__BackingField: 
-        <NodeType>k__BackingField: 1
-        <Position>k__BackingField: {x: -469, y: 455}
-        <DescriptionTask>k__BackingField: Our crops need love to sustain our food
-          supply.
-        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 16241ca68beab624daa21b7813874b15,
-          type: 3}
-        <TimeLeft>k__BackingField: 0
-        <BaseDuration>k__BackingField: 1
-        <MandatorySlots>k__BackingField: 1
-        <OptionalSlots>k__BackingField: 1
-        <TaskHelpFactor>k__BackingField: 0.75
-        <Room>k__BackingField: 3
-        <IsPermanent>k__BackingField: 1
-        <PreviewOutcome>k__BackingField: Food
-    - rid: 7018500050529026053
+    - rid: 9116668935928545346
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 8b80c32a-c161-4771-a942-95bcd8b5a470
         <Name>k__BackingField: HullTask
         <Choices>k__BackingField:
-        - rid: 7018500050529026063
-        - rid: 7018500050529026064
+        - rid: 9116668935928545355
+        - rid: 9116668935928545356
         <GroupID>k__BackingField: 
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: -469, y: 991}
@@ -166,14 +143,14 @@ MonoBehaviour:
         <Room>k__BackingField: 4
         <IsPermanent>k__BackingField: 1
         <PreviewOutcome>k__BackingField: Hull
-    - rid: 7018500050529026054
+    - rid: 9116668935928545347
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 5a408429-531f-4cc8-b0bd-759769c93925
         <Name>k__BackingField: TaskNode
         <Choices>k__BackingField:
-        - rid: 7018500050529026065
-        - rid: 7018500050529026066
+        - rid: 9116668935928545357
+        - rid: 9116668935928545358
         <GroupID>k__BackingField: 
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 234, y: 991}
@@ -189,132 +166,137 @@ MonoBehaviour:
         <Room>k__BackingField: 1
         <IsPermanent>k__BackingField: 1
         <PreviewOutcome>k__BackingField: electricity
-    - rid: 7018500050529026055
+    - rid: 9116668935928545348
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 5f019f8b-b151-40b9-a893-28acfb5b1946
+        <Name>k__BackingField: FoodTask
+        <Choices>k__BackingField:
+        - rid: 9116668935928545359
+        - rid: 9116668935928545360
+        <GroupID>k__BackingField: 
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: -469, y: 455}
+        <DescriptionTask>k__BackingField: Our crops need love to sustain our food
+          supply.
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 16241ca68beab624daa21b7813874b15,
+          type: 3}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 1
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 1
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 3
+        <IsPermanent>k__BackingField: 1
+        <PreviewOutcome>k__BackingField: Food
+    - rid: 9116668935928545349
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 73f533ef-ab1f-4e34-8c13-108899dedeba
-    - rid: 7018500050529026056
+    - rid: 9116668935928545350
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 
-    - rid: 7018500050529026057
+    - rid: 9116668935928545351
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNodeID>k__BackingField: 111d8e37-e415-4304-af2e-e4a78158aa1b
-        <Jobs>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
+        <Condition>k__BackingField: {fileID: 0}
         <IsUnlockStoryline>k__BackingField: 0
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500050529026058
+    - rid: 9116668935928545352
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: LastChoice
         <NextNodeID>k__BackingField: 
-        <Jobs>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
+        <Condition>k__BackingField: {fileID: 0}
         <IsUnlockStoryline>k__BackingField: 0
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500050529026059
+    - rid: 9116668935928545353
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNodeID>k__BackingField: 
-        <Jobs>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
+        <Condition>k__BackingField: {fileID: 0}
         <IsUnlockStoryline>k__BackingField: 0
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500050529026060
+    - rid: 9116668935928545354
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: LastChoice
         <NextNodeID>k__BackingField: 
-        <Jobs>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
+        <Condition>k__BackingField: {fileID: 0}
         <IsUnlockStoryline>k__BackingField: 0
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500050529026061
+    - rid: 9116668935928545355
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNodeID>k__BackingField: 
-        <Jobs>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
+        <Condition>k__BackingField: {fileID: 0}
         <IsUnlockStoryline>k__BackingField: 0
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500050529026062
+    - rid: 9116668935928545356
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: LastChoice
         <NextNodeID>k__BackingField: 
-        <Jobs>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
+        <Condition>k__BackingField: {fileID: 0}
         <IsUnlockStoryline>k__BackingField: 0
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500050529026063
+    - rid: 9116668935928545357
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNodeID>k__BackingField: 
-        <Jobs>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
+        <Condition>k__BackingField: {fileID: 0}
         <IsUnlockStoryline>k__BackingField: 0
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500050529026064
+    - rid: 9116668935928545358
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: LastChoice
         <NextNodeID>k__BackingField: 
-        <Jobs>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
+        <Condition>k__BackingField: {fileID: 0}
         <IsUnlockStoryline>k__BackingField: 0
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500050529026065
+    - rid: 9116668935928545359
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNodeID>k__BackingField: 
-        <Jobs>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
+        <Condition>k__BackingField: {fileID: 11400000, guid: e545a21b628cee0408511e4df5ecb34f,
+          type: 2}
         <IsUnlockStoryline>k__BackingField: 0
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []
         <StatusNodeGroups>k__BackingField: []
-    - rid: 7018500050529026066
+    - rid: 9116668935928545360
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: LastChoice
         <NextNodeID>k__BackingField: 
-        <Jobs>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
+        <Condition>k__BackingField: {fileID: 11400000, guid: 1681249c6c5ea0c40aafed18c6365b7f,
+          type: 2}
         <IsUnlockStoryline>k__BackingField: 0
         <IsUnlockTimeline>k__BackingField: 0
         <StatusNodeContainers>k__BackingField: []

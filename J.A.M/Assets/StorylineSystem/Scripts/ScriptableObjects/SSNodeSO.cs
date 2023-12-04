@@ -9,7 +9,7 @@ namespace SS.ScriptableObjects
     public class SSNodeSO : ScriptableObject
     {
         [field: SerializeField] public string NodeName { get; set; }
-        [field: SerializeField] public List<SSNodeChoiceData> Choices { get; set; }
+        [field: SerializeReference] public List<SSNodeChoiceData> Choices { get; set; }
         [field: SerializeField] public SSNodeType NodeType { get; set; }
         [field: SerializeField] public bool IsStartingNode { get; set; }
 

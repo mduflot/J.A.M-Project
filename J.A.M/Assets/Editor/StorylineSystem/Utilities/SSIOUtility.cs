@@ -329,9 +329,7 @@ namespace SS.Utilities
                     choiceData = new SSNodeChoiceTaskData()
                     {
                         Text = choiceTask.Text,
-                        Jobs = choiceTask.Jobs,
-                        PositiveTraits = choiceTask.PositiveTraits,
-                        NegativeTraits = choiceTask.NegativeTraits,
+                        Condition = choiceTask.Condition,
                         IsUnlockStoryline = choiceTask.IsUnlockStoryline,
                         IsUnlockTimeline = choiceTask.IsUnlockTimeline,
                         StatusNodeContainers = choiceTask.StatusNodeContainers,
@@ -655,9 +653,7 @@ namespace SS.Utilities
                     {
                         Text = choiceTask.Text,
                         NextNodeID = choiceTask.NextNodeID,
-                        Jobs = choiceTask.Jobs,
-                        PositiveTraits = choiceTask.PositiveTraits,
-                        NegativeTraits = choiceTask.NegativeTraits,
+                        Condition = choiceTask.Condition,
                         IsUnlockStoryline = choiceTask.IsUnlockStoryline,
                         IsUnlockTimeline = choiceTask.IsUnlockTimeline,
                         StatusNodeContainers = choiceTask.StatusNodeContainers,

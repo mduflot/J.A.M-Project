@@ -45,9 +45,6 @@ namespace SS.Elements
             SSChoiceTaskSaveData firstChoiceData = new SSChoiceTaskSaveData()
             {
                 Text = "FirstChoice",
-                Jobs = TraitsData.Job.None,
-                PositiveTraits = TraitsData.PositiveTraits.None,
-                NegativeTraits = TraitsData.NegativeTraits.None,
                 IsUnlockStoryline = false,
                 IsUnlockTimeline = false,
                 StatusNodeContainers = new List<SerializableTuple<SSStoryStatus, SSNodeContainerSO>>(),
@@ -57,9 +54,6 @@ namespace SS.Elements
             SSChoiceTaskSaveData lastChoiceData = new SSChoiceTaskSaveData()
             {
                 Text = "LastChoice",
-                Jobs = TraitsData.Job.None,
-                PositiveTraits = TraitsData.PositiveTraits.None,
-                NegativeTraits = TraitsData.NegativeTraits.None,
                 IsUnlockStoryline = false,
                 IsUnlockTimeline = false,
                 StatusNodeContainers = new List<SerializableTuple<SSStoryStatus, SSNodeContainerSO>>(),
@@ -84,10 +78,7 @@ namespace SS.Elements
 
                 SSChoiceTaskSaveData choiceData = new SSChoiceTaskSaveData()
                 {
-                    Text = "New Choice",
-                    Jobs = TraitsData.Job.None,
-                    PositiveTraits = TraitsData.PositiveTraits.None,
-                    NegativeTraits = TraitsData.NegativeTraits.None
+                    Text = "New Choice"
                 };
 
                 Choices.Add(choiceData);
@@ -192,22 +183,10 @@ namespace SS.Elements
 
             Foldout choiceFoldout = ElementUtility.CreateFoldout($"{choiceData.Text} :");
 
-            EnumFlagsField jobEnumFlagsField = ElementUtility.CreateEnumFlagsField(choiceData.Jobs, "Jobs :",
-                callback => { choiceData.Jobs = (TraitsData.Job)callback.newValue; });
+            ObjectField conditionField = ElementUtility.CreateObjectField(choiceData.Condition, typeof(ConditionSO),
+                "Condition :", callback => { choiceData.Condition = (ConditionSO)callback.newValue; });
 
-            choiceFoldout.Add(jobEnumFlagsField);
-
-            EnumFlagsField positiveTraitsEnumFlagsField = ElementUtility.CreateEnumFlagsField(choiceData.PositiveTraits,
-                "Positive Traits :",
-                callback => { choiceData.PositiveTraits = (TraitsData.PositiveTraits)callback.newValue; });
-
-            choiceFoldout.Add(positiveTraitsEnumFlagsField);
-
-            EnumFlagsField negativeTraitsEnumFlagsField = ElementUtility.CreateEnumFlagsField(choiceData.NegativeTraits,
-                "Negative Traits :",
-                callback => { choiceData.NegativeTraits = (TraitsData.NegativeTraits)callback.newValue; });
-
-            choiceFoldout.Add(negativeTraitsEnumFlagsField);
+            choiceFoldout.Add(conditionField);
 
             ListView listViewStoryline = null;
             ListView listViewTimeline = null;
@@ -267,12 +246,6 @@ namespace SS.Elements
                 choiceFoldout.Add(listViewTimeline);
             }
 
-            // TODO : Add addButton
-            Button addConditionButton = ElementUtility.CreateButton("Add Condition", () =>
-            {
-                // TODO : Use CreateConditionFoldout()
-            });
-
             customDataContainer.Insert(Choices.IndexOf(choiceData), choiceFoldout);
 
             Button deleteChoiceButton = ElementUtility.CreateButton("X", () =>
@@ -287,9 +260,6 @@ namespace SS.Elements
                     graphView.DeleteElements(choicePort.connections);
                 }
 
-                choiceData.Jobs = TraitsData.Job.None;
-                choiceData.PositiveTraits = TraitsData.PositiveTraits.None;
-                choiceData.NegativeTraits = TraitsData.NegativeTraits.None;
                 Choices.Remove(choiceData);
 
                 graphView.RemoveElement(choicePort);
@@ -314,15 +284,6 @@ namespace SS.Elements
             choicePort.Add(deleteChoiceButton);
 
             outputContainer.Add(choicePort);
-        }
-
-        private void CreateConditionFoldout()
-        {
-            Foldout conditionFoldout = ElementUtility.CreateFoldout("Condition :");
-
-            // TODO : Add conditions
-            // TODO : Add outcomes
-            // TODO : Add deleteButton
         }
 
         #endregion

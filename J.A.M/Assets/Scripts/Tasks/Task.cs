@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Task
@@ -14,9 +15,11 @@ public class Task
     public RoomType Room;
     public bool IsPermanent;
     public string PreviewOutcome;
+    public List<ConditionSO> Conditions;
+    public int conditionIndex = 0;
 
     public Task(string name, string description, Sprite icon, float timeLeft, float duration, int mandatorySlots,
-        int optionalSlots, float helpFactor, RoomType room, bool isPermanent, string previewOutcome)
+        int optionalSlots, float helpFactor, RoomType room, bool isPermanent, string previewOutcome, List<ConditionSO> conditions)
     {
         Name = name;
         Description = description;
@@ -30,5 +33,6 @@ public class Task
         Room = room;
         IsPermanent = isPermanent;
         PreviewOutcome = previewOutcome;
+        Conditions = conditions;
     }
 }

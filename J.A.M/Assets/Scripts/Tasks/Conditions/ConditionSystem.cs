@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ConditionSystem
@@ -10,45 +8,45 @@ public class ConditionSystem
         bool validateCondition = true;
 
         /*Base Condition Check*/
-        
-        if(!CheckJob(characterTraits.GetJob(), taskCondition.BaseCondition.Traits.GetJob())) 
+
+        if (!CheckJob(characterTraits.GetJob(), taskCondition.BaseCondition.Traits.GetJob()))
             validateCondition = false;
-        
+
         if (!CheckPositiveTraits(characterTraits.GetPositiveTraits(),
                 taskCondition.BaseCondition.Traits.GetPositiveTraits()))
             validateCondition = false;
-        
+
         if (!CheckNegativeTraits(characterTraits.GetNegativeTraits(),
                 taskCondition.BaseCondition.Traits.GetNegativeTraits()))
             validateCondition = false;
-        
+
         if (!CheckSpaceshipTraits(spaceshipTraits, hiddenSpaceshipTraits, taskCondition.BaseCondition.SpaceshipTraits,
-                taskCondition.BaseCondition.HiddenSpaceshipTraits)) 
+                taskCondition.BaseCondition.HiddenSpaceshipTraits))
             validateCondition = false;
 
         if (taskCondition.supplementaryConditions.Count < 1)
             return validateCondition;
-        
+
         /*Additionnal Condition Check*/
 
         bool supplementaryCondition = true;
         foreach (var cond in taskCondition.supplementaryConditions)
         {
-            if(!CheckJob(characterTraits.GetJob(), taskCondition.BaseCondition.Traits.GetJob())) 
+            if (!CheckJob(characterTraits.GetJob(), taskCondition.BaseCondition.Traits.GetJob()))
                 supplementaryCondition = false;
-        
+
             if (!CheckPositiveTraits(characterTraits.GetPositiveTraits(),
                     taskCondition.BaseCondition.Traits.GetPositiveTraits()))
                 supplementaryCondition = false;
-        
+
             if (!CheckNegativeTraits(characterTraits.GetNegativeTraits(),
                     taskCondition.BaseCondition.Traits.GetNegativeTraits()))
                 supplementaryCondition = false;
-        
-            if (!CheckSpaceshipTraits(spaceshipTraits, hiddenSpaceshipTraits, taskCondition.BaseCondition.SpaceshipTraits,
-                    taskCondition.BaseCondition.HiddenSpaceshipTraits)) 
-                supplementaryCondition = false;
 
+            if (!CheckSpaceshipTraits(spaceshipTraits, hiddenSpaceshipTraits,
+                    taskCondition.BaseCondition.SpaceshipTraits,
+                    taskCondition.BaseCondition.HiddenSpaceshipTraits))
+                supplementaryCondition = false;
 
             //Apply logical operator
             switch (cond.Key)
@@ -68,13 +66,9 @@ public class ConditionSystem
                 case TraitsData.TraitOperator.NOT:
                     validateCondition = (validateCondition != supplementaryCondition);
                     break;
-                
-                default:
-                    break;
             }
         }
-        
-        
+
         return validateCondition;
     }
 
@@ -82,13 +76,15 @@ public class ConditionSystem
     {
         return (job & conditionJob) == conditionJob;
     }
-    
-    private static bool CheckPositiveTraits(TraitsData.PositiveTraits pTraits, TraitsData.PositiveTraits conditionPTraits)
+
+    private static bool CheckPositiveTraits(TraitsData.PositiveTraits pTraits,
+        TraitsData.PositiveTraits conditionPTraits)
     {
         return (pTraits & conditionPTraits) == conditionPTraits;
     }
-    
-    private static bool CheckNegativeTraits(TraitsData.NegativeTraits negativeTraits, TraitsData.NegativeTraits conditionNtTraits)
+
+    private static bool CheckNegativeTraits(TraitsData.NegativeTraits negativeTraits,
+        TraitsData.NegativeTraits conditionNtTraits)
     {
         return (negativeTraits & conditionNtTraits) == conditionNtTraits;
     }
