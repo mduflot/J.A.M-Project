@@ -12,10 +12,10 @@ namespace SS.ScriptableObjects
         [field: SerializeField] public SSStoryType StoryType { get; set; }
         [field: SerializeField] public List<ConditionSO> Conditions { get; set; }
 
-        public void Initialize(string groupName, SSStoryStatus storyStatus, SSStoryType storyType, List<ConditionSO> conditions)
+        public void Initialize(string groupName, SSStoryType storyType, List<ConditionSO> conditions)
         {
             GroupName = groupName;
-            StoryStatus = storyStatus;
+            StoryStatus = SSStoryStatus.Enabled;
             StoryType = storyType;
             Conditions = conditions;
         }

@@ -80,8 +80,6 @@ namespace SS
             }
         }
 
-        // REWORK : Refactor the speakerType
-        // FIX : Problem with empty list if GD not set correctly
         private void RunNode(SSDialogueNodeSO nodeSO)
         {
             CharacterBehaviour actualSpeaker;
@@ -259,6 +257,7 @@ namespace SS
             {
                 if (timeNode.Choices.First().NextNode == null)
                 {
+                    nodeGroup.StoryStatus = SSStoryStatus.Disabled;
                     ResetTimeline();
                     TimeTickSystem.OnTick -= WaitingTime;
                     return;
@@ -283,6 +282,7 @@ namespace SS
             characterBehaviour.speaker.EndDialogue();
             if (nodeSO.Choices.First().NextNode == null)
             {
+                nodeGroup.StoryStatus = SSStoryStatus.Disabled;
                 ResetTimeline();
                 yield break;
             }
@@ -297,6 +297,7 @@ namespace SS
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).AssistantCharacters);
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
             {
+                nodeGroup.StoryStatus = SSStoryStatus.Disabled;
                 ResetTimeline();
                 yield break;
             }

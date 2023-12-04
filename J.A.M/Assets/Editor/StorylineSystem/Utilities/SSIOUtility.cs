@@ -58,11 +58,11 @@ namespace SS.Utilities
             SSGraphSaveDataSO graphData =
                 CreateAsset<SSGraphSaveDataSO>("Assets/Editor/StorylineSystem/Graphs", $"{graphFileName}Graph");
 
-            graphData.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.Conditions);
+            graphData.Initialize(graphFileName, graphView.StoryType, graphView.Conditions);
 
             SSNodeContainerSO nodeContainer = CreateAsset<SSNodeContainerSO>(containerFolderPath, graphFileName);
 
-            nodeContainer.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.Conditions);
+            nodeContainer.Initialize(graphFileName, graphView.StoryType, graphView.Conditions);
 
             SaveGroups(graphData, nodeContainer);
             SaveNodes(graphData, nodeContainer);
@@ -93,7 +93,6 @@ namespace SS.Utilities
             SSGroupSaveData groupData = new SSGroupSaveData()
             {
                 ID = group.ID,
-                StoryStatus = group.StoryStatus,
                 Name = group.title,
                 Position = group.GetPosition().position
             };
@@ -111,7 +110,7 @@ namespace SS.Utilities
             SSNodeGroupSO nodeGroup =
                 CreateAsset<SSNodeGroupSO>($"{containerFolderPath}/Groups/{groupName}", groupName);
 
-            nodeGroup.Initialize(groupName, group.StoryStatus, group.StoryType, group.Conditions);
+            nodeGroup.Initialize(groupName, group.StoryType, group.Conditions);
 
             createdNodeGroups.Add(group.ID, nodeGroup);
 
@@ -446,7 +445,6 @@ namespace SS.Utilities
                 SSGroup group = graphView.CreateGroup(groupData.Name, groupData.Position);
 
                 group.ID = groupData.ID;
-                group.StoryStatus = groupData.StoryStatus;
                 group.StoryType = groupData.StoryType;
                 group.Conditions = groupData.Conditions;
 

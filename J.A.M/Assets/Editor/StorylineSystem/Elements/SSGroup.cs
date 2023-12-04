@@ -10,7 +10,6 @@ namespace SS.Elements
     public class SSGroup : Group
     {
         public string ID { get; set; }
-        public SSStoryStatus StoryStatus { get; set; }
         public SSStoryType StoryType { get; set; }
         public List<ConditionSO> Conditions { get; set; }
         public string OldTitle { get; set; }

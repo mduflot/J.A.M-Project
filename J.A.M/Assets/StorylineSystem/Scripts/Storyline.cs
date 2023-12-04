@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using SS.Enumerations;
 
 namespace SS
 {
-    using Enumerations;
     using ScriptableObjects;
 
     [System.Serializable]
@@ -10,16 +10,13 @@ namespace SS
     {
         public SSNodeContainerSO StorylineContainer;
         public SSStoryStatus StoryStatus;
-        public List<SerializableTuple<SSStoryStatus, SSNodeGroupSO>> ActivatableTimelines;
-        public List<SerializableTuple<SSStoryStatus, SSNodeGroupSO>> DisabledTimelines;
+        public List<SSNodeGroupSO> Timelines;
 
-        public Storyline(SSNodeContainerSO storylineContainer, SSStoryStatus storyStatus,
-            List<SerializableTuple<SSStoryStatus, SSNodeGroupSO>> activatableTimelines, List<SerializableTuple<SSStoryStatus, SSNodeGroupSO>> disabledTimelines)
+        public Storyline(SSNodeContainerSO storylineContainer, List<SSNodeGroupSO> timelines)
         {
             StorylineContainer = storylineContainer;
-            StoryStatus = storyStatus;
-            ActivatableTimelines = activatableTimelines;
-            DisabledTimelines = disabledTimelines;
+            StoryStatus = SSStoryStatus.Enabled;
+            Timelines = timelines;
         }
     }
 }

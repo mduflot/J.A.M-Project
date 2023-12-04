@@ -27,11 +27,6 @@ namespace SS.Windows
             rootVisualElement.Clear();
             if (graphView == null) return;
 
-            EnumField enumFieldGraphStatus = ElementUtility.CreateEnumField(graphView.StoryStatus, "SS Status:",
-                callback => { graphView.StoryStatus = (SSStoryStatus)callback.newValue; });
-
-            rootVisualElement.Add(enumFieldGraphStatus);
-
             EnumField enumFieldGraphType = ElementUtility.CreateEnumField(graphView.StoryType, "SS Type:",
                 callback => { graphView.StoryType = (SSStoryType)callback.newValue; });
 
@@ -43,12 +38,6 @@ namespace SS.Windows
 
             foreach (var group in graphView.Groups)
             {
-                EnumField enumFieldGroupStatus = ElementUtility.CreateEnumField(group.Value.Groups[0].StoryStatus,
-                    $"{group.Value.Groups[0].title} Status:",
-                    callback => { group.Value.Groups[0].StoryStatus = (SSStoryStatus)callback.newValue; });
-
-                rootVisualElement.Add(enumFieldGroupStatus);
-
                 EnumField enumFieldGroupType = ElementUtility.CreateEnumField(group.Value.Groups[0].StoryType,
                     $"{group.Value.Groups[0].title} Type:",
                     callback => { group.Value.Groups[0].StoryType = (SSStoryType)callback.newValue; });

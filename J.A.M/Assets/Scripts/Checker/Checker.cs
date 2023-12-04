@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using SS;
-using SS.Enumerations;
 using SS.ScriptableObjects;
 using UnityEngine;
 
@@ -34,13 +33,13 @@ public class Checker : MonoBehaviour
             var randPicker = Random.Range(0, 1);
             if (activeStorylines.Count == 0)
             {
-                ChooseNewStoryline(campaign.ActivatableStorylines);
+                ChooseNewStoryline();
                 return;
             }
 
             if (randPicker <= weighedInactivePercent)
             {
-                ChooseNewStoryline(campaign.ActivatableStorylines);
+                ChooseNewStoryline();
             }
             else
             {
@@ -53,31 +52,31 @@ public class Checker : MonoBehaviour
         PickTimelineFromStoryline();
     }
 
-    private void ChooseNewStoryline(List<Storyline> activatableStorylines)
+    private void ChooseNewStoryline()
     {
+        List<Storyline> availableStoryLines = new List<Storyline>();
+        
+        foreach (var storyline in campaign.Storylines)
+        {
+            if (activeStorylines.Contains(storyline)) continue;
+            // TODO : Check conditions here ?
+            availableStoryLines.Add(storyline);
+        }
+        
         //numberOfASL = availableStoryLines.length
         //pickPercent = 100.0/numberOfASL
         //randPicker = random(0.0,100.0)
-        var numberOfASL = activatableStorylines.Count;
+        var numberOfASL = availableStoryLines.Count;
         var pickPercent = 100.0f / numberOfASL;
         var randPicker = Random.Range(0, 100);
-
-        List<Storyline> availableStorylines = new List<Storyline>();
-
-        foreach (var availableStoryline in activatableStorylines)
-        {
-            // TODO : Add conditions check
-            availableStorylines.Add(availableStoryline);
-        }
 
         for (int i = 0; i < numberOfASL; i++)
         {
             if (randPicker <= pickPercent * i)
             {
-                chosenStoryline = availableStorylines[i];
-                chosenStoryline.StorylineContainer.StoryStatus = SSStoryStatus.Activated;
+                chosenStoryline = availableStoryLines[i];
                 activeStorylines.Add(chosenStoryline);
-                StartStoryline();
+                PickTimelineFromStoryline(true);
                 break;
             }
         }
@@ -89,13 +88,13 @@ public class Checker : MonoBehaviour
         {
             chosenStoryline = activeStorylines[Random.Range(0, activeStorylines.Count)];
         }
-
-        var availableTimelines = new List<SSNodeGroupSO>();
-
-        foreach (var nodeGroup in chosenStoryline.ActivatableTimelines)
+        
+        List<SSNodeGroupSO> availableTimelines = new List<SSNodeGroupSO>();
+        
+        foreach (var timeline in chosenStoryline.Timelines)
         {
-            // TODO : Add conditions check
-            availableTimelines.Add(nodeGroup.Item2);
+            // TODO : Check conditions here ?
+            availableTimelines.Add(timeline);
         }
 
         var numberOfASL = availableTimelines.Count;
@@ -104,25 +103,14 @@ public class Checker : MonoBehaviour
 
         for (int i = 0; i < numberOfASL; i++)
         {
-            // FIX : IT'S POSSIBLE TO NEVER PICK A STORYLINE 
             if (randPicker <= pickPercent * i)
             {
                 chosenTimeline = availableTimelines[i];
-                PlayTimeline();
+                node.nodeContainer = chosenStoryline.StorylineContainer;
+                node.nodeGroup = chosenTimeline;
+                node.StartTimeline();
                 break;
             }
         }
-    }
-
-    private void StartStoryline()
-    {
-        PickTimelineFromStoryline(true);
-    }
-
-    private void PlayTimeline()
-    {
-        node.nodeContainer = chosenStoryline.StorylineContainer;
-        node.nodeGroup = chosenTimeline;
-        node.StartTimeline();
     }
 }

@@ -13,7 +13,6 @@ namespace SS.Windows
 
     public class SSGraphView : GraphView
     {
-        public SSStoryStatus StoryStatus;
         public SSStoryType StoryType;
         public List<ConditionSO> Conditions;
         public SerializableDictionary<string, SSGroupErrorData> Groups;
