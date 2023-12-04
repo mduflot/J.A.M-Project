@@ -39,6 +39,7 @@ namespace SS
 
         public void StartTimeline()
         {
+            Debug.Log($"Starting timeline {nodeContainer.name}");
             dialogues = new();
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
             CheckNodeType(node);

@@ -35,14 +35,12 @@ public class Checker : MonoBehaviour
             if (activeStorylines.Count == 0)
             {
                 ChooseNewStoryline(campaign.ActivatableStorylines);
-                PickTimelineFromStoryline();
                 return;
             }
 
             if (randPicker <= weighedInactivePercent)
             {
                 ChooseNewStoryline(campaign.ActivatableStorylines);
-                PickTimelineFromStoryline();
             }
             else
             {
@@ -80,6 +78,7 @@ public class Checker : MonoBehaviour
         // TODO : Revoir la gestion des probabilités
         for (int i = 0; i < numberOfASL; i++)
         {
+            // FIX : IT'S POSSIBLE TO NEVER PICK A STORYLINE
             if (randPicker <= pickPercent * i)
             {
                 chosenStoryline = availableStorylines[i];
@@ -118,6 +117,7 @@ public class Checker : MonoBehaviour
 
         for (int i = 0; i < numberOfASL; i++)
         {
+            // FIX : IT'S POSSIBLE TO NEVER PICK A STORYLINE 
             if (randPicker <= pickPercent * i)
             {
                 chosenTimeline = availableTimelines[i];
