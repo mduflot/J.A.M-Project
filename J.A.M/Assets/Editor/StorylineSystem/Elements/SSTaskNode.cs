@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -8,7 +7,6 @@ namespace SS.Elements
 {
     using Data.Save;
     using Enumerations;
-    using ScriptableObjects;
     using Windows;
 
     public class SSTaskNode : SSNode
@@ -44,20 +42,12 @@ namespace SS.Elements
 
             SSChoiceTaskSaveData firstChoiceData = new SSChoiceTaskSaveData()
             {
-                Text = "FirstChoice",
-                IsUnlockStoryline = false,
-                IsUnlockTimeline = false,
-                StatusNodeContainers = new List<SerializableTuple<SSStoryStatus, SSNodeContainerSO>>(),
-                StatusNodeGroups = new List<SerializableTuple<SSStoryStatus, SSNodeGroupSO>>()
+                Text = "FirstChoice"
             };
 
             SSChoiceTaskSaveData lastChoiceData = new SSChoiceTaskSaveData()
             {
-                Text = "LastChoice",
-                IsUnlockStoryline = false,
-                IsUnlockTimeline = false,
-                StatusNodeContainers = new List<SerializableTuple<SSStoryStatus, SSNodeContainerSO>>(),
-                StatusNodeGroups = new List<SerializableTuple<SSStoryStatus, SSNodeGroupSO>>()
+                Text = "LastChoice"
             };
 
             Choices.Add(firstChoiceData);
@@ -187,64 +177,6 @@ namespace SS.Elements
                 "Condition :", callback => { choiceData.Condition = (ConditionSO)callback.newValue; });
 
             choiceFoldout.Add(conditionField);
-
-            ListView listViewStoryline = null;
-            ListView listViewTimeline = null;
-
-            Toggle isUnlockStorylineToggle = ElementUtility.CreateToggle(choiceData.IsUnlockStoryline,
-                "Is Unlock Storyline :",
-                callback =>
-                {
-                    choiceData.IsUnlockStoryline = callback.newValue;
-                    if (callback.newValue)
-                    {
-                        listViewStoryline =
-                            ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeContainers,
-                                "Node Containers :");
-                        choiceFoldout.Insert(4, listViewStoryline);
-                    }
-                    else
-                    {
-                        choiceData.StatusNodeContainers.Clear();
-                        choiceFoldout.Remove(listViewStoryline);
-                    }
-                });
-
-            choiceFoldout.Add(isUnlockStorylineToggle);
-
-            Toggle isUnlockTimelineToggle = ElementUtility.CreateToggle(choiceData.IsUnlockTimeline,
-                "Is Unlock Timeline :",
-                callback =>
-                {
-                    choiceData.IsUnlockTimeline = callback.newValue;
-                    if (callback.newValue)
-                    {
-                        listViewTimeline =
-                            ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeGroups, "Node Groups :");
-                        choiceFoldout.Add(listViewTimeline);
-                    }
-                    else
-                    {
-                        choiceData.StatusNodeGroups.Clear();
-                        choiceFoldout.Remove(listViewTimeline);
-                    }
-                });
-
-            choiceFoldout.Add(isUnlockTimelineToggle);
-
-            if (choiceData.IsUnlockStoryline)
-            {
-                listViewStoryline =
-                    ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeContainers, "Node Containers :");
-                choiceFoldout.Insert(4, listViewStoryline);
-            }
-
-            if (choiceData.IsUnlockTimeline)
-            {
-                listViewTimeline =
-                    ElementUtility.CreateListViewEnumObjectField(choiceData.StatusNodeGroups, "Node Groups :");
-                choiceFoldout.Add(listViewTimeline);
-            }
 
             customDataContainer.Insert(Choices.IndexOf(choiceData), choiceFoldout);
 

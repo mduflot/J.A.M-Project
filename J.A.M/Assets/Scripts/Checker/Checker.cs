@@ -70,10 +70,8 @@ public class Checker : MonoBehaviour
             availableStorylines.Add(availableStoryline);
         }
 
-        // TODO : Revoir la gestion des probabilités
         for (int i = 0; i < numberOfASL; i++)
         {
-            // FIX : IT'S POSSIBLE TO NEVER PICK A STORYLINE
             if (randPicker <= pickPercent * i)
             {
                 chosenStoryline = availableStorylines[i];
@@ -87,7 +85,6 @@ public class Checker : MonoBehaviour
 
     private void PickTimelineFromStoryline(bool isNewStoryline = false)
     {
-        // TODO : Ajouter des probabilités entre les trois à sélectionner
         if (!isNewStoryline)
         {
             chosenStoryline = activeStorylines[Random.Range(0, activeStorylines.Count)];
