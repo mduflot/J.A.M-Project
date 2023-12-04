@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using SS;
+using SS.Enumerations;
 using SS.ScriptableObjects;
 using UnityEngine;
 
 public class Checker : MonoBehaviour
 {
     [SerializeField] private SSNode node;
-    [SerializeField] private SSCampaignSO campaign;
-    
+    [SerializeField] private List<Storyline> storylines;
+
     private List<Storyline> activeStorylines = new();
     private float priorityFactor;
     private Storyline chosenStoryline;
@@ -15,7 +17,7 @@ public class Checker : MonoBehaviour
 
     public void Initialize(SSCampaignSO ssCampaign)
     {
-        campaign = ssCampaign;
+        storylines = ssCampaign.Storylines;
     }
 
     [ContextMenu("GenerateRandomEvent")]
@@ -55,14 +57,15 @@ public class Checker : MonoBehaviour
     private void ChooseNewStoryline()
     {
         List<Storyline> availableStoryLines = new List<Storyline>();
-        
-        foreach (var storyline in campaign.Storylines)
+
+        foreach (var storyline in storylines)
         {
             if (activeStorylines.Contains(storyline)) continue;
-            // TODO : Check conditions here ?
+            if (storyline.StoryStatus != SSStoryStatus.Enabled) continue;
+            // TODO : CHECK CONDITIONS
             availableStoryLines.Add(storyline);
         }
-        
+
         //numberOfASL = availableStoryLines.length
         //pickPercent = 100.0/numberOfASL
         //randPicker = random(0.0,100.0)
@@ -88,12 +91,28 @@ public class Checker : MonoBehaviour
         {
             chosenStoryline = activeStorylines[Random.Range(0, activeStorylines.Count)];
         }
-        
+
         List<SSNodeGroupSO> availableTimelines = new List<SSNodeGroupSO>();
-        
+
+        bool isAllDisabled = true;
+        foreach (var timeline in chosenStoryline.Timelines.Where(timeline =>
+                     timeline.StoryStatus == SSStoryStatus.Enabled))
+        {
+            isAllDisabled = false;
+        }
+
+        if (isAllDisabled)
+        {
+            chosenStoryline.StoryStatus = SSStoryStatus.Disabled;
+            activeStorylines.Remove(chosenStoryline);
+            ChooseNewStoryline();
+            return;
+        }
+
         foreach (var timeline in chosenStoryline.Timelines)
         {
-            // TODO : Check conditions here ?
+            if (timeline.StoryStatus != SSStoryStatus.Enabled) continue;
+            // TODO : CHECK CONDITIONS
             availableTimelines.Add(timeline);
         }
 
