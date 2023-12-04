@@ -10,13 +10,15 @@ namespace SS
     {
         public SSNodeContainerSO StorylineContainer;
         public SSStoryStatus StoryStatus;
-        public List<SSNodeGroupSO> Timelines;
+        public List<SSNodeGroupSO> EnabledTimelines;
+        public List<SSNodeGroupSO> DisabledTimelines;
 
-        public Storyline(SSNodeContainerSO storylineContainer, List<SSNodeGroupSO> timelines)
+        public Storyline(SSNodeContainerSO storylineContainer, SSStoryStatus storyStatus, List<SSNodeGroupSO> enabledTimelines, List<SSNodeGroupSO> disabledTimelines)
         {
             StorylineContainer = storylineContainer;
-            StoryStatus = SSStoryStatus.Enabled;
-            Timelines = timelines;
+            StoryStatus = storyStatus;
+            EnabledTimelines = enabledTimelines;
+            DisabledTimelines = disabledTimelines;
         }
     }
 }

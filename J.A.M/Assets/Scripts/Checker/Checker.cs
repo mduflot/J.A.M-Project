@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using SS;
 using SS.Enumerations;
 using SS.ScriptableObjects;
@@ -14,10 +13,19 @@ public class Checker : MonoBehaviour
     private float priorityFactor;
     private Storyline chosenStoryline;
     private SSNodeGroupSO chosenTimeline;
+    private List<Storyline> availableStoryLines = new();
 
     public void Initialize(SSCampaignSO ssCampaign)
     {
         storylines = ssCampaign.Storylines;
+        
+        foreach (var storyline in storylines)
+        {
+            if (activeStorylines.Contains(storyline)) continue;
+            if (storyline.StoryStatus != SSStoryStatus.Enabled) continue;
+            // TODO : CHECK CONDITIONS
+            availableStoryLines.Add(storyline);
+        }
     }
 
     [ContextMenu("GenerateRandomEvent")]
@@ -56,16 +64,6 @@ public class Checker : MonoBehaviour
 
     private void ChooseNewStoryline()
     {
-        List<Storyline> availableStoryLines = new List<Storyline>();
-
-        foreach (var storyline in storylines)
-        {
-            if (activeStorylines.Contains(storyline)) continue;
-            if (storyline.StoryStatus != SSStoryStatus.Enabled) continue;
-            // TODO : CHECK CONDITIONS
-            availableStoryLines.Add(storyline);
-        }
-
         //numberOfASL = availableStoryLines.length
         //pickPercent = 100.0/numberOfASL
         //randPicker = random(0.0,100.0)
@@ -89,34 +87,23 @@ public class Checker : MonoBehaviour
     {
         if (!isNewStoryline)
         {
+            foreach (var storyline in activeStorylines)
+            {
+                if (storyline.EnabledTimelines.Count == 0)
+                {
+                    storyline.StoryStatus = SSStoryStatus.Completed;
+                    activeStorylines.Remove(storyline);
+                }
+            }
+            if (activeStorylines.Count == 0)
+            {
+                ChooseNewStoryline();
+                return;
+            }
             chosenStoryline = activeStorylines[Random.Range(0, activeStorylines.Count)];
         }
 
-        List<SSNodeGroupSO> availableTimelines = new List<SSNodeGroupSO>();
-
-        bool isAllDisabled = true;
-        foreach (var timeline in chosenStoryline.Timelines.Where(timeline =>
-                     timeline.StoryStatus == SSStoryStatus.Enabled))
-        {
-            isAllDisabled = false;
-        }
-
-        if (isAllDisabled)
-        {
-            chosenStoryline.StoryStatus = SSStoryStatus.Disabled;
-            activeStorylines.Remove(chosenStoryline);
-            ChooseNewStoryline();
-            return;
-        }
-
-        foreach (var timeline in chosenStoryline.Timelines)
-        {
-            if (timeline.StoryStatus != SSStoryStatus.Enabled) continue;
-            // TODO : CHECK CONDITIONS
-            availableTimelines.Add(timeline);
-        }
-
-        var numberOfASL = availableTimelines.Count;
+        var numberOfASL = chosenStoryline.EnabledTimelines.Count;
         var pickPercent = 100.0f / numberOfASL;
         var randPicker = Random.Range(0, 100);
 
@@ -124,7 +111,7 @@ public class Checker : MonoBehaviour
         {
             if (randPicker <= pickPercent * i)
             {
-                chosenTimeline = availableTimelines[i];
+                chosenTimeline = chosenStoryline.EnabledTimelines[i];
                 node.nodeContainer = chosenStoryline.StorylineContainer;
                 node.nodeGroup = chosenTimeline;
                 node.StartTimeline();

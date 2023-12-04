@@ -14,18 +14,19 @@ namespace SS.Windows
             graphView = ssGraphView;
         }
 
-        protected override void OnGraphViewChanging()
-        {
-        }
+        protected override void OnGraphViewChanging() { }
 
-        protected override void OnGraphViewChanged()
-        {
-        }
+        protected override void OnGraphViewChanged() { }
 
         public void DisplayInspector()
         {
             rootVisualElement.Clear();
             if (graphView == null) return;
+
+            EnumField enumFieldGraphStatus = ElementUtility.CreateEnumField(graphView.StoryStatus, "SS Status:",
+                callback => { graphView.StoryStatus = (SSStoryStatus)callback.newValue; });
+
+            rootVisualElement.Add(enumFieldGraphStatus);
 
             EnumField enumFieldGraphType = ElementUtility.CreateEnumField(graphView.StoryType, "SS Type:",
                 callback => { graphView.StoryType = (SSStoryType)callback.newValue; });
@@ -38,11 +39,24 @@ namespace SS.Windows
 
             foreach (var group in graphView.Groups)
             {
+                EnumField enumFieldGroupStatus = ElementUtility.CreateEnumField(group.Value.Groups[0].StoryStatus,
+                    $"{group.Value.Groups[0].title} Status:",
+                    callback => { group.Value.Groups[0].StoryStatus = (SSStoryStatus)callback.newValue; });
+
+                rootVisualElement.Add(enumFieldGroupStatus);
+
+                // TODO : VERIFY IF WE NEED STORYTYPE FOR GROUPS
                 EnumField enumFieldGroupType = ElementUtility.CreateEnumField(group.Value.Groups[0].StoryType,
                     $"{group.Value.Groups[0].title} Type:",
                     callback => { group.Value.Groups[0].StoryType = (SSStoryType)callback.newValue; });
 
                 rootVisualElement.Add(enumFieldGroupType);
+
+                Toggle toggle = ElementUtility.CreateToggle(group.Value.Groups[0].IsFirstToPlay,
+                    $"{group.Value.Groups[0].title} Is First To Play:",
+                    callback => { group.Value.Groups[0].IsFirstToPlay = callback.newValue; });
+
+                rootVisualElement.Add(toggle);
 
                 ListView conditionsListViewGroup = ElementUtility.CreateListViewObjectField(
                     group.Value.Groups[0].Conditions,

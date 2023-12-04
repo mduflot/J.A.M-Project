@@ -3,6 +3,7 @@ namespace SS.Enumerations
     public enum SSStoryStatus
     {
         Enabled,
-        Disabled
+        Disabled,
+        Completed
     }
 }
