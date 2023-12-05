@@ -6,6 +6,7 @@ using UnityEngine;
 public class ConditionSO : ScriptableObject
 {
     public OutcomeData.OutcomeTarget target;
+    public SystemType targetGauge;
     public Condition BaseCondition;
     public SerializableDictionary<TraitsData.TraitOperator, Condition> supplementaryConditions;
 

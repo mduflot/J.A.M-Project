@@ -7,7 +7,10 @@ public class SpaceshipManager : MonoBehaviour
     public ShipSystem[] systems;
     public CharacterBehaviour[] characters;
     public Pool<GameObject> notificationPool;
-
+    public TraitsData.SpaceshipTraits SpaceshipTraits = TraitsData.SpaceshipTraits.None;
+    public TraitsData.HiddenSpaceshipTraits HiddenSpaceshipTraits = TraitsData.HiddenSpaceshipTraits.None;
+    
+    
     [SerializeField] private List<Notification> activeTasks = new();
     [SerializeField] private GameObject taskNotificationPrefab;
 

@@ -9,4 +9,5 @@ public class Condition
     public TraitsData.Traits Traits;
     public TraitsData.SpaceshipTraits SpaceshipTraits;
     public TraitsData.HiddenSpaceshipTraits HiddenSpaceshipTraits;
+    public GaugeCheck.GaugeValue GaugeValue;
 }

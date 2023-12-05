@@ -25,6 +25,7 @@ public class OutcomeData : MonoBehaviour
     
     public enum OutcomeTarget
     {
+        None,
         Leader,
         Assistant,
         Crew,
