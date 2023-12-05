@@ -63,8 +63,11 @@ public class Notification : MonoBehaviour
         {
             if (character.isMandatory)
             {
-                LeaderCharacters.Add(character.icon.character);
-                character.icon.character.AssignTask(this, true);
+                if (character.icon != null)
+                {
+                    LeaderCharacters.Add(character.icon.character);
+                    character.icon.character.AssignTask(this, true);
+                }
             }
             else
             {

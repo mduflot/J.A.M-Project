@@ -126,7 +126,6 @@ public class TaskUI : MonoBehaviour
 
     public void StartTask()
     {
-        // TODO : Feedback on characters are working
         if (CharactersWorking()) return;
         notification.OnStart(characterSlots);
         taskStarted = true;
