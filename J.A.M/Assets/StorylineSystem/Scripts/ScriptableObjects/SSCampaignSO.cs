@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using SS.Enumerations;
 using UnityEngine;
 
@@ -41,8 +42,9 @@ namespace SS.ScriptableObjects
         private void FillGroups(Storyline storyline)
         {
             storyline.Timelines = new List<SSNodeGroupSO>();
-            foreach (var group in storyline.StorylineContainer.NodeGroups)
+            for (int index = 0; index < storyline.StorylineContainer.NodeGroups.Count; index++)
             {
+                var group = storyline.StorylineContainer.NodeGroups.ElementAt(index);
                 storyline.Timelines.Add(group.Key);
             }
         }

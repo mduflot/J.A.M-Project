@@ -32,6 +32,11 @@ namespace SS.Windows
                 callback => { graphView.StoryType = (SSStoryType)callback.newValue; });
 
             rootVisualElement.Add(enumFieldGraphType);
+            
+            Toggle toggleGraph = ElementUtility.CreateToggle(graphView.IsFirstToPlay, "Is First To Play:",
+                callback => { graphView.IsFirstToPlay = callback.newValue; });
+            
+            rootVisualElement.Add(toggleGraph);
 
             ListView conditionsListView = ElementUtility.CreateListViewObjectField(graphView.Conditions, "Conditions:");
 

@@ -31,7 +31,24 @@ public class Checker : MonoBehaviour
     [ContextMenu("GenerateRandomEvent")]
     public void GenerateRandomEvent()
     {
-        if (activeStorylines.Count == 0) ChooseNewStoryline(SSStoryType.Principal);
+        if (activeStorylines.Count == 0)
+        {
+            for (int index = 0; index < principalStorylines.Count; index++)
+            {
+                var storyline = principalStorylines[index];
+                if (storyline.StorylineContainer.IsFirstToPlay)
+                {
+                    chosenStoryline = storyline;
+                    activeStorylines.Add(chosenStoryline);
+                    PickTimelineFromStoryline(true);
+                    return;
+                }
+            }
+
+            ChooseNewStoryline(SSStoryType.Principal);
+            return;
+        }
+
         if (activeStorylines.Count < 3)
         {
             // pickPercent : float, % chance for an outcome
@@ -155,6 +172,11 @@ public class Checker : MonoBehaviour
         foreach (var timeline in chosenStoryline.Timelines)
         {
             if (timeline.StoryStatus != SSStoryStatus.Enabled) continue;
+            if (timeline.IsFirstToPlay)
+            {
+                StartTimeline(timeline);
+                return;
+            }
             // TODO : CHECK CONDITIONS
             availableTimelines.Add(timeline);
         }
@@ -167,13 +189,18 @@ public class Checker : MonoBehaviour
         {
             if (randPicker <= pickPercent * i)
             {
-                chosenTimeline = availableTimelines[i];
-                node.nodeContainer = chosenStoryline.StorylineContainer;
-                node.nodeGroup = chosenTimeline;
-                node.SetStoryline(chosenStoryline);
-                node.StartTimeline();
+                StartTimeline(availableTimelines[i]);
                 break;
             }
         }
+    }
+
+    private void StartTimeline(SSNodeGroupSO timeline)
+    {
+        chosenTimeline = timeline;
+        node.nodeContainer = chosenStoryline.StorylineContainer;
+        node.nodeGroup = chosenTimeline;
+        node.SetStoryline(chosenStoryline);
+        node.StartTimeline();
     }
 }

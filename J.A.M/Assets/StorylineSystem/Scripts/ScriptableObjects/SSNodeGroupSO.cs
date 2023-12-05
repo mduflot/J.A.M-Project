@@ -9,12 +9,14 @@ namespace SS.ScriptableObjects
     {
         [field: SerializeField] public string GroupName { get; set; }
         [field: SerializeField] public SSStoryStatus StoryStatus { get; set; }
+        [field: SerializeField] public bool IsFirstToPlay { get; set; }
         [field: SerializeField] public List<ConditionSO> Conditions { get; set; }
 
-        public void Initialize(string groupName, SSStoryStatus storyStatus, List<ConditionSO> conditions)
+        public void Initialize(string groupName, SSStoryStatus storyStatus, bool isFirstToPlay, List<ConditionSO> conditions)
         {
             GroupName = groupName;
             StoryStatus = storyStatus;
+            IsFirstToPlay = isFirstToPlay;
             Conditions = conditions;
         }
     }

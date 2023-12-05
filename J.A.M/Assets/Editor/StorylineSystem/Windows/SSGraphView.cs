@@ -15,6 +15,7 @@ namespace SS.Windows
     {
         public SSStoryStatus StoryStatus;
         public SSStoryType StoryType;
+        public bool IsFirstToPlay;
         public List<ConditionSO> Conditions;
         public SerializableDictionary<string, SSGroupErrorData> Groups;
 
@@ -54,6 +55,7 @@ namespace SS.Windows
 
             StoryStatus = SSStoryStatus.Enabled;
             StoryType = SSStoryType.Principal;
+            IsFirstToPlay = false;
             Conditions = new List<ConditionSO>();
 
             ungroupedNodes = new SerializableDictionary<string, SSNodeErrorData>();
