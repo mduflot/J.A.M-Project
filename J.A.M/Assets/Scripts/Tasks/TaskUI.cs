@@ -11,8 +11,7 @@ public class TaskUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI durationText;
     [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private TextMeshProUGUI previewOutcomeText;
-    [SerializeField] private Transform leaderSlotsParent;
-    [SerializeField] private Transform assistantSlotsParent;
+    [SerializeField] private Transform characterSlotsParent;
     [SerializeField] private CharacterUISlot[] inactiveSlots;
     [SerializeField] private WarningUI warningUI;
 
@@ -48,7 +47,7 @@ public class TaskUI : MonoBehaviour
         {
             var slot = inactiveSlots[i];
             slot.isMandatory = true;
-            slot.transform.SetParent(leaderSlotsParent);
+            slot.transform.SetParent(characterSlotsParent);
             slot.gameObject.SetActive(true);
             characterSlots.Add(slot);
         }
@@ -57,7 +56,7 @@ public class TaskUI : MonoBehaviour
         {
             var slot = inactiveSlots[i];
             slot.isMandatory = false;
-            slot.transform.SetParent(assistantSlotsParent);
+            slot.transform.SetParent(characterSlotsParent);
             slot.gameObject.SetActive(true);
             characterSlots.Add(slot);
         }
@@ -73,7 +72,7 @@ public class TaskUI : MonoBehaviour
         if (!taskStarted)
         {
             // TODO : Update PreviewOutcome
-            previewOutcomeText.text = notification.Task.PreviewOutcome;
+            //previewOutcomeText.text = notification.Task.Conditions;
 
             var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
 

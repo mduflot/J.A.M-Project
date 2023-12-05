@@ -156,9 +156,9 @@ RectTransform:
   - {fileID: 6807185420490406608}
   m_Father: {fileID: 3191368260597340695}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 152, y: -69}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6541626590159516173
@@ -383,9 +383,9 @@ RectTransform:
   - {fileID: 4781786332804103214}
   m_Father: {fileID: 1585847997282039449}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 112.5, y: -165}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6007166242863109253
@@ -460,9 +460,9 @@ RectTransform:
   - {fileID: 716537875186329515}
   m_Father: {fileID: 3191368260597340695}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 72, y: -69}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3611968843926246026
@@ -1538,9 +1538,9 @@ RectTransform:
   - {fileID: 3836909362036306074}
   m_Father: {fileID: 2082772674881218580}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 190, y: -35}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 250, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4591559580550003917
@@ -3104,9 +3104,9 @@ RectTransform:
   - {fileID: 3029107886035811861}
   m_Father: {fileID: 2082772674881218580}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 520, y: -35}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 250, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2275687259544839598
@@ -3822,9 +3822,9 @@ RectTransform:
   - {fileID: 1403556471740680656}
   m_Father: {fileID: 3191368260597340695}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 112, y: -69}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &853827829450689785
@@ -4330,7 +4330,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1525726558151462472}
   m_HandleRect: {fileID: 1024251399721310245}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4897,6 +4897,7 @@ GameObject:
   - component: {fileID: 4520503119858979931}
   - component: {fileID: 2280232418969158738}
   - component: {fileID: 1689793084273940706}
+  - component: {fileID: 198957416594102284}
   m_Layer: 5
   m_Name: AirflowTask
   m_TagString: Untagged
@@ -5007,7 +5008,40 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2280232418969158738}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 198957416594102284}
+        m_TargetAssemblyTypeName: SS.SSNode, Assembly-CSharp
+        m_MethodName: StartTimeline
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &198957416594102284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4693067613091446871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStoryline: {fileID: 0}
+  spaceshipManager: {fileID: 0}
+  nodeContainer: {fileID: 11400000, guid: 188556f72a62def49a3907ef9dc69b0a, type: 2}
+  nodeGroup: {fileID: 0}
+  node: {fileID: 11400000, guid: c5d1f819edc227b42805e1db4e5a4a5c, type: 2}
+  groupedNodes: 0
+  startingNodesOnly: 0
+  selectedNodeGroupIndex: 0
+  selectedNodeIndex: 0
 --- !u!1 &4724313365680135703
 GameObject:
   m_ObjectHideFlags: 0
@@ -5042,9 +5076,9 @@ RectTransform:
   - {fileID: 7962212894368948067}
   m_Father: {fileID: 2082772674881218580}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 850, y: -35}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 250, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4397686427643381520
@@ -5529,8 +5563,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 162.49997}
-  m_SizeDelta: {x: 100, y: 275}
+  m_AnchoredPosition: {x: 0, y: 162.50003}
+  m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6722090513468953903
 CanvasRenderer:
@@ -5592,6 +5626,7 @@ GameObject:
   - component: {fileID: 782733084833179703}
   - component: {fileID: 3157598716493124854}
   - component: {fileID: 7197155671540076136}
+  - component: {fileID: 676571106706987494}
   m_Layer: 5
   m_Name: FoodTask
   m_TagString: Untagged
@@ -5702,7 +5737,40 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3157598716493124854}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 676571106706987494}
+        m_TargetAssemblyTypeName: SS.SSNode, Assembly-CSharp
+        m_MethodName: StartTimeline
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &676571106706987494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5182467873110272665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStoryline: {fileID: 0}
+  spaceshipManager: {fileID: 0}
+  nodeContainer: {fileID: 11400000, guid: 188556f72a62def49a3907ef9dc69b0a, type: 2}
+  nodeGroup: {fileID: 0}
+  node: {fileID: 11400000, guid: 11fb772673d0d6a4aa40a80540a161f8, type: 2}
+  groupedNodes: 0
+  startingNodesOnly: 0
+  selectedNodeGroupIndex: 0
+  selectedNodeIndex: 3
 --- !u!1 &5192150245774814562
 GameObject:
   m_ObjectHideFlags: 0
@@ -7396,9 +7464,9 @@ RectTransform:
   - {fileID: 2134773404029803395}
   m_Father: {fileID: 1585847997282039449}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 212.5, y: -32.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 425, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2445258647732314343
@@ -7621,13 +7689,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gauges:
-  - system: 1
+  - systemType: 1
     gauge: {fileID: 6500772242218042608}
-  - system: 2
+  - systemType: 2
     gauge: {fileID: 4897957261226681531}
-  - system: 3
+  - systemType: 3
     gauge: {fileID: 1562224985085410786}
-  - system: 4
+  - systemType: 4
     gauge: {fileID: 1029888186232771943}
   charactersUIParent: {fileID: 5570369980112058552}
   charactersUI: []
@@ -7651,6 +7719,7 @@ GameObject:
   - component: {fileID: 7588597418666890429}
   - component: {fileID: 7899402557505624553}
   - component: {fileID: 1870500461802367801}
+  - component: {fileID: 2143731523414814458}
   m_Layer: 5
   m_Name: HullTask
   m_TagString: Untagged
@@ -7761,7 +7830,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7588597418666890429}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2143731523414814458}
+        m_TargetAssemblyTypeName: SS.SSNode, Assembly-CSharp
+        m_MethodName: StartTimeline
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1870500461802367801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7774,6 +7855,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30ef0882d308d794faa997fc570dff10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskName: {fileID: 0}
+  taskDuration: {fileID: 0}
+  taskIcon: {fileID: 0}
+--- !u!114 &2143731523414814458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630675645902737396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStoryline: {fileID: 0}
+  spaceshipManager: {fileID: 0}
+  nodeContainer: {fileID: 11400000, guid: 188556f72a62def49a3907ef9dc69b0a, type: 2}
+  nodeGroup: {fileID: 0}
+  node: {fileID: 11400000, guid: 1183c384825df8a4f9582660c01cd98f, type: 2}
+  groupedNodes: 0
+  startingNodesOnly: 0
+  selectedNodeGroupIndex: 0
+  selectedNodeIndex: 1
 --- !u!1 &7870824234314044307
 GameObject:
   m_ObjectHideFlags: 0
@@ -9139,9 +9244,9 @@ RectTransform:
   - {fileID: 8161751146285327074}
   m_Father: {fileID: 2082772674881218580}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1180, y: -35}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 250, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6148437146989853806
@@ -9229,6 +9334,7 @@ GameObject:
   - component: {fileID: 456258457685054182}
   - component: {fileID: 7666141375782269403}
   - component: {fileID: 8988374602915864711}
+  - component: {fileID: 5313235406310021259}
   m_Layer: 5
   m_Name: PowerTask
   m_TagString: Untagged
@@ -9339,7 +9445,40 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7666141375782269403}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5313235406310021259}
+        m_TargetAssemblyTypeName: SS.SSNode, Assembly-CSharp
+        m_MethodName: StartTimeline
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5313235406310021259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8974345295885191451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStoryline: {fileID: 0}
+  spaceshipManager: {fileID: 0}
+  nodeContainer: {fileID: 11400000, guid: 188556f72a62def49a3907ef9dc69b0a, type: 2}
+  nodeGroup: {fileID: 0}
+  node: {fileID: 11400000, guid: 7b61eea6312c1974e96ca8702abfa747, type: 2}
+  groupedNodes: 0
+  startingNodesOnly: 0
+  selectedNodeGroupIndex: 0
+  selectedNodeIndex: 2
 --- !u!1 &8982828568388023342
 GameObject:
   m_ObjectHideFlags: 0
@@ -9523,9 +9662,9 @@ RectTransform:
   - {fileID: 4047812940029681691}
   m_Father: {fileID: 1585847997282039449}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 165, y: -102.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 330, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3535074292531019185

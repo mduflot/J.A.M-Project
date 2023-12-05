@@ -239,8 +239,7 @@ namespace SS
                 }
 
                 task = new Task(nodeSO.name, nodeSO.Description, nodeSO.Icon, nodeSO.TimeLeft, nodeSO.Duration,
-                    nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room, nodeSO.IsPermanent,
-                    nodeSO.PreviewOutcome, conditions);
+                    nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room, nodeSO.IsPermanent, conditions);
                 notification.Initialize(task, spaceshipManager, dialogues);
                 spaceshipManager.AddTask(notification);
                 StartCoroutine(WaiterTask(nodeSO, task));
