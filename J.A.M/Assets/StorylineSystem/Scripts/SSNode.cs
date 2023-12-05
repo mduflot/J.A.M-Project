@@ -37,6 +37,12 @@ namespace SS
         private SSTimeNodeSO timeNode;
         private uint durationTimeNode;
         private Task task;
+        private Storyline storyline;
+
+        public void SetStoryline(Storyline storyline)
+        {
+            this.storyline = storyline;
+        }
 
         public void StartTimeline()
         {
@@ -55,7 +61,6 @@ namespace SS
         /// Checks the type of the node and runs the appropriate function
         /// </summary>
         /// <param name="nodeSO"> Node you need to run </param>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void CheckNodeType(SSNodeSO nodeSO)
         {
             switch (nodeSO.NodeType)
@@ -75,13 +80,9 @@ namespace SS
                     RunNode(nodeSO as SSTimeNodeSO);
                     break;
                 }
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 
-        // REWORK : Refactor the speakerType
-        // FIX : Problem with empty list if GD not set correctly
         private void RunNode(SSDialogueNodeSO nodeSO)
         {
             CharacterBehaviour actualSpeaker;
@@ -109,13 +110,13 @@ namespace SS
                 }
                 case SSSpeakerType.Sensor:
                 {
-                    // TODO : Place on furniture / List of Furniture in spaceship
+                    // TODO : NEED FURNITURE BEFORE
                     // dialogues.Add(new Tuple<Sprite, string, string>(null, "Sensor", nodeSO.Text));
                     break;
                 }
                 case SSSpeakerType.Expert:
                 {
-                    // TODO : Place on furniture / List of Furniture in spaceship
+                    // TODO : NEED FURNITURE BEFORE
                     // dialogues.Add(new Tuple<Sprite, string, string>(null, "Expert", nodeSO.Text));
                     break;
                 }
@@ -236,6 +237,7 @@ namespace SS
                 {
                     conditions.Add(((SSNodeChoiceTaskData)choiceData).Condition);
                 }
+
                 task = new Task(nodeSO.name, nodeSO.Description, nodeSO.Icon, nodeSO.TimeLeft, nodeSO.Duration,
                     nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room, nodeSO.IsPermanent,
                     nodeSO.PreviewOutcome, conditions);
@@ -259,6 +261,8 @@ namespace SS
             {
                 if (timeNode.Choices.First().NextNode == null)
                 {
+                    nodeGroup.StoryStatus = SSStoryStatus.Completed;
+                    storyline.Timelines.Remove(nodeGroup);
                     ResetTimeline();
                     TimeTickSystem.OnTick -= WaitingTime;
                     return;
@@ -274,7 +278,8 @@ namespace SS
             yield return new WaitUntil(() => characterBehaviour.speaker.IsSpeaking == false);
             if (nodeSO.IsDialogueTask)
             {
-                yield return new WaitUntil(() => 100 - Mathf.Clamp(task.Duration / task.BaseDuration, 0, 100) * 100 > nodeSO.PercentageTask);
+                yield return new WaitUntil(() =>
+                    100 - Mathf.Clamp(task.Duration / task.BaseDuration, 0, 100) * 100 > nodeSO.PercentageTask);
             }
 
             characterBehaviour.speaker.StartDialogue(nodeSO);
@@ -283,6 +288,8 @@ namespace SS
             characterBehaviour.speaker.EndDialogue();
             if (nodeSO.Choices.First().NextNode == null)
             {
+                nodeGroup.StoryStatus = SSStoryStatus.Completed;
+                storyline.Timelines.Remove(nodeGroup);
                 ResetTimeline();
                 yield break;
             }
@@ -297,6 +304,8 @@ namespace SS
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).AssistantCharacters);
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
             {
+                nodeGroup.StoryStatus = SSStoryStatus.Completed;
+                storyline.Timelines.Remove(nodeGroup);
                 ResetTimeline();
                 yield break;
             }

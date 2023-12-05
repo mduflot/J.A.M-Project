@@ -13,8 +13,10 @@ namespace SS.Windows
 
     public class SSGraphView : GraphView
     {
-        public SSStoryStatus storyStatus;
-        public SSStoryType storyType;
+        public SSStoryStatus StoryStatus;
+        public SSStoryType StoryType;
+        public bool IsFirstToPlay;
+        public List<ConditionSO> Conditions;
         public SerializableDictionary<string, SSGroupErrorData> Groups;
 
         private SSEditorWindow editorWindow;
@@ -50,6 +52,11 @@ namespace SS.Windows
         public SSGraphView(SSEditorWindow ssEditorWindow)
         {
             editorWindow = ssEditorWindow;
+
+            StoryStatus = SSStoryStatus.Enabled;
+            StoryType = SSStoryType.Principal;
+            IsFirstToPlay = false;
+            Conditions = new List<ConditionSO>();
 
             ungroupedNodes = new SerializableDictionary<string, SSNodeErrorData>();
             Groups = new SerializableDictionary<string, SSGroupErrorData>();

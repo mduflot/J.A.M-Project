@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SS.ScriptableObjects
@@ -8,13 +9,15 @@ namespace SS.ScriptableObjects
     {
         [field: SerializeField] public string GroupName { get; set; }
         [field: SerializeField] public SSStoryStatus StoryStatus { get; set; }
-        [field: SerializeField] public SSStoryType StoryType { get; set; }
+        [field: SerializeField] public bool IsFirstToPlay { get; set; }
+        [field: SerializeField] public List<ConditionSO> Conditions { get; set; }
 
-        public void Initialize(string groupName, SSStoryStatus storyStatus, SSStoryType storyType)
+        public void Initialize(string groupName, SSStoryStatus storyStatus, bool isFirstToPlay, List<ConditionSO> conditions)
         {
             GroupName = groupName;
             StoryStatus = storyStatus;
-            StoryType = storyType;
+            IsFirstToPlay = isFirstToPlay;
+            Conditions = conditions;
         }
     }
 }

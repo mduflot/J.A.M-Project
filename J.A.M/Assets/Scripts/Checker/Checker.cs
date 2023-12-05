@@ -3,83 +3,142 @@ using SS;
 using SS.Enumerations;
 using SS.ScriptableObjects;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Checker : MonoBehaviour
 {
     [SerializeField] private SSNode node;
-    [SerializeField] private SSCampaignSO campaign;
-    
-    private List<Storyline> activeStorylines = new();
+
     private float priorityFactor;
     private Storyline chosenStoryline;
     private SSNodeGroupSO chosenTimeline;
 
+    private List<Storyline> principalStorylines;
+    private List<Storyline> secondaryStorylines;
+    private List<Storyline> trivialStorylines;
+
+    private List<Storyline> activeStorylines = new();
+    private List<Storyline> availableStoryLines = new();
+    private List<SSNodeGroupSO> availableTimelines = new();
+
     public void Initialize(SSCampaignSO ssCampaign)
     {
-        campaign = ssCampaign;
+        principalStorylines = ssCampaign.PrincipalStorylines;
+        secondaryStorylines = ssCampaign.SecondaryStorylines;
+        trivialStorylines = ssCampaign.TrivialStorylines;
     }
 
     [ContextMenu("GenerateRandomEvent")]
     public void GenerateRandomEvent()
     {
-        if (activeStorylines.Count < 3)
+        if (activeStorylines.Count == 0)
         {
-            //pickPercent : float, % chance for an outcome
-            //weighedActivePercent : float, probability for an active timeline to be selected
-            //weighedInactivePercent : float, probability for an inactive timeline to be selected
-            //randPicker : float, random value in [0,100] used to chose among available or unavailable storylines
-            var pickPercent = 1.0f / 3.0f;
-            var weighedInactivePercent = pickPercent * (1 - 1.0f / priorityFactor);
-            // var weighedActivePercent = 1 - weighedInactivePercent;
-            var randPicker = Random.Range(0, 1);
-            if (activeStorylines.Count == 0)
+            for (int index = 0; index < principalStorylines.Count; index++)
             {
-                ChooseNewStoryline(campaign.ActivatableStorylines);
-                return;
+                var storyline = principalStorylines[index];
+                if (storyline.StorylineContainer.IsFirstToPlay)
+                {
+                    chosenStoryline = storyline;
+                    activeStorylines.Add(chosenStoryline);
+                    PickTimelineFromStoryline(true);
+                    return;
+                }
             }
 
-            if (randPicker <= weighedInactivePercent)
-            {
-                ChooseNewStoryline(campaign.ActivatableStorylines);
-            }
-            else
-            {
-                PickTimelineFromStoryline();
-            }
-
+            ChooseNewStoryline(SSStoryType.Principal);
             return;
         }
 
-        PickTimelineFromStoryline();
+        if (activeStorylines.Count < 3)
+        {
+            // pickPercent : float, % chance for an outcome
+            // weighedActivePercent : float, probability for an active timeline to be selected
+            // weighedInactivePercent : float, probability for an inactive timeline to be selected
+            // randPicker : float, random value in [0,100] used to chose among available or unavailable storylines
+
+            var missingStoryTypes = new List<SSStoryType>();
+            for (int index = 0; index < activeStorylines.Count; index++)
+            {
+                if (activeStorylines[index].StorylineContainer.StoryType == SSStoryType.Principal)
+                    missingStoryTypes.Add(SSStoryType.Principal);
+                if (activeStorylines[index].StorylineContainer.StoryType == SSStoryType.Secondary)
+                    missingStoryTypes.Add(SSStoryType.Secondary);
+                if (activeStorylines[index].StorylineContainer.StoryType == SSStoryType.Trivial)
+                    missingStoryTypes.Add(SSStoryType.Trivial);
+            }
+
+            // TODO : DO PROBABILITY CALCULATIONS HERE
+
+            var storyType = missingStoryTypes[Random.Range(0, missingStoryTypes.Count)];
+            ChooseNewStoryline(storyType);
+        }
+        else
+        {
+            PickTimelineFromStoryline();
+        }
     }
 
-    private void ChooseNewStoryline(List<Storyline> activatableStorylines)
+    private void ChooseNewStoryline(SSStoryType storyType)
     {
-        //numberOfASL = availableStoryLines.length
-        //pickPercent = 100.0/numberOfASL
-        //randPicker = random(0.0,100.0)
-        var numberOfASL = activatableStorylines.Count;
+        availableStoryLines.Clear();
+        switch (storyType)
+        {
+            case SSStoryType.Principal:
+            {
+                for (var index = 0; index < principalStorylines.Count; index++)
+                {
+                    var storyline = principalStorylines[index];
+                    if (activeStorylines.Contains(storyline)) continue;
+                    if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
+                    // TODO : CHECK CONDITIONS
+                    availableStoryLines.Add(storyline);
+                }
+
+                break;
+            }
+            case SSStoryType.Secondary:
+            {
+                for (var index = 0; index < secondaryStorylines.Count; index++)
+                {
+                    var storyline = secondaryStorylines[index];
+                    if (activeStorylines.Contains(storyline)) continue;
+                    if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
+                    // TODO : CHECK CONDITIONS
+                    availableStoryLines.Add(storyline);
+                }
+
+                break;
+            }
+            case SSStoryType.Trivial:
+            {
+                for (var index = 0; index < trivialStorylines.Count; index++)
+                {
+                    var storyline = trivialStorylines[index];
+                    if (activeStorylines.Contains(storyline)) continue;
+                    if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
+                    // TODO : CHECK CONDITIONS
+                    availableStoryLines.Add(storyline);
+                }
+
+                break;
+            }
+        }
+
+        // numberOfASL = availableStoryLines.length
+        // pickPercent = 100.0/numberOfASL
+        // randPicker = random(0.0,100.0)
+
+        var numberOfASL = availableStoryLines.Count;
         var pickPercent = 100.0f / numberOfASL;
         var randPicker = Random.Range(0, 100);
 
-        List<Storyline> availableStorylines = new List<Storyline>();
-
-        foreach (var availableStoryline in activatableStorylines)
-        {
-            // TODO : Add conditions check
-            availableStorylines.Add(availableStoryline);
-        }
-
-        // TODO : Revoir la gestion des probabilités
         for (int i = 0; i < numberOfASL; i++)
         {
-            // FIX : IT'S POSSIBLE TO NEVER PICK A STORYLINE
             if (randPicker <= pickPercent * i)
             {
-                chosenStoryline = availableStorylines[i];
-                chosenStoryline.StorylineContainer.StoryStatus = SSStoryStatus.Activated;
+                chosenStoryline = availableStoryLines[i];
                 activeStorylines.Add(chosenStoryline);
-                StartStoryline();
+                PickTimelineFromStoryline(true);
                 break;
             }
         }
@@ -87,18 +146,39 @@ public class Checker : MonoBehaviour
 
     private void PickTimelineFromStoryline(bool isNewStoryline = false)
     {
-        // TODO : Ajouter des probabilités entre les trois à sélectionner
         if (!isNewStoryline)
         {
+            for (var index = 0; index < activeStorylines.Count; index++)
+            {
+                var storyline = activeStorylines[index];
+                if (storyline.Timelines.Count == 0)
+                {
+                    storyline.StorylineContainer.StoryStatus = SSStoryStatus.Completed;
+                    activeStorylines.Remove(storyline);
+                }
+            }
+
+            if (activeStorylines.Count == 0)
+            {
+                GenerateRandomEvent();
+                return;
+            }
+
+            // TODO : DO PROBABILITY CALCULATIONS HERE
+
             chosenStoryline = activeStorylines[Random.Range(0, activeStorylines.Count)];
         }
 
-        var availableTimelines = new List<SSNodeGroupSO>();
-
-        foreach (var nodeGroup in chosenStoryline.ActivatableTimelines)
+        foreach (var timeline in chosenStoryline.Timelines)
         {
-            // TODO : Add conditions check
-            availableTimelines.Add(nodeGroup.Item2);
+            if (timeline.StoryStatus != SSStoryStatus.Enabled) continue;
+            if (timeline.IsFirstToPlay)
+            {
+                StartTimeline(timeline);
+                return;
+            }
+            // TODO : CHECK CONDITIONS
+            availableTimelines.Add(timeline);
         }
 
         var numberOfASL = availableTimelines.Count;
@@ -107,25 +187,20 @@ public class Checker : MonoBehaviour
 
         for (int i = 0; i < numberOfASL; i++)
         {
-            // FIX : IT'S POSSIBLE TO NEVER PICK A STORYLINE 
             if (randPicker <= pickPercent * i)
             {
-                chosenTimeline = availableTimelines[i];
-                PlayTimeline();
+                StartTimeline(availableTimelines[i]);
                 break;
             }
         }
     }
 
-    private void StartStoryline()
+    private void StartTimeline(SSNodeGroupSO timeline)
     {
-        PickTimelineFromStoryline(true);
-    }
-
-    private void PlayTimeline()
-    {
+        chosenTimeline = timeline;
         node.nodeContainer = chosenStoryline.StorylineContainer;
         node.nodeGroup = chosenTimeline;
+        node.SetStoryline(chosenStoryline);
         node.StartTimeline();
     }
 }

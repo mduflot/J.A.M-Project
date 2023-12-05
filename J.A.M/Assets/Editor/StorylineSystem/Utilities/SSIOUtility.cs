@@ -58,11 +58,11 @@ namespace SS.Utilities
             SSGraphSaveDataSO graphData =
                 CreateAsset<SSGraphSaveDataSO>("Assets/Editor/StorylineSystem/Graphs", $"{graphFileName}Graph");
 
-            graphData.Initialize(graphFileName, graphView.storyStatus, graphView.storyType);
+            graphData.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.IsFirstToPlay, graphView.Conditions);
 
             SSNodeContainerSO nodeContainer = CreateAsset<SSNodeContainerSO>(containerFolderPath, graphFileName);
 
-            nodeContainer.Initialize(graphFileName, graphView.storyStatus, graphView.storyType);
+            nodeContainer.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.IsFirstToPlay, graphView.Conditions);
 
             SaveGroups(graphData, nodeContainer);
             SaveNodes(graphData, nodeContainer);
@@ -93,8 +93,10 @@ namespace SS.Utilities
             SSGroupSaveData groupData = new SSGroupSaveData()
             {
                 ID = group.ID,
-                StoryStatus = group.StoryStatus,
                 Name = group.title,
+                StoryStatus = group.StoryStatus,
+                IsFirstToPlay = group.IsFirstToPlay,
+                Conditions = group.Conditions,
                 Position = group.GetPosition().position
             };
 
@@ -111,7 +113,7 @@ namespace SS.Utilities
             SSNodeGroupSO nodeGroup =
                 CreateAsset<SSNodeGroupSO>($"{containerFolderPath}/Groups/{groupName}", groupName);
 
-            nodeGroup.Initialize(groupName, group.StoryStatus, group.StoryType);
+            nodeGroup.Initialize(groupName, group.StoryStatus, group.IsFirstToPlay, group.Conditions);
 
             createdNodeGroups.Add(group.ID, nodeGroup);
 
@@ -323,17 +325,13 @@ namespace SS.Utilities
             foreach (SSChoiceSaveData nodeChoice in nodeChoices)
             {
                 SSNodeChoiceData choiceData;
-                
+
                 if (nodeChoice is SSChoiceTaskSaveData choiceTask)
                 {
                     choiceData = new SSNodeChoiceTaskData()
                     {
                         Text = choiceTask.Text,
-                        Condition = choiceTask.Condition,
-                        IsUnlockStoryline = choiceTask.IsUnlockStoryline,
-                        IsUnlockTimeline = choiceTask.IsUnlockTimeline,
-                        StatusNodeContainers = choiceTask.StatusNodeContainers,
-                        StatusNodeGroups = choiceTask.StatusNodeGroups
+                        Condition = choiceTask.Condition
                     };
 
                     nodeChoicesData.Add(choiceData);
@@ -451,7 +449,8 @@ namespace SS.Utilities
 
                 group.ID = groupData.ID;
                 group.StoryStatus = groupData.StoryStatus;
-                group.StoryType = groupData.StoryType;
+                group.IsFirstToPlay = groupData.IsFirstToPlay;
+                group.Conditions = groupData.Conditions;
 
                 loadedGroups.Add(group.ID, group);
             }
@@ -653,11 +652,7 @@ namespace SS.Utilities
                     {
                         Text = choiceTask.Text,
                         NextNodeID = choiceTask.NextNodeID,
-                        Condition = choiceTask.Condition,
-                        IsUnlockStoryline = choiceTask.IsUnlockStoryline,
-                        IsUnlockTimeline = choiceTask.IsUnlockTimeline,
-                        StatusNodeContainers = choiceTask.StatusNodeContainers,
-                        StatusNodeGroups = choiceTask.StatusNodeGroups
+                        Condition = choiceTask.Condition
                     };
                 }
                 else
