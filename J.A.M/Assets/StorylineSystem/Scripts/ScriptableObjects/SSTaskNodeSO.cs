@@ -9,6 +9,7 @@ namespace SS.ScriptableObjects
     public class SSTaskNodeSO : SSNodeSO
     {
         [field: SerializeField] public string Description { get; set; }
+        [field: SerializeField] public SSTaskType TaskType { get; set; }
         [field: SerializeField] public Sprite Icon { get; set; }
         [field: SerializeField] public float TimeLeft { get; set; }
         [field: SerializeField] public float Duration { get; set; }
@@ -17,18 +18,18 @@ namespace SS.ScriptableObjects
         [field: SerializeField] public float TaskHelpFactor { get; set; }
         [field: SerializeField] public RoomType Room { get; set; }
         [field: SerializeField] public bool IsPermanent { get; set; }
-        [field: SerializeField] public string PreviewOutcome { get; set; }
 
         public void Initialize(string nodeName, List<SSNodeChoiceData> choices, SSNodeType nodeType,
-            bool isStartingNode, string descriptionTask, Sprite taskIcon, float timeLeft, float duration,
+            bool isStartingNode, string descriptionTask, SSTaskType taskType, Sprite taskIcon, float timeLeft, float duration,
             int mandatorySlots, int optionalSlots, float taskHelpFactor, RoomType room,
-            bool isPermanent, string previewOutcome)
+            bool isPermanent)
         {
             NodeName = nodeName;
             Choices = choices;
             NodeType = nodeType;
             IsStartingNode = isStartingNode;
             Description = descriptionTask;
+            TaskType = taskType;
             Icon = taskIcon;
             TimeLeft = timeLeft;
             Duration = duration;
@@ -37,7 +38,6 @@ namespace SS.ScriptableObjects
             TaskHelpFactor = taskHelpFactor;
             Room = room;
             IsPermanent = isPermanent;
-            PreviewOutcome = previewOutcome;
         }
     }
 }

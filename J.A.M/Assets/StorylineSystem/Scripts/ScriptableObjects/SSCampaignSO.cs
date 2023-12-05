@@ -14,13 +14,23 @@ namespace SS.ScriptableObjects
         public List<Storyline> SecondaryStorylines = new();
         public List<Storyline> TrivialStorylines = new();
 
-        private void OnValidate()
+        private void FillGroups(Storyline storyline)
         {
-            if (Storylines == null) return;
+            storyline.Timelines = new List<SSNodeGroupSO>();
+            for (int index = 0; index < storyline.StorylineContainer.NodeGroups.Count; index++)
+            {
+                var group = storyline.StorylineContainer.NodeGroups.ElementAt(index);
+                storyline.Timelines.Add(group.Key);
+            }
+        }
 
+        [ContextMenu("FillGroups")]
+        private void FillGroups()
+        {
             for (var index = 0; index < Storylines.Count; index++)
             {
                 var storyline = Storylines[index];
+                if (storyline.StorylineContainer == null) continue;
                 switch(storyline.StorylineContainer.StoryType)
                 {
                     case SSStoryType.Principal:
@@ -33,29 +43,6 @@ namespace SS.ScriptableObjects
                         TrivialStorylines.Add(storyline);
                         break;
                 }
-                if (storyline.StorylineContainer == null) continue;
-                if (storyline.Timelines.Count != 0) continue;
-                FillGroups(storyline);
-            }
-        }
-
-        private void FillGroups(Storyline storyline)
-        {
-            storyline.Timelines = new List<SSNodeGroupSO>();
-            for (int index = 0; index < storyline.StorylineContainer.NodeGroups.Count; index++)
-            {
-                var group = storyline.StorylineContainer.NodeGroups.ElementAt(index);
-                storyline.Timelines.Add(group.Key);
-            }
-        }
-
-        [ContextMenu("ResetGroups")]
-        private void ResetGroups()
-        {
-            for (var index = 0; index < Storylines.Count; index++)
-            {
-                var storyline = Storylines[index];
-                if (storyline.StorylineContainer == null) continue;
                 FillGroups(storyline);
             }
         }

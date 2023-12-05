@@ -3,10 +3,13 @@ using UnityEngine;
 
 namespace SS.Data.Save
 {
+    using Enumerations;
+
     [Serializable]
     public class SSTaskNodeSaveData : SSNodeSaveData
     {
         [field: SerializeField] public string DescriptionTask { get; set; }
+        [field: SerializeField] public SSTaskType TaskType { get; set; }
         [field: SerializeField] public Sprite TaskIcon { get; set; }
         [field: SerializeField] public float TimeLeft { get; set; }
         [field: SerializeField] public float BaseDuration { get; set; }
@@ -15,6 +18,5 @@ namespace SS.Data.Save
         [field: SerializeField] public float TaskHelpFactor { get; set; }
         [field: SerializeField] public RoomType Room { get; set; }
         [field: SerializeField] public bool IsPermanent { get; set; }
-        [field: SerializeField] public string PreviewOutcome { get; set; }
     }
 }

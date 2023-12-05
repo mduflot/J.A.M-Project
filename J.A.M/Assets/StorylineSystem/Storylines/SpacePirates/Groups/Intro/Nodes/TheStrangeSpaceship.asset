@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: TheStrangeSpaceship
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: TheStrangeSpaceship
+  <Choices>k__BackingField:
+  - rid: 9116668955202683212
+  - rid: 9116668955202683213
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: An unidentified human spaceship approaches at high
+    speed. The crew doesn't seem to recognize the model of the vessel. What should
+    we do?
+  <TaskType>k__BackingField: 2
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7d944ed3842671f45b0afda12595792b,
+    type: 3}
+  <TimeLeft>k__BackingField: 0
+  <Duration>k__BackingField: 2
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 0
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 4
+  <IsPermanent>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 9116668955202683212
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: d65fb822741bc5349af99a11fa7aea32,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 648a50182ff87844895ba803492d5a08,
+          type: 2}
+        <PreviewOutcome>k__BackingField: Preview...
+    - rid: 9116668955202683213
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: LastChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 8cb38cb4d38683047980d58a63cfb5e1,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: e545a21b628cee0408511e4df5ecb34f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: Preview...

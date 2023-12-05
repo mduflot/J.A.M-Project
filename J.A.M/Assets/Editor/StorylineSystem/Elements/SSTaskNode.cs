@@ -12,6 +12,7 @@ namespace SS.Elements
     public class SSTaskNode : SSNode
     {
         public string DescriptionTask { get; set; }
+        public SSTaskType TaskType { get; set; }
         public Sprite TaskIcon { get; set; }
         public float TimeLeft { get; set; }
         public float BaseDuration { get; set; }
@@ -20,7 +21,6 @@ namespace SS.Elements
         public float TaskHelpFactor { get; set; }
         public RoomType Room { get; set; }
         public bool IsPermanent { get; set; }
-        public string PreviewOutcome { get; set; }
 
         private VisualElement customDataContainer = new();
 
@@ -38,16 +38,17 @@ namespace SS.Elements
             TaskHelpFactor = 0.75f;
             Room = RoomType.Bedrooms;
             IsPermanent = false;
-            PreviewOutcome = "Preview Outcome";
 
             SSChoiceTaskSaveData firstChoiceData = new SSChoiceTaskSaveData()
             {
-                Text = "FirstChoice"
+                Text = "FirstChoice",
+                PreviewOutcome = "Preview..."
             };
 
             SSChoiceTaskSaveData lastChoiceData = new SSChoiceTaskSaveData()
             {
-                Text = "LastChoice"
+                Text = "LastChoice",
+                PreviewOutcome = "Preview..."
             };
 
             Choices.Add(firstChoiceData);
@@ -101,6 +102,11 @@ namespace SS.Elements
 
             customDataContainer.Add(textFoldout);
 
+            EnumField taskTypeEnumField = ElementUtility.CreateEnumField(TaskType, "Task Type :",
+                callback => { TaskType = (SSTaskType)callback.newValue; });
+
+            customDataContainer.Add(taskTypeEnumField);
+
             ObjectField iconObjectField = ElementUtility.CreateObjectField(TaskIcon, typeof(Sprite), "Task Icon :",
                 callback => { TaskIcon = (Sprite)callback.newValue; });
 
@@ -143,17 +149,6 @@ namespace SS.Elements
 
             customDataContainer.Add(isPermanentToggle);
 
-            Foldout previewOutcomeFoldout = ElementUtility.CreateFoldout("Preview Outcome :");
-
-            TextField previewOutcomeTextField = ElementUtility.CreateTextField(PreviewOutcome, null,
-                callback => { PreviewOutcome = callback.newValue; });
-
-            previewOutcomeTextField.AddClasses("ss-node__text-field", "ss-node__quote-text-field");
-
-            previewOutcomeFoldout.Add(previewOutcomeTextField);
-
-            customDataContainer.Add(previewOutcomeFoldout);
-
             extensionContainer.Add(customDataContainer);
 
             RefreshExpandedState();
@@ -177,6 +172,17 @@ namespace SS.Elements
                 "Condition :", callback => { choiceData.Condition = (ConditionSO)callback.newValue; });
 
             choiceFoldout.Add(conditionField);
+
+            Foldout previewOutcomeFoldout = ElementUtility.CreateFoldout("Preview Outcome :");
+
+            TextField previewOutcomeTextField = ElementUtility.CreateTextField(choiceData.PreviewOutcome, null,
+                callback => { choiceData.PreviewOutcome = callback.newValue; });
+
+            previewOutcomeTextField.AddClasses("ss-node__text-field", "ss-node__quote-text-field");
+
+            previewOutcomeFoldout.Add(previewOutcomeTextField);
+
+            choiceFoldout.Add(previewOutcomeFoldout);
 
             customDataContainer.Insert(Choices.IndexOf(choiceData), choiceFoldout);
 

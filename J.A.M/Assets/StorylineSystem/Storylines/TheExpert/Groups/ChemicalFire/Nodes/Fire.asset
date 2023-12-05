@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: Fire
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: Fire
+  <Choices>k__BackingField:
+  - rid: 9116668955202683052
+  - rid: 9116668955202683053
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: Something is burning in there! It's emitting strange
+    fumes all around the place and people are getting dizzy. What can we do?
+  <TaskType>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: ea698d351bd4748449aada363e59d6a3,
+    type: 3}
+  <TimeLeft>k__BackingField: 0
+  <Duration>k__BackingField: 2
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 0
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 7
+  <IsPermanent>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 9116668955202683052
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 3cb8f4ed7ff72ec4490519de2435db77,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 648a50182ff87844895ba803492d5a08,
+          type: 2}
+        <PreviewOutcome>k__BackingField: Preview...
+    - rid: 9116668955202683053
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: LastChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 21f9b75b12382c048bad0871f1e98c84,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: e545a21b628cee0408511e4df5ecb34f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: Preview...

@@ -1,0 +1,185 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: PermanentTaskGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: PermanentTask
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField: []
+  <Nodes>k__BackingField:
+  - rid: 9116668955202682968
+  - rid: 9116668955202682969
+  - rid: 9116668955202682970
+  - rid: 9116668955202682971
+  <OldGroupNames>k__BackingField: []
+  <OldUngroupedNodeNames>k__BackingField:
+  - FoodTask
+  - Electrical
+  - OxygenTask
+  - HullTask
+  <OldGroupedNodeNames>k__BackingField:
+    list: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 9116668955202682968
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 5f019f8b-b151-40b9-a893-28acfb5b1946
+        <Name>k__BackingField: FoodTask
+        <Choices>k__BackingField:
+        - rid: 9116668955202682972
+        - rid: 9116668955202682973
+        <GroupID>k__BackingField: 
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: -469, y: 455}
+        <DescriptionTask>k__BackingField: Our crops need love to sustain our food
+          supply.
+        <TaskType>k__BackingField: 0
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 16241ca68beab624daa21b7813874b15,
+          type: 3}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 1
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 1
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 3
+        <IsPermanent>k__BackingField: 1
+    - rid: 9116668955202682969
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 5a408429-531f-4cc8-b0bd-759769c93925
+        <Name>k__BackingField: Electrical
+        <Choices>k__BackingField:
+        - rid: 9116668955202682974
+        - rid: 9116668955202682975
+        <GroupID>k__BackingField: 
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: -160, y: 455}
+        <DescriptionTask>k__BackingField: The generator needs tuning in order to
+          bring us safely to our destination.
+        <TaskType>k__BackingField: 0
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: ea698d351bd4748449aada363e59d6a3,
+          type: 3}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 3
+        <MandatorySlots>k__BackingField: 2
+        <OptionalSlots>k__BackingField: 2
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 1
+        <IsPermanent>k__BackingField: 1
+    - rid: 9116668955202682970
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 78c8d6ba-f705-4d20-8537-dd1d6519ec99
+        <Name>k__BackingField: OxygenTask
+        <Choices>k__BackingField:
+        - rid: 9116668955202682976
+        - rid: 9116668955202682977
+        <GroupID>k__BackingField: 
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: -779, y: 455}
+        <DescriptionTask>k__BackingField: Vents need to be cleaned regularly.
+        <TaskType>k__BackingField: 0
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 178ea6ed06e6e114aa5b5ba5f88233cf,
+          type: 3}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 5
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 3
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 2
+        <IsPermanent>k__BackingField: 1
+    - rid: 9116668955202682971
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 8b80c32a-c161-4771-a942-95bcd8b5a470
+        <Name>k__BackingField: HullTask
+        <Choices>k__BackingField:
+        - rid: 9116668955202682978
+        - rid: 9116668955202682979
+        <GroupID>k__BackingField: 
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 142, y: 455}
+        <DescriptionTask>k__BackingField: Small asteroids often damage the hull.
+          It'll need to be fixed.
+        <TaskType>k__BackingField: 0
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 7d944ed3842671f45b0afda12595792b,
+          type: 3}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 10
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 2
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 4
+        <IsPermanent>k__BackingField: 1
+    - rid: 9116668955202682972
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: e545a21b628cee0408511e4df5ecb34f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: 
+    - rid: 9116668955202682973
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: LastChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 1681249c6c5ea0c40aafed18c6365b7f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: 
+    - rid: 9116668955202682974
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 0}
+        <PreviewOutcome>k__BackingField: 
+    - rid: 9116668955202682975
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: LastChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 0}
+        <PreviewOutcome>k__BackingField: 
+    - rid: 9116668955202682976
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 0}
+        <PreviewOutcome>k__BackingField: 
+    - rid: 9116668955202682977
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: LastChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 0}
+        <PreviewOutcome>k__BackingField: 
+    - rid: 9116668955202682978
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 0}
+        <PreviewOutcome>k__BackingField: 
+    - rid: 9116668955202682979
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: LastChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 0}
+        <PreviewOutcome>k__BackingField: 

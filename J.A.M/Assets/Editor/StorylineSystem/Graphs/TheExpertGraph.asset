@@ -1,0 +1,352 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: TheExpertGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: TheExpert
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: 690e484a-00fc-4f1d-af34-8d136bec17cf
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 1
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: Intro
+    <Position>k__BackingField: {x: 311.00012, y: 235.00002}
+  - <ID>k__BackingField: 2052f957-a8b8-4e0e-90a0-26daba378344
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: ChemicalFire
+    <Position>k__BackingField: {x: 160, y: 957.99994}
+  <Nodes>k__BackingField:
+  - rid: 9116668955202683054
+  - rid: 9116668955202683055
+  - rid: 9116668955202683056
+  - rid: 9116668955202683057
+  - rid: 9116668955202683058
+  - rid: 9116668955202683059
+  - rid: 9116668955202683060
+  - rid: 9116668955202683061
+  - rid: 9116668955202683062
+  - rid: 9116668955202683063
+  - rid: 9116668955202683064
+  - rid: 9116668955202683065
+  <OldGroupNames>k__BackingField:
+  - Intro
+  - ChemicalFire
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: Intro
+      Value:
+      - Approaching
+      - Trouble
+      - Ship
+      - Assign
+      - NotAssign
+      - UnexpectedVisitor
+    - Key: ChemicalFire
+      Value:
+      - Emission
+      - Smell
+      - Feeling
+      - Assign
+      - NotAssign
+      - Fire
+  references:
+    version: 2
+    RefIds:
+    - rid: 9116668955202683054
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ef3f71ff-7b32-4985-ae51-d4512f92f070
+        <Name>k__BackingField: Approaching
+        <Choices>k__BackingField:
+        - rid: 9116668955202683066
+        <GroupID>k__BackingField: 690e484a-00fc-4f1d-af34-8d136bec17cf
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 336, y: 294}
+        <Text>k__BackingField: An unindentified spaceship is approaching.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 4
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+    - rid: 9116668955202683055
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: f6243233-66be-4331-a7c5-4f425f18234a
+        <Name>k__BackingField: Trouble
+        <Choices>k__BackingField:
+        - rid: 9116668955202683067
+        <GroupID>k__BackingField: 690e484a-00fc-4f1d-af34-8d136bec17cf
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1009, y: 294}
+        <Text>k__BackingField: Hey, I hear we got company. Might be trouble.
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 4
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+    - rid: 9116668955202683056
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 25713ee7-a30a-4273-8907-f8f2eb297a49
+        <Name>k__BackingField: Ship
+        <Choices>k__BackingField:
+        - rid: 9116668955202683068
+        <GroupID>k__BackingField: 690e484a-00fc-4f1d-af34-8d136bec17cf
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1688, y: 294}
+        <Text>k__BackingField: That ship is man-made. No doubt about it.
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 4
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+    - rid: 9116668955202683057
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 79dc278b-b5d6-4702-83a5-d069bff9eca7
+        <Name>k__BackingField: Assign
+        <Choices>k__BackingField:
+        - rid: 9116668955202683069
+        <GroupID>k__BackingField: 690e484a-00fc-4f1d-af34-8d136bec17cf
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3143, y: 294}
+        <Text>k__BackingField: Well, best way to know their intentions is to let
+          them in.
+        <SpeakerType>k__BackingField: 8
+        <Duration>k__BackingField: 4
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+    - rid: 9116668955202683058
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ab8fd819-ee53-4bdc-96ee-edce51d7d8bd
+        <Name>k__BackingField: NotAssign
+        <Choices>k__BackingField:
+        - rid: 9116668955202683070
+        <GroupID>k__BackingField: 690e484a-00fc-4f1d-af34-8d136bec17cf
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3143, y: 609}
+        <Text>k__BackingField: Human or not, no way we're letting any stranger dock
+          right now.
+        <SpeakerType>k__BackingField: 4
+        <Duration>k__BackingField: 4
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+    - rid: 9116668955202683059
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: e965d492-4e1c-45f3-bb28-9acb60b49fef
+        <Name>k__BackingField: UnexpectedVisitor
+        <Choices>k__BackingField:
+        - rid: 9116668955202683071
+        - rid: 9116668955202683072
+        <GroupID>k__BackingField: 690e484a-00fc-4f1d-af34-8d136bec17cf
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 2397, y: 294}
+        <DescriptionTask>k__BackingField: A small human leisure vessel requests to
+          dock in. It doesn't seem hostile, but you never know...
+        <TaskType>k__BackingField: 0
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 178ea6ed06e6e114aa5b5ba5f88233cf,
+          type: 3}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 2
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 7
+        <IsPermanent>k__BackingField: 0
+    - rid: 9116668955202683060
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 79b73cf0-a72b-4097-8b18-4d99008eca36
+        <Name>k__BackingField: Emission
+        <Choices>k__BackingField:
+        - rid: 9116668955202683073
+        <GroupID>k__BackingField: 2052f957-a8b8-4e0e-90a0-26daba378344
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 185, y: 1017}
+        <Text>k__BackingField: Irregular particle emission detected in the laboratory.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 4
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+    - rid: 9116668955202683061
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ccf30fbe-97f1-451b-8918-cba7ee67bc51
+        <Name>k__BackingField: Smell
+        <Choices>k__BackingField:
+        - rid: 9116668955202683074
+        <GroupID>k__BackingField: 2052f957-a8b8-4e0e-90a0-26daba378344
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 865, y: 1017}
+        <Text>k__BackingField: Hey, do you smell that? Is something burning?
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 4
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+    - rid: 9116668955202683062
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: cdd26357-9074-4fff-a0f1-bde1fac4fd5a
+        <Name>k__BackingField: Feeling
+        <Choices>k__BackingField:
+        - rid: 9116668955202683075
+        <GroupID>k__BackingField: 2052f957-a8b8-4e0e-90a0-26daba378344
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1562, y: 1017}
+        <Text>k__BackingField: Hey, hum. I'm feeling kinda dizzy. And what about
+          that smell?...
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 4
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+    - rid: 9116668955202683063
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: f310e57f-9d6b-4cd1-9cd2-42ced813a5ed
+        <Name>k__BackingField: Assign
+        <Choices>k__BackingField:
+        - rid: 9116668955202683076
+        <GroupID>k__BackingField: 2052f957-a8b8-4e0e-90a0-26daba378344
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2722, y: 1017}
+        <Text>k__BackingField: I'll take care of it!
+        <SpeakerType>k__BackingField: 8
+        <Duration>k__BackingField: 4
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+    - rid: 9116668955202683064
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 93c76644-e5e8-4e47-8368-9aa52b1c570e
+        <Name>k__BackingField: NotAssign
+        <Choices>k__BackingField:
+        - rid: 9116668955202683077
+        <GroupID>k__BackingField: 2052f957-a8b8-4e0e-90a0-26daba378344
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2722, y: 1293}
+        <Text>k__BackingField: Wait... There was a f-f-fire, right?
+        <SpeakerType>k__BackingField: 4
+        <Duration>k__BackingField: 4
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+    - rid: 9116668955202683065
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: c763e4fc-63ec-4614-bc7f-c383f2c66803
+        <Name>k__BackingField: Fire
+        <Choices>k__BackingField:
+        - rid: 9116668955202683078
+        - rid: 9116668955202683079
+        <GroupID>k__BackingField: 2052f957-a8b8-4e0e-90a0-26daba378344
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 1982, y: 1017}
+        <DescriptionTask>k__BackingField: Something is burning in there! It's emitting
+          strange fumes all around the place and people are getting dizzy. What can
+          we do?
+        <TaskType>k__BackingField: 0
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: ea698d351bd4748449aada363e59d6a3,
+          type: 3}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 2
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 7
+        <IsPermanent>k__BackingField: 0
+    - rid: 9116668955202683066
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: f6243233-66be-4331-a7c5-4f425f18234a
+    - rid: 9116668955202683067
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 25713ee7-a30a-4273-8907-f8f2eb297a49
+    - rid: 9116668955202683068
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: e965d492-4e1c-45f3-bb28-9acb60b49fef
+    - rid: 9116668955202683069
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 9116668955202683070
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 9116668955202683071
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 79dc278b-b5d6-4702-83a5-d069bff9eca7
+        <Condition>k__BackingField: {fileID: 11400000, guid: 648a50182ff87844895ba803492d5a08,
+          type: 2}
+        <PreviewOutcome>k__BackingField: 
+    - rid: 9116668955202683072
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: LastChoice
+        <NextNodeID>k__BackingField: ab8fd819-ee53-4bdc-96ee-edce51d7d8bd
+        <Condition>k__BackingField: {fileID: 11400000, guid: e545a21b628cee0408511e4df5ecb34f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: 
+    - rid: 9116668955202683073
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: ccf30fbe-97f1-451b-8918-cba7ee67bc51
+    - rid: 9116668955202683074
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: cdd26357-9074-4fff-a0f1-bde1fac4fd5a
+    - rid: 9116668955202683075
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: c763e4fc-63ec-4614-bc7f-c383f2c66803
+    - rid: 9116668955202683076
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 9116668955202683077
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 9116668955202683078
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: f310e57f-9d6b-4cd1-9cd2-42ced813a5ed
+        <Condition>k__BackingField: {fileID: 11400000, guid: 648a50182ff87844895ba803492d5a08,
+          type: 2}
+        <PreviewOutcome>k__BackingField: Preview...
+    - rid: 9116668955202683079
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: LastChoice
+        <NextNodeID>k__BackingField: 93c76644-e5e8-4e47-8368-9aa52b1c570e
+        <Condition>k__BackingField: {fileID: 11400000, guid: e545a21b628cee0408511e4df5ecb34f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: Preview...
