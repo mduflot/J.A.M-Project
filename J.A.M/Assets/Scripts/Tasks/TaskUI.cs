@@ -121,6 +121,10 @@ public class TaskUI : MonoBehaviour
                   (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
                 : notification.Task.Duration;
             durationText.text = duration.ToString("F2") + " hours";
+            
+            // TODO : WHAT TO DO WHEN TIME IS UP ?
+            // if (!notification.Task.IsPermanent) timeLeft -= TimeTickSystem.timePerTick;
+            // if (timeLeft <= 0) StartTask();
         }
     }
 

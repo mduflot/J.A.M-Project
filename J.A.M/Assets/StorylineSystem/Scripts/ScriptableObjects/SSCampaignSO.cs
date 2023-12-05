@@ -10,9 +10,9 @@ namespace SS.ScriptableObjects
     {
         [field: SerializeField] public List<Storyline> Storylines { get; set; }
         
-        public List<Storyline> PrincipalStorylines = new();
-        public List<Storyline> SecondaryStorylines = new();
-        public List<Storyline> TrivialStorylines = new();
+        [HideInInspector] public List<Storyline> PrincipalStorylines = new();
+        [HideInInspector] public List<Storyline> SecondaryStorylines = new();
+        [HideInInspector] public List<Storyline> TrivialStorylines = new();
 
         private void FillGroups(Storyline storyline)
         {

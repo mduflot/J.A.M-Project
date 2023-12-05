@@ -92,6 +92,14 @@ public class Notification : MonoBehaviour
                 break;
             }
         }
+        
+        if (LeaderCharacters.Count == 0)
+        {
+            Debug.Log("No leader");
+            taskCondition = Task.Conditions[^1].Item1;
+            Task.conditionIndex = Task.Conditions.Count - 1;
+            validatedCondition = true;
+        }
 
         if (validatedCondition)
         {
@@ -100,6 +108,9 @@ public class Notification : MonoBehaviour
             for (var i = 0; i < taskCondition.outcomes.Outcomes.Length; i++)
             {
                 var outcome = taskCondition.outcomes.Outcomes[i];
+                Debug.Log("outcome: " + outcome.OutcomeType + " " + outcome.OutcomeOperation + " " +
+                          outcome.OutcomeTargetStat + " " + outcome.value + " " + outcome.OutcomeTargetGauge +
+                          " " + outcome.OutcomeTargetTrait + " " + outcome.OutcomeTarget);
                 switch (outcome.OutcomeTarget)
                 {
                     case OutcomeData.OutcomeTarget.Leader:
@@ -116,6 +127,7 @@ public class Notification : MonoBehaviour
                         break;
 
                     case OutcomeData.OutcomeTarget.Gauge:
+                        
                         outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
                         break;
                 }
@@ -161,6 +173,9 @@ public class Notification : MonoBehaviour
                 break;
             case OutcomeData.OutcomeTarget.Ship:
                 validateCondition = ConditionSystem.CheckSpaceshipCondition(taskCondition);
+                break;
+            case OutcomeData.OutcomeTarget.None:
+                validateCondition = true;
                 break;
         }
 
