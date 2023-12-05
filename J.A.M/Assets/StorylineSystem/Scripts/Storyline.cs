@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using SS.Enumerations;
 
 namespace SS
 {
@@ -9,16 +8,12 @@ namespace SS
     public class Storyline
     {
         public SSNodeContainerSO StorylineContainer;
-        public SSStoryStatus StoryStatus;
-        public List<SSNodeGroupSO> EnabledTimelines;
-        public List<SSNodeGroupSO> DisabledTimelines;
+        public List<SSNodeGroupSO> Timelines;
 
-        public Storyline(SSNodeContainerSO storylineContainer, SSStoryStatus storyStatus, List<SSNodeGroupSO> enabledTimelines, List<SSNodeGroupSO> disabledTimelines)
+        public Storyline(SSNodeContainerSO storylineContainer, List<SSNodeGroupSO> timelines)
         {
             StorylineContainer = storylineContainer;
-            StoryStatus = storyStatus;
-            EnabledTimelines = enabledTimelines;
-            DisabledTimelines = disabledTimelines;
+            Timelines = timelines;
         }
     }
 }

@@ -8,29 +8,53 @@ namespace SS.ScriptableObjects
     public class SSCampaignSO : ScriptableObject
     {
         [field: SerializeField] public List<Storyline> Storylines { get; set; }
+        
+        public List<Storyline> PrincipalStorylines = new();
+        public List<Storyline> SecondaryStorylines = new();
+        public List<Storyline> TrivialStorylines = new();
 
         private void OnValidate()
         {
             if (Storylines == null) return;
 
-            foreach (var storyline in Storylines)
+            for (var index = 0; index < Storylines.Count; index++)
             {
+                var storyline = Storylines[index];
+                switch(storyline.StorylineContainer.StoryType)
+                {
+                    case SSStoryType.Principal:
+                        PrincipalStorylines.Add(storyline);
+                        break;
+                    case SSStoryType.Secondary:
+                        SecondaryStorylines.Add(storyline);
+                        break;
+                    case SSStoryType.Trivial:
+                        TrivialStorylines.Add(storyline);
+                        break;
+                }
                 if (storyline.StorylineContainer == null) continue;
-                storyline.StoryStatus = storyline.StorylineContainer.StoryStatus;
-                if (storyline.EnabledTimelines.Count != 0) continue;
-                if (storyline.DisabledTimelines.Count != 0) continue;
+                if (storyline.Timelines.Count != 0) continue;
                 FillGroups(storyline);
             }
         }
 
         private void FillGroups(Storyline storyline)
         {
-            storyline.EnabledTimelines = new List<SSNodeGroupSO>();
-            storyline.DisabledTimelines = new List<SSNodeGroupSO>();
+            storyline.Timelines = new List<SSNodeGroupSO>();
             foreach (var group in storyline.StorylineContainer.NodeGroups)
             {
-                if (group.Key.StoryStatus == SSStoryStatus.Enabled) storyline.EnabledTimelines.Add(group.Key);
-                if (group.Key.StoryStatus == SSStoryStatus.Disabled) storyline.DisabledTimelines.Add(group.Key);
+                storyline.Timelines.Add(group.Key);
+            }
+        }
+
+        [ContextMenu("ResetGroups")]
+        private void ResetGroups()
+        {
+            for (var index = 0; index < Storylines.Count; index++)
+            {
+                var storyline = Storylines[index];
+                if (storyline.StorylineContainer == null) continue;
+                FillGroups(storyline);
             }
         }
     }

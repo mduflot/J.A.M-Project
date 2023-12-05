@@ -39,7 +39,7 @@ namespace SS
         private Task task;
         private Storyline storyline;
 
-        private void SetStoryline(Storyline storyline)
+        public void SetStoryline(Storyline storyline)
         {
             this.storyline = storyline;
         }
@@ -110,13 +110,13 @@ namespace SS
                 }
                 case SSSpeakerType.Sensor:
                 {
-                    // TODO : Place on furniture / List of Furniture in spaceship
+                    // TODO : NEED FURNITURE BEFORE
                     // dialogues.Add(new Tuple<Sprite, string, string>(null, "Sensor", nodeSO.Text));
                     break;
                 }
                 case SSSpeakerType.Expert:
                 {
-                    // TODO : Place on furniture / List of Furniture in spaceship
+                    // TODO : NEED FURNITURE BEFORE
                     // dialogues.Add(new Tuple<Sprite, string, string>(null, "Expert", nodeSO.Text));
                     break;
                 }
@@ -262,7 +262,7 @@ namespace SS
                 if (timeNode.Choices.First().NextNode == null)
                 {
                     nodeGroup.StoryStatus = SSStoryStatus.Completed;
-                    storyline.EnabledTimelines.Remove(nodeGroup);
+                    storyline.Timelines.Remove(nodeGroup);
                     ResetTimeline();
                     TimeTickSystem.OnTick -= WaitingTime;
                     return;
@@ -289,7 +289,7 @@ namespace SS
             if (nodeSO.Choices.First().NextNode == null)
             {
                 nodeGroup.StoryStatus = SSStoryStatus.Completed;
-                storyline.EnabledTimelines.Remove(nodeGroup);
+                storyline.Timelines.Remove(nodeGroup);
                 ResetTimeline();
                 yield break;
             }
@@ -305,7 +305,7 @@ namespace SS
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
             {
                 nodeGroup.StoryStatus = SSStoryStatus.Completed;
-                storyline.EnabledTimelines.Remove(nodeGroup);
+                storyline.Timelines.Remove(nodeGroup);
                 ResetTimeline();
                 yield break;
             }

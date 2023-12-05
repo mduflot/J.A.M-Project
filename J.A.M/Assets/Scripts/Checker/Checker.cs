@@ -3,70 +3,114 @@ using SS;
 using SS.Enumerations;
 using SS.ScriptableObjects;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Checker : MonoBehaviour
 {
     [SerializeField] private SSNode node;
-    [SerializeField] private List<Storyline> storylines;
 
-    private List<Storyline> activeStorylines = new();
     private float priorityFactor;
     private Storyline chosenStoryline;
     private SSNodeGroupSO chosenTimeline;
+
+    private List<Storyline> principalStorylines;
+    private List<Storyline> secondaryStorylines;
+    private List<Storyline> trivialStorylines;
+
+    private List<Storyline> activeStorylines = new();
     private List<Storyline> availableStoryLines = new();
+    private List<SSNodeGroupSO> availableTimelines = new();
 
     public void Initialize(SSCampaignSO ssCampaign)
     {
-        storylines = ssCampaign.Storylines;
-        
-        foreach (var storyline in storylines)
-        {
-            if (activeStorylines.Contains(storyline)) continue;
-            if (storyline.StoryStatus != SSStoryStatus.Enabled) continue;
-            // TODO : CHECK CONDITIONS
-            availableStoryLines.Add(storyline);
-        }
+        principalStorylines = ssCampaign.PrincipalStorylines;
+        secondaryStorylines = ssCampaign.SecondaryStorylines;
+        trivialStorylines = ssCampaign.TrivialStorylines;
     }
 
     [ContextMenu("GenerateRandomEvent")]
     public void GenerateRandomEvent()
     {
+        if (activeStorylines.Count == 0) ChooseNewStoryline(SSStoryType.Principal);
         if (activeStorylines.Count < 3)
         {
-            //pickPercent : float, % chance for an outcome
-            //weighedActivePercent : float, probability for an active timeline to be selected
-            //weighedInactivePercent : float, probability for an inactive timeline to be selected
-            //randPicker : float, random value in [0,100] used to chose among available or unavailable storylines
-            var pickPercent = 1.0f / 3.0f;
-            var weighedInactivePercent = pickPercent * (1 - 1.0f / priorityFactor);
-            // var weighedActivePercent = 1 - weighedInactivePercent;
-            var randPicker = Random.Range(0, 1);
-            if (activeStorylines.Count == 0)
+            // pickPercent : float, % chance for an outcome
+            // weighedActivePercent : float, probability for an active timeline to be selected
+            // weighedInactivePercent : float, probability for an inactive timeline to be selected
+            // randPicker : float, random value in [0,100] used to chose among available or unavailable storylines
+
+            var missingStoryTypes = new List<SSStoryType>();
+            for (int index = 0; index < activeStorylines.Count; index++)
             {
-                ChooseNewStoryline();
-                return;
+                if (activeStorylines[index].StorylineContainer.StoryType == SSStoryType.Principal)
+                    missingStoryTypes.Add(SSStoryType.Principal);
+                if (activeStorylines[index].StorylineContainer.StoryType == SSStoryType.Secondary)
+                    missingStoryTypes.Add(SSStoryType.Secondary);
+                if (activeStorylines[index].StorylineContainer.StoryType == SSStoryType.Trivial)
+                    missingStoryTypes.Add(SSStoryType.Trivial);
             }
 
-            if (randPicker <= weighedInactivePercent)
-            {
-                ChooseNewStoryline();
-            }
-            else
-            {
-                PickTimelineFromStoryline();
-            }
+            // TODO : DO PROBABILITY CALCULATIONS HERE
 
-            return;
+            var storyType = missingStoryTypes[Random.Range(0, missingStoryTypes.Count)];
+            ChooseNewStoryline(storyType);
         }
-
-        PickTimelineFromStoryline();
+        else
+        {
+            PickTimelineFromStoryline();
+        }
     }
 
-    private void ChooseNewStoryline()
+    private void ChooseNewStoryline(SSStoryType storyType)
     {
-        //numberOfASL = availableStoryLines.length
-        //pickPercent = 100.0/numberOfASL
-        //randPicker = random(0.0,100.0)
+        availableStoryLines.Clear();
+        switch (storyType)
+        {
+            case SSStoryType.Principal:
+            {
+                for (var index = 0; index < principalStorylines.Count; index++)
+                {
+                    var storyline = principalStorylines[index];
+                    if (activeStorylines.Contains(storyline)) continue;
+                    if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
+                    // TODO : CHECK CONDITIONS
+                    availableStoryLines.Add(storyline);
+                }
+
+                break;
+            }
+            case SSStoryType.Secondary:
+            {
+                for (var index = 0; index < secondaryStorylines.Count; index++)
+                {
+                    var storyline = secondaryStorylines[index];
+                    if (activeStorylines.Contains(storyline)) continue;
+                    if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
+                    // TODO : CHECK CONDITIONS
+                    availableStoryLines.Add(storyline);
+                }
+
+                break;
+            }
+            case SSStoryType.Trivial:
+            {
+                for (var index = 0; index < trivialStorylines.Count; index++)
+                {
+                    var storyline = trivialStorylines[index];
+                    if (activeStorylines.Contains(storyline)) continue;
+                    if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
+                    // TODO : CHECK CONDITIONS
+                    availableStoryLines.Add(storyline);
+                }
+
+                break;
+            }
+        }
+
+        // numberOfASL = availableStoryLines.length
+        // pickPercent = 100.0/numberOfASL
+        // randPicker = random(0.0,100.0)
+
         var numberOfASL = availableStoryLines.Count;
         var pickPercent = 100.0f / numberOfASL;
         var randPicker = Random.Range(0, 100);
@@ -87,23 +131,35 @@ public class Checker : MonoBehaviour
     {
         if (!isNewStoryline)
         {
-            foreach (var storyline in activeStorylines)
+            for (var index = 0; index < activeStorylines.Count; index++)
             {
-                if (storyline.EnabledTimelines.Count == 0)
+                var storyline = activeStorylines[index];
+                if (storyline.Timelines.Count == 0)
                 {
-                    storyline.StoryStatus = SSStoryStatus.Completed;
+                    storyline.StorylineContainer.StoryStatus = SSStoryStatus.Completed;
                     activeStorylines.Remove(storyline);
                 }
             }
+
             if (activeStorylines.Count == 0)
             {
-                ChooseNewStoryline();
+                GenerateRandomEvent();
                 return;
             }
+
+            // TODO : DO PROBABILITY CALCULATIONS HERE
+
             chosenStoryline = activeStorylines[Random.Range(0, activeStorylines.Count)];
         }
 
-        var numberOfASL = chosenStoryline.EnabledTimelines.Count;
+        foreach (var timeline in chosenStoryline.Timelines)
+        {
+            if (timeline.StoryStatus != SSStoryStatus.Enabled) continue;
+            // TODO : CHECK CONDITIONS
+            availableTimelines.Add(timeline);
+        }
+
+        var numberOfASL = availableTimelines.Count;
         var pickPercent = 100.0f / numberOfASL;
         var randPicker = Random.Range(0, 100);
 
@@ -111,9 +167,10 @@ public class Checker : MonoBehaviour
         {
             if (randPicker <= pickPercent * i)
             {
-                chosenTimeline = chosenStoryline.EnabledTimelines[i];
+                chosenTimeline = availableTimelines[i];
                 node.nodeContainer = chosenStoryline.StorylineContainer;
                 node.nodeGroup = chosenTimeline;
+                node.SetStoryline(chosenStoryline);
                 node.StartTimeline();
                 break;
             }

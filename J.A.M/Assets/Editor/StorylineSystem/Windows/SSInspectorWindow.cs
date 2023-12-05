@@ -45,13 +45,6 @@ namespace SS.Windows
 
                 rootVisualElement.Add(enumFieldGroupStatus);
 
-                // TODO : VERIFY IF WE NEED STORYTYPE FOR GROUPS
-                EnumField enumFieldGroupType = ElementUtility.CreateEnumField(group.Value.Groups[0].StoryType,
-                    $"{group.Value.Groups[0].title} Type:",
-                    callback => { group.Value.Groups[0].StoryType = (SSStoryType)callback.newValue; });
-
-                rootVisualElement.Add(enumFieldGroupType);
-
                 Toggle toggle = ElementUtility.CreateToggle(group.Value.Groups[0].IsFirstToPlay,
                     $"{group.Value.Groups[0].title} Is First To Play:",
                     callback => { group.Value.Groups[0].IsFirstToPlay = callback.newValue; });

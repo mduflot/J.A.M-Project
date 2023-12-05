@@ -11,7 +11,6 @@ namespace SS.Elements
     {
         public string ID { get; set; }
         public SSStoryStatus StoryStatus { get; set; }
-        public SSStoryType StoryType { get; set; }
         public bool IsFirstToPlay { get; set; }
         public List<ConditionSO> Conditions { get; set; }
         public string OldTitle { get; set; }
@@ -24,6 +23,9 @@ namespace SS.Elements
             ID = Guid.NewGuid().ToString();
 
             title = groupTitle;
+            StoryStatus = SSStoryStatus.Enabled;
+            IsFirstToPlay = false;
+            Conditions = new List<ConditionSO>();
             OldTitle = groupTitle;
 
             SetPosition(new Rect(position, Vector2.zero));

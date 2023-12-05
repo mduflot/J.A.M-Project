@@ -95,7 +95,6 @@ namespace SS.Utilities
                 ID = group.ID,
                 Name = group.title,
                 StoryStatus = group.StoryStatus,
-                StoryType = group.StoryType,
                 IsFirstToPlay = group.IsFirstToPlay,
                 Conditions = group.Conditions,
                 Position = group.GetPosition().position
@@ -114,7 +113,7 @@ namespace SS.Utilities
             SSNodeGroupSO nodeGroup =
                 CreateAsset<SSNodeGroupSO>($"{containerFolderPath}/Groups/{groupName}", groupName);
 
-            nodeGroup.Initialize(groupName, group.StoryStatus, group.StoryType, group.Conditions);
+            nodeGroup.Initialize(groupName, group.StoryStatus, group.Conditions);
 
             createdNodeGroups.Add(group.ID, nodeGroup);
 
@@ -450,7 +449,6 @@ namespace SS.Utilities
 
                 group.ID = groupData.ID;
                 group.StoryStatus = groupData.StoryStatus;
-                group.StoryType = groupData.StoryType;
                 group.IsFirstToPlay = groupData.IsFirstToPlay;
                 group.Conditions = groupData.Conditions;
 

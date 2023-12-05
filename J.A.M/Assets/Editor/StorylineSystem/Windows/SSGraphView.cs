@@ -52,6 +52,10 @@ namespace SS.Windows
         {
             editorWindow = ssEditorWindow;
 
+            StoryStatus = SSStoryStatus.Enabled;
+            StoryType = SSStoryType.Principal;
+            Conditions = new List<ConditionSO>();
+
             ungroupedNodes = new SerializableDictionary<string, SSNodeErrorData>();
             Groups = new SerializableDictionary<string, SSGroupErrorData>();
             groupedNodes = new SerializableDictionary<Group, SerializableDictionary<string, SSNodeErrorData>>();
