@@ -7,7 +7,10 @@ using Random = UnityEngine.Random;
 
 public class Checker : MonoBehaviour
 {
-    [SerializeField] private SSNode node;
+    [SerializeField] private SSCampaignSO ssCampaign;
+    [SerializeField] private SSLauncher principalLauncher;
+    [SerializeField] private SSLauncher secondaryLauncher;
+    [SerializeField] private SSLauncher trivialLauncher;
 
     private float priorityFactor;
     private Storyline chosenStoryline;
@@ -21,7 +24,8 @@ public class Checker : MonoBehaviour
     private List<Storyline> availableStoryLines = new();
     private List<SSNodeGroupSO> availableTimelines = new();
 
-    public void Initialize(SSCampaignSO ssCampaign)
+    [ContextMenu("Initialize")]
+    public void Initialize()
     {
         principalStorylines = ssCampaign.PrincipalStorylines;
         secondaryStorylines = ssCampaign.SecondaryStorylines;
@@ -31,6 +35,12 @@ public class Checker : MonoBehaviour
     [ContextMenu("GenerateRandomEvent")]
     public void GenerateRandomEvent()
     {
+        if (principalStorylines.Count == 0 && secondaryStorylines.Count == 0 && trivialStorylines.Count == 0)
+        {
+            Debug.Log("No storylines available");
+            return;
+        }
+
         if (activeStorylines.Count == 0)
         {
             for (int index = 0; index < principalStorylines.Count; index++)
@@ -45,6 +55,8 @@ public class Checker : MonoBehaviour
                 }
             }
 
+            // TODO : DO PROBABILITY CALCULATIONS HERE
+
             ChooseNewStoryline(SSStoryType.Principal);
             return;
         }
@@ -56,20 +68,27 @@ public class Checker : MonoBehaviour
             // weighedInactivePercent : float, probability for an inactive timeline to be selected
             // randPicker : float, random value in [0,100] used to chose among available or unavailable storylines
 
-            var missingStoryTypes = new List<SSStoryType>();
+            var missingTypes = new List<SSStoryType>()
+            {
+                SSStoryType.Principal, SSStoryType.Secondary, SSStoryType.Trivial
+            };
             for (int index = 0; index < activeStorylines.Count; index++)
             {
-                if (activeStorylines[index].StorylineContainer.StoryType == SSStoryType.Principal)
-                    missingStoryTypes.Add(SSStoryType.Principal);
-                if (activeStorylines[index].StorylineContainer.StoryType == SSStoryType.Secondary)
-                    missingStoryTypes.Add(SSStoryType.Secondary);
-                if (activeStorylines[index].StorylineContainer.StoryType == SSStoryType.Trivial)
-                    missingStoryTypes.Add(SSStoryType.Trivial);
+                if (activeStorylines[index].StorylineContainer.StoryType == SSStoryType.Principal ||
+                    principalStorylines.Count == 0)
+                    missingTypes.Remove(SSStoryType.Principal);
+                if (activeStorylines[index].StorylineContainer.StoryType == SSStoryType.Secondary ||
+                    secondaryStorylines.Count == 0)
+                    missingTypes.Remove(SSStoryType.Secondary);
+                if (activeStorylines[index].StorylineContainer.StoryType == SSStoryType.Trivial ||
+                    trivialStorylines.Count == 0)
+                    missingTypes.Remove(SSStoryType.Trivial);
             }
 
             // TODO : DO PROBABILITY CALCULATIONS HERE
 
-            var storyType = missingStoryTypes[Random.Range(0, missingStoryTypes.Count)];
+            var storyType = missingTypes[Random.Range(0, missingTypes.Count)];
+
             ChooseNewStoryline(storyType);
         }
         else
@@ -88,9 +107,8 @@ public class Checker : MonoBehaviour
                 for (var index = 0; index < principalStorylines.Count; index++)
                 {
                     var storyline = principalStorylines[index];
-                    if (activeStorylines.Contains(storyline)) continue;
                     if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
-                    if (!ConditionSystem.CheckEnvironmentCondition(storyline.StorylineContainer.Condition)) continue;
+                    if (storyline.StorylineContainer.Condition) if (!ConditionSystem.CheckEnvironmentCondition(storyline.StorylineContainer.Condition)) continue;
                     availableStoryLines.Add(storyline);
                 }
 
@@ -101,9 +119,8 @@ public class Checker : MonoBehaviour
                 for (var index = 0; index < secondaryStorylines.Count; index++)
                 {
                     var storyline = secondaryStorylines[index];
-                    if (activeStorylines.Contains(storyline)) continue;
                     if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
-                    if (!ConditionSystem.CheckEnvironmentCondition(storyline.StorylineContainer.Condition)) continue;
+                    if (storyline.StorylineContainer.Condition) if (!ConditionSystem.CheckEnvironmentCondition(storyline.StorylineContainer.Condition)) continue;
                     availableStoryLines.Add(storyline);
                 }
 
@@ -114,14 +131,19 @@ public class Checker : MonoBehaviour
                 for (var index = 0; index < trivialStorylines.Count; index++)
                 {
                     var storyline = trivialStorylines[index];
-                    if (activeStorylines.Contains(storyline)) continue;
                     if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
-                    if (!ConditionSystem.CheckEnvironmentCondition(storyline.StorylineContainer.Condition)) continue;
+                    if (storyline.StorylineContainer.Condition) if (!ConditionSystem.CheckEnvironmentCondition(storyline.StorylineContainer.Condition)) continue;
                     availableStoryLines.Add(storyline);
                 }
 
                 break;
             }
+        }
+        
+        if (availableStoryLines.Count == 0)
+        {
+            Debug.Log("No storylines available");
+            return;
         }
 
         // numberOfASL = availableStoryLines.length
@@ -134,7 +156,8 @@ public class Checker : MonoBehaviour
 
         for (int i = 0; i < numberOfASL; i++)
         {
-            if (randPicker <= pickPercent * i)
+            // if (randPicker <= pickPercent * i)
+            if (true)
             {
                 chosenStoryline = availableStoryLines[i];
                 activeStorylines.Add(chosenStoryline);
@@ -150,18 +173,27 @@ public class Checker : MonoBehaviour
         {
             for (var index = 0; index < activeStorylines.Count; index++)
             {
+                bool isAllCompleted = true;
                 var storyline = activeStorylines[index];
-                if (storyline.Timelines.Count == 0)
+                for (int j = 0; j < storyline.Timelines.Count; j++)
                 {
-                    storyline.StorylineContainer.StoryStatus = SSStoryStatus.Completed;
-                    activeStorylines.Remove(storyline);
+                    if (storyline.Timelines[index].StoryStatus == SSStoryStatus.Enabled)
+                    {
+                        isAllCompleted = false;
+                        break;
+                    }
                 }
-            }
 
-            if (activeStorylines.Count == 0)
-            {
-                GenerateRandomEvent();
-                return;
+                if (isAllCompleted)
+                {
+                    activeStorylines.Remove(storyline);
+                    if (activeStorylines.Count == 0)
+                    {
+                        Debug.Log("No storylines available");
+                        GenerateRandomEvent();
+                        return;
+                    }
+                }
             }
 
             // TODO : DO PROBABILITY CALCULATIONS HERE
@@ -179,8 +211,14 @@ public class Checker : MonoBehaviour
                 return;
             }
 
-            if (!ConditionSystem.CheckEnvironmentCondition(timeline.Condition)) continue;
+            if (timeline.Condition) if (!ConditionSystem.CheckEnvironmentCondition(timeline.Condition)) continue;
             availableTimelines.Add(timeline);
+        }
+        
+        if (availableTimelines.Count == 0)
+        {
+            Debug.Log("No timelines available");
+            return;
         }
 
         var numberOfASL = availableTimelines.Count;
@@ -189,7 +227,8 @@ public class Checker : MonoBehaviour
 
         for (int i = 0; i < numberOfASL; i++)
         {
-            if (randPicker <= pickPercent * i)
+            // if (randPicker <= pickPercent * i)
+            if (true)
             {
                 StartTimeline(availableTimelines[i]);
                 break;
@@ -200,9 +239,55 @@ public class Checker : MonoBehaviour
     private void StartTimeline(SSNodeGroupSO timeline)
     {
         chosenTimeline = timeline;
-        node.nodeContainer = chosenStoryline.StorylineContainer;
-        node.nodeGroup = chosenTimeline;
-        node.SetStoryline(chosenStoryline);
-        node.StartTimeline();
+        SSNodeSO node = null;
+        var count = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline].Count;
+        switch (chosenStoryline.StorylineContainer.StoryType)
+        {
+            case SSStoryType.Principal:
+                principalLauncher.nodeContainer = chosenStoryline.StorylineContainer;
+                principalLauncher.nodeGroup = chosenTimeline;
+                for (int index = 0; index < count; index++)
+                {
+                    if (chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index].IsStartingNode)
+                    {
+                        node = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index];
+                        break;
+                    }
+                }
+                principalLauncher.node = node;
+                principalLauncher.SetStoryline(chosenStoryline);
+                principalLauncher.StartTimeline();
+                break;
+            case SSStoryType.Secondary:
+                secondaryLauncher.nodeContainer = chosenStoryline.StorylineContainer;
+                secondaryLauncher.nodeGroup = chosenTimeline;
+                for (int index = 0; index < count; index++)
+                {
+                    if (chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index].IsStartingNode)
+                    {
+                        node = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index];
+                        break;
+                    }
+                }
+                secondaryLauncher.node = node;
+                secondaryLauncher.SetStoryline(chosenStoryline);
+                secondaryLauncher.StartTimeline();
+                break;
+            case SSStoryType.Trivial:
+                trivialLauncher.nodeContainer = chosenStoryline.StorylineContainer;
+                trivialLauncher.nodeGroup = chosenTimeline;
+                for (int index = 0; index < count; index++)
+                {
+                    if (chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index].IsStartingNode)
+                    {
+                        node = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index];
+                        break;
+                    }
+                }
+                trivialLauncher.node = node;
+                trivialLauncher.SetStoryline(chosenStoryline);
+                trivialLauncher.StartTimeline();
+                break;
+        }
     }
 }

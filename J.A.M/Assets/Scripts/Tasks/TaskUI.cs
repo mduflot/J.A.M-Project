@@ -73,7 +73,7 @@ public class TaskUI : MonoBehaviour
         if (!taskStarted)
         {
             // TODO : Update PreviewOutcome
-            previewOutcomeText.text = notification.Task.PreviewOutcome;
+            // previewOutcomeText.text = notification.Task.PreviewOutcome;
 
             var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
 

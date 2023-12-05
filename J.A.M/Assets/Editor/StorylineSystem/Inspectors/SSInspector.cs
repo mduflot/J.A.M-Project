@@ -6,7 +6,7 @@ namespace SS.Inspectors
     using Utilities;
     using ScriptableObjects;
 
-    [CustomEditor(typeof(SSNode))]
+    [CustomEditor(typeof(SSLauncher))]
     public class SSInspector : Editor
     {
         /* UI GameObjects */

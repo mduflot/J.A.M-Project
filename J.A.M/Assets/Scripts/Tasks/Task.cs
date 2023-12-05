@@ -14,12 +14,11 @@ public class Task
     public float HelpFactor;
     public RoomType Room;
     public bool IsPermanent;
-    public string PreviewOutcome;
     public List<ConditionSO> Conditions;
     public int conditionIndex = 0;
 
     public Task(string name, string description, Sprite icon, float timeLeft, float duration, int mandatorySlots,
-        int optionalSlots, float helpFactor, RoomType room, bool isPermanent, string previewOutcome, List<ConditionSO> conditions)
+        int optionalSlots, float helpFactor, RoomType room, bool isPermanent, List<ConditionSO> conditions)
     {
         Name = name;
         Description = description;
@@ -32,7 +31,6 @@ public class Task
         HelpFactor = helpFactor;
         Room = room;
         IsPermanent = isPermanent;
-        PreviewOutcome = previewOutcome;
         Conditions = conditions;
     }
 }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using SS.Enumerations;
-using SS.ScriptableObjects;
 using UnityEngine;
 
 namespace SS.Data.Save
@@ -10,5 +7,6 @@ namespace SS.Data.Save
     public class SSChoiceTaskSaveData : SSChoiceSaveData
     {
         [field: SerializeField] public ConditionSO Condition { get; set; }
+        [field: SerializeField] public string PreviewOutcome { get; set; }
     }
 }
