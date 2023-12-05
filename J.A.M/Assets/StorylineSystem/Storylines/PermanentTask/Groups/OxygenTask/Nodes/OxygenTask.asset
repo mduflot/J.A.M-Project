@@ -10,41 +10,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
-  m_Name: FoodTask
+  m_Name: OxygenTask
   m_EditorClassIdentifier: 
-  <NodeName>k__BackingField: FoodTask
+  <NodeName>k__BackingField: OxygenTask
   <Choices>k__BackingField:
-  - rid: 9116668955202682960
-  - rid: 9116668955202682961
+  - rid: 9116668955202683272
+  - rid: 9116668955202683273
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 1
-  <Description>k__BackingField: Our crops need love to sustain our food supply.
+  <Description>k__BackingField: Vents need to be cleaned regularly.
   <TaskType>k__BackingField: 0
-  <Icon>k__BackingField: {fileID: 21300000, guid: 16241ca68beab624daa21b7813874b15,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 178ea6ed06e6e114aa5b5ba5f88233cf,
     type: 3}
   <TimeLeft>k__BackingField: 0
-  <Duration>k__BackingField: 1
+  <Duration>k__BackingField: 5
   <MandatorySlots>k__BackingField: 1
-  <OptionalSlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 3
   <TaskHelpFactor>k__BackingField: 0.75
-  <Room>k__BackingField: 3
+  <Room>k__BackingField: 2
   <IsPermanent>k__BackingField: 1
   references:
     version: 2
     RefIds:
-    - rid: 9116668955202682960
+    - rid: 9116668955202683272
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNode>k__BackingField: {fileID: 0}
-        <Condition>k__BackingField: {fileID: 11400000, guid: e545a21b628cee0408511e4df5ecb34f,
-          type: 2}
+        <Condition>k__BackingField: {fileID: 0}
         <PreviewOutcome>k__BackingField: 
-    - rid: 9116668955202682961
+    - rid: 9116668955202683273
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: LastChoice
         <NextNode>k__BackingField: {fileID: 0}
-        <Condition>k__BackingField: {fileID: 11400000, guid: 1681249c6c5ea0c40aafed18c6365b7f,
-          type: 2}
+        <Condition>k__BackingField: {fileID: 0}
         <PreviewOutcome>k__BackingField: 
