@@ -81,7 +81,7 @@ public class Notification : MonoBehaviour
 
         for (int i = 0; i < Task.Conditions.Count; i++)
         {
-            taskCondition = Task.Conditions[i];
+            taskCondition = Task.Conditions[i].Item1;
             validatedCondition = RouteCondition(taskCondition.target);
             if (validatedCondition)
             {
@@ -145,12 +145,19 @@ public class Notification : MonoBehaviour
         switch (target)
         {
             case OutcomeData.OutcomeTarget.Leader:
-                validateCondition = ConditionSystem.CheckCondition(LeaderCharacters[0].GetTraits(), taskCondition);
+                validateCondition = ConditionSystem.CheckCharacterCondition(LeaderCharacters[0].GetTraits(), taskCondition);
                 break;
-
             case OutcomeData.OutcomeTarget.Assistant:
-                if (AssistantCharacters.Count >= 1)
-                    validateCondition = ConditionSystem.CheckCondition(AssistantCharacters[0].GetTraits(), taskCondition);
+                if (AssistantCharacters.Count >= 1) validateCondition = ConditionSystem.CheckCharacterCondition(AssistantCharacters[0].GetTraits(), taskCondition);
+                break;
+            case OutcomeData.OutcomeTarget.Gauge:
+                validateCondition = ConditionSystem.CheckGaugeCondition(taskCondition);
+                break;
+            case OutcomeData.OutcomeTarget.Crew:
+                validateCondition = ConditionSystem.CheckCrewCondition(taskCondition);
+                break;
+            case OutcomeData.OutcomeTarget.Ship:
+                validateCondition = ConditionSystem.CheckSpaceshipCondition(taskCondition);
                 break;
         }
 

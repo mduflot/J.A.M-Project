@@ -232,10 +232,10 @@ namespace SS
             if (notificationGO.TryGetComponent(out Notification notification))
             {
                 notification.transform.position = position;
-                var conditions = new List<ConditionSO>();
+                var conditions = new List<Tuple<ConditionSO, string>>();
                 foreach (var choiceData in nodeSO.Choices)
                 {
-                    conditions.Add(((SSNodeChoiceTaskData)choiceData).Condition);
+                    conditions.Add(new Tuple<ConditionSO, string>(((SSNodeChoiceTaskData)choiceData).Condition, ((SSNodeChoiceTaskData)choiceData).PreviewOutcome));
                 }
 
                 task = new Task(nodeSO.name, nodeSO.Description, nodeSO.Icon, nodeSO.TimeLeft, nodeSO.Duration,

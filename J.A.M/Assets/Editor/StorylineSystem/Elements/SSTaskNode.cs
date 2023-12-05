@@ -36,7 +36,7 @@ namespace SS.Elements
             MandatorySlots = 1;
             OptionalSlots = 0;
             TaskHelpFactor = 0.75f;
-            Room = RoomType.Bedrooms;
+            Room = RoomType.Flight;
             IsPermanent = false;
 
             SSChoiceTaskSaveData firstChoiceData = new SSChoiceTaskSaveData()

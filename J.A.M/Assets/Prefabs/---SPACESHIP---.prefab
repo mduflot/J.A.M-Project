@@ -254,7 +254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4112939243578204483}
   m_Layer: 0
-  m_Name: Mess
+  m_Name: Laboratory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,7 +287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4956073838975483421}
   m_Layer: 0
-  m_Name: BedRoom3
+  m_Name: Bedroom3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -440,7 +440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7678359276091043669}
   m_Layer: 0
-  m_Name: Deck
+  m_Name: FlightDeck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -559,7 +559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1113380260559595826}
   m_Layer: 0
-  m_Name: EVARoom
+  m_Name: DockingBay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -628,7 +628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4700349737763630016}
   m_Layer: 0
-  m_Name: BedRoom2
+  m_Name: Bedroom2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -662,7 +662,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1082405421057094714}
   m_Layer: 0
-  m_Name: BedRoom4
+  m_Name: Bedroom4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -948,7 +948,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4739245400921703811}
   m_Layer: 0
-  m_Name: FoodRoom
+  m_Name: Greenhouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1274,7 +1274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 317269913175076161}
   m_Layer: 0
-  m_Name: BedRoom1
+  m_Name: Bedroom1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1803,67 +1803,65 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rooms:
-  - roomName: 1
+  - type: 1
     transform: {fileID: 3173952042905870052}
     doorPosition: {fileID: 0}
     roomObjects: []
-  - roomName: 3
+  - type: 3
     transform: {fileID: 4739245400921703811}
     doorPosition: {fileID: 0}
     roomObjects: []
-  - roomName: 2
+  - type: 2
     transform: {fileID: 207184545892958356}
     doorPosition: {fileID: 0}
     roomObjects: []
-  - roomName: 4
+  - type: 4
     transform: {fileID: 1113380260559595826}
     doorPosition: {fileID: 0}
     roomObjects: []
-  - roomName: 5
+  - type: 5
     transform: {fileID: 4700349737763630016}
     doorPosition: {fileID: 0}
     roomObjects: []
-  - roomName: 6
+  - type: 6
     transform: {fileID: 2222253329960699129}
     doorPosition: {fileID: 0}
     roomObjects: []
-  - roomName: 7
+  - type: 7
     transform: {fileID: 7678359276091043669}
     doorPosition: {fileID: 0}
     roomObjects: []
-  - roomName: 8
+  - type: 8
     transform: {fileID: 2260380936735166375}
     doorPosition: {fileID: 0}
     roomObjects: []
-  shipSystems:
-  - systemName: 1
+  systems:
+  - type: 1
     systemObject: {fileID: 9203435017712485670}
     decreaseSpeed: 1.5
     gaugeValue: 0
-    task: {fileID: 11400000, guid: a59de71c2f7916345bb5539062676f73, type: 2}
-  - systemName: 2
+  - type: 2
     systemObject: {fileID: 3309848308192400204}
     decreaseSpeed: 1.2
     gaugeValue: 0
-    task: {fileID: 11400000, guid: 1af36496842188d498882351e85e9667, type: 2}
-  - systemName: 3
+  - type: 3
     systemObject: {fileID: 5302695586191320199}
     decreaseSpeed: 3
     gaugeValue: 0
-    task: {fileID: 11400000, guid: a7e40e2287d60b14cb3a9908eaaace7c, type: 2}
-  - systemName: 4
+  - type: 4
     systemObject: {fileID: 3286734122856121808}
     decreaseSpeed: 0.7
     gaugeValue: 0
-    task: {fileID: 11400000, guid: 4e5103ed65f36a84785996f01306825c, type: 2}
   characters:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  taskNotificationPrefab: {fileID: 1904295957524180973, guid: 05921ee8b243c6041a56fb5d23f1d925,
-    type: 3}
+  SpaceshipTraits: 0
+  HiddenSpaceshipTraits: 0
   activeTasks: []
+  taskNotificationPrefab: {fileID: 6265730595941581578, guid: a31d5117ac421284586e48efdec9f5d9,
+    type: 3}
 --- !u!1 &8525692297237476304
 GameObject:
   m_ObjectHideFlags: 0
