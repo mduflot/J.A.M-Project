@@ -58,11 +58,11 @@ namespace SS.Utilities
             SSGraphSaveDataSO graphData =
                 CreateAsset<SSGraphSaveDataSO>("Assets/Editor/StorylineSystem/Graphs", $"{graphFileName}Graph");
 
-            graphData.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.IsFirstToPlay, graphView.Conditions);
+            graphData.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.IsFirstToPlay, graphView.Condition);
 
             SSNodeContainerSO nodeContainer = CreateAsset<SSNodeContainerSO>(containerFolderPath, graphFileName);
 
-            nodeContainer.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.IsFirstToPlay, graphView.Conditions);
+            nodeContainer.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.IsFirstToPlay, graphView.Condition);
 
             SaveGroups(graphData, nodeContainer);
             SaveNodes(graphData, nodeContainer);
@@ -96,7 +96,7 @@ namespace SS.Utilities
                 Name = group.title,
                 StoryStatus = group.StoryStatus,
                 IsFirstToPlay = group.IsFirstToPlay,
-                Conditions = group.Conditions,
+                Condition = group.Condition,
                 Position = group.GetPosition().position
             };
 
@@ -113,7 +113,7 @@ namespace SS.Utilities
             SSNodeGroupSO nodeGroup =
                 CreateAsset<SSNodeGroupSO>($"{containerFolderPath}/Groups/{groupName}", groupName);
 
-            nodeGroup.Initialize(groupName, group.StoryStatus, group.IsFirstToPlay, group.Conditions);
+            nodeGroup.Initialize(groupName, group.StoryStatus, group.IsFirstToPlay, group.Condition);
 
             createdNodeGroups.Add(group.ID, nodeGroup);
 
@@ -450,7 +450,7 @@ namespace SS.Utilities
                 group.ID = groupData.ID;
                 group.StoryStatus = groupData.StoryStatus;
                 group.IsFirstToPlay = groupData.IsFirstToPlay;
-                group.Conditions = groupData.Conditions;
+                group.Condition = groupData.Condition;
 
                 loadedGroups.Add(group.ID, group);
             }

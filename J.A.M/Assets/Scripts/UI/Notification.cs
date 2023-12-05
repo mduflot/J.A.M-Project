@@ -145,14 +145,12 @@ public class Notification : MonoBehaviour
         switch (target)
         {
             case OutcomeData.OutcomeTarget.Leader:
-                validateCondition = ConditionSystem.CheckCondition(LeaderCharacters[0].GetTraits(),
-                    TraitsData.SpaceshipTraits.None, TraitsData.HiddenSpaceshipTraits.None, taskCondition);
+                validateCondition = ConditionSystem.CheckCondition(LeaderCharacters[0].GetTraits(), taskCondition);
                 break;
 
             case OutcomeData.OutcomeTarget.Assistant:
                 if (AssistantCharacters.Count >= 1)
-                    validateCondition = ConditionSystem.CheckCondition(AssistantCharacters[0].GetTraits(),
-                        TraitsData.SpaceshipTraits.None, TraitsData.HiddenSpaceshipTraits.None, taskCondition);
+                    validateCondition = ConditionSystem.CheckCondition(AssistantCharacters[0].GetTraits(), taskCondition);
                 break;
         }
 

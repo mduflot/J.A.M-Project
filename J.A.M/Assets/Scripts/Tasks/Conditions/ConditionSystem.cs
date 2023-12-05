@@ -1,11 +1,10 @@
-using UnityEngine;
-
 public class ConditionSystem
 {
-    public static bool CheckCondition(TraitsData.Traits characterTraits, TraitsData.SpaceshipTraits spaceshipTraits,
-        TraitsData.HiddenSpaceshipTraits hiddenSpaceshipTraits, ConditionSO taskCondition)
+    public static bool CheckCondition(TraitsData.Traits characterTraits, ConditionSO taskCondition)
     {
         bool validateCondition = true;
+        var spaceshipTraits = TraitsData.SpaceshipTraits.None;
+        var hiddenSpaceshipTraits = TraitsData.HiddenSpaceshipTraits.None;
 
         /*Base Condition Check*/
 
@@ -73,10 +72,13 @@ public class ConditionSystem
         return validateCondition;
     }
 
-    public static bool CheckEnvironmentCondition(CharacterBehaviour[] crew, TraitsData.SpaceshipTraits spaceshipTraits, TraitsData.HiddenSpaceshipTraits hiddenSpaceshipTraits, ConditionSO condition)
+    public static bool CheckEnvironmentCondition(ConditionSO condition)
     {
         bool validateCondition = true;
         int validatingCrew = -1;
+        var crew = GameManager.Instance.SpaceshipManager.characters;
+        var spaceshipTraits = TraitsData.SpaceshipTraits.None;
+        var hiddenSpaceshipTraits = TraitsData.HiddenSpaceshipTraits.None;
         
         validateCondition = CheckSpaceshipTraits(spaceshipTraits, hiddenSpaceshipTraits,
             condition.BaseCondition.SpaceshipTraits,

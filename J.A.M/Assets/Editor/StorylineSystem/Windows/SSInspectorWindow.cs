@@ -1,9 +1,11 @@
-﻿using SS.Enumerations;
-using UnityEditor.Experimental.GraphView;
+﻿using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace SS.Windows
 {
+    using Enumerations;
+
     public class SSInspectorWindow : GraphViewToolWindow
     {
         protected override string ToolName => "SS Inspector";
@@ -32,15 +34,17 @@ namespace SS.Windows
                 callback => { graphView.StoryType = (SSStoryType)callback.newValue; });
 
             rootVisualElement.Add(enumFieldGraphType);
-            
+
             Toggle toggleGraph = ElementUtility.CreateToggle(graphView.IsFirstToPlay, "Is First To Play:",
                 callback => { graphView.IsFirstToPlay = callback.newValue; });
-            
+
             rootVisualElement.Add(toggleGraph);
 
-            ListView conditionsListView = ElementUtility.CreateListViewObjectField(graphView.Conditions, "Conditions:");
+            ObjectField objectFieldGraphCondition = ElementUtility.CreateObjectField(graphView.Condition,
+                typeof(ConditionSO), "SS Condition:",
+                callback => { graphView.Condition = (ConditionSO)callback.newValue; });
 
-            rootVisualElement.Add(conditionsListView);
+            rootVisualElement.Add(objectFieldGraphCondition);
 
             foreach (var group in graphView.Groups)
             {
@@ -56,11 +60,12 @@ namespace SS.Windows
 
                 rootVisualElement.Add(toggle);
 
-                ListView conditionsListViewGroup = ElementUtility.CreateListViewObjectField(
-                    group.Value.Groups[0].Conditions,
-                    $"{group.Value.Groups[0].title} Conditions:");
+                ObjectField objectField = ElementUtility.CreateObjectField(group.Value.Groups[0].Condition,
+                    typeof(ConditionSO),
+                    $"{group.Value.Groups[0].title} Condition:",
+                    callback => { group.Value.Groups[0].Condition = (ConditionSO)callback.newValue; });
 
-                rootVisualElement.Add(conditionsListViewGroup);
+                rootVisualElement.Add(objectField);
             }
         }
     }

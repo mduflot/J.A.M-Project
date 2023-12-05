@@ -90,7 +90,7 @@ public class Checker : MonoBehaviour
                     var storyline = principalStorylines[index];
                     if (activeStorylines.Contains(storyline)) continue;
                     if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
-                    // TODO : CHECK CONDITIONS
+                    if (!ConditionSystem.CheckEnvironmentCondition(storyline.StorylineContainer.Condition)) continue;
                     availableStoryLines.Add(storyline);
                 }
 
@@ -103,7 +103,7 @@ public class Checker : MonoBehaviour
                     var storyline = secondaryStorylines[index];
                     if (activeStorylines.Contains(storyline)) continue;
                     if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
-                    // TODO : CHECK CONDITIONS
+                    if (!ConditionSystem.CheckEnvironmentCondition(storyline.StorylineContainer.Condition)) continue;
                     availableStoryLines.Add(storyline);
                 }
 
@@ -116,7 +116,7 @@ public class Checker : MonoBehaviour
                     var storyline = trivialStorylines[index];
                     if (activeStorylines.Contains(storyline)) continue;
                     if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
-                    // TODO : CHECK CONDITIONS
+                    if (!ConditionSystem.CheckEnvironmentCondition(storyline.StorylineContainer.Condition)) continue;
                     availableStoryLines.Add(storyline);
                 }
 
@@ -169,15 +169,17 @@ public class Checker : MonoBehaviour
             chosenStoryline = activeStorylines[Random.Range(0, activeStorylines.Count)];
         }
 
-        foreach (var timeline in chosenStoryline.Timelines)
+        for (var index = 0; index < chosenStoryline.Timelines.Count; index++)
         {
+            var timeline = chosenStoryline.Timelines[index];
             if (timeline.StoryStatus != SSStoryStatus.Enabled) continue;
             if (timeline.IsFirstToPlay)
             {
                 StartTimeline(timeline);
                 return;
             }
-            // TODO : CHECK CONDITIONS
+
+            if (!ConditionSystem.CheckEnvironmentCondition(timeline.Condition)) continue;
             availableTimelines.Add(timeline);
         }
 

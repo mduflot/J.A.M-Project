@@ -12,7 +12,7 @@ namespace SS.Elements
         public string ID { get; set; }
         public SSStoryStatus StoryStatus { get; set; }
         public bool IsFirstToPlay { get; set; }
-        public List<ConditionSO> Conditions { get; set; }
+        public ConditionSO Condition { get; set; }
         public string OldTitle { get; set; }
 
         private Color defaultBorderColor;
@@ -25,7 +25,6 @@ namespace SS.Elements
             title = groupTitle;
             StoryStatus = SSStoryStatus.Enabled;
             IsFirstToPlay = false;
-            Conditions = new List<ConditionSO>();
             OldTitle = groupTitle;
 
             SetPosition(new Rect(position, Vector2.zero));

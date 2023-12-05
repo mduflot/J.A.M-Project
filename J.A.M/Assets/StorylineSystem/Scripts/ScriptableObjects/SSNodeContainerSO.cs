@@ -11,17 +11,17 @@ namespace SS.ScriptableObjects
         [field: SerializeField] public SSStoryStatus StoryStatus { get; set; }
         [field: SerializeField] public SSStoryType StoryType { get; set; }
         [field: SerializeField] public bool IsFirstToPlay { get; set; }
-        [field: SerializeField] public List<ConditionSO> Conditions { get; set; }
+        [field: SerializeField] public ConditionSO Condition { get; set; }
         [field: SerializeField] public SerializableDictionary<SSNodeGroupSO, List<SSNodeSO>> NodeGroups { get; set; }
         [field: SerializeField] public List<SSNodeSO> UngroupedNodes { get; set; }
 
-        public void Initialize(string fileName, SSStoryStatus storyStatus, SSStoryType storyType, bool isFirstToPlay, List<ConditionSO> conditions)
+        public void Initialize(string fileName, SSStoryStatus storyStatus, SSStoryType storyType, bool isFirstToPlay, ConditionSO condition)
         {
             FileName = fileName;
             StoryStatus = storyStatus;
             StoryType = storyType;
             IsFirstToPlay = isFirstToPlay;
-            Conditions = conditions;
+            Condition = condition;
             NodeGroups = new SerializableDictionary<SSNodeGroupSO, List<SSNodeSO>>();
             UngroupedNodes = new List<SSNodeSO>();
         }
