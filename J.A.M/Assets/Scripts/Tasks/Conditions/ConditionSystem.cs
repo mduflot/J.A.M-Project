@@ -64,7 +64,7 @@ public class ConditionSystem
                     validateCondition = !(validateCondition && supplementaryCondition);
                     break;
                 case TraitsData.TraitOperator.NOT:
-                    validateCondition = (validateCondition != supplementaryCondition);
+                    validateCondition = (validateCondition & !supplementaryCondition);
                     break;
             }
         }
