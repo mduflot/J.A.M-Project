@@ -44,14 +44,7 @@ namespace SS.Elements
                 PreviewOutcome = "Preview..."
             };
 
-            SSChoiceTaskSaveData lastChoiceData = new SSChoiceTaskSaveData()
-            {
-                Text = "LastChoice",
-                PreviewOutcome = "Preview..."
-            };
-
             Choices.Add(firstChoiceData);
-            Choices.Add(lastChoiceData);
         }
 
         public override void Draw()
@@ -187,7 +180,7 @@ namespace SS.Elements
 
             Button deleteChoiceButton = ElementUtility.CreateButton("X", () =>
             {
-                if (Choices.Count == 2)
+                if (Choices.Count == 1)
                 {
                     return;
                 }

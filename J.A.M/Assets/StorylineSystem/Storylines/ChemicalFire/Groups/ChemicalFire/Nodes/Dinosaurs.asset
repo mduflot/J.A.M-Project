@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
-  m_Name: Trouble
+  m_Name: Dinosaurs
   m_EditorClassIdentifier: 
-  <NodeName>k__BackingField: Trouble
+  <NodeName>k__BackingField: Dinosaurs
   <Choices>k__BackingField:
-  - rid: 9116668977360142947
+  - rid: 9116668977360142792
   <NodeType>k__BackingField: 0
   <IsStartingNode>k__BackingField: 0
-  <Text>k__BackingField: Hey, I hear we got company. Might be trouble.
-  <SpeakerType>k__BackingField: 0
+  <Text>k__BackingField: Dinosaurs! It was dinosaurs! I know it...
+  <SpeakerType>k__BackingField: 5
   <Duration>k__BackingField: 4
-  <IsDialogueTask>k__BackingField: 0
+  <IsDialogueTask>k__BackingField: 1
   <PercentageTask>k__BackingField: 50
   <isCompleted>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 9116668977360142947
+    - rid: 9116668977360142792
       type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Next Node
-        <NextNode>k__BackingField: {fileID: 11400000, guid: 4ee61063f621fec4398ffd15218261cd,
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 0fb8543eb36031c459e3f017ffac7bd6,
           type: 2}
