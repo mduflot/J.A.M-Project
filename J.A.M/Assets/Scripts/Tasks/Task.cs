@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CharacterSystem;
 using UnityEngine;
 
 namespace Tasks
@@ -19,6 +20,8 @@ namespace Tasks
         public bool IsPermanent;
         public List<Tuple<ConditionSO, string>> Conditions;
         public int conditionIndex = 0;
+        public List<CharacterBehaviour> leaderCharacters = new ();
+        public List<CharacterBehaviour> assistantCharacters = new();
 
         public Task(string name, string description, Sprite icon, float timeLeft, float duration, int mandatorySlots,
             int optionalSlots, float helpFactor, RoomType room, bool isPermanent, List<Tuple<ConditionSO, string>> conditions)

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using CharacterSystem;
 using Managers;
 using TMPro;
 using UI;
@@ -15,7 +16,7 @@ namespace Tasks
         [SerializeField] private TextMeshProUGUI durationText;
         [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private TextMeshProUGUI previewOutcomeText;
-        [SerializeField] private Transform characterSlotsParent;
+        [SerializeField] private Transform charactersParent;
         [SerializeField] private CharacterUISlot[] inactiveSlots;
         [SerializeField] private WarningUI warningUI;
 
@@ -46,12 +47,10 @@ namespace Tasks
             duration = notification.Task.Duration;
             descriptionText.text = notification.Task.Description;
             taskStarted = false;
-            notification = tn;
             for (int i = 0; i < notification.Task.MandatorySlots; i++)
             {
                 var slot = inactiveSlots[i];
-                slot.isMandatory = true;
-                slot.transform.SetParent(characterSlotsParent);
+                slot.SetupSlot(true);
                 slot.gameObject.SetActive(true);
                 characterSlots.Add(slot);
             }
@@ -59,19 +58,47 @@ namespace Tasks
             for (int i = 3; i < notification.Task.OptionalSlots + 3; i++)
             {
                 var slot = inactiveSlots[i];
-                slot.isMandatory = false;
-                slot.transform.SetParent(characterSlotsParent);
+                slot.SetupSlot(false);
                 slot.gameObject.SetActive(true);
                 characterSlots.Add(slot);
             }
 
-            timeLeftText.SetText(timeLeft.ToString());
-
-            TimeTickSystem.OnTick += UpdateTask;
+            timeLeftText.SetText(TimeTickSystem.GetTicksAsTime((uint)(timeLeft * TimeTickSystem.ticksPerHour)));
             gameObject.SetActive(true);
         }
 
-        public void UpdateTask(object sender, TimeTickSystem.OnTickEventArgs e)
+        public void DisplayTaskInfo(Notification n)
+        {
+            notification = n;
+            warningUI.gameObject.SetActive(false);
+            titleText.text = notification.Task.Name;
+            duration = notification.Task.Duration;
+            descriptionText.text = notification.Task.Description;
+            
+            for (int i = 0; i < notification.Task.leaderCharacters.Count; i++)
+            {
+                var charUI = GameManager.Instance.UIManager.GetCharacterUI(notification.Task.leaderCharacters[i]);
+                var slot = inactiveSlots[i];
+                slot.SetupSlot(true);
+                slot.gameObject.SetActive(true);
+                characterSlots.Add(slot);
+                slot.character = charUI.character;
+                charUI.icon.SetupIcon(slot.transform, slot);
+            }
+            for (int i = 0; i < notification.Task.assistantCharacters.Count; i++)
+            {
+                var charUI = GameManager.Instance.UIManager.GetCharacterUI(notification.Task.assistantCharacters[i]);
+                if(charUI == null) continue;
+                var slot = inactiveSlots[i];
+                slot.SetupSlot(false);
+                slot.gameObject.SetActive(true);
+                characterSlots.Add(slot);
+                slot.character = charUI.character;
+                charUI.icon.SetupIcon(slot.transform, slot);
+            }
+        }
+
+        public void Update()
         {
             if (!taskStarted)
             {
@@ -124,14 +151,14 @@ namespace Tasks
                     ? notification.Task.Duration /
                       (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
                     : notification.Task.Duration;
-                durationText.text = duration.ToString("F2") + " hours";
+                
+                durationText.text = TimeTickSystem.GetTicksAsTime((uint)(duration * TimeTickSystem.ticksPerHour));
             }
         }
 
         public void StartTask()
         {
-            Debug.Log(gameObject.name);
-            if (notification.Task.IsPermanent) if (CanStartTask()) return;
+            if (notification.Task.IsPermanent) if (!CanStartTask()) return;
             if (CharactersWorking()) return;
             notification.OnStart(characterSlots);
             taskStarted = true;
@@ -161,8 +188,7 @@ namespace Tasks
                 slot.ClearCharacter();
                 slot.gameObject.SetActive(false);
             }
-
-            TimeTickSystem.OnTick -= UpdateTask;
+            
             previewOutcomeText.text = null;
             characterSlots.Clear();
             GameManager.Instance.RefreshCharacterIcons();

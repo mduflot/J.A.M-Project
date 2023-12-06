@@ -11,7 +11,6 @@ namespace UI
         public CharacterIcon icon;
         public Image moodGauge;
         public Image volitionGauge;
-        public CharacterUISlot slot;
 
         [SerializeField] private Speaker speaker;
 
@@ -27,9 +26,9 @@ namespace UI
             icon = null;
         }
 
-        public void SetCharacter(CharacterIcon icon)
+        public void SetCharacter(CharacterIcon i)
         {
-            this.icon = icon;
+            icon = i;
         }
 
         public void OnDrop(PointerEventData eventData)
@@ -38,6 +37,7 @@ namespace UI
             GameObject dropped = eventData.pointerDrag;
             icon = dropped.GetComponent<CharacterIcon>();
             icon.SetupIcon(transform, this);
+            icon.transform.localScale = transform.localScale;
         }
     }
 }
