@@ -132,7 +132,7 @@ namespace Tasks
         public void StartTask()
         {
             if (notification.Task.TaskType.Equals(SSTaskType.Permanent))
-                if (CanStartTask())
+                if (!CanStartTask())
                     return;
             if (CharactersWorking()) return;
             notification.OnStart(characterSlots);

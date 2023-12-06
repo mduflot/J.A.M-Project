@@ -49,22 +49,22 @@ namespace UI
             }
         }
 
-    public void Initialize(Task task, SpaceshipManager spaceshipManager,
-        List<Tuple<Sprite, string, string>> dialogues = null)
-    {
-        Task = task;
-        Task.TimeLeft *= TimeTickSystem.ticksPerHour;
-        icon.sprite = task.Icon;
-        Dialogues = dialogues;
-        this.spaceshipManager = spaceshipManager;
-        TimeTickSystem.ModifyTimeScale(1.0f);
-    }
+        public void Initialize(Task task, SpaceshipManager spaceshipManager,
+            List<Tuple<Sprite, string, string>> dialogues = null)
+        {
+            Task = task;
+            Task.TimeLeft *= TimeTickSystem.ticksPerHour;
+            icon.sprite = task.Icon;
+            Dialogues = dialogues;
+            this.spaceshipManager = spaceshipManager;
+            TimeTickSystem.ModifyTimeScale(1.0f);
+        }
 
-    public void Display()
-    {
-        TimeTickSystem.ModifyTimeScale(0.0f);
-        GameManager.Instance.UIManager.taskUI.Initialize(this, true);
-    }
+        public void Display()
+        {
+            TimeTickSystem.ModifyTimeScale(0.0f);
+            GameManager.Instance.UIManager.taskUI.Initialize(this, true);
+        }
 
         public void OnStart(List<CharacterUISlot> characters)
         {
@@ -102,14 +102,14 @@ namespace UI
                     break;
                 }
             }
-        
-        if (LeaderCharacters.Count == 0)
-        {
-            Debug.LogError("No leader assigned to task");
-            taskCondition = Task.Conditions[^1].Item1;
-            Task.conditionIndex = Task.Conditions.Count - 1;
-            validatedCondition = true;
-        }
+
+            if (LeaderCharacters.Count == 0)
+            {
+                Debug.Log("No leader assigned to task");
+                taskCondition = Task.Conditions[^1].Item1;
+                Task.conditionIndex = Task.Conditions.Count - 1;
+                validatedCondition = true;
+            }
 
             if (validatedCondition)
             {
@@ -134,7 +134,7 @@ namespace UI
                             break;
 
                         case OutcomeData.OutcomeTarget.Gauge:
-                        
+
                             outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
                             break;
                     }
@@ -167,10 +167,13 @@ namespace UI
             switch (target)
             {
                 case OutcomeData.OutcomeTarget.Leader:
-                    validateCondition = ConditionSystem.CheckCharacterCondition(LeaderCharacters[0].GetTraits(), taskCondition);
+                    validateCondition =
+                        ConditionSystem.CheckCharacterCondition(LeaderCharacters[0].GetTraits(), taskCondition);
                     break;
                 case OutcomeData.OutcomeTarget.Assistant:
-                    if (AssistantCharacters.Count >= 1) validateCondition = ConditionSystem.CheckCharacterCondition(AssistantCharacters[0].GetTraits(), taskCondition);
+                    if (AssistantCharacters.Count >= 1)
+                        validateCondition =
+                            ConditionSystem.CheckCharacterCondition(AssistantCharacters[0].GetTraits(), taskCondition);
                     break;
                 case OutcomeData.OutcomeTarget.Gauge:
                     validateCondition = ConditionSystem.CheckGaugeCondition(taskCondition);
@@ -217,7 +220,7 @@ namespace UI
                 }
             }
         }
-        
+
         private void OnComplete()
         {
             for (uint i = 0; i < outcomeEvents.Length; i++) outcomeEvents[i].Invoke(outcomeEventArgs[i]);
