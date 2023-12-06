@@ -305,19 +305,12 @@ namespace SS
             }
         }
 
-        IEnumerator DisplayDialogue(Speaker speaker, string characterName, SSDialogueNodeSO nodeSO)
+        private IEnumerator DisplayDialogue(Speaker speaker, string characterName, SSDialogueNodeSO nodeSO)
         {
-            yield return new WaitUntil(() => speaker.IsSpeaking == false);
-            if (nodeSO.IsDialogueTask)
-            {
-                yield return new WaitUntil(() =>
-                    100 - Mathf.Clamp(task.Duration / task.BaseDuration, 0, 100) * 100 > nodeSO.PercentageTask);
-            }
+            speaker.AddDialogue(task, nodeSO, characterName);
 
-            speaker.StartDialogue(nodeSO, characterName);
-
-            yield return new WaitForSeconds(nodeSO.Duration);
-            speaker.EndDialogue();
+            yield return new WaitUntil(() => nodeSO.isCompleted);
+            
             if (nodeSO.Choices.First().NextNode == null)
             {
                 isRunning = false;
@@ -329,7 +322,7 @@ namespace SS
             CheckNodeType(nodeSO.Choices.First().NextNode);
         }
 
-        IEnumerator WaiterTask(SSTaskNodeSO nodeSO, Task task)
+        private IEnumerator WaiterTask(SSTaskNodeSO nodeSO, Task task)
         {
             yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(task).IsStarted);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).LeaderCharacters);

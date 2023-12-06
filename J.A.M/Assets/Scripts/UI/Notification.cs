@@ -193,7 +193,7 @@ public class Notification : MonoBehaviour
                 OnComplete();
             }
         }
-        else if (Task.IsPermanent)
+        else if (!Task.IsPermanent)
         {
             if (Task.TimeLeft <= 0) GameManager.Instance.UIManager.taskUI.StartTask();
             Task.TimeLeft -= TimeTickSystem.timePerTick;
