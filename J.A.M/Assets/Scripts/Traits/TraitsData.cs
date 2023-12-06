@@ -35,6 +35,7 @@ public class TraitsData
         HotHeaded = 1,
         Old = 2,
         ShellShocked = 4,
+        HighOnFumes = 8,
     }
 
     [Flags]
@@ -50,13 +51,21 @@ public class TraitsData
     [Flags]
     public enum SpaceshipTraits
     {
-        None,
+        None = 0,
+        ShipLostCargo = 1,
+        NewMouthToFeed = 2,
+        SparedRepairParts = 4,
+        RuinedLab = 8,
+        SpeedMode = 16,
+        FightMode = 32,
+        StealthMode = 64,
     }
     
     [Flags]
     public enum HiddenSpaceshipTraits
     {
-        None,
+        None = 0,
+        WreckedPirateShip = 1,
     }
     
     public enum TraitOperator
