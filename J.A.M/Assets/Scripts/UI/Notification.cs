@@ -193,11 +193,10 @@ public class Notification : MonoBehaviour
                 OnComplete();
             }
         }
-        else
+        else if (Task.IsPermanent)
         {
-            // TODO : WHAT TO DO WHEN TIME IS UP ?
-            // if (!notification.Task.IsPermanent) timeLeft -= TimeTickSystem.timePerTick;
-            // if (timeLeft <= 0) StartTask();
+            if (Task.TimeLeft <= 0) GameManager.Instance.UIManager.taskUI.StartTask();
+            Task.TimeLeft -= TimeTickSystem.timePerTick;
         }
     }
 
