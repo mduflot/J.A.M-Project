@@ -1,3 +1,4 @@
+using SS.Utilities;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -55,7 +56,7 @@ namespace SS.Elements
 
             /* MAIN CONTAINER */
 
-            Button addChoiceButton = ElementUtility.CreateButton("Add Choice", () =>
+            Button addChoiceButton = SSElementUtility.CreateButton("Add Choice", () =>
             {
                 /* OUTPUT CONTAINER */
 
@@ -82,10 +83,10 @@ namespace SS.Elements
 
             /* EXTENSIONS CONTAINER */
 
-            Foldout textFoldout = ElementUtility.CreateFoldout("Description :");
+            Foldout textFoldout = SSElementUtility.CreateFoldout("Description :");
 
             TextField textTextField =
-                ElementUtility.CreateTextArea(DescriptionTask, null,
+                SSElementUtility.CreateTextArea(DescriptionTask, null,
                     callback => { DescriptionTask = callback.newValue; });
 
             textTextField.AddClasses("ss-node__text-field", "ss-node__quote-text-field");
@@ -94,49 +95,49 @@ namespace SS.Elements
 
             customDataContainer.Add(textFoldout);
 
-            EnumField statusTypeEnumField = ElementUtility.CreateEnumField(TaskStatus, "Status Type :",
+            EnumField statusTypeEnumField = SSElementUtility.CreateEnumField(TaskStatus, "Status Type :",
                 callback => { TaskStatus = (SSTaskStatus)callback.newValue; });
 
             customDataContainer.Add(statusTypeEnumField);
 
-            EnumField taskTypeEnumField = ElementUtility.CreateEnumField(TaskType, "Task Type :",
+            EnumField taskTypeEnumField = SSElementUtility.CreateEnumField(TaskType, "Task Type :",
                 callback => { TaskType = (SSTaskType)callback.newValue; });
 
             customDataContainer.Add(taskTypeEnumField);
 
-            ObjectField iconObjectField = ElementUtility.CreateObjectField(TaskIcon, typeof(Sprite), "Task Icon :",
+            ObjectField iconObjectField = SSElementUtility.CreateObjectField(TaskIcon, typeof(Sprite), "Task Icon :",
                 callback => { TaskIcon = (Sprite)callback.newValue; });
 
             customDataContainer.Add(iconObjectField);
 
-            FloatField timeLeftFloatField = ElementUtility.CreateFloatField(TimeLeft, "Time Left :",
+            FloatField timeLeftFloatField = SSElementUtility.CreateFloatField(TimeLeft, "Time Left :",
                 callback => { TimeLeft = callback.newValue; });
 
             customDataContainer.Add(timeLeftFloatField);
 
-            FloatField baseDurationFloatField = ElementUtility.CreateFloatField(BaseDuration, "Duration :",
+            FloatField baseDurationFloatField = SSElementUtility.CreateFloatField(BaseDuration, "Duration :",
                 callback => { BaseDuration = callback.newValue; });
 
             customDataContainer.Add(baseDurationFloatField);
 
-            IntegerField mandatorySlotsIntegerField = ElementUtility.CreateIntegerField(MandatorySlots,
+            IntegerField mandatorySlotsIntegerField = SSElementUtility.CreateIntegerField(MandatorySlots,
                 "Leader Slots :",
                 callback => { MandatorySlots = callback.newValue; });
 
             customDataContainer.Add(mandatorySlotsIntegerField);
 
-            IntegerField optionalSlotsIntegerField = ElementUtility.CreateIntegerField(OptionalSlots,
+            IntegerField optionalSlotsIntegerField = SSElementUtility.CreateIntegerField(OptionalSlots,
                 "Assistant Slots :",
                 callback => { OptionalSlots = callback.newValue; });
 
             customDataContainer.Add(optionalSlotsIntegerField);
 
-            FloatField taskHelpFactorFloatField = ElementUtility.CreateFloatField(TaskHelpFactor, "Task Help Factor :",
+            FloatField taskHelpFactorFloatField = SSElementUtility.CreateFloatField(TaskHelpFactor, "Task Help Factor :",
                 callback => { TaskHelpFactor = callback.newValue; });
 
             customDataContainer.Add(taskHelpFactorFloatField);
 
-            EnumField roomEnumField = ElementUtility.CreateEnumField(Room, "Room :",
+            EnumField roomEnumField = SSElementUtility.CreateEnumField(Room, "Room :",
                 callback => { Room = (RoomType)callback.newValue; });
 
             customDataContainer.Add(roomEnumField);
@@ -158,16 +159,16 @@ namespace SS.Elements
 
             /* CHOICE CONDITIONS CONTAINER */
 
-            Foldout choiceFoldout = ElementUtility.CreateFoldout($"{choiceData.Text} :");
+            Foldout choiceFoldout = SSElementUtility.CreateFoldout($"{choiceData.Text} :");
 
-            ObjectField conditionField = ElementUtility.CreateObjectField(choiceData.Condition, typeof(ConditionSO),
+            ObjectField conditionField = SSElementUtility.CreateObjectField(choiceData.Condition, typeof(ConditionSO),
                 "Condition :", callback => { choiceData.Condition = (ConditionSO)callback.newValue; });
 
             choiceFoldout.Add(conditionField);
 
-            Foldout previewOutcomeFoldout = ElementUtility.CreateFoldout("Preview Outcome :");
+            Foldout previewOutcomeFoldout = SSElementUtility.CreateFoldout("Preview Outcome :");
 
-            TextField previewOutcomeTextField = ElementUtility.CreateTextField(choiceData.PreviewOutcome, null,
+            TextField previewOutcomeTextField = SSElementUtility.CreateTextField(choiceData.PreviewOutcome, null,
                 callback => { choiceData.PreviewOutcome = callback.newValue; });
 
             previewOutcomeTextField.AddClasses("ss-node__text-field", "ss-node__quote-text-field");
@@ -178,7 +179,7 @@ namespace SS.Elements
 
             customDataContainer.Insert(Choices.IndexOf(choiceData), choiceFoldout);
 
-            Button deleteChoiceButton = ElementUtility.CreateButton("X", () =>
+            Button deleteChoiceButton = SSElementUtility.CreateButton("X", () =>
             {
                 if (Choices.Count == 1)
                 {
@@ -198,7 +199,7 @@ namespace SS.Elements
 
             deleteChoiceButton.AddToClassList("ss-node__button");
 
-            TextField choiceTextField = ElementUtility.CreateTextField(choiceData.Text, null, callback =>
+            TextField choiceTextField = SSElementUtility.CreateTextField(choiceData.Text, null, callback =>
             {
                 choiceData.Text = callback.newValue;
                 choiceFoldout.text = $"{callback.newValue} :";

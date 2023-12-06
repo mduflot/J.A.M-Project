@@ -1,4 +1,5 @@
-﻿using UnityEditor.Experimental.GraphView;
+﻿using SS.Utilities;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -48,7 +49,7 @@ namespace SS.Elements
 
             customDataContainer.AddToClassList("ss-node__custom-data-container");
             
-            UnsignedIntegerField unsignedIntegerField = ElementUtility.CreateUnsignedIntegerField(TimeToWait, "WaitingTime", callback =>
+            UnsignedIntegerField unsignedIntegerField = SSElementUtility.CreateUnsignedIntegerField(TimeToWait, "WaitingTime", callback =>
             {
                 TimeToWait = callback.newValue;
             });
