@@ -92,7 +92,7 @@ namespace SS
                     actualSpeaker = spaceshipManager.characters[Random.Range(0, spaceshipManager.characters.Length)];
                     dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
                         actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
-                    StartCoroutine(DisplayDialogue(actualSpeaker, nodeSO));
+                    StartCoroutine(DisplayDialogue(actualSpeaker.speaker, actualSpeaker.GetCharacterData().firstName, nodeSO));
                     characters.Add(actualSpeaker);
                     break;
                 }
@@ -102,20 +102,54 @@ namespace SS
                     actualSpeaker = tempCharacters[Random.Range(0, tempCharacters.Count)];
                     dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
                         actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
-                    StartCoroutine(DisplayDialogue(actualSpeaker, nodeSO));
+                    StartCoroutine(DisplayDialogue(actualSpeaker.speaker, actualSpeaker.GetCharacterData().firstName, nodeSO));
                     characters.Add(actualSpeaker);
                     break;
                 }
                 case SSSpeakerType.Sensor:
                 {
-                    // TODO : NEED FURNITURE BEFORE
-                    // dialogues.Add(new Tuple<Sprite, string, string>(null, "Sensor", nodeSO.Text));
+                    dialogues.Add(new Tuple<Sprite, string, string>(null, "Sensor", nodeSO.Text));
+                    for (int index = 0; index < spaceshipManager.GetRoom(RoomType.Flight).roomObjects.Length; index++)
+                    {
+                        var furniture = spaceshipManager.GetRoom(RoomType.Flight).roomObjects[index];
+                        if (furniture.furnitureType == FurnitureType.Console)
+                        {
+                            var sensor = furniture.transform;
+                            if (sensor.TryGetComponent(out Speaker speaker))
+                            {
+                                StartCoroutine(DisplayDialogue(speaker, "Sensor", nodeSO));
+                            }
+                            else
+                            {
+                                Debug.LogWarning("No speaker on the sensor");
+                            }
+
+                            break;
+                        }
+                    }
                     break;
                 }
                 case SSSpeakerType.Expert:
                 {
-                    // TODO : NEED FURNITURE BEFORE
-                    // dialogues.Add(new Tuple<Sprite, string, string>(null, "Expert", nodeSO.Text));
+                    dialogues.Add(new Tuple<Sprite, string, string>(null, "Expert", nodeSO.Text));
+                    for (int index = 0; index < spaceshipManager.GetRoom(RoomType.Docking).roomObjects.Length; index++)
+                    {
+                        var furniture = spaceshipManager.GetRoom(RoomType.Docking).roomObjects[index];
+                        if (furniture.furnitureType == FurnitureType.PortHole)
+                        {
+                            var sensor = furniture.transform;
+                            if (sensor.TryGetComponent(out Speaker speaker))
+                            {
+                                StartCoroutine(DisplayDialogue(speaker, "Expert", nodeSO));
+                            }
+                            else
+                            {
+                                Debug.LogWarning("No speaker on the expert");
+                            }
+
+                            break;
+                        }
+                    }
                     break;
                 }
                 case SSSpeakerType.Character1:
@@ -124,7 +158,7 @@ namespace SS
                     {
                         dialogues.Add(new Tuple<Sprite, string, string>(characters[0].GetCharacterData().characterIcon,
                             characters[0].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(characters[0], nodeSO));
+                        StartCoroutine(DisplayDialogue(characters[0].speaker, characters[0].GetCharacterData().firstName, nodeSO));
                     }
 
                     break;
@@ -135,7 +169,7 @@ namespace SS
                     {
                         dialogues.Add(new Tuple<Sprite, string, string>(characters[1].GetCharacterData().characterIcon,
                             characters[1].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(characters[1], nodeSO));
+                        StartCoroutine(DisplayDialogue(characters[1].speaker, characters[1].GetCharacterData().firstName, nodeSO));
                     }
 
                     break;
@@ -146,7 +180,7 @@ namespace SS
                     {
                         dialogues.Add(new Tuple<Sprite, string, string>(characters[2].GetCharacterData().characterIcon,
                             characters[2].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(characters[2], nodeSO));
+                        StartCoroutine(DisplayDialogue(characters[2].speaker, characters[2].GetCharacterData().firstName, nodeSO));
                     }
 
                     break;
@@ -157,7 +191,7 @@ namespace SS
                     {
                         dialogues.Add(new Tuple<Sprite, string, string>(characters[3].GetCharacterData().characterIcon,
                             characters[3].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(characters[3], nodeSO));
+                        StartCoroutine(DisplayDialogue(characters[3].speaker, characters[3].GetCharacterData().firstName, nodeSO));
                     }
 
                     break;
@@ -169,7 +203,7 @@ namespace SS
                         dialogues.Add(new Tuple<Sprite, string, string>(
                             assignedCharacters[0].GetCharacterData().characterIcon,
                             assignedCharacters[0].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(assignedCharacters[0], nodeSO));
+                        StartCoroutine(DisplayDialogue(assignedCharacters[0].speaker, assignedCharacters[0].GetCharacterData().firstName, nodeSO));
                     }
 
                     break;
@@ -181,7 +215,7 @@ namespace SS
                         dialogues.Add(new Tuple<Sprite, string, string>(
                             assignedCharacters[1].GetCharacterData().characterIcon,
                             assignedCharacters[1].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(assignedCharacters[1], nodeSO));
+                        StartCoroutine(DisplayDialogue(assignedCharacters[1].speaker, assignedCharacters[1].GetCharacterData().firstName, nodeSO));
                     }
 
                     break;
@@ -193,7 +227,7 @@ namespace SS
                         dialogues.Add(new Tuple<Sprite, string, string>(
                             assignedCharacters[2].GetCharacterData().characterIcon,
                             assignedCharacters[2].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(assignedCharacters[2], nodeSO));
+                        StartCoroutine(DisplayDialogue(assignedCharacters[2].speaker, assignedCharacters[2].GetCharacterData().firstName, nodeSO));
                     }
 
                     break;
@@ -205,7 +239,7 @@ namespace SS
                         dialogues.Add(new Tuple<Sprite, string, string>(
                             assignedCharacters[3].GetCharacterData().characterIcon,
                             assignedCharacters[3].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(assignedCharacters[3], nodeSO));
+                        StartCoroutine(DisplayDialogue(assignedCharacters[3].speaker, assignedCharacters[3].GetCharacterData().firstName, nodeSO));
                     }
 
                     break;
@@ -216,7 +250,7 @@ namespace SS
                     actualSpeaker = tempCharacters[Random.Range(0, tempCharacters.Count)];
                     dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
                         actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
-                    StartCoroutine(DisplayDialogue(actualSpeaker, nodeSO));
+                    StartCoroutine(DisplayDialogue(actualSpeaker.speaker, actualSpeaker.GetCharacterData().firstName, nodeSO));
 
                     break;
                 }
@@ -271,19 +305,19 @@ namespace SS
             }
         }
 
-        IEnumerator DisplayDialogue(CharacterBehaviour characterBehaviour, SSDialogueNodeSO nodeSO)
+        IEnumerator DisplayDialogue(Speaker speaker, string characterName, SSDialogueNodeSO nodeSO)
         {
-            yield return new WaitUntil(() => characterBehaviour.speaker.IsSpeaking == false);
+            yield return new WaitUntil(() => speaker.IsSpeaking == false);
             if (nodeSO.IsDialogueTask)
             {
                 yield return new WaitUntil(() =>
                     100 - Mathf.Clamp(task.Duration / task.BaseDuration, 0, 100) * 100 > nodeSO.PercentageTask);
             }
 
-            characterBehaviour.speaker.StartDialogue(nodeSO);
+            speaker.StartDialogue(nodeSO, characterName);
 
             yield return new WaitForSeconds(nodeSO.Duration);
-            characterBehaviour.speaker.EndDialogue();
+            speaker.EndDialogue();
             if (nodeSO.Choices.First().NextNode == null)
             {
                 isRunning = false;

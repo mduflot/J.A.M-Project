@@ -1,11 +1,12 @@
 ﻿public enum FurnitureType
 {
-    Electrical = 1,
-    Airflow = 2,
-    Food = 3,
-    Hull = 4,
-    Bedrooms = 5,
-    Cafeteria = 6,
-    Control = 7,
-    Warehouse = 8
+    Console = 1,
+    PortHole = 2,
+    Table = 3,
+    Bed = 4,
+    Cannister = 5,
+    ConsoleSide = 6,
+    Generator = 7,
+    PlantCrops = 8,
+    Crates = 9
 }

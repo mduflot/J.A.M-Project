@@ -10,13 +10,12 @@ public class CharacterUI : MonoBehaviour, IDropHandler
     public Image volitionGauge;
     public CharacterUISlot slot;
 
-    [SerializeField] private CharacterSpeaker speaker;
+    [SerializeField] private Speaker speaker;
 
     public void Initialize(CharacterBehaviour c)
     {
         character = c;
         c.speaker = speaker;
-        speaker.Initialize(c);
         icon.Initialize(character, this);
     }
 

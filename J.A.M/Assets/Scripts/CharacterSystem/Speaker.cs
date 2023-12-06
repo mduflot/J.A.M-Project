@@ -1,27 +1,21 @@
 ﻿using SS.ScriptableObjects;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class CharacterSpeaker : MonoBehaviour
+public class Speaker : MonoBehaviour
 {
     public bool IsSpeaking;
 
     [SerializeField] private GameObject dialogueContainer;
-    [SerializeField] private TextMeshProUGUI characterName;
+    [FormerlySerializedAs("characterName")] [SerializeField] private TextMeshProUGUI characterNameText;
     [SerializeField] private TextMeshProUGUI dialogue;
 
-    private CharacterBehaviour characterBehaviour;
-
-    public void Initialize(CharacterBehaviour behaviour)
-    {
-        characterBehaviour = behaviour;
-    }
-
-    public void StartDialogue(SSDialogueNodeSO node)
+    public void StartDialogue(SSDialogueNodeSO node, string characterName)
     {
         IsSpeaking = true;
         dialogue.text = node.Text;
-        characterName.text = characterBehaviour.GetCharacterData().firstName;
+        characterNameText.text = characterName;
         dialogueContainer.SetActive(true);
     }
 

@@ -9,8 +9,8 @@ public class SpaceshipManager : MonoBehaviour
     public Pool<GameObject> notificationPool;
     public TraitsData.SpaceshipTraits SpaceshipTraits = TraitsData.SpaceshipTraits.None;
     public TraitsData.HiddenSpaceshipTraits HiddenSpaceshipTraits = TraitsData.HiddenSpaceshipTraits.None;
-    
-    
+
+
     [SerializeField] private List<Notification> activeTasks = new();
     [SerializeField] private GameObject taskNotificationPrefab;
 
@@ -105,6 +105,11 @@ public class SpaceshipManager : MonoBehaviour
     public Transform GetTaskPosition(RoomType room)
     {
         return roomsDictionary[room].transform;
+    }
+
+    public Room GetRoom(RoomType room)
+    {
+        return roomsDictionary[room];
     }
 
     public void AddTask(Notification task)

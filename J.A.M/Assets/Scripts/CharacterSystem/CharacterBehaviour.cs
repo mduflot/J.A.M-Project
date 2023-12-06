@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CharacterBehaviour : MonoBehaviour
 {
-    public CharacterSpeaker speaker;
+    public Speaker speaker;
     
     [SerializeField] private CharacterDataScriptable data;
     [SerializeField] private float moveSpeed;
