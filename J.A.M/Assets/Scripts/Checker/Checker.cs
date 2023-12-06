@@ -108,7 +108,7 @@ public class Checker : MonoBehaviour
                 {
                     var storyline = principalStorylines[index];
                     if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
-                    if (storyline.StorylineContainer.Condition) if (!ConditionSystem.CheckEnvironmentCondition(storyline.StorylineContainer.Condition)) continue;
+                    if (storyline.StorylineContainer.Condition) if (RouteCondition(storyline.StorylineContainer.Condition)) continue;
                     availableStoryLines.Add(storyline);
                 }
 
@@ -120,7 +120,7 @@ public class Checker : MonoBehaviour
                 {
                     var storyline = secondaryStorylines[index];
                     if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
-                    if (storyline.StorylineContainer.Condition) if (!ConditionSystem.CheckEnvironmentCondition(storyline.StorylineContainer.Condition)) continue;
+                    if (storyline.StorylineContainer.Condition) if (RouteCondition(storyline.StorylineContainer.Condition)) continue;
                     availableStoryLines.Add(storyline);
                 }
 
@@ -132,7 +132,7 @@ public class Checker : MonoBehaviour
                 {
                     var storyline = trivialStorylines[index];
                     if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
-                    if (storyline.StorylineContainer.Condition) if (!ConditionSystem.CheckEnvironmentCondition(storyline.StorylineContainer.Condition)) continue;
+                    if (storyline.StorylineContainer.Condition) if (RouteCondition(storyline.StorylineContainer.Condition)) continue;
                     availableStoryLines.Add(storyline);
                 }
 
@@ -211,7 +211,7 @@ public class Checker : MonoBehaviour
                 return;
             }
 
-            if (timeline.Condition) if (!ConditionSystem.CheckEnvironmentCondition(timeline.Condition)) continue;
+            if (timeline.Condition) if (RouteCondition(timeline.Condition)) continue;
             availableTimelines.Add(timeline);
         }
         
@@ -235,6 +235,31 @@ public class Checker : MonoBehaviour
             }
         }
     }
+    
+    private bool RouteCondition(ConditionSO condition)
+    {
+        bool validateCondition = false;
+        switch (condition.target)
+        {
+            case OutcomeData.OutcomeTarget.Leader:
+                // validateCondition = ConditionSystem.CheckCharacterCondition(LeaderCharacters[0].GetTraits(), condition);
+                break;
+            case OutcomeData.OutcomeTarget.Assistant:
+                // validateCondition = ConditionSystem.CheckCharacterCondition(AssistantCharacters[0].GetTraits(), condition);
+                break;
+            case OutcomeData.OutcomeTarget.Gauge:
+                validateCondition = ConditionSystem.CheckGaugeCondition(condition);
+                break;
+            case OutcomeData.OutcomeTarget.Crew:
+                validateCondition = ConditionSystem.CheckCrewCondition(condition);
+                break;
+            case OutcomeData.OutcomeTarget.Ship:
+                validateCondition = ConditionSystem.CheckSpaceshipCondition(condition);
+                break;
+        }
+
+        return validateCondition;
+    }
 
     private void StartTimeline(SSNodeGroupSO timeline)
     {
@@ -255,7 +280,6 @@ public class Checker : MonoBehaviour
                     }
                 }
                 principalLauncher.node = node;
-                principalLauncher.SetStoryline(chosenStoryline);
                 principalLauncher.StartTimeline();
                 break;
             case SSStoryType.Secondary:
@@ -270,7 +294,6 @@ public class Checker : MonoBehaviour
                     }
                 }
                 secondaryLauncher.node = node;
-                secondaryLauncher.SetStoryline(chosenStoryline);
                 secondaryLauncher.StartTimeline();
                 break;
             case SSStoryType.Trivial:
@@ -285,7 +308,6 @@ public class Checker : MonoBehaviour
                     }
                 }
                 trivialLauncher.node = node;
-                trivialLauncher.SetStoryline(chosenStoryline);
                 trivialLauncher.StartTimeline();
                 break;
         }

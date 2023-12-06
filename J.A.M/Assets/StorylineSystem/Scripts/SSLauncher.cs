@@ -37,17 +37,15 @@ namespace SS
         private SSTimeNodeSO timeNode;
         private uint durationTimeNode;
         private Task task;
-        private Storyline storyline;
+        private bool isRunning;
 
-        public void SetStoryline(Storyline storyline)
-        {
-            this.storyline = storyline;
-        }
-
+        public bool IsRunning => isRunning;
+        
         public void StartTimeline()
         {
             dialogues = new();
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
+            isRunning = true;
             CheckNodeType(node);
         }
 
@@ -232,10 +230,10 @@ namespace SS
             if (notificationGO.TryGetComponent(out Notification notification))
             {
                 notification.transform.position = position;
-                var conditions = new List<ConditionSO>();
+                var conditions = new List<Tuple<ConditionSO, string>>();
                 foreach (var choiceData in nodeSO.Choices)
                 {
-                    conditions.Add(((SSNodeChoiceTaskData)choiceData).Condition);
+                    conditions.Add(new Tuple<ConditionSO, string>(((SSNodeChoiceTaskData)choiceData).Condition, ((SSNodeChoiceTaskData)choiceData).PreviewOutcome));
                 }
 
                 task = new Task(nodeSO.name, nodeSO.Description, nodeSO.Icon, nodeSO.TimeLeft, nodeSO.Duration,
@@ -261,6 +259,7 @@ namespace SS
             {
                 if (timeNode.Choices.First().NextNode == null)
                 {
+                    isRunning = false;
                     nodeGroup.StoryStatus = SSStoryStatus.Completed;
                     ResetTimeline();
                     TimeTickSystem.OnTick -= WaitingTime;
@@ -287,6 +286,7 @@ namespace SS
             characterBehaviour.speaker.EndDialogue();
             if (nodeSO.Choices.First().NextNode == null)
             {
+                isRunning = false;
                 nodeGroup.StoryStatus = SSStoryStatus.Completed;
                 ResetTimeline();
                 yield break;
@@ -302,6 +302,7 @@ namespace SS
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).AssistantCharacters);
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
             {
+                isRunning = false;
                 nodeGroup.StoryStatus = SSStoryStatus.Completed;
                 ResetTimeline();
                 yield break;

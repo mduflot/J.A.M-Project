@@ -54,6 +54,7 @@ public class Notification : MonoBehaviour
 
     public void Display()
     {
+        // TODO : STOP TIME
         GameManager.Instance.UIManager.taskUI.Initialize(this);
     }
 
@@ -63,8 +64,11 @@ public class Notification : MonoBehaviour
         {
             if (character.isMandatory)
             {
-                LeaderCharacters.Add(character.icon.character);
-                character.icon.character.AssignTask(this, true);
+                if (character.icon != null)
+                {
+                    LeaderCharacters.Add(character.icon.character);
+                    character.icon.character.AssignTask(this, true);
+                }
             }
             else
             {
@@ -81,13 +85,20 @@ public class Notification : MonoBehaviour
 
         for (int i = 0; i < Task.Conditions.Count; i++)
         {
-            taskCondition = Task.Conditions[i];
+            taskCondition = Task.Conditions[i].Item1;
             validatedCondition = RouteCondition(taskCondition.target);
             if (validatedCondition)
             {
                 Task.conditionIndex = i;
                 break;
             }
+        }
+        
+        if (LeaderCharacters.Count == 0)
+        {
+            taskCondition = Task.Conditions[^1].Item1;
+            Task.conditionIndex = Task.Conditions.Count - 1;
+            validatedCondition = true;
         }
 
         if (validatedCondition)
@@ -113,6 +124,7 @@ public class Notification : MonoBehaviour
                         break;
 
                     case OutcomeData.OutcomeTarget.Gauge:
+                        
                         outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
                         break;
                 }
@@ -145,12 +157,22 @@ public class Notification : MonoBehaviour
         switch (target)
         {
             case OutcomeData.OutcomeTarget.Leader:
-                validateCondition = ConditionSystem.CheckCondition(LeaderCharacters[0].GetTraits(), taskCondition);
+                validateCondition = ConditionSystem.CheckCharacterCondition(LeaderCharacters[0].GetTraits(), taskCondition);
                 break;
-
             case OutcomeData.OutcomeTarget.Assistant:
-                if (AssistantCharacters.Count >= 1)
-                    validateCondition = ConditionSystem.CheckCondition(AssistantCharacters[0].GetTraits(), taskCondition);
+                if (AssistantCharacters.Count >= 1) validateCondition = ConditionSystem.CheckCharacterCondition(AssistantCharacters[0].GetTraits(), taskCondition);
+                break;
+            case OutcomeData.OutcomeTarget.Gauge:
+                validateCondition = ConditionSystem.CheckGaugeCondition(taskCondition);
+                break;
+            case OutcomeData.OutcomeTarget.Crew:
+                validateCondition = ConditionSystem.CheckCrewCondition(taskCondition);
+                break;
+            case OutcomeData.OutcomeTarget.Ship:
+                validateCondition = ConditionSystem.CheckSpaceshipCondition(taskCondition);
+                break;
+            case OutcomeData.OutcomeTarget.None:
+                validateCondition = true;
                 break;
         }
 
@@ -159,15 +181,23 @@ public class Notification : MonoBehaviour
 
     public void OnUpdate()
     {
-        if (!IsStarted) return;
-        if (Task.Duration > 0)
+        if (IsStarted)
         {
-            Task.Duration -= TimeTickSystem.timePerTick;
-            time.text = Task.Duration + " hours";
+            if (Task.Duration > 0)
+            {
+                Task.Duration -= TimeTickSystem.timePerTick;
+                time.text = Task.Duration + " hours";
+            }
+            else
+            {
+                OnComplete();
+            }
         }
         else
         {
-            OnComplete();
+            // TODO : WHAT TO DO WHEN TIME IS UP ?
+            // if (!notification.Task.IsPermanent) timeLeft -= TimeTickSystem.timePerTick;
+            // if (timeLeft <= 0) StartTask();
         }
     }
 

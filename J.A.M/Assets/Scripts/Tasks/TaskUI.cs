@@ -23,7 +23,7 @@ public class TaskUI : MonoBehaviour
     [SerializeField] private float duration;
 
     private Notification notification;
-    private List<CharacterUISlot> characterSlots = new();
+    [SerializeField] private List<CharacterUISlot> characterSlots = new();
     private bool taskStarted;
 
     /*
@@ -71,9 +71,49 @@ public class TaskUI : MonoBehaviour
     {
         if (!taskStarted)
         {
-            // TODO : Update PreviewOutcome
-            //previewOutcomeText.text = notification.Task.Conditions;
-
+            for (int index = 0; index < notification.Task.Conditions.Count; index++)
+            {
+                bool condition = false;
+                switch (notification.Task.Conditions[index].Item1.target)
+                {
+                    case OutcomeData.OutcomeTarget.Leader :
+                        for (int j = 0; j < characterSlots.Count; j++)
+                        {
+                            if (!characterSlots[j].isMandatory) continue;
+                            var character = characterSlots[j];
+                            condition = ConditionSystem.CheckCharacterCondition(character.icon.character.GetTraits(), notification.Task.Conditions[index].Item1);
+                        }
+                        break;
+                    
+                    case OutcomeData.OutcomeTarget.Assistant :
+                        for (int j = 0; j < characterSlots.Count; j++)
+                        {
+                            if (characterSlots[j].isMandatory) continue;
+                            var character = characterSlots[j];
+                            condition = ConditionSystem.CheckCharacterCondition(character.icon.character.GetTraits(), notification.Task.Conditions[index].Item1);
+                        }
+                        break;
+                    
+                    case OutcomeData.OutcomeTarget.Crew :
+                        condition = ConditionSystem.CheckCrewCondition(notification.Task.Conditions[index].Item1);
+                        break;
+                    
+                    case OutcomeData.OutcomeTarget.Gauge :
+                        condition = ConditionSystem.CheckGaugeCondition(notification.Task.Conditions[index].Item1);
+                        break;
+                    
+                    case OutcomeData.OutcomeTarget.Ship :
+                        condition = ConditionSystem.CheckSpaceshipCondition(notification.Task.Conditions[index].Item1);
+                        break;
+                }
+                if (condition)
+                {
+                    previewOutcomeText.text = notification.Task.Conditions[index].Item2;
+                    notification.Task.conditionIndex = index;
+                    break;
+                }
+            }
+            
             var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
 
             duration = assistantCharacters > 0
@@ -86,11 +126,23 @@ public class TaskUI : MonoBehaviour
 
     public void StartTask()
     {
-        // TODO : Feedback on characters are working
+        if (notification.Task.IsPermanent) if (CanStartTask()) return;
         if (CharactersWorking()) return;
         notification.OnStart(characterSlots);
         taskStarted = true;
         CloseTask();
+    }
+    
+    private bool CanStartTask()
+    {
+        foreach (var slot in characterSlots)
+        {
+            if (slot.isMandatory && slot.icon == null)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     /// <summary>
