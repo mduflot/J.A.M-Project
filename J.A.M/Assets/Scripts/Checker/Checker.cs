@@ -55,40 +55,59 @@ public class Checker : MonoBehaviour
                 }
             }
 
-            // TODO : DO PROBABILITY CALCULATIONS HERE
-
-            ChooseNewStoryline(SSStoryType.Principal);
+            SSStoryType storyType = (SSStoryType) Random.Range(0, 3);
+            
+            ChooseNewStoryline(storyType);
             return;
         }
 
         if (activeStorylines.Count < 3)
         {
-            // pickPercent : float, % chance for an outcome
-            // weighedActivePercent : float, probability for an active timeline to be selected
-            // weighedInactivePercent : float, probability for an inactive timeline to be selected
-            // randPicker : float, random value in [0,100] used to chose among available or unavailable storylines
-
             var missingTypes = new List<SSStoryType>()
             {
                 SSStoryType.Principal, SSStoryType.Secondary, SSStoryType.Trivial
             };
+            var activeTypes = new List<SSStoryType>();
             for (int index = 0; index < activeStorylines.Count; index++)
             {
                 if (activeStorylines[index].StorylineContainer.StoryType == SSStoryType.Principal ||
                     principalStorylines.Count == 0)
+                {
+                    if (!principalLauncher.IsRunning)
+                        activeTypes.Add(SSStoryType.Principal);
+                    
                     missingTypes.Remove(SSStoryType.Principal);
+                }
+
                 if (activeStorylines[index].StorylineContainer.StoryType == SSStoryType.Secondary ||
                     secondaryStorylines.Count == 0)
+                {
+                    if (!secondaryLauncher.IsRunning)
+                        activeTypes.Add(SSStoryType.Secondary);
+                    
                     missingTypes.Remove(SSStoryType.Secondary);
+                }
+
                 if (activeStorylines[index].StorylineContainer.StoryType == SSStoryType.Trivial ||
                     trivialStorylines.Count == 0)
+                {
+                    if (!trivialLauncher.IsRunning)
+                        activeTypes.Add(SSStoryType.Trivial);
+                    
                     missingTypes.Remove(SSStoryType.Trivial);
+                }
             }
 
-            // TODO : DO PROBABILITY CALCULATIONS HERE
-
-            var storyType = missingTypes[Random.Range(0, missingTypes.Count)];
-
+            float pickPercent = .33f;
+            float inactivePickPercent = pickPercent * missingTypes.Count;
+            float randPicker = Random.Range(0.0f, 1.0f);
+            
+            SSStoryType storyType;
+            if (randPicker < inactivePickPercent)
+                storyType = missingTypes[Random.Range(0, missingTypes.Count)];
+            else
+                storyType = activeTypes[Random.Range(0, activeTypes.Count)];
+            
             ChooseNewStoryline(storyType);
         }
         else
@@ -146,20 +165,15 @@ public class Checker : MonoBehaviour
             return;
         }
 
-        // numberOfASL = availableStoryLines.length
-        // pickPercent = 100.0/numberOfASL
-        // randPicker = random(0.0,100.0)
+        float numberOfASL = availableStoryLines.Count;
+        float pickPercent = 1.0f / numberOfASL;
+        float randPicker = Random.Range(0.0f, 1.0f);
 
-        var numberOfASL = availableStoryLines.Count;
-        var pickPercent = 100.0f / numberOfASL;
-        var randPicker = Random.Range(0, 100);
-
-        for (int i = 0; i < numberOfASL; i++)
+        for (int i = 1; i <= numberOfASL; i++)
         {
-            // if (randPicker <= pickPercent * i)
-            if (true)
+            if (randPicker <= pickPercent * i)
             {
-                chosenStoryline = availableStoryLines[i];
+                chosenStoryline = availableStoryLines[i-1];
                 activeStorylines.Add(chosenStoryline);
                 PickTimelineFromStoryline(true);
                 break;
@@ -195,9 +209,9 @@ public class Checker : MonoBehaviour
                     }
                 }
             }
-
-            // TODO : DO PROBABILITY CALCULATIONS HERE
-
+            
+            
+            
             chosenStoryline = activeStorylines[Random.Range(0, activeStorylines.Count)];
         }
 
@@ -222,15 +236,14 @@ public class Checker : MonoBehaviour
         }
 
         var numberOfASL = availableTimelines.Count;
-        var pickPercent = 100.0f / numberOfASL;
-        var randPicker = Random.Range(0, 100);
+        var pickPercent = 1.0f / numberOfASL;
+        var randPicker = Random.Range(0.0f, 1.0f);
 
-        for (int i = 0; i < numberOfASL; i++)
+        for (int i = 1; i <= numberOfASL; i++)
         {
-            // if (randPicker <= pickPercent * i)
-            if (true)
+            if (randPicker <= pickPercent * i)
             {
-                StartTimeline(availableTimelines[i]);
+                StartTimeline(availableTimelines[i-1]);
                 break;
             }
         }

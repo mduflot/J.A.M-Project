@@ -6,7 +6,7 @@ public class TimeTickSystem : MonoBehaviour
 {
     public static uint timePerTick = 1; // InGame Time Unit
     public static uint ticksPerHour = 48;
-    [SerializeField] private float timeScale = 1.0f;
+    [SerializeField] private static float timeScale = 1.0f;
     //[SerializeField] private const uint ticksPerTenMinutes = 5;
     public class OnTickEventArgs : EventArgs
     {
@@ -54,15 +54,9 @@ public class TimeTickSystem : MonoBehaviour
         return "Day : " + days.ToString("D2") + " // " + hours.ToString("D2") + ":" + minutes.ToString("D2");
     }
 
-    public void ModifyTimeScale(float newScale)
+    public static void ModifyTimeScale(float newScale)
     {
         timeScale = newScale;
     }
-
-    /*public void IncreaseTimeScale(float factor)
-    {
-        timeScale += factor;
-        timeScale = Mathf.Clamp(timeScale, minTimeScale, maxTimeScale);
-    }*/
 }
 

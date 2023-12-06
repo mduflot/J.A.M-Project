@@ -10,10 +10,10 @@ public class SpaceshipManager : MonoBehaviour
     public TraitsData.SpaceshipTraits SpaceshipTraits = TraitsData.SpaceshipTraits.None;
     public TraitsData.HiddenSpaceshipTraits HiddenSpaceshipTraits = TraitsData.HiddenSpaceshipTraits.None;
 
-
+    [SerializeField] private Checker checker;
     [SerializeField] private List<Notification> activeTasks = new();
     [SerializeField] private GameObject taskNotificationPrefab;
-
+    
     private Dictionary<SystemType, ShipSystem> systemsDictionary = new();
     private Dictionary<RoomType, Room> roomsDictionary = new();
 
@@ -29,6 +29,7 @@ public class SpaceshipManager : MonoBehaviour
         TimeTickSystem.OnTick += UpdateSystems;
         TimeTickSystem.OnTick += UpdateTasks;
         TimeTickSystem.OnTick += UpdateCharacters;
+        TimeTickSystem.OnTick += GenerateRandomEventOnDayStart;
     }
 
     private void InitializeSystems()
@@ -79,6 +80,15 @@ public class SpaceshipManager : MonoBehaviour
         }
 
         systemsDictionary[systemType].gaugeValue = gaugeValue;
+    }
+
+    public void GenerateRandomEventOnDayStart(object sender, TimeTickSystem.OnTickEventArgs e)
+    {
+        if (e.tick % (TimeTickSystem.ticksPerHour * 24) != 0)
+            return;
+        
+        Debug.Log("Generating random event");
+        //Checker.GenerateRandomEvent();
     }
 
     #region Tasks

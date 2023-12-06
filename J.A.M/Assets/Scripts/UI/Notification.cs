@@ -50,16 +50,18 @@ public class Notification : MonoBehaviour
         icon.sprite = task.Icon;
         Dialogues = dialogues;
         this.spaceshipManager = spaceshipManager;
+        TimeTickSystem.ModifyTimeScale(1.0f);
     }
 
     public void Display()
     {
-        // TODO : STOP TIME
+        TimeTickSystem.ModifyTimeScale(0.0f);
         GameManager.Instance.UIManager.taskUI.Initialize(this);
     }
 
     public void OnStart(List<CharacterUISlot> characters)
     {
+        TimeTickSystem.ModifyTimeScale(1.0f);
         foreach (var character in characters)
         {
             if (character.isMandatory)

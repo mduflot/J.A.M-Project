@@ -169,6 +169,7 @@ public class TaskUI : MonoBehaviour
     /// </summary>
     public void CloseNotification()
     {
+        TimeTickSystem.ModifyTimeScale(1.0f);
         if (notification.Task.IsPermanent) notification.OnCancel();
     }
 
