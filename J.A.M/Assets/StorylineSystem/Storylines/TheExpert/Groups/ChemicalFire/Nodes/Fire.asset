@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: Fire
   <Choices>k__BackingField:
-  - rid: 9116668977360142348
-  - rid: 9116668977360142349
+  - rid: 9116668977360142474
+  - rid: 9116668977360142475
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: Something is burning in there! It's emitting strange
@@ -23,7 +23,7 @@ MonoBehaviour:
   <TaskType>k__BackingField: 0
   <Icon>k__BackingField: {fileID: 21300000, guid: ea698d351bd4748449aada363e59d6a3,
     type: 3}
-  <TimeLeft>k__BackingField: 0
+  <TimeLeft>k__BackingField: 10
   <Duration>k__BackingField: 2
   <MandatorySlots>k__BackingField: 1
   <OptionalSlots>k__BackingField: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 9116668977360142348
+    - rid: 9116668977360142474
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -42,12 +42,12 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 648a50182ff87844895ba803492d5a08,
           type: 2}
         <PreviewOutcome>k__BackingField: Preview...
-    - rid: 9116668977360142349
+    - rid: 9116668977360142475
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: LastChoice
         <NextNode>k__BackingField: {fileID: 11400000, guid: 21f9b75b12382c048bad0871f1e98c84,
           type: 2}
-        <Condition>k__BackingField: {fileID: 11400000, guid: e545a21b628cee0408511e4df5ecb34f,
+        <Condition>k__BackingField: {fileID: 11400000, guid: 51a265ec0700b8d429140d8cc71735f2,
           type: 2}
         <PreviewOutcome>k__BackingField: Preview...

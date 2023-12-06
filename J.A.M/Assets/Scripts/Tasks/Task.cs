@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using SS.Enumerations;
 using UnityEngine;
 
 public class Task
 {
     public string Name;
     public string Description;
+    public SSTaskStatus TaskStatus;
+    public SSTaskType TaskType;
     public Sprite Icon;
     public float TimeLeft;
     public float Duration;
@@ -14,15 +17,16 @@ public class Task
     public int OptionalSlots;
     public float HelpFactor;
     public RoomType Room;
-    public bool IsPermanent;
     public List<Tuple<ConditionSO, string>> Conditions;
     public int conditionIndex = 0;
 
-    public Task(string name, string description, Sprite icon, float timeLeft, float duration, int mandatorySlots,
-        int optionalSlots, float helpFactor, RoomType room, bool isPermanent, List<Tuple<ConditionSO, string>> conditions)
+    public Task(string name, string description, SSTaskStatus taskStatus, SSTaskType taskType, Sprite icon, float timeLeft, float duration, int mandatorySlots,
+        int optionalSlots, float helpFactor, RoomType room, List<Tuple<ConditionSO, string>> conditions)
     {
         Name = name;
         Description = description;
+        TaskStatus = taskStatus;
+        TaskType = taskType;
         Icon = icon;
         TimeLeft = timeLeft;
         Duration = duration;
@@ -31,7 +35,6 @@ public class Task
         OptionalSlots = optionalSlots;
         HelpFactor = helpFactor;
         Room = room;
-        IsPermanent = isPermanent;
         Conditions = conditions;
     }
 }

@@ -2,8 +2,8 @@
 {
     public enum SSTaskType
     {
-        Neutral,
-        Important,
-        Critical
+        Permanent,
+        Timed,
+        Untimed
     }
 }

@@ -16,8 +16,7 @@ public class Speaker : MonoBehaviour
 
     public void Update()
     {
-        if (isSpeaking) return;
-        if (sentences.Count <= 0) return;
+        if (isSpeaking || sentences.Count <= 0) return;
         isSpeaking = true;
         StartCoroutine(DisplayDialogue());
     }

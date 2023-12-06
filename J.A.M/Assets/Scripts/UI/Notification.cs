@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SS.Enumerations;
 using TMPro;
 using UnityEngine;
 
@@ -47,6 +48,7 @@ public class Notification : MonoBehaviour
         List<Tuple<Sprite, string, string>> dialogues = null)
     {
         Task = task;
+        Task.TimeLeft *= TimeTickSystem.ticksPerHour;
         icon.sprite = task.Icon;
         Dialogues = dialogues;
         this.spaceshipManager = spaceshipManager;
@@ -56,7 +58,7 @@ public class Notification : MonoBehaviour
     public void Display()
     {
         TimeTickSystem.ModifyTimeScale(0.0f);
-        GameManager.Instance.UIManager.taskUI.Initialize(this);
+        GameManager.Instance.UIManager.taskUI.Initialize(this, true);
     }
 
     public void OnStart(List<CharacterUISlot> characters)
@@ -98,6 +100,7 @@ public class Notification : MonoBehaviour
         
         if (LeaderCharacters.Count == 0)
         {
+            Debug.LogError("No leader assigned to task");
             taskCondition = Task.Conditions[^1].Item1;
             Task.conditionIndex = Task.Conditions.Count - 1;
             validatedCondition = true;
@@ -195,10 +198,19 @@ public class Notification : MonoBehaviour
                 OnComplete();
             }
         }
-        else if (!Task.IsPermanent)
+        else if (Task.TaskType.Equals(SSTaskType.Timed))
         {
-            if (Task.TimeLeft <= 0) GameManager.Instance.UIManager.taskUI.StartTask();
-            Task.TimeLeft -= TimeTickSystem.timePerTick;
+            if (Task.TimeLeft > 0)
+            {
+                Task.TimeLeft -= TimeTickSystem.timePerTick;
+                time.text = Task.TimeLeft + " hours";
+            }
+            else
+            {
+                GameManager.Instance.UIManager.taskUI.Initialize(this);
+                GameManager.Instance.UIManager.taskUI.StartTask();
+            }
+
         }
     }
 

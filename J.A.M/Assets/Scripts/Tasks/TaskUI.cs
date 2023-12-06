@@ -1,11 +1,13 @@
 using TMPro;
 using System.Collections.Generic;
 using System.Linq;
+using SS.Enumerations;
 using UnityEngine;
 
 public class TaskUI : MonoBehaviour
 {
-    [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
+    [Header("Task")]
+    [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI timeLeftText;
     [SerializeField] private TextMeshProUGUI durationText;
     [SerializeField] private TextMeshProUGUI descriptionText;
@@ -14,33 +16,27 @@ public class TaskUI : MonoBehaviour
     [SerializeField] private CharacterUISlot[] inactiveSlots;
     [SerializeField] private WarningUI warningUI;
 
-    [Header("Dialogues")] [SerializeField] private GameObject dialogueContainer;
+    [Header("Dialogues")]
+    [SerializeField] private GameObject dialogueContainer;
 
-    [Header("Values")] [SerializeField] private float timeLeft;
+    [Header("Values")]
+    [SerializeField] private float timeLeft;
     [SerializeField] private float duration;
 
     private Notification notification;
-    [SerializeField] private List<CharacterUISlot> characterSlots = new();
+    private List<CharacterUISlot> characterSlots = new();
     private bool taskStarted;
 
-    /*
-     * NOTES :
-     *      fix : Notif icon grabs raycast
-     *      fix : opening menu with notif icon doesnt show assigned characters
-     *      add : refreshDisplay to update values after assigning characters
-     *      fix : remove characterIcon from task if menu is closed without starting task
-     */
-    public void Initialize(Notification tn)
+    public void Initialize(Notification notification, bool needToDisplay = false)
     {
-        notification = tn;
+        this.notification = notification;
         warningUI.gameObject.SetActive(false);
-        titleText.text = notification.Task.Name;
-        timeLeft = notification.Task.TimeLeft;
-        duration = notification.Task.Duration;
-        descriptionText.text = notification.Task.Description;
+        titleText.text = this.notification.Task.Name;
+        timeLeft = this.notification.Task.TimeLeft;
+        duration = this.notification.Task.Duration;
+        descriptionText.text = this.notification.Task.Description;
         taskStarted = false;
-        notification = tn;
-        for (int i = 0; i < notification.Task.MandatorySlots; i++)
+        for (int i = 0; i < this.notification.Task.MandatorySlots; i++)
         {
             var slot = inactiveSlots[i];
             slot.isMandatory = true;
@@ -49,7 +45,7 @@ public class TaskUI : MonoBehaviour
             characterSlots.Add(slot);
         }
 
-        for (int i = 3; i < notification.Task.OptionalSlots + 3; i++)
+        for (int i = 3; i < this.notification.Task.OptionalSlots + 3; i++)
         {
             var slot = inactiveSlots[i];
             slot.isMandatory = false;
@@ -58,13 +54,15 @@ public class TaskUI : MonoBehaviour
             characterSlots.Add(slot);
         }
 
-        timeLeftText.SetText(timeLeft.ToString());
-
-        TimeTickSystem.OnTick += UpdateTask;
-        gameObject.SetActive(true);
+        if (needToDisplay)
+        {
+            timeLeftText.SetText(timeLeft.ToString());
+            TimeTickSystem.OnTick += UpdateTask;
+            gameObject.SetActive(true);
+        }
     }
 
-    public void UpdateTask(object sender, TimeTickSystem.OnTickEventArgs e)
+    private void UpdateTask(object sender, TimeTickSystem.OnTickEventArgs e)
     {
         if (!taskStarted)
         {
@@ -128,7 +126,7 @@ public class TaskUI : MonoBehaviour
 
     public void StartTask()
     {
-        if (notification.Task.IsPermanent)
+        if (notification.Task.TaskType.Equals(SSTaskType.Permanent))
             if (!CanStartTask())
                 return;
         if (CharactersWorking()) return;
@@ -175,7 +173,7 @@ public class TaskUI : MonoBehaviour
     public void CloseNotification()
     {
         TimeTickSystem.ModifyTimeScale(1.0f);
-        if (notification.Task.IsPermanent) notification.OnCancel();
+        if (notification.Task.TaskType.Equals(SSTaskType.Permanent)) notification.OnCancel();
     }
 
     private bool CharactersWorking()
