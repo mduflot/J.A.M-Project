@@ -7,30 +7,34 @@ public class TraitsData
     public enum Job
     {
         None = 0,
-        Soldier = 1,
+        Military = 1,
         Electrician = 2,
-        Gardener = 4,
-        Mechanic = 8
+        Cook = 4,
+        FieldEngineer = 8,
+        Pilot = 16,
+        Scientist = 32,
+        Mechanic = 64,
+        Civilian = 128,
     };
 
     [Flags]
     public enum PositiveTraits
     {
         None = 0,
-        Crafty = 1,
-        Smart = 2,
-        Quick = 4,
-        GreenHanded = 8,
+        Authority = 1,
+        Calm = 2,
+        Cautious = 4,
+        Curious = 8,
+        Extroverted = 16,
     };
 
     [Flags]
     public enum NegativeTraits
     {
         None = 0,
-        Slow = 1,
-        Dull = 2,
-        Unfocused = 4,
-        Depressed = 8,
+        HotHeaded = 1,
+        Old = 2,
+        ShellShocked = 4,
     }
 
     [Flags]

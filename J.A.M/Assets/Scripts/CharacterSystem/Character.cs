@@ -14,12 +14,7 @@ public class Character : MonoBehaviour
     private float stress = 10.0f;
     
     private bool isIdle;
-
-    void Start()
-    {
-        TraitSystem.ApplyBonuses(this, TraitsData.Job.Mechanic, TraitsData.PositiveTraits.Crafty | TraitsData.PositiveTraits.GreenHanded, TraitsData.NegativeTraits.Dull | TraitsData.NegativeTraits.Slow);
-    }
-
+    
     public TraitsData.Job GetJob() { return traits.GetJob(); }
 
     public TraitsData.PositiveTraits GetPositiveTraits() { return traits.GetPositiveTraits(); }

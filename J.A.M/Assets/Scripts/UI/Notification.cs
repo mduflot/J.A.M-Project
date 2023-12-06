@@ -113,10 +113,52 @@ namespace UI
 
             if (validatedCondition)
             {
-                //Generate event args
-                outcomeEventArgs = new OutcomeSystem.OutcomeEventArgs[taskCondition.outcomes.Outcomes.Length];
-                for (var i = 0; i < taskCondition.outcomes.Outcomes.Length; i++)
+                //Check additional conditions
+                var additionalConditionOutcomes = new List<Outcome>();
+                for (uint i = 0; i < taskCondition.additionnalConditions.Length; i++)
                 {
+                    var cond = taskCondition.additionnalConditions[i];
+                    switch (cond.target)
+                    {
+                        case OutcomeData.OutcomeTarget.Leader:
+                            if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0].GetTraits(), cond))
+                                continue;
+                            break;
+
+                        case OutcomeData.OutcomeTarget.Assistant:
+                            if (!ConditionSystem.CheckCharacterCondition(AssistantCharacters[0].GetTraits(), cond))
+                                continue;
+                            break;
+
+                        case OutcomeData.OutcomeTarget.Crew:
+                            if (!ConditionSystem.CheckCrewCondition(cond))
+                                continue;
+                            break;
+
+                        case OutcomeData.OutcomeTarget.Ship:
+                            if (!ConditionSystem.CheckSpaceshipCondition(cond))
+                                continue;
+                            break;
+
+                        case OutcomeData.OutcomeTarget.Gauge:
+                            if (!ConditionSystem.CheckGaugeCondition(cond))
+                                continue;
+                            break;
+
+                        case OutcomeData.OutcomeTarget.None:
+                            break;
+                    }
+
+                    additionalConditionOutcomes.AddRange(cond.outcomes.Outcomes);
+                }
+
+                //Generate event args
+                outcomeEventArgs =
+                    new OutcomeSystem.OutcomeEventArgs[taskCondition.outcomes.Outcomes.Length +
+                                                       additionalConditionOutcomes.Count];
+                for (int i = 0; i < taskCondition.outcomes.Outcomes.Length; i++)
+                {
+                    //Generate event args
                     var outcome = taskCondition.outcomes.Outcomes[i];
                     switch (outcome.OutcomeTarget)
                     {
@@ -134,31 +176,54 @@ namespace UI
                             break;
 
                         case OutcomeData.OutcomeTarget.Gauge:
-
                             outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
                             break;
                     }
                 }
 
-                //Generate events
-                outcomeEvents = new OutcomeSystem.OutcomeEvent[taskCondition.outcomes.Outcomes.Length];
-                for (var i = 0; i < outcomeEventArgs.Length; i++)
+                var numberOfBaseOutcomes = taskCondition.outcomes.Outcomes.Length;
+                for (int i = 0; i < additionalConditionOutcomes.Count; i++)
                 {
-                    outcomeEvents[i] = OutcomeSystem.GenerateOutcomeEvent(outcomeEventArgs[i]);
-                }
-            }
-            else
-            {
-                outcomeEventArgs = Array.Empty<OutcomeSystem.OutcomeEventArgs>();
-                outcomeEvents = Array.Empty<OutcomeSystem.OutcomeEvent>();
-            }
+                    var outcome = additionalConditionOutcomes[i];
+                    switch (outcome.OutcomeTarget)
+                    {
+                        case OutcomeData.OutcomeTarget.Leader:
+                            outcomeEventArgs[numberOfBaseOutcomes + i] =
+                                OutcomeSystem.GenerateEventArgs(outcome, LeaderCharacters[0]);
+                            break;
 
-            Task.Duration = AssistantCharacters.Count > 0
-                ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
-                : Task.Duration;
-            Task.Duration *= TimeTickSystem.ticksPerHour;
-            Task.BaseDuration = Task.Duration;
-            IsStarted = true;
+                        case OutcomeData.OutcomeTarget.Assistant:
+                            outcomeEventArgs[numberOfBaseOutcomes + i] =
+                                OutcomeSystem.GenerateEventArgs(outcome, AssistantCharacters[0]);
+                            break;
+
+                        case OutcomeData.OutcomeTarget.Crew:
+                            outcomeEventArgs[numberOfBaseOutcomes + i] = OutcomeSystem.GenerateEventArgs(outcome,
+                                GameManager.Instance.SpaceshipManager.characters);
+                            break;
+
+                        case OutcomeData.OutcomeTarget.Gauge:
+                            outcomeEventArgs[numberOfBaseOutcomes + i] =
+                                OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
+                            break;
+                    }
+                }
+
+                //Generate events
+                outcomeEvents = new OutcomeSystem.OutcomeEvent[outcomeEventArgs.Length];
+                for (int i = 0; i < outcomeEventArgs.Length; i++)
+                {
+                    outcomeEventArgs = Array.Empty<OutcomeSystem.OutcomeEventArgs>();
+                    outcomeEvents = Array.Empty<OutcomeSystem.OutcomeEvent>();
+                }
+
+                Task.Duration = AssistantCharacters.Count > 0
+                    ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
+                    : Task.Duration;
+                Task.Duration *= TimeTickSystem.ticksPerHour;
+                Task.BaseDuration = Task.Duration;
+                IsStarted = true;
+            }
         }
 
         private bool RouteCondition(OutcomeData.OutcomeTarget target)

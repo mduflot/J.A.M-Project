@@ -80,6 +80,7 @@ public class TraitSystem
     {
         switch(jobMatch)
         {
+            /*
             case TraitsData.Job.None:
                 //No bonus ?
                 Debug.Log("no job");
@@ -98,13 +99,17 @@ public class TraitSystem
                 return 1.0f;
             default:
                 return 0.0f;
+                */
         }
+
+        return 0.0f;
     }
     
     public static void ApplyPositiveTraitBonus(TraitsData.PositiveTraits pt)
     {
         switch(pt)
         {
+            /*
             case TraitsData.PositiveTraits.None:
                 //No bonus ?
                 Debug.Log("no positives");
@@ -126,6 +131,7 @@ public class TraitSystem
                 break;
             default:
                 break;
+                */
         }
     }
    
@@ -133,6 +139,7 @@ public class TraitSystem
     {
         switch(nt)
         {
+            /*
             case TraitsData.NegativeTraits.None:
                 //No bonus ?
                 Debug.Log("no negatives");
@@ -155,6 +162,7 @@ public class TraitSystem
                 break;
             default:
                 break;
+                */
         }
     }
 
