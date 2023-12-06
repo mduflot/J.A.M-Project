@@ -1,51 +1,43 @@
 using System.Collections.Generic;
 using System.Linq;
+using Managers;
+using SS.Enumerations;
+using TMPro;
+using UI;
 using UnityEngine;
 
 namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-    [Header("Task")]
-    [SerializeField] private TextMeshProUGUI titleText;
-    [SerializeField] private TextMeshProUGUI timeLeftText;
-    [SerializeField] private TextMeshProUGUI durationText;
-    [SerializeField] private TextMeshProUGUI descriptionText;
-    [SerializeField] private TextMeshProUGUI previewOutcomeText;
-    [SerializeField] private Transform characterSlotsParent;
-    [SerializeField] private CharacterUISlot[] inactiveSlots;
-    [SerializeField] private WarningUI warningUI;
+        [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
+        [SerializeField] private TextMeshProUGUI timeLeftText;
+        [SerializeField] private TextMeshProUGUI durationText;
+        [SerializeField] private TextMeshProUGUI descriptionText;
+        [SerializeField] private TextMeshProUGUI previewOutcomeText;
+        [SerializeField] private Transform characterSlotsParent;
+        [SerializeField] private CharacterUISlot[] inactiveSlots;
+        [SerializeField] private WarningUI warningUI;
 
-    [Header("Dialogues")]
-    [SerializeField] private GameObject dialogueContainer;
+        [Header("Dialogues")] [SerializeField] private GameObject dialogueContainer;
 
-    [Header("Values")]
-    [SerializeField] private float timeLeft;
-    [SerializeField] private float duration;
+        [Header("Values")] [SerializeField] private float timeLeft;
+        [SerializeField] private float duration;
 
-    private Notification notification;
-    private List<CharacterUISlot> characterSlots = new();
-    private bool taskStarted;
+        private Notification notification;
+        private List<CharacterUISlot> characterSlots = new();
+        private bool taskStarted;
 
-    public void Initialize(Notification notification, bool needToDisplay = false)
-    {
-        this.notification = notification;
-        warningUI.gameObject.SetActive(false);
-        titleText.text = this.notification.Task.Name;
-        timeLeft = this.notification.Task.TimeLeft;
-        duration = this.notification.Task.Duration;
-        descriptionText.text = this.notification.Task.Description;
-        taskStarted = false;
-        for (int i = 0; i < this.notification.Task.MandatorySlots; i++)
+        public void Initialize(Notification notification, bool needToDisplay = false)
         {
-            notification = tn;
+            this.notification = notification;
             warningUI.gameObject.SetActive(false);
-            titleText.text = notification.Task.Name;
-            timeLeft = notification.Task.TimeLeft;
-            duration = notification.Task.Duration;
-            descriptionText.text = notification.Task.Description;
+            titleText.text = this.notification.Task.Name;
+            timeLeft = this.notification.Task.TimeLeft;
+            duration = this.notification.Task.Duration;
+            descriptionText.text = this.notification.Task.Description;
             taskStarted = false;
-            notification = tn;
+
             for (int i = 0; i < notification.Task.MandatorySlots; i++)
             {
                 var slot = inactiveSlots[i];
@@ -55,26 +47,24 @@ namespace Tasks
                 characterSlots.Add(slot);
             }
 
-        for (int i = 3; i < this.notification.Task.OptionalSlots + 3; i++)
-        {
-            var slot = inactiveSlots[i];
-            slot.isMandatory = false;
-            slot.transform.SetParent(characterSlotsParent);
-            slot.gameObject.SetActive(true);
-            characterSlots.Add(slot);
+            for (int i = 3; i < this.notification.Task.OptionalSlots + 3; i++)
+            {
+                var slot = inactiveSlots[i];
+                slot.isMandatory = false;
+                slot.transform.SetParent(characterSlotsParent);
+                slot.gameObject.SetActive(true);
+                characterSlots.Add(slot);
+            }
+
+            if (needToDisplay)
+            {
+                timeLeftText.SetText(timeLeft.ToString());
+                TimeTickSystem.OnTick += UpdateTask;
+                gameObject.SetActive(true);
+            }
         }
 
-        if (needToDisplay)
-        {
-            timeLeftText.SetText(timeLeft.ToString());
-            TimeTickSystem.OnTick += UpdateTask;
-            gameObject.SetActive(true);
-        }
-    }
-
-    private void UpdateTask(object sender, TimeTickSystem.OnTickEventArgs e)
-    {
-        if (!taskStarted)
+        private void UpdateTask(object sender, TimeTickSystem.OnTickEventArgs e)
         {
             if (!taskStarted)
             {
@@ -83,36 +73,44 @@ namespace Tasks
                     bool condition = false;
                     switch (notification.Task.Conditions[index].Item1.target)
                     {
-                        case OutcomeData.OutcomeTarget.Leader :
+                        case OutcomeData.OutcomeTarget.Leader:
                             for (int j = 0; j < characterSlots.Count; j++)
                             {
                                 if (!characterSlots[j].isMandatory) continue;
                                 var character = characterSlots[j];
-                                condition = ConditionSystem.CheckCharacterCondition(character.icon.character.GetTraits(), notification.Task.Conditions[index].Item1);
+                                condition = ConditionSystem.CheckCharacterCondition(
+                                    character.icon.character.GetTraits(),
+                                    notification.Task.Conditions[index].Item1);
                             }
+
                             break;
-                    
-                        case OutcomeData.OutcomeTarget.Assistant :
+
+                        case OutcomeData.OutcomeTarget.Assistant:
                             for (int j = 0; j < characterSlots.Count; j++)
                             {
                                 if (characterSlots[j].isMandatory) continue;
                                 var character = characterSlots[j];
-                                condition = ConditionSystem.CheckCharacterCondition(character.icon.character.GetTraits(), notification.Task.Conditions[index].Item1);
+                                condition = ConditionSystem.CheckCharacterCondition(
+                                    character.icon.character.GetTraits(),
+                                    notification.Task.Conditions[index].Item1);
                             }
+
                             break;
-                    
-                        case OutcomeData.OutcomeTarget.Crew :
+
+                        case OutcomeData.OutcomeTarget.Crew:
                             condition = ConditionSystem.CheckCrewCondition(notification.Task.Conditions[index].Item1);
                             break;
-                    
-                        case OutcomeData.OutcomeTarget.Gauge :
+
+                        case OutcomeData.OutcomeTarget.Gauge:
                             condition = ConditionSystem.CheckGaugeCondition(notification.Task.Conditions[index].Item1);
                             break;
-                    
-                        case OutcomeData.OutcomeTarget.Ship :
-                            condition = ConditionSystem.CheckSpaceshipCondition(notification.Task.Conditions[index].Item1);
+
+                        case OutcomeData.OutcomeTarget.Ship:
+                            condition = ConditionSystem.CheckSpaceshipCondition(notification.Task.Conditions[index]
+                                .Item1);
                             break;
                     }
+
                     if (condition)
                     {
                         previewOutcomeText.text = notification.Task.Conditions[index].Item2;
@@ -120,7 +118,7 @@ namespace Tasks
                         break;
                     }
                 }
-            
+
                 var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
 
                 duration = assistantCharacters > 0
@@ -133,14 +131,15 @@ namespace Tasks
 
         public void StartTask()
         {
-            Debug.Log(gameObject.name);
-            if (notification.Task.IsPermanent) if (CanStartTask()) return;
+            if (notification.Task.TaskType.Equals(SSTaskType.Permanent))
+                if (CanStartTask())
+                    return;
             if (CharactersWorking()) return;
             notification.OnStart(characterSlots);
             taskStarted = true;
             CloseTask();
         }
-    
+
         private bool CanStartTask()
         {
             foreach (var slot in characterSlots)
@@ -150,23 +149,14 @@ namespace Tasks
                     return false;
                 }
             }
+
             return true;
         }
 
-    public void StartTask()
-    {
-        if (notification.Task.TaskType.Equals(SSTaskType.Permanent))
-            if (!CanStartTask())
-                return;
-        if (CharactersWorking()) return;
-        notification.OnStart(characterSlots);
-        taskStarted = true;
-        CloseTask();
-    }
-
-    private bool CanStartTask()
-    {
-        foreach (var slot in characterSlots)
+        /// <summary>
+        /// Close the task UI
+        /// </summary>
+        public void CloseTask()
         {
             foreach (var slot in characterSlots)
             {
@@ -188,28 +178,10 @@ namespace Tasks
         public void CloseNotification()
         {
             TimeTickSystem.ModifyTimeScale(1.0f);
-            if (notification.Task.IsPermanent) notification.OnCancel();
+            if (notification.Task.TaskType.Equals(SSTaskType.Permanent)) notification.OnCancel();
         }
 
-        TimeTickSystem.OnTick -= UpdateTask;
-        previewOutcomeText.text = null;
-        characterSlots.Clear();
-        GameManager.Instance.RefreshCharacterIcons();
-        gameObject.SetActive(false);
-    }
-
-    /// <summary>
-    /// Close the notification if it is permanent
-    /// </summary>
-    public void CloseNotification()
-    {
-        TimeTickSystem.ModifyTimeScale(1.0f);
-        if (notification.Task.TaskType.Equals(SSTaskType.Permanent)) notification.OnCancel();
-    }
-
-    private bool CharactersWorking()
-    {
-        foreach (var character in characterSlots)
+        private bool CharactersWorking()
         {
             foreach (var character in characterSlots)
             {

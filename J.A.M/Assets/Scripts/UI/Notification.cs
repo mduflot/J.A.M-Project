@@ -203,25 +203,28 @@ namespace UI
                     OnComplete();
                 }
             }
-            else if (!Task.IsPermanent)
+            else if (Task.TaskType.Equals(SSTaskType.Timed))
             {
-                if (Task.TimeLeft <= 0) GameManager.Instance.UIManager.taskUI.StartTask();
-                Task.TimeLeft -= TimeTickSystem.timePerTick;
+                if (Task.TimeLeft > 0)
+                {
+                    Task.TimeLeft -= TimeTickSystem.timePerTick;
+                    time.text = Task.TimeLeft + " hours";
+                }
+                else
+                {
+                    GameManager.Instance.UIManager.taskUI.Initialize(this);
+                    GameManager.Instance.UIManager.taskUI.StartTask();
+                }
             }
         }
-        else if (Task.TaskType.Equals(SSTaskType.Timed))
+        
+        private void OnComplete()
         {
-            if (Task.TimeLeft > 0)
-            {
-                Task.TimeLeft -= TimeTickSystem.timePerTick;
-                time.text = Task.TimeLeft + " hours";
-            }
-            else
-            {
-                GameManager.Instance.UIManager.taskUI.Initialize(this);
-                GameManager.Instance.UIManager.taskUI.StartTask();
-            }
-
+            for (uint i = 0; i < outcomeEvents.Length; i++) outcomeEvents[i].Invoke(outcomeEventArgs[i]);
+            IsCompleted = true;
+            ResetCharacters();
+            GameManager.Instance.RefreshCharacterIcons();
+            spaceshipManager.notificationPool.AddToPool(gameObject);
         }
 
         public void OnCancel()
