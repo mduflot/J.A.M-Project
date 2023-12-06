@@ -1,10 +1,13 @@
-public class CharacterUISlot : CharacterUI
+namespace UI
 {
-    public bool isMandatory;
-    public UnityEngine.UI.Image image;
-
-    private void Start()
+    public class CharacterUISlot : CharacterUI
     {
-        image = GetComponent<UnityEngine.UI.Image>();
+        public bool isMandatory;
+        public UnityEngine.UI.Image image;
+
+        private void Start()
+        {
+            image = GetComponent<UnityEngine.UI.Image>();
+        }
     }
 }

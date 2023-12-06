@@ -575,7 +575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.10980393, g: 0.04705883, b: 0.18039216, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1057,7 +1057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.54509807, g: 0.3529412, b: 0.81568635, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1652,7 +1652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4408,7 +4408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.10980393, g: 0.04705883, b: 0.18039216, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4483,7 +4483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4910,6 +4910,7 @@ GameObject:
   - component: {fileID: 2280232418969158738}
   - component: {fileID: 1689793084273940706}
   - component: {fileID: 198957416594102284}
+  - component: {fileID: 8910415398951938729}
   m_Layer: 5
   m_Name: AirflowTask
   m_TagString: Untagged
@@ -4934,9 +4935,9 @@ RectTransform:
   - {fileID: 1293726469673351315}
   m_Father: {fileID: 3301070007106207493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -102.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 245, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4520503119858979931
@@ -5054,6 +5055,21 @@ MonoBehaviour:
   startingNodesOnly: 0
   selectedNodeGroupIndex: 0
   selectedNodeIndex: 0
+--- !u!114 &8910415398951938729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4693067613091446871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ef0882d308d794faa997fc570dff10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskName: {fileID: 3812915490664935826}
+  taskDuration: {fileID: 4776579883889170466}
+  taskIcon: {fileID: 7547856378610335903}
 --- !u!1 &4724313365680135703
 GameObject:
   m_ObjectHideFlags: 0
@@ -5651,6 +5667,7 @@ GameObject:
   - component: {fileID: 3157598716493124854}
   - component: {fileID: 7197155671540076136}
   - component: {fileID: 676571106706987494}
+  - component: {fileID: 3533441821595818916}
   m_Layer: 5
   m_Name: FoodTask
   m_TagString: Untagged
@@ -5675,9 +5692,9 @@ RectTransform:
   - {fileID: 1188568345960732744}
   m_Father: {fileID: 3301070007106207493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -32.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 245, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &782733084833179703
@@ -5795,6 +5812,21 @@ MonoBehaviour:
   startingNodesOnly: 0
   selectedNodeGroupIndex: 1
   selectedNodeIndex: 0
+--- !u!114 &3533441821595818916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5182467873110272665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ef0882d308d794faa997fc570dff10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskName: {fileID: 6457579728362651405}
+  taskDuration: {fileID: 3525407063263104070}
+  taskIcon: {fileID: 920470978882971046}
 --- !u!1 &5192150245774814562
 GameObject:
   m_ObjectHideFlags: 0
@@ -5930,7 +5962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.54509807, g: 0.3529412, b: 0.81568635, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -7742,8 +7774,8 @@ GameObject:
   - component: {fileID: 8772978967732399951}
   - component: {fileID: 7588597418666890429}
   - component: {fileID: 7899402557505624553}
-  - component: {fileID: 1870500461802367801}
   - component: {fileID: 2143731523414814458}
+  - component: {fileID: 1870500461802367801}
   m_Layer: 5
   m_Name: HullTask
   m_TagString: Untagged
@@ -7768,9 +7800,9 @@ RectTransform:
   - {fileID: 5866514566376719344}
   m_Father: {fileID: 3301070007106207493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -242.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 245, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8772978967732399951
@@ -7867,21 +7899,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1870500461802367801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7630675645902737396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30ef0882d308d794faa997fc570dff10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  taskName: {fileID: 0}
-  taskDuration: {fileID: 0}
-  taskIcon: {fileID: 0}
 --- !u!114 &2143731523414814458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7903,6 +7920,21 @@ MonoBehaviour:
   startingNodesOnly: 0
   selectedNodeGroupIndex: 3
   selectedNodeIndex: 0
+--- !u!114 &1870500461802367801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630675645902737396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ef0882d308d794faa997fc570dff10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskName: {fileID: 4781137683229449722}
+  taskDuration: {fileID: 1226649537049721618}
+  taskIcon: {fileID: 2997364441078496909}
 --- !u!1 &7870824234314044307
 GameObject:
   m_ObjectHideFlags: 0
@@ -9359,6 +9391,7 @@ GameObject:
   - component: {fileID: 7666141375782269403}
   - component: {fileID: 8988374602915864711}
   - component: {fileID: 5313235406310021259}
+  - component: {fileID: 8373775433591861821}
   m_Layer: 5
   m_Name: PowerTask
   m_TagString: Untagged
@@ -9383,9 +9416,9 @@ RectTransform:
   - {fileID: 1944525427650101955}
   m_Father: {fileID: 3301070007106207493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -172.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 245, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &456258457685054182
@@ -9503,6 +9536,21 @@ MonoBehaviour:
   startingNodesOnly: 0
   selectedNodeGroupIndex: 2
   selectedNodeIndex: 0
+--- !u!114 &8373775433591861821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8974345295885191451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ef0882d308d794faa997fc570dff10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskName: {fileID: 1832734741980106633}
+  taskDuration: {fileID: 337108963901896221}
+  taskIcon: {fileID: 950491747556153505}
 --- !u!1 &8982828568388023342
 GameObject:
   m_ObjectHideFlags: 0
