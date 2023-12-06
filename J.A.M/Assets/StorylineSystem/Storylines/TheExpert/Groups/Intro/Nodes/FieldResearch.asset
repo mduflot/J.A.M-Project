@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: FieldResearch
   <Choices>k__BackingField:
-  - rid: 9116668982798057540
-  - rid: 9116668982798057541
-  - rid: 9116668982798057542
+  - rid: 8412203090294341646
+  - rid: 8412203090294341647
+  - rid: 8412203090294341648
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: The self-proclaimed alien tech Expert says he knows
@@ -36,31 +36,34 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 9116668982798057540
+    - rid: 8412203090294341646
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNode>k__BackingField: {fileID: 11400000, guid: 5081553d8c239114796182f3870c9a16,
           type: 2}
-        <Condition>k__BackingField: {fileID: 0}
+        <Condition>k__BackingField: {fileID: 11400000, guid: f1e088f7a6d5f19449fc75b06cb14d4d,
+          type: 2}
         <PreviewOutcome>k__BackingField: ASSIGNED says the guy knows too much to
           be trusted. They'll send him for interrogation in the Storage Room.
-    - rid: 9116668982798057541
+    - rid: 8412203090294341647
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: MiddleChoice
         <NextNode>k__BackingField: {fileID: 11400000, guid: d92c678114a73f841a62e8a4e5eddd63,
           type: 2}
-        <Condition>k__BackingField: {fileID: 0}
+        <Condition>k__BackingField: {fileID: 11400000, guid: cc722fb09719d9d409b5555120a9b436,
+          type: 2}
         <PreviewOutcome>k__BackingField: ASSIGNED says it may be too soon to trust
           the Expert, but knowing what holding the Artifact untails is too important
           to care. They'll send him to the Artifact Room to let him conduce his research.
-    - rid: 9116668982798057542
+    - rid: 8412203090294341648
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: LastChoice
         <NextNode>k__BackingField: {fileID: 11400000, guid: 3d980b96f5981cf41b7429f83cd3b724,
           type: 2}
-        <Condition>k__BackingField: {fileID: 0}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 2c41247c016d1f84a8ea93bb8e345c2b,
+          type: 2}
         <PreviewOutcome>k__BackingField: We can't trust this man with the Artifact
           but we'll let him go.

@@ -26,6 +26,7 @@ namespace Managers
         {
             Initialize();
             InitializeSystems();
+            checker.Initialize();
             notificationPool = new Pool<GameObject>(taskNotificationPrefab, 5);
         }
 

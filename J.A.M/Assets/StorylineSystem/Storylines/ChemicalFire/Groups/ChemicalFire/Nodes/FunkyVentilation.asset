@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: FunkyVentilation
   <Choices>k__BackingField:
-  - rid: 9116668977360143347
+  - rid: 8412203090294341783
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: The Ventilation is full of fume deposits and it's
@@ -32,13 +32,14 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 9116668977360143347
+    - rid: 8412203090294341783
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNode>k__BackingField: {fileID: 11400000, guid: 92378a3e4aafb4a4cbde54f9baae7fcc,
           type: 2}
-        <Condition>k__BackingField: {fileID: 0}
+        <Condition>k__BackingField: {fileID: 11400000, guid: a0828b4d5fb70ae4e9846d36e947bc38,
+          type: 2}
         <PreviewOutcome>k__BackingField: The Ventilation is full of fume deposits
           and it's making everyone in the ship high as a kite. Someone should do
           something...

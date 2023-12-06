@@ -10,7 +10,8 @@ namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-        [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
+        [Header("Task")]
+        [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI timeLeftText;
         [SerializeField] private TextMeshProUGUI durationText;
         [SerializeField] private TextMeshProUGUI descriptionText;
@@ -19,9 +20,11 @@ namespace Tasks
         [SerializeField] private CharacterUISlot[] inactiveSlots;
         [SerializeField] private WarningUI warningUI;
 
-        [Header("Dialogues")] [SerializeField] private GameObject dialogueContainer;
+        [Header("Dialogues")]
+        [SerializeField] private GameObject dialogueContainer;
 
-        [Header("Values")] [SerializeField] private float timeLeft;
+        [Header("Values")]
+        [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
 
         private Notification notification;
@@ -131,7 +134,7 @@ namespace Tasks
 
         public void StartTask()
         {
-            if (notification.Task.TaskType.Equals(SSTaskType.Permanent))
+            if (notification.Task.TaskType.Equals(SSTaskType.Permanent) || notification.Task.TaskType.Equals(SSTaskType.Untimed))
                 if (!CanStartTask())
                     return;
             if (CharactersWorking()) return;

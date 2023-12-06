@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using SS;
 using SS.Enumerations;
 using SS.ScriptableObjects;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,6 +14,8 @@ public class Checker : MonoBehaviour
     [SerializeField] private SSLauncher principalLauncher;
     [SerializeField] private SSLauncher secondaryLauncher;
     [SerializeField] private SSLauncher trivialLauncher;
+    [SerializeField] private GameObject presentationContainer;
+    [SerializeField] private TextMeshProUGUI presentationText; 
 
     private float priorityFactor;
     private Storyline chosenStoryline;
@@ -25,7 +29,6 @@ public class Checker : MonoBehaviour
     private List<Storyline> availableStoryLines = new();
     private List<SSNodeGroupSO> availableTimelines = new();
 
-    [ContextMenu("Initialize")]
     public void Initialize()
     {
         principalStorylines = ssCampaign.PrincipalStorylines;
@@ -33,7 +36,6 @@ public class Checker : MonoBehaviour
         trivialStorylines = ssCampaign.TrivialStorylines;
     }
 
-    [ContextMenu("GenerateRandomEvent")]
     public void GenerateRandomEvent()
     {
         var enabledPStorylines = principalStorylines.Where(((storyline => storyline.StorylineContainer.StoryStatus == SSStoryStatus.Enabled)));
@@ -283,6 +285,9 @@ public class Checker : MonoBehaviour
     {
         chosenTimeline = timeline;
         SSNodeSO node = null;
+        presentationContainer.SetActive(true);
+        presentationText.text = "New Storyline : " + chosenStoryline.StorylineContainer.FileName;
+        StartCoroutine(DisablePresentation());
         var count = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline].Count;
         switch (chosenStoryline.StorylineContainer.StoryType)
         {
@@ -329,5 +334,11 @@ public class Checker : MonoBehaviour
                 trivialLauncher.StartTimeline();
                 break;
         }
+    }
+    
+    private IEnumerator DisablePresentation()
+    {
+        yield return new WaitForSeconds(5.0f);
+        presentationContainer.SetActive(false);
     }
 }
