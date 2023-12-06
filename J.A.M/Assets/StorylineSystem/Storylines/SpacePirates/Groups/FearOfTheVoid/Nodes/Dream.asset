@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: Dream
   <Choices>k__BackingField:
-  - rid: 9116668977360142387
-  - rid: 9116668977360142388
+  - rid: 9116668977360142432
+  - rid: 9116668977360142433
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: Many crew members have experienced very strange dreams
@@ -24,7 +24,7 @@ MonoBehaviour:
   <TaskType>k__BackingField: 0
   <Icon>k__BackingField: {fileID: 21300000, guid: 178ea6ed06e6e114aa5b5ba5f88233cf,
     type: 3}
-  <TimeLeft>k__BackingField: 0
+  <TimeLeft>k__BackingField: 10
   <Duration>k__BackingField: 2
   <MandatorySlots>k__BackingField: 1
   <OptionalSlots>k__BackingField: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 9116668977360142387
+    - rid: 9116668977360142432
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -43,12 +43,12 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 648a50182ff87844895ba803492d5a08,
           type: 2}
         <PreviewOutcome>k__BackingField: Preview...
-    - rid: 9116668977360142388
+    - rid: 9116668977360142433
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: LastChoice
         <NextNode>k__BackingField: {fileID: 11400000, guid: 64bb6248603de0e4cbdf14941ed8cefc,
           type: 2}
-        <Condition>k__BackingField: {fileID: 11400000, guid: e545a21b628cee0408511e4df5ecb34f,
+        <Condition>k__BackingField: {fileID: 11400000, guid: 51a265ec0700b8d429140d8cc71735f2,
           type: 2}
         <PreviewOutcome>k__BackingField: Preview...

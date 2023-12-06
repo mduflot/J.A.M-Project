@@ -12,6 +12,7 @@ namespace SS.Elements
     public class SSTaskNode : SSNode
     {
         public string DescriptionTask { get; set; }
+        public SSTaskStatus TaskStatus { get; set; }
         public SSTaskType TaskType { get; set; }
         public Sprite TaskIcon { get; set; }
         public float TimeLeft { get; set; }
@@ -20,7 +21,6 @@ namespace SS.Elements
         public int OptionalSlots { get; set; }
         public float TaskHelpFactor { get; set; }
         public RoomType Room { get; set; }
-        public bool IsPermanent { get; set; }
 
         private VisualElement customDataContainer = new();
 
@@ -37,7 +37,6 @@ namespace SS.Elements
             OptionalSlots = 0;
             TaskHelpFactor = 0.75f;
             Room = RoomType.Flight;
-            IsPermanent = false;
 
             SSChoiceTaskSaveData firstChoiceData = new SSChoiceTaskSaveData()
             {
@@ -102,6 +101,11 @@ namespace SS.Elements
 
             customDataContainer.Add(textFoldout);
 
+            EnumField statusTypeEnumField = ElementUtility.CreateEnumField(TaskStatus, "Status Type :",
+                callback => { TaskStatus = (SSTaskStatus)callback.newValue; });
+
+            customDataContainer.Add(statusTypeEnumField);
+
             EnumField taskTypeEnumField = ElementUtility.CreateEnumField(TaskType, "Task Type :",
                 callback => { TaskType = (SSTaskType)callback.newValue; });
 
@@ -143,11 +147,6 @@ namespace SS.Elements
                 callback => { Room = (RoomType)callback.newValue; });
 
             customDataContainer.Add(roomEnumField);
-
-            Toggle isPermanentToggle = ElementUtility.CreateToggle(IsPermanent, "Is Permanent :",
-                callback => { IsPermanent = callback.newValue; });
-
-            customDataContainer.Add(isPermanentToggle);
 
             extensionContainer.Add(customDataContainer);
 

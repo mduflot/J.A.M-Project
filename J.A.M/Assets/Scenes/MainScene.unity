@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentStoryline: {fileID: 908526471}
+  currentStoryline: {fileID: 1107620578}
   spaceshipManager: {fileID: 1360174038}
   nodeContainer: {fileID: 11400000, guid: 188556f72a62def49a3907ef9dc69b0a, type: 2}
   nodeGroup: {fileID: 11400000, guid: 328d00adecc01dc4eb825eaa2b5cbc81, type: 2}
@@ -531,6 +531,18 @@ Transform:
 --- !u!114 &908526471 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6196855536627165640, guid: f4b0ad034b47349458511baeb5fff145,
+    type: 3}
+  m_PrefabInstance: {fileID: 1360174037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1107620578 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4155142919507163934, guid: f4b0ad034b47349458511baeb5fff145,
     type: 3}
   m_PrefabInstance: {fileID: 1360174037}
   m_PrefabAsset: {fileID: 0}
@@ -1090,11 +1102,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 664443831}
-    - target: {fileID: 4997119690143029177, guid: f4b0ad034b47349458511baeb5fff145,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 701981757}
     - target: {fileID: 5548623478867040994, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1764,7 +1771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentStoryline: {fileID: 908526471}
+  currentStoryline: {fileID: 2073672110}
   spaceshipManager: {fileID: 1360174038}
   nodeContainer: {fileID: 11400000, guid: 188556f72a62def49a3907ef9dc69b0a, type: 2}
   nodeGroup: {fileID: 11400000, guid: 328d00adecc01dc4eb825eaa2b5cbc81, type: 2}
@@ -1788,6 +1795,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 885315564}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2073672110 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1292848350423454869, guid: f4b0ad034b47349458511baeb5fff145,
+    type: 3}
+  m_PrefabInstance: {fileID: 1360174037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

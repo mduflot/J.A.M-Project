@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SS.Enumerations;
 using CharacterSystem;
 using Managers;
 using Tasks;
@@ -48,21 +49,22 @@ namespace UI
             }
         }
 
-        public void Initialize(Task task, SpaceshipManager spaceshipManager,
-            List<Tuple<Sprite, string, string>> dialogues = null)
-        {
-            Task = task;
-            icon.sprite = task.Icon;
-            Dialogues = dialogues;
-            this.spaceshipManager = spaceshipManager;
-            TimeTickSystem.ModifyTimeScale(1.0f);
-        }
+    public void Initialize(Task task, SpaceshipManager spaceshipManager,
+        List<Tuple<Sprite, string, string>> dialogues = null)
+    {
+        Task = task;
+        Task.TimeLeft *= TimeTickSystem.ticksPerHour;
+        icon.sprite = task.Icon;
+        Dialogues = dialogues;
+        this.spaceshipManager = spaceshipManager;
+        TimeTickSystem.ModifyTimeScale(1.0f);
+    }
 
-        public void Display()
-        {
-            TimeTickSystem.ModifyTimeScale(0.0f);
-            GameManager.Instance.UIManager.taskUI.Initialize(this);
-        }
+    public void Display()
+    {
+        TimeTickSystem.ModifyTimeScale(0.0f);
+        GameManager.Instance.UIManager.taskUI.Initialize(this, true);
+    }
 
         public void OnStart(List<CharacterUISlot> characters)
         {
@@ -101,12 +103,13 @@ namespace UI
                 }
             }
         
-            if (LeaderCharacters.Count == 0)
-            {
-                taskCondition = Task.Conditions[^1].Item1;
-                Task.conditionIndex = Task.Conditions.Count - 1;
-                validatedCondition = true;
-            }
+        if (LeaderCharacters.Count == 0)
+        {
+            Debug.LogError("No leader assigned to task");
+            taskCondition = Task.Conditions[^1].Item1;
+            Task.conditionIndex = Task.Conditions.Count - 1;
+            validatedCondition = true;
+        }
 
             if (validatedCondition)
             {
@@ -206,14 +209,19 @@ namespace UI
                 Task.TimeLeft -= TimeTickSystem.timePerTick;
             }
         }
-
-        private void OnComplete()
+        else if (Task.TaskType.Equals(SSTaskType.Timed))
         {
-            for (uint i = 0; i < outcomeEvents.Length; i++) outcomeEvents[i].Invoke(outcomeEventArgs[i]);
-            IsCompleted = true;
-            ResetCharacters();
-            GameManager.Instance.RefreshCharacterIcons();
-            spaceshipManager.notificationPool.AddToPool(gameObject);
+            if (Task.TimeLeft > 0)
+            {
+                Task.TimeLeft -= TimeTickSystem.timePerTick;
+                time.text = Task.TimeLeft + " hours";
+            }
+            else
+            {
+                GameManager.Instance.UIManager.taskUI.Initialize(this);
+                GameManager.Instance.UIManager.taskUI.StartTask();
+            }
+
         }
 
         public void OnCancel()

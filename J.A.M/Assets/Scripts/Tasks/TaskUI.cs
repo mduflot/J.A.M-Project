@@ -1,43 +1,42 @@
 using System.Collections.Generic;
 using System.Linq;
-using Managers;
-using TMPro;
-using UI;
 using UnityEngine;
 
 namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-        [Header("Task")] 
-        [SerializeField] private TextMeshProUGUI titleText;
-        [SerializeField] private TextMeshProUGUI timeLeftText;
-        [SerializeField] private TextMeshProUGUI durationText;
-        [SerializeField] private TextMeshProUGUI descriptionText;
-        [SerializeField] private TextMeshProUGUI previewOutcomeText;
-        [SerializeField] private Transform characterSlotsParent;
-        [SerializeField] private CharacterUISlot[] inactiveSlots;
-        [SerializeField] private WarningUI warningUI;
+    [Header("Task")]
+    [SerializeField] private TextMeshProUGUI titleText;
+    [SerializeField] private TextMeshProUGUI timeLeftText;
+    [SerializeField] private TextMeshProUGUI durationText;
+    [SerializeField] private TextMeshProUGUI descriptionText;
+    [SerializeField] private TextMeshProUGUI previewOutcomeText;
+    [SerializeField] private Transform characterSlotsParent;
+    [SerializeField] private CharacterUISlot[] inactiveSlots;
+    [SerializeField] private WarningUI warningUI;
 
-        [Header("Dialogues")] 
-        [SerializeField] private GameObject dialogueContainer;
+    [Header("Dialogues")]
+    [SerializeField] private GameObject dialogueContainer;
 
-        [Header("Values")] 
-        [SerializeField] private float timeLeft;
-        [SerializeField] private float duration;
+    [Header("Values")]
+    [SerializeField] private float timeLeft;
+    [SerializeField] private float duration;
 
-        private Notification notification;
-        [SerializeField] private List<CharacterUISlot> characterSlots = new();
-        private bool taskStarted;
+    private Notification notification;
+    private List<CharacterUISlot> characterSlots = new();
+    private bool taskStarted;
 
-        /*
-         * NOTES :
-         *      fix : Notif icon grabs raycast
-         *      fix : opening menu with notif icon doesnt show assigned characters
-         *      add : refreshDisplay to update values after assigning characters
-         *      fix : remove characterIcon from task if menu is closed without starting task
-         */
-        public void Initialize(Notification tn)
+    public void Initialize(Notification notification, bool needToDisplay = false)
+    {
+        this.notification = notification;
+        warningUI.gameObject.SetActive(false);
+        titleText.text = this.notification.Task.Name;
+        timeLeft = this.notification.Task.TimeLeft;
+        duration = this.notification.Task.Duration;
+        descriptionText.text = this.notification.Task.Description;
+        taskStarted = false;
+        for (int i = 0; i < this.notification.Task.MandatorySlots; i++)
         {
             notification = tn;
             warningUI.gameObject.SetActive(false);
@@ -56,22 +55,26 @@ namespace Tasks
                 characterSlots.Add(slot);
             }
 
-            for (int i = 3; i < notification.Task.OptionalSlots + 3; i++)
-            {
-                var slot = inactiveSlots[i];
-                slot.isMandatory = false;
-                slot.transform.SetParent(characterSlotsParent);
-                slot.gameObject.SetActive(true);
-                characterSlots.Add(slot);
-            }
+        for (int i = 3; i < this.notification.Task.OptionalSlots + 3; i++)
+        {
+            var slot = inactiveSlots[i];
+            slot.isMandatory = false;
+            slot.transform.SetParent(characterSlotsParent);
+            slot.gameObject.SetActive(true);
+            characterSlots.Add(slot);
+        }
 
+        if (needToDisplay)
+        {
             timeLeftText.SetText(timeLeft.ToString());
-
             TimeTickSystem.OnTick += UpdateTask;
             gameObject.SetActive(true);
         }
+    }
 
-        public void UpdateTask(object sender, TimeTickSystem.OnTickEventArgs e)
+    private void UpdateTask(object sender, TimeTickSystem.OnTickEventArgs e)
+    {
+        if (!taskStarted)
         {
             if (!taskStarted)
             {
@@ -150,10 +153,20 @@ namespace Tasks
             return true;
         }
 
-        /// <summary>
-        /// Close the task UI
-        /// </summary>
-        public void CloseTask()
+    public void StartTask()
+    {
+        if (notification.Task.TaskType.Equals(SSTaskType.Permanent))
+            if (!CanStartTask())
+                return;
+        if (CharactersWorking()) return;
+        notification.OnStart(characterSlots);
+        taskStarted = true;
+        CloseTask();
+    }
+
+    private bool CanStartTask()
+    {
+        foreach (var slot in characterSlots)
         {
             foreach (var slot in characterSlots)
             {
@@ -178,7 +191,25 @@ namespace Tasks
             if (notification.Task.IsPermanent) notification.OnCancel();
         }
 
-        private bool CharactersWorking()
+        TimeTickSystem.OnTick -= UpdateTask;
+        previewOutcomeText.text = null;
+        characterSlots.Clear();
+        GameManager.Instance.RefreshCharacterIcons();
+        gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Close the notification if it is permanent
+    /// </summary>
+    public void CloseNotification()
+    {
+        TimeTickSystem.ModifyTimeScale(1.0f);
+        if (notification.Task.TaskType.Equals(SSTaskType.Permanent)) notification.OnCancel();
+    }
+
+    private bool CharactersWorking()
+    {
+        foreach (var character in characterSlots)
         {
             foreach (var character in characterSlots)
             {
