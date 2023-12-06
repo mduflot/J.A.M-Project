@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: TheInterrogation
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: TheInterrogation
+  <Choices>k__BackingField:
+  - rid: 9116668977360142977
+  - rid: 9116668977360142978
+  - rid: 9116668977360142979
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: The Expert didn't find us by chance... He says he
+    has a vision that told him about the Artifact's trajectory. One thing's for sure,
+    the Military can't let this man free with such knowledge. On the other hand,
+    researchers could need a person with a connexion to the Artifact.
+  <TaskStatus>k__BackingField: 2
+  <TaskType>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+    type: 3}
+  <TimeLeft>k__BackingField: 10
+  <Duration>k__BackingField: 2
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 0
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 4
+  references:
+    version: 2
+    RefIds:
+    - rid: 9116668977360142977
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: a64dc5a195313ef4fbd8a4f375e56479,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 0}
+        <PreviewOutcome>k__BackingField: Preview...
+    - rid: 9116668977360142978
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: MiddleChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: f104a42fd1e373840aba5cf570b2bcf2,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 0}
+        <PreviewOutcome>k__BackingField: 
+    - rid: 9116668977360142979
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: LastChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: bd9014d343eed5347ac3e781b94586fd,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 0}
+        <PreviewOutcome>k__BackingField: 

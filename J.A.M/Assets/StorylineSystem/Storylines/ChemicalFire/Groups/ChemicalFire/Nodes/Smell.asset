@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
-  m_Name: Trouble
+  m_Name: Smell
   m_EditorClassIdentifier: 
-  <NodeName>k__BackingField: Trouble
+  <NodeName>k__BackingField: Smell
   <Choices>k__BackingField:
-  - rid: 9116668977360142947
+  - rid: 9116668977360142774
   <NodeType>k__BackingField: 0
   <IsStartingNode>k__BackingField: 0
-  <Text>k__BackingField: Hey, I hear we got company. Might be trouble.
+  <Text>k__BackingField: Hey, do you smell that? Is something burning?
   <SpeakerType>k__BackingField: 0
   <Duration>k__BackingField: 4
   <IsDialogueTask>k__BackingField: 0
@@ -26,9 +26,9 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 9116668977360142947
+    - rid: 9116668977360142774
       type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Next Node
-        <NextNode>k__BackingField: {fileID: 11400000, guid: 4ee61063f621fec4398ffd15218261cd,
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 0a94183d675a53546b9b079a97c05a79,
           type: 2}

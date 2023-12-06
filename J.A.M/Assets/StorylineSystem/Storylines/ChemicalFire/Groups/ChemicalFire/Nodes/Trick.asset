@@ -10,25 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
-  m_Name: Trouble
+  m_Name: Trick
   m_EditorClassIdentifier: 
-  <NodeName>k__BackingField: Trouble
+  <NodeName>k__BackingField: Trick
   <Choices>k__BackingField:
-  - rid: 9116668977360142947
+  - rid: 9116668977360142786
   <NodeType>k__BackingField: 0
   <IsStartingNode>k__BackingField: 0
-  <Text>k__BackingField: Hey, I hear we got company. Might be trouble.
-  <SpeakerType>k__BackingField: 0
+  <Text>k__BackingField: That should do the trick!
+  <SpeakerType>k__BackingField: 8
   <Duration>k__BackingField: 4
-  <IsDialogueTask>k__BackingField: 0
-  <PercentageTask>k__BackingField: 50
+  <IsDialogueTask>k__BackingField: 1
+  <PercentageTask>k__BackingField: 80
   <isCompleted>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 9116668977360142947
+    - rid: 9116668977360142786
       type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Next Node
-        <NextNode>k__BackingField: {fileID: 11400000, guid: 4ee61063f621fec4398ffd15218261cd,
-          type: 2}
+        <NextNode>k__BackingField: {fileID: 0}
