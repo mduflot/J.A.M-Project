@@ -88,7 +88,7 @@ public class SpaceshipManager : MonoBehaviour
             return;
         
         Debug.Log("Generating random event");
-        //Checker.GenerateRandomEvent();
+        checker.GenerateRandomEvent();
     }
 
     #region Tasks

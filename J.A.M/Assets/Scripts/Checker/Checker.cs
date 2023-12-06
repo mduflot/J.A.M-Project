@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using SS;
 using SS.Enumerations;
 using SS.ScriptableObjects;
+using UnityEditor.Rendering;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -35,12 +37,16 @@ public class Checker : MonoBehaviour
     [ContextMenu("GenerateRandomEvent")]
     public void GenerateRandomEvent()
     {
-        if (principalStorylines.Count == 0 && secondaryStorylines.Count == 0 && trivialStorylines.Count == 0)
+        var enabledPStorylines = principalStorylines.Where(((storyline => storyline.StorylineContainer.StoryStatus == SSStoryStatus.Enabled)));
+        var enabledSStorylines = secondaryStorylines.Where(((storyline => storyline.StorylineContainer.StoryStatus == SSStoryStatus.Enabled)));
+        var enabledTStorylines = trivialStorylines.Where(((storyline => storyline.StorylineContainer.StoryStatus == SSStoryStatus.Enabled)));
+
+        if (enabledPStorylines.Any() && enabledSStorylines.Any() && enabledTStorylines.Any())
         {
-            Debug.Log("No storylines available");
+            Debug.Log("No available storylines");
             return;
         }
-
+        
         if (activeStorylines.Count == 0)
         {
             for (int index = 0; index < principalStorylines.Count; index++)
