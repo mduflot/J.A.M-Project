@@ -14,20 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: Pilot
   <Choices>k__BackingField:
-  - rid: 9116668977360142422
+  - rid: 9116668977360143200
   <NodeType>k__BackingField: 0
   <IsStartingNode>k__BackingField: 0
   <Text>k__BackingField: Can't let these guys interfere. I'll handle the ship.
   <SpeakerType>k__BackingField: 8
   <Duration>k__BackingField: 4
-  <IsDialogueTask>k__BackingField: 0
-  <PercentageTask>k__BackingField: 50
+  <IsDialogueTask>k__BackingField: 1
+  <PercentageTask>k__BackingField: 0
   <isCompleted>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 9116668977360142422
+    - rid: 9116668977360143200
       type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Next Node
-        <NextNode>k__BackingField: {fileID: 0}
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 769eb6e221350bc4fab97752e2a13a0f,
+          type: 2}
