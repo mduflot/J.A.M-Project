@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using SS;
 using SS.Enumerations;
 using SS.ScriptableObjects;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,6 +14,8 @@ public class Checker : MonoBehaviour
     [SerializeField] private SSLauncher principalLauncher;
     [SerializeField] private SSLauncher secondaryLauncher;
     [SerializeField] private SSLauncher trivialLauncher;
+    [SerializeField] private GameObject presentationContainer;
+    [SerializeField] private TextMeshProUGUI presentationText; 
 
     private float priorityFactor;
     private Storyline chosenStoryline;
@@ -24,7 +29,6 @@ public class Checker : MonoBehaviour
     private List<Storyline> availableStoryLines = new();
     private List<SSNodeGroupSO> availableTimelines = new();
 
-    [ContextMenu("Initialize")]
     public void Initialize()
     {
         principalStorylines = ssCampaign.PrincipalStorylines;
@@ -32,15 +36,18 @@ public class Checker : MonoBehaviour
         trivialStorylines = ssCampaign.TrivialStorylines;
     }
 
-    [ContextMenu("GenerateRandomEvent")]
     public void GenerateRandomEvent()
     {
-        if (principalStorylines.Count == 0 && secondaryStorylines.Count == 0 && trivialStorylines.Count == 0)
+        var enabledPStorylines = principalStorylines.Where(((storyline => storyline.StorylineContainer.StoryStatus == SSStoryStatus.Enabled)));
+        var enabledSStorylines = secondaryStorylines.Where(((storyline => storyline.StorylineContainer.StoryStatus == SSStoryStatus.Enabled)));
+        var enabledTStorylines = trivialStorylines.Where(((storyline => storyline.StorylineContainer.StoryStatus == SSStoryStatus.Enabled)));
+
+        if (enabledPStorylines.Any() && enabledSStorylines.Any() && enabledTStorylines.Any())
         {
-            Debug.Log("No storylines available");
+            Debug.Log("No available storylines");
             return;
         }
-
+        
         if (activeStorylines.Count == 0)
         {
             for (int index = 0; index < principalStorylines.Count; index++)
@@ -278,6 +285,9 @@ public class Checker : MonoBehaviour
     {
         chosenTimeline = timeline;
         SSNodeSO node = null;
+        presentationContainer.SetActive(true);
+        presentationText.text = "New Storyline : " + chosenStoryline.StorylineContainer.FileName;
+        StartCoroutine(DisablePresentation());
         var count = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline].Count;
         switch (chosenStoryline.StorylineContainer.StoryType)
         {
@@ -324,5 +334,11 @@ public class Checker : MonoBehaviour
                 trivialLauncher.StartTimeline();
                 break;
         }
+    }
+    
+    private IEnumerator DisablePresentation()
+    {
+        yield return new WaitForSeconds(5.0f);
+        presentationContainer.SetActive(false);
     }
 }

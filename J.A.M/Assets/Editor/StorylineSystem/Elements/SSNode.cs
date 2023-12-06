@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SS.Utilities;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -42,7 +43,7 @@ namespace SS.Elements
         {
             /* TITLE CONTAINER */
 
-            TextField nodeNameTextField = ElementUtility.CreateTextField(NodeName, null, callback =>
+            TextField nodeNameTextField = SSElementUtility.CreateTextField(NodeName, null, callback =>
             {
                 TextField target = (TextField) callback.target;
 

@@ -9,6 +9,7 @@ namespace SS.ScriptableObjects
     public class SSTaskNodeSO : SSNodeSO
     {
         [field: SerializeField] public string Description { get; set; }
+        [field: SerializeField] public SSTaskStatus TaskStatus { get; set; }
         [field: SerializeField] public SSTaskType TaskType { get; set; }
         [field: SerializeField] public Sprite Icon { get; set; }
         [field: SerializeField] public float TimeLeft { get; set; }
@@ -17,18 +18,17 @@ namespace SS.ScriptableObjects
         [field: SerializeField] public int OptionalSlots { get; set; }
         [field: SerializeField] public float TaskHelpFactor { get; set; }
         [field: SerializeField] public RoomType Room { get; set; }
-        [field: SerializeField] public bool IsPermanent { get; set; }
 
         public void Initialize(string nodeName, List<SSNodeChoiceData> choices, SSNodeType nodeType,
-            bool isStartingNode, string descriptionTask, SSTaskType taskType, Sprite taskIcon, float timeLeft, float duration,
-            int mandatorySlots, int optionalSlots, float taskHelpFactor, RoomType room,
-            bool isPermanent)
+            bool isStartingNode, string descriptionTask, SSTaskStatus taskStatus, SSTaskType taskType, Sprite taskIcon, float timeLeft, float duration,
+            int mandatorySlots, int optionalSlots, float taskHelpFactor, RoomType room)
         {
             NodeName = nodeName;
             Choices = choices;
             NodeType = nodeType;
             IsStartingNode = isStartingNode;
             Description = descriptionTask;
+            TaskStatus = taskStatus;
             TaskType = taskType;
             Icon = taskIcon;
             TimeLeft = timeLeft;
@@ -37,7 +37,6 @@ namespace SS.ScriptableObjects
             OptionalSlots = optionalSlots;
             TaskHelpFactor = taskHelpFactor;
             Room = room;
-            IsPermanent = isPermanent;
         }
     }
 }

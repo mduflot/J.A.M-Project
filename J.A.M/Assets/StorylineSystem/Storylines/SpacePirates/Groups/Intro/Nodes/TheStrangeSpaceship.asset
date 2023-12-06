@@ -14,41 +14,76 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: TheStrangeSpaceship
   <Choices>k__BackingField:
-  - rid: 9116668977360142379
-  - rid: 9116668977360142380
+  - rid: 8412203090294341887
+  - rid: 8412203090294341888
+  - rid: 8412203090294341889
+  - rid: 8412203090294341890
+  - rid: 8412203090294341891
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: An unidentified human spaceship approaches at high
     speed. The crew doesn't seem to recognize the model of the vessel. What should
     we do?
-  <TaskType>k__BackingField: 2
+  <TaskStatus>k__BackingField: 2
+  <TaskType>k__BackingField: 1
   <Icon>k__BackingField: {fileID: 21300000, guid: 7d944ed3842671f45b0afda12595792b,
     type: 3}
-  <TimeLeft>k__BackingField: 0
+  <TimeLeft>k__BackingField: 10
   <Duration>k__BackingField: 2
   <MandatorySlots>k__BackingField: 1
   <OptionalSlots>k__BackingField: 0
   <TaskHelpFactor>k__BackingField: 0.75
-  <Room>k__BackingField: 4
-  <IsPermanent>k__BackingField: 0
+  <Room>k__BackingField: 7
   references:
     version: 2
     RefIds:
-    - rid: 9116668977360142379
+    - rid: 8412203090294341887
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNode>k__BackingField: {fileID: 11400000, guid: d65fb822741bc5349af99a11fa7aea32,
           type: 2}
-        <Condition>k__BackingField: {fileID: 11400000, guid: 648a50182ff87844895ba803492d5a08,
+        <Condition>k__BackingField: {fileID: 11400000, guid: e829b736a54bc5c4dabb23987b5d84d1,
           type: 2}
-        <PreviewOutcome>k__BackingField: Preview...
-    - rid: 9116668977360142380
+        <PreviewOutcome>k__BackingField: ASSIGNED will charge the boosters and turn
+          the ship to high speed mode. We won't let them near us!
+    - rid: 8412203090294341888
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 8cb38cb4d38683047980d58a63cfb5e1,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 1fe28f87acbde3340b34a52c5c8489fe,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ASSIGNED will charge the weapons in case
+          they try to attack us.
+    - rid: 8412203090294341889
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: ThirdChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 57a1b64cc0064bf42b1db4321faf748a,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 82269ab910c44fc409adf1538e8b0e3e,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ASSIGNED will turn on stealth mode and try
+          to remain undetected by the incoming spaceship.
+    - rid: 8412203090294341890
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FourthChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 7ecd8fc5feebd0c4d93be7f0b54b8789,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: cfcbd9bbf351ce44baf1932fab6758a8,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ASSIGNED will try to assess the incoming
+          spaceship and identify its intentions.
+    - rid: 8412203090294341891
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: LastChoice
-        <NextNode>k__BackingField: {fileID: 11400000, guid: 8cb38cb4d38683047980d58a63cfb5e1,
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 76a2183bbfe87414abbfc16fa4f4481a,
           type: 2}
-        <Condition>k__BackingField: {fileID: 11400000, guid: e545a21b628cee0408511e4df5ecb34f,
+        <Condition>k__BackingField: {fileID: 11400000, guid: cfd6bc65c546e174195b717e52df31b7,
           type: 2}
-        <PreviewOutcome>k__BackingField: Preview...
+        <PreviewOutcome>k__BackingField: ASSIGNED will try to assess the incoming
+          spaceship and identify its intentions.

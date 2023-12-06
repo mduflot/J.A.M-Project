@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
+  m_Name: Tailing
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: Tailing
+  <Choices>k__BackingField:
+  - rid: 8412203090294341853
+  <NodeType>k__BackingField: 0
+  <IsStartingNode>k__BackingField: 0
+  <Text>k__BackingField: They're tailing us! Their ship is fast as hell!
+  <SpeakerType>k__BackingField: 12
+  <Duration>k__BackingField: 4
+  <IsDialogueTask>k__BackingField: 1
+  <PercentageTask>k__BackingField: 30
+  <isCompleted>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 8412203090294341853
+      type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNode>k__BackingField: {fileID: 11400000, guid: d27575031606f3b49946233dc28c994e,
+          type: 2}

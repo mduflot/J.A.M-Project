@@ -202,6 +202,7 @@ namespace SS.Utilities
                     NodeType = taskNode.NodeType,
                     Position = taskNode.GetPosition().position,
                     DescriptionTask = taskNode.DescriptionTask,
+                    TaskStatus = taskNode.TaskStatus,
                     TaskType = taskNode.TaskType,
                     TaskIcon = taskNode.TaskIcon,
                     TimeLeft = taskNode.TimeLeft,
@@ -209,8 +210,7 @@ namespace SS.Utilities
                     MandatorySlots = taskNode.MandatorySlots,
                     OptionalSlots = taskNode.OptionalSlots,
                     TaskHelpFactor = taskNode.TaskHelpFactor,
-                    Room = taskNode.Room,
-                    IsPermanent = taskNode.IsPermanent
+                    Room = taskNode.Room
                 };
 
                 graphData.Nodes.Add(nodeData);
@@ -282,9 +282,9 @@ namespace SS.Utilities
 
                 nodeSO.Initialize(taskNode.NodeName, ConvertNodeChoicesToNodeChoicesData(taskNode.Choices),
                     taskNode.NodeType,
-                    taskNode.IsStartingNode(), taskNode.DescriptionTask, taskNode.TaskType, taskNode.TaskIcon, taskNode.TimeLeft,
+                    taskNode.IsStartingNode(), taskNode.DescriptionTask, taskNode.TaskStatus, taskNode.TaskType, taskNode.TaskIcon, taskNode.TimeLeft,
                     taskNode.BaseDuration, taskNode.MandatorySlots, taskNode.OptionalSlots, taskNode.TaskHelpFactor,
-                    taskNode.Room, taskNode.IsPermanent);
+                    taskNode.Room);
 
                 createdNodes.Add(taskNode.ID, nodeSO);
 
@@ -483,6 +483,7 @@ namespace SS.Utilities
                 else if (nodeData.NodeType == SSNodeType.Task)
                 {
                     ((SSTaskNode)node).DescriptionTask = ((SSTaskNodeSaveData)nodeData).DescriptionTask;
+                    ((SSTaskNode)node).TaskStatus = ((SSTaskNodeSaveData)nodeData).TaskStatus;
                     ((SSTaskNode)node).TaskType = ((SSTaskNodeSaveData)nodeData).TaskType;
                     ((SSTaskNode)node).TaskIcon = ((SSTaskNodeSaveData)nodeData).TaskIcon;
                     ((SSTaskNode)node).TimeLeft = ((SSTaskNodeSaveData)nodeData).TimeLeft;
@@ -491,7 +492,6 @@ namespace SS.Utilities
                     ((SSTaskNode)node).OptionalSlots = ((SSTaskNodeSaveData)nodeData).OptionalSlots;
                     ((SSTaskNode)node).TaskHelpFactor = ((SSTaskNodeSaveData)nodeData).TaskHelpFactor;
                     ((SSTaskNode)node).Room = ((SSTaskNodeSaveData)nodeData).Room;
-                    ((SSTaskNode)node).IsPermanent = ((SSTaskNodeSaveData)nodeData).IsPermanent;
                 }
                 else if (nodeData.NodeType == SSNodeType.Time)
                 {

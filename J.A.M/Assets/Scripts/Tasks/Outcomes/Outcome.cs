@@ -27,4 +27,10 @@ public class Outcome
     
     [Tooltip("Trait that will be added / removed (only affects Trait")]
     public TraitsData.Traits OutcomeTargetTrait;
+
+    [Tooltip("Ship Trait that will be added / removed")]
+    public TraitsData.SpaceshipTraits OutcomeShipTrait;
+    
+    [Tooltip("Hidden Ship Trait that will be added / removed")]
+    public TraitsData.HiddenSpaceshipTraits  OutcomeHiddenShipTrait;
 }

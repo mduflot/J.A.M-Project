@@ -1,27 +1,50 @@
-﻿using SS.ScriptableObjects;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using SS.ScriptableObjects;
+using Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Speaker : MonoBehaviour
 {
-    public bool IsSpeaking;
-
     [SerializeField] private GameObject dialogueContainer;
-    [FormerlySerializedAs("characterName")] [SerializeField] private TextMeshProUGUI characterNameText;
+    [SerializeField] private TextMeshProUGUI characterNameText;
     [SerializeField] private TextMeshProUGUI dialogue;
 
-    public void StartDialogue(SSDialogueNodeSO node, string characterName)
+    private Queue<Tuple<Task, SSDialogueNodeSO, string>> sentences = new();
+    private bool isSpeaking;
+
+    public void Update()
     {
-        IsSpeaking = true;
-        dialogue.text = node.Text;
-        characterNameText.text = characterName;
-        dialogueContainer.SetActive(true);
+        if (isSpeaking || sentences.Count <= 0) return;
+        isSpeaking = true;
+        StartCoroutine(DisplayDialogue());
     }
 
-    public void EndDialogue()
+    public void AddDialogue(Task task, SSDialogueNodeSO node, string characterName)
     {
+        sentences.Enqueue(new Tuple<Task, SSDialogueNodeSO, string>(task, node, characterName));
+    }
+
+    private IEnumerator DisplayDialogue()
+    {
+        var tuple = sentences.Dequeue();
+        if (tuple.Item2.IsDialogueTask)
+            yield return new WaitUntil(() =>
+                100 - Mathf.Clamp(tuple.Item1.Duration / tuple.Item1.BaseDuration, 0, 100) * 100 >
+                tuple.Item2.PercentageTask);
+        dialogueContainer.SetActive(true);
+        characterNameText.text = tuple.Item3;
+        dialogue.text = tuple.Item2.Text;
+        yield return new WaitForSeconds(tuple.Item2.Duration);
+        EndDialogue(tuple);
+    }
+
+    private void EndDialogue(Tuple<Task, SSDialogueNodeSO, string> tuple)
+    {
+        tuple.Item2.isCompleted = true;
         dialogueContainer.SetActive(false);
-        IsSpeaking = false;
+        isSpeaking = false;
     }
 }

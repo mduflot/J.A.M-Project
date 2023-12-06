@@ -1,3 +1,4 @@
+using SS.Utilities;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -55,10 +56,10 @@ namespace SS.Elements
 
             customDataContainer.AddToClassList("ss-node__custom-data-container");
 
-            Foldout textFoldout = ElementUtility.CreateFoldout("Dialogue");
+            Foldout textFoldout = SSElementUtility.CreateFoldout("Dialogue");
 
             TextField textTextField =
-                ElementUtility.CreateTextArea(Text, null, callback => { Text = callback.newValue; });
+                SSElementUtility.CreateTextArea(Text, null, callback => { Text = callback.newValue; });
 
             textTextField.AddClasses("ss-node__text-field", "ss-node__quote-text-field");
 
@@ -66,24 +67,24 @@ namespace SS.Elements
 
             customDataContainer.Add(textFoldout);
 
-            EnumField enumField = ElementUtility.CreateEnumField(SpeakerType, "Speaker",
+            EnumField enumField = SSElementUtility.CreateEnumField(SpeakerType, "Speaker",
                 callback => { SpeakerType = (SSSpeakerType)callback.newValue; });
 
             customDataContainer.Add(enumField);
 
-            UnsignedIntegerField unsignedIntegerField = ElementUtility.CreateUnsignedIntegerField(Duration,
+            UnsignedIntegerField unsignedIntegerField = SSElementUtility.CreateUnsignedIntegerField(Duration,
                 "Duration", callback => { Duration = callback.newValue; });
 
             customDataContainer.Add(unsignedIntegerField);
 
             SliderInt sliderInt = null;
 
-            Toggle toggle = ElementUtility.CreateToggle(IsDialogueTask, "DialogueTask", callback =>
+            Toggle toggle = SSElementUtility.CreateToggle(IsDialogueTask, "DialogueTask", callback =>
             {
                 IsDialogueTask = callback.newValue;
                 if (callback.newValue)
                 {
-                    sliderInt = ElementUtility.CreateSliderIntField(PercentageTask, "PercentageTask : ", 0, 100,
+                    sliderInt = SSElementUtility.CreateSliderIntField(PercentageTask, "PercentageTask : ", 0, 100,
                         callback =>
                         {
                             PercentageTask = callback.newValue;
@@ -102,7 +103,7 @@ namespace SS.Elements
 
             if (IsDialogueTask)
             {
-                sliderInt = ElementUtility.CreateSliderIntField(PercentageTask, "PercentageTask : ", 0, 100,
+                sliderInt = SSElementUtility.CreateSliderIntField(PercentageTask, "PercentageTask : ", 0, 100,
                     callback =>
                     {
                         PercentageTask = callback.newValue;

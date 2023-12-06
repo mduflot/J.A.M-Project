@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
+  m_Name: Signal
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: Signal
+  <Choices>k__BackingField:
+  - rid: 8412203090294341644
+  <NodeType>k__BackingField: 0
+  <IsStartingNode>k__BackingField: 0
+  <Text>k__BackingField: The guy says he followed a signal coming from our ship...
+    He... knows about the Artifact?!
+  <SpeakerType>k__BackingField: 8
+  <Duration>k__BackingField: 4
+  <IsDialogueTask>k__BackingField: 1
+  <PercentageTask>k__BackingField: 50
+  <isCompleted>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 8412203090294341644
+      type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 9d7f7c6cd195ece4a8f1cefbb337b2f7,
+          type: 2}

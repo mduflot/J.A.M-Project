@@ -116,26 +116,26 @@ namespace SS.Inspectors
 
         private void DrawNodeContainerArea()
         {
-            InspectorUtility.DrawHeader("Node Container");
+            SSInspectorUtility.DrawHeader("Node Container");
 
             nodeContainerProperty.DrawPropertyField();
 
-            InspectorUtility.DrawSpace();
+            SSInspectorUtility.DrawSpace();
         }
 
         private void DrawFiltersArea()
         {
-            InspectorUtility.DrawHeader("Filters");
+            SSInspectorUtility.DrawHeader("Filters");
 
             groupedNodesProperty.DrawPropertyField();
             startingNodesOnlyProperty.DrawPropertyField();
 
-            InspectorUtility.DrawSpace();
+            SSInspectorUtility.DrawSpace();
         }
 
         private void DrawNodeGroupArea(SSNodeContainerSO nodeContainer, List<string> nodeGroupNames)
         {
-            InspectorUtility.DrawHeader("Node Group");
+            SSInspectorUtility.DrawHeader("Node Group");
 
             int oldSelectedNodeGroupIndex = selectedNodeGroupIndexProperty.intValue;
 
@@ -147,7 +147,7 @@ namespace SS.Inspectors
 
             UpdateIndexOnNamesListUpdate(nodeGroupNames, selectedNodeGroupIndexProperty, oldSelectedNodeGroupIndex, oldNodeGroupName, isOldNodeGroupNull);
 
-            selectedNodeGroupIndexProperty.intValue = InspectorUtility.DrawPopup("Node Group", selectedNodeGroupIndexProperty, nodeGroupNames.ToArray());
+            selectedNodeGroupIndexProperty.intValue = SSInspectorUtility.DrawPopup("Node Group", selectedNodeGroupIndexProperty, nodeGroupNames.ToArray());
 
             string selectedNodeGroupName = nodeGroupNames[selectedNodeGroupIndexProperty.intValue];
 
@@ -156,14 +156,14 @@ namespace SS.Inspectors
 
             nodeGroupProperty.objectReferenceValue = selectedNodeGroup;
 
-            InspectorUtility.DrawDisabledFields(() => nodeGroupProperty.DrawPropertyField());
+            SSInspectorUtility.DrawDisabledFields(() => nodeGroupProperty.DrawPropertyField());
 
-            InspectorUtility.DrawSpace();
+            SSInspectorUtility.DrawSpace();
         }
 
         private void DrawNodeArea(List<string> nodeNames, string nodeFolderPath)
         {
-            InspectorUtility.DrawHeader("Node");
+            SSInspectorUtility.DrawHeader("Node");
 
             int oldSelectedNodeIndex = selectedNodeIndexProperty.intValue;
 
@@ -175,7 +175,7 @@ namespace SS.Inspectors
 
             UpdateIndexOnNamesListUpdate(nodeNames, selectedNodeIndexProperty, oldSelectedNodeIndex, oldNodeName, isOldNodeNull);
 
-            selectedNodeIndexProperty.intValue = InspectorUtility.DrawPopup("Node", selectedNodeIndexProperty, nodeNames.ToArray());
+            selectedNodeIndexProperty.intValue = SSInspectorUtility.DrawPopup("Node", selectedNodeIndexProperty, nodeNames.ToArray());
 
             string selectedNodeName = nodeNames[selectedNodeIndexProperty.intValue];
 
@@ -183,16 +183,16 @@ namespace SS.Inspectors
 
             nodeProperty.objectReferenceValue = selectedNode;
 
-            InspectorUtility.DrawDisabledFields(() => nodeProperty.DrawPropertyField());
+            SSInspectorUtility.DrawDisabledFields(() => nodeProperty.DrawPropertyField());
         }
 
         private void StopDrawing(string reason, MessageType messageType = MessageType.Info)
         {
-            InspectorUtility.DrawHelpBox(reason, messageType);
+            SSInspectorUtility.DrawHelpBox(reason, messageType);
 
-            InspectorUtility.DrawSpace();
+            SSInspectorUtility.DrawSpace();
 
-            InspectorUtility.DrawHelpBox("You need to select a Node for this component to work properly at Runtime!", MessageType.Warning);
+            SSInspectorUtility.DrawHelpBox("You need to select a Node for this component to work properly at Runtime!", MessageType.Warning);
 
             serializedObject.ApplyModifiedProperties();
         }

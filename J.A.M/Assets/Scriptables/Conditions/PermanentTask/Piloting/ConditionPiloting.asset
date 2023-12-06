@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3a298838b420346a8b6588d8248e9c, type: 3}
+  m_Name: ConditionPiloting
+  m_EditorClassIdentifier: 
+  target: 0
+  targetGauge: 0
+  BaseCondition:
+    Traits:
+      traits:
+        Item1: 0
+        Item2: 0
+        Item3: 0
+    SpaceshipTraits: 0
+    HiddenSpaceshipTraits: 0
+    GaugeValue: 0
+  supplementaryConditions:
+    list: []
+  additionnalConditions:
+  - {fileID: 11400000, guid: aea1dc054a57a194bb0a947e83260ac6, type: 2}
+  - {fileID: 11400000, guid: ff3eb0da5d0d97547ae04ae061eafe36, type: 2}
+  - {fileID: 11400000, guid: a75c2018339dd2b4891c8762bf91c632, type: 2}
+  - {fileID: 11400000, guid: e55dfc019d8ebec42984941ea654156d, type: 2}
+  - {fileID: 11400000, guid: 065859defc5ecee4cbcf4739359f4aae, type: 2}
+  - {fileID: 11400000, guid: 145640fd4e32ed543b25e77d5d92dc51, type: 2}
+  outcomes: {fileID: 11400000, guid: be51337a144860048bc3ad55fbfe6ef0, type: 2}

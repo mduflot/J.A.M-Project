@@ -14,6 +14,7 @@ namespace SS.ScriptableObjects
         [field: SerializeField] public uint Duration { get; set; }
         [field: SerializeField] public bool IsDialogueTask { get; set; }
         [field: SerializeField] public int PercentageTask { get; set; }
+        [field: SerializeField] public bool isCompleted { get; set; }
 
         public void Initialize(string nodeName, string text, List<SSNodeChoiceData> choices, SSNodeType nodeType,
             bool isStartingNode, SSSpeakerType speakerType, uint duration, bool isDialogueTask, int percentageTask)
@@ -27,6 +28,7 @@ namespace SS.ScriptableObjects
             Duration = duration;
             IsDialogueTask = isDialogueTask;
             PercentageTask = percentageTask;
+            isCompleted = false;
         }
     }
 }
