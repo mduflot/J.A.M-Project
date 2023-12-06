@@ -37,17 +37,15 @@ namespace SS
         private SSTimeNodeSO timeNode;
         private uint durationTimeNode;
         private Task task;
-        private Storyline storyline;
+        private bool isRunning;
 
-        public void SetStoryline(Storyline storyline)
-        {
-            this.storyline = storyline;
-        }
-
+        public bool IsRunning => isRunning;
+        
         public void StartTimeline()
         {
             dialogues = new();
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
+            isRunning = true;
             CheckNodeType(node);
         }
 
@@ -261,6 +259,7 @@ namespace SS
             {
                 if (timeNode.Choices.First().NextNode == null)
                 {
+                    isRunning = false;
                     nodeGroup.StoryStatus = SSStoryStatus.Completed;
                     ResetTimeline();
                     TimeTickSystem.OnTick -= WaitingTime;
@@ -287,6 +286,7 @@ namespace SS
             characterBehaviour.speaker.EndDialogue();
             if (nodeSO.Choices.First().NextNode == null)
             {
+                isRunning = false;
                 nodeGroup.StoryStatus = SSStoryStatus.Completed;
                 ResetTimeline();
                 yield break;
@@ -302,6 +302,7 @@ namespace SS
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).AssistantCharacters);
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
             {
+                isRunning = false;
                 nodeGroup.StoryStatus = SSStoryStatus.Completed;
                 ResetTimeline();
                 yield break;

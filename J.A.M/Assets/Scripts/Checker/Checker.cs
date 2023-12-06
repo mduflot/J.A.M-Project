@@ -280,7 +280,6 @@ public class Checker : MonoBehaviour
                     }
                 }
                 principalLauncher.node = node;
-                principalLauncher.SetStoryline(chosenStoryline);
                 principalLauncher.StartTimeline();
                 break;
             case SSStoryType.Secondary:
@@ -295,7 +294,6 @@ public class Checker : MonoBehaviour
                     }
                 }
                 secondaryLauncher.node = node;
-                secondaryLauncher.SetStoryline(chosenStoryline);
                 secondaryLauncher.StartTimeline();
                 break;
             case SSStoryType.Trivial:
@@ -310,7 +308,6 @@ public class Checker : MonoBehaviour
                     }
                 }
                 trivialLauncher.node = node;
-                trivialLauncher.SetStoryline(chosenStoryline);
                 trivialLauncher.StartTimeline();
                 break;
         }

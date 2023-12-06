@@ -23,7 +23,7 @@ public class TaskUI : MonoBehaviour
     [SerializeField] private float duration;
 
     private Notification notification;
-    private List<CharacterUISlot> characterSlots = new();
+    [SerializeField] private List<CharacterUISlot> characterSlots = new();
     private bool taskStarted;
 
     /*
@@ -121,19 +121,28 @@ public class TaskUI : MonoBehaviour
                   (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
                 : notification.Task.Duration;
             durationText.text = duration.ToString("F2") + " hours";
-            
-            // TODO : WHAT TO DO WHEN TIME IS UP ?
-            // if (!notification.Task.IsPermanent) timeLeft -= TimeTickSystem.timePerTick;
-            // if (timeLeft <= 0) StartTask();
         }
     }
 
     public void StartTask()
     {
+        if (notification.Task.IsPermanent) if (CanStartTask()) return;
         if (CharactersWorking()) return;
         notification.OnStart(characterSlots);
         taskStarted = true;
         CloseTask();
+    }
+    
+    private bool CanStartTask()
+    {
+        foreach (var slot in characterSlots)
+        {
+            if (slot.isMandatory && slot.icon == null)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     /// <summary>

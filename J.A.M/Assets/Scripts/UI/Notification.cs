@@ -54,6 +54,7 @@ public class Notification : MonoBehaviour
 
     public void Display()
     {
+        // TODO : STOP TIME
         GameManager.Instance.UIManager.taskUI.Initialize(this);
     }
 
@@ -95,7 +96,6 @@ public class Notification : MonoBehaviour
         
         if (LeaderCharacters.Count == 0)
         {
-            Debug.Log("No leader");
             taskCondition = Task.Conditions[^1].Item1;
             Task.conditionIndex = Task.Conditions.Count - 1;
             validatedCondition = true;
@@ -108,9 +108,6 @@ public class Notification : MonoBehaviour
             for (var i = 0; i < taskCondition.outcomes.Outcomes.Length; i++)
             {
                 var outcome = taskCondition.outcomes.Outcomes[i];
-                Debug.Log("outcome: " + outcome.OutcomeType + " " + outcome.OutcomeOperation + " " +
-                          outcome.OutcomeTargetStat + " " + outcome.value + " " + outcome.OutcomeTargetGauge +
-                          " " + outcome.OutcomeTargetTrait + " " + outcome.OutcomeTarget);
                 switch (outcome.OutcomeTarget)
                 {
                     case OutcomeData.OutcomeTarget.Leader:
@@ -184,15 +181,23 @@ public class Notification : MonoBehaviour
 
     public void OnUpdate()
     {
-        if (!IsStarted) return;
-        if (Task.Duration > 0)
+        if (IsStarted)
         {
-            Task.Duration -= TimeTickSystem.timePerTick;
-            time.text = Task.Duration + " hours";
+            if (Task.Duration > 0)
+            {
+                Task.Duration -= TimeTickSystem.timePerTick;
+                time.text = Task.Duration + " hours";
+            }
+            else
+            {
+                OnComplete();
+            }
         }
         else
         {
-            OnComplete();
+            // TODO : WHAT TO DO WHEN TIME IS UP ?
+            // if (!notification.Task.IsPermanent) timeLeft -= TimeTickSystem.timePerTick;
+            // if (timeLeft <= 0) StartTask();
         }
     }
 
