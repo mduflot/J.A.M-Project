@@ -56,15 +56,15 @@ namespace UI
             icon.sprite = task.Icon;
             Dialogues = dialogues;
             this.spaceshipManager = spaceshipManager;
-            TimeTickSystem.ModifyTimeScale(1.0f);
+            TimeTickSystem.ModifyTimeScale(TimeTickSystem.lastActiveTimeScale);
         }
 
-        private void Display()
+        public void Display()
         {
             TimeTickSystem.ModifyTimeScale(0.0f);
             if (IsStarted)
             {
-                //GameManager.Instance.UIManager.taskUI.DisplayTaskInfo(this);
+                GameManager.Instance.UIManager.taskUI.DisplayTaskInfo(this);
             }
             else
             {
@@ -74,14 +74,14 @@ namespace UI
 
         public void OnStart(List<CharacterUISlot> characters)
         {
-            TimeTickSystem.ModifyTimeScale(1.0f);
+            TimeTickSystem.ModifyTimeScale(TimeTickSystem.lastActiveTimeScale);
             foreach (var character in characters)
             {
                 if (character.isMandatory)
                 {
                     if (character.icon != null)
                     {
-                        Task.leaderCharacters.Add(character.character);
+                        Task.leaderCharacters.Add(character.icon.character);
                         LeaderCharacters.Add(character.icon.character);
                         character.icon.character.AssignTask(this, true);
                     }
@@ -90,7 +90,7 @@ namespace UI
                 {
                     if (character.icon != null)
                     {
-                        Task.assistantCharacters.Add(character.character);
+                        Task.assistantCharacters.Add(character.icon.character);
                         AssistantCharacters.Add(character.icon.character);
                         character.icon.character.AssignTask(this);
                     }

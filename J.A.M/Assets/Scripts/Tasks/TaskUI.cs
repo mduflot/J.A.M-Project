@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CharacterSystem;
+using Cysharp.Threading.Tasks.Triggers;
 using Managers;
 using SS.Enumerations;
 using TMPro;
@@ -21,6 +22,8 @@ namespace Tasks
         [SerializeField] private Transform charactersParent;
         [SerializeField] private CharacterUISlot[] inactiveSlots;
         [SerializeField] private WarningUI warningUI;
+        [SerializeField] private GameObject startButton;
+        [SerializeField] private GameObject cancelButton;
 
         [Header("Dialogues")]
         [SerializeField] private GameObject dialogueContainer;
@@ -33,16 +36,20 @@ namespace Tasks
         private List<CharacterUISlot> characterSlots = new();
         private bool taskStarted;
 
-        public void Initialize(Notification notification, bool needToDisplay = true)
+        public void Initialize(Notification n, bool needToDisplay = true)
         {
-            this.notification = notification;
+            notification = n;
             warningUI.gameObject.SetActive(false);
-            titleText.text = this.notification.Task.Name;
-            timeLeft = this.notification.Task.TimeLeft;
-            duration = this.notification.Task.Duration;
-            descriptionText.text = this.notification.Task.Description;
+            titleText.text = notification.Task.Name;
+            timeLeft = notification.Task.TimeLeft;
+            duration = notification.Task.Duration;
+            
+            
+            descriptionText.text = notification.Task.Description;
             taskStarted = false;
 
+            startButton.SetActive(true);
+            cancelButton.SetActive(false);
             for (int i = 0; i < notification.Task.MandatorySlots; i++)
             {
                 var slot = inactiveSlots[i];
@@ -72,6 +79,7 @@ namespace Tasks
             warningUI.gameObject.SetActive(false);
             titleText.text = notification.Task.Name;
             duration = notification.Task.Duration;
+            durationText.SetText(TimeTickSystem.GetTicksAsTime((uint)duration));
             descriptionText.text = notification.Task.Description;
 
             for (int i = 0; i < notification.Task.leaderCharacters.Count; i++)
@@ -81,8 +89,8 @@ namespace Tasks
                 slot.SetupSlot(true);
                 slot.gameObject.SetActive(true);
                 characterSlots.Add(slot);
-                slot.character = charUI.character;
-                charUI.icon.SetupIcon(slot.transform, slot);
+                slot.icon = charUI.icon;
+                charUI.icon.transform.SetParent(slot.transform);
             }
 
             for (int i = 0; i < notification.Task.assistantCharacters.Count; i++)
@@ -93,9 +101,12 @@ namespace Tasks
                 slot.SetupSlot(false);
                 slot.gameObject.SetActive(true);
                 characterSlots.Add(slot);
-                slot.character = charUI.character;
-                charUI.icon.SetupIcon(slot.transform, slot);
+                slot.icon = charUI.icon;
+                charUI.icon.transform.SetParent(slot.transform);
             }
+            startButton.SetActive(false);
+            cancelButton.SetActive(true);
+            gameObject.SetActive(true);
         }
 
         public void Update()
@@ -313,20 +324,37 @@ namespace Tasks
         /// <summary>
         /// Close the notification if it is permanent
         /// </summary>
-        public void CloseNotification()
+        public void CloseNotification(bool forceStop = false)
         {
             TimeTickSystem.ModifyTimeScale(1.0f);
+            if(!forceStop && taskStarted) return;
             notification.OnCancel();
         }
 
+        public void CancelTask()
+        {
+            foreach (var slot in characterSlots)
+            {
+                if (slot.icon != null) slot.icon.ResetTransform();
+                slot.icon.character.StopTask();
+                slot.ClearCharacter();
+                slot.gameObject.SetActive(false);
+            }
+
+            previewOutcomeText.text = null;
+            characterSlots.Clear();
+            GameManager.Instance.RefreshCharacterIcons();
+            gameObject.SetActive(false);
+            CloseNotification(true);
+        }
+        
         private bool CharactersWorking()
         {
             foreach (var character in characterSlots)
             {
                 if (character.icon != null && character.icon.character.IsWorking())
                 {
-                    warningUI.gameObject.SetActive(true);
-                    warningUI.Init(character.icon.character);
+                    warningUI.CharacterWarning(character.icon.character);
                     return true;
                 }
             }

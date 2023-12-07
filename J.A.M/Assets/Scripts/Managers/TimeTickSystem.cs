@@ -6,8 +6,10 @@ namespace Managers
     public class TimeTickSystem : MonoBehaviour
     {
         public static uint timePerTick = 1; // InGame Time Unit
-        public static uint ticksPerHour = 48;
-        [SerializeField] private static float timeScale = 1.0f;
+        public static uint ticksPerHour = 48; 
+        private static float timeScale = 1.0f;
+
+        public static float lastActiveTimeScale = 1.0f;
         //[SerializeField] private const uint ticksPerTenMinutes = 5;
         public class OnTickEventArgs : EventArgs
         {
@@ -70,6 +72,7 @@ namespace Managers
 
         public static void ModifyTimeScale(float newScale)
         {
+            if (newScale != 0) lastActiveTimeScale = newScale;
             timeScale = newScale;
         }
     }

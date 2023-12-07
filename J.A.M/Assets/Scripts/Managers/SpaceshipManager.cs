@@ -134,11 +134,11 @@ namespace Managers
             activeTasks.Add(task);
         }
 
-        public bool IsTaskActive(Task task)
+        public bool IsTaskActive(string taskName)
         {
             foreach (var activeTask in activeTasks)
             {
-                return activeTask.Task == task;
+                return activeTask.Task.Name == taskName;
             }
 
             return false;

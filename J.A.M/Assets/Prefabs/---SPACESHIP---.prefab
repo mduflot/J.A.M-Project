@@ -475,6 +475,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5045956543696281819}
   - component: {fileID: 4667060464846381408}
+  - component: {fileID: 8265355278484429805}
+  - component: {fileID: 5450843349347119838}
+  - component: {fileID: 2618817692661470676}
   m_Layer: 0
   m_Name: RoomShape2
   m_TagString: Untagged
@@ -549,6 +552,84 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8265355278484429805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3251822707700580315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStoryline: {fileID: 0}
+  spaceshipManager: {fileID: 0}
+  nodeContainer: {fileID: 11400000, guid: e9fc39a357f8213438a2877d0b8e7472, type: 2}
+  nodeGroup: {fileID: 11400000, guid: 4fe84ade17d55784f951e97bd290e9a9, type: 2}
+  node: {fileID: 11400000, guid: 4283acaeca1ab8a428a629dbf3f060fd, type: 2}
+  groupedNodes: 1
+  startingNodesOnly: 0
+  selectedNodeGroupIndex: 3
+  selectedNodeIndex: 0
+--- !u!114 &5450843349347119838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3251822707700580315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13042a951293bf64dad95cf947c7d12f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &2618817692661470676
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3251822707700580315}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.85, y: 5.85}
+    newSize: {x: 5.85, y: 5.85}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.85, y: 5.85}
+  m_EdgeRadius: 0
 --- !u!1 &3286734122856121808
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,6 +777,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5251193093655680004}
   - component: {fileID: 461397590667926488}
+  - component: {fileID: 1817835516420270566}
+  - component: {fileID: 1394878571856115256}
+  - component: {fileID: 8799366067933176268}
   m_Layer: 0
   m_Name: RoomShape2
   m_TagString: Untagged
@@ -770,6 +854,84 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1817835516420270566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4240635890696545418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStoryline: {fileID: 0}
+  spaceshipManager: {fileID: 0}
+  nodeContainer: {fileID: 11400000, guid: e9fc39a357f8213438a2877d0b8e7472, type: 2}
+  nodeGroup: {fileID: 11400000, guid: d92e5425b09c86c4ca7066512d5a2211, type: 2}
+  node: {fileID: 11400000, guid: 543ae8c418c40964e92334c23ac72312, type: 2}
+  groupedNodes: 1
+  startingNodesOnly: 0
+  selectedNodeGroupIndex: 2
+  selectedNodeIndex: 0
+--- !u!114 &1394878571856115256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4240635890696545418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13042a951293bf64dad95cf947c7d12f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &8799366067933176268
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4240635890696545418}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.85, y: 5.85}
+    newSize: {x: 5.85, y: 5.85}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.85, y: 5.85}
+  m_EdgeRadius: 0
 --- !u!1 &4528345811977583889
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,6 +1026,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3276849369184885616}
   - component: {fileID: 6294497185214707397}
+  - component: {fileID: 2073129993648803277}
+  - component: {fileID: 1155766264813400784}
+  - component: {fileID: 6626788001988148534}
   m_Layer: 0
   m_Name: RoomShape2
   m_TagString: Untagged
@@ -938,6 +1103,84 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2073129993648803277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5173235771441118628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStoryline: {fileID: 0}
+  spaceshipManager: {fileID: 0}
+  nodeContainer: {fileID: 11400000, guid: e9fc39a357f8213438a2877d0b8e7472, type: 2}
+  nodeGroup: {fileID: 11400000, guid: e128715715fb95c4eb7cb1e69e4b34f0, type: 2}
+  node: {fileID: 11400000, guid: 3c70a053cdd5f154a9764e4b44203ed1, type: 2}
+  groupedNodes: 1
+  startingNodesOnly: 0
+  selectedNodeGroupIndex: 1
+  selectedNodeIndex: 0
+--- !u!114 &1155766264813400784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5173235771441118628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13042a951293bf64dad95cf947c7d12f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &6626788001988148534
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5173235771441118628}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.85, y: 5.85}
+    newSize: {x: 5.85, y: 5.85}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.85, y: 5.85}
+  m_EdgeRadius: 0
 --- !u!1 &5302695586191320199
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,6 +1400,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5600495671884660695}
   - component: {fileID: 463022913895414996}
+  - component: {fileID: 4963560562374965615}
+  - component: {fileID: 4138489579938396765}
+  - component: {fileID: 5765947336308663526}
   m_Layer: 0
   m_Name: RoomShape1
   m_TagString: Untagged
@@ -1231,6 +1477,84 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4963560562374965615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271306301728090443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStoryline: {fileID: 0}
+  spaceshipManager: {fileID: 0}
+  nodeContainer: {fileID: 11400000, guid: e9fc39a357f8213438a2877d0b8e7472, type: 2}
+  nodeGroup: {fileID: 11400000, guid: 4fe84ade17d55784f951e97bd290e9a9, type: 2}
+  node: {fileID: 11400000, guid: 4283acaeca1ab8a428a629dbf3f060fd, type: 2}
+  groupedNodes: 1
+  startingNodesOnly: 0
+  selectedNodeGroupIndex: 3
+  selectedNodeIndex: 0
+--- !u!114 &4138489579938396765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271306301728090443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13042a951293bf64dad95cf947c7d12f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &5765947336308663526
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271306301728090443}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.85, y: 5.85}
+    newSize: {x: 5.85, y: 5.85}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.85, y: 5.85}
+  m_EdgeRadius: 0
 --- !u!1 &6814216646950471469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1392,6 +1716,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7455044463848680271}
   - component: {fileID: 2347010933613352811}
+  - component: {fileID: 3990083905613424571}
+  - component: {fileID: 1083266613315011427}
+  - component: {fileID: 5293551862481899423}
   m_Layer: 0
   m_Name: RoomShape1
   m_TagString: Untagged
@@ -1466,6 +1793,84 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3990083905613424571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8077012309797968010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStoryline: {fileID: 0}
+  spaceshipManager: {fileID: 0}
+  nodeContainer: {fileID: 11400000, guid: e9fc39a357f8213438a2877d0b8e7472, type: 2}
+  nodeGroup: {fileID: 11400000, guid: d92e5425b09c86c4ca7066512d5a2211, type: 2}
+  node: {fileID: 11400000, guid: 543ae8c418c40964e92334c23ac72312, type: 2}
+  groupedNodes: 1
+  startingNodesOnly: 0
+  selectedNodeGroupIndex: 2
+  selectedNodeIndex: 0
+--- !u!114 &1083266613315011427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8077012309797968010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13042a951293bf64dad95cf947c7d12f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &5293551862481899423
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8077012309797968010}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.85, y: 5.85}
+    newSize: {x: 5.85, y: 5.85}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.85, y: 5.85}
+  m_EdgeRadius: 0
 --- !u!1 &8152024986132200475
 GameObject:
   m_ObjectHideFlags: 0
@@ -1840,18 +2245,22 @@ MonoBehaviour:
     systemObject: {fileID: 9203435017712485670}
     decreaseSpeed: 1.5
     gaugeValue: 0
+    maxGauge: 50
   - type: 2
     systemObject: {fileID: 3309848308192400204}
     decreaseSpeed: 1.2
     gaugeValue: 0
+    maxGauge: 50
   - type: 3
     systemObject: {fileID: 5302695586191320199}
     decreaseSpeed: 3
     gaugeValue: 0
+    maxGauge: 50
   - type: 4
     systemObject: {fileID: 3286734122856121808}
     decreaseSpeed: 0.7
     gaugeValue: 0
+    maxGauge: 50
   characters:
   - {fileID: 0}
   - {fileID: 0}
@@ -1873,6 +2282,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2592588404667634659}
   - component: {fileID: 6938000646770764802}
+  - component: {fileID: 8308199252104381045}
+  - component: {fileID: 4894885287524702612}
+  - component: {fileID: 8538105907776396531}
   m_Layer: 0
   m_Name: RoomShape
   m_TagString: Untagged
@@ -1947,6 +2359,84 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8308199252104381045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8525692297237476304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStoryline: {fileID: 0}
+  spaceshipManager: {fileID: 0}
+  nodeContainer: {fileID: 11400000, guid: e9fc39a357f8213438a2877d0b8e7472, type: 2}
+  nodeGroup: {fileID: 11400000, guid: 54c13bfd713820648bd148993d47f29d, type: 2}
+  node: {fileID: 11400000, guid: f00c6ad1e7db4f540abf2e5224d46d7d, type: 2}
+  groupedNodes: 1
+  startingNodesOnly: 0
+  selectedNodeGroupIndex: 0
+  selectedNodeIndex: 0
+--- !u!114 &4894885287524702612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8525692297237476304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13042a951293bf64dad95cf947c7d12f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &8538105907776396531
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8525692297237476304}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.85, y: 5.85}
+    newSize: {x: 5.85, y: 5.85}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.85, y: 5.85}
+  m_EdgeRadius: 0
 --- !u!1 &8690042968694899155
 GameObject:
   m_ObjectHideFlags: 0
@@ -4729,7 +5219,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5041339076047283443, guid: 442c7fc479bb434478b4fa20b156aa4b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5932232249994787717}
   m_SourcePrefab: {fileID: 100100000, guid: 442c7fc479bb434478b4fa20b156aa4b, type: 3}
 --- !u!4 &576642453967539505 stripped
 Transform:
@@ -4737,6 +5231,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8121363071190678862}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3837787624241863101 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5041339076047283443, guid: 442c7fc479bb434478b4fa20b156aa4b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8121363071190678862}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5932232249994787717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3837787624241863101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ee809a36410f3342b8d47572f0a0f25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8251372311891230758
 PrefabInstance:
   m_ObjectHideFlags: 0

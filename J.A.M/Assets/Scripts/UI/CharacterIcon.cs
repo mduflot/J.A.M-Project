@@ -86,7 +86,7 @@ namespace UI
         public void SetupIcon(Transform parent, CharacterUI script)
         {
             parentAfterDrag = parent;
-            transform.position = Vector3.zero;
+            transform.localPosition = Vector3.zero;
             parentScript = script;
         }
     }

@@ -45,6 +45,11 @@ namespace SS
 
         public bool IsRunning => isRunning;
 
+        private void Start()
+        {
+            spaceshipManager = GameManager.Instance.SpaceshipManager;
+        }
+
         public void StartTimeline()
         {
             dialogues = new();
@@ -276,6 +281,7 @@ namespace SS
 
         private void RunNode(SSTaskNodeSO nodeSO)
         {
+            if (GameManager.Instance.SpaceshipManager.IsTaskActive(nodeSO.name)) return;
             var position = spaceshipManager.GetTaskPosition(nodeSO.Room).position;
             var notificationGO = spaceshipManager.notificationPool.GetFromPool();
             notificationGO.transform.parent = spaceshipManager.GetTaskPosition(nodeSO.Room);
@@ -294,7 +300,7 @@ namespace SS
                     conditions);
                 notification.Initialize(task, spaceshipManager, dialogues);
                 spaceshipManager.AddTask(notification);
-                if(nodeSO.TaskType.Equals(SSTaskType.Permanent)) GameManager.Instance.UIManager.taskUI.Initialize(notification);
+                if(nodeSO.TaskType.Equals(SSTaskType.Permanent)) notification.Display();
                 StartCoroutine(WaiterTask(nodeSO, task));
             }
         }
