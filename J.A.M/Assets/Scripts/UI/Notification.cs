@@ -298,7 +298,7 @@ namespace UI
             {
                 if (Task.Duration > 0)
                 {
-                    time.text = TimeTickSystem.GetTicksAsTime((uint)(Task.Duration * TimeTickSystem.ticksPerHour));
+                    time.text = TimeTickSystem.GetTicksAsTime((uint)Task.Duration);
                     Task.Duration -= TimeTickSystem.timePerTick;
                 }
                 else
@@ -310,7 +310,7 @@ namespace UI
             {
                 if (Task.TimeLeft > 0)
                 {
-                    time.text = TimeTickSystem.GetTicksAsTime((uint)(Task.TimeLeft * TimeTickSystem.ticksPerHour));
+                    time.text = TimeTickSystem.GetTicksAsTime((uint)Task.TimeLeft);
                     Task.TimeLeft -= TimeTickSystem.timePerTick;
                 }
                 else
