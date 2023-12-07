@@ -42,7 +42,7 @@ public class Checker : MonoBehaviour
         var enabledSStorylines = secondaryStorylines.Where(((storyline => storyline.StorylineContainer.StoryStatus == SSStoryStatus.Enabled)));
         var enabledTStorylines = trivialStorylines.Where(((storyline => storyline.StorylineContainer.StoryStatus == SSStoryStatus.Enabled)));
 
-        if (enabledPStorylines.Any() && enabledSStorylines.Any() && enabledTStorylines.Any())
+        if (!enabledPStorylines.Any() && !enabledSStorylines.Any() && !enabledTStorylines.Any())
         {
             Debug.Log("No available storylines");
             return;

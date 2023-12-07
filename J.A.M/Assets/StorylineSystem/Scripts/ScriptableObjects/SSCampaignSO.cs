@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SS.Enumerations;
 using UnityEngine;
 
 namespace SS.ScriptableObjects
 {
+    using Enumerations;
+
     [CreateAssetMenu(fileName = "New Campaign", menuName = "SSSystem/Campaign")]
     public class SSCampaignSO : ScriptableObject
     {
         [field: SerializeField] public List<Storyline> Storylines { get; set; }
-        
-        [HideInInspector] public List<Storyline> PrincipalStorylines = new();
-        [HideInInspector] public List<Storyline> SecondaryStorylines = new();
-        [HideInInspector] public List<Storyline> TrivialStorylines = new();
+
+        [field: SerializeField] public List<Storyline> PrincipalStorylines = new();
+        [field: SerializeField] public List<Storyline> SecondaryStorylines = new();
+        [field: SerializeField] public List<Storyline> TrivialStorylines = new();
 
         private void FillGroups(Storyline storyline)
         {
@@ -27,11 +28,14 @@ namespace SS.ScriptableObjects
         [ContextMenu("FillGroups")]
         private void FillGroups()
         {
+            PrincipalStorylines.Clear();
+            SecondaryStorylines.Clear();
+            TrivialStorylines.Clear();
             for (var index = 0; index < Storylines.Count; index++)
             {
                 var storyline = Storylines[index];
                 if (storyline.StorylineContainer == null) continue;
-                switch(storyline.StorylineContainer.StoryType)
+                switch (storyline.StorylineContainer.StoryType)
                 {
                     case SSStoryType.Principal:
                         PrincipalStorylines.Add(storyline);
@@ -43,6 +47,7 @@ namespace SS.ScriptableObjects
                         TrivialStorylines.Add(storyline);
                         break;
                 }
+
                 FillGroups(storyline);
             }
         }
