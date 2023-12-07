@@ -15,7 +15,7 @@ public class Checker : MonoBehaviour
     [SerializeField] private SSLauncher secondaryLauncher;
     [SerializeField] private SSLauncher trivialLauncher;
     [SerializeField] private GameObject presentationContainer;
-    [SerializeField] private TextMeshProUGUI presentationText; 
+    [SerializeField] private TextMeshProUGUI presentationText;
 
     private float priorityFactor;
     private Storyline chosenStoryline;
@@ -38,16 +38,22 @@ public class Checker : MonoBehaviour
 
     public void GenerateRandomEvent()
     {
-        var enabledPStorylines = principalStorylines.Where(((storyline => storyline.StorylineContainer.StoryStatus == SSStoryStatus.Enabled)));
-        var enabledSStorylines = secondaryStorylines.Where(((storyline => storyline.StorylineContainer.StoryStatus == SSStoryStatus.Enabled)));
-        var enabledTStorylines = trivialStorylines.Where(((storyline => storyline.StorylineContainer.StoryStatus == SSStoryStatus.Enabled)));
+        var enabledPStorylines =
+            principalStorylines.Where(
+                ((storyline => storyline.StorylineContainer.StoryStatus == SSStoryStatus.Enabled)));
+        var enabledSStorylines =
+            secondaryStorylines.Where(
+                ((storyline => storyline.StorylineContainer.StoryStatus == SSStoryStatus.Enabled)));
+        var enabledTStorylines =
+            trivialStorylines.Where(((storyline => storyline.StorylineContainer.StoryStatus == SSStoryStatus.Enabled)));
 
-        if (!enabledPStorylines.Any() && !enabledSStorylines.Any() && !enabledTStorylines.Any())
+        if ((!enabledPStorylines.Any() && !enabledSStorylines.Any() && !enabledTStorylines.Any()) ||
+            (principalLauncher.IsRunning && secondaryLauncher.IsRunning && trivialLauncher.IsRunning))
         {
             Debug.Log("No available storylines");
             return;
         }
-        
+
         if (activeStorylines.Count == 0)
         {
             for (int index = 0; index < principalStorylines.Count; index++)
@@ -62,8 +68,8 @@ public class Checker : MonoBehaviour
                 }
             }
 
-            SSStoryType storyType = (SSStoryType) Random.Range(0, 3);
-            
+            SSStoryType storyType = (SSStoryType)Random.Range(0, 3);
+
             ChooseNewStoryline(storyType);
             return;
         }
@@ -82,7 +88,7 @@ public class Checker : MonoBehaviour
                 {
                     if (!principalLauncher.IsRunning)
                         activeTypes.Add(SSStoryType.Principal);
-                    
+
                     missingTypes.Remove(SSStoryType.Principal);
                 }
 
@@ -91,7 +97,7 @@ public class Checker : MonoBehaviour
                 {
                     if (!secondaryLauncher.IsRunning)
                         activeTypes.Add(SSStoryType.Secondary);
-                    
+
                     missingTypes.Remove(SSStoryType.Secondary);
                 }
 
@@ -100,7 +106,7 @@ public class Checker : MonoBehaviour
                 {
                     if (!trivialLauncher.IsRunning)
                         activeTypes.Add(SSStoryType.Trivial);
-                    
+
                     missingTypes.Remove(SSStoryType.Trivial);
                 }
             }
@@ -108,13 +114,18 @@ public class Checker : MonoBehaviour
             float pickPercent = .33f;
             float inactivePickPercent = pickPercent * missingTypes.Count;
             float randPicker = Random.Range(0.0f, 1.0f);
-            
+
             SSStoryType storyType;
-            if (randPicker < inactivePickPercent)
+            if (randPicker < inactivePickPercent && missingTypes.Count > 0)
                 storyType = missingTypes[Random.Range(0, missingTypes.Count)];
-            else
+            else if (activeTypes.Count > 0)
                 storyType = activeTypes[Random.Range(0, activeTypes.Count)];
-            
+            else
+            {
+                Debug.Log("No storylines available");
+                return;
+            }
+
             ChooseNewStoryline(storyType);
         }
         else
@@ -134,7 +145,9 @@ public class Checker : MonoBehaviour
                 {
                     var storyline = principalStorylines[index];
                     if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
-                    if (storyline.StorylineContainer.Condition) if (RouteCondition(storyline.StorylineContainer.Condition)) continue;
+                    if (storyline.StorylineContainer.Condition)
+                        if (RouteCondition(storyline.StorylineContainer.Condition))
+                            continue;
                     availableStoryLines.Add(storyline);
                 }
 
@@ -146,7 +159,9 @@ public class Checker : MonoBehaviour
                 {
                     var storyline = secondaryStorylines[index];
                     if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
-                    if (storyline.StorylineContainer.Condition) if (RouteCondition(storyline.StorylineContainer.Condition)) continue;
+                    if (storyline.StorylineContainer.Condition)
+                        if (RouteCondition(storyline.StorylineContainer.Condition))
+                            continue;
                     availableStoryLines.Add(storyline);
                 }
 
@@ -158,14 +173,16 @@ public class Checker : MonoBehaviour
                 {
                     var storyline = trivialStorylines[index];
                     if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
-                    if (storyline.StorylineContainer.Condition) if (RouteCondition(storyline.StorylineContainer.Condition)) continue;
+                    if (storyline.StorylineContainer.Condition)
+                        if (RouteCondition(storyline.StorylineContainer.Condition))
+                            continue;
                     availableStoryLines.Add(storyline);
                 }
 
                 break;
             }
         }
-        
+
         if (availableStoryLines.Count == 0)
         {
             Debug.Log("No storylines available");
@@ -180,7 +197,7 @@ public class Checker : MonoBehaviour
         {
             if (randPicker <= pickPercent * i)
             {
-                chosenStoryline = availableStoryLines[i-1];
+                chosenStoryline = availableStoryLines[i - 1];
                 activeStorylines.Add(chosenStoryline);
                 PickTimelineFromStoryline(true);
                 break;
@@ -216,9 +233,7 @@ public class Checker : MonoBehaviour
                     }
                 }
             }
-            
-            
-            
+
             chosenStoryline = activeStorylines[Random.Range(0, activeStorylines.Count)];
         }
 
@@ -232,10 +247,12 @@ public class Checker : MonoBehaviour
                 return;
             }
 
-            if (timeline.Condition) if (RouteCondition(timeline.Condition)) continue;
+            if (timeline.Condition)
+                if (RouteCondition(timeline.Condition))
+                    continue;
             availableTimelines.Add(timeline);
         }
-        
+
         if (availableTimelines.Count == 0)
         {
             Debug.Log("No timelines available");
@@ -250,12 +267,12 @@ public class Checker : MonoBehaviour
         {
             if (randPicker <= pickPercent * i)
             {
-                StartTimeline(availableTimelines[i-1]);
+                StartTimeline(availableTimelines[i - 1]);
                 break;
             }
         }
     }
-    
+
     private bool RouteCondition(ConditionSO condition)
     {
         bool validateCondition = false;
@@ -303,6 +320,7 @@ public class Checker : MonoBehaviour
                         break;
                     }
                 }
+
                 principalLauncher.node = node;
                 principalLauncher.StartTimeline();
                 break;
@@ -317,6 +335,7 @@ public class Checker : MonoBehaviour
                         break;
                     }
                 }
+
                 secondaryLauncher.node = node;
                 secondaryLauncher.StartTimeline();
                 break;
@@ -331,12 +350,13 @@ public class Checker : MonoBehaviour
                         break;
                     }
                 }
+
                 trivialLauncher.node = node;
                 trivialLauncher.StartTimeline();
                 break;
         }
     }
-    
+
     private IEnumerator DisablePresentation()
     {
         yield return new WaitForSeconds(5.0f);

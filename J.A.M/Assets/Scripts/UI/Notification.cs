@@ -96,7 +96,7 @@ namespace UI
                     }
                 }
             }
-
+            
             //checkCondition & reference
             var validatedCondition = false;
 
@@ -118,7 +118,12 @@ namespace UI
                 Task.conditionIndex = Task.Conditions.Count - 1;
                 validatedCondition = true;
             }
+            
+            CheckingCondition(validatedCondition);
+        }
 
+        private void CheckingCondition(bool validatedCondition)
+        {
             if (validatedCondition)
             {
                 //Check additional conditions
@@ -134,7 +139,20 @@ namespace UI
                             break;
 
                         case OutcomeData.OutcomeTarget.Assistant:
-                            if (!ConditionSystem.CheckCharacterCondition(AssistantCharacters[0].GetTraits(), cond))
+                            bool condition = false;
+                            for (int j = 0; j < AssistantCharacters.Count; j++)
+                            {
+                                if (AssistantCharacters[j] == null)
+                                    if (!ConditionSystem.CheckCharacterCondition(AssistantCharacters[j].GetTraits(),
+                                            cond))
+                                        condition = true;
+                                    else
+                                    {
+                                        condition = false;
+                                        break;
+                                    }
+                            }
+                            if (condition)
                                 continue;
                             break;
 
@@ -267,12 +285,13 @@ namespace UI
 
         public void OnUpdate()
         {
+            // TODO : CHECK CANCEL
             if (IsStarted)
             {
                 if (Task.Duration > 0)
                 {
+                    time.text = TimeTickSystem.GetTicksAsTime((uint)(Task.Duration * TimeTickSystem.ticksPerHour));
                     Task.Duration -= TimeTickSystem.timePerTick;
-                    if (Task.Duration < 0) time.text = TimeTickSystem.GetTicksAsTime((uint)(Task.Duration * TimeTickSystem.ticksPerHour));
                 }
                 else
                 {
@@ -283,8 +302,8 @@ namespace UI
             {
                 if (Task.TimeLeft > 0)
                 {
+                    time.text = TimeTickSystem.GetTicksAsTime((uint)(Task.TimeLeft * TimeTickSystem.ticksPerHour));
                     Task.TimeLeft -= TimeTickSystem.timePerTick;
-                    if (Task.TimeLeft < 0) time.text = TimeTickSystem.GetTicksAsTime((uint)(Task.TimeLeft * TimeTickSystem.ticksPerHour));
                 }
                 else
                 {
@@ -306,7 +325,17 @@ namespace UI
         public void OnCancel()
         {
             ResetCharacters();
-            spaceshipManager.notificationPool.AddToPool(gameObject);
+            if (Task.TaskType.Equals(SSTaskType.Permanent))
+            {
+                
+                spaceshipManager.notificationPool.AddToPool(gameObject);
+            }
+            else
+            {
+                taskCondition = Task.Conditions[^1].Item1;
+                Task.conditionIndex = Task.Conditions.Count - 1;
+                CheckingCondition(true);
+            }
         }
 
         private void ResetCharacters()

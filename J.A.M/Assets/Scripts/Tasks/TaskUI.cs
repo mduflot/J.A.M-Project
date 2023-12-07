@@ -110,6 +110,7 @@ namespace Tasks
                             {
                                 if (!characterSlots[j].isMandatory) continue;
                                 var character = characterSlots[j];
+                                if (character.icon == null) continue;
                                 condition = ConditionSystem.CheckCharacterCondition(
                                     character.icon.character.GetTraits(),
                                     notification.Task.Conditions[index].Item1);
@@ -122,6 +123,7 @@ namespace Tasks
                             {
                                 if (characterSlots[j].isMandatory) continue;
                                 var character = characterSlots[j];
+                                if (character.icon == null) continue;
                                 condition = ConditionSystem.CheckCharacterCondition(
                                     character.icon.character.GetTraits(),
                                     notification.Task.Conditions[index].Item1);
@@ -210,7 +212,7 @@ namespace Tasks
         public void CloseNotification()
         {
             TimeTickSystem.ModifyTimeScale(1.0f);
-            if (notification.Task.TaskType.Equals(SSTaskType.Permanent)) notification.OnCancel();
+            notification.OnCancel();
         }
 
         private bool CharactersWorking()
