@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CharacterSystem;
@@ -72,7 +73,7 @@ namespace Tasks
             titleText.text = notification.Task.Name;
             duration = notification.Task.Duration;
             descriptionText.text = notification.Task.Description;
-            
+
             for (int i = 0; i < notification.Task.leaderCharacters.Count; i++)
             {
                 var charUI = GameManager.Instance.UIManager.GetCharacterUI(notification.Task.leaderCharacters[i]);
@@ -83,10 +84,11 @@ namespace Tasks
                 slot.character = charUI.character;
                 charUI.icon.SetupIcon(slot.transform, slot);
             }
+
             for (int i = 0; i < notification.Task.assistantCharacters.Count; i++)
             {
                 var charUI = GameManager.Instance.UIManager.GetCharacterUI(notification.Task.assistantCharacters[i]);
-                if(charUI == null) continue;
+                if (charUI == null) continue;
                 var slot = inactiveSlots[i];
                 slot.SetupSlot(false);
                 slot.gameObject.SetActive(true);
@@ -100,58 +102,159 @@ namespace Tasks
         {
             if (!taskStarted)
             {
-                for (int index = 0; index < notification.Task.Conditions.Count; index++)
+                bool canCheck = true;
+                for (int j = 0; j < characterSlots.Count; j++)
                 {
-                    bool condition = false;
-                    switch (notification.Task.Conditions[index].Item1.target)
+                    if (!characterSlots[j].isMandatory) continue;
+                    var character = characterSlots[j];
+                    if (character.icon == null)
                     {
-                        case OutcomeData.OutcomeTarget.Leader:
-                            for (int j = 0; j < characterSlots.Count; j++)
-                            {
-                                if (!characterSlots[j].isMandatory) continue;
-                                var character = characterSlots[j];
-                                if (character.icon == null) continue;
-                                condition = ConditionSystem.CheckCharacterCondition(
-                                    character.icon.character.GetTraits(),
-                                    notification.Task.Conditions[index].Item1);
-                            }
-
-                            break;
-
-                        case OutcomeData.OutcomeTarget.Assistant:
-                            for (int j = 0; j < characterSlots.Count; j++)
-                            {
-                                if (characterSlots[j].isMandatory) continue;
-                                var character = characterSlots[j];
-                                if (character.icon == null) continue;
-                                condition = ConditionSystem.CheckCharacterCondition(
-                                    character.icon.character.GetTraits(),
-                                    notification.Task.Conditions[index].Item1);
-                            }
-
-                            break;
-
-                        case OutcomeData.OutcomeTarget.Crew:
-                            condition = ConditionSystem.CheckCrewCondition(notification.Task.Conditions[index].Item1);
-                            break;
-
-                        case OutcomeData.OutcomeTarget.Gauge:
-                            condition = ConditionSystem.CheckGaugeCondition(notification.Task.Conditions[index].Item1);
-                            break;
-
-                        case OutcomeData.OutcomeTarget.Ship:
-                            condition = ConditionSystem.CheckSpaceshipCondition(notification.Task.Conditions[index]
-                                .Item1);
-                            break;
-                    }
-
-                    if (condition)
-                    {
-                        previewOutcomeText.text = notification.Task.Conditions[index].Item2;
-                        notification.Task.conditionIndex = index;
-                        break;
+                        canCheck = false;
                     }
                 }
+
+                if (canCheck)
+                {
+                    for (int index = 0; index < notification.Task.Conditions.Count; index++)
+                    {
+                        bool condition = false;
+                        switch (notification.Task.Conditions[index].Item1.target)
+                        {
+                            case OutcomeData.OutcomeTarget.Leader:
+                                for (int j = 0; j < characterSlots.Count; j++)
+                                {
+                                    if (!characterSlots[j].isMandatory) continue;
+                                    var character = characterSlots[j];
+                                    if (character.icon == null) continue;
+                                    condition = ConditionSystem.CheckCharacterCondition(
+                                        character.icon.character.GetTraits(),
+                                        notification.Task.Conditions[index].Item1);
+                                }
+
+                                break;
+
+                            case OutcomeData.OutcomeTarget.Assistant:
+                                for (int j = 0; j < characterSlots.Count; j++)
+                                {
+                                    if (characterSlots[j].isMandatory) continue;
+                                    var character = characterSlots[j];
+                                    if (character.icon == null) continue;
+                                    condition = ConditionSystem.CheckCharacterCondition(
+                                        character.icon.character.GetTraits(),
+                                        notification.Task.Conditions[index].Item1);
+                                }
+
+                                break;
+
+                            case OutcomeData.OutcomeTarget.Crew:
+                                condition = ConditionSystem.CheckCrewCondition(
+                                    notification.Task.Conditions[index].Item1);
+                                break;
+
+                            case OutcomeData.OutcomeTarget.Gauge:
+                                condition = ConditionSystem.CheckGaugeCondition(notification.Task.Conditions[index]
+                                    .Item1);
+                                break;
+
+                            case OutcomeData.OutcomeTarget.Ship:
+                                condition = ConditionSystem.CheckSpaceshipCondition(notification.Task.Conditions[index]
+                                    .Item1);
+                                break;
+                        }
+
+                        if (condition)
+                        {
+                            previewOutcomeText.text = notification.Task.Conditions[index].Item2;
+                            for (int j = 0; j < notification.Task.Conditions[index].Item1.outcomes.Outcomes.Length; j++)
+                            {
+                                var outcome = notification.Task.Conditions[index].Item1.outcomes.Outcomes[j];
+                                switch (outcome.OutcomeType)
+                                {
+                                    case OutcomeData.OutcomeType.Gauge:
+                                        switch (outcome.OutcomeTargetGauge)
+                                        {
+                                            case SystemType.Airflow:
+                                                previewOutcomeText.text += "\n" + outcome.OutcomeOperation + " " +
+                                                                           outcome.value + " " +
+                                                                           outcome.OutcomeTargetGauge;
+                                                break;
+                                            case SystemType.Hull:
+                                                previewOutcomeText.text += "\n" + outcome.OutcomeOperation + " " +
+                                                                           outcome.value + " " +
+                                                                           outcome.OutcomeTargetGauge;
+                                                break;
+                                            case SystemType.Power:
+                                                previewOutcomeText.text += "\n" + outcome.OutcomeOperation + " " +
+                                                                           outcome.value + " " +
+                                                                           outcome.OutcomeTargetGauge;
+                                                break;
+                                            case SystemType.Food:
+                                                previewOutcomeText.text += "\n" + outcome.OutcomeOperation + " " +
+                                                                           outcome.value + " " +
+                                                                           outcome.OutcomeTargetGauge;
+                                                break;
+                                        }
+
+                                        break;
+                                    case OutcomeData.OutcomeType.Trait:
+                                        if (outcome.OutcomeTargetTrait.GetJob() != TraitsData.Job.None)
+                                        {
+                                            switch (outcome.OutcomeTarget)
+                                            {
+                                                case OutcomeData.OutcomeTarget.Crew:
+                                                    previewOutcomeText.text +=
+                                                        "\n" + outcome.OutcomeOperation + " Crew " +
+                                                        outcome.OutcomeTargetTrait.GetJob();
+                                                    break;
+                                                default:
+                                                    for (int i = 0; i < characterSlots.Count; i++)
+                                                    {
+                                                        var character = characterSlots[i];
+                                                        if (character.icon == null) continue;
+                                                        previewOutcomeText.text += "\n" + outcome.OutcomeOperation +
+                                                            " " + character.icon.character.GetCharacterData()
+                                                                .firstName + " " +
+                                                            outcome.OutcomeTargetTrait.GetJob();
+                                                    }
+
+                                                    break;
+                                            }
+                                        }
+
+                                        if (outcome.OutcomeTargetTrait.GetPositiveTraits() !=
+                                            TraitsData.PositiveTraits.None)
+                                            previewOutcomeText.text += "\n" + outcome.OutcomeOperation + " " +
+                                                                       outcome.OutcomeTargetTrait.GetPositiveTraits();
+                                        if (outcome.OutcomeTargetTrait.GetNegativeTraits() !=
+                                            TraitsData.NegativeTraits.None)
+                                            previewOutcomeText.text += "\n" + outcome.OutcomeOperation + " " +
+                                                                       outcome.OutcomeTargetTrait.GetNegativeTraits();
+                                        if (outcome.OutcomeShipTrait != TraitsData.SpaceshipTraits.None)
+                                        {
+                                            foreach (TraitsData.SpaceshipTraits spaceshipTraits in Enum.GetValues(typeof(TraitsData.SpaceshipTraits)))
+                                            {
+                                                if (outcome.OutcomeShipTrait.HasFlag(spaceshipTraits) &&
+                                                    spaceshipTraits != TraitsData.SpaceshipTraits.None)
+                                                {
+                                                    previewOutcomeText.text += "\n" + outcome.OutcomeOperation + " Ship " +
+                                                                               spaceshipTraits;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case OutcomeData.OutcomeType.CharacterStat:
+                                        previewOutcomeText.text += "\n" + outcome.OutcomeOperation + " " +
+                                                                   outcome.value + " " + outcome.OutcomeTargetStat;
+                                        break;
+                                }
+                            }
+
+                            notification.Task.conditionIndex = index;
+                            break;
+                        }
+                    }
+                }
+                else previewOutcomeText.text = null;
 
                 var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
 
@@ -159,14 +262,15 @@ namespace Tasks
                     ? notification.Task.Duration /
                       (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
                     : notification.Task.Duration;
-                
+
                 durationText.text = TimeTickSystem.GetTicksAsTime((uint)(duration * TimeTickSystem.ticksPerHour));
             }
         }
 
         public void StartTask()
         {
-            if (notification.Task.TaskType.Equals(SSTaskType.Permanent) || notification.Task.TaskType.Equals(SSTaskType.Untimed))
+            if (notification.Task.TaskType.Equals(SSTaskType.Permanent) ||
+                notification.Task.TaskType.Equals(SSTaskType.Untimed))
                 if (!CanStartTask())
                     return;
             if (CharactersWorking()) return;
@@ -199,7 +303,7 @@ namespace Tasks
                 slot.ClearCharacter();
                 slot.gameObject.SetActive(false);
             }
-            
+
             previewOutcomeText.text = null;
             characterSlots.Clear();
             GameManager.Instance.RefreshCharacterIcons();

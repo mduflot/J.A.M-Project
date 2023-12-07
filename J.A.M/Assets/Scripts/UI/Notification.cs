@@ -236,7 +236,6 @@ namespace UI
                                 OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
                             break;
                     }
-                    
                 }
 
                 //Generate events
