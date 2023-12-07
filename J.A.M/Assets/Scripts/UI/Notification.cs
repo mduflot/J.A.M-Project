@@ -42,6 +42,7 @@ namespace UI
                 {
                     if (hit.transform == transform)
                     {
+                        Debug.Log("Clicked on notification");
                         Display();
                     }
                 }
@@ -62,6 +63,7 @@ namespace UI
         private void Display()
         {
             TimeTickSystem.ModifyTimeScale(0.0f);
+            Debug.Log(IsStarted);
             if (IsStarted)
             {
                 //GameManager.Instance.UIManager.taskUI.DisplayTaskInfo(this);
@@ -272,7 +274,7 @@ namespace UI
                 if (Task.Duration > 0)
                 {
                     Task.Duration -= TimeTickSystem.timePerTick;
-                    time.text = (Task.Duration / TimeTickSystem.ticksPerHour).ToString("F2")  + " hours";
+                    time.text = TimeTickSystem.GetTicksAsTime((uint)(Task.Duration * TimeTickSystem.ticksPerHour));
                 }
                 else
                 {
@@ -284,11 +286,11 @@ namespace UI
                 if (Task.TimeLeft > 0)
                 {
                     Task.TimeLeft -= TimeTickSystem.timePerTick;
-                    time.text = Task.TimeLeft + " hours";
+                    time.text = TimeTickSystem.GetTicksAsTime((uint)(Task.TimeLeft * TimeTickSystem.ticksPerHour));
                 }
                 else
                 {
-                    GameManager.Instance.UIManager.taskUI.Initialize(this);
+                    GameManager.Instance.UIManager.taskUI.Initialize(this, false);
                     GameManager.Instance.UIManager.taskUI.StartTask();
                 }
             }

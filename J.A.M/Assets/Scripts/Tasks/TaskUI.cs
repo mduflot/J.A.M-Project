@@ -32,7 +32,7 @@ namespace Tasks
         private List<CharacterUISlot> characterSlots = new();
         private bool taskStarted;
 
-        public void Initialize(Notification notification, bool needToDisplay = false)
+        public void Initialize(Notification notification, bool needToDisplay = true)
         {
             this.notification = notification;
             warningUI.gameObject.SetActive(false);
@@ -61,12 +61,8 @@ namespace Tasks
             if (needToDisplay)
             {
                 timeLeftText.SetText(timeLeft.ToString());
-                TimeTickSystem.OnTick += UpdateTask;
                 gameObject.SetActive(true);
             }
-        }
-            timeLeftText.SetText(TimeTickSystem.GetTicksAsTime((uint)(timeLeft * TimeTickSystem.ticksPerHour)));
-            gameObject.SetActive(true);
         }
 
         public void DisplayTaskInfo(Notification n)

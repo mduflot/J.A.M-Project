@@ -8,9 +8,10 @@ namespace Tasks
 {
     public class Task
     {
-
         public string Name;
         public string Description;
+        public SSTaskStatus TaskStatus;
+        public SSTaskType TaskType;
         public Sprite Icon;
         public float TimeLeft;
         public float Duration;
