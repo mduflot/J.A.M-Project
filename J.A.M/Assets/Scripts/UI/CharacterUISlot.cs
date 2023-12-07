@@ -1,13 +1,19 @@
+using UnityEngine;
+
 namespace UI
 {
     public class CharacterUISlot : CharacterUI
     {
         public bool isMandatory;
-        public UnityEngine.UI.Image image;
+        [SerializeField] private UnityEngine.UI.Image image;
+        [SerializeField] private Sprite mandatorySprite;
+        [SerializeField] private Sprite assistantSprite;
 
-        private void Start()
+        public void SetupSlot(bool mandatory)
         {
-            image = GetComponent<UnityEngine.UI.Image>();
+            image.sprite = mandatory ? mandatorySprite : assistantSprite;
+            transform.localScale = mandatory ? Vector3.one : Vector3.one / 1.15f;
+            isMandatory = mandatory;
         }
     }
 }

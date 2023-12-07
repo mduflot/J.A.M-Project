@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CharacterSystem;
 using Tasks;
 using TMPro;
 using UI;
@@ -77,5 +78,16 @@ namespace Managers
                 charUi.volitionGauge.fillAmount = charUi.character.GetVolition() / charUi.character.GetMaxMood();
             }
         }
+        
+        public CharacterUI GetCharacterUI(CharacterBehaviour c)
+        {
+            foreach (var charUI in charactersUI)
+            {
+                if (charUI.character == c) return charUI;
+            }
+
+            return null;
+        }
+        
     }
 }

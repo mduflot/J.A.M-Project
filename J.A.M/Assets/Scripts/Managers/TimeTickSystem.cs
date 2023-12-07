@@ -55,6 +55,19 @@ namespace Managers
             return "Day : " + days.ToString("D2") + " // " + hours.ToString("D2") + ":" + minutes.ToString("D2");
         }
 
+        public static string GetTicksAsTime(uint t)
+        {
+            uint ticks = t;
+            uint ticksPerTenMinutes = ticksPerHour / 6;
+
+            uint hours = ticks / ticksPerHour;
+            ticks %= ticksPerHour;
+
+            uint minutes = (ticks / ticksPerTenMinutes) * 10;
+
+            return hours.ToString("D2") + ":" + minutes.ToString("D2");
+        }
+
         public static void ModifyTimeScale(float newScale)
         {
             timeScale = newScale;

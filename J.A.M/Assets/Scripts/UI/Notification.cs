@@ -34,7 +34,6 @@ namespace UI
 
         private void Update()
         {
-            if (IsStarted) return;
             if (Input.GetMouseButtonDown(0))
             {
                 RaycastHit hit;
@@ -60,10 +59,17 @@ namespace UI
             TimeTickSystem.ModifyTimeScale(1.0f);
         }
 
-        public void Display()
+        private void Display()
         {
             TimeTickSystem.ModifyTimeScale(0.0f);
-            GameManager.Instance.UIManager.taskUI.Initialize(this, true);
+            if (IsStarted)
+            {
+                //GameManager.Instance.UIManager.taskUI.DisplayTaskInfo(this);
+            }
+            else
+            {
+                GameManager.Instance.UIManager.taskUI.Initialize(this);
+            }
         }
 
         public void OnStart(List<CharacterUISlot> characters)
@@ -75,6 +81,7 @@ namespace UI
                 {
                     if (character.icon != null)
                     {
+                        Task.leaderCharacters.Add(character.character);
                         LeaderCharacters.Add(character.icon.character);
                         character.icon.character.AssignTask(this, true);
                     }
@@ -83,6 +90,7 @@ namespace UI
                 {
                     if (character.icon != null)
                     {
+                        Task.assistantCharacters.Add(character.character);
                         AssistantCharacters.Add(character.icon.character);
                         character.icon.character.AssignTask(this);
                     }
@@ -264,7 +272,7 @@ namespace UI
                 if (Task.Duration > 0)
                 {
                     Task.Duration -= TimeTickSystem.timePerTick;
-                    time.text = Task.Duration + " hours";
+                    time.text = (Task.Duration / TimeTickSystem.ticksPerHour).ToString("F2")  + " hours";
                 }
                 else
                 {

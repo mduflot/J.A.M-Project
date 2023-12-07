@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 661429031586066772}
   - component: {fileID: 6859641744914304632}
   - component: {fileID: 747420219756707821}
-  - component: {fileID: 220743782921132590}
+  - component: {fileID: 667810900726118980}
   m_Layer: 5
   m_Name: CharacterUISlot
   m_TagString: Untagged
@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 140, y: 155}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &661429031586066772
 CanvasRenderer:
@@ -60,15 +60,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: a930f71f8fe81f044a565765cd7fc7ec, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &220743782921132590
+--- !u!114 &667810900726118980
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,7 +119,8 @@ MonoBehaviour:
   icon: {fileID: 0}
   moodGauge: {fileID: 0}
   volitionGauge: {fileID: 0}
-  slot: {fileID: 0}
   speaker: {fileID: 0}
   isMandatory: 0
-  image: {fileID: 0}
+  image: {fileID: 6859641744914304632}
+  mandatorySprite: {fileID: 21300000, guid: ae12a5e7540a0954f8426cb728d668e4, type: 3}
+  assistantSprite: {fileID: 21300000, guid: a930f71f8fe81f044a565765cd7fc7ec, type: 3}
