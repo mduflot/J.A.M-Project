@@ -1,5 +1,7 @@
+using System;
 using CharacterSystem;
 using Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,7 +16,9 @@ namespace UI
         [SerializeField] private Image image;
         [SerializeField] private Image characterIcon;
         [SerializeField] private Image currentTaskImage;
-        public CharacterBehaviour character;
+        [SerializeField] private TextMeshProUGUI characterName;
+        [NonSerialized] public CharacterBehaviour character;
+        private Animator animator;
     
         public void Initialize(CharacterBehaviour c, CharacterUI script)
         {
@@ -22,6 +26,8 @@ namespace UI
             character = c;
             characterIcon.sprite = character.GetCharacterData().characterIcon;
             parentScript = script;
+            characterName.text = character.GetCharacterData().firstName;
+            animator = GetComponent<Animator>();
         }
         public void ResetTransform()
         {
@@ -37,6 +43,7 @@ namespace UI
             parentScript.ClearCharacter();
             image.raycastTarget = false;
             transform.SetParent(GameManager.Instance.UIManager.canvas.transform);
+            animator.SetBool("Selected", true);
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -48,12 +55,12 @@ namespace UI
         {
             transform.SetParent(parentAfterDrag);
             transform.localPosition = Vector3.zero;
-            //transform.position = parentAfterDrag.position;
+            animator.SetBool("Selected", false);
             parentScript.icon = this;
             image.raycastTarget = true;
         }
 
-        public void AssignTask(Task t)
+        private void AssignTask(Task t)
         {
             currentTaskImage.sprite = t.Icon;
             currentTaskImage.enabled = true;
