@@ -293,6 +293,7 @@ namespace SS
                     conditions);
                 notification.Initialize(task, spaceshipManager, dialogues);
                 spaceshipManager.AddTask(notification);
+                if(nodeSO.TaskType.Equals(SSTaskType.Permanent)) GameManager.Instance.UIManager.taskUI.Initialize(notification);
                 StartCoroutine(WaiterTask(nodeSO, task));
             }
         }
