@@ -182,6 +182,9 @@ namespace UI
                 outcomeEventArgs =
                     new OutcomeSystem.OutcomeEventArgs[taskCondition.outcomes.Outcomes.Length +
                                                        additionalConditionOutcomes.Count];
+                
+                Debug.Log(outcomeEventArgs.Length);
+                
                 for (int i = 0; i < taskCondition.outcomes.Outcomes.Length; i++)
                 {
                     //Generate event args
@@ -233,14 +236,14 @@ namespace UI
                                 OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
                             break;
                     }
+                    
                 }
 
                 //Generate events
                 outcomeEvents = new OutcomeSystem.OutcomeEvent[outcomeEventArgs.Length];
                 for (int i = 0; i < outcomeEventArgs.Length; i++)
                 {
-                    outcomeEventArgs = Array.Empty<OutcomeSystem.OutcomeEventArgs>();
-                    outcomeEvents = Array.Empty<OutcomeSystem.OutcomeEvent>();
+                    outcomeEvents[i] = OutcomeSystem.GenerateOutcomeEvent(outcomeEventArgs[i]);
                 }
 
                 Task.Duration = AssistantCharacters.Count > 0
@@ -249,6 +252,11 @@ namespace UI
                 Task.Duration *= TimeTickSystem.ticksPerHour;
                 Task.BaseDuration = Task.Duration;
                 IsStarted = true;
+            }
+            else
+            {
+                outcomeEventArgs = Array.Empty<OutcomeSystem.OutcomeEventArgs>();
+                outcomeEvents = Array.Empty<OutcomeSystem.OutcomeEvent>();
             }
         }
 

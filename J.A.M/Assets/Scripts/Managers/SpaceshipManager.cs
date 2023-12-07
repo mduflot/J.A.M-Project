@@ -75,10 +75,11 @@ namespace Managers
         public void GaugeValueOperation(SystemType systemType, float value)
         {
             var gaugeValue = systemsDictionary[systemType].gaugeValue;
+            var maxGauge = systemsDictionary[systemType].maxGauge;
             gaugeValue += value;
-            if (gaugeValue > 20)
+            if (gaugeValue > maxGauge)
             {
-                gaugeValue = 20;
+                gaugeValue = maxGauge;
             }
             else if (gaugeValue < 0)
             {

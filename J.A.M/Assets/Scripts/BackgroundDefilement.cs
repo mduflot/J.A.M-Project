@@ -9,11 +9,13 @@ public class BackgroundDefilement : MonoBehaviour
     [SerializeField] private float defilementSpeed;
 
     private Transform leftBackground;
+    private float initialPos;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         leftBackground = background1;
+        initialPos = transform.position.z;
     }
 
     // Update is called once per frame
@@ -23,8 +25,9 @@ public class BackgroundDefilement : MonoBehaviour
         background2.Translate(Vector3.left*defilementSpeed);
         if (leftBackground.position.x < -4000)
         {
-            Vector3 resetPos = new Vector3(4000, 0, 500);
+            Vector3 resetPos = new Vector3(4000, 0, initialPos);
             leftBackground.position = resetPos;
+            //leftBackground = (leftBackground == background1) ? background2 : background1;
             if (leftBackground == background1)
             {
                 leftBackground = background2;
