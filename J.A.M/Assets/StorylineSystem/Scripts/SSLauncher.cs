@@ -278,6 +278,7 @@ namespace SS
         {
             var position = spaceshipManager.GetTaskPosition(nodeSO.Room).position;
             var notificationGO = spaceshipManager.notificationPool.GetFromPool();
+            notificationGO.transform.parent = spaceshipManager.GetTaskPosition(nodeSO.Room);
             if (notificationGO.TryGetComponent(out Notification notification))
             {
                 notification.transform.position = position;

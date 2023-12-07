@@ -570,6 +570,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 492d9394a84d71d40a3b95791f82cb08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &679852356 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 956777181369209663, guid: f4b0ad034b47349458511baeb5fff145,
+    type: 3}
+  m_PrefabInstance: {fileID: 1360174037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &679852358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679852356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ee809a36410f3342b8d47572f0a0f25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &701981756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1845,7 +1863,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3816388344809745690, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1373306684}
+      addedObject: {fileID: 1373306686}
+    - targetCorrespondingSourceObject: {fileID: 956777181369209663, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 679852358}
   m_SourcePrefab: {fileID: 100100000, guid: f4b0ad034b47349458511baeb5fff145, type: 3}
 --- !u!114 &1360174038 stripped
 MonoBehaviour:
@@ -1883,7 +1905,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1360174037}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1373306684
+--- !u!114 &1373306686
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1892,12 +1914,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1373306682}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41c4d52347c54988b1824f2ac2d5a508, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ee809a36410f3342b8d47572f0a0f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueContainer: {fileID: 0}
-  characterNameText: {fileID: 0}
-  dialogue: {fileID: 0}
 --- !u!1 &1407804381
 GameObject:
   m_ObjectHideFlags: 0
