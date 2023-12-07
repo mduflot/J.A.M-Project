@@ -288,6 +288,7 @@ public class Checker : MonoBehaviour
         presentationContainer.SetActive(true);
         presentationText.text = "New Storyline : " + chosenStoryline.StorylineContainer.FileName;
         StartCoroutine(DisablePresentation());
+        Debug.Log($"Key : {chosenTimeline}");
         var count = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline].Count;
         switch (chosenStoryline.StorylineContainer.StoryType)
         {
