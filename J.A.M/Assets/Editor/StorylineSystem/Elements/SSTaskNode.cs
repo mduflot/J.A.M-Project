@@ -22,6 +22,7 @@ namespace SS.Elements
         public int OptionalSlots { get; set; }
         public float TaskHelpFactor { get; set; }
         public RoomType Room { get; set; }
+        public FurnitureType Furniture { get; set; }
 
         private VisualElement customDataContainer = new();
 
@@ -38,6 +39,7 @@ namespace SS.Elements
             OptionalSlots = 0;
             TaskHelpFactor = 0.75f;
             Room = RoomType.Flight;
+            Furniture = FurnitureType.Console;
 
             SSChoiceTaskSaveData firstChoiceData = new SSChoiceTaskSaveData()
             {
@@ -132,7 +134,8 @@ namespace SS.Elements
 
             customDataContainer.Add(optionalSlotsIntegerField);
 
-            FloatField taskHelpFactorFloatField = SSElementUtility.CreateFloatField(TaskHelpFactor, "Task Help Factor :",
+            FloatField taskHelpFactorFloatField = SSElementUtility.CreateFloatField(TaskHelpFactor,
+                "Task Help Factor :",
                 callback => { TaskHelpFactor = callback.newValue; });
 
             customDataContainer.Add(taskHelpFactorFloatField);
@@ -141,6 +144,11 @@ namespace SS.Elements
                 callback => { Room = (RoomType)callback.newValue; });
 
             customDataContainer.Add(roomEnumField);
+
+            EnumField furnitureEnumField = SSElementUtility.CreateEnumField(Furniture, "Furniture :",
+                callback => { Furniture = (FurnitureType)callback.newValue; });
+
+            customDataContainer.Add(furnitureEnumField);
 
             extensionContainer.Add(customDataContainer);
 

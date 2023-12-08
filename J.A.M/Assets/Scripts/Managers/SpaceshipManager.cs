@@ -114,16 +114,6 @@ namespace Managers
             }
         }
 
-        /// <summary>
-        /// Returns the position of the task in the room
-        /// </summary>
-        /// <param name="room"> Room of the task </param>
-        /// <returns> Position of the room in the ship </returns>
-        public Transform GetTaskPosition(RoomType room)
-        {
-            return roomsDictionary[room].transform;
-        }
-
         public Room GetRoom(RoomType room)
         {
             return roomsDictionary[room];
@@ -136,9 +126,10 @@ namespace Managers
 
         public bool IsTaskActive(string taskName)
         {
-            foreach (var activeTask in activeTasks)
+            for (var index = 0; index < activeTasks.Count; index++)
             {
-                return activeTask.Task.Name == taskName;
+                var activeTask = activeTasks[index];
+                if (activeTask.Task.Name == taskName) return true;
             }
 
             return false;

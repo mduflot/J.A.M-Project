@@ -281,13 +281,26 @@ namespace SS
 
         private void RunNode(SSTaskNodeSO nodeSO)
         {
-            if (GameManager.Instance.SpaceshipManager.IsTaskActive(nodeSO.name)) return;
-            var position = spaceshipManager.GetTaskPosition(nodeSO.Room).position;
+            if (nodeSO.TaskType.Equals(SSTaskType.Permanent)) 
+                if (spaceshipManager.IsTaskActive(nodeSO.name)) 
+                    return;
+            var room = spaceshipManager.GetRoom(nodeSO.Room);
             var notificationGO = spaceshipManager.notificationPool.GetFromPool();
-            notificationGO.transform.parent = spaceshipManager.GetTaskPosition(nodeSO.Room);
             if (notificationGO.TryGetComponent(out Notification notification))
             {
-                notification.transform.position = position;
+                Transform roomTransform;
+                if (room.roomObjects.Any(furniture => furniture.furnitureType == nodeSO.Furniture))
+                {
+                    roomTransform = room.roomObjects.First(furniture => furniture.furnitureType == nodeSO.Furniture).transform;
+                    roomTransform.GetComponent<NotificationContainer>().DisplayNotification();
+                }
+                else
+                {
+                    roomTransform = room.roomObjects[0].transform;
+                }
+                notification.transform.position = roomTransform.position;
+                notificationGO.transform.parent = roomTransform;
+                roomTransform.GetComponent<NotificationContainer>().DisplayNotification();
                 var conditions = new List<Tuple<ConditionSO, string>>();
                 foreach (var choiceData in nodeSO.Choices)
                 {

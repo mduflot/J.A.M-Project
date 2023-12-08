@@ -18,5 +18,6 @@ namespace SS.Data.Save
         [field: SerializeField] public int OptionalSlots { get; set; }
         [field: SerializeField] public float TaskHelpFactor { get; set; }
         [field: SerializeField] public RoomType Room { get; set; }
+        [field: SerializeField] public FurnitureType Furniture { get; set; }
     }
 }

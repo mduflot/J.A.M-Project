@@ -326,7 +326,9 @@ namespace UI
             IsCompleted = true;
             ResetCharacters();
             GameManager.Instance.RefreshCharacterIcons();
+            var notificationContainer = transform.parent.GetComponent<NotificationContainer>();
             transform.parent = null;
+            notificationContainer.DisplayNotification();
             spaceshipManager.notificationPool.AddToPool(gameObject);
         }
 
@@ -335,7 +337,9 @@ namespace UI
             ResetCharacters();
             if (Task.TaskType.Equals(SSTaskType.Permanent))
             {
+                var notificationContainer = transform.parent.GetComponent<NotificationContainer>();
                 transform.parent = null;
+                notificationContainer.DisplayNotification();
                 spaceshipManager.notificationPool.AddToPool(gameObject);
             }
             else

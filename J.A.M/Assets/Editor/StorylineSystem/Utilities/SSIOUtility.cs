@@ -210,7 +210,8 @@ namespace SS.Utilities
                     MandatorySlots = taskNode.MandatorySlots,
                     OptionalSlots = taskNode.OptionalSlots,
                     TaskHelpFactor = taskNode.TaskHelpFactor,
-                    Room = taskNode.Room
+                    Room = taskNode.Room,
+                    Furniture = taskNode.Furniture
                 };
 
                 graphData.Nodes.Add(nodeData);
@@ -284,7 +285,7 @@ namespace SS.Utilities
                     taskNode.NodeType,
                     taskNode.IsStartingNode(), taskNode.DescriptionTask, taskNode.TaskStatus, taskNode.TaskType, taskNode.TaskIcon, taskNode.TimeLeft,
                     taskNode.BaseDuration, taskNode.MandatorySlots, taskNode.OptionalSlots, taskNode.TaskHelpFactor,
-                    taskNode.Room);
+                    taskNode.Room, taskNode.Furniture);
 
                 createdNodes.Add(taskNode.ID, nodeSO);
 
@@ -492,6 +493,7 @@ namespace SS.Utilities
                     ((SSTaskNode)node).OptionalSlots = ((SSTaskNodeSaveData)nodeData).OptionalSlots;
                     ((SSTaskNode)node).TaskHelpFactor = ((SSTaskNodeSaveData)nodeData).TaskHelpFactor;
                     ((SSTaskNode)node).Room = ((SSTaskNodeSaveData)nodeData).Room;
+                    ((SSTaskNode)node).Furniture = ((SSTaskNodeSaveData)nodeData).Furniture;
                 }
                 else if (nodeData.NodeType == SSNodeType.Time)
                 {
