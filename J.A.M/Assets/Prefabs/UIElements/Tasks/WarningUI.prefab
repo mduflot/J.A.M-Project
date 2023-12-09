@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 1888416485888835220}
   - component: {fileID: 4907282709419178463}
   - component: {fileID: 2244132182466236915}
+  - component: {fileID: 933914313476393391}
   m_Layer: 5
   m_Name: WarningUI
   m_TagString: Untagged
@@ -385,6 +386,27 @@ MonoBehaviour:
   characterWarningDescription: {fileID: 841421329953376674}
   warning: {fileID: 4586288249918045690}
   characterWarning: {fileID: 5191918592241004667}
+--- !u!95 &933914313476393391
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2416262333217117364}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1695c5e1910ced9459024e0a67082d7a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2463997407578840409
 GameObject:
   m_ObjectHideFlags: 0

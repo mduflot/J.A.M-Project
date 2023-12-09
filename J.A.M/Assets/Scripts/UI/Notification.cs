@@ -13,6 +13,7 @@ namespace UI
     {
         [HideInInspector] public bool IsCompleted;
         [HideInInspector] public bool IsStarted;
+        [HideInInspector] public bool IsCancelled;
         [HideInInspector] public List<Tuple<Sprite, string, string>> Dialogues;
         [HideInInspector] public Task Task;
         [HideInInspector] public List<CharacterBehaviour> LeaderCharacters = new();
@@ -348,6 +349,7 @@ namespace UI
                 Task.conditionIndex = Task.Conditions.Count - 1;
                 CheckingCondition(true);
             }
+            IsCancelled = true;
         }
 
         private void ResetCharacters()

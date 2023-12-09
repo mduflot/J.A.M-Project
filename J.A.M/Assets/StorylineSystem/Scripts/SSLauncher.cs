@@ -8,6 +8,7 @@ using SS.Data;
 using Tasks;
 using TMPro;
 using UI;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -310,7 +311,7 @@ namespace SS
 
                 task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon, nodeSO.TimeLeft, nodeSO.Duration,
                     nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
-                    conditions);
+                    conditions, nodeSO.TaskType == SSTaskType.Permanent);
                 notification.Initialize(task, spaceshipManager, dialogues);
                 spaceshipManager.AddTask(notification);
                 if(nodeSO.TaskType.Equals(SSTaskType.Permanent)) notification.Display();
@@ -364,7 +365,13 @@ namespace SS
 
         private IEnumerator WaiterTask(SSTaskNodeSO nodeSO, Task task)
         {
-            yield return new WaitUntil(() => spaceshipManager.GetTaskNotification(task).IsStarted);
+            var notification = spaceshipManager.GetTaskNotification(task);
+            yield return new WaitUntil(() => notification.IsStarted || notification.IsCancelled);
+            if (notification.IsCancelled)
+            {
+                spaceshipManager.RemoveTask(notification);
+                yield break;
+            }
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).LeaderCharacters);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).AssistantCharacters);
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)

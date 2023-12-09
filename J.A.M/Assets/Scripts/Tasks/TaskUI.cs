@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CharacterSystem;
+using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Triggers;
 using Managers;
 using SS.Enumerations;
@@ -31,21 +32,24 @@ namespace Tasks
         [Header("Values")]
         [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
-
+        
         private Notification notification;
         private List<CharacterUISlot> characterSlots = new();
         private bool taskStarted;
+        private Animator animator;
+
+        private void Start()
+        {
+            animator = GetComponent<Animator>();
+        }
 
         public void Initialize(Notification n, bool needToDisplay = true)
         {
             notification = n;
-            warningUI.gameObject.SetActive(false);
             titleText.text = notification.Task.Name;
+            DisplayText(descriptionText, notification.Task.Description, 20);
             timeLeft = notification.Task.TimeLeft;
             duration = notification.Task.Duration;
-            
-            
-            descriptionText.text = notification.Task.Description;
             taskStarted = false;
 
             startButton.SetActive(true);
@@ -58,7 +62,7 @@ namespace Tasks
                 characterSlots.Add(slot);
             }
 
-            for (int i = 3; i < this.notification.Task.OptionalSlots + 3; i++)
+            for (int i = 3; i < notification.Task.OptionalSlots + 3; i++)
             {
                 var slot = inactiveSlots[i];
                 slot.SetupSlot(false);
@@ -68,19 +72,19 @@ namespace Tasks
 
             if (needToDisplay)
             {
+                DisplayText(timeLeftText, timeLeft.ToString(), 100);
                 timeLeftText.SetText(timeLeft.ToString());
-                gameObject.SetActive(true);
+                Appear(true);
             }
         }
 
         public void DisplayTaskInfo(Notification n)
         {
             notification = n;
-            warningUI.gameObject.SetActive(false);
             titleText.text = notification.Task.Name;
+            DisplayText(descriptionText, notification.Task.Description, 20);
             duration = notification.Task.Duration;
             durationText.SetText(TimeTickSystem.GetTicksAsTime((uint)duration));
-            descriptionText.text = notification.Task.Description;
 
             for (int i = 0; i < notification.Task.leaderCharacters.Count; i++)
             {
@@ -106,11 +110,12 @@ namespace Tasks
             }
             startButton.SetActive(false);
             cancelButton.SetActive(true);
-            gameObject.SetActive(true);
+            Appear(true);
         }
 
         public void Update()
         {
+            if(!animator.GetBool("Appear")) return;
             if (!taskStarted)
             {
                 bool canCheck = true;
@@ -308,17 +313,17 @@ namespace Tasks
         /// </summary>
         public void CloseTask()
         {
+            Appear(false);
             foreach (var slot in characterSlots)
             {
                 if (slot.icon != null) slot.icon.ResetTransform();
                 slot.ClearCharacter();
                 slot.gameObject.SetActive(false);
             }
-
+            if(notification.Task.IsPermanent) CloseNotification();
             previewOutcomeText.text = null;
             characterSlots.Clear();
             GameManager.Instance.RefreshCharacterIcons();
-            gameObject.SetActive(false);
         }
 
         /// <summary>
@@ -344,7 +349,7 @@ namespace Tasks
             previewOutcomeText.text = null;
             characterSlots.Clear();
             GameManager.Instance.RefreshCharacterIcons();
-            gameObject.SetActive(false);
+            Appear(false);
             CloseNotification(true);
         }
         
@@ -361,5 +366,26 @@ namespace Tasks
 
             return false;
         }
+        
+        private void Appear(bool state)
+        {
+            animator.SetBool("Appear", state);
+        }
+
+        private async System.Threading.Tasks.Task DisplayText(TextMeshProUGUI text, string textToDisplay, int speed)
+        {
+            int letterIndex = 0;
+            string tempText = "";
+            text.text = tempText;
+            while (letterIndex < textToDisplay.Length)
+            {
+                await System.Threading.Tasks.Task.Delay(speed);
+                tempText += textToDisplay[letterIndex];
+                text.text = tempText;
+                letterIndex++;
+            }
+        }
+        
     }
+
 }

@@ -1,3 +1,4 @@
+using System;
 using CharacterSystem;
 using TMPro;
 using UnityEngine;
@@ -11,10 +12,16 @@ public class WarningUI : MonoBehaviour
     public TextMeshProUGUI characterWarningDescription;
     [SerializeField] private GameObject warning;
     [SerializeField] private GameObject characterWarning;
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public void CloseWarning()
     {
-        gameObject.SetActive(false);
+        Appear(false);
     }
 
     public void CharacterWarning(CharacterBehaviour c)
@@ -35,7 +42,7 @@ public class WarningUI : MonoBehaviour
                                       character.GetTask().Name +
                                       ". Assigning him here will slow down his current Task. Do you want to proceed?";
         }
-        gameObject.SetActive(true);
+        Appear(true);
     }
 
     public void Warning()
@@ -43,7 +50,7 @@ public class WarningUI : MonoBehaviour
         warning.SetActive(true);
         characterWarning.SetActive(false);
         warningDescription.SetText("Are you sure you want to cancel this task?");
-        gameObject.SetActive(true);
+        Appear(true);
     }
     public void CancelTask()
     {
@@ -58,11 +65,16 @@ public class WarningUI : MonoBehaviour
                 character.StopTask();
             }
             GameManager.Instance.RefreshCharacterIcons();
-            gameObject.SetActive(false);
+            Appear(false);
         }
         else
         {
             GameManager.Instance.UIManager.taskUI.CancelTask();
         }
+    }
+
+    private void Appear(bool state)
+    {
+        animator.SetBool("Appear", state);
     }
 }

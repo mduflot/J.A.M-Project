@@ -27,7 +27,7 @@ namespace Tasks
         public List<CharacterBehaviour> assistantCharacters = new();
 
     public Task(string name, string description, SSTaskStatus taskStatus, SSTaskType taskType, Sprite icon, float timeLeft, float duration, int mandatorySlots,
-        int optionalSlots, float helpFactor, RoomType room, List<Tuple<ConditionSO, string>> conditions)
+        int optionalSlots, float helpFactor, RoomType room, List<Tuple<ConditionSO, string>> conditions, bool isPermanent)
     {
         Name = name;
         Description = description;
@@ -42,6 +42,7 @@ namespace Tasks
         HelpFactor = helpFactor;
         Room = room;
         Conditions = conditions;
-        }
+        IsPermanent = isPermanent;
+    }
     }
 }
