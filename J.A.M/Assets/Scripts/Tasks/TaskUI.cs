@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CharacterSystem;
-using Cysharp.Threading.Tasks;
-using Cysharp.Threading.Tasks.Triggers;
 using Managers;
 using SS.Enumerations;
 using TMPro;
@@ -25,6 +22,7 @@ namespace Tasks
         [SerializeField] private WarningUI warningUI;
         [SerializeField] private GameObject startButton;
         [SerializeField] private GameObject cancelButton;
+        [SerializeField] private DialogueLog dialogueLog;
 
         [Header("Dialogues")]
         [SerializeField] private GameObject dialogueContainer;
@@ -69,6 +67,7 @@ namespace Tasks
                 slot.gameObject.SetActive(true);
                 characterSlots.Add(slot);
             }
+            dialogueLog.DisplayDialogueLog(notification.Dialogues);
 
             if (needToDisplay)
             {
@@ -108,6 +107,7 @@ namespace Tasks
                 slot.icon = charUI.icon;
                 charUI.icon.transform.SetParent(slot.transform);
             }
+            dialogueLog.DisplayDialogueLog(notification.Dialogues);
             startButton.SetActive(false);
             cancelButton.SetActive(true);
             Appear(true);
@@ -323,6 +323,7 @@ namespace Tasks
             if(notification.Task.IsPermanent) CloseNotification();
             previewOutcomeText.text = null;
             characterSlots.Clear();
+            dialogueLog.ClearDialogueLog();
             GameManager.Instance.RefreshCharacterIcons();
         }
 
