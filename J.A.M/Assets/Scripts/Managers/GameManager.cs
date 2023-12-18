@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public UIManager UIManager;
     public SpaceshipManager SpaceshipManager;
     public Camera mainCamera;
-
+    public bool isFocused;
     private void Awake()
     {
         if (Instance == null) Instance = this;
