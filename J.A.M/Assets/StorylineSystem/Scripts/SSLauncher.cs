@@ -394,6 +394,12 @@ namespace SS
                 yield break;
             }
 
+            if (IsCancelled)
+            {
+                IsCancelled = false;
+                yield break;
+            }
+
             CheckNodeType(nodeSO.Choices.First().NextNode);
         }
 

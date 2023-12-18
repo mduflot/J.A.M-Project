@@ -69,7 +69,6 @@ namespace UI
 
         public void InitializeCancelTask()
         {
-            Debug.Log("InitializeCancelTask");
             taskCondition = Task.Conditions[^1].Item1;
             Task.conditionIndex = Task.Conditions.Count - 1;
             CheckingCondition(true);
