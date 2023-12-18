@@ -19,7 +19,8 @@ namespace SS
     public class SSLauncher : MonoBehaviour
     {
         public bool IsCancelled;
-        
+        public bool CanIgnoreDialogueTask;
+
         /* UI GameObjects */
         [SerializeField] private TextMeshProUGUI currentStoryline;
         [SerializeField] private SpaceshipManager spaceshipManager;
@@ -44,7 +45,6 @@ namespace SS
         private uint durationTimeNode;
         private Task task;
         private bool isRunning;
-        private bool canIgnoreDialogueTask;
 
         public bool IsRunning => isRunning;
 
@@ -59,7 +59,7 @@ namespace SS
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
             isRunning = true;
             IsCancelled = false;
-            canIgnoreDialogueTask = false;
+            CanIgnoreDialogueTask = false;
             CheckNodeType(node);
         }
 
@@ -328,7 +328,6 @@ namespace SS
 
         public void RunNodeCancel(Notification notification, Task actualTask, float duration, SSTaskNodeSO taskNode)
         {
-            Debug.Log("RunNodeCancel");
             StartCoroutine(WaitRunCancelNode(notification, actualTask, taskNode));
         }
 
@@ -355,6 +354,7 @@ namespace SS
 
                 if (IsCancelled)
                 {
+                    CanIgnoreDialogueTask = true;
                     IsCancelled = false;
                     TimeTickSystem.OnTick -= WaitingTime;
                     return;
@@ -367,21 +367,35 @@ namespace SS
 
         private IEnumerator WaitRunCancelNode(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
         {
-            Debug.Log("Waiting for cancel to be false");
             yield return new WaitUntil(() => IsCancelled == false);
             notification.InitializeCancelTask();
             StartCoroutine(WaiterTask(taskNode, actualTask));
         }
-        
+
         private IEnumerator DisplayDialogue(Speaker speaker, string characterName, SSDialogueNodeSO nodeSO)
         {
             nodeSO.isCompleted = false;
-            if (!nodeSO.IsDialogueTask && task != null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
+            if (CanIgnoreDialogueTask && nodeSO.IsDialogueTask)
+            {
+                if (nodeSO.Choices.First().NextNode == null)
+                {
+                    isRunning = false;
+                    nodeGroup.StoryStatus = SSStoryStatus.Completed;
+                    ResetTimeline();
+                    yield break;
+                }
+            }
+
+            CanIgnoreDialogueTask = false;
+            if (!nodeSO.IsDialogueTask && task != null)
+                yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
             if (IsCancelled)
             {
+                CanIgnoreDialogueTask = true;
                 IsCancelled = false;
                 yield break;
             }
+
             speaker.AddDialogue(task, nodeSO, characterName);
 
             yield return new WaitUntil(() => nodeSO.isCompleted);
@@ -391,12 +405,6 @@ namespace SS
                 isRunning = false;
                 nodeGroup.StoryStatus = SSStoryStatus.Completed;
                 ResetTimeline();
-                yield break;
-            }
-
-            if (IsCancelled)
-            {
-                IsCancelled = false;
                 yield break;
             }
 
@@ -425,6 +433,7 @@ namespace SS
 
             if (IsCancelled)
             {
+                CanIgnoreDialogueTask = true;
                 IsCancelled = false;
                 yield break;
             }
