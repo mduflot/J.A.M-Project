@@ -20,29 +20,28 @@ namespace Tasks
         public int OptionalSlots;
         public float HelpFactor;
         public RoomType Room;
-        public bool IsPermanent;
         public List<Tuple<ConditionSO, string>> Conditions;
         public int conditionIndex = 0;
-        public List<CharacterBehaviour> leaderCharacters = new ();
+        public List<CharacterBehaviour> leaderCharacters = new();
         public List<CharacterBehaviour> assistantCharacters = new();
 
-    public Task(string name, string description, SSTaskStatus taskStatus, SSTaskType taskType, Sprite icon, float timeLeft, float duration, int mandatorySlots,
-        int optionalSlots, float helpFactor, RoomType room, List<Tuple<ConditionSO, string>> conditions, bool isPermanent)
-    {
-        Name = name;
-        Description = description;
-        TaskStatus = taskStatus;
-        TaskType = taskType;
-        Icon = icon;
-        TimeLeft = timeLeft;
-        Duration = duration;
-        BaseDuration = duration;
-        MandatorySlots = mandatorySlots;
-        OptionalSlots = optionalSlots;
-        HelpFactor = helpFactor;
-        Room = room;
-        Conditions = conditions;
-        IsPermanent = isPermanent;
-    }
+        public Task(string name, string description, SSTaskStatus taskStatus, SSTaskType taskType, Sprite icon,
+            float timeLeft, float duration, int mandatorySlots,
+            int optionalSlots, float helpFactor, RoomType room, List<Tuple<ConditionSO, string>> conditions)
+        {
+            Name = name;
+            Description = description;
+            TaskStatus = taskStatus;
+            TaskType = taskType;
+            Icon = icon;
+            TimeLeft = timeLeft;
+            Duration = duration;
+            BaseDuration = duration;
+            MandatorySlots = mandatorySlots;
+            OptionalSlots = optionalSlots;
+            HelpFactor = helpFactor;
+            Room = room;
+            Conditions = conditions;
+        }
     }
 }
