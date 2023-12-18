@@ -80,7 +80,7 @@ public class TraitsData
     [System.Serializable]
     public class Traits
     {
-        [SerializeField] private SerializableTuple<Job, PositiveTraits, NegativeTraits> traits;
+        [SerializeField] public SerializableTuple<Job, PositiveTraits, NegativeTraits> traits;
         
         public Traits(Job job, PositiveTraits positiveTraits, NegativeTraits negativeTraits)
         {
@@ -111,7 +111,6 @@ public class TraitsData
         
         public void RemoveTraits(Traits traits)
         {
-            Debug.Log("Trait removed");
             RemoveJob(traits.GetJob());
             RemovePositiveTrait(traits.GetPositiveTraits());
             RemoveNegativeTrait(traits.GetNegativeTraits());
@@ -124,7 +123,6 @@ public class TraitsData
  
         private void RemoveJob(Job j)
         {
-            Debug.Log("Trait removed");
             traits.Item1 &= ~j;
         }
 

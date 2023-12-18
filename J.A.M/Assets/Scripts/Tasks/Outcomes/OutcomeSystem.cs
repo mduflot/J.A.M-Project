@@ -16,6 +16,8 @@ public class OutcomeSystem
         public OutcomeData.OutcomeOperation outcomeOperation;
         public float value;
         public TraitsData.Traits outcomeTargetTrait;
+        public TraitsData.SpaceshipTraits outcomeSpaceshipTrait;
+        public TraitsData.HiddenSpaceshipTraits outcomeHSpaceshipTrait;
         
         public CharacterBehaviour[] targets;
         public SystemType gauge;
@@ -51,6 +53,13 @@ public class OutcomeSystem
         newOutcome.outcomeFunctionFlag = (uint) outcome.OutcomeType | (uint) outcome.OutcomeOperation | (uint) outcome.OutcomeTargetStat;
         return newOutcome;
     }
+
+    public static OutcomeEventArgs GenerateEventArgs(Outcome outcome)
+    {
+        var newOutcome = FillArgsData(outcome, 0);
+        newOutcome.outcomeFunctionFlag = (uint) outcome.OutcomeType | (uint) outcome.OutcomeOperation | (uint) outcome.OutcomeTargetStat;
+        return newOutcome;
+    }
     
     private static OutcomeEventArgs FillArgsData(Outcome outcome, int numberOfTargets)
     {
@@ -59,6 +68,8 @@ public class OutcomeSystem
         newOutcome.outcomeOperation = outcome.OutcomeOperation;
         newOutcome.value = outcome.value;
         newOutcome.outcomeTargetTrait = outcome.OutcomeTargetTrait;
+        newOutcome.outcomeSpaceshipTrait = outcome.OutcomeShipTrait;
+        newOutcome.outcomeHSpaceshipTrait = outcome.OutcomeHiddenShipTrait;
         newOutcome.targets = new CharacterBehaviour[numberOfTargets];
         newOutcome.gauge = outcome.OutcomeTargetGauge;
         return newOutcome;

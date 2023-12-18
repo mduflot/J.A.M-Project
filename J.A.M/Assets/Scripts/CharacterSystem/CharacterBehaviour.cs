@@ -1,6 +1,9 @@
 using Tasks;
 using UI;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SubsystemsImplementation;
+using UnityEngine.UIElements;
 
 namespace CharacterSystem
 {
@@ -40,7 +43,32 @@ namespace CharacterSystem
             volition = data.baseVolition;
             traits = data.traits;
         }
-    
+
+        public bool CheckStat(float threshold, OutcomeData.OutcomeTargetStat ts, ConditionSystem.ComparisonOperator co)
+        {
+            var targetValue = (ts == OutcomeData.OutcomeTargetStat.Mood) ? mood : volition;
+            var compValue = (threshold > MaxMood) ? MaxMood : threshold;
+            switch (co)
+            {
+                case ConditionSystem.ComparisonOperator.Equal:
+                    return (int) targetValue == (int) compValue; //Cheating to avoid floating point comparison error
+                
+                case ConditionSystem.ComparisonOperator.Higher:
+                    return targetValue > compValue;
+                
+                case ConditionSystem.ComparisonOperator.Less:
+                    return targetValue < compValue;
+                
+                case ConditionSystem.ComparisonOperator.HigherOrEqual:
+                    return targetValue >= compValue;
+                
+                case ConditionSystem.ComparisonOperator.LessOrEqual:
+                    return targetValue <= compValue;
+            }
+
+            return true;
+        }
+        
         public TraitsData.Job GetJob() { return traits.GetJob(); }
 
         public TraitsData.PositiveTraits GetPositiveTraits() { return traits.GetPositiveTraits(); }

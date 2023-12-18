@@ -7,16 +7,28 @@ using UnityEngine;
 public class ConditionSystem
 {
     // Call if Target is Leader or Assistant
-    public static bool CheckCharacterCondition(TraitsData.Traits characterTraits, ConditionSO taskCondition)
+    public static bool CheckCharacterCondition(CharacterBehaviour character, ConditionSO taskCondition)
     {
         if (taskCondition.target == OutcomeData.OutcomeTarget.None) return true;
         
         var ssTraits = GameManager.Instance.SpaceshipManager.SpaceshipTraits;
         var hssTraits = GameManager.Instance.SpaceshipManager.HiddenSpaceshipTraits;
         bool validateCondition = true;
+
+        if (!CheckSpaceshipTraits(ssTraits, hssTraits, taskCondition.BaseCondition.SpaceshipTraits,
+                taskCondition.BaseCondition.HiddenSpaceshipTraits))
+            return false;
         
         /*Base Condition Check*/
 
+        var characterTraits = character.GetTraits();
+        
+        if (taskCondition.targetStat != OutcomeData.OutcomeTargetStat.None)
+        {
+            validateCondition = character.CheckStat(taskCondition.statThreshold, taskCondition.targetStat,
+                taskCondition.statComparison);
+        }
+        
         if (!CheckJob(characterTraits.GetJob(), taskCondition.BaseCondition.Traits.GetJob()))
             validateCondition = false;
 
@@ -26,10 +38,6 @@ public class ConditionSystem
 
         if (!CheckNegativeTraits(characterTraits.GetNegativeTraits(),
                 taskCondition.BaseCondition.Traits.GetNegativeTraits()))
-            validateCondition = false;
-
-        if (!CheckSpaceshipTraits(ssTraits, hssTraits, taskCondition.BaseCondition.SpaceshipTraits,
-                taskCondition.BaseCondition.HiddenSpaceshipTraits))
             validateCondition = false;
 
         if (taskCondition.supplementaryConditions.Count < 1)
@@ -261,10 +269,10 @@ public class ConditionSystem
         switch (condition.additionnalConditions[additionnalConditionIndex].target)
         {
             case OutcomeData.OutcomeTarget.Leader:
-                return CheckCharacterCondition(potentialTarget.GetTraits(), condition);
+                return CheckCharacterCondition(potentialTarget, condition);
                 
             case OutcomeData.OutcomeTarget.Assistant:
-                return CheckCharacterCondition(potentialTarget.GetTraits(), condition);
+                return CheckCharacterCondition(potentialTarget, condition);
                 
             case OutcomeData.OutcomeTarget.Crew:
                 return CheckCrewCondition(condition);
@@ -304,5 +312,14 @@ public class ConditionSystem
     {
         return ((spaceshipTraits & conditionSTraits) == conditionSTraits) &&
                ((hiddenSpaceshipTraits & conditionHSTraits) == conditionHSTraits);
+    }
+    
+    public enum ComparisonOperator
+    {
+        Less,
+        Equal,
+        Higher,
+        LessOrEqual,
+        HigherOrEqual,
     }
 }

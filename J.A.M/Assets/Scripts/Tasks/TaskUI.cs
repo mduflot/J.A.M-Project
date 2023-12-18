@@ -143,7 +143,7 @@ namespace Tasks
                                     var character = characterSlots[j];
                                     if (character.icon == null) continue;
                                     condition = ConditionSystem.CheckCharacterCondition(
-                                        character.icon.character.GetTraits(),
+                                        character.icon.character,
                                         notification.Task.Conditions[index].Item1);
                                 }
 
@@ -156,7 +156,7 @@ namespace Tasks
                                     var character = characterSlots[j];
                                     if (character.icon == null) continue;
                                     condition = ConditionSystem.CheckCharacterCondition(
-                                        character.icon.character.GetTraits(),
+                                        character.icon.character,
                                         notification.Task.Conditions[index].Item1);
                                 }
 

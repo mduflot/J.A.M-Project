@@ -6,18 +6,21 @@ using UnityEngine;
 
 public class OutcomeFunctions
 {
-    public const uint ADD_MOOD = 41;
-    public const uint SUB_MOOD = 49;
-    public const uint ADD_VOLITION = 73;
-    public const uint SUB_VOLITION = 81;
-    public const uint ADD_TRAIT = 10;
-    public const uint SUB_TRAIT = 18;
-    public const uint ADD_GAUGE = 12;
-    public const uint SUB_GAUGE = 20;
+    public const uint ADD_MOOD = (uint) OutcomeData.OutcomeType.CharacterStat + (uint) OutcomeData.OutcomeOperation.Add + (uint) OutcomeData.OutcomeTargetStat.Mood;
+    public const uint SUB_MOOD = (uint) OutcomeData.OutcomeType.CharacterStat + (uint) OutcomeData.OutcomeOperation.Sub + (uint) OutcomeData.OutcomeTargetStat.Mood;
+    public const uint ADD_VOLITION = (uint) OutcomeData.OutcomeType.CharacterStat + (uint) OutcomeData.OutcomeOperation.Add + (uint) OutcomeData.OutcomeTargetStat.Volition;
+    public const uint SUB_VOLITION = (uint) OutcomeData.OutcomeType.CharacterStat + (uint) OutcomeData.OutcomeOperation.Sub + (uint) OutcomeData.OutcomeTargetStat.Volition;
+    public const uint ADD_TRAIT = (uint) OutcomeData.OutcomeType.Trait + (uint) OutcomeData.OutcomeOperation.Add;
+    public const uint SUB_TRAIT = (uint) OutcomeData.OutcomeType.Trait + (uint) OutcomeData.OutcomeOperation.Sub;
+    public const uint ADD_SHIPTRAIT = (uint) OutcomeData.OutcomeType.ShipTrait + (uint) OutcomeData.OutcomeOperation.Add;
+    public const uint SUB_SHIPTRAIT = (uint) OutcomeData.OutcomeType.ShipTrait + (uint) OutcomeData.OutcomeOperation.Sub;
+    public const uint ADD_GAUGE = (uint) OutcomeData.OutcomeType.Gauge + (uint) OutcomeData.OutcomeOperation.Add;
+    public const uint SUB_GAUGE = (uint) OutcomeData.OutcomeType.Gauge + (uint) OutcomeData.OutcomeOperation.Sub;
 
     public static OutcomeSystem.OutcomeEvent GetOutcomeFunction(uint outcomeFlag)
     {
         var evt = new OutcomeSystem.OutcomeEvent();
+        Debug.Log(outcomeFlag);
         
         switch (outcomeFlag)
         {
@@ -45,6 +48,14 @@ public class OutcomeFunctions
                 evt.AddListener(SubTrait);
                 break;
             
+            case ADD_SHIPTRAIT:
+                evt.AddListener(AddShipTrait);
+                break;
+            
+            case SUB_SHIPTRAIT:
+                evt.AddListener(SubShipTrait);
+                break;
+            
             case ADD_GAUGE:
                 evt.AddListener(AddGauge);
                 break;
@@ -53,7 +64,6 @@ public class OutcomeFunctions
                 evt.AddListener(SubGauge);
                 break;
         }
-
         return evt;
     }
     
@@ -105,6 +115,18 @@ public class OutcomeFunctions
         }
     }
 
+    private static void AddShipTrait(OutcomeSystem.OutcomeEventArgs e)
+    {
+        GameManager.Instance.SpaceshipManager.SpaceshipTraits |= e.outcomeSpaceshipTrait;
+        GameManager.Instance.SpaceshipManager.HiddenSpaceshipTraits |= e.outcomeHSpaceshipTrait;
+    }
+
+    private static void SubShipTrait(OutcomeSystem.OutcomeEventArgs e)
+    {
+        GameManager.Instance.SpaceshipManager.SpaceshipTraits &= ~e.outcomeSpaceshipTrait;
+        GameManager.Instance.SpaceshipManager.HiddenSpaceshipTraits &= ~e.outcomeHSpaceshipTrait;
+    }
+    
     private static void AddGauge(OutcomeSystem.OutcomeEventArgs e)
     {
         GameManager.Instance.SpaceshipManager.GaugeValueOperation(e.gauge, e.value);

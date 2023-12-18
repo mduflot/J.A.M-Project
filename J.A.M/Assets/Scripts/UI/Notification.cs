@@ -135,7 +135,7 @@ namespace UI
                     switch (cond.target)
                     {
                         case OutcomeData.OutcomeTarget.Leader:
-                            if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0].GetTraits(), cond))
+                            if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], cond))
                                 continue;
                             break;
 
@@ -144,7 +144,7 @@ namespace UI
                             for (int j = 0; j < AssistantCharacters.Count; j++)
                             {
                                 if (AssistantCharacters[j] == null)
-                                    if (!ConditionSystem.CheckCharacterCondition(AssistantCharacters[j].GetTraits(),
+                                    if (!ConditionSystem.CheckCharacterCondition(AssistantCharacters[j],
                                             cond))
                                         condition = true;
                                     else
@@ -205,6 +205,9 @@ namespace UI
                                 GameManager.Instance.SpaceshipManager.characters);
                             break;
 
+                        case OutcomeData.OutcomeTarget.Ship:
+                            outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome);
+                            break;
                         case OutcomeData.OutcomeTarget.Gauge:
                             outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
                             break;
@@ -232,6 +235,10 @@ namespace UI
                                 GameManager.Instance.SpaceshipManager.characters);
                             break;
 
+                        case OutcomeData.OutcomeTarget.Ship:
+                            outcomeEventArgs[numberOfBaseOutcomes + i] = OutcomeSystem.GenerateEventArgs(outcome);
+                            break;
+                        
                         case OutcomeData.OutcomeTarget.Gauge:
                             outcomeEventArgs[numberOfBaseOutcomes + i] =
                                 OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
@@ -267,12 +274,12 @@ namespace UI
             {
                 case OutcomeData.OutcomeTarget.Leader:
                     validateCondition =
-                        ConditionSystem.CheckCharacterCondition(LeaderCharacters[0].GetTraits(), taskCondition);
+                        ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], taskCondition);
                     break;
                 case OutcomeData.OutcomeTarget.Assistant:
                     if (AssistantCharacters.Count >= 1)
                         validateCondition =
-                            ConditionSystem.CheckCharacterCondition(AssistantCharacters[0].GetTraits(), taskCondition);
+                            ConditionSystem.CheckCharacterCondition(AssistantCharacters[0], taskCondition);
                     break;
                 case OutcomeData.OutcomeTarget.Gauge:
                     validateCondition = ConditionSystem.CheckGaugeCondition(taskCondition);

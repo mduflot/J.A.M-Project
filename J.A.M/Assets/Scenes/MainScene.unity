@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speaker: {fileID: 0}
-  data: {fileID: 11400000, guid: eefdd547100ada140ae03a793102445a, type: 2}
+  data: {fileID: 11400000, guid: 8f0fb8df2cf1c544fbd2895d745374d3, type: 2}
   moveSpeed: 0
   traits:
     traits:
@@ -1421,12 +1421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d739a8f0c38fc04c8ef67573f4a33be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1360174039 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7241136618820745542, guid: f4b0ad034b47349458511baeb5fff145,
-    type: 3}
-  m_PrefabInstance: {fileID: 1360174037}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1407804381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1791,11 +1785,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4961808aa3f17ea45810a22c7a01d63d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  zoomSpeed: 10
-  maxZoom: -200
-  minZoom: -600
-  menuContainer: {fileID: 1360174039}
 --- !u!114 &1754173459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1833,7 +1822,7 @@ PrefabInstance:
     - target: {fileID: 3836141617645299094, guid: df303a4f6b3629a49b34978e4516a784,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1250
       objectReference: {fileID: 0}
     - target: {fileID: 3836141617645299094, guid: df303a4f6b3629a49b34978e4516a784,
         type: 3}
@@ -1870,10 +1859,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4198038970769000710, guid: df303a4f6b3629a49b34978e4516a784,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558542016409312555, guid: df303a4f6b3629a49b34978e4516a784,
+        type: 3}
+      propertyPath: defilementSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6946783196213744311, guid: df303a4f6b3629a49b34978e4516a784,
         type: 3}
       propertyPath: m_Name
       value: BackgroundDefilement
+      objectReference: {fileID: 0}
+    - target: {fileID: 7452635126779217665, guid: df303a4f6b3629a49b34978e4516a784,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

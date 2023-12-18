@@ -7,20 +7,21 @@ public class OutcomeData : MonoBehaviour
     {
         CharacterStat = 1,
         Trait = 2,
-        Gauge = 4
+        ShipTrait = 4,
+        Gauge = 8
     }
     
     public enum OutcomeOperation : uint
     {
-        Add = 8,
-        Sub = 16
+        Add = 16,
+        Sub = 32
     }
     
     public enum OutcomeTargetStat : uint 
     {
         None = 0,
-        Mood = 32,
-        Volition = 64
+        Mood = 64,
+        Volition = 128
     }
     
     public enum OutcomeTarget
