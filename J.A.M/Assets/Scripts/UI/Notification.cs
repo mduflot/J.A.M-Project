@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using SS.Enumerations;
 using CharacterSystem;
 using Managers;
+using SS;
+using SS.ScriptableObjects;
 using Tasks;
 using TMPro;
 using UnityEngine;
@@ -27,6 +29,8 @@ namespace UI
         private ConditionSO taskCondition;
         private OutcomeSystem.OutcomeEvent[] outcomeEvents;
         private OutcomeSystem.OutcomeEventArgs[] outcomeEventArgs;
+        private SSLauncher launcher;
+        private SSTaskNodeSO taskNode;
 
         private void Start()
         {
@@ -49,15 +53,26 @@ namespace UI
             }
         }
 
-        public void Initialize(Task task, SpaceshipManager spaceshipManager,
+        public void Initialize(Task task, SSTaskNodeSO ssTaskNode, SpaceshipManager spaceshipManager,
+            SSLauncher ssLauncher,
             List<Tuple<Sprite, string, string>> dialogues = null)
         {
             Task = task;
+            taskNode = ssTaskNode;
+            IsCancelled = false;
             Task.TimeLeft *= TimeTickSystem.ticksPerHour;
             icon.sprite = task.Icon;
             Dialogues = dialogues;
             this.spaceshipManager = spaceshipManager;
+            launcher = ssLauncher;
             TimeTickSystem.ModifyTimeScale(TimeTickSystem.lastActiveTimeScale);
+        }
+
+        public void InitializeCancelTask()
+        {
+            taskCondition = Task.Conditions[^1].Item1;
+            Task.conditionIndex = Task.Conditions.Count - 1;
+            CheckingCondition(true);
         }
 
         public void Display()
@@ -97,7 +112,7 @@ namespace UI
                     }
                 }
             }
-            
+
             //checkCondition & reference
             var validatedCondition = false;
 
@@ -119,7 +134,7 @@ namespace UI
                 Task.conditionIndex = Task.Conditions.Count - 1;
                 validatedCondition = true;
             }
-            
+
             CheckingCondition(validatedCondition);
         }
 
@@ -153,6 +168,7 @@ namespace UI
                                         break;
                                     }
                             }
+
                             if (condition)
                                 continue;
                             break;
@@ -183,9 +199,9 @@ namespace UI
                 outcomeEventArgs =
                     new OutcomeSystem.OutcomeEventArgs[taskCondition.outcomes.Outcomes.Length +
                                                        additionalConditionOutcomes.Count];
-                
+
                 Debug.Log(outcomeEventArgs.Length);
-                
+
                 for (int i = 0; i < taskCondition.outcomes.Outcomes.Length; i++)
                 {
                     //Generate event args
@@ -253,11 +269,15 @@ namespace UI
                     outcomeEvents[i] = OutcomeSystem.GenerateOutcomeEvent(outcomeEventArgs[i]);
                 }
 
-                Task.Duration = AssistantCharacters.Count > 0
-                    ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
-                    : Task.Duration;
-                Task.Duration *= TimeTickSystem.ticksPerHour;
-                Task.BaseDuration = Task.Duration;
+                if (!IsCancelled)
+                {
+                    Task.Duration = AssistantCharacters.Count > 0
+                        ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
+                        : Task.Duration;
+                    Task.Duration *= TimeTickSystem.ticksPerHour;
+                    Task.BaseDuration = Task.Duration;
+                }
+                IsCancelled = false;
                 IsStarted = true;
             }
             else
@@ -300,7 +320,6 @@ namespace UI
 
         public void OnUpdate()
         {
-            // TODO : CHECK CANCEL
             if (IsStarted)
             {
                 if (Task.Duration > 0)
@@ -313,7 +332,7 @@ namespace UI
                     OnComplete();
                 }
             }
-            else if (Task.TaskType.Equals(SSTaskType.Timed))
+            else if (Task.TaskType.Equals(SSTaskType.Timed) && IsCancelled == false)
             {
                 if (Task.TimeLeft > 0)
                 {
@@ -342,9 +361,9 @@ namespace UI
 
         public void OnCancel()
         {
-            ResetCharacters();
             if (Task.TaskType.Equals(SSTaskType.Permanent))
             {
+                ResetCharacters();
                 var notificationContainer = transform.parent.GetComponent<NotificationContainer>();
                 transform.parent = null;
                 notificationContainer.DisplayNotification();
@@ -352,10 +371,11 @@ namespace UI
             }
             else
             {
-                taskCondition = Task.Conditions[^1].Item1;
-                Task.conditionIndex = Task.Conditions.Count - 1;
-                CheckingCondition(true);
+                launcher.IsCancelled = true;
+                IsStarted = false;
+                launcher.RunNodeCancel(this, Task, Task.Duration, taskNode);
             }
+
             IsCancelled = true;
         }
 

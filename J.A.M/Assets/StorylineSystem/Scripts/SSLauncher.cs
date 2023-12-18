@@ -8,7 +8,6 @@ using SS.Data;
 using Tasks;
 using TMPro;
 using UI;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,6 +18,8 @@ namespace SS
 
     public class SSLauncher : MonoBehaviour
     {
+        public bool IsCancelled;
+        
         /* UI GameObjects */
         [SerializeField] private TextMeshProUGUI currentStoryline;
         [SerializeField] private SpaceshipManager spaceshipManager;
@@ -43,6 +44,7 @@ namespace SS
         private uint durationTimeNode;
         private Task task;
         private bool isRunning;
+        private bool canIgnoreDialogueTask;
 
         public bool IsRunning => isRunning;
 
@@ -56,6 +58,8 @@ namespace SS
             dialogues = new();
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
             isRunning = true;
+            IsCancelled = false;
+            canIgnoreDialogueTask = false;
             CheckNodeType(node);
         }
 
@@ -282,8 +286,8 @@ namespace SS
 
         private void RunNode(SSTaskNodeSO nodeSO)
         {
-            if (nodeSO.TaskType.Equals(SSTaskType.Permanent)) 
-                if (spaceshipManager.IsTaskActive(nodeSO.name)) 
+            if (nodeSO.TaskType.Equals(SSTaskType.Permanent))
+                if (spaceshipManager.IsTaskActive(nodeSO.name))
                     return;
             var room = spaceshipManager.GetRoom(nodeSO.Room);
             var notificationGO = spaceshipManager.notificationPool.GetFromPool();
@@ -292,13 +296,15 @@ namespace SS
                 Transform roomTransform;
                 if (room.roomObjects.Any(furniture => furniture.furnitureType == nodeSO.Furniture))
                 {
-                    roomTransform = room.roomObjects.First(furniture => furniture.furnitureType == nodeSO.Furniture).transform;
+                    roomTransform = room.roomObjects.First(furniture => furniture.furnitureType == nodeSO.Furniture)
+                        .transform;
                     roomTransform.GetComponent<NotificationContainer>().DisplayNotification();
                 }
                 else
                 {
                     roomTransform = room.roomObjects[0].transform;
                 }
+
                 notification.transform.position = roomTransform.position;
                 notificationGO.transform.parent = roomTransform;
                 roomTransform.GetComponent<NotificationContainer>().DisplayNotification();
@@ -309,14 +315,21 @@ namespace SS
                         ((SSNodeChoiceTaskData)choiceData).PreviewOutcome));
                 }
 
-                task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon, nodeSO.TimeLeft, nodeSO.Duration,
+                task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
+                    nodeSO.TimeLeft, nodeSO.Duration,
                     nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
-                    conditions, nodeSO.TaskType == SSTaskType.Permanent);
-                notification.Initialize(task, spaceshipManager, dialogues);
+                    conditions);
+                notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
                 spaceshipManager.AddTask(notification);
-                if(nodeSO.TaskType.Equals(SSTaskType.Permanent)) notification.Display();
+                if (nodeSO.TaskType.Equals(SSTaskType.Permanent)) notification.Display();
                 StartCoroutine(WaiterTask(nodeSO, task));
             }
+        }
+
+        public void RunNodeCancel(Notification notification, Task actualTask, float duration, SSTaskNodeSO taskNode)
+        {
+            notification.InitializeCancelTask();
+            StartCoroutine(WaiterTask(taskNode, actualTask));
         }
 
         private void RunNode(SSTimeNodeSO nodeSO)
@@ -336,6 +349,13 @@ namespace SS
                     isRunning = false;
                     nodeGroup.StoryStatus = SSStoryStatus.Completed;
                     ResetTimeline();
+                    TimeTickSystem.OnTick -= WaitingTime;
+                    return;
+                }
+
+                if (IsCancelled)
+                {
+                    IsCancelled = false;
                     TimeTickSystem.OnTick -= WaitingTime;
                     return;
                 }
@@ -360,6 +380,12 @@ namespace SS
                 yield break;
             }
 
+            if (IsCancelled)
+            {
+                IsCancelled = false;
+                yield break;
+            }
+
             CheckNodeType(nodeSO.Choices.First().NextNode);
         }
 
@@ -372,6 +398,7 @@ namespace SS
                 spaceshipManager.RemoveTask(notification);
                 yield break;
             }
+
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).LeaderCharacters);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).AssistantCharacters);
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
@@ -379,6 +406,12 @@ namespace SS
                 isRunning = false;
                 nodeGroup.StoryStatus = SSStoryStatus.Completed;
                 ResetTimeline();
+                yield break;
+            }
+
+            if (IsCancelled)
+            {
+                IsCancelled = false;
                 yield break;
             }
 

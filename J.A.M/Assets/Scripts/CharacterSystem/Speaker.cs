@@ -34,7 +34,7 @@ namespace CharacterSystem
             var tuple = sentences.Dequeue();
             if (tuple.Item2.IsDialogueTask)
                 yield return new WaitUntil(() =>
-                    100 - Mathf.Clamp(tuple.Item1.Duration / tuple.Item1.BaseDuration, 0, 100) * 100 >
+                    100 - Mathf.Clamp(tuple.Item1.Duration / tuple.Item1.BaseDuration, 0, 1) * 100 >
                     tuple.Item2.PercentageTask);
             dialogueContainer.SetActive(true);
             characterNameText.text = tuple.Item3;
