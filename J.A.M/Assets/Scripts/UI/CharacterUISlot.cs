@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace UI
 {
@@ -6,6 +7,7 @@ namespace UI
     {
         public bool isMandatory;
         [SerializeField] private UnityEngine.UI.Image image;
+        [SerializeField] private Transform iconParent;
         [SerializeField] private Sprite mandatorySprite;
         [SerializeField] private Sprite assistantSprite;
 
@@ -14,6 +16,15 @@ namespace UI
             image.sprite = mandatory ? mandatorySprite : assistantSprite;
             transform.localScale = mandatory ? Vector3.one : Vector3.one / 1.15f;
             isMandatory = mandatory;
+        }
+        
+        public override void OnDrop(PointerEventData eventData)
+        {
+            if (transform.childCount > 1) return;
+            GameObject dropped = eventData.pointerDrag;
+            icon = dropped.GetComponent<CharacterIcon>();
+            icon.SetupIcon(iconParent, this);
+            icon.transform.localScale = transform.localScale;
         }
     }
 }

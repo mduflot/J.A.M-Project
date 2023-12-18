@@ -31,9 +31,9 @@ namespace UI
             icon = i;
         }
 
-        public void OnDrop(PointerEventData eventData)
+        public virtual void OnDrop(PointerEventData eventData)
         {
-            if (transform.childCount > 0) return;
+            if (transform.childCount > 1) return;
             GameObject dropped = eventData.pointerDrag;
             icon = dropped.GetComponent<CharacterIcon>();
             icon.SetupIcon(transform, this);

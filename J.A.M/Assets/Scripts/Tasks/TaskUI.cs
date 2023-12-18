@@ -324,7 +324,12 @@ namespace Tasks
                 slot.ClearCharacter();
                 slot.gameObject.SetActive(false);
             }
-            if(notification.Task.IsPermanent) CloseNotification();
+
+            if (notification.Task.IsPermanent)
+            {
+                Debug.Log("Je close la notification");
+                CloseNotification();
+            }
             previewOutcomeText.text = null;
             characterSlots.Clear();
             dialogueLog.ClearDialogueLog();
@@ -339,6 +344,7 @@ namespace Tasks
         public void CloseNotification(bool forceStop = false)
         {
             TimeTickSystem.ModifyTimeScale(1.0f);
+            //Debug.Log("Je close la notification");
             if(!forceStop && taskStarted) return;
             if (notification.Task.TaskType.Equals(SSTaskType.Permanent)) notification.OnCancel();
         }

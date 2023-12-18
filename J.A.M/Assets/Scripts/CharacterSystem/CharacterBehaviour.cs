@@ -84,7 +84,7 @@ namespace CharacterSystem
             isWorking = true;
             currentNotification = t;
             isTaskLeader = leader;
-            mood -= 3.0f;
+            mood -= 7.0f;
         }
 
         public bool IsWorking()

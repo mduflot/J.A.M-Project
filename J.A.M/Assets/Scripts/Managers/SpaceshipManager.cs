@@ -175,12 +175,12 @@ namespace Managers
             {
                 if (!character.IsWorking())
                 {
-                    float moodIncrease = 3.0f / TimeTickSystem.ticksPerHour;
+                    float moodIncrease = 1.0f / TimeTickSystem.ticksPerHour;
                     foreach (var system in systems)
                     {
                         if (system.gaugeValue <= 0)
                         {
-                            moodIncrease -= 2.5f / TimeTickSystem.ticksPerHour;
+                            moodIncrease -= 0.75f / TimeTickSystem.ticksPerHour;
                         }
                     }
 
