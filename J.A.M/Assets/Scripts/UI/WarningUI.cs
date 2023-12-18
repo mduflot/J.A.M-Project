@@ -33,15 +33,16 @@ public class WarningUI : MonoBehaviour
         if (c.IsTaskLeader())
         {
             characterWarningDescription.text = character.GetCharacterData().firstName + " is already assigned to " +
-                                      character.GetTask().Name +
-                                      ". Assigning him here will cancel his current Task. Do you want to proceed?";
+                                               character.GetTask().Name +
+                                               ". Assigning him here will cancel his current Task. Do you want to proceed?";
         }
         else
         {
             characterWarningDescription.text = character.GetCharacterData().firstName + " is already assigned to " +
-                                      character.GetTask().Name +
-                                      ". Assigning him here will slow down his current Task. Do you want to proceed?";
+                                               character.GetTask().Name +
+                                               ". Assigning him here will slow down his current Task. Do you want to proceed?";
         }
+
         Appear(true);
     }
 
@@ -52,18 +53,22 @@ public class WarningUI : MonoBehaviour
         warningDescription.SetText("Are you sure you want to cancel this task?");
         Appear(true);
     }
+
     public void CancelTask()
     {
+        // TODO: if condition is never true
         if (characterWarning.activeSelf)
         {
             if (character.IsTaskLeader())
             {
+                Debug.Log("CancelTask Leader");
                 GameManager.Instance.SpaceshipManager.CancelTask(character.GetTask());
             }
             else
             {
                 character.StopTask();
             }
+
             GameManager.Instance.RefreshCharacterIcons();
             Appear(false);
         }

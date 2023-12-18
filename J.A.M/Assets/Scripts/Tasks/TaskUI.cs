@@ -320,7 +320,7 @@ namespace Tasks
                 slot.ClearCharacter();
                 slot.gameObject.SetActive(false);
             }
-            if(notification.Task.TaskType.Equals(SSTaskType.Permanent)) CloseNotification();
+            if (notification.Task.TaskType.Equals(SSTaskType.Permanent) && !taskStarted) CloseNotification();
             previewOutcomeText.text = null;
             characterSlots.Clear();
             dialogueLog.ClearDialogueLog();
@@ -330,10 +330,9 @@ namespace Tasks
         /// <summary>
         /// Close the notification
         /// </summary>
-        public void CloseNotification(bool forceStop = false)
+        public void CloseNotification()
         {
             TimeTickSystem.ModifyTimeScale(1.0f);
-            if(!forceStop && taskStarted) return;
             notification.OnCancel();
         }
 
@@ -347,11 +346,12 @@ namespace Tasks
                 slot.gameObject.SetActive(false);
             }
 
+            notification.IsCancelled = true;
             previewOutcomeText.text = null;
             characterSlots.Clear();
             GameManager.Instance.RefreshCharacterIcons();
             Appear(false);
-            CloseNotification(true);
+            CloseNotification();
         }
         
         private bool CharactersWorking()

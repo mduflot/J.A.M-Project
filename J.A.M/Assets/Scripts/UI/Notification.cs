@@ -59,7 +59,6 @@ namespace UI
         {
             Task = task;
             taskNode = ssTaskNode;
-            IsCancelled = false;
             Task.TimeLeft *= TimeTickSystem.ticksPerHour;
             icon.sprite = task.Icon;
             Dialogues = dialogues;
@@ -70,6 +69,7 @@ namespace UI
 
         public void InitializeCancelTask()
         {
+            Debug.Log("InitializeCancelTask");
             taskCondition = Task.Conditions[^1].Item1;
             Task.conditionIndex = Task.Conditions.Count - 1;
             CheckingCondition(true);
@@ -199,8 +199,6 @@ namespace UI
                 outcomeEventArgs =
                     new OutcomeSystem.OutcomeEventArgs[taskCondition.outcomes.Outcomes.Length +
                                                        additionalConditionOutcomes.Count];
-
-                Debug.Log(outcomeEventArgs.Length);
 
                 for (int i = 0; i < taskCondition.outcomes.Outcomes.Length; i++)
                 {
@@ -363,11 +361,12 @@ namespace UI
         {
             if (Task.TaskType.Equals(SSTaskType.Permanent))
             {
-                ResetCharacters();
-                var notificationContainer = transform.parent.GetComponent<NotificationContainer>();
-                transform.parent = null;
-                notificationContainer.DisplayNotification();
-                spaceshipManager.notificationPool.AddToPool(gameObject);
+                if (!IsStarted || IsCancelled)
+                {
+                    outcomeEventArgs = Array.Empty<OutcomeSystem.OutcomeEventArgs>();
+                    outcomeEvents = Array.Empty<OutcomeSystem.OutcomeEvent>();
+                }
+                OnComplete();
             }
             else
             {
@@ -375,8 +374,6 @@ namespace UI
                 IsStarted = false;
                 launcher.RunNodeCancel(this, Task, Task.Duration, taskNode);
             }
-
-            IsCancelled = true;
         }
 
         private void ResetCharacters()

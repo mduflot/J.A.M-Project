@@ -328,8 +328,8 @@ namespace SS
 
         public void RunNodeCancel(Notification notification, Task actualTask, float duration, SSTaskNodeSO taskNode)
         {
-            notification.InitializeCancelTask();
-            StartCoroutine(WaiterTask(taskNode, actualTask));
+            Debug.Log("RunNodeCancel");
+            StartCoroutine(WaitRunCancelNode(notification, actualTask, taskNode));
         }
 
         private void RunNode(SSTimeNodeSO nodeSO)
@@ -365,9 +365,23 @@ namespace SS
             }
         }
 
+        private IEnumerator WaitRunCancelNode(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
+        {
+            Debug.Log("Waiting for cancel to be false");
+            yield return new WaitUntil(() => IsCancelled == false);
+            notification.InitializeCancelTask();
+            StartCoroutine(WaiterTask(taskNode, actualTask));
+        }
+        
         private IEnumerator DisplayDialogue(Speaker speaker, string characterName, SSDialogueNodeSO nodeSO)
         {
             nodeSO.isCompleted = false;
+            if (!nodeSO.IsDialogueTask && task != null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
+            if (IsCancelled)
+            {
+                IsCancelled = false;
+                yield break;
+            }
             speaker.AddDialogue(task, nodeSO, characterName);
 
             yield return new WaitUntil(() => nodeSO.isCompleted);
@@ -380,12 +394,6 @@ namespace SS
                 yield break;
             }
 
-            if (IsCancelled)
-            {
-                IsCancelled = false;
-                yield break;
-            }
-
             CheckNodeType(nodeSO.Choices.First().NextNode);
         }
 
@@ -395,7 +403,7 @@ namespace SS
             yield return new WaitUntil(() => notification.IsStarted || notification.IsCancelled);
             if (notification.IsCancelled)
             {
-                spaceshipManager.RemoveTask(notification);
+                if (task.TaskType.Equals(SSTaskType.Permanent)) spaceshipManager.RemoveTask(notification);
                 yield break;
             }
 
