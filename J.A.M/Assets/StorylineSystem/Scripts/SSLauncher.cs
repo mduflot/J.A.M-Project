@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CharacterSystem;
 using Managers;
-using SS.Data;
 using Tasks;
 using TMPro;
 using UI;
@@ -13,13 +12,14 @@ using Random = UnityEngine.Random;
 
 namespace SS
 {
+    using Data;
     using Enumerations;
     using ScriptableObjects;
 
     public class SSLauncher : MonoBehaviour
     {
-        public bool IsCancelled;
-        public bool CanIgnoreDialogueTask;
+        [HideInInspector] public bool IsCancelled;
+        [HideInInspector] public bool CanIgnoreDialogueTask;
 
         /* UI GameObjects */
         [SerializeField] private TextMeshProUGUI currentStoryline;
@@ -103,17 +103,12 @@ namespace SS
             {
                 case SSSpeakerType.Random:
                 {
-                    actualSpeaker = spaceshipManager.characters[Random.Range(0, spaceshipManager.characters.Length)];
-                    dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
-                        actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
-                    StartCoroutine(DisplayDialogue(actualSpeaker.speaker, actualSpeaker.GetCharacterData().firstName,
-                        nodeSO));
-                    characters.Add(actualSpeaker);
-                    break;
-                }
-                case SSSpeakerType.RandomOther:
-                {
                     tempCharacters = spaceshipManager.characters.Except(characters).ToList();
+                    if (tempCharacters.Count == 0)
+                    {
+                        Debug.LogWarning($"Try to get a random character but there is no one left");
+                        break;
+                    }
                     actualSpeaker = tempCharacters[Random.Range(0, tempCharacters.Count)];
                     dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
                         actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
@@ -179,6 +174,7 @@ namespace SS
                         StartCoroutine(DisplayDialogue(characters[0].speaker,
                             characters[0].GetCharacterData().firstName, nodeSO));
                     }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
 
                     break;
                 }
@@ -191,6 +187,7 @@ namespace SS
                         StartCoroutine(DisplayDialogue(characters[1].speaker,
                             characters[1].GetCharacterData().firstName, nodeSO));
                     }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
 
                     break;
                 }
@@ -203,6 +200,7 @@ namespace SS
                         StartCoroutine(DisplayDialogue(characters[2].speaker,
                             characters[2].GetCharacterData().firstName, nodeSO));
                     }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
 
                     break;
                 }
@@ -215,6 +213,7 @@ namespace SS
                         StartCoroutine(DisplayDialogue(characters[3].speaker,
                             characters[3].GetCharacterData().firstName, nodeSO));
                     }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
 
                     break;
                 }
@@ -228,6 +227,7 @@ namespace SS
                         StartCoroutine(DisplayDialogue(assignedCharacters[0].speaker,
                             assignedCharacters[0].GetCharacterData().firstName, nodeSO));
                     }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
 
                     break;
                 }
@@ -241,6 +241,7 @@ namespace SS
                         StartCoroutine(DisplayDialogue(assignedCharacters[1].speaker,
                             assignedCharacters[1].GetCharacterData().firstName, nodeSO));
                     }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
 
                     break;
                 }
@@ -254,6 +255,7 @@ namespace SS
                         StartCoroutine(DisplayDialogue(assignedCharacters[2].speaker,
                             assignedCharacters[2].GetCharacterData().firstName, nodeSO));
                     }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
 
                     break;
                 }
@@ -267,12 +269,18 @@ namespace SS
                         StartCoroutine(DisplayDialogue(assignedCharacters[3].speaker,
                             assignedCharacters[3].GetCharacterData().firstName, nodeSO));
                     }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
 
                     break;
                 }
                 case SSSpeakerType.NotAssigned:
                 {
                     tempCharacters = spaceshipManager.characters.Except(assignedCharacters).ToList();
+                    if (tempCharacters.Count == 0)
+                    {
+                        Debug.LogWarning($"Try to get a character but all of them are assigned");
+                        break;
+                    }
                     actualSpeaker = tempCharacters[Random.Range(0, tempCharacters.Count)];
                     dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
                         actualSpeaker.GetCharacterData().firstName, nodeSO.Text));

@@ -3,7 +3,6 @@ namespace SS.Enumerations
     public enum SSSpeakerType
     {
         Random,
-        RandomOther,
         Sensor,
         Expert,
         Character1,
