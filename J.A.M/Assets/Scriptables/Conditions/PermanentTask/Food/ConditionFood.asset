@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3a298838b420346a8b6588d8248e9c, type: 3}
   m_Name: ConditionFood
   m_EditorClassIdentifier: 
-  target: 1
+  target: 0
   targetStat: 0
   statComparison: 0
   statThreshold: 0
@@ -20,34 +20,14 @@ MonoBehaviour:
   BaseCondition:
     Traits:
       traits:
-        Item1: 1
+        Item1: 0
         Item2: 0
         Item3: 0
     SpaceshipTraits: 0
     HiddenSpaceshipTraits: 0
     GaugeValue: 0
   supplementaryConditions:
-    list:
-    - Key: 0
-      Value:
-        Traits:
-          traits:
-            Item1: 0
-            Item2: 1
-            Item3: 0
-        SpaceshipTraits: 0
-        HiddenSpaceshipTraits: 0
-        GaugeValue: 0
-    - Key: 0
-      Value:
-        Traits:
-          traits:
-            Item1: 0
-            Item2: 4
-            Item3: 0
-        SpaceshipTraits: 0
-        HiddenSpaceshipTraits: 0
-        GaugeValue: 0
+    list: []
   additionnalConditions:
   - {fileID: 11400000, guid: 01116239f5c95bd4a98ef55a8d17799c, type: 2}
   - {fileID: 11400000, guid: 567dd732d6d728b4888cc26aafc59a08, type: 2}
