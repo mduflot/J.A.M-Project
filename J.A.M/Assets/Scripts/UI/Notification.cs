@@ -57,6 +57,7 @@ namespace UI
             SSLauncher ssLauncher,
             List<Tuple<Sprite, string, string>> dialogues = null)
         {
+            IsCompleted = false;
             Task = task;
             taskNode = ssTaskNode;
             Task.TimeLeft *= TimeTickSystem.ticksPerHour;
