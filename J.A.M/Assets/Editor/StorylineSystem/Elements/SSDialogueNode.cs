@@ -13,7 +13,7 @@ namespace SS.Elements
     {
         public string Text { get; set; }
         public SSSpeakerType SpeakerType { get; set; }
-        public uint Duration { get; set; }
+        public float Duration { get; set; }
         public bool IsDialogueTask { get; set; }
         public int PercentageTask { get; set; }
         public TraitsData.Job Job { get; set; }
@@ -26,7 +26,7 @@ namespace SS.Elements
 
             NodeType = SSNodeType.Dialogue;
             Text = "Node text.";
-            Duration = 1;
+            Duration = 1.0f;
             IsDialogueTask = false;
             PercentageTask = 50;
             Job = TraitsData.Job.None;
@@ -132,7 +132,7 @@ namespace SS.Elements
                 customDataContainer.Add(enumFieldNegativeTraits);
             }
 
-            UnsignedIntegerField unsignedIntegerField = SSElementUtility.CreateUnsignedIntegerField(Duration,
+            FloatField unsignedIntegerField = SSElementUtility.CreateFloatField(Duration,
                 "Duration", callback => { Duration = callback.newValue; });
 
             customDataContainer.Add(unsignedIntegerField);
