@@ -179,6 +179,9 @@ namespace Tasks
                                 condition = ConditionSystem.CheckSpaceshipCondition(notification.Task.Conditions[index]
                                     .Item1);
                                 break;
+                            case OutcomeData.OutcomeTarget.None:
+                                condition = true;
+                                break;
                         }
 
                         if (condition)
