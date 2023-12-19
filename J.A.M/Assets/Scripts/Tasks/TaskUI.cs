@@ -11,8 +11,7 @@ namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-        [Header("Task")]
-        [SerializeField] private TextMeshProUGUI titleText;
+        [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI timeLeftText;
         [SerializeField] private TextMeshProUGUI durationText;
         [SerializeField] private TextMeshProUGUI descriptionText;
@@ -25,13 +24,11 @@ namespace Tasks
         [SerializeField] private DialogueLog dialogueLog;
         [SerializeField] private GameObject separator;
 
-        [Header("Dialogues")]
-        [SerializeField] private GameObject dialogueContainer;
+        [Header("Dialogues")] [SerializeField] private GameObject dialogueContainer;
 
-        [Header("Values")]
-        [SerializeField] private float timeLeft;
+        [Header("Values")] [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
-        
+
         private Notification notification;
         private List<CharacterUISlot> characterSlots = new();
         private bool taskStarted;
@@ -68,6 +65,7 @@ namespace Tasks
                 slot.gameObject.SetActive(true);
                 characterSlots.Add(slot);
             }
+
             dialogueLog.DisplayDialogueLog(notification.Dialogues);
 
             if (needToDisplay)
@@ -102,13 +100,14 @@ namespace Tasks
             {
                 var charUI = GameManager.Instance.UIManager.GetCharacterUI(notification.Task.assistantCharacters[i]);
                 if (charUI == null) continue;
-                var slot = inactiveSlots[i+3];
+                var slot = inactiveSlots[i + 3];
                 slot.SetupSlot(false);
                 slot.gameObject.SetActive(true);
                 characterSlots.Add(slot);
                 slot.icon = charUI.icon;
                 charUI.icon.transform.SetParent(slot.transform);
             }
+
             dialogueLog.DisplayDialogueLog(notification.Dialogues);
             startButton.SetActive(false);
             cancelButton.SetActive(true);
@@ -118,7 +117,7 @@ namespace Tasks
 
         public void Update()
         {
-            if(!animator.GetBool("Appear")) return;
+            if (!animator.GetBool("Appear")) return;
             if (!taskStarted)
             {
                 bool canCheck = true;
@@ -218,6 +217,36 @@ namespace Tasks
                                         }
 
                                         break;
+                                    case OutcomeData.OutcomeType.GaugeVolition:
+                                        switch (outcome.OutcomeTargetGauge)
+                                        {
+                                            case SystemType.Airflow:
+                                                previewOutcomeText.text += "\n" + outcome.OutcomeOperation + " " +
+                                                                           characterSlots[0].icon.character
+                                                                               .GetVolition() + " " +
+                                                                           outcome.OutcomeTargetGauge;
+                                                break;
+                                            case SystemType.Hull:
+                                                previewOutcomeText.text += "\n" + outcome.OutcomeOperation + " " +
+                                                                           characterSlots[0].icon.character
+                                                                               .GetVolition() + " " +
+                                                                           outcome.OutcomeTargetGauge;
+                                                break;
+                                            case SystemType.Power:
+                                                previewOutcomeText.text += "\n" + outcome.OutcomeOperation + " " +
+                                                                           characterSlots[0].icon.character
+                                                                               .GetVolition() + " " +
+                                                                           outcome.OutcomeTargetGauge;
+                                                break;
+                                            case SystemType.Food:
+                                                previewOutcomeText.text += "\n" + outcome.OutcomeOperation + " " +
+                                                                           characterSlots[0].icon.character
+                                                                               .GetVolition() + " " +
+                                                                           outcome.OutcomeTargetGauge;
+                                                break;
+                                        }
+
+                                        break;
                                     case OutcomeData.OutcomeType.Trait:
                                         if (outcome.OutcomeTargetTrait.GetJob() != TraitsData.Job.None)
                                         {
@@ -253,16 +282,19 @@ namespace Tasks
                                                                        outcome.OutcomeTargetTrait.GetNegativeTraits();
                                         if (outcome.OutcomeShipTrait != TraitsData.SpaceshipTraits.None)
                                         {
-                                            foreach (TraitsData.SpaceshipTraits spaceshipTraits in Enum.GetValues(typeof(TraitsData.SpaceshipTraits)))
+                                            foreach (TraitsData.SpaceshipTraits spaceshipTraits in Enum.GetValues(
+                                                         typeof(TraitsData.SpaceshipTraits)))
                                             {
                                                 if (outcome.OutcomeShipTrait.HasFlag(spaceshipTraits) &&
                                                     spaceshipTraits != TraitsData.SpaceshipTraits.None)
                                                 {
-                                                    previewOutcomeText.text += "\n" + outcome.OutcomeOperation + " Ship " +
-                                                                               spaceshipTraits;
+                                                    previewOutcomeText.text +=
+                                                        "\n" + outcome.OutcomeOperation + " Ship " +
+                                                        spaceshipTraits;
                                                 }
                                             }
                                         }
+
                                         break;
                                     case OutcomeData.OutcomeType.CharacterStat:
                                         previewOutcomeText.text += "\n" + outcome.OutcomeOperation + " " +
@@ -326,6 +358,7 @@ namespace Tasks
                 slot.ClearCharacter();
                 slot.gameObject.SetActive(false);
             }
+
             if (notification.Task.TaskType.Equals(SSTaskType.Permanent) && !taskStarted) CloseNotification();
             TimeTickSystem.ModifyTimeScale(1.0f);
             previewOutcomeText.text = null;
@@ -362,7 +395,7 @@ namespace Tasks
             Appear(false);
             CloseNotification();
         }
-        
+
         private bool CharactersWorking()
         {
             foreach (var character in characterSlots)
@@ -376,7 +409,7 @@ namespace Tasks
 
             return false;
         }
-        
+
         private void Appear(bool state)
         {
             animator.SetBool("Appear", state);
@@ -395,7 +428,5 @@ namespace Tasks
                 letterIndex++;
             }
         }
-        
     }
-
 }
