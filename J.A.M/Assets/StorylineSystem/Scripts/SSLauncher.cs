@@ -647,9 +647,7 @@ namespace SS
                 if (task.TaskType.Equals(SSTaskType.Permanent)) spaceshipManager.RemoveTask(notification);
                 yield break;
             }
-
-            assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).LeaderCharacters);
-            assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).AssistantCharacters);
+            
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
             {
                 isRunning = false;
@@ -657,6 +655,9 @@ namespace SS
                 ResetTimeline();
                 yield break;
             }
+            
+            assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).LeaderCharacters);
+            assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).AssistantCharacters);
 
             if (IsCancelled)
             {

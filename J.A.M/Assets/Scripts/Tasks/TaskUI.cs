@@ -355,6 +355,7 @@ namespace Tasks
             previewOutcomeText.text = null;
             characterSlots.Clear();
             GameManager.Instance.RefreshCharacterIcons();
+            separator.SetActive(false);
             Appear(false);
             CloseNotification();
         }
