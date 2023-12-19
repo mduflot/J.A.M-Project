@@ -1,3 +1,4 @@
+using SS.Utilities;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,7 +7,6 @@ namespace SS.Elements
 {
     using Data.Save;
     using Enumerations;
-    using Utilities;
     using Windows;
 
     public class SSDialogueNode : SSNode
@@ -16,9 +16,6 @@ namespace SS.Elements
         public uint Duration { get; set; }
         public bool IsDialogueTask { get; set; }
         public int PercentageTask { get; set; }
-        public TraitsData.Job Job { get; set; }
-        public TraitsData.PositiveTraits PositiveTraits { get; set; }
-        public TraitsData.NegativeTraits NegativeTraits { get; set; }
 
         public override void Initialize(string nodeName, SSGraphView ssGraphView, Vector2 position)
         {
@@ -29,9 +26,6 @@ namespace SS.Elements
             Duration = 1;
             IsDialogueTask = false;
             PercentageTask = 50;
-            Job = TraitsData.Job.None;
-            PositiveTraits = TraitsData.PositiveTraits.None;
-            NegativeTraits = TraitsData.NegativeTraits.None;
 
             SSChoiceSaveData choiceData = new SSChoiceSaveData()
             {
@@ -73,64 +67,10 @@ namespace SS.Elements
 
             customDataContainer.Add(textFoldout);
 
-            EnumField enumFieldJob = null;
-            EnumField enumFieldPositiveTraits = null;
-            EnumField enumFieldNegativeTraits = null;
-            
             EnumField enumField = SSElementUtility.CreateEnumField(SpeakerType, "Speaker",
-                callback =>
-                {
-                    SpeakerType = (SSSpeakerType)callback.newValue;
-                    if (SpeakerType == SSSpeakerType.Traits)
-                    {
-                        enumFieldJob = SSElementUtility.CreateEnumField(Job, "Job",
-                            callbackJob => { Job = (TraitsData.Job)callbackJob.newValue; });
-                        enumFieldPositiveTraits = SSElementUtility.CreateEnumField(PositiveTraits,
-                            "Positive Traits",
-                            callbackPositiveTraits =>
-                            {
-                                PositiveTraits = (TraitsData.PositiveTraits)callbackPositiveTraits.newValue;
-                            });
-                        enumFieldNegativeTraits = SSElementUtility.CreateEnumField(NegativeTraits, "Negative Traits",
-                            callbackNegativeTraits =>
-                            {
-                                NegativeTraits = (TraitsData.NegativeTraits)callbackNegativeTraits.newValue;
-                            });
-                        
-                        customDataContainer.Add(enumFieldJob);
-                        customDataContainer.Add(enumFieldPositiveTraits);
-                        customDataContainer.Add(enumFieldNegativeTraits);
-                    }
-                    else
-                    {
-                        if (customDataContainer.Contains(enumFieldJob)) customDataContainer.Remove(enumFieldJob);
-                        if (customDataContainer.Contains(enumFieldPositiveTraits)) customDataContainer.Remove(enumFieldPositiveTraits);
-                        if (customDataContainer.Contains(enumFieldNegativeTraits)) customDataContainer.Remove(enumFieldNegativeTraits);
-                    }
-                });
+                callback => { SpeakerType = (SSSpeakerType)callback.newValue; });
 
             customDataContainer.Add(enumField);
-
-            if (SpeakerType == SSSpeakerType.Traits)
-            {
-                enumFieldJob = SSElementUtility.CreateEnumField(Job, "Job",
-                    callbackJob => { Job = (TraitsData.Job)callbackJob.newValue; });
-                enumFieldPositiveTraits = SSElementUtility.CreateEnumField(PositiveTraits,
-                    "Positive Traits",
-                    callbackPositiveTraits =>
-                    {
-                        PositiveTraits = (TraitsData.PositiveTraits)callbackPositiveTraits.newValue;
-                    });
-                enumFieldNegativeTraits = SSElementUtility.CreateEnumField(NegativeTraits, "Negative Traits",
-                    callbackNegativeTraits =>
-                    {
-                        NegativeTraits = (TraitsData.NegativeTraits)callbackNegativeTraits.newValue;
-                    });
-                        
-                customDataContainer.Add(enumFieldJob);
-                customDataContainer.Add(enumFieldPositiveTraits);
-                customDataContainer.Add(enumFieldNegativeTraits);
-            }
 
             UnsignedIntegerField unsignedIntegerField = SSElementUtility.CreateUnsignedIntegerField(Duration,
                 "Duration", callback => { Duration = callback.newValue; });

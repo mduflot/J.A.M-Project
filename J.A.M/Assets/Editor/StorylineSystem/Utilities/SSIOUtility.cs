@@ -58,13 +58,11 @@ namespace SS.Utilities
             SSGraphSaveDataSO graphData =
                 CreateAsset<SSGraphSaveDataSO>("Assets/Editor/StorylineSystem/Graphs", $"{graphFileName}Graph");
 
-            graphData.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.IsFirstToPlay,
-                graphView.Condition);
+            graphData.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.IsFirstToPlay, graphView.Condition);
 
             SSNodeContainerSO nodeContainer = CreateAsset<SSNodeContainerSO>(containerFolderPath, graphFileName);
 
-            nodeContainer.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.IsFirstToPlay,
-                graphView.Condition);
+            nodeContainer.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.IsFirstToPlay, graphView.Condition);
 
             SaveGroups(graphData, nodeContainer);
             SaveNodes(graphData, nodeContainer);
@@ -188,10 +186,7 @@ namespace SS.Utilities
                     SpeakerType = dialogueNode.SpeakerType,
                     Duration = dialogueNode.Duration,
                     IsDialogueTask = dialogueNode.IsDialogueTask,
-                    PercentageTask = dialogueNode.PercentageTask,
-                    Job = dialogueNode.Job,
-                    PositiveTraits = dialogueNode.PositiveTraits,
-                    NegativeTraits = dialogueNode.NegativeTraits
+                    PercentageTask = dialogueNode.PercentageTask
                 };
 
                 graphData.Nodes.Add(nodeData);
@@ -262,8 +257,7 @@ namespace SS.Utilities
                 nodeSO.Initialize(dialogueNode.NodeName, dialogueNode.Text,
                     ConvertNodeChoicesToNodeChoicesData(dialogueNode.Choices), dialogueNode.NodeType,
                     dialogueNode.IsStartingNode(), dialogueNode.SpeakerType, dialogueNode.Duration,
-                    dialogueNode.IsDialogueTask, dialogueNode.PercentageTask, dialogueNode.Job,
-                    dialogueNode.PositiveTraits, dialogueNode.NegativeTraits);
+                    dialogueNode.IsDialogueTask, dialogueNode.PercentageTask);
 
                 createdNodes.Add(dialogueNode.ID, nodeSO);
 
@@ -289,8 +283,7 @@ namespace SS.Utilities
 
                 nodeSO.Initialize(taskNode.NodeName, ConvertNodeChoicesToNodeChoicesData(taskNode.Choices),
                     taskNode.NodeType,
-                    taskNode.IsStartingNode(), taskNode.DescriptionTask, taskNode.TaskStatus, taskNode.TaskType,
-                    taskNode.TaskIcon, taskNode.TimeLeft,
+                    taskNode.IsStartingNode(), taskNode.DescriptionTask, taskNode.TaskStatus, taskNode.TaskType, taskNode.TaskIcon, taskNode.TimeLeft,
                     taskNode.BaseDuration, taskNode.MandatorySlots, taskNode.OptionalSlots, taskNode.TaskHelpFactor,
                     taskNode.Room, taskNode.Furniture);
 
@@ -448,7 +441,7 @@ namespace SS.Utilities
             LoadGroups(graphData.Groups);
             LoadNodes(graphData.Nodes);
             LoadNodesConnections();
-
+            
             graphView.IsFirstToPlay = graphData.IsFirstToPlay;
             graphView.StoryStatus = graphData.StoryStatus;
             graphView.StoryType = graphData.StoryType;
@@ -487,9 +480,6 @@ namespace SS.Utilities
                     ((SSDialogueNode)node).Duration = ((SSDialogueNodeSaveData)nodeData).Duration;
                     ((SSDialogueNode)node).IsDialogueTask = ((SSDialogueNodeSaveData)nodeData).IsDialogueTask;
                     ((SSDialogueNode)node).PercentageTask = ((SSDialogueNodeSaveData)nodeData).PercentageTask;
-                    ((SSDialogueNode)node).Job = ((SSDialogueNodeSaveData)nodeData).Job;
-                    ((SSDialogueNode)node).PositiveTraits = ((SSDialogueNodeSaveData)nodeData).PositiveTraits;
-                    ((SSDialogueNode)node).NegativeTraits = ((SSDialogueNodeSaveData)nodeData).NegativeTraits;
                 }
                 else if (nodeData.NodeType == SSNodeType.Task)
                 {
