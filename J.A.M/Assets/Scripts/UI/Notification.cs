@@ -58,6 +58,7 @@ namespace UI
             List<Tuple<Sprite, string, string>> dialogues = null)
         {
             IsCompleted = false;
+            IsCancelled = false;
             Task = task;
             taskNode = ssTaskNode;
             Task.TimeLeft *= TimeTickSystem.ticksPerHour;
@@ -70,6 +71,8 @@ namespace UI
 
         public void InitializeCancelTask()
         {
+            IsCompleted = false;
+            IsCancelled = false;
             taskCondition = Task.Conditions[^1].Item1;
             Task.conditionIndex = Task.Conditions.Count - 1;
             CheckingCondition(true);
@@ -355,6 +358,7 @@ namespace UI
             transform.parent = null;
             notificationContainer.DisplayNotification();
             spaceshipManager.notificationPool.AddToPool(gameObject);
+            IsStarted = false;
         }
 
         public void OnCancel()
