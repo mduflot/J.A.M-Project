@@ -70,12 +70,12 @@ public class WarningUI : MonoBehaviour
             }
 
             GameManager.Instance.RefreshCharacterIcons();
-            Appear(false);
         }
         else
         {
             GameManager.Instance.UIManager.taskUI.CancelTask();
         }
+        Appear(false);
     }
 
     private void Appear(bool state)

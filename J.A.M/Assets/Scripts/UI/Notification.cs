@@ -125,7 +125,7 @@ namespace UI
                     break;
                 }
             }
-
+            Debug.Log(LeaderCharacters.Count);
             if (LeaderCharacters.Count == 0)
             {
                 Debug.Log("No leader assigned to task");

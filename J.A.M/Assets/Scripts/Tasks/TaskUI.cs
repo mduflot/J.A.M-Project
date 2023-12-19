@@ -321,6 +321,7 @@ namespace Tasks
                 slot.gameObject.SetActive(false);
             }
             if (notification.Task.TaskType.Equals(SSTaskType.Permanent) && !taskStarted) CloseNotification();
+            TimeTickSystem.ModifyTimeScale(1.0f);
             previewOutcomeText.text = null;
             characterSlots.Clear();
             dialogueLog.ClearDialogueLog();
@@ -332,8 +333,6 @@ namespace Tasks
         /// </summary>
         public void CloseNotification()
         {
-            TimeTickSystem.ModifyTimeScale(1.0f);
-            //Debug.Log("Je close la notification");
             notification.OnCancel();
         }
 

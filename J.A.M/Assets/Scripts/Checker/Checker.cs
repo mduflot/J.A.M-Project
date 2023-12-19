@@ -215,7 +215,7 @@ public class Checker : MonoBehaviour
                 var storyline = activeStorylines[index];
                 for (int j = 0; j < storyline.Timelines.Count; j++)
                 {
-                    if (storyline.Timelines[index].StoryStatus == SSStoryStatus.Enabled)
+                    if (storyline.Timelines[j].StoryStatus == SSStoryStatus.Enabled)
                     {
                         isAllCompleted = false;
                         break;
