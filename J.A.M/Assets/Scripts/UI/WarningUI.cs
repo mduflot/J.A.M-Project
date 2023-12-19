@@ -56,12 +56,10 @@ public class WarningUI : MonoBehaviour
 
     public void CancelTask()
     {
-        // TODO: if condition is never true
         if (characterWarning.activeSelf)
         {
             if (character.IsTaskLeader())
             {
-                Debug.Log("CancelTask Leader");
                 GameManager.Instance.SpaceshipManager.CancelTask(character.GetTask());
             }
             else
