@@ -102,7 +102,7 @@ namespace Tasks
             {
                 var charUI = GameManager.Instance.UIManager.GetCharacterUI(notification.Task.assistantCharacters[i]);
                 if (charUI == null) continue;
-                var slot = inactiveSlots[i];
+                var slot = inactiveSlots[i+3];
                 slot.SetupSlot(false);
                 slot.gameObject.SetActive(true);
                 characterSlots.Add(slot);

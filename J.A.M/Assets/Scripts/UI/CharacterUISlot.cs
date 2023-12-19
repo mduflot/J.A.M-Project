@@ -20,7 +20,7 @@ namespace UI
         
         public override void OnDrop(PointerEventData eventData)
         {
-            if (transform.childCount > 1) return;
+            if (icon != null) return;
             GameObject dropped = eventData.pointerDrag;
             icon = dropped.GetComponent<CharacterIcon>();
             icon.SetupIcon(iconParent, this);
