@@ -226,7 +226,8 @@ namespace UI
                             outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome);
                             break;
                         case OutcomeData.OutcomeTarget.Gauge:
-                            outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
+                            if (outcome.OutcomeType.Equals(OutcomeData.OutcomeType.Gauge)) outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
+                            else outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition());
                             break;
                     }
                 }
