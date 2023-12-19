@@ -40,6 +40,8 @@ namespace SS
 
         private List<CharacterBehaviour> characters = new();
         private List<CharacterBehaviour> assignedCharacters = new();
+        private List<CharacterBehaviour> notAssignedCharacters = new();
+        private List<CharacterBehaviour> traitsCharacters = new();
         private List<Tuple<Sprite, string, string>> dialogues;
         private SSTimeNodeSO timeNode;
         private uint durationTimeNode;
@@ -66,6 +68,10 @@ namespace SS
         private void ResetTimeline()
         {
             dialogues.Clear();
+            characters.Clear();
+            assignedCharacters.Clear();
+            notAssignedCharacters.Clear();
+            traitsCharacters.Clear();
             if (currentStoryline) currentStoryline.text = "No timeline";
         }
 
@@ -98,7 +104,7 @@ namespace SS
         private void RunNode(SSDialogueNodeSO nodeSO)
         {
             CharacterBehaviour actualSpeaker;
-            List<CharacterBehaviour> tempCharacters;
+            List<CharacterBehaviour> tempCharacters = new();
             switch (nodeSO.SpeakerType)
             {
                 case SSSpeakerType.Random:
@@ -109,17 +115,14 @@ namespace SS
                         Debug.LogWarning($"Try to get a random character but there is no one left");
                         break;
                     }
+
                     actualSpeaker = tempCharacters[Random.Range(0, tempCharacters.Count)];
-                    dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
-                        actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
-                    StartCoroutine(DisplayDialogue(actualSpeaker.speaker, actualSpeaker.GetCharacterData().firstName,
-                        nodeSO));
+                    SetDialogue(actualSpeaker, nodeSO);
                     characters.Add(actualSpeaker);
                     break;
                 }
                 case SSSpeakerType.Sensor:
                 {
-                    dialogues.Add(new Tuple<Sprite, string, string>(null, "Sensor", nodeSO.Text));
                     for (int index = 0; index < spaceshipManager.GetRoom(RoomType.Flight).roomObjects.Length; index++)
                     {
                         var furniture = spaceshipManager.GetRoom(RoomType.Flight).roomObjects[index];
@@ -128,6 +131,7 @@ namespace SS
                             var sensor = furniture.transform;
                             if (sensor.TryGetComponent(out Speaker speaker))
                             {
+                                dialogues.Add(new Tuple<Sprite, string, string>(null, "Sensor", nodeSO.Text));
                                 StartCoroutine(DisplayDialogue(speaker, "Sensor", nodeSO));
                             }
                             else
@@ -143,7 +147,6 @@ namespace SS
                 }
                 case SSSpeakerType.Expert:
                 {
-                    dialogues.Add(new Tuple<Sprite, string, string>(null, "Expert", nodeSO.Text));
                     for (int index = 0; index < spaceshipManager.GetRoom(RoomType.Docking).roomObjects.Length; index++)
                     {
                         var furniture = spaceshipManager.GetRoom(RoomType.Docking).roomObjects[index];
@@ -152,6 +155,7 @@ namespace SS
                             var sensor = furniture.transform;
                             if (sensor.TryGetComponent(out Speaker speaker))
                             {
+                                dialogues.Add(new Tuple<Sprite, string, string>(null, "Expert", nodeSO.Text));
                                 StartCoroutine(DisplayDialogue(speaker, "Expert", nodeSO));
                             }
                             else
@@ -169,10 +173,7 @@ namespace SS
                 {
                     if (characters[0])
                     {
-                        dialogues.Add(new Tuple<Sprite, string, string>(characters[0].GetCharacterData().characterIcon,
-                            characters[0].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(characters[0].speaker,
-                            characters[0].GetCharacterData().firstName, nodeSO));
+                        SetDialogue(characters[0], nodeSO);
                     }
                     else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
 
@@ -182,10 +183,7 @@ namespace SS
                 {
                     if (characters[1])
                     {
-                        dialogues.Add(new Tuple<Sprite, string, string>(characters[1].GetCharacterData().characterIcon,
-                            characters[1].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(characters[1].speaker,
-                            characters[1].GetCharacterData().firstName, nodeSO));
+                        SetDialogue(characters[1], nodeSO);
                     }
                     else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
 
@@ -195,10 +193,7 @@ namespace SS
                 {
                     if (characters[2])
                     {
-                        dialogues.Add(new Tuple<Sprite, string, string>(characters[2].GetCharacterData().characterIcon,
-                            characters[2].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(characters[2].speaker,
-                            characters[2].GetCharacterData().firstName, nodeSO));
+                        SetDialogue(characters[2], nodeSO);
                     }
                     else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
 
@@ -208,10 +203,27 @@ namespace SS
                 {
                     if (characters[3])
                     {
-                        dialogues.Add(new Tuple<Sprite, string, string>(characters[3].GetCharacterData().characterIcon,
-                            characters[3].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(characters[3].speaker,
-                            characters[3].GetCharacterData().firstName, nodeSO));
+                        SetDialogue(characters[3], nodeSO);
+                    }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+
+                    break;
+                }
+                case SSSpeakerType.Character5:
+                {
+                    if (characters[4])
+                    {
+                        SetDialogue(characters[4], nodeSO);
+                    }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+
+                    break;
+                }
+                case SSSpeakerType.Character6:
+                {
+                    if (characters[5])
+                    {
+                        SetDialogue(characters[5], nodeSO);
                     }
                     else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
 
@@ -221,11 +233,7 @@ namespace SS
                 {
                     if (assignedCharacters[0])
                     {
-                        dialogues.Add(new Tuple<Sprite, string, string>(
-                            assignedCharacters[0].GetCharacterData().characterIcon,
-                            assignedCharacters[0].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(assignedCharacters[0].speaker,
-                            assignedCharacters[0].GetCharacterData().firstName, nodeSO));
+                        SetDialogue(assignedCharacters[0], nodeSO);
                     }
                     else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
 
@@ -235,13 +243,20 @@ namespace SS
                 {
                     if (assignedCharacters[1])
                     {
-                        dialogues.Add(new Tuple<Sprite, string, string>(
-                            assignedCharacters[1].GetCharacterData().characterIcon,
-                            assignedCharacters[1].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(assignedCharacters[1].speaker,
-                            assignedCharacters[1].GetCharacterData().firstName, nodeSO));
+                        SetDialogue(assignedCharacters[1], nodeSO);
                     }
-                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+                    else
+                    {
+                        if (nodeSO.Choices.First().NextNode == null)
+                        {
+                            isRunning = false;
+                            nodeGroup.StoryStatus = SSStoryStatus.Completed;
+                            ResetTimeline();
+                            return;
+                        }
+
+                        CheckNodeType(nodeSO.Choices.First().NextNode);
+                    }
 
                     break;
                 }
@@ -249,13 +264,20 @@ namespace SS
                 {
                     if (assignedCharacters[2])
                     {
-                        dialogues.Add(new Tuple<Sprite, string, string>(
-                            assignedCharacters[2].GetCharacterData().characterIcon,
-                            assignedCharacters[2].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(assignedCharacters[2].speaker,
-                            assignedCharacters[2].GetCharacterData().firstName, nodeSO));
+                        SetDialogue(assignedCharacters[2], nodeSO);
                     }
-                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+                    else
+                    {
+                        if (nodeSO.Choices.First().NextNode == null)
+                        {
+                            isRunning = false;
+                            nodeGroup.StoryStatus = SSStoryStatus.Completed;
+                            ResetTimeline();
+                            return;
+                        }
+
+                        CheckNodeType(nodeSO.Choices.First().NextNode);
+                    }
 
                     break;
                 }
@@ -263,33 +285,230 @@ namespace SS
                 {
                     if (assignedCharacters[3])
                     {
-                        dialogues.Add(new Tuple<Sprite, string, string>(
-                            assignedCharacters[3].GetCharacterData().characterIcon,
-                            assignedCharacters[3].GetCharacterData().firstName, nodeSO.Text));
-                        StartCoroutine(DisplayDialogue(assignedCharacters[3].speaker,
-                            assignedCharacters[3].GetCharacterData().firstName, nodeSO));
+                        SetDialogue(assignedCharacters[3], nodeSO);
                     }
-                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+                    else
+                    {
+                        if (nodeSO.Choices.First().NextNode == null)
+                        {
+                            isRunning = false;
+                            nodeGroup.StoryStatus = SSStoryStatus.Completed;
+                            ResetTimeline();
+                            return;
+                        }
+
+                        CheckNodeType(nodeSO.Choices.First().NextNode);
+                    }
+
+                    break;
+                }
+                case SSSpeakerType.Assigned5:
+                {
+                    if (assignedCharacters[4])
+                    {
+                        SetDialogue(assignedCharacters[4], nodeSO);
+                    }
+                    else
+                    {
+                        if (nodeSO.Choices.First().NextNode == null)
+                        {
+                            isRunning = false;
+                            nodeGroup.StoryStatus = SSStoryStatus.Completed;
+                            ResetTimeline();
+                            return;
+                        }
+
+                        CheckNodeType(nodeSO.Choices.First().NextNode);
+                    }
+
+                    break;
+                }
+                case SSSpeakerType.Assigned6:
+                {
+                    if (assignedCharacters[5])
+                    {
+                        SetDialogue(assignedCharacters[5], nodeSO);
+                    }
+                    else
+                    {
+                        if (nodeSO.Choices.First().NextNode == null)
+                        {
+                            isRunning = false;
+                            nodeGroup.StoryStatus = SSStoryStatus.Completed;
+                            ResetTimeline();
+                            return;
+                        }
+
+                        CheckNodeType(nodeSO.Choices.First().NextNode);
+                    }
 
                     break;
                 }
                 case SSSpeakerType.NotAssigned:
                 {
-                    tempCharacters = spaceshipManager.characters.Except(assignedCharacters).ToList();
+                    tempCharacters = spaceshipManager.characters.Except(assignedCharacters).Except(notAssignedCharacters).ToList();
                     if (tempCharacters.Count == 0)
                     {
                         Debug.LogWarning($"Try to get a character but all of them are assigned");
                         break;
+                    }
+
+                    actualSpeaker = tempCharacters[Random.Range(0, tempCharacters.Count)];
+                    SetDialogue(actualSpeaker, nodeSO);
+                    notAssignedCharacters.Add(actualSpeaker);
+
+                    break;
+                }
+                case SSSpeakerType.Other1:
+                {
+                    if (notAssignedCharacters[0])
+                    {
+                        SetDialogue(notAssignedCharacters[0], nodeSO);
+                    }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+
+                    break;
+                }
+                case SSSpeakerType.Other2:
+                {
+                    if (notAssignedCharacters[1])
+                    {
+                        SetDialogue(notAssignedCharacters[1], nodeSO);
+                    }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+
+                    break;
+                }
+                case SSSpeakerType.Other3:
+                {
+                    if (notAssignedCharacters[2])
+                    {
+                        SetDialogue(notAssignedCharacters[2], nodeSO);
+                    }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+
+                    break;
+                }
+                case SSSpeakerType.Other4:
+                {
+                    if (notAssignedCharacters[3])
+                    {
+                        SetDialogue(notAssignedCharacters[3], nodeSO);
+                    }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+
+                    break;
+                }
+                case SSSpeakerType.Other5:
+                {
+                    if (notAssignedCharacters[4])
+                    {
+                        SetDialogue(notAssignedCharacters[4], nodeSO);
+                    }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+
+                    break;
+                }
+                case SSSpeakerType.Other6:
+                {
+                    if (notAssignedCharacters[5])
+                    {
+                        SetDialogue(notAssignedCharacters[5], nodeSO);
+                    }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+
+                    break;
+                }
+                case SSSpeakerType.Traits:
+                {
+                    for (int i = 0; i < spaceshipManager.characters.Length; i++)
+                    {
+                        var character = spaceshipManager.characters[i];
+                        if (character.GetJob().HasFlag(nodeSO.Job) &&
+                            character.GetPositiveTraits().HasFlag(nodeSO.PositiveTraits) &&
+                            character.GetNegativeTraits().HasFlag(nodeSO.NegativeTraits))
+                        {
+                            tempCharacters.Add(character);
+                        }
                     }
                     actualSpeaker = tempCharacters[Random.Range(0, tempCharacters.Count)];
                     dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
                         actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
                     StartCoroutine(DisplayDialogue(actualSpeaker.speaker, actualSpeaker.GetCharacterData().firstName,
                         nodeSO));
+                    traitsCharacters.Add(actualSpeaker);
+
+                    break;
+                }
+                case SSSpeakerType.CharacterTraits1:
+                {
+                    if (traitsCharacters[0])
+                    {
+                        SetDialogue(traitsCharacters[0], nodeSO);
+                    }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+
+                    break;
+                }
+                case SSSpeakerType.CharacterTraits2:
+                {
+                    if (traitsCharacters[1])
+                    {
+                        SetDialogue(traitsCharacters[1], nodeSO);
+                    }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+
+                    break;
+                }
+                case SSSpeakerType.CharacterTraits3:
+                {
+                    if (traitsCharacters[2])
+                    {
+                        SetDialogue(traitsCharacters[2], nodeSO);
+                    }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+
+                    break;
+                }
+                case SSSpeakerType.CharacterTraits4:
+                {
+                    if (traitsCharacters[3])
+                    {
+                        SetDialogue(traitsCharacters[3], nodeSO);
+                    }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+
+                    break;
+                }
+                case SSSpeakerType.CharacterTraits5:
+                {
+                    if (traitsCharacters[4])
+                    {
+                        SetDialogue(traitsCharacters[4], nodeSO);
+                    }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
+
+                    break;
+                }
+                case SSSpeakerType.CharacterTraits6:
+                {
+                    if (traitsCharacters[5])
+                    {
+                        SetDialogue(traitsCharacters[5], nodeSO);
+                    }
+                    else Debug.LogWarning($"Try to get a character but no one is assigned to this slot");
 
                     break;
                 }
             }
+        }
+
+        private void SetDialogue(CharacterBehaviour character, SSDialogueNodeSO nodeSO)
+        {
+            dialogues.Add(new Tuple<Sprite, string, string>(character.GetCharacterData().characterIcon,
+                character.GetCharacterData().firstName, nodeSO.Text));
+            StartCoroutine(DisplayDialogue(character.speaker,
+                character.GetCharacterData().firstName, nodeSO));
         }
 
         private void RunNode(SSTaskNodeSO nodeSO)
@@ -382,7 +601,7 @@ namespace SS
 
         private IEnumerator DisplayDialogue(Speaker speaker, string characterName, SSDialogueNodeSO nodeSO)
         {
-            nodeSO.isCompleted = false;
+            nodeSO.IsCompleted = false;
             if (CanIgnoreDialogueTask && nodeSO.IsDialogueTask)
             {
                 if (nodeSO.Choices.First().NextNode == null)
@@ -406,7 +625,7 @@ namespace SS
 
             speaker.AddDialogue(task, nodeSO, characterName);
 
-            yield return new WaitUntil(() => nodeSO.isCompleted);
+            yield return new WaitUntil(() => nodeSO.IsCompleted);
 
             if (nodeSO.Choices.First().NextNode == null)
             {

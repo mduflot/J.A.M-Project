@@ -9,10 +9,27 @@ namespace SS.Enumerations
         Character2,
         Character3,
         Character4,
+        Character5,
+        Character6,
         Assigned1,
         Assigned2,
         Assigned3,
         Assigned4,
-        NotAssigned
+        Assigned5,
+        Assigned6,
+        NotAssigned,
+        Other1,
+        Other2,
+        Other3,
+        Other4,
+        Other5,
+        Other6,
+        Traits,
+        CharacterTraits1,
+        CharacterTraits2,
+        CharacterTraits3,
+        CharacterTraits4,
+        CharacterTraits5,
+        CharacterTraits6
     }
 }
