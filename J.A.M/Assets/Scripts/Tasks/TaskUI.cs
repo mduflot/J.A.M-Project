@@ -23,6 +23,7 @@ namespace Tasks
         [SerializeField] private GameObject startButton;
         [SerializeField] private GameObject cancelButton;
         [SerializeField] private DialogueLog dialogueLog;
+        [SerializeField] private GameObject separator;
 
         [Header("Dialogues")]
         [SerializeField] private GameObject dialogueContainer;
@@ -73,6 +74,7 @@ namespace Tasks
             {
                 DisplayText(timeLeftText, timeLeft.ToString(), 100);
                 timeLeftText.SetText(timeLeft.ToString());
+                separator.SetActive(true);
                 Appear(true);
             }
         }
@@ -110,6 +112,7 @@ namespace Tasks
             dialogueLog.DisplayDialogueLog(notification.Dialogues);
             startButton.SetActive(false);
             cancelButton.SetActive(true);
+            separator.SetActive(true);
             Appear(true);
         }
 
@@ -325,6 +328,7 @@ namespace Tasks
             previewOutcomeText.text = null;
             characterSlots.Clear();
             dialogueLog.ClearDialogueLog();
+            separator.SetActive(false);
             GameManager.Instance.RefreshCharacterIcons();
         }
 
