@@ -20,7 +20,6 @@ public class OutcomeFunctions
     public static OutcomeSystem.OutcomeEvent GetOutcomeFunction(uint outcomeFlag)
     {
         var evt = new OutcomeSystem.OutcomeEvent();
-        Debug.Log(outcomeFlag);
         
         switch (outcomeFlag)
         {

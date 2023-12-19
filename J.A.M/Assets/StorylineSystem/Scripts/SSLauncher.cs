@@ -8,7 +8,6 @@ using SS.Data;
 using Tasks;
 using TMPro;
 using UI;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,6 +18,9 @@ namespace SS
 
     public class SSLauncher : MonoBehaviour
     {
+        public bool IsCancelled;
+        public bool CanIgnoreDialogueTask;
+
         /* UI GameObjects */
         [SerializeField] private TextMeshProUGUI currentStoryline;
         [SerializeField] private SpaceshipManager spaceshipManager;
@@ -56,6 +58,8 @@ namespace SS
             dialogues = new();
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
             isRunning = true;
+            IsCancelled = false;
+            CanIgnoreDialogueTask = false;
             CheckNodeType(node);
         }
 
@@ -282,8 +286,8 @@ namespace SS
 
         private void RunNode(SSTaskNodeSO nodeSO)
         {
-            if (nodeSO.TaskType.Equals(SSTaskType.Permanent)) 
-                if (spaceshipManager.IsTaskActive(nodeSO.name)) 
+            if (nodeSO.TaskType.Equals(SSTaskType.Permanent))
+                if (spaceshipManager.IsTaskActive(nodeSO.name))
                     return;
             var room = spaceshipManager.GetRoom(nodeSO.Room);
             var notificationGO = spaceshipManager.notificationPool.GetFromPool();
@@ -292,13 +296,15 @@ namespace SS
                 Transform roomTransform;
                 if (room.roomObjects.Any(furniture => furniture.furnitureType == nodeSO.Furniture))
                 {
-                    roomTransform = room.roomObjects.First(furniture => furniture.furnitureType == nodeSO.Furniture).transform;
+                    roomTransform = room.roomObjects.First(furniture => furniture.furnitureType == nodeSO.Furniture)
+                        .transform;
                     roomTransform.GetComponent<NotificationContainer>().DisplayNotification();
                 }
                 else
                 {
                     roomTransform = room.roomObjects[0].transform;
                 }
+
                 notification.transform.position = roomTransform.position;
                 notificationGO.transform.parent = roomTransform;
                 roomTransform.GetComponent<NotificationContainer>().DisplayNotification();
@@ -309,14 +315,20 @@ namespace SS
                         ((SSNodeChoiceTaskData)choiceData).PreviewOutcome));
                 }
 
-                task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon, nodeSO.TimeLeft, nodeSO.Duration,
+                task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
+                    nodeSO.TimeLeft, nodeSO.Duration,
                     nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
-                    conditions, nodeSO.TaskType == SSTaskType.Permanent);
-                notification.Initialize(task, spaceshipManager, dialogues);
+                    conditions);
+                notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
                 spaceshipManager.AddTask(notification);
-                if(nodeSO.TaskType.Equals(SSTaskType.Permanent)) notification.Display();
+                if (nodeSO.TaskType.Equals(SSTaskType.Permanent)) notification.Display();
                 StartCoroutine(WaiterTask(nodeSO, task));
             }
+        }
+
+        public void RunNodeCancel(Notification notification, Task actualTask, float duration, SSTaskNodeSO taskNode)
+        {
+            StartCoroutine(WaitRunCancelNode(notification, actualTask, taskNode));
         }
 
         private void RunNode(SSTimeNodeSO nodeSO)
@@ -340,14 +352,50 @@ namespace SS
                     return;
                 }
 
+                if (IsCancelled)
+                {
+                    CanIgnoreDialogueTask = true;
+                    IsCancelled = false;
+                    TimeTickSystem.OnTick -= WaitingTime;
+                    return;
+                }
+
                 TimeTickSystem.OnTick -= WaitingTime;
                 CheckNodeType(timeNode.Choices.First().NextNode);
             }
         }
 
+        private IEnumerator WaitRunCancelNode(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
+        {
+            yield return new WaitUntil(() => IsCancelled == false);
+            notification.InitializeCancelTask();
+            StartCoroutine(WaiterTask(taskNode, actualTask));
+        }
+
         private IEnumerator DisplayDialogue(Speaker speaker, string characterName, SSDialogueNodeSO nodeSO)
         {
             nodeSO.isCompleted = false;
+            if (CanIgnoreDialogueTask && nodeSO.IsDialogueTask)
+            {
+                if (nodeSO.Choices.First().NextNode == null)
+                {
+                    isRunning = false;
+                    nodeGroup.StoryStatus = SSStoryStatus.Completed;
+                    ResetTimeline();
+                    yield break;
+                }
+            }
+
+            CanIgnoreDialogueTask = false;
+            if (!nodeSO.IsDialogueTask && task != null)
+                yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
+            if (IsCancelled)
+            {
+                CanIgnoreDialogueTask = true;
+                IsCancelled = false;
+                yield break;
+            }
+
             speaker.AddDialogue(task, nodeSO, characterName);
 
             yield return new WaitUntil(() => nodeSO.isCompleted);
@@ -369,9 +417,10 @@ namespace SS
             yield return new WaitUntil(() => notification.IsStarted || notification.IsCancelled);
             if (notification.IsCancelled)
             {
-                spaceshipManager.RemoveTask(notification);
+                if (task.TaskType.Equals(SSTaskType.Permanent)) spaceshipManager.RemoveTask(notification);
                 yield break;
             }
+
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).LeaderCharacters);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).AssistantCharacters);
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
@@ -379,6 +428,13 @@ namespace SS
                 isRunning = false;
                 nodeGroup.StoryStatus = SSStoryStatus.Completed;
                 ResetTimeline();
+                yield break;
+            }
+
+            if (IsCancelled)
+            {
+                CanIgnoreDialogueTask = true;
+                IsCancelled = false;
                 yield break;
             }
 
