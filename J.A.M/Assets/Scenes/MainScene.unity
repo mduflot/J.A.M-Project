@@ -148,12 +148,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95639540}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 885315564}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &95639542
 MonoBehaviour:
@@ -171,7 +171,7 @@ MonoBehaviour:
   CanIgnoreDialogueTask: 0
   currentStoryline: {fileID: 0}
   spaceshipManager: {fileID: 1360174038}
-  nodeContainer: {fileID: 0}
+  nodeContainer: {fileID: 11400000, guid: 9ba530475e2c4d744b0169bdc7f22d38, type: 2}
   nodeGroup: {fileID: 0}
   node: {fileID: 0}
   groupedNodes: 0
@@ -553,7 +553,6 @@ Transform:
   - {fileID: 1503467685}
   - {fileID: 701981758}
   - {fileID: 1908046486}
-  - {fileID: 95639541}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &908526471 stripped
@@ -1920,9 +1919,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1495234966}
-        m_TargetAssemblyTypeName: Checker, Assembly-CSharp
-        m_MethodName: GenerateRandomEvent
+      - m_Target: {fileID: 95639542}
+        m_TargetAssemblyTypeName: SS.SSLauncher, Assembly-CSharp
+        m_MethodName: StartTimeline
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2442,4 +2441,5 @@ SceneRoots:
   - {fileID: 1859755811}
   - {fileID: 664443830}
   - {fileID: 1495234967}
+  - {fileID: 95639541}
   - {fileID: 885315564}
