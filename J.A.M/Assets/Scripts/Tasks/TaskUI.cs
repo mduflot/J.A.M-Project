@@ -334,8 +334,7 @@ namespace Tasks
         {
             TimeTickSystem.ModifyTimeScale(1.0f);
             //Debug.Log("Je close la notification");
-            if(!forceStop && taskStarted) return;
-            if (notification.Task.TaskType.Equals(SSTaskType.Permanent)) notification.OnCancel();
+            notification.OnCancel();
         }
 
         public void CancelTask()
