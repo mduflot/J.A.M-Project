@@ -337,6 +337,7 @@ namespace Tasks
         /// </summary>
         public void CloseNotification()
         {
+            TimeTickSystem.ModifyTimeScale(1.0f);
             notification.OnCancel();
         }
 
