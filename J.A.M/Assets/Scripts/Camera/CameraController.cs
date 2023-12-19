@@ -16,6 +16,10 @@ public class CameraController : MonoBehaviour
     private Vector2 moveVector;
     private Vector2 zoomVector;
 
+    private Vector3 origin;
+    private Vector3 difference;
+    private bool isDragging;
+
     private void Awake()
     {
         movement = new CameraInput();
@@ -53,12 +57,23 @@ public class CameraController : MonoBehaviour
         if (cheatContainer) cheatContainer.SetActive(!cheatContainer.activeSelf);
     }
 
+    private void OnDrag(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+            origin = GetMousePosition;
+        isDragging = ctx.started || ctx.performed;
+    }
+    
+
     private void Update()
     {
         transform.position += new Vector3(0, 0, zoomVector.y * zoomSpeed);
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -750, 700),
             Mathf.Clamp(transform.position.y, -300, 300),
             Mathf.Clamp(transform.position.z, minZoom, maxZoom));
+        if (!isDragging) return;
+        difference = GetMousePosition - transform.position;
+        transform.position = origin - difference;
     }
 
     private void FixedUpdate()
@@ -75,6 +90,7 @@ public class CameraController : MonoBehaviour
         cameraMovement.Zoom.canceled += OnZoomCancelled;
         cameraMovement.Escape.performed += OnEscapePerformed;
         cameraMovement.Cheat.performed += OnCheatPerformed;
+        cameraMovement.Drag.performed += OnDrag;
     }
 
     private void OnDisable()
@@ -86,5 +102,8 @@ public class CameraController : MonoBehaviour
         cameraMovement.Zoom.canceled -= OnZoomCancelled;
         cameraMovement.Escape.performed -= OnEscapePerformed;
         cameraMovement.Cheat.performed -= OnCheatPerformed;
+        cameraMovement.Drag.performed -= OnDrag;
     }
+    
+    private Vector3 GetMousePosition => GameManager.Instance.mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 }

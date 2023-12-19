@@ -48,8 +48,7 @@ namespace UI
 
         public void OnDrag(PointerEventData eventData)
         {
-            var position = GameManager.Instance.mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 500));
-            transform.localPosition = new Vector3(position.x, position.y, 0) * 1.8f;
+            transform.position = Input.mousePosition;
         }
 
         public void OnEndDrag(PointerEventData eventData)
