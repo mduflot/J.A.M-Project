@@ -13,5 +13,8 @@ namespace SS.Data.Save
         [field: SerializeField] public uint Duration { get; set; }
         [field: SerializeField] public bool IsDialogueTask { get; set; }
         [field: SerializeField] public int PercentageTask { get; set; }
+        [field: SerializeField] public TraitsData.Job Job { get; set; }
+        [field: SerializeField] public TraitsData.PositiveTraits PositiveTraits { get; set; }
+        [field: SerializeField] public TraitsData.NegativeTraits NegativeTraits { get; set; }
     }
 }

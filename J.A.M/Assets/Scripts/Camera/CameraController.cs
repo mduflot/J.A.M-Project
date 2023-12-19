@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float maxZoom;
     [SerializeField] private float minZoom;
     [SerializeField] private GameObject menuContainer;
+    [SerializeField] private GameObject cheatContainer;
 
     private Camera camera;
     private CameraInput movement;
@@ -44,7 +45,12 @@ public class CameraController : MonoBehaviour
 
     private void OnEscapePerformed(InputAction.CallbackContext obj)
     {
-        menuContainer.SetActive(!menuContainer.activeSelf);
+        if (menuContainer) menuContainer.SetActive(!menuContainer.activeSelf);
+    }
+
+    private void OnCheatPerformed(InputAction.CallbackContext obj)
+    {
+        if (cheatContainer) cheatContainer.SetActive(!cheatContainer.activeSelf);
     }
 
     private void Update()
@@ -68,6 +74,7 @@ public class CameraController : MonoBehaviour
         cameraMovement.Zoom.performed += OnZoomPerformed;
         cameraMovement.Zoom.canceled += OnZoomCancelled;
         cameraMovement.Escape.performed += OnEscapePerformed;
+        cameraMovement.Cheat.performed += OnCheatPerformed;
     }
 
     private void OnDisable()
@@ -78,5 +85,6 @@ public class CameraController : MonoBehaviour
         cameraMovement.Zoom.performed -= OnZoomPerformed;
         cameraMovement.Zoom.canceled -= OnZoomCancelled;
         cameraMovement.Escape.performed -= OnEscapePerformed;
+        cameraMovement.Cheat.performed -= OnCheatPerformed;
     }
 }

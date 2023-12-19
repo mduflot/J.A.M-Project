@@ -45,7 +45,7 @@ namespace CharacterSystem
 
         private void EndDialogue(Tuple<Task, SSDialogueNodeSO, string> tuple)
         {
-            tuple.Item2.isCompleted = true;
+            tuple.Item2.IsCompleted = true;
             dialogueContainer.SetActive(false);
             isSpeaking = false;
         }
