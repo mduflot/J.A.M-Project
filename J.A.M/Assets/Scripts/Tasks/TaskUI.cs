@@ -210,13 +210,47 @@ namespace Tasks
                                 switch (outcome.OutcomeType)
                                 {
                                     case OutcomeData.OutcomeType.Gauge:
-                                        previewOutcomeText.text +=
-                                            $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}\n";
+                                        switch (outcome.OutcomeTargetGauge)
+                                        {
+                                            case SystemType.Airflow:
+                                                previewOutcomeText.text +=
+                                                    $"<color=blue>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                break;
+                                            case SystemType.Food:
+                                                previewOutcomeText.text +=
+                                                    $"<color=green>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                break;
+                                            case SystemType.Hull:
+                                                previewOutcomeText.text +=
+                                                    $"<color=red>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                break;
+                                            case SystemType.Power:
+                                                previewOutcomeText.text +=
+                                                    $"<color=yellow>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                break;
+                                        }
 
                                         break;
                                     case OutcomeData.OutcomeType.GaugeVolition:
-                                        previewOutcomeText.text +=
-                                            $"{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}\n";
+                                        switch (outcome.OutcomeTargetGauge)
+                                        {
+                                            case SystemType.Airflow:
+                                                previewOutcomeText.text +=
+                                                    $"<color=blue>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                break;
+                                            case SystemType.Food:
+                                                previewOutcomeText.text +=
+                                                    $"<color=green>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                break;
+                                            case SystemType.Hull:
+                                                previewOutcomeText.text +=
+                                                    $"<color=red>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                break;
+                                            case SystemType.Power:
+                                                previewOutcomeText.text +=
+                                                    $"<color=yellow>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                break;
+                                        }
 
                                         break;
                                     case OutcomeData.OutcomeType.Trait:
@@ -353,13 +387,47 @@ namespace Tasks
                                         switch (outcome.OutcomeType)
                                         {
                                             case OutcomeData.OutcomeType.Gauge:
-                                                previewOutcomeText.text +=
-                                                    $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}\n";
+                                                switch (outcome.OutcomeTargetGauge)
+                                                {
+                                                    case SystemType.Airflow:
+                                                        previewOutcomeText.text +=
+                                                            $"<color=blue>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                        break;
+                                                    case SystemType.Food:
+                                                        previewOutcomeText.text +=
+                                                            $"<color=green>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                        break;
+                                                    case SystemType.Hull:
+                                                        previewOutcomeText.text +=
+                                                            $"<color=red>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                        break;
+                                                    case SystemType.Power:
+                                                        previewOutcomeText.text +=
+                                                            $"<color=yellow>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                        break;
+                                                }
 
                                                 break;
                                             case OutcomeData.OutcomeType.GaugeVolition:
-                                                previewOutcomeText.text +=
-                                                    $"{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}\n";
+                                                switch (outcome.OutcomeTargetGauge)
+                                                {
+                                                    case SystemType.Airflow:
+                                                        previewOutcomeText.text +=
+                                                            $"<color=blue>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                        break;
+                                                    case SystemType.Food:
+                                                        previewOutcomeText.text +=
+                                                            $"<color=green>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                        break;
+                                                    case SystemType.Hull:
+                                                        previewOutcomeText.text +=
+                                                            $"<color=red>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                        break;
+                                                    case SystemType.Power:
+                                                        previewOutcomeText.text +=
+                                                            $"<color=yellow>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                        break;
+                                                }
 
                                                 break;
                                             case OutcomeData.OutcomeType.Trait:
