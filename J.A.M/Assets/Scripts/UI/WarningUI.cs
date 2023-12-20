@@ -60,10 +60,12 @@ public class WarningUI : MonoBehaviour
         {
             if (character.IsTaskLeader())
             {
+                character.IncreaseMood(-10);
                 GameManager.Instance.SpaceshipManager.CancelTask(character.GetTask());
             }
             else
             {
+                character.IncreaseMood(-10);
                 character.StopTask();
             }
 

@@ -701,6 +701,7 @@ namespace Tasks
             {
                 if (slot.icon != null) slot.icon.ResetTransform();
                 slot.icon.character.StopTask();
+                slot.icon.character.IncreaseMood(-10);
                 slot.ClearCharacter();
                 slot.gameObject.SetActive(false);
             }
