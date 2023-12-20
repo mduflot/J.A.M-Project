@@ -25,6 +25,7 @@ namespace Managers
         public TextMeshProUGUI date;
         [SerializeField] private Sprite redArrow;
         [SerializeField] private Sprite greenArrow;
+        public CharacterInfoUI characterInfoUI;
     
         [Serializable] 
         public struct Gauges

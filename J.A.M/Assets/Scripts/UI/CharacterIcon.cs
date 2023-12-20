@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class CharacterIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
+    public class CharacterIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public CharacterUI baseParentScript;
         private Transform parentAfterDrag;
@@ -123,6 +123,16 @@ namespace UI
                 GameManager.Instance.UIManager.taskUI.SetLeader(this);
             }
             else if (clicked >= 2 && Time.time - clickTime > clickDelay) clicked = 0;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            GameManager.Instance.UIManager.characterInfoUI.SetupCharacterInfo(character.GetCharacterData());
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            GameManager.Instance.UIManager.characterInfoUI.ClearCharacterInfo();
         }
     }
 }
