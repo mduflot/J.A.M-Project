@@ -625,6 +625,7 @@ namespace Tasks
 
         public void StartTask()
         {
+            if (notification.IsStarted) return;
             if (notification.Task.TaskType.Equals(SSTaskType.Permanent) ||
                 notification.Task.TaskType.Equals(SSTaskType.Untimed))
                 if (!CanStartTask())

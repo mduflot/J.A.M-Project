@@ -129,7 +129,7 @@ namespace UI
                     break;
                 }
             }
-            Debug.Log(LeaderCharacters.Count);
+
             if (LeaderCharacters.Count == 0)
             {
                 Debug.Log("No leader assigned to task");
@@ -153,7 +153,8 @@ namespace UI
                     switch (cond.BaseCondition.target)
                     {
                         case OutcomeData.OutcomeTarget.Leader:
-                            if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], AssistantCharacters.ToArray(), cond))
+                            if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0],
+                                    AssistantCharacters.ToArray(), cond))
                                 continue;
                             break;
 
@@ -162,7 +163,8 @@ namespace UI
                             for (int j = 0; j < AssistantCharacters.Count; j++)
                             {
                                 if (AssistantCharacters[j] == null)
-                                    if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], AssistantCharacters.ToArray(),
+                                    if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0],
+                                            AssistantCharacters.ToArray(),
                                             cond))
                                         condition = true;
                                     else
@@ -226,8 +228,12 @@ namespace UI
                             outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome);
                             break;
                         case OutcomeData.OutcomeTarget.Gauge:
-                            if (outcome.OutcomeType.Equals(OutcomeData.OutcomeType.Gauge)) outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
-                            else outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition());
+                            if (outcome.OutcomeType.Equals(OutcomeData.OutcomeType.Gauge))
+                                outcomeEventArgs[i] =
+                                    OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
+                            else
+                                outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
+                                    outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition());
                             break;
                     }
                 }
@@ -256,7 +262,7 @@ namespace UI
                         case OutcomeData.OutcomeTarget.Ship:
                             outcomeEventArgs[numberOfBaseOutcomes + i] = OutcomeSystem.GenerateEventArgs(outcome);
                             break;
-                        
+
                         case OutcomeData.OutcomeTarget.Gauge:
                             outcomeEventArgs[numberOfBaseOutcomes + i] =
                                 OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
@@ -279,6 +285,7 @@ namespace UI
                     Task.Duration *= TimeTickSystem.ticksPerHour;
                     Task.BaseDuration = Task.Duration;
                 }
+
                 IsCancelled = false;
                 IsStarted = true;
             }
@@ -296,12 +303,14 @@ namespace UI
             {
                 case OutcomeData.OutcomeTarget.Leader:
                     validateCondition =
-                        ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], AssistantCharacters.ToArray(), taskCondition);
+                        ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], AssistantCharacters.ToArray(),
+                            taskCondition);
                     break;
                 case OutcomeData.OutcomeTarget.Assistant:
                     if (AssistantCharacters.Count >= 1)
                         validateCondition =
-                            ConditionSystem.CheckCharacterCondition(AssistantCharacters[0], AssistantCharacters.ToArray(), taskCondition);
+                            ConditionSystem.CheckCharacterCondition(AssistantCharacters[0],
+                                AssistantCharacters.ToArray(), taskCondition);
                     break;
                 case OutcomeData.OutcomeTarget.Gauge:
                     validateCondition = ConditionSystem.CheckGaugeCondition(taskCondition);
@@ -371,6 +380,7 @@ namespace UI
                     outcomeEventArgs = Array.Empty<OutcomeSystem.OutcomeEventArgs>();
                     outcomeEvents = Array.Empty<OutcomeSystem.OutcomeEvent>();
                 }
+
                 OnComplete();
             }
             else
