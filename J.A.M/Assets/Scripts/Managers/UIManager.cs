@@ -13,7 +13,7 @@ namespace Managers
     public class UIManager : MonoBehaviour
     {
         public Gauges[] gauges;
-        private Dictionary<SystemType, Image> gaugeReferences = new();
+        private Dictionary<SystemType, Gauges> gaugeReferences = new();
         public Transform charactersUIParent;
         public List<CharacterUI> charactersUI;
         private List<CharacterIcon> characterIcons = new();
@@ -29,6 +29,7 @@ namespace Managers
         {
             [FormerlySerializedAs("system")] public SystemType systemType;
             public Image gauge;
+            public Image previewGauge;
         }
     
         private void Start()
@@ -40,7 +41,7 @@ namespace Managers
         {
             for (int i = 0; i < gauges.Length; i++)
             {
-                gaugeReferences.Add(gauges[i].systemType, gauges[i].gauge);
+                gaugeReferences.Add(gauges[i].systemType, gauges[i]);
             }
 
             foreach (var character in GameManager.Instance.SpaceshipManager.characters)
@@ -54,7 +55,7 @@ namespace Managers
 
         public void UpdateGauges(SystemType systemType, float value)
         {
-            gaugeReferences[systemType].fillAmount = value/20;
+            gaugeReferences[systemType].gauge.fillAmount = value/20;
         }
 
         public void UpdateInGameDate(string newDate)
@@ -67,6 +68,37 @@ namespace Managers
             foreach (var icon in characterIcons)
             {
                 icon.RefreshIcon();
+            }
+        }
+
+        public void PreviewOutcomeGauges(List<TaskUI.GaugesOutcome> gaugesOutcomes)
+        {
+            foreach (var gauge in gauges)
+            {
+                var valueToAdd = 0f;
+                foreach (var outcome in gaugesOutcomes)
+                {
+                    if (outcome.gauge == gauge.systemType) valueToAdd += outcome.value;
+                }
+
+                if (valueToAdd > 0)
+                {
+                    valueToAdd += gauge.gauge.fillAmount * 20;
+                    gauge.previewGauge.fillAmount = valueToAdd / 20;
+                }
+                else
+                {
+                    gauge.previewGauge.fillAmount = gauge.gauge.fillAmount;
+                    gauge.gauge.fillAmount += valueToAdd / 20;
+                }
+            }
+        }
+
+        public void ResetPreviewGauges()
+        {
+            foreach (var gauge in gauges)
+            {
+                gauge.previewGauge.fillAmount = 0;
             }
         }
 

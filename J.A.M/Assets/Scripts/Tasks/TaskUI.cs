@@ -32,12 +32,24 @@ namespace Tasks
         [Header("Values")]
         [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
-
+        
         private Notification notification;
         private List<CharacterUISlot> characterSlots = new();
         private bool taskStarted;
         private Animator animator;
+        private List<GaugesOutcome> gaugesOutcomes = new List<GaugesOutcome>();
+        public struct GaugesOutcome
+        {
+            public SystemType gauge;
+            public float value;
 
+            public GaugesOutcome(SystemType system, float value)
+            {
+                gauge = system;
+                this.value = value;
+            }
+        }
+        
         private void Start()
         {
             animator = GetComponent<Animator>();
@@ -231,7 +243,8 @@ namespace Tasks
                                                     $"<color=yellow>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                         }
-
+                                        gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge, outcome.value));
+                                        
                                         break;
                                     case OutcomeData.OutcomeType.GaugeVolition:
                                         if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
@@ -255,7 +268,7 @@ namespace Tasks
                                                     $"<color=yellow>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                         }
-
+                                        gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge, characterSlots[0].icon.character.GetVolition()));
                                         break;
                                     case OutcomeData.OutcomeType.Trait:
                                         previewOutcomeText.text += traits;
@@ -472,7 +485,7 @@ namespace Tasks
                                                             $"<color=yellow>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                 }
-
+                                                gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge, outcome.value));
                                                 break;
                                             case OutcomeData.OutcomeType.GaugeVolition:
                                                 if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
@@ -496,7 +509,7 @@ namespace Tasks
                                                             $"<color=yellow>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                 }
-
+                                                gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge, characterSlots[0].icon.character.GetVolition()));
                                                 break;
                                             case OutcomeData.OutcomeType.Trait:
                                                 previewOutcomeText.text += traits;
@@ -632,7 +645,8 @@ namespace Tasks
                 else previewOutcomeText.text = null;
 
                 var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
-
+                GameManager.Instance.UIManager.PreviewOutcomeGauges(gaugesOutcomes);
+                gaugesOutcomes.Clear();
                 duration = assistantCharacters > 0
                     ? notification.Task.Duration /
                       (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
@@ -652,6 +666,7 @@ namespace Tasks
             if (CharactersWorking()) return;
             notification.OnStart(characterSlots);
             taskStarted = true;
+            GameManager.Instance.UIManager.ResetPreviewGauges();
             CloseTask();
         }
 
@@ -687,6 +702,7 @@ namespace Tasks
             characterSlots.Clear();
             dialogueLog.ClearDialogueLog();
             separator.SetActive(false);
+            GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.RefreshCharacterIcons();
         }
 
