@@ -61,6 +61,7 @@ namespace UI
             IsCancelled = false;
             Task = task;
             taskNode = ssTaskNode;
+            time.text = "";
             Task.TimeLeft *= TimeTickSystem.ticksPerHour;
             icon.sprite = task.Icon;
             Dialogues = dialogues;
@@ -383,11 +384,17 @@ namespace UI
 
                 OnComplete();
             }
-            else
+            else if (Task.TaskType.Equals(SSTaskType.Timed))
             {
                 launcher.IsCancelled = true;
                 IsStarted = false;
-                launcher.RunNodeCancel(this, Task, Task.Duration, taskNode);
+                launcher.RunTimedNodeCancel(this, Task, taskNode);
+            }
+            else if (Task.TaskType.Equals(SSTaskType.Untimed))
+            {
+                launcher.IsCancelled = true;
+                IsStarted = false;
+                launcher.RunUntimedNodeCancel(this, Task, taskNode);
             }
         }
 

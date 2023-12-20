@@ -346,7 +346,8 @@ namespace SS
                 }
                 case SSSpeakerType.NotAssigned:
                 {
-                    tempCharacters = spaceshipManager.characters.Except(assignedCharacters).Except(notAssignedCharacters).ToList();
+                    tempCharacters = spaceshipManager.characters.Except(assignedCharacters)
+                        .Except(notAssignedCharacters).ToList();
                     if (tempCharacters.Count == 0)
                     {
                         Debug.LogWarning($"Try to get a character but all of them are assigned");
@@ -431,6 +432,7 @@ namespace SS
                             tempCharacters.Add(character);
                         }
                     }
+
                     actualSpeaker = tempCharacters[Random.Range(0, tempCharacters.Count)];
                     dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
                         actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
@@ -553,9 +555,14 @@ namespace SS
             }
         }
 
-        public void RunNodeCancel(Notification notification, Task actualTask, float duration, SSTaskNodeSO taskNode)
+        public void RunTimedNodeCancel(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
         {
-            StartCoroutine(WaitRunCancelNode(notification, actualTask, taskNode));
+            StartCoroutine(WaitTimedRunCancelNode(notification, actualTask, taskNode));
+        }
+
+        public void RunUntimedNodeCancel(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
+        {
+            StartCoroutine(WaitUntimedRunCancelNode(notification, actualTask, taskNode));
         }
 
         private void RunNode(SSTimeNodeSO nodeSO)
@@ -592,10 +599,18 @@ namespace SS
             }
         }
 
-        private IEnumerator WaitRunCancelNode(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
+        private IEnumerator WaitTimedRunCancelNode(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
         {
             yield return new WaitUntil(() => IsCancelled == false);
             notification.InitializeCancelTask();
+            StartCoroutine(WaiterTask(taskNode, actualTask));
+        }
+
+        private IEnumerator WaitUntimedRunCancelNode(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
+        {
+            yield return new WaitUntil(() => IsCancelled == false);
+            CanIgnoreDialogueTask = false;
+            notification.Initialize(actualTask, taskNode, spaceshipManager, this, dialogues);
             StartCoroutine(WaiterTask(taskNode, actualTask));
         }
 
@@ -647,7 +662,7 @@ namespace SS
                 if (task.TaskType.Equals(SSTaskType.Permanent)) spaceshipManager.RemoveTask(notification);
                 yield break;
             }
-            
+
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
             {
                 isRunning = false;
@@ -655,7 +670,7 @@ namespace SS
                 ResetTimeline();
                 yield break;
             }
-            
+
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).LeaderCharacters);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).AssistantCharacters);
 
