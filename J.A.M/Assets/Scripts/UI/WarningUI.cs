@@ -1,17 +1,17 @@
-using System;
+using System.Collections.Generic;
 using CharacterSystem;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class WarningUI : MonoBehaviour
 {
-    public CharacterBehaviour character;
-    public Image characterIcon;
+    public List<CharacterBehaviour> characters;
     public TextMeshProUGUI warningDescription;
     public TextMeshProUGUI characterWarningDescription;
+
     [SerializeField] private GameObject warning;
     [SerializeField] private GameObject characterWarning;
+
     private Animator animator;
 
     private void Start()
@@ -24,23 +24,27 @@ public class WarningUI : MonoBehaviour
         Appear(false);
     }
 
-    public void CharacterWarning(CharacterBehaviour c)
+    public void CharacterWarning(List<CharacterBehaviour> c)
     {
-        character = c;
-        characterIcon.sprite = c.GetCharacterData().characterIcon;
+        characters = c;
         warning.SetActive(false);
         characterWarning.SetActive(true);
-        if (c.IsTaskLeader())
+        characterWarningDescription.text = "";
+        for (int i = 0; i < c.Count; i++)
         {
-            characterWarningDescription.text = character.GetCharacterData().firstName + " is already assigned to " +
-                                               character.GetTask().Name +
-                                               ". Assigning him here will cancel his current Task. Do you want to proceed?";
-        }
-        else
-        {
-            characterWarningDescription.text = character.GetCharacterData().firstName + " is already assigned to " +
-                                               character.GetTask().Name +
-                                               ". Assigning him here will slow down his current Task. Do you want to proceed?";
+            var character = c[i];
+            if (character.IsTaskLeader())
+            {
+                characterWarningDescription.text = character.GetCharacterData().firstName + " is already assigned to " +
+                                                   character.GetTask().Name +
+                                                   ". Assigning him here will cancel his current Task. Do you want to proceed?";
+            }
+            else
+            {
+                characterWarningDescription.text += character.GetCharacterData().firstName + " is already assigned to " +
+                                                   character.GetTask().Name +
+                                                   ". Assigning him here will slow down his current Task. Do you want to proceed?";
+            }
         }
 
         Appear(true);
@@ -58,15 +62,19 @@ public class WarningUI : MonoBehaviour
     {
         if (characterWarning.activeSelf)
         {
-            if (character.IsTaskLeader())
+            for (int i = 0; i < characters.Count; i++)
             {
-                character.IncreaseMood(-10);
-                GameManager.Instance.SpaceshipManager.CancelTask(character.GetTask());
-            }
-            else
-            {
-                character.IncreaseMood(-10);
-                character.StopTask();
+                var character = characters[i];
+                if (character.IsTaskLeader())
+                {
+                    character.IncreaseMood(-10);
+                    GameManager.Instance.SpaceshipManager.CancelTask(character.GetTask());
+                }
+                else
+                {
+                    character.IncreaseMood(-10);
+                    character.StopTask();
+                }
             }
 
             GameManager.Instance.RefreshCharacterIcons();
@@ -75,6 +83,7 @@ public class WarningUI : MonoBehaviour
         {
             GameManager.Instance.UIManager.taskUI.CancelTask();
         }
+
         Appear(false);
     }
 

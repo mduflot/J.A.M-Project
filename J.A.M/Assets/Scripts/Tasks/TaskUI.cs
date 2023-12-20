@@ -677,6 +677,7 @@ namespace Tasks
         public void CloseNotification()
         {
             TimeTickSystem.ModifyTimeScale(1.0f);
+            GameManager.Instance.RefreshCharacterIcons();
             notification.OnCancel();
         }
 
@@ -702,13 +703,19 @@ namespace Tasks
 
         private bool CharactersWorking()
         {
+            List<CharacterBehaviour> characters = new();
             foreach (var character in characterSlots)
             {
                 if (character.icon != null && character.icon.character.IsWorking())
                 {
-                    warningUI.CharacterWarning(character.icon.character);
-                    return true;
+                    characters.Add(character.icon.character);
                 }
+            }
+
+            if (characters.Count > 0)
+            {
+                warningUI.CharacterWarning(characters);
+                return true;
             }
 
             return false;
