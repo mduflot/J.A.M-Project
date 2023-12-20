@@ -35,6 +35,7 @@ namespace UI
             transform.position = baseParentScript.transform.position;
             transform.localScale = baseParentScript.transform.localScale;
             baseParentScript.icon = this;
+            parentScript = baseParentScript;
         }
     
         public void OnBeginDrag(PointerEventData eventData)

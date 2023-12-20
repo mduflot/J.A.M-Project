@@ -1,4 +1,3 @@
-using System;
 using SS;
 using UI;
 using UnityEngine;
@@ -9,8 +8,8 @@ namespace Spaceship
     [RequireComponent(typeof(SSLauncher))]
     public class TaskRoom : MonoBehaviour, IDropHandler
     {
-        
         private SSLauncher launcher;
+
         private void Start()
         {
             launcher = GetComponent<SSLauncher>();
@@ -20,7 +19,7 @@ namespace Spaceship
         {
             GameObject dropped = eventData.pointerDrag;
             var icon = dropped.GetComponent<CharacterIcon>();
-            if(icon != null) launcher.StartTimeline();
+            if (icon != null) launcher.StartTimeline();
         }
     }
 }
