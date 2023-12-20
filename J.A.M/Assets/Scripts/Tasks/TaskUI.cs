@@ -191,84 +191,96 @@ namespace Tasks
                         {
                             previewOutcomeText.text =
                                 $"{characterSlots[0].icon.character.GetCharacterData().name} {notification.Task.Conditions[index].Item2}\n";
+                            var traits = "";
                             if (notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetJob() !=
                                 TraitsData.Job.None)
-                                previewOutcomeText.text +=
+                                traits +=
                                     $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetJob()}";
                             if (notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetPositiveTraits() !=
                                 TraitsData.PositiveTraits.None)
-                                previewOutcomeText.text +=
+                                traits +=
                                     $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetPositiveTraits()}";
                             if (notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetNegativeTraits() !=
                                 TraitsData.NegativeTraits.None)
-                                previewOutcomeText.text +=
+                                traits +=
                                     $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetNegativeTraits()}";
-                            
+
                             for (int j = 0; j < notification.Task.Conditions[index].Item1.outcomes.Outcomes.Length; j++)
                             {
                                 var outcome = notification.Task.Conditions[index].Item1.outcomes.Outcomes[j];
+                                var operation = "+";
                                 switch (outcome.OutcomeType)
                                 {
                                     case OutcomeData.OutcomeType.Gauge:
+                                        if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
+                                            operation = "-";
                                         switch (outcome.OutcomeTargetGauge)
                                         {
                                             case SystemType.Airflow:
                                                 previewOutcomeText.text +=
-                                                    $"<color=blue>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=blue>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Food:
                                                 previewOutcomeText.text +=
-                                                    $"<color=green>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=green>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Hull:
                                                 previewOutcomeText.text +=
-                                                    $"<color=red>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=red>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Power:
                                                 previewOutcomeText.text +=
-                                                    $"<color=yellow>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=yellow>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                         }
 
                                         break;
                                     case OutcomeData.OutcomeType.GaugeVolition:
+                                        if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
+                                            operation = "-";
                                         switch (outcome.OutcomeTargetGauge)
                                         {
                                             case SystemType.Airflow:
                                                 previewOutcomeText.text +=
-                                                    $"<color=blue>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=lightblue>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Food:
                                                 previewOutcomeText.text +=
-                                                    $"<color=green>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=green>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Hull:
                                                 previewOutcomeText.text +=
-                                                    $"<color=red>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=red>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Power:
                                                 previewOutcomeText.text +=
-                                                    $"<color=yellow>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=yellow>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                         }
 
                                         break;
                                     case OutcomeData.OutcomeType.Trait:
+                                        previewOutcomeText.text += traits;
                                         if (outcome.OutcomeTargetTrait.GetJob() != TraitsData.Job.None)
                                         {
                                             switch (outcome.OutcomeTarget)
                                             {
                                                 case OutcomeData.OutcomeTarget.Crew:
                                                     previewOutcomeText.text +=
-                                                        $"{outcome.OutcomeOperation} Crew {outcome.OutcomeTargetTrait.GetJob()}\n";
+                                                        $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetJob()} to Crew\n";
                                                     break;
-                                                default:
+                                                case OutcomeData.OutcomeTarget.Leader:
+                                                    previewOutcomeText.text +=
+                                                        $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetJob()} to {characterSlots[0].icon.character.GetCharacterData().firstName}\n";
+                                                    break;
+                                                case OutcomeData.OutcomeTarget.Assistant:
                                                     for (int i = 0; i < characterSlots.Count; i++)
                                                     {
                                                         var character = characterSlots[i];
+                                                        if (character.isMandatory) continue;
                                                         if (character.icon == null) continue;
                                                         previewOutcomeText.text +=
-                                                            $"{outcome.OutcomeOperation} {character.icon.character.GetCharacterData().firstName} {outcome.OutcomeTargetTrait.GetJob()}\n";
+                                                            $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetJob()} to {character.icon.character.GetCharacterData().firstName}\n";
                                                     }
 
                                                     break;
@@ -277,12 +289,54 @@ namespace Tasks
 
                                         if (outcome.OutcomeTargetTrait.GetPositiveTraits() !=
                                             TraitsData.PositiveTraits.None)
-                                            previewOutcomeText.text +=
-                                                $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetPositiveTraits()}\n";
+                                            switch (outcome.OutcomeTarget)
+                                            {
+                                                case OutcomeData.OutcomeTarget.Crew:
+                                                    previewOutcomeText.text +=
+                                                        $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetPositiveTraits()} to Crew\n";
+                                                    break;
+                                                case OutcomeData.OutcomeTarget.Leader:
+                                                    previewOutcomeText.text +=
+                                                        $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetPositiveTraits()} to {characterSlots[0].icon.character.GetCharacterData().firstName}\n";
+                                                    break;
+                                                case OutcomeData.OutcomeTarget.Assistant:
+                                                    for (int i = 0; i < characterSlots.Count; i++)
+                                                    {
+                                                        var character = characterSlots[i];
+                                                        if (character.isMandatory) continue;
+                                                        if (character.icon == null) continue;
+                                                        previewOutcomeText.text +=
+                                                            $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetPositiveTraits()} to {character.icon.character.GetCharacterData().firstName}\n";
+                                                    }
+
+                                                    break;
+                                            }
+
                                         if (outcome.OutcomeTargetTrait.GetNegativeTraits() !=
                                             TraitsData.NegativeTraits.None)
-                                            previewOutcomeText.text +=
-                                                $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetNegativeTraits()}\n";
+                                            switch (outcome.OutcomeTarget)
+                                            {
+                                                case OutcomeData.OutcomeTarget.Crew:
+                                                    previewOutcomeText.text +=
+                                                        $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetNegativeTraits()} to Crew\n";
+                                                    break;
+                                                case OutcomeData.OutcomeTarget.Leader:
+                                                    previewOutcomeText.text +=
+                                                        $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetNegativeTraits()} to {characterSlots[0].icon.character.GetCharacterData().firstName}\n";
+                                                    break;
+                                                case OutcomeData.OutcomeTarget.Assistant:
+                                                    for (int i = 0; i < characterSlots.Count; i++)
+                                                    {
+                                                        var character = characterSlots[i];
+                                                        if (character.isMandatory) continue;
+                                                        if (character.icon == null) continue;
+                                                        previewOutcomeText.text +=
+                                                            $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetNegativeTraits()} to {character.icon.character.GetCharacterData().firstName}\n";
+                                                    }
+
+                                                    break;
+                                            }
+
                                         if (outcome.OutcomeShipTrait != TraitsData.SpaceshipTraits.None)
                                         {
                                             foreach (TraitsData.SpaceshipTraits spaceshipTraits in Enum.GetValues(
@@ -292,13 +346,14 @@ namespace Tasks
                                                     spaceshipTraits != TraitsData.SpaceshipTraits.None)
                                                 {
                                                     previewOutcomeText.text +=
-                                                        $"{outcome.OutcomeOperation} Ship {spaceshipTraits}\n";
+                                                        $"{outcome.OutcomeOperation} {spaceshipTraits} to Ship\n";
                                                 }
                                             }
                                         }
 
                                         break;
                                     case OutcomeData.OutcomeType.CharacterStat:
+                                        previewOutcomeText.text += traits;
                                         previewOutcomeText.text +=
                                             $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat}\n";
                                         break;
@@ -364,18 +419,22 @@ namespace Tasks
 
                                 if (condition)
                                 {
-                                    if (notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetJob() != TraitsData.Job.None)
-                                        previewOutcomeText.text +=
+                                    traits = "";
+                                    if (notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
+                                            .BaseCondition.Traits.GetJob() != TraitsData.Job.None)
+                                        traits +=
                                             $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetJob()} ";
-                                    if (notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits
+                                    if (notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
+                                            .BaseCondition.Traits
                                             .GetPositiveTraits() !=
                                         TraitsData.PositiveTraits.None)
-                                        previewOutcomeText.text +=
+                                        traits +=
                                             $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetPositiveTraits()} ";
-                                    if (notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits
+                                    if (notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
+                                            .BaseCondition.Traits
                                             .GetNegativeTraits() !=
                                         TraitsData.NegativeTraits.None)
-                                        previewOutcomeText.text +=
+                                        traits +=
                                             $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetNegativeTraits()} ";
                                     for (int j = 0;
                                          j < notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
@@ -384,68 +443,79 @@ namespace Tasks
                                     {
                                         var outcome = notification.Task.Conditions[index].Item1
                                             .additionnalConditions[jindex].outcomes.Outcomes[j];
+                                        var operation = "+";
                                         switch (outcome.OutcomeType)
                                         {
                                             case OutcomeData.OutcomeType.Gauge:
+                                                if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
+                                                    operation = "-";
                                                 switch (outcome.OutcomeTargetGauge)
                                                 {
                                                     case SystemType.Airflow:
                                                         previewOutcomeText.text +=
-                                                            $"<color=blue>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=blue>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Food:
                                                         previewOutcomeText.text +=
-                                                            $"<color=green>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=green>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Hull:
                                                         previewOutcomeText.text +=
-                                                            $"<color=red>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=red>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Power:
                                                         previewOutcomeText.text +=
-                                                            $"<color=yellow>{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=yellow>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                 }
 
                                                 break;
                                             case OutcomeData.OutcomeType.GaugeVolition:
+                                                if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
+                                                    operation = "-";
                                                 switch (outcome.OutcomeTargetGauge)
                                                 {
                                                     case SystemType.Airflow:
                                                         previewOutcomeText.text +=
-                                                            $"<color=blue>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=blue>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Food:
                                                         previewOutcomeText.text +=
-                                                            $"<color=green>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=green>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Hull:
                                                         previewOutcomeText.text +=
-                                                            $"<color=red>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=red>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Power:
                                                         previewOutcomeText.text +=
-                                                            $"<color=yellow>{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=yellow>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                 }
 
                                                 break;
                                             case OutcomeData.OutcomeType.Trait:
+                                                previewOutcomeText.text += traits;
                                                 if (outcome.OutcomeTargetTrait.GetJob() != TraitsData.Job.None)
                                                 {
                                                     switch (outcome.OutcomeTarget)
                                                     {
                                                         case OutcomeData.OutcomeTarget.Crew:
                                                             previewOutcomeText.text +=
-                                                                $"{outcome.OutcomeOperation} Crew {outcome.OutcomeTargetTrait.GetJob()}\n";
+                                                                $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetJob()} to Crew\n";
                                                             break;
-                                                        default:
+                                                        case OutcomeData.OutcomeTarget.Leader:
+                                                            previewOutcomeText.text +=
+                                                                $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetJob()} to {characterSlots[0].icon.character.GetCharacterData().firstName}\n";
+                                                            break;
+                                                        case OutcomeData.OutcomeTarget.Assistant:
                                                             for (int i = 0; i < characterSlots.Count; i++)
                                                             {
                                                                 var character = characterSlots[i];
+                                                                if (character.isMandatory) continue;
                                                                 if (character.icon == null) continue;
                                                                 previewOutcomeText.text +=
-                                                                    $"{outcome.OutcomeOperation} {character.icon.character.GetCharacterData().firstName} {outcome.OutcomeTargetTrait.GetJob()}\n";
+                                                                    $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetJob()} to {character.icon.character.GetCharacterData().firstName}\n";
                                                             }
 
                                                             break;
@@ -454,12 +524,54 @@ namespace Tasks
 
                                                 if (outcome.OutcomeTargetTrait.GetPositiveTraits() !=
                                                     TraitsData.PositiveTraits.None)
-                                                    previewOutcomeText.text +=
-                                                        $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetPositiveTraits()}\n";
+                                                    switch (outcome.OutcomeTarget)
+                                                    {
+                                                        case OutcomeData.OutcomeTarget.Crew:
+                                                            previewOutcomeText.text +=
+                                                                $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetPositiveTraits()} to Crew\n";
+                                                            break;
+                                                        case OutcomeData.OutcomeTarget.Leader:
+                                                            previewOutcomeText.text +=
+                                                                $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetPositiveTraits()} to {characterSlots[0].icon.character.GetCharacterData().firstName}\n";
+                                                            break;
+                                                        case OutcomeData.OutcomeTarget.Assistant:
+                                                            for (int i = 0; i < characterSlots.Count; i++)
+                                                            {
+                                                                var character = characterSlots[i];
+                                                                if (character.isMandatory) continue;
+                                                                if (character.icon == null) continue;
+                                                                previewOutcomeText.text +=
+                                                                    $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetPositiveTraits()} to {character.icon.character.GetCharacterData().firstName}\n";
+                                                            }
+
+                                                            break;
+                                                    }
+
                                                 if (outcome.OutcomeTargetTrait.GetNegativeTraits() !=
                                                     TraitsData.NegativeTraits.None)
-                                                    previewOutcomeText.text +=
-                                                        $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetNegativeTraits()}\n";
+                                                    switch (outcome.OutcomeTarget)
+                                                    {
+                                                        case OutcomeData.OutcomeTarget.Crew:
+                                                            previewOutcomeText.text +=
+                                                                $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetNegativeTraits()} to Crew\n";
+                                                            break;
+                                                        case OutcomeData.OutcomeTarget.Leader:
+                                                            previewOutcomeText.text +=
+                                                                $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetNegativeTraits()} to {characterSlots[0].icon.character.GetCharacterData().firstName}\n";
+                                                            break;
+                                                        case OutcomeData.OutcomeTarget.Assistant:
+                                                            for (int i = 0; i < characterSlots.Count; i++)
+                                                            {
+                                                                var character = characterSlots[i];
+                                                                if (character.isMandatory) continue;
+                                                                if (character.icon == null) continue;
+                                                                previewOutcomeText.text +=
+                                                                    $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetNegativeTraits()} to {character.icon.character.GetCharacterData().firstName}\n";
+                                                            }
+
+                                                            break;
+                                                    }
+
                                                 if (outcome.OutcomeShipTrait != TraitsData.SpaceshipTraits.None)
                                                 {
                                                     foreach (TraitsData.SpaceshipTraits spaceshipTraits in Enum
@@ -470,15 +582,38 @@ namespace Tasks
                                                             spaceshipTraits != TraitsData.SpaceshipTraits.None)
                                                         {
                                                             previewOutcomeText.text +=
-                                                                $"{outcome.OutcomeOperation} Ship {spaceshipTraits}\n";
+                                                                $"{outcome.OutcomeOperation} {spaceshipTraits} to Ship\n";
                                                         }
                                                     }
                                                 }
 
                                                 break;
                                             case OutcomeData.OutcomeType.CharacterStat:
-                                                previewOutcomeText.text +=
-                                                    $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat}\n";
+                                                switch (outcome.OutcomeTarget)
+                                                {
+                                                    case OutcomeData.OutcomeTarget.Crew:
+                                                        previewOutcomeText.text += traits;
+                                                        previewOutcomeText.text +=
+                                                            $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat} to Crew\n";
+                                                        break;
+                                                    case OutcomeData.OutcomeTarget.Leader:
+                                                        previewOutcomeText.text += traits;
+                                                        previewOutcomeText.text +=
+                                                            $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat} to {characterSlots[0].icon.character.GetCharacterData().firstName}\n";
+                                                        break;
+                                                    case OutcomeData.OutcomeTarget.Assistant:
+                                                        previewOutcomeText.text += traits;
+                                                        for (int i = 0; i < characterSlots.Count; i++)
+                                                        {
+                                                            var character = characterSlots[i];
+                                                            if (character.isMandatory) continue;
+                                                            if (character.icon == null) continue;
+                                                            previewOutcomeText.text +=
+                                                                $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat} to {character.icon.character.GetCharacterData().firstName}\n";
+                                                        }
+
+                                                        break;
+                                                }
                                                 break;
                                         }
                                     }
