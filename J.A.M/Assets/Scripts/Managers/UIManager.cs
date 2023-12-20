@@ -117,19 +117,22 @@ namespace Managers
         {
             foreach (var c in charactersUI)
             {
-                var value = 0;
+                var value = 0f;
                 foreach (var character in characters)
                 {
-                    if (c.icon.character == character.character)
-                    {
-                        c.previewMoodGauge.fillAmount = c.character.GetMood() / c.character.GetMaxMood();
-                        c.moodGauge.fillAmount = (c.character.GetMood() - GameManager.Instance.SpaceshipManager.moodLossOnTaskStart) /
-                                                      c.character.GetMaxMood();
-                    }
-                    else
-                    {
-                        c.moodGauge.fillAmount = c.character.GetMood() / c.character.GetMaxMood();
-                    }
+                    if (c.character == character.character) value += character.value;
+                }
+                if(value < 0)
+                {
+                    c.previewMoodGauge.fillAmount = c.character.GetMood() / c.character.GetMaxMood();
+                    c.moodGauge.fillAmount = (c.character.GetMood() - GameManager.Instance.SpaceshipManager.moodLossOnTaskStart) /
+                                             c.character.GetMaxMood();
+                }
+                else
+                {
+                    value += c.moodGauge.fillAmount * c.character.GetMaxMood();
+                    c.previewMoodGauge.fillAmount = value / c.character.GetMaxMood();
+                    c.moodGauge.fillAmount = c.character.GetMood() / c.character.GetMaxMood();
                 }
             }
         }

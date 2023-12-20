@@ -668,7 +668,7 @@ namespace Tasks
                 GameManager.Instance.UIManager.PreviewOutcomeGauges(gaugesOutcomes);
                 foreach (var c in characterSlots)
                 {
-                    if(c.icon != null) charOutcome.Add(new CharacterOutcome(c.icon.character, GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
+                    if(c.icon != null) charOutcome.Add(new CharacterOutcome(c.icon.character, -GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
                 }
                 GameManager.Instance.UIManager.CharacterPreviewGauges(charOutcome);
                 charOutcome.Clear();
