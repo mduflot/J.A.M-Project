@@ -351,9 +351,28 @@ namespace Tasks
 
                                         break;
                                     case OutcomeData.OutcomeType.CharacterStat:
-                                        previewOutcomeText.text += traits;
-                                        previewOutcomeText.text +=
-                                            $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat}\n";
+                                        previewOutcomeText.text += traits + " ";
+                                        switch (outcome.OutcomeTarget)
+                                        {
+                                            case OutcomeData.OutcomeTarget.Crew:
+                                                previewOutcomeText.text +=
+                                                    $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat} to Crew\n";
+                                                break;
+                                            case OutcomeData.OutcomeTarget.Leader:
+                                                previewOutcomeText.text +=
+                                                    $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat} to {characterSlots[0].icon.character.GetCharacterData().firstName}\n";
+                                                break;
+                                            case OutcomeData.OutcomeTarget.Assistant:
+                                                for (int i = 0; i < characterSlots.Count; i++)
+                                                {
+                                                    var character = characterSlots[i];
+                                                    if (character.isMandatory) continue;
+                                                    if (character.icon == null) continue;
+                                                    previewOutcomeText.text +=
+                                                        $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat} to {character.icon.character.GetCharacterData().firstName}\n";
+                                                }
+                                                break;
+                                        }
                                         break;
                                 }
                             }
@@ -574,20 +593,18 @@ namespace Tasks
 
                                                 break;
                                             case OutcomeData.OutcomeType.CharacterStat:
+                                                previewOutcomeText.text += traits + " ";
                                                 switch (outcome.OutcomeTarget)
                                                 {
                                                     case OutcomeData.OutcomeTarget.Crew:
-                                                        previewOutcomeText.text += traits;
                                                         previewOutcomeText.text +=
                                                             $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat} to Crew\n";
                                                         break;
                                                     case OutcomeData.OutcomeTarget.Leader:
-                                                        previewOutcomeText.text += traits;
                                                         previewOutcomeText.text +=
                                                             $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat} to {characterSlots[0].icon.character.GetCharacterData().firstName}\n";
                                                         break;
                                                     case OutcomeData.OutcomeTarget.Assistant:
-                                                        previewOutcomeText.text += traits;
                                                         for (int i = 0; i < characterSlots.Count; i++)
                                                         {
                                                             var character = characterSlots[i];
