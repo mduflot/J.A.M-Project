@@ -149,6 +149,8 @@ namespace Tasks
             if (!animator.GetBool("Appear")) return;
             if (!taskStarted)
             {
+                List<GaugesOutcome> gaugeOutcomes = new List<GaugesOutcome>();
+                List<CharacterOutcome> characterOutcomes = new List<CharacterOutcome>();
                 bool canCheck = true;
                 for (int j = 0; j < characterSlots.Count; j++)
                 {
@@ -255,7 +257,7 @@ namespace Tasks
                                                 break;
                                         }
 
-                                        gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
+                                        gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
                                             outcome.value));
 
                                         break;
@@ -282,7 +284,7 @@ namespace Tasks
                                                 break;
                                         }
 
-                                        gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
+                                        gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
                                             characterSlots[0].icon.character.GetVolition()));
                                         break;
                                     case OutcomeData.OutcomeType.Trait:
@@ -503,7 +505,7 @@ namespace Tasks
                                                         break;
                                                 }
 
-                                                gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
+                                                gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
                                                     outcome.value));
                                                 break;
                                             case OutcomeData.OutcomeType.GaugeVolition:
@@ -529,7 +531,7 @@ namespace Tasks
                                                         break;
                                                 }
 
-                                                gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
+                                                gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
                                                     characterSlots[0].icon.character.GetVolition()));
                                                 break;
                                             case OutcomeData.OutcomeType.Trait:
@@ -670,11 +672,11 @@ namespace Tasks
                 GameManager.Instance.UIManager.PreviewOutcomeGauges(gaugesOutcomes);
                 foreach (var c in characterSlots)
                 {
-                    if(c.icon != null) charOutcome.Add(new CharacterOutcome(c.icon.character, -GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
+                    if(c.icon != null) characterOutcomes.Add(new CharacterOutcome(c.icon.character, -GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
                 }
                 GameManager.Instance.UIManager.CharacterPreviewGauges(charOutcome);
-                charOutcome.Clear();
-                gaugesOutcomes.Clear();
+                charOutcome = characterOutcomes;
+                gaugesOutcomes = gaugeOutcomes;
                 duration = assistantCharacters > 0
                     ? notification.Task.Duration /
                       (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
@@ -692,10 +694,13 @@ namespace Tasks
                 if (!CanStartTask())
                     return;
             if (CharactersWorking()) return;
-            notification.OnStart(characterSlots);
+            notification.OnStart(characterSlots, gaugesOutcomes);
             taskStarted = true;
             GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.UIManager.ResetCharactersPreviewGauges();
+            GameManager.Instance.SpaceshipManager.ApplyGaugeOutcomes(gaugesOutcomes);
+            gaugesOutcomes.Clear();
+            charOutcome.Clear();
             CloseTask();
         }
 

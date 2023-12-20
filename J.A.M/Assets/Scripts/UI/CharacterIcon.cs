@@ -116,7 +116,6 @@ namespace UI
         {
             if(!GameManager.Instance.taskOpened) return;
             clicked++;
-            Debug.Log(clicked);
             if (clicked == 1) clickTime = Time.time;
             if (clicked > 1 && Time.time - clickTime < clickDelay)
             {

@@ -57,9 +57,10 @@ namespace Managers
             }
         }
 
-        public void UpdateGauges(SystemType systemType, float value)
+        public void UpdateGauges(SystemType systemType, float value, float previewValue)
         {
             gaugeReferences[systemType].gauge.fillAmount = value/50;
+            gaugeReferences[systemType].previewGauge.fillAmount = (value + previewValue) / 50;
             gaugeReferences[systemType].arrow.sprite = redArrow;
         }
 

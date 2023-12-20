@@ -32,6 +32,7 @@ namespace UI
         private OutcomeSystem.OutcomeEventArgs[] outcomeEventArgs;
         private SSLauncher launcher;
         private SSTaskNodeSO taskNode;
+        private List<TaskUI.GaugesOutcome> gaugeOutcomes = new List<TaskUI.GaugesOutcome>();
 
         private void Start()
         {
@@ -98,7 +99,7 @@ namespace UI
             }
         }
 
-        public void OnStart(List<CharacterUISlot> characters)
+        public void OnStart(List<CharacterUISlot> characters, List<TaskUI.GaugesOutcome> go)
         {
             TimeTickSystem.ModifyTimeScale(TimeTickSystem.lastActiveTimeScale);
             foreach (var character in characters)
@@ -144,7 +145,8 @@ namespace UI
                 Task.conditionIndex = Task.Conditions.Count - 1;
                 validatedCondition = true;
             }
-
+            Debug.Log("Je start");
+            gaugeOutcomes = go;
             CheckingCondition(validatedCondition);
         }
 
@@ -375,6 +377,8 @@ namespace UI
             transform.parent = null;
             notificationContainer.DisplayNotification();
             spaceshipManager.notificationPool.AddToPool(gameObject);
+            Debug.Log(gaugeOutcomes.Count);
+            spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             IsStarted = false;
         }
 
@@ -395,12 +399,14 @@ namespace UI
                 launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunTimedNodeCancel(this, Task, taskNode);
+                spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             }
             else if (Task.TaskType.Equals(SSTaskType.Untimed))
             {
                 launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunUntimedNodeCancel(this, Task, taskNode);
+                spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             }
         }
 
