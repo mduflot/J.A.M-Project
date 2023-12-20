@@ -1,0 +1,158 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: HotShowerGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: HotShower
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: 918f54f2-422f-44fe-98a4-b34429a897bc
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: HotShower
+    <Position>k__BackingField: {x: 314, y: 165}
+  <Nodes>k__BackingField:
+  - rid: 5268905267145998439
+  - rid: 5268905267145998440
+  - rid: 5268905267145998441
+  - rid: 5268905267145998442
+  <OldGroupNames>k__BackingField:
+  - HotShower
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: HotShower
+      Value:
+      - Passing
+      - Full
+      - HotShower
+      - Idea
+  references:
+    version: 2
+    RefIds:
+    - rid: 5268905267145998439
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: a5be18fd-fa46-4e24-ab33-84f9651f0f28
+        <Name>k__BackingField: Passing
+        <Choices>k__BackingField:
+        - rid: 5268905267145998443
+        <GroupID>k__BackingField: 918f54f2-422f-44fe-98a4-b34429a897bc
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 339, y: 224}
+        <Text>k__BackingField: I was passing by the power generator and it's burning
+          !
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5268905267145998440
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 4a7bc50f-4bba-4765-96aa-a2a4fc825f5c
+        <Name>k__BackingField: Full
+        <Choices>k__BackingField:
+        - rid: 5268905267145998444
+        <GroupID>k__BackingField: 918f54f2-422f-44fe-98a4-b34429a897bc
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 994, y: 225}
+        <Text>k__BackingField: Yes, its full so the excess of energy is slipping
+          out
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5268905267145998441
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 2c2fd1f9-13c1-42fd-bc86-62a7e33284cb
+        <Name>k__BackingField: HotShower
+        <Choices>k__BackingField:
+        - rid: 5268905267145998445
+        - rid: 5268905267145998446
+        <GroupID>k__BackingField: 918f54f2-422f-44fe-98a4-b34429a897bc
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 2286, y: 230}
+        <DescriptionTask>k__BackingField: Description
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: ea698d351bd4748449aada363e59d6a3,
+          type: 3}
+        <TimeLeft>k__BackingField: 2
+        <BaseDuration>k__BackingField: 2
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 1
+        <Furniture>k__BackingField: 7
+    - rid: 5268905267145998442
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: fa933790-b8fd-4733-8ab9-cdd335d0bcc8
+        <Name>k__BackingField: Idea
+        <Choices>k__BackingField:
+        - rid: 5268905267145998447
+        <GroupID>k__BackingField: 918f54f2-422f-44fe-98a4-b34429a897bc
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1637, y: 226}
+        <Text>k__BackingField: I have an idea to exploit that but I must ask the
+          AI to organise its execution
+        <SpeakerType>k__BackingField: 3
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5268905267145998443
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 4a7bc50f-4bba-4765-96aa-a2a4fc825f5c
+    - rid: 5268905267145998444
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: fa933790-b8fd-4733-8ab9-cdd335d0bcc8
+    - rid: 5268905267145998445
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 6722e6042c33f6047ae0f14564d9b27f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: The warmth of the generator will heat up
+          water for the shower.
+    - rid: 5268905267145998446
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 9689ceffcf730a948a6dc3ac51c9e03b,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No one will be attributed to such a menial
+          task.
+    - rid: 5268905267145998447
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 2c2fd1f9-13c1-42fd-bc86-62a7e33284cb
