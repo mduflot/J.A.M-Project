@@ -24,6 +24,7 @@ namespace Tasks
         public int conditionIndex = 0;
         public List<CharacterBehaviour> leaderCharacters = new();
         public List<CharacterBehaviour> assistantCharacters = new();
+        public string previewText;
 
         public Task(string name, string description, SSTaskStatus taskStatus, SSTaskType taskType, Sprite icon,
             float timeLeft, float duration, int mandatorySlots,
@@ -42,6 +43,7 @@ namespace Tasks
             HelpFactor = helpFactor;
             Room = room;
             Conditions = conditions;
+            previewText = "";
         }
     }
 }

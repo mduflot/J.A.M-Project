@@ -12,8 +12,7 @@ namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-        [Header("Task")]
-        [SerializeField] private TextMeshProUGUI titleText;
+        [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI timeLeftText;
         [SerializeField] private TextMeshProUGUI durationText;
         [SerializeField] private TextMeshProUGUI descriptionText;
@@ -26,18 +25,17 @@ namespace Tasks
         [SerializeField] private DialogueLog dialogueLog;
         [SerializeField] private GameObject separator;
 
-        [Header("Dialogues")]
-        [SerializeField] private GameObject dialogueContainer;
+        [Header("Dialogues")] [SerializeField] private GameObject dialogueContainer;
 
-        [Header("Values")]
-        [SerializeField] private float timeLeft;
+        [Header("Values")] [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
-        
+
         private Notification notification;
         private List<CharacterUISlot> characterSlots = new();
         private bool taskStarted;
         private Animator animator;
         private List<GaugesOutcome> gaugesOutcomes = new List<GaugesOutcome>();
+
         public struct GaugesOutcome
         {
             public SystemType gauge;
@@ -49,7 +47,7 @@ namespace Tasks
                 this.value = value;
             }
         }
-        
+
         private void Start()
         {
             animator = GetComponent<Animator>();
@@ -98,6 +96,7 @@ namespace Tasks
             notification = n;
             titleText.text = notification.Task.Name;
             DisplayText(descriptionText, notification.Task.Description, 20);
+            DisplayText(previewOutcomeText, notification.Task.previewText, 20);
             duration = notification.Task.Duration;
             durationText.SetText(TimeTickSystem.GetTicksAsTime((uint)duration));
 
@@ -243,8 +242,10 @@ namespace Tasks
                                                     $"<color=yellow>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                         }
-                                        gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge, outcome.value));
-                                        
+
+                                        gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
+                                            outcome.value));
+
                                         break;
                                     case OutcomeData.OutcomeType.GaugeVolition:
                                         if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
@@ -268,7 +269,9 @@ namespace Tasks
                                                     $"<color=yellow>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                         }
-                                        gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge, characterSlots[0].icon.character.GetVolition()));
+
+                                        gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
+                                            characterSlots[0].icon.character.GetVolition()));
                                         break;
                                     case OutcomeData.OutcomeType.Trait:
                                         previewOutcomeText.text += traits;
@@ -384,8 +387,10 @@ namespace Tasks
                                                     previewOutcomeText.text +=
                                                         $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat} to {character.icon.character.GetCharacterData().firstName}\n";
                                                 }
+
                                                 break;
                                         }
+
                                         break;
                                 }
                             }
@@ -485,7 +490,9 @@ namespace Tasks
                                                             $"<color=yellow>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                 }
-                                                gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge, outcome.value));
+
+                                                gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
+                                                    outcome.value));
                                                 break;
                                             case OutcomeData.OutcomeType.GaugeVolition:
                                                 if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
@@ -509,7 +516,9 @@ namespace Tasks
                                                             $"<color=yellow>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                 }
-                                                gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge, characterSlots[0].icon.character.GetVolition()));
+
+                                                gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
+                                                    characterSlots[0].icon.character.GetVolition()));
                                                 break;
                                             case OutcomeData.OutcomeType.Trait:
                                                 previewOutcomeText.text += traits;
@@ -638,6 +647,7 @@ namespace Tasks
                                 }
                             }
 
+                            notification.Task.previewText = previewOutcomeText.text;
                             break;
                         }
                     }
