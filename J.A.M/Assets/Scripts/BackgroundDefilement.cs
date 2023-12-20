@@ -16,7 +16,7 @@ public class BackgroundDefilement : MonoBehaviour
     void Awake()
     {
         leftBackground = background1;
-        initialPos = transform.position.z;
+        initialPos = background1.transform.position.z;
     }
 
     // Update is called once per frame
@@ -26,17 +26,10 @@ public class BackgroundDefilement : MonoBehaviour
         background2.Translate(defilementSpeed*TimeTickSystem.timeScale*Vector3.left);
         if (leftBackground.position.x < -4000)
         {
+            Debug.Log(initialPos);
             Vector3 resetPos = new Vector3(4000, 0, initialPos);
             leftBackground.position = resetPos;
-            //leftBackground = (leftBackground == background1) ? background2 : background1;
-            if (leftBackground == background1)
-            {
-                leftBackground = background2;
-            }
-            else
-            {
-                leftBackground = background1;
-            }
+            leftBackground = (leftBackground == background1) ? background2 : background1;
         }
     }
 }
