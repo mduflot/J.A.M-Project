@@ -390,14 +390,14 @@ namespace Tasks
                                     case OutcomeData.OutcomeTarget.Leader:
                                         condition = ConditionSystem.CheckCharacterCondition(
                                             leader, assistants.ToArray(),
-                                            notification.Task.Conditions[index].Item1);
+                                            notification.Task.Conditions[index].Item1.additionnalConditions[jindex]);
 
                                         break;
 
                                     case OutcomeData.OutcomeTarget.Assistant:
                                         condition = ConditionSystem.CheckCharacterCondition(
                                             leader, assistants.ToArray(),
-                                            notification.Task.Conditions[index].Item1);
+                                            notification.Task.Conditions[index].Item1.additionnalConditions[jindex]);
 
                                         break;
 
