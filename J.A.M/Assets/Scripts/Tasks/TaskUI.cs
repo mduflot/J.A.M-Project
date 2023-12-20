@@ -145,12 +145,12 @@ namespace Tasks
                         List<CharacterBehaviour> assistants = new List<CharacterBehaviour>();
                         for (int j = 0; j < characterSlots.Count; j++)
                         {
-                            if (characterSlots[j].isMandatory) 
+                            if (characterSlots[j].isMandatory)
                                 leader = characterSlots[j].icon.character;
                             else if (characterSlots[j].icon != null)
                                 assistants.Add(characterSlots[j].icon.character);
                         }
-                        
+
                         switch (notification.Task.Conditions[index].Item1.BaseCondition.target)
                         {
                             case OutcomeData.OutcomeTarget.Leader:
@@ -365,7 +365,8 @@ namespace Tasks
                                  jindex++)
                             {
                                 condition = false;
-                                switch (notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.target)
+                                switch (notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
+                                            .BaseCondition.target)
                                 {
                                     case OutcomeData.OutcomeTarget.Leader:
                                         condition = ConditionSystem.CheckCharacterCondition(
@@ -598,6 +599,7 @@ namespace Tasks
 
                                                         break;
                                                 }
+
                                                 break;
                                         }
                                     }

@@ -9,6 +9,7 @@ namespace UI
     {
         public CharacterBehaviour character;
         public CharacterIcon icon;
+        public CharacterIcon defaultIcon;
         public Image moodGauge;
         public Image volitionGauge;
 
@@ -33,7 +34,7 @@ namespace UI
 
         public virtual void OnDrop(PointerEventData eventData)
         {
-            if (transform.childCount > 1) return;
+            if (defaultIcon != eventData.pointerDrag.GetComponent<CharacterIcon>()) return;
             GameObject dropped = eventData.pointerDrag;
             icon = dropped.GetComponent<CharacterIcon>();
             icon.SetupIcon(transform, this);

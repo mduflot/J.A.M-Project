@@ -10,7 +10,7 @@ namespace UI
 {
     public class CharacterIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        private CharacterUI baseParentScript;
+        public CharacterUI baseParentScript;
         private Transform parentAfterDrag;
         private CharacterUI parentScript;
         [SerializeField] private Image image;
@@ -23,6 +23,7 @@ namespace UI
         public void Initialize(CharacterBehaviour c, CharacterUI script)
         {
             baseParentScript = script;
+            baseParentScript.defaultIcon = this;
             character = c;
             characterIcon.sprite = character.GetCharacterData().characterIcon;
             parentScript = script;
