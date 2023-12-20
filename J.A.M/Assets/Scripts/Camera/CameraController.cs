@@ -60,20 +60,17 @@ public class CameraController : MonoBehaviour
     private void OnDrag(InputAction.CallbackContext ctx)
     {
         if (ctx.started)
+        {
             origin = GetMousePosition;
+        }
         isDragging = ctx.started || ctx.performed;
     }
     
 
-    private void Update()
+    private void LateUpdate()
     {
-        transform.position += new Vector3(0, 0, zoomVector.y * zoomSpeed);
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -750, 700),
-            Mathf.Clamp(transform.position.y, -300, 300),
-            Mathf.Clamp(transform.position.z, minZoom, maxZoom));
-        if (!isDragging) return;
-        difference = GetMousePosition - transform.position;
-        transform.position = origin - difference;
+        CameraMovement();
+        transform.position = ClampCameraToBounds(transform.position);
     }
 
     private void FixedUpdate()
@@ -81,6 +78,23 @@ public class CameraController : MonoBehaviour
         transform.Translate(moveVector * moveSpeed);
     }
 
+    private Vector3 ClampCameraToBounds(Vector3 position)
+    {
+        position = new Vector3(Mathf.Clamp(position.x, -750, 700),
+            Mathf.Clamp(position.y, -300, 300),
+            Mathf.Clamp(position.z, minZoom, maxZoom));
+        return position;
+    }
+
+    private void CameraMovement()
+    {
+        transform.position += new Vector3(0, 0, zoomVector.y * zoomSpeed);
+        if (!isDragging) return;
+        //Debug.Log(origin);
+        difference = (Vector3)GetMousePosition - transform.position;
+        transform.position = origin - difference;
+    }
+    
     private void OnEnable()
     {
         movement.Enable();
@@ -90,7 +104,9 @@ public class CameraController : MonoBehaviour
         cameraMovement.Zoom.canceled += OnZoomCancelled;
         cameraMovement.Escape.performed += OnEscapePerformed;
         cameraMovement.Cheat.performed += OnCheatPerformed;
+        cameraMovement.Drag.started += OnDrag;
         cameraMovement.Drag.performed += OnDrag;
+        cameraMovement.Drag.canceled += OnDrag;
     }
 
     private void OnDisable()
@@ -102,10 +118,12 @@ public class CameraController : MonoBehaviour
         cameraMovement.Zoom.canceled -= OnZoomCancelled;
         cameraMovement.Escape.performed -= OnEscapePerformed;
         cameraMovement.Cheat.performed -= OnCheatPerformed;
+        cameraMovement.Drag.started -= OnDrag;
         cameraMovement.Drag.performed -= OnDrag;
+        cameraMovement.Drag.canceled -= OnDrag;
     }
     
     //Essaie d'ajouter un offset sur l'axe de profondeur (je suppose que screen to worldpoint prends en compte
     //l'axe Z et du coup déplace la caméra sur le meme plan que le background / vaisseau)
-    private Vector3 GetMousePosition => GameManager.Instance.mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+    private Vector2 GetMousePosition => camera.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, -500));
 }
