@@ -57,6 +57,7 @@ namespace UI
         {
             //Check si character.IsWorking(), si oui, return ou ResetTransform()
             transform.position = Input.mousePosition;
+            GameManager.Instance.UIManager.characterInfoUI.SetupCharacterInfo(character.GetCharacterData());
         }
 
         public void OnEndDrag(PointerEventData eventData)
@@ -68,6 +69,7 @@ namespace UI
             }
             isFromRoot = false;
             SetupIconValues();
+            GameManager.Instance.UIManager.characterInfoUI.ClearCharacterInfo();
         }
 
         public void SetupIconValues()
