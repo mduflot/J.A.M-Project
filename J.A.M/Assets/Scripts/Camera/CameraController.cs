@@ -90,7 +90,6 @@ public class CameraController : MonoBehaviour
     {
         transform.position += new Vector3(0, 0, zoomVector.y * zoomSpeed);
         if (!isDragging) return;
-        //Debug.Log(origin);
         difference = (Vector3)GetMousePosition - transform.position;
         transform.position = origin - difference;
     }
@@ -123,7 +122,5 @@ public class CameraController : MonoBehaviour
         cameraMovement.Drag.canceled -= OnDrag;
     }
     
-    //Essaie d'ajouter un offset sur l'axe de profondeur (je suppose que screen to worldpoint prends en compte
-    //l'axe Z et du coup déplace la caméra sur le meme plan que le background / vaisseau)
     private Vector2 GetMousePosition => camera.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, -500));
 }
