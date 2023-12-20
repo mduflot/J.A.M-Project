@@ -118,6 +118,7 @@ namespace Tasks
             Appear(true);
         }
 
+        // TODO : Refactor this, don't want to use Update for this
         public void Update()
         {
             if (!animator.GetBool("Appear")) return;
@@ -188,18 +189,34 @@ namespace Tasks
 
                         if (condition)
                         {
-                            previewOutcomeText.text = $"{characterSlots[0].icon.character.GetCharacterData().name} {notification.Task.Conditions[index].Item2}\n";
+                            previewOutcomeText.text =
+                                $"{characterSlots[0].icon.character.GetCharacterData().name} {notification.Task.Conditions[index].Item2}\n";
+                            if (notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetJob() !=
+                                TraitsData.Job.None)
+                                previewOutcomeText.text +=
+                                    $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetJob()}";
+                            if (notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetPositiveTraits() !=
+                                TraitsData.PositiveTraits.None)
+                                previewOutcomeText.text +=
+                                    $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetPositiveTraits()}";
+                            if (notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetNegativeTraits() !=
+                                TraitsData.NegativeTraits.None)
+                                previewOutcomeText.text +=
+                                    $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetNegativeTraits()}";
+                            
                             for (int j = 0; j < notification.Task.Conditions[index].Item1.outcomes.Outcomes.Length; j++)
                             {
                                 var outcome = notification.Task.Conditions[index].Item1.outcomes.Outcomes[j];
                                 switch (outcome.OutcomeType)
                                 {
                                     case OutcomeData.OutcomeType.Gauge:
-                                        previewOutcomeText.text += $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}\n";
+                                        previewOutcomeText.text +=
+                                            $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}\n";
 
                                         break;
                                     case OutcomeData.OutcomeType.GaugeVolition:
-                                        previewOutcomeText.text += $"{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}\n";
+                                        previewOutcomeText.text +=
+                                            $"{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}\n";
 
                                         break;
                                     case OutcomeData.OutcomeType.Trait:
@@ -208,14 +225,16 @@ namespace Tasks
                                             switch (outcome.OutcomeTarget)
                                             {
                                                 case OutcomeData.OutcomeTarget.Crew:
-                                                    previewOutcomeText.text += $"{outcome.OutcomeOperation} Crew {outcome.OutcomeTargetTrait.GetJob()}\n";
+                                                    previewOutcomeText.text +=
+                                                        $"{outcome.OutcomeOperation} Crew {outcome.OutcomeTargetTrait.GetJob()}\n";
                                                     break;
                                                 default:
                                                     for (int i = 0; i < characterSlots.Count; i++)
                                                     {
                                                         var character = characterSlots[i];
                                                         if (character.icon == null) continue;
-                                                        previewOutcomeText.text += $"{outcome.OutcomeOperation} {character.icon.character.GetCharacterData().firstName} {outcome.OutcomeTargetTrait.GetJob()}\n";
+                                                        previewOutcomeText.text +=
+                                                            $"{outcome.OutcomeOperation} {character.icon.character.GetCharacterData().firstName} {outcome.OutcomeTargetTrait.GetJob()}\n";
                                                     }
 
                                                     break;
@@ -224,10 +243,12 @@ namespace Tasks
 
                                         if (outcome.OutcomeTargetTrait.GetPositiveTraits() !=
                                             TraitsData.PositiveTraits.None)
-                                            previewOutcomeText.text += $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetPositiveTraits()}\n";
+                                            previewOutcomeText.text +=
+                                                $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetPositiveTraits()}\n";
                                         if (outcome.OutcomeTargetTrait.GetNegativeTraits() !=
                                             TraitsData.NegativeTraits.None)
-                                            previewOutcomeText.text += $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetNegativeTraits()}\n";
+                                            previewOutcomeText.text +=
+                                                $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetNegativeTraits()}\n";
                                         if (outcome.OutcomeShipTrait != TraitsData.SpaceshipTraits.None)
                                         {
                                             foreach (TraitsData.SpaceshipTraits spaceshipTraits in Enum.GetValues(
@@ -236,137 +257,169 @@ namespace Tasks
                                                 if (outcome.OutcomeShipTrait.HasFlag(spaceshipTraits) &&
                                                     spaceshipTraits != TraitsData.SpaceshipTraits.None)
                                                 {
-                                                    previewOutcomeText.text += $"{outcome.OutcomeOperation} Ship {spaceshipTraits}\n";
+                                                    previewOutcomeText.text +=
+                                                        $"{outcome.OutcomeOperation} Ship {spaceshipTraits}\n";
                                                 }
                                             }
                                         }
 
                                         break;
                                     case OutcomeData.OutcomeType.CharacterStat:
-                                        previewOutcomeText.text += $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat}\n";
+                                        previewOutcomeText.text +=
+                                            $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat}\n";
                                         break;
                                 }
                             }
 
                             notification.Task.conditionIndex = index;
-                            break;
-                        }
 
-                        for (int jindex = 0;
-                             index < notification.Task.Conditions[index].Item1.additionnalConditions.Length;
-                             jindex++)
-                        {
-                            condition = false;
-                            switch (notification.Task.Conditions[index].Item1.additionnalConditions[jindex].target)
+                            for (int jindex = 0;
+                                 jindex < notification.Task.Conditions[index].Item1.additionnalConditions.Length;
+                                 jindex++)
                             {
-                                case OutcomeData.OutcomeTarget.Leader:
-                                    for (int j = 0; j < characterSlots.Count; j++)
-                                    {
-                                        if (!characterSlots[j].isMandatory) continue;
-                                        var character = characterSlots[j];
-                                        if (character.icon == null) continue;
-                                        condition = ConditionSystem.CheckCharacterCondition(
-                                            character.icon.character,
-                                            notification.Task.Conditions[index].Item1.additionnalConditions[jindex]);
-                                    }
-
-                                    break;
-
-                                case OutcomeData.OutcomeTarget.Assistant:
-                                    for (int j = 0; j < characterSlots.Count; j++)
-                                    {
-                                        if (characterSlots[j].isMandatory) continue;
-                                        var character = characterSlots[j];
-                                        if (character.icon == null) continue;
-                                        condition = ConditionSystem.CheckCharacterCondition(
-                                            character.icon.character,
-                                            notification.Task.Conditions[index].Item1.additionnalConditions[jindex]);
-                                    }
-
-                                    break;
-
-                                case OutcomeData.OutcomeTarget.Crew:
-                                    condition = ConditionSystem.CheckCrewCondition(
-                                        notification.Task.Conditions[index].Item1.additionnalConditions[jindex]);
-                                    break;
-
-                                case OutcomeData.OutcomeTarget.Gauge:
-                                    condition = ConditionSystem.CheckGaugeCondition(notification.Task.Conditions[index].Item1.additionnalConditions[jindex]);
-                                    break;
-
-                                case OutcomeData.OutcomeTarget.Ship:
-                                    condition = ConditionSystem.CheckSpaceshipCondition(notification.Task.Conditions[index].Item1.additionnalConditions[jindex]);
-                                    break;
-                                case OutcomeData.OutcomeTarget.None:
-                                    condition = true;
-                                    break;
-                            }
-
-                            if (condition)
-                            {
-                                for (int j = 0;
-                                     j < notification.Task.Conditions[index].Item1.additionnalConditions[jindex].outcomes.Outcomes.Length;
-                                     j++)
+                                condition = false;
+                                switch (notification.Task.Conditions[index].Item1.additionnalConditions[jindex].target)
                                 {
-                                    var outcome = notification.Task.Conditions[index].Item1.additionnalConditions[jindex].outcomes.Outcomes[j];
-                                    switch (outcome.OutcomeType)
-                                    {
-                                        case OutcomeData.OutcomeType.Gauge:
-                                            previewOutcomeText.text += $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}\n";
+                                    case OutcomeData.OutcomeTarget.Leader:
+                                        for (int j = 0; j < characterSlots.Count; j++)
+                                        {
+                                            if (!characterSlots[j].isMandatory) continue;
+                                            var character = characterSlots[j];
+                                            if (character.icon == null) continue;
+                                            condition = ConditionSystem.CheckCharacterCondition(
+                                                character.icon.character,
+                                                notification.Task.Conditions[index].Item1
+                                                    .additionnalConditions[jindex]);
+                                        }
 
-                                            break;
-                                        case OutcomeData.OutcomeType.GaugeVolition:
-                                            previewOutcomeText.text += $"{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}\n";
-                                            
-                                            break;
-                                        case OutcomeData.OutcomeType.Trait:
-                                            if (outcome.OutcomeTargetTrait.GetJob() != TraitsData.Job.None)
-                                            {
-                                                switch (outcome.OutcomeTarget)
-                                                {
-                                                    case OutcomeData.OutcomeTarget.Crew:
-                                                        previewOutcomeText.text += $"{outcome.OutcomeOperation} Crew {outcome.OutcomeTargetTrait.GetJob()}\n";
-                                                        break;
-                                                    default:
-                                                        for (int i = 0; i < characterSlots.Count; i++)
-                                                        {
-                                                            var character = characterSlots[i];
-                                                            if (character.icon == null) continue;
-                                                            previewOutcomeText.text += $"{outcome.OutcomeOperation} {character.icon.character.GetCharacterData().firstName} {outcome.OutcomeTargetTrait.GetJob()}\n";
-                                                        }
+                                        break;
 
-                                                        break;
-                                                }
-                                            }
+                                    case OutcomeData.OutcomeTarget.Assistant:
+                                        for (int j = 0; j < characterSlots.Count; j++)
+                                        {
+                                            if (characterSlots[j].isMandatory) continue;
+                                            var character = characterSlots[j];
+                                            if (character.icon == null) continue;
+                                            condition = ConditionSystem.CheckCharacterCondition(
+                                                character.icon.character,
+                                                notification.Task.Conditions[index].Item1
+                                                    .additionnalConditions[jindex]);
+                                        }
 
-                                            if (outcome.OutcomeTargetTrait.GetPositiveTraits() !=
-                                                TraitsData.PositiveTraits.None)
-                                                previewOutcomeText.text += $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetPositiveTraits()}\n";
-                                            if (outcome.OutcomeTargetTrait.GetNegativeTraits() !=
-                                                TraitsData.NegativeTraits.None)
-                                                previewOutcomeText.text += $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetNegativeTraits()}\n";
-                                            if (outcome.OutcomeShipTrait != TraitsData.SpaceshipTraits.None)
-                                            {
-                                                foreach (TraitsData.SpaceshipTraits spaceshipTraits in Enum.GetValues(
-                                                             typeof(TraitsData.SpaceshipTraits)))
-                                                {
-                                                    if (outcome.OutcomeShipTrait.HasFlag(spaceshipTraits) &&
-                                                        spaceshipTraits != TraitsData.SpaceshipTraits.None)
-                                                    {
-                                                        previewOutcomeText.text += $"{outcome.OutcomeOperation} Ship {spaceshipTraits}\n";
-                                                    }
-                                                }
-                                            }
+                                        break;
 
-                                            break;
-                                        case OutcomeData.OutcomeType.CharacterStat:
-                                            previewOutcomeText.text += $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat}\n";
-                                            break;
-                                    }
+                                    case OutcomeData.OutcomeTarget.Crew:
+                                        condition = ConditionSystem.CheckCrewCondition(
+                                            notification.Task.Conditions[index].Item1.additionnalConditions[jindex]);
+                                        break;
+
+                                    case OutcomeData.OutcomeTarget.Gauge:
+                                        condition = ConditionSystem.CheckGaugeCondition(notification.Task
+                                            .Conditions[index]
+                                            .Item1.additionnalConditions[jindex]);
+                                        break;
+
+                                    case OutcomeData.OutcomeTarget.Ship:
+                                        condition = ConditionSystem.CheckSpaceshipCondition(notification.Task
+                                            .Conditions[index].Item1.additionnalConditions[jindex]);
+                                        break;
+                                    case OutcomeData.OutcomeTarget.None:
+                                        condition = true;
+                                        break;
                                 }
 
-                                break;
+                                if (condition)
+                                {
+                                    if (notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetJob() != TraitsData.Job.None)
+                                        previewOutcomeText.text +=
+                                            $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetJob()} ";
+                                    if (notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits
+                                            .GetPositiveTraits() !=
+                                        TraitsData.PositiveTraits.None)
+                                        previewOutcomeText.text +=
+                                            $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetPositiveTraits()} ";
+                                    if (notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits
+                                            .GetNegativeTraits() !=
+                                        TraitsData.NegativeTraits.None)
+                                        previewOutcomeText.text +=
+                                            $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetNegativeTraits()} ";
+                                    for (int j = 0;
+                                         j < notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
+                                             .outcomes.Outcomes.Length;
+                                         j++)
+                                    {
+                                        var outcome = notification.Task.Conditions[index].Item1
+                                            .additionnalConditions[jindex].outcomes.Outcomes[j];
+                                        switch (outcome.OutcomeType)
+                                        {
+                                            case OutcomeData.OutcomeType.Gauge:
+                                                previewOutcomeText.text +=
+                                                    $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetGauge}\n";
+
+                                                break;
+                                            case OutcomeData.OutcomeType.GaugeVolition:
+                                                previewOutcomeText.text +=
+                                                    $"{outcome.OutcomeOperation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}\n";
+
+                                                break;
+                                            case OutcomeData.OutcomeType.Trait:
+                                                if (outcome.OutcomeTargetTrait.GetJob() != TraitsData.Job.None)
+                                                {
+                                                    switch (outcome.OutcomeTarget)
+                                                    {
+                                                        case OutcomeData.OutcomeTarget.Crew:
+                                                            previewOutcomeText.text +=
+                                                                $"{outcome.OutcomeOperation} Crew {outcome.OutcomeTargetTrait.GetJob()}\n";
+                                                            break;
+                                                        default:
+                                                            for (int i = 0; i < characterSlots.Count; i++)
+                                                            {
+                                                                var character = characterSlots[i];
+                                                                if (character.icon == null) continue;
+                                                                previewOutcomeText.text +=
+                                                                    $"{outcome.OutcomeOperation} {character.icon.character.GetCharacterData().firstName} {outcome.OutcomeTargetTrait.GetJob()}\n";
+                                                            }
+
+                                                            break;
+                                                    }
+                                                }
+
+                                                if (outcome.OutcomeTargetTrait.GetPositiveTraits() !=
+                                                    TraitsData.PositiveTraits.None)
+                                                    previewOutcomeText.text +=
+                                                        $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetPositiveTraits()}\n";
+                                                if (outcome.OutcomeTargetTrait.GetNegativeTraits() !=
+                                                    TraitsData.NegativeTraits.None)
+                                                    previewOutcomeText.text +=
+                                                        $"{outcome.OutcomeOperation} {outcome.OutcomeTargetTrait.GetNegativeTraits()}\n";
+                                                if (outcome.OutcomeShipTrait != TraitsData.SpaceshipTraits.None)
+                                                {
+                                                    foreach (TraitsData.SpaceshipTraits spaceshipTraits in Enum
+                                                                 .GetValues(
+                                                                     typeof(TraitsData.SpaceshipTraits)))
+                                                    {
+                                                        if (outcome.OutcomeShipTrait.HasFlag(spaceshipTraits) &&
+                                                            spaceshipTraits != TraitsData.SpaceshipTraits.None)
+                                                        {
+                                                            previewOutcomeText.text +=
+                                                                $"{outcome.OutcomeOperation} Ship {spaceshipTraits}\n";
+                                                        }
+                                                    }
+                                                }
+
+                                                break;
+                                            case OutcomeData.OutcomeType.CharacterStat:
+                                                previewOutcomeText.text +=
+                                                    $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat}\n";
+                                                break;
+                                        }
+                                    }
+
+                                    break;
+                                }
                             }
+
+                            break;
                         }
                     }
                 }

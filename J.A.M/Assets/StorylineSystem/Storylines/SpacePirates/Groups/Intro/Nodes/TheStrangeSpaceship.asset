@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: TheStrangeSpaceship
   <Choices>k__BackingField:
-  - rid: 9116669275380122230
-  - rid: 9116669275380122231
-  - rid: 9116669275380122232
-  - rid: 9116669275380122233
-  - rid: 9116669275380122234
+  - rid: 9116669292278448375
+  - rid: 9116669292278448376
+  - rid: 9116669292278448377
+  - rid: 9116669292278448378
+  - rid: 9116669292278448379
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: An unidentified human spaceship approaches at high
@@ -38,7 +38,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 9116669275380122230
+    - rid: 9116669292278448375
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -46,9 +46,9 @@ MonoBehaviour:
           type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: e829b736a54bc5c4dabb23987b5d84d1,
           type: 2}
-        <PreviewOutcome>k__BackingField: ASSIGNED will charge the boosters and turn
-          the ship to high speed mode. We won't let them near us!
-    - rid: 9116669275380122231
+        <PreviewOutcome>k__BackingField: ' will charge the boosters and turn the
+          ship to high speed mode. We won''t let them near us!'
+    - rid: 9116669292278448376
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
@@ -56,9 +56,9 @@ MonoBehaviour:
           type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: 1fe28f87acbde3340b34a52c5c8489fe,
           type: 2}
-        <PreviewOutcome>k__BackingField: ASSIGNED will charge the weapons in case
-          they try to attack us.
-    - rid: 9116669275380122232
+        <PreviewOutcome>k__BackingField: ' will charge the weapons in case they try
+          to attack us.'
+    - rid: 9116669292278448377
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: ThirdChoice
@@ -66,9 +66,9 @@ MonoBehaviour:
           type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: 82269ab910c44fc409adf1538e8b0e3e,
           type: 2}
-        <PreviewOutcome>k__BackingField: ASSIGNED will turn on stealth mode and try
-          to remain undetected by the incoming spaceship.
-    - rid: 9116669275380122233
+        <PreviewOutcome>k__BackingField: ' will turn on stealth mode and try to remain
+          undetected by the incoming spaceship.'
+    - rid: 9116669292278448378
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FourthChoice
@@ -76,9 +76,9 @@ MonoBehaviour:
           type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: cfcbd9bbf351ce44baf1932fab6758a8,
           type: 2}
-        <PreviewOutcome>k__BackingField: ASSIGNED will try to assess the incoming
-          spaceship and identify its intentions.
-    - rid: 9116669275380122234
+        <PreviewOutcome>k__BackingField: ' will try to assess the incoming spaceship
+          and identify its intentions.'
+    - rid: 9116669292278448379
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: LastChoice
@@ -86,5 +86,5 @@ MonoBehaviour:
           type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: cfd6bc65c546e174195b717e52df31b7,
           type: 2}
-        <PreviewOutcome>k__BackingField: ASSIGNED will try to assess the incoming
-          spaceship and identify its intentions.
+        <PreviewOutcome>k__BackingField: ' will try to assess the incoming spaceship
+          and identify its intentions.'
