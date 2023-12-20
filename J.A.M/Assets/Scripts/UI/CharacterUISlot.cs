@@ -21,10 +21,11 @@ namespace UI
 
         public override void OnDrop(PointerEventData eventData)
         {
-            SetupIcon(eventData);
+            CharacterIcon dropped = eventData.pointerDrag.GetComponent<CharacterIcon>();
+            SetupIcon(dropped);
         }
 
-        private void SetupIcon(PointerEventData eventData)
+        public void SetupIcon(CharacterIcon c)
         {
             if (icon != null)
             {
@@ -32,8 +33,7 @@ namespace UI
                 icon.RefreshIcon();
                 ClearCharacter();
             }
-            GameObject dropped = eventData.pointerDrag;
-            icon = dropped.GetComponent<CharacterIcon>();
+            icon = c;
             icon.SetupIcon(iconParent, this);
             icon.transform.localScale = transform.localScale;
         }

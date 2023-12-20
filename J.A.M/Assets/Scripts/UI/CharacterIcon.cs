@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class CharacterIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class CharacterIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
     {
         public CharacterUI baseParentScript;
         private Transform parentAfterDrag;
@@ -19,6 +19,11 @@ namespace UI
         [SerializeField] private TextMeshProUGUI characterName;
         [NonSerialized] public CharacterBehaviour character;
         private Animator animator;
+        private bool isFromRoot;
+        
+        private float clickTime;
+        private uint clicked;
+        private float clickDelay = 0.5f;
     
         public void Initialize(CharacterBehaviour c, CharacterUI script)
         {
@@ -56,6 +61,17 @@ namespace UI
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            if (!isFromRoot && Vector3.Distance(transform.position, parentAfterDrag.position) >= 80)
+            {
+                parentAfterDrag = baseParentScript.transform;
+                parentScript = baseParentScript;
+            }
+            isFromRoot = false;
+            SetupIconValues();
+        }
+
+        public void SetupIconValues()
+        {
             transform.SetParent(parentAfterDrag);
             transform.localPosition = Vector3.zero;
             animator.SetBool("Selected", false);
@@ -88,9 +104,25 @@ namespace UI
 
         public void SetupIcon(Transform parent, CharacterUI script)
         {
+            isFromRoot = parentScript == baseParentScript;
             parentAfterDrag = parent;
             transform.localPosition = Vector3.zero;
             parentScript = script;
+        }
+        
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if(!GameManager.Instance.taskOpened) return;
+            clicked++;
+            Debug.Log(clicked);
+            if (clicked == 1) clickTime = Time.time;
+            if (clicked > 1 && Time.time - clickTime < clickDelay)
+            {
+                clicked = 0;
+                clickTime = 0;
+                GameManager.Instance.UIManager.taskUI.SetLeader(this);
+            }
+            else if (clicked >= 2 && Time.time - clickTime > clickDelay) clicked = 0;
         }
     }
 }

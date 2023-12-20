@@ -791,6 +791,12 @@ namespace Tasks
             animator.SetBool("Appear", state);
         }
 
+        public void SetLeader(CharacterIcon leader)
+        {
+            characterSlots[0].SetupIcon(leader);
+            leader.SetupIconValues();
+        }
+
         private async System.Threading.Tasks.Task DisplayText(TextMeshProUGUI text, string textToDisplay, int speed)
         {
             int letterIndex = 0;
