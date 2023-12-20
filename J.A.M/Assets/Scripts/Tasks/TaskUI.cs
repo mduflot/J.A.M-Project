@@ -228,7 +228,7 @@ namespace Tasks
                                         {
                                             case SystemType.Airflow:
                                                 previewOutcomeText.text +=
-                                                    $"<color=blue>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=lightblue>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Food:
                                                 previewOutcomeText.text +=
@@ -470,7 +470,7 @@ namespace Tasks
                                                 {
                                                     case SystemType.Airflow:
                                                         previewOutcomeText.text +=
-                                                            $"<color=blue>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=lightblue>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Food:
                                                         previewOutcomeText.text +=
@@ -494,7 +494,7 @@ namespace Tasks
                                                 {
                                                     case SystemType.Airflow:
                                                         previewOutcomeText.text +=
-                                                            $"<color=blue>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=lightblue>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Food:
                                                         previewOutcomeText.text +=

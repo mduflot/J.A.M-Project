@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3a298838b420346a8b6588d8248e9c, type: 3}
   m_Name: ConditionPiloting
   m_EditorClassIdentifier: 
-  target: 0
-  targetGauge: 0
   BaseCondition:
+    target: 0
     Traits:
       traits:
         Item1: 0
@@ -23,7 +22,12 @@ MonoBehaviour:
     SpaceshipTraits: 0
     HiddenSpaceshipTraits: 0
     GaugeValue: 0
+  targetStat: 0
+  statComparison: 0
+  statThreshold: 0
+  targetGauge: 0
   supplementaryConditions:
     list: []
-  additionnalConditions: []
-  outcomes: {fileID: 11400000, guid: be51337a144860048bc3ad55fbfe6ef0, type: 2}
+  additionnalConditions:
+  - {fileID: 11400000, guid: 7575a8889f4b6c34db679e3a70dac6da, type: 2}
+  outcomes: {fileID: 11400000, guid: 2ec8a6f07a980c54083ee803044e2ab2, type: 2}
