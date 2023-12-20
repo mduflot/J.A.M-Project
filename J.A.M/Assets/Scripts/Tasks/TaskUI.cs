@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CharacterSystem;
 using Managers;
 using SS.Enumerations;
 using TMPro;
@@ -140,31 +141,28 @@ namespace Tasks
                     for (int index = 0; index < notification.Task.Conditions.Count; index++)
                     {
                         bool condition = false;
-                        switch (notification.Task.Conditions[index].Item1.target)
+                        CharacterBehaviour leader = null;
+                        List<CharacterBehaviour> assistants = new List<CharacterBehaviour>();
+                        for (int j = 0; j < characterSlots.Count; j++)
+                        {
+                            if (characterSlots[j].isMandatory) 
+                                leader = characterSlots[j].icon.character;
+                            else if (characterSlots[j].icon != null)
+                                assistants.Add(characterSlots[j].icon.character);
+                        }
+                        
+                        switch (notification.Task.Conditions[index].Item1.BaseCondition.target)
                         {
                             case OutcomeData.OutcomeTarget.Leader:
-                                for (int j = 0; j < characterSlots.Count; j++)
-                                {
-                                    if (!characterSlots[j].isMandatory) continue;
-                                    var character = characterSlots[j];
-                                    if (character.icon == null) continue;
-                                    condition = ConditionSystem.CheckCharacterCondition(
-                                        character.icon.character,
-                                        notification.Task.Conditions[index].Item1);
-                                }
-
+                                condition = ConditionSystem.CheckCharacterCondition(
+                                    leader, assistants.ToArray(),
+                                    notification.Task.Conditions[index].Item1);
                                 break;
 
                             case OutcomeData.OutcomeTarget.Assistant:
-                                for (int j = 0; j < characterSlots.Count; j++)
-                                {
-                                    if (characterSlots[j].isMandatory) continue;
-                                    var character = characterSlots[j];
-                                    if (character.icon == null) continue;
-                                    condition = ConditionSystem.CheckCharacterCondition(
-                                        character.icon.character,
-                                        notification.Task.Conditions[index].Item1);
-                                }
+                                condition = ConditionSystem.CheckCharacterCondition(
+                                    leader, assistants.ToArray(),
+                                    notification.Task.Conditions[index].Item1);
 
                                 break;
 
@@ -367,33 +365,19 @@ namespace Tasks
                                  jindex++)
                             {
                                 condition = false;
-                                switch (notification.Task.Conditions[index].Item1.additionnalConditions[jindex].target)
+                                switch (notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.target)
                                 {
                                     case OutcomeData.OutcomeTarget.Leader:
-                                        for (int j = 0; j < characterSlots.Count; j++)
-                                        {
-                                            if (!characterSlots[j].isMandatory) continue;
-                                            var character = characterSlots[j];
-                                            if (character.icon == null) continue;
-                                            condition = ConditionSystem.CheckCharacterCondition(
-                                                character.icon.character,
-                                                notification.Task.Conditions[index].Item1
-                                                    .additionnalConditions[jindex]);
-                                        }
+                                        condition = ConditionSystem.CheckCharacterCondition(
+                                            leader, assistants.ToArray(),
+                                            notification.Task.Conditions[index].Item1);
 
                                         break;
 
                                     case OutcomeData.OutcomeTarget.Assistant:
-                                        for (int j = 0; j < characterSlots.Count; j++)
-                                        {
-                                            if (characterSlots[j].isMandatory) continue;
-                                            var character = characterSlots[j];
-                                            if (character.icon == null) continue;
-                                            condition = ConditionSystem.CheckCharacterCondition(
-                                                character.icon.character,
-                                                notification.Task.Conditions[index].Item1
-                                                    .additionnalConditions[jindex]);
-                                        }
+                                        condition = ConditionSystem.CheckCharacterCondition(
+                                            leader, assistants.ToArray(),
+                                            notification.Task.Conditions[index].Item1);
 
                                         break;
 

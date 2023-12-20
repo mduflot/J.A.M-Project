@@ -6,6 +6,8 @@ using UnityEngine;
 [Serializable]
 public class Condition
 {
+    public OutcomeData.OutcomeTarget target;
+    
     public TraitsData.Traits Traits;
     public TraitsData.SpaceshipTraits SpaceshipTraits;
     public TraitsData.HiddenSpaceshipTraits HiddenSpaceshipTraits;

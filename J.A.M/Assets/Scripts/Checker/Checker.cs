@@ -276,7 +276,7 @@ public class Checker : MonoBehaviour
     private bool RouteCondition(ConditionSO condition)
     {
         bool validateCondition = false;
-        switch (condition.target)
+        switch (condition.BaseCondition.target)
         {
             case OutcomeData.OutcomeTarget.Leader:
                 // validateCondition = ConditionSystem.CheckCharacterCondition(LeaderCharacters[0].GetTraits(), condition);
