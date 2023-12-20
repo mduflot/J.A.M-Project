@@ -48,6 +48,7 @@ namespace UI
 
         public void OnDrag(PointerEventData eventData)
         {
+            //Check si character.IsWorking(), si oui, return ou ResetTransform()
             transform.position = Input.mousePosition;
         }
 

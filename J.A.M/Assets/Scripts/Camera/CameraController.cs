@@ -105,5 +105,7 @@ public class CameraController : MonoBehaviour
         cameraMovement.Drag.performed -= OnDrag;
     }
     
+    //Essaie d'ajouter un offset sur l'axe de profondeur (je suppose que screen to worldpoint prends en compte
+    //l'axe Z et du coup déplace la caméra sur le meme plan que le background / vaisseau)
     private Vector3 GetMousePosition => GameManager.Instance.mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 }
