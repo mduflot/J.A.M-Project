@@ -65,14 +65,15 @@ public class WarningUI : MonoBehaviour
             for (int i = 0; i < characters.Count; i++)
             {
                 var character = characters[i];
+                var spaceship = GameManager.Instance.SpaceshipManager; 
                 if (character.IsTaskLeader())
                 {
-                    character.IncreaseMood(-10);
-                    GameManager.Instance.SpaceshipManager.CancelTask(character.GetTask());
+                    character.IncreaseMood(-spaceship.moodLossOnCancelTask);
+                    spaceship.CancelTask(character.GetTask());
                 }
                 else
                 {
-                    character.IncreaseMood(-10);
+                    character.IncreaseMood(-spaceship.moodLossOnCancelTask);
                     character.StopTask();
                 }
             }

@@ -55,7 +55,7 @@ namespace Managers
 
         public void UpdateGauges(SystemType systemType, float value)
         {
-            gaugeReferences[systemType].gauge.fillAmount = value/20;
+            gaugeReferences[systemType].gauge.fillAmount = value/50;
         }
 
         public void UpdateInGameDate(string newDate)
@@ -83,13 +83,13 @@ namespace Managers
 
                 if (valueToAdd > 0)
                 {
-                    valueToAdd += gauge.gauge.fillAmount * 20;
-                    gauge.previewGauge.fillAmount = valueToAdd / 20;
+                    valueToAdd += gauge.gauge.fillAmount * 50;
+                    gauge.previewGauge.fillAmount = valueToAdd / 50;
                 }
                 else
                 {
                     gauge.previewGauge.fillAmount = gauge.gauge.fillAmount;
-                    gauge.gauge.fillAmount += valueToAdd / 20;
+                    gauge.gauge.fillAmount += valueToAdd / 50;
                 }
             }
         }
@@ -108,6 +108,37 @@ namespace Managers
             {
                 charUi.moodGauge.fillAmount = charUi.character.GetMood() / charUi.character.GetMaxMood();
                 charUi.volitionGauge.fillAmount = charUi.character.GetVolition() / charUi.character.GetMaxMood();
+            }
+        }
+
+        
+        //TODO : Modifier une fois qu'on aura les traits et des bonus de Mood
+        public void CharacterPreviewGauges(List<TaskUI.CharacterOutcome> characters)
+        {
+            foreach (var c in charactersUI)
+            {
+                var value = 0;
+                foreach (var character in characters)
+                {
+                    if (c.icon.character == character.character)
+                    {
+                        c.previewMoodGauge.fillAmount = c.character.GetMood() / c.character.GetMaxMood();
+                        c.moodGauge.fillAmount = (c.character.GetMood() - GameManager.Instance.SpaceshipManager.moodLossOnTaskStart) /
+                                                      c.character.GetMaxMood();
+                    }
+                    else
+                    {
+                        c.moodGauge.fillAmount = c.character.GetMood() / c.character.GetMaxMood();
+                    }
+                }
+            }
+        }
+
+        public void ResetCharactersPreviewGauges()
+        {
+            foreach (var charUI in charactersUI)
+            {
+                charUI.previewMoodGauge.fillAmount = 0;
             }
         }
         

@@ -112,7 +112,7 @@ namespace CharacterSystem
             isWorking = true;
             currentNotification = t;
             isTaskLeader = leader;
-            mood -= 7.0f;
+            mood -= GameManager.Instance.SpaceshipManager.moodLossOnTaskStart;
         }
 
         public bool IsWorking()
