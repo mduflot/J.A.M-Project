@@ -18,6 +18,14 @@ namespace Managers
         [SerializeField] private Checker checker;
         [SerializeField] private List<Notification> activeTasks = new();
         [SerializeField] private GameObject taskNotificationPrefab;
+
+        [Header("Character Value")] 
+        public float moodLossOnTaskStart = 7.0f;
+
+        [SerializeField] private float hourlyMoodGain = 1.0f;
+
+        [SerializeField] private float hourlyMoodLossGaugeEmpty = 0.75f;
+        public float moodLossOnCancelTask = 10.0f;
     
         private Dictionary<SystemType, ShipSystem> systemsDictionary = new();
         private Dictionary<RoomType, Room> roomsDictionary = new();
@@ -42,11 +50,9 @@ namespace Managers
         {
             foreach (var system in systems)
             {
-                system.gaugeValue = 20;
+                system.gaugeValue = 35;
                 systemsDictionary.Add(system.type, system);
             }
-
-            systemsDictionary[SystemType.Hull].gaugeValue = 10;
 
             foreach (var room in rooms)
             {
@@ -175,12 +181,12 @@ namespace Managers
             {
                 if (!character.IsWorking())
                 {
-                    float moodIncrease = 1.0f / TimeTickSystem.ticksPerHour;
+                    float moodIncrease = hourlyMoodGain / TimeTickSystem.ticksPerHour;
                     foreach (var system in systems)
                     {
                         if (system.gaugeValue <= 0)
                         {
-                            moodIncrease -= 0.75f / TimeTickSystem.ticksPerHour;
+                            moodIncrease -= hourlyMoodLossGaugeEmpty / TimeTickSystem.ticksPerHour;
                         }
                     }
 

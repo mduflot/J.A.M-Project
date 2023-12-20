@@ -12,6 +12,7 @@ namespace UI
         public CharacterIcon defaultIcon;
         public Image moodGauge;
         public Image volitionGauge;
+        public Image previewMoodGauge;
 
         [SerializeField] private Speaker speaker;
 

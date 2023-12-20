@@ -38,6 +38,7 @@ namespace Tasks
         private bool taskStarted;
         private Animator animator;
         private List<GaugesOutcome> gaugesOutcomes = new List<GaugesOutcome>();
+        private List<CharacterOutcome> charOutcome = new List<CharacterOutcome>();
         public struct GaugesOutcome
         {
             public SystemType gauge;
@@ -50,6 +51,16 @@ namespace Tasks
             }
         }
         
+        public struct CharacterOutcome
+        {
+            public CharacterBehaviour character;
+            public float value;
+            public CharacterOutcome(CharacterBehaviour c, float value)
+            {
+                character = c;
+                this.value = value;
+            }
+        }
         private void Start()
         {
             animator = GetComponent<Animator>();
@@ -147,7 +158,6 @@ namespace Tasks
                         canCheck = false;
                     }
                 }
-
                 if (canCheck)
                 {
                     for (int index = 0; index < notification.Task.Conditions.Count; index++)
@@ -643,9 +653,15 @@ namespace Tasks
                     }
                 }
                 else previewOutcomeText.text = null;
-
+                
                 var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
                 GameManager.Instance.UIManager.PreviewOutcomeGauges(gaugesOutcomes);
+                foreach (var c in characterSlots)
+                {
+                    if(c.icon != null) charOutcome.Add(new CharacterOutcome(c.icon.character, GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
+                }
+                GameManager.Instance.UIManager.CharacterPreviewGauges(charOutcome);
+                charOutcome.Clear();
                 gaugesOutcomes.Clear();
                 duration = assistantCharacters > 0
                     ? notification.Task.Duration /
@@ -667,6 +683,7 @@ namespace Tasks
             notification.OnStart(characterSlots);
             taskStarted = true;
             GameManager.Instance.UIManager.ResetPreviewGauges();
+            GameManager.Instance.UIManager.ResetCharactersPreviewGauges();
             CloseTask();
         }
 
