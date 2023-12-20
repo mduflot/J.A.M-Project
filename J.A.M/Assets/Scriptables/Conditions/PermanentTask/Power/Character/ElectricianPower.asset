@@ -10,20 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f3a298838b420346a8b6588d8248e9c, type: 3}
-  m_Name: MusicianFood
+  m_Name: ElectricianPower
   m_EditorClassIdentifier: 
-  target: 1
-  targetGauge: 0
   BaseCondition:
+    target: 1
     Traits:
       traits:
-        Item1: 132
+        Item1: 2
         Item2: 0
         Item3: 0
     SpaceshipTraits: 0
     HiddenSpaceshipTraits: 0
     GaugeValue: 0
+  targetStat: 0
+  statComparison: 0
+  statThreshold: 0
+  targetGauge: 0
   supplementaryConditions:
     list: []
   additionnalConditions: []
-  outcomes: {fileID: 11400000, guid: 09d5d861b18ea964e88e6133d2fe7a26, type: 2}
+  outcomes: {fileID: 11400000, guid: 127ffc8d04fcadc45af6387a5295513a, type: 2}
