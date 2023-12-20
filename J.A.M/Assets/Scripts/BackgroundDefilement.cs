@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 public class BackgroundDefilement : MonoBehaviour
@@ -21,8 +22,8 @@ public class BackgroundDefilement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        background1.Translate(Vector3.left*defilementSpeed);
-        background2.Translate(Vector3.left*defilementSpeed);
+        background1.Translate(defilementSpeed*TimeTickSystem.timeScale*Vector3.left);
+        background2.Translate(defilementSpeed*TimeTickSystem.timeScale*Vector3.left);
         if (leftBackground.position.x < -4000)
         {
             Vector3 resetPos = new Vector3(4000, 0, initialPos);

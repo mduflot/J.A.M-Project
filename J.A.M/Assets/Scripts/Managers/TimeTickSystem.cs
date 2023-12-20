@@ -7,7 +7,7 @@ namespace Managers
     {
         public static uint timePerTick = 1; // InGame Time Unit
         public static uint ticksPerHour = 48; 
-        private static float timeScale = 1.0f;
+        public static float timeScale = 1.0f;
 
         public static float lastActiveTimeScale = 1.0f;
         //[SerializeField] private const uint ticksPerTenMinutes = 5;
