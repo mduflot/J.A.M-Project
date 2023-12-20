@@ -8,10 +8,11 @@ using SS.ScriptableObjects;
 using Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace UI
 {
-    public class Notification : MonoBehaviour
+    public class Notification : MonoBehaviour, IPointerDownHandler
     {
         [HideInInspector] public bool IsCompleted;
         [HideInInspector] public bool IsStarted;
@@ -37,7 +38,7 @@ namespace UI
             camera = Camera.main;
         }
 
-        private void Update()
+        /*private void Update()
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -51,6 +52,11 @@ namespace UI
                     }
                 }
             }
+        }*/
+        
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            Display();
         }
 
         public void Initialize(Task task, SSTaskNodeSO ssTaskNode, SpaceshipManager spaceshipManager,
@@ -410,5 +416,7 @@ namespace UI
                 character.StopTask();
             }
         }
+
+        
     }
 }

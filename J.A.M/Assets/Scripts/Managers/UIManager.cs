@@ -23,6 +23,8 @@ namespace Managers
         public TaskUI taskUI;
         public Canvas canvas;
         public TextMeshProUGUI date;
+        [SerializeField] private Sprite redArrow;
+        [SerializeField] private Sprite greenArrow;
     
         [Serializable] 
         public struct Gauges
@@ -30,6 +32,7 @@ namespace Managers
             [FormerlySerializedAs("system")] public SystemType systemType;
             public Image gauge;
             public Image previewGauge;
+            public Image arrow;
         }
     
         private void Start()
@@ -56,6 +59,7 @@ namespace Managers
         public void UpdateGauges(SystemType systemType, float value)
         {
             gaugeReferences[systemType].gauge.fillAmount = value/50;
+            gaugeReferences[systemType].arrow.sprite = redArrow;
         }
 
         public void UpdateInGameDate(string newDate)
@@ -85,11 +89,13 @@ namespace Managers
                 {
                     valueToAdd += gauge.gauge.fillAmount * 50;
                     gauge.previewGauge.fillAmount = valueToAdd / 50;
+                    gauge.arrow.sprite = greenArrow;
                 }
                 else
                 {
                     gauge.previewGauge.fillAmount = gauge.gauge.fillAmount;
                     gauge.gauge.fillAmount += valueToAdd / 50;
+                    gauge.arrow.sprite = redArrow;
                 }
             }
         }

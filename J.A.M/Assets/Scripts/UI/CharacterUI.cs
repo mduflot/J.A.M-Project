@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class CharacterUI : MonoBehaviour, IDropHandler
+    public class CharacterUI : MonoBehaviour, IDropHandler, IPointerDownHandler
     {
         public CharacterBehaviour character;
         public CharacterIcon icon;
@@ -15,7 +15,9 @@ namespace UI
         public Image previewMoodGauge;
 
         [SerializeField] private Speaker speaker;
-
+        private float clickTime;
+        private uint clicked;
+        private float clickDelay = 0.5f;
         public void Initialize(CharacterBehaviour c)
         {
             character = c;
@@ -40,6 +42,20 @@ namespace UI
             icon = dropped.GetComponent<CharacterIcon>();
             icon.SetupIcon(transform, this);
             icon.transform.localScale = transform.localScale;
+        }
+        
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if(!GameManager.Instance.taskOpened) return;
+            clicked++;
+            if (clicked == 1) clickTime = Time.time;
+            if (clicked > 1 && Time.time - clickTime < clickDelay)
+            {
+                clicked = 0;
+                clickTime = 0;
+                
+            }
+            else if (clicked >= 2 && Time.time - clickTime > clickDelay) clicked = 0;
         }
     }
 }

@@ -21,6 +21,11 @@ namespace UI
 
         public override void OnDrop(PointerEventData eventData)
         {
+            SetupIcon(eventData);
+        }
+
+        private void SetupIcon(PointerEventData eventData)
+        {
             if (icon != null)
             {
                 icon.ResetTransform();

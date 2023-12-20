@@ -99,6 +99,7 @@ namespace Tasks
                 timeLeftText.SetText(timeLeft.ToString());
                 separator.SetActive(true);
                 Appear(true);
+                GameManager.Instance.taskOpened = true;
             }
         }
 
@@ -138,6 +139,7 @@ namespace Tasks
             startButton.SetActive(false);
             cancelButton.SetActive(true);
             separator.SetActive(true);
+            GameManager.Instance.taskOpened = true;
             Appear(true);
         }
 
@@ -724,13 +726,14 @@ namespace Tasks
             }
 
             if (notification.Task.TaskType.Equals(SSTaskType.Permanent) && !taskStarted) CloseNotification();
-            TimeTickSystem.ModifyTimeScale(1.0f);
+            TimeTickSystem.ModifyTimeScale(3.0f);
             previewOutcomeText.text = null;
             characterSlots.Clear();
             dialogueLog.ClearDialogueLog();
             separator.SetActive(false);
             GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.RefreshCharacterIcons();
+            GameManager.Instance.taskOpened = false;
         }
 
         /// <summary>
@@ -738,7 +741,7 @@ namespace Tasks
         /// </summary>
         public void CloseNotification()
         {
-            TimeTickSystem.ModifyTimeScale(1.0f);
+            TimeTickSystem.ModifyTimeScale(3.0f);
             GameManager.Instance.RefreshCharacterIcons();
             notification.OnCancel();
         }
