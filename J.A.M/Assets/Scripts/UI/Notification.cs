@@ -122,7 +122,7 @@ namespace UI
             for (int i = 0; i < Task.Conditions.Count; i++)
             {
                 taskCondition = Task.Conditions[i].Item1;
-                validatedCondition = RouteCondition(taskCondition.target);
+                validatedCondition = RouteCondition(taskCondition.BaseCondition.target);
                 if (validatedCondition)
                 {
                     Task.conditionIndex = i;
@@ -150,10 +150,10 @@ namespace UI
                 for (uint i = 0; i < taskCondition.additionnalConditions.Length; i++)
                 {
                     var cond = taskCondition.additionnalConditions[i];
-                    switch (cond.target)
+                    switch (cond.BaseCondition.target)
                     {
                         case OutcomeData.OutcomeTarget.Leader:
-                            if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], cond))
+                            if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], AssistantCharacters.ToArray(), cond))
                                 continue;
                             break;
 
@@ -162,7 +162,7 @@ namespace UI
                             for (int j = 0; j < AssistantCharacters.Count; j++)
                             {
                                 if (AssistantCharacters[j] == null)
-                                    if (!ConditionSystem.CheckCharacterCondition(AssistantCharacters[j],
+                                    if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], AssistantCharacters.ToArray(),
                                             cond))
                                         condition = true;
                                     else
@@ -296,12 +296,12 @@ namespace UI
             {
                 case OutcomeData.OutcomeTarget.Leader:
                     validateCondition =
-                        ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], taskCondition);
+                        ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], AssistantCharacters.ToArray(), taskCondition);
                     break;
                 case OutcomeData.OutcomeTarget.Assistant:
                     if (AssistantCharacters.Count >= 1)
                         validateCondition =
-                            ConditionSystem.CheckCharacterCondition(AssistantCharacters[0], taskCondition);
+                            ConditionSystem.CheckCharacterCondition(AssistantCharacters[0], AssistantCharacters.ToArray(), taskCondition);
                     break;
                 case OutcomeData.OutcomeTarget.Gauge:
                     validateCondition = ConditionSystem.CheckGaugeCondition(taskCondition);
