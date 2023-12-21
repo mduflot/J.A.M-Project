@@ -12,12 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3a298838b420346a8b6588d8248e9c, type: 3}
   m_Name: 1.1
   m_EditorClassIdentifier: 
-  target: 1
-  targetStat: 0
-  statComparison: 0
-  statThreshold: 0
-  targetGauge: 0
   BaseCondition:
+    target: 1
     Traits:
       traits:
         Item1: 16
@@ -26,17 +22,12 @@ MonoBehaviour:
     SpaceshipTraits: 0
     HiddenSpaceshipTraits: 0
     GaugeValue: 0
+  targetStat: 0
+  statComparison: 0
+  statThreshold: 0
+  targetGauge: 0
   supplementaryConditions:
-    list:
-    - Key: 0
-      Value:
-        Traits:
-          traits:
-            Item1: 0
-            Item2: 0
-            Item3: 0
-        SpaceshipTraits: 0
-        HiddenSpaceshipTraits: 0
-        GaugeValue: 1
-  additionnalConditions: []
+    list: []
+  additionnalConditions:
+  - {fileID: 11400000, guid: 95df43931653b9b47a3e3f466d2a6354, type: 2}
   outcomes: {fileID: 11400000, guid: 04ff1df3da1e0a3458012867902f335e, type: 2}
