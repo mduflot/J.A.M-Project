@@ -1,30 +1,30 @@
-﻿using UnityEditor.Experimental.GraphView;
+﻿using SS.Enumerations;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace SS.Elements
 {
     using Data.Save;
-    using Enumerations;
     using Utilities;
     using Windows;
 
-    public class SSTimeNode : SSNode
+    public class SSSoundNode : SSNode
     {
-        public uint TimeToWait { get; set; }
-
+        public AudioClip AudioClip { get; set; }
+        
         public override void Initialize(string nodeName, SSGraphView ssGraphView, Vector2 position)
         {
             base.Initialize(nodeName, ssGraphView, position);
-
-            NodeType = SSNodeType.Time;
-            TimeToWait = 1;
-
+            
+            NodeType = SSNodeType.Sound;
+            
             SSChoiceSaveData choiceData = new SSChoiceSaveData()
             {
                 Text = "Next Node"
             };
-
+            
             Choices.Add(choiceData);
         }
 
@@ -48,14 +48,16 @@ namespace SS.Elements
             VisualElement customDataContainer = new();
 
             customDataContainer.AddToClassList("ss-node__custom-data-container");
-
-            UnsignedIntegerField unsignedIntegerField = SSElementUtility.CreateUnsignedIntegerField(TimeToWait,
-                "WaitingTime", callback => { TimeToWait = callback.newValue; });
-
-            customDataContainer.Add(unsignedIntegerField);
-
+            
+            ObjectField objectField = SSElementUtility.CreateObjectField(AudioClip, typeof(AudioClip), "Audio Clip:", callback =>
+            {
+                AudioClip = (AudioClip) callback.newValue;
+            });
+            
+            customDataContainer.Add(objectField);
+            
             extensionContainer.Add(customDataContainer);
-
+            
             RefreshExpandedState();
         }
     }

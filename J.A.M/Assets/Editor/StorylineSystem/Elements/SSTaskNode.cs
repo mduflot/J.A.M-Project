@@ -1,4 +1,3 @@
-using SS.Utilities;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -8,6 +7,7 @@ namespace SS.Elements
 {
     using Data.Save;
     using Enumerations;
+    using Utilities;
     using Windows;
 
     public class SSTaskNode : SSNode

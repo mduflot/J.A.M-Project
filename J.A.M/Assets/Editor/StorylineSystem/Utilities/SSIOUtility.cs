@@ -236,6 +236,21 @@ namespace SS.Utilities
 
                 graphData.Nodes.Add(nodeData);
             }
+            else if (node is SSSoundNode soundNode)
+            {
+                SSSoundNodeSaveData nodeData = new SSSoundNodeSaveData()
+                {
+                    ID = soundNode.ID,
+                    Name = soundNode.NodeName,
+                    Choices = choices,
+                    GroupID = soundNode.Group?.ID,
+                    NodeType = soundNode.NodeType,
+                    Position = soundNode.GetPosition().position,
+                    AudioClip = soundNode.AudioClip
+                };
+
+                graphData.Nodes.Add(nodeData);
+            }
         }
 
         private static void SaveNodeToScriptableObject(SSNode node, SSNodeContainerSO nodeContainer)
@@ -321,6 +336,32 @@ namespace SS.Utilities
                     timeNode.IsStartingNode(), timeNode.TimeToWait);
 
                 createdNodes.Add(timeNode.ID, nodeSO);
+
+                SaveAsset(nodeSO);
+            }
+            else if (node is SSSoundNode soundNode)
+            {
+                SSSoundNodeSO nodeSO;
+
+                if (soundNode.Group != null)
+                {
+                    nodeSO = CreateAsset<SSSoundNodeSO>($"{containerFolderPath}/Groups/{soundNode.Group.title}/Nodes",
+                        soundNode.NodeName);
+
+                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[soundNode.Group.ID], nodeSO);
+                }
+                else
+                {
+                    nodeSO = CreateAsset<SSSoundNodeSO>($"{containerFolderPath}/Global/Nodes", soundNode.NodeName);
+
+                    nodeContainer.UngroupedNodes.Add(nodeSO);
+                }
+
+                nodeSO.Initialize(soundNode.NodeName, ConvertNodeChoicesToNodeChoicesData(soundNode.Choices),
+                    soundNode.NodeType,
+                    soundNode.IsStartingNode(), soundNode.AudioClip);
+
+                createdNodes.Add(soundNode.ID, nodeSO);
 
                 SaveAsset(nodeSO);
             }
@@ -508,6 +549,10 @@ namespace SS.Utilities
                 else if (nodeData.NodeType == SSNodeType.Time)
                 {
                     ((SSTimeNode)node).TimeToWait = ((SSTimeNodeSaveData)nodeData).TimeToWait;
+                }
+                else if (nodeData.NodeType == SSNodeType.Sound)
+                {
+                    ((SSSoundNode)node).AudioClip = ((SSSoundNodeSaveData)nodeData).AudioClip;
                 }
 
                 node.Draw();
