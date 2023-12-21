@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
-  m_Name: Asteroid15
+  m_Name: Need2
   m_EditorClassIdentifier: 
-  <NodeName>k__BackingField: Asteroid15
+  <NodeName>k__BackingField: Need2
   <Choices>k__BackingField:
-  - rid: 7990854058925097597
+  - rid: 7990854058925097492
   <NodeType>k__BackingField: 0
   <IsStartingNode>k__BackingField: 0
-  <Text>k__BackingField: Minor asteroid impact received. Damages to the hull registered.
-  <SpeakerType>k__BackingField: 1
+  <Text>k__BackingField: Shit, they're attacking us!
+  <SpeakerType>k__BackingField: 0
   <Duration>k__BackingField: 1
   <IsDialogueTask>k__BackingField: 1
-  <PercentageTask>k__BackingField: 70
+  <PercentageTask>k__BackingField: 45
   <IsCompleted>k__BackingField: 0
   <Job>k__BackingField: 0
   <PositiveTraits>k__BackingField: 0
@@ -29,9 +29,9 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7990854058925097597
+    - rid: 7990854058925097492
       type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Next Node
-        <NextNode>k__BackingField: {fileID: 11400000, guid: 2956c544dd4c4e7468ca7a33e1f8f2b3,
+        <NextNode>k__BackingField: {fileID: 11400000, guid: dc8b7d332bc14354b9e3f973718797ad,
           type: 2}

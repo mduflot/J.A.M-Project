@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: LastChanceToEscape
   <Choices>k__BackingField:
-  - rid: 7990854058925097261
-  - rid: 7990854058925097262
-  - rid: 7990854058925097263
+  - rid: 7990854058925097601
+  - rid: 7990854058925097602
+  - rid: 7990854058925097603
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: Asteroids ahead! We should assign an ace pilot immediately
@@ -34,7 +34,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7990854058925097261
+    - rid: 7990854058925097601
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Pilot
@@ -44,7 +44,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: is a certified pilot. They'll try to get
           us away from the asteroids.
-    - rid: 7990854058925097262
+    - rid: 7990854058925097602
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Anyone
@@ -54,7 +54,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: will try to get us away from the asteroids.
           Hopefully they're not as bad at piloting as they say...
-    - rid: 7990854058925097263
+    - rid: 7990854058925097603
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Fallback
