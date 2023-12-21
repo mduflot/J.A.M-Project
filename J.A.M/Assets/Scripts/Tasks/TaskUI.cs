@@ -273,19 +273,19 @@ namespace Tasks
                                         {
                                             case SystemType.Airflow:
                                                 previewOutcomeText.text +=
-                                                    $"<color=lightblue>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=lightblue>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Food:
                                                 previewOutcomeText.text +=
-                                                    $"<color=green>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=green>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Hull:
                                                 previewOutcomeText.text +=
-                                                    $"<color=red>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=red>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Power:
                                                 previewOutcomeText.text +=
-                                                    $"<color=yellow>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=yellow>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                         }
 
@@ -520,19 +520,19 @@ namespace Tasks
                                                 {
                                                     case SystemType.Airflow:
                                                         previewOutcomeText.text +=
-                                                            $"<color=lightblue>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=lightblue>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Food:
                                                         previewOutcomeText.text +=
-                                                            $"<color=green>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=green>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Hull:
                                                         previewOutcomeText.text +=
-                                                            $"<color=red>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=red>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Power:
                                                         previewOutcomeText.text +=
-                                                            $"<color=yellow>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=yellow>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                 }
 
