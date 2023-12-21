@@ -8,23 +8,25 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class CharacterIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
+    public class CharacterIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler,
+        IPointerEnterHandler, IPointerExitHandler
     {
         public CharacterUI baseParentScript;
-        private Transform parentAfterDrag;
-        private CharacterUI parentScript;
+
         [SerializeField] private Image image;
         [SerializeField] private Image characterIcon;
         [SerializeField] private Image currentTaskImage;
         [SerializeField] private TextMeshProUGUI characterName;
         [NonSerialized] public CharacterBehaviour character;
+
         private Animator animator;
         private bool isFromRoot;
-        
+        private Transform parentAfterDrag;
+        private CharacterUI parentScript;
         private float clickTime;
         private uint clicked;
         private float clickDelay = 0.5f;
-    
+
         public void Initialize(CharacterBehaviour c, CharacterUI script)
         {
             baseParentScript = script;
@@ -35,6 +37,7 @@ namespace UI
             characterName.text = character.GetCharacterData().firstName;
             animator = GetComponent<Animator>();
         }
+
         public void ResetTransform()
         {
             transform.SetParent(baseParentScript.transform);
@@ -43,7 +46,7 @@ namespace UI
             baseParentScript.icon = this;
             parentScript = baseParentScript;
         }
-    
+
         public void OnBeginDrag(PointerEventData eventData)
         {
             parentAfterDrag = transform.parent;
@@ -57,6 +60,7 @@ namespace UI
         {
             //Check si character.IsWorking(), si oui, return ou ResetTransform()
             transform.position = Input.mousePosition;
+            GameManager.Instance.UIManager.characterInfoUI.SetupCharacterInfo(character.GetCharacterData());
         }
 
         public void OnEndDrag(PointerEventData eventData)
@@ -66,8 +70,10 @@ namespace UI
                 parentAfterDrag = baseParentScript.transform;
                 parentScript = baseParentScript;
             }
+
             isFromRoot = false;
             SetupIconValues();
+            GameManager.Instance.UIManager.characterInfoUI.ClearCharacterInfo();
         }
 
         public void SetupIconValues()
@@ -109,12 +115,11 @@ namespace UI
             transform.localPosition = Vector3.zero;
             parentScript = script;
         }
-        
+
         public void OnPointerDown(PointerEventData eventData)
         {
-            if(!GameManager.Instance.taskOpened) return;
+            if (!GameManager.Instance.taskOpened) return;
             clicked++;
-            Debug.Log(clicked);
             if (clicked == 1) clickTime = Time.time;
             if (clicked > 1 && Time.time - clickTime < clickDelay)
             {

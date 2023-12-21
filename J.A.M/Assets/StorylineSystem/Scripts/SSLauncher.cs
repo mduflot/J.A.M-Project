@@ -55,14 +55,15 @@ namespace SS
             spaceshipManager = GameManager.Instance.SpaceshipManager;
         }
 
-        public void StartTimeline()
+        public void StartTimeline(CharacterIcon icon = null)
         {
             dialogues = new();
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
             isRunning = true;
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
-            CheckNodeType(node);
+            if (icon != null) RunNode(node as SSTaskNodeSO, icon);
+            else CheckNodeType(node);
         }
 
         private void ResetTimeline()
@@ -513,7 +514,7 @@ namespace SS
                 character.GetCharacterData().firstName, nodeSO));
         }
 
-        private void RunNode(SSTaskNodeSO nodeSO)
+        private void RunNode(SSTaskNodeSO nodeSO, CharacterIcon icon = null)
         {
             if (nodeSO.TaskType.Equals(SSTaskType.Permanent))
                 if (spaceshipManager.IsTaskActive(nodeSO.name))
@@ -550,7 +551,8 @@ namespace SS
                     conditions);
                 notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
                 spaceshipManager.AddTask(notification);
-                if (nodeSO.TaskType.Equals(SSTaskType.Permanent)) notification.Display();
+                if (nodeSO.TaskType.Equals(SSTaskType.Permanent) && icon != null) notification.Display(icon);
+                else if (nodeSO.TaskType.Equals(SSTaskType.Permanent)) notification.Display();
                 StartCoroutine(WaiterTask(nodeSO, task));
             }
         }

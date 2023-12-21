@@ -21,6 +21,7 @@ public class CharacterInfoUI : MonoBehaviour
     {
         icon.sprite = c.characterIcon;
         name.text = c.firstName + " " + c.lastName;
+        traits.text = c.traits.traits.Item1.ToString() + ", " + c.traits.traits.Item2.ToString() + ", " + c.traits.traits.Item3.ToString();
         gameObject.SetActive(true);
     }
 

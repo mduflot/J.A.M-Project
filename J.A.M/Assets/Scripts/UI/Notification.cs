@@ -32,28 +32,13 @@ namespace UI
         private OutcomeSystem.OutcomeEventArgs[] outcomeEventArgs;
         private SSLauncher launcher;
         private SSTaskNodeSO taskNode;
+        private List<TaskUI.GaugesOutcome> gaugeOutcomes = new List<TaskUI.GaugesOutcome>();
 
         private void Start()
         {
             camera = Camera.main;
         }
 
-        /*private void Update()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                RaycastHit hit;
-                Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit))
-                {
-                    if (hit.transform == transform)
-                    {
-                        Display();
-                    }
-                }
-            }
-        }*/
-        
         public void OnPointerDown(PointerEventData eventData)
         {
             Display();
@@ -85,7 +70,7 @@ namespace UI
             CheckingCondition(true);
         }
 
-        public void Display()
+        public void Display(CharacterIcon icon = null)
         {
             TimeTickSystem.ModifyTimeScale(0.0f);
             if (IsStarted)
@@ -94,11 +79,12 @@ namespace UI
             }
             else
             {
+                if (icon != null) GameManager.Instance.UIManager.taskUI.Initialize(this, icon);
                 GameManager.Instance.UIManager.taskUI.Initialize(this);
             }
         }
 
-        public void OnStart(List<CharacterUISlot> characters)
+        public void OnStart(List<CharacterUISlot> characters, List<TaskUI.GaugesOutcome> go)
         {
             TimeTickSystem.ModifyTimeScale(TimeTickSystem.lastActiveTimeScale);
             foreach (var character in characters)
@@ -145,6 +131,8 @@ namespace UI
                 validatedCondition = true;
             }
 
+            Debug.Log("Je start");
+            gaugeOutcomes = go;
             CheckingCondition(validatedCondition);
         }
 
@@ -359,7 +347,7 @@ namespace UI
                 }
                 else
                 {
-                    GameManager.Instance.UIManager.taskUI.Initialize(this, false);
+                    GameManager.Instance.UIManager.taskUI.Initialize(this, null, false);
                     GameManager.Instance.UIManager.taskUI.StartTask();
                 }
             }
@@ -375,6 +363,8 @@ namespace UI
             transform.parent = null;
             notificationContainer.DisplayNotification();
             spaceshipManager.notificationPool.AddToPool(gameObject);
+            Debug.Log(gaugeOutcomes.Count);
+            spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             IsStarted = false;
         }
 
@@ -395,12 +385,14 @@ namespace UI
                 launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunTimedNodeCancel(this, Task, taskNode);
+                spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             }
             else if (Task.TaskType.Equals(SSTaskType.Untimed))
             {
                 launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunUntimedNodeCancel(this, Task, taskNode);
+                spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             }
         }
 
@@ -416,7 +408,5 @@ namespace UI
                 character.StopTask();
             }
         }
-
-        
     }
 }
