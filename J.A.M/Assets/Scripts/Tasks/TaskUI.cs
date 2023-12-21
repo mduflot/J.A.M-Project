@@ -81,7 +81,6 @@ namespace Tasks
 
             startButton.SetActive(true);
             var button = startButton.GetComponentInChildren<Button>();
-            button.Select();
             cancelButton.SetActive(false);
             for (int i = 0; i < notification.Task.MandatorySlots; i++)
             {
@@ -697,6 +696,8 @@ namespace Tasks
                     : notification.Task.Duration;
 
                 durationText.text = TimeTickSystem.GetTicksAsTime((uint)(duration * TimeTickSystem.ticksPerHour));
+                var button = startButton.GetComponentInChildren<Button>();
+                button.Select();
             }
         }
 

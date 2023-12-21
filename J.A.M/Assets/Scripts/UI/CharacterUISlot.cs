@@ -6,7 +6,7 @@ namespace UI
     public class CharacterUISlot : CharacterUI
     {
         public bool isMandatory;
-        
+
         [SerializeField] private UnityEngine.UI.Image image;
         [SerializeField] private Transform iconParent;
         [SerializeField] private Sprite mandatorySprite;
@@ -33,6 +33,7 @@ namespace UI
                 icon.RefreshIcon();
                 ClearCharacter();
             }
+
             icon = c;
             icon.SetupIcon(iconParent, this);
             icon.transform.localScale = transform.localScale;
