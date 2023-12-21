@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
-  m_Name: Particle
+  m_Name: Asteroid19
   m_EditorClassIdentifier: 
-  <NodeName>k__BackingField: Particle
+  <NodeName>k__BackingField: Asteroid19
   <Choices>k__BackingField:
-  - rid: 9116669292278448254
+  - rid: 7990854058925097115
   <NodeType>k__BackingField: 0
   <IsStartingNode>k__BackingField: 0
-  <Text>k__BackingField: Irregular particle emission detected in the laboratory.
+  <Text>k__BackingField: Asteroid Field incoming. Impact in 3...2...1...
   <SpeakerType>k__BackingField: 1
-  <Duration>k__BackingField: 0.5
-  <IsDialogueTask>k__BackingField: 0
+  <Duration>k__BackingField: 1
+  <IsDialogueTask>k__BackingField: 1
   <PercentageTask>k__BackingField: 50
-  <IsCompleted>k__BackingField: 1
+  <IsCompleted>k__BackingField: 0
   <Job>k__BackingField: 0
   <PositiveTraits>k__BackingField: 0
   <NegativeTraits>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 9116669292278448254
+    - rid: 7990854058925097115
       type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Next Node
-        <NextNode>k__BackingField: {fileID: 11400000, guid: ae4ec361d05150e4fac641a85b6c6c2d,
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 5e2c9ce8956f3424293e17b731de1188,
           type: 2}

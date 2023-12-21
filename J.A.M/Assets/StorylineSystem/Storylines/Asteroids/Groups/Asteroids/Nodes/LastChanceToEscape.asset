@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: LastChanceToEscape
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: LastChanceToEscape
+  <Choices>k__BackingField:
+  - rid: 7990854058925097104
+  - rid: 7990854058925097105
+  - rid: 7990854058925097106
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: Asteroids ahead! We should assign an ace pilot immediately
+    or we'll see damage like we've never had before.
+  <TaskStatus>k__BackingField: 2
+  <TaskType>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 0}
+  <TimeLeft>k__BackingField: 10
+  <Duration>k__BackingField: 20
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 1
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 5
+  <Furniture>k__BackingField: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 7990854058925097104
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Pilot
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 91334fcf56b0a2b408d1cb58ab4d58d1,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: f4e75de46f8d45146acc39bd099ae394,
+          type: 2}
+        <PreviewOutcome>k__BackingField: is a certified pilot. They'll try to get
+          us away from the asteroids.
+    - rid: 7990854058925097105
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Anyone
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 07a5e99a7dec29e49b872f97bd2d7a70,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 7a7d6f21193521e41bbca8aa4a194590,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will try to get us away from the asteroids.
+          Hopefully they're not as bad at piloting as they say...
+    - rid: 7990854058925097106
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Fallback
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 39e3c5192f5df3f4ca02790b1fe3407c,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: e075b308746358e43b048f33ed8d0e2a,
+          type: 2}
+        <PreviewOutcome>k__BackingField: We can't avoid the asteroids if we don't
+          assign someone to pilot and use some of our burn. Damages will be inevitable.
