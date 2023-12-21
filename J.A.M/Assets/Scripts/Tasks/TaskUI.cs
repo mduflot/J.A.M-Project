@@ -7,12 +7,14 @@ using SS.Enumerations;
 using TMPro;
 using UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-        [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
+        [Header("Task")]
+        [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI timeLeftText;
         [SerializeField] private TextMeshProUGUI durationText;
         [SerializeField] private TextMeshProUGUI descriptionText;
@@ -25,9 +27,11 @@ namespace Tasks
         [SerializeField] private DialogueLog dialogueLog;
         [SerializeField] private GameObject separator;
 
-        [Header("Dialogues")] [SerializeField] private GameObject dialogueContainer;
+        [Header("Dialogues")]
+        [SerializeField] private GameObject dialogueContainer;
 
-        [Header("Values")] [SerializeField] private float timeLeft;
+        [Header("Values")]
+        [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
 
         private Notification notification;
@@ -76,6 +80,7 @@ namespace Tasks
             taskStarted = false;
 
             startButton.SetActive(true);
+            var button = startButton.GetComponentInChildren<Button>();
             cancelButton.SetActive(false);
             for (int i = 0; i < notification.Task.MandatorySlots; i++)
             {
@@ -691,6 +696,8 @@ namespace Tasks
                     : notification.Task.Duration;
 
                 durationText.text = TimeTickSystem.GetTicksAsTime((uint)(duration * TimeTickSystem.ticksPerHour));
+                var button = startButton.GetComponentInChildren<Button>();
+                button.Select();
             }
         }
 
