@@ -218,15 +218,15 @@ namespace Tasks
                             if (notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetJob() !=
                                 TraitsData.Job.None)
                                 traits +=
-                                    $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetJob()}";
+                                    $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetJob()}: ";
                             if (notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetPositiveTraits() !=
                                 TraitsData.PositiveTraits.None)
                                 traits +=
-                                    $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetPositiveTraits()}";
+                                    $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetPositiveTraits()}: ";
                             if (notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetNegativeTraits() !=
                                 TraitsData.NegativeTraits.None)
                                 traits +=
-                                    $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetNegativeTraits()}";
+                                    $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetNegativeTraits()}: ";
 
                             for (int j = 0; j < notification.Task.Conditions[index].Item1.outcomes.Outcomes.Length; j++)
                             {
@@ -268,19 +268,19 @@ namespace Tasks
                                         {
                                             case SystemType.Airflow:
                                                 previewOutcomeText.text +=
-                                                    $"<color=lightblue>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=lightblue>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Food:
                                                 previewOutcomeText.text +=
-                                                    $"<color=green>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=green>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Hull:
                                                 previewOutcomeText.text +=
-                                                    $"<color=red>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=red>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Power:
                                                 previewOutcomeText.text +=
-                                                    $"<color=yellow>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=yellow>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                         }
 
@@ -381,7 +381,7 @@ namespace Tasks
 
                                         break;
                                     case OutcomeData.OutcomeType.CharacterStat:
-                                        previewOutcomeText.text += traits + " ";
+                                        previewOutcomeText.text += traits;
                                         switch (outcome.OutcomeTarget)
                                         {
                                             case OutcomeData.OutcomeTarget.Crew:
@@ -459,19 +459,19 @@ namespace Tasks
                                     if (notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
                                             .BaseCondition.Traits.GetJob() != TraitsData.Job.None)
                                         traits +=
-                                            $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetJob()} ";
+                                            $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetJob()}: ";
                                     if (notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
                                             .BaseCondition.Traits
                                             .GetPositiveTraits() !=
                                         TraitsData.PositiveTraits.None)
                                         traits +=
-                                            $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetPositiveTraits()} ";
+                                            $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetPositiveTraits()}: ";
                                     if (notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
                                             .BaseCondition.Traits
                                             .GetNegativeTraits() !=
                                         TraitsData.NegativeTraits.None)
                                         traits +=
-                                            $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetNegativeTraits()} ";
+                                            $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetNegativeTraits()}: ";
                                     for (int j = 0;
                                          j < notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
                                              .outcomes.Outcomes.Length;
@@ -515,19 +515,19 @@ namespace Tasks
                                                 {
                                                     case SystemType.Airflow:
                                                         previewOutcomeText.text +=
-                                                            $"<color=lightblue>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=lightblue>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Food:
                                                         previewOutcomeText.text +=
-                                                            $"<color=green>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=green>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Hull:
                                                         previewOutcomeText.text +=
-                                                            $"<color=red>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=red>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Power:
                                                         previewOutcomeText.text +=
-                                                            $"<color=yellow>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=yellow>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                 }
 
@@ -629,7 +629,7 @@ namespace Tasks
 
                                                 break;
                                             case OutcomeData.OutcomeType.CharacterStat:
-                                                previewOutcomeText.text += traits + " ";
+                                                previewOutcomeText.text += traits;
                                                 switch (outcome.OutcomeTarget)
                                                 {
                                                     case OutcomeData.OutcomeTarget.Crew:
