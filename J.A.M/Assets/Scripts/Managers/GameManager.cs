@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public UIManager UIManager;
     public SpaceshipManager SpaceshipManager;
     public Camera mainCamera;
+    public bool taskOpened;
 
     private void Awake()
     {

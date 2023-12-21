@@ -6,7 +6,7 @@ namespace UI
     public class CharacterUISlot : CharacterUI
     {
         public bool isMandatory;
-        
+
         [SerializeField] private UnityEngine.UI.Image image;
         [SerializeField] private Transform iconParent;
         [SerializeField] private Sprite mandatorySprite;
@@ -21,14 +21,20 @@ namespace UI
 
         public override void OnDrop(PointerEventData eventData)
         {
+            CharacterIcon dropped = eventData.pointerDrag.GetComponent<CharacterIcon>();
+            SetupIcon(dropped);
+        }
+
+        public void SetupIcon(CharacterIcon c)
+        {
             if (icon != null)
             {
                 icon.ResetTransform();
                 icon.RefreshIcon();
                 ClearCharacter();
             }
-            GameObject dropped = eventData.pointerDrag;
-            icon = dropped.GetComponent<CharacterIcon>();
+
+            icon = c;
             icon.SetupIcon(iconParent, this);
             icon.transform.localScale = transform.localScale;
         }

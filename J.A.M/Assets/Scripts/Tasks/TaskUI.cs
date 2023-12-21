@@ -7,13 +7,17 @@ using SS.Enumerations;
 using TMPro;
 using UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-        [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
+        [Header("Task")]
+        [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI timeLeftText;
+        [SerializeField] private GameObject timeLeftObject;
+        [SerializeField] private Transform startButtonObject;
         [SerializeField] private TextMeshProUGUI durationText;
         [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private TextMeshProUGUI previewOutcomeText;
@@ -25,9 +29,11 @@ namespace Tasks
         [SerializeField] private DialogueLog dialogueLog;
         [SerializeField] private GameObject separator;
 
-        [Header("Dialogues")] [SerializeField] private GameObject dialogueContainer;
+        [Header("Dialogues")]
+        [SerializeField] private GameObject dialogueContainer;
 
-        [Header("Values")] [SerializeField] private float timeLeft;
+        [Header("Values")]
+        [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
 
         private Notification notification;
@@ -36,6 +42,7 @@ namespace Tasks
         private Animator animator;
         private List<GaugesOutcome> gaugesOutcomes = new List<GaugesOutcome>();
         private List<CharacterOutcome> charOutcome = new List<CharacterOutcome>();
+
         public struct GaugesOutcome
         {
             public SystemType gauge;
@@ -47,11 +54,12 @@ namespace Tasks
                 this.value = value;
             }
         }
-        
+
         public struct CharacterOutcome
         {
             public CharacterBehaviour character;
             public float value;
+
             public CharacterOutcome(CharacterBehaviour c, float value)
             {
                 character = c;
@@ -64,7 +72,7 @@ namespace Tasks
             animator = GetComponent<Animator>();
         }
 
-        public void Initialize(Notification n, bool needToDisplay = true)
+        public void Initialize(Notification n, CharacterIcon icon = null, bool needToDisplay = true)
         {
             notification = n;
             titleText.text = notification.Task.Name;
@@ -93,12 +101,25 @@ namespace Tasks
 
             dialogueLog.DisplayDialogueLog(notification.Dialogues);
 
+            if (icon != null) SetLeader(icon);
+            if (notification.Task.TaskType != SSTaskType.Timed)
+            {
+                startButtonObject.localPosition =
+                    new Vector3(50, startButtonObject.localPosition.y, startButtonObject.localPosition.z);
+                timeLeftObject.SetActive(false);
+            }
+            else
+            {
+                startButtonObject.localPosition =
+                    new Vector3(0, startButtonObject.localPosition.y, startButtonObject.localPosition.z);
+                timeLeftObject.SetActive(true);
+            }
             if (needToDisplay)
             {
-                DisplayText(timeLeftText, timeLeft.ToString(), 100);
-                timeLeftText.SetText(timeLeft.ToString());
+                DisplayText(timeLeftText, "Ends in : " + (timeLeft / TimeTickSystem.ticksPerHour).ToString("F2"), 20);
                 separator.SetActive(true);
                 Appear(true);
+                GameManager.Instance.taskOpened = true;
             }
         }
 
@@ -138,6 +159,7 @@ namespace Tasks
             startButton.SetActive(false);
             cancelButton.SetActive(true);
             separator.SetActive(true);
+            GameManager.Instance.taskOpened = true;
             Appear(true);
         }
 
@@ -147,17 +169,9 @@ namespace Tasks
             if (!animator.GetBool("Appear")) return;
             if (!taskStarted)
             {
-                bool canCheck = true;
-                for (int j = 0; j < characterSlots.Count; j++)
-                {
-                    if (!characterSlots[j].isMandatory) continue;
-                    var character = characterSlots[j];
-                    if (character.icon == null)
-                    {
-                        canCheck = false;
-                    }
-                }
-                if (canCheck)
+                List<GaugesOutcome> gaugeOutcomes = new List<GaugesOutcome>();
+                List<CharacterOutcome> characterOutcomes = new List<CharacterOutcome>();
+                
                 {
                     for (int index = 0; index < notification.Task.Conditions.Count; index++)
                     {
@@ -166,7 +180,7 @@ namespace Tasks
                         List<CharacterBehaviour> assistants = new List<CharacterBehaviour>();
                         for (int j = 0; j < characterSlots.Count; j++)
                         {
-                            if (characterSlots[j].isMandatory)
+                            if (characterSlots[j].isMandatory && characterSlots[j].icon != null)
                                 leader = characterSlots[j].icon.character;
                             else if (characterSlots[j].icon != null)
                                 assistants.Add(characterSlots[j].icon.character);
@@ -208,21 +222,21 @@ namespace Tasks
 
                         if (condition)
                         {
-                            previewOutcomeText.text =
-                                $"{characterSlots[0].icon.character.GetCharacterData().name} {notification.Task.Conditions[index].Item2}\n";
+                            if (characterSlots[0].icon != null) previewOutcomeText.text = $"{characterSlots[0].icon.character.GetCharacterData().name} {notification.Task.Conditions[index].Item2}\n";
+                            else previewOutcomeText.text = $"{notification.Task.Conditions[index].Item2}\n";
                             var traits = "";
                             if (notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetJob() !=
                                 TraitsData.Job.None)
                                 traits +=
-                                    $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetJob()}";
+                                    $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetJob()}: ";
                             if (notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetPositiveTraits() !=
                                 TraitsData.PositiveTraits.None)
                                 traits +=
-                                    $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetPositiveTraits()}";
+                                    $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetPositiveTraits()}: ";
                             if (notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetNegativeTraits() !=
                                 TraitsData.NegativeTraits.None)
                                 traits +=
-                                    $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetNegativeTraits()}";
+                                    $"{notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetNegativeTraits()}: ";
 
                             for (int j = 0; j < notification.Task.Conditions[index].Item1.outcomes.Outcomes.Length; j++)
                             {
@@ -253,7 +267,7 @@ namespace Tasks
                                                 break;
                                         }
 
-                                        gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
+                                        gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
                                             outcome.value));
 
                                         break;
@@ -264,23 +278,23 @@ namespace Tasks
                                         {
                                             case SystemType.Airflow:
                                                 previewOutcomeText.text +=
-                                                    $"<color=lightblue>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=lightblue>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Food:
                                                 previewOutcomeText.text +=
-                                                    $"<color=green>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=green>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Hull:
                                                 previewOutcomeText.text +=
-                                                    $"<color=red>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=red>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                             case SystemType.Power:
                                                 previewOutcomeText.text +=
-                                                    $"<color=yellow>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                    $"<color=yellow>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                         }
 
-                                        gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
+                                        gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
                                             characterSlots[0].icon.character.GetVolition()));
                                         break;
                                     case OutcomeData.OutcomeType.Trait:
@@ -377,7 +391,7 @@ namespace Tasks
 
                                         break;
                                     case OutcomeData.OutcomeType.CharacterStat:
-                                        previewOutcomeText.text += traits + " ";
+                                        previewOutcomeText.text += traits;
                                         switch (outcome.OutcomeTarget)
                                         {
                                             case OutcomeData.OutcomeTarget.Crew:
@@ -455,19 +469,19 @@ namespace Tasks
                                     if (notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
                                             .BaseCondition.Traits.GetJob() != TraitsData.Job.None)
                                         traits +=
-                                            $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetJob()} ";
+                                            $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetJob()}: ";
                                     if (notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
                                             .BaseCondition.Traits
                                             .GetPositiveTraits() !=
                                         TraitsData.PositiveTraits.None)
                                         traits +=
-                                            $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetPositiveTraits()} ";
+                                            $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetPositiveTraits()}: ";
                                     if (notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
                                             .BaseCondition.Traits
                                             .GetNegativeTraits() !=
                                         TraitsData.NegativeTraits.None)
                                         traits +=
-                                            $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetNegativeTraits()} ";
+                                            $"{notification.Task.Conditions[index].Item1.additionnalConditions[jindex].BaseCondition.Traits.GetNegativeTraits()}: ";
                                     for (int j = 0;
                                          j < notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
                                              .outcomes.Outcomes.Length;
@@ -501,7 +515,7 @@ namespace Tasks
                                                         break;
                                                 }
 
-                                                gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
+                                                gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
                                                     outcome.value));
                                                 break;
                                             case OutcomeData.OutcomeType.GaugeVolition:
@@ -511,23 +525,23 @@ namespace Tasks
                                                 {
                                                     case SystemType.Airflow:
                                                         previewOutcomeText.text +=
-                                                            $"<color=lightblue>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=lightblue>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Food:
                                                         previewOutcomeText.text +=
-                                                            $"<color=green>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=green>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Hull:
                                                         previewOutcomeText.text +=
-                                                            $"<color=red>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=red>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                     case SystemType.Power:
                                                         previewOutcomeText.text +=
-                                                            $"<color=yellow>Volition: {traits} {operation} {characterSlots[0].icon.character.GetVolition()} {outcome.OutcomeTargetGauge}</color>\n";
+                                                            $"<color=yellow>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                         break;
                                                 }
 
-                                                gaugesOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
+                                                gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
                                                     characterSlots[0].icon.character.GetVolition()));
                                                 break;
                                             case OutcomeData.OutcomeType.Trait:
@@ -625,7 +639,7 @@ namespace Tasks
 
                                                 break;
                                             case OutcomeData.OutcomeType.CharacterStat:
-                                                previewOutcomeText.text += traits + " ";
+                                                previewOutcomeText.text += traits;
                                                 switch (outcome.OutcomeTarget)
                                                 {
                                                     case OutcomeData.OutcomeTarget.Crew:
@@ -662,23 +676,27 @@ namespace Tasks
                         }
                     }
                 }
-                else previewOutcomeText.text = null;
-                
+
                 var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
                 GameManager.Instance.UIManager.PreviewOutcomeGauges(gaugesOutcomes);
                 foreach (var c in characterSlots)
                 {
-                    if(c.icon != null) charOutcome.Add(new CharacterOutcome(c.icon.character, -GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
+                    if (c.icon != null)
+                        characterOutcomes.Add(new CharacterOutcome(c.icon.character,
+                            -GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
                 }
+
                 GameManager.Instance.UIManager.CharacterPreviewGauges(charOutcome);
-                charOutcome.Clear();
-                gaugesOutcomes.Clear();
+                charOutcome = characterOutcomes;
+                gaugesOutcomes = gaugeOutcomes;
                 duration = assistantCharacters > 0
                     ? notification.Task.Duration /
                       (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
                     : notification.Task.Duration;
 
                 durationText.text = TimeTickSystem.GetTicksAsTime((uint)(duration * TimeTickSystem.ticksPerHour));
+                var button = startButton.GetComponentInChildren<Button>();
+                button.Select();
             }
         }
 
@@ -690,10 +708,13 @@ namespace Tasks
                 if (!CanStartTask())
                     return;
             if (CharactersWorking()) return;
-            notification.OnStart(characterSlots);
+            notification.OnStart(characterSlots, gaugesOutcomes);
             taskStarted = true;
             GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.UIManager.ResetCharactersPreviewGauges();
+            GameManager.Instance.SpaceshipManager.ApplyGaugeOutcomes(gaugesOutcomes);
+            gaugesOutcomes.Clear();
+            charOutcome.Clear();
             CloseTask();
         }
 
@@ -724,13 +745,14 @@ namespace Tasks
             }
 
             if (notification.Task.TaskType.Equals(SSTaskType.Permanent) && !taskStarted) CloseNotification();
-            TimeTickSystem.ModifyTimeScale(1.0f);
+            TimeTickSystem.ModifyTimeScale(1);
             previewOutcomeText.text = null;
             characterSlots.Clear();
             dialogueLog.ClearDialogueLog();
             separator.SetActive(false);
             GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.RefreshCharacterIcons();
+            GameManager.Instance.taskOpened = false;
         }
 
         /// <summary>
@@ -738,7 +760,7 @@ namespace Tasks
         /// </summary>
         public void CloseNotification()
         {
-            TimeTickSystem.ModifyTimeScale(1.0f);
+            TimeTickSystem.ModifyTimeScale(1);
             GameManager.Instance.RefreshCharacterIcons();
             notification.OnCancel();
         }
@@ -786,6 +808,12 @@ namespace Tasks
         private void Appear(bool state)
         {
             animator.SetBool("Appear", state);
+        }
+
+        public void SetLeader(CharacterIcon leader)
+        {
+            characterSlots[0].SetupIcon(leader);
+            leader.SetupIconValues();
         }
 
         private async System.Threading.Tasks.Task DisplayText(TextMeshProUGUI text, string textToDisplay, int speed)

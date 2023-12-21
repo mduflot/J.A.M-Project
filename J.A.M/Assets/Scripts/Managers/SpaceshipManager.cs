@@ -67,10 +67,39 @@ namespace Managers
                 if (system.gaugeValue < 0) system.gaugeValue = 0;
                 else
                     system.gaugeValue -= system.decreaseSpeed / TimeTickSystem.ticksPerHour;
-                GameManager.Instance.UIManager.UpdateGauges(system.type, system.gaugeValue);
+                GameManager.Instance.UIManager.UpdateGauges(system.type, system.gaugeValue, system.previewGaugeValue);
             }
 
             GameManager.Instance.UIManager.UpdateInGameDate(TimeTickSystem.GetTimeAsInGameDate(e));
+        }
+
+        public void ApplyGaugeOutcomes(List<TaskUI.GaugesOutcome> outcomes)
+        {
+            foreach (var system in systems)
+            {
+                var valueToAdd = 0f;
+                foreach (var outcome in outcomes)
+                {
+                    if (outcome.gauge == system.type) valueToAdd += outcome.value;
+                }
+                Debug.Log(valueToAdd);
+                system.previewGaugeValue += valueToAdd;
+            }
+        }
+
+        public void RemoveGaugeOutcomes(List<TaskUI.GaugesOutcome> outcomes)
+        {
+            foreach (var system in systems)
+            {
+                var valueToAdd = 0f;
+                foreach (var outcome in outcomes)
+                {
+                    Debug.Log(outcome.gauge + " " + outcome.value);
+                    if (outcome.gauge == system.type) valueToAdd -= outcome.value;
+                }
+                Debug.Log(valueToAdd);
+                system.previewGaugeValue += valueToAdd;
+            }
         }
 
         public float GetGaugeValue(SystemType systemType)
@@ -101,7 +130,7 @@ namespace Managers
                 return;
         
             Debug.Log("Generating random event");
-            //Checker.GenerateRandomEvent();
+            checker.GenerateRandomEvent();
         }
 
         #region Tasks

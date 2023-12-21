@@ -6,9 +6,12 @@ using UnityEngine.EventSystems;
 namespace Spaceship
 {
     [RequireComponent(typeof(SSLauncher))]
-    public class TaskRoom : MonoBehaviour, IDropHandler
+    public class TaskRoom : MonoBehaviour, IDropHandler, IPointerDownHandler
     {
         private SSLauncher launcher;
+        private float clickTime;
+        private uint clicked;
+        private float clickDelay = 0.5f;
 
         private void Start()
         {
@@ -19,7 +22,20 @@ namespace Spaceship
         {
             GameObject dropped = eventData.pointerDrag;
             var icon = dropped.GetComponent<CharacterIcon>();
-            if (icon != null) launcher.StartTimeline();
+            if (icon != null) launcher.StartTimeline(icon);
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            clicked++;
+            if (clicked == 1) clickTime = Time.time;
+            if (clicked > 1 && Time.time - clickTime < clickDelay)
+            {
+                clicked = 0;
+                clickTime = 0;
+                launcher.StartTimeline();
+            }
+            else if (clicked >= 2 && Time.time - clickTime > clickDelay) clicked = 0;
         }
     }
 }

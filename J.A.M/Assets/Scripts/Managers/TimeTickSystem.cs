@@ -7,10 +7,18 @@ namespace Managers
     {
         public static uint timePerTick = 1; // InGame Time Unit
         public static uint ticksPerHour = 48; 
-        public static float timeScale = 1.0f;
+        public static float timeScale = 3.0f;
 
-        public static float lastActiveTimeScale = 1.0f;
+        public static int lastActiveTimeScale = 1;
+
+        public static int pauseScale = 0;
+
+        public static int playScale = 3;
+
+        public static int quickPlayScale = 10;
         //[SerializeField] private const uint ticksPerTenMinutes = 5;
+
+        [SerializeField] private TimeButton[] timeButtons;
         public class OnTickEventArgs : EventArgs
         {
             public uint tick;
@@ -26,6 +34,11 @@ namespace Managers
         private void Awake()
         {
             tick = 0;
+        }
+
+        private void Start()
+        {
+            timeButtons[1].SelectButton();
         }
 
         private void Update()
@@ -70,10 +83,38 @@ namespace Managers
             return hours.ToString("D2") + ":" + minutes.ToString("D2");
         }
 
-        public static void ModifyTimeScale(float newScale)
+        public static void ModifyTimeScale(int scale)
         {
-            if (newScale != 0) lastActiveTimeScale = newScale;
+            var newScale = 0;
+
+            switch (scale)
+            {
+                case 0:
+                    newScale = pauseScale; 
+                    break;
+                
+                case 1:
+                    newScale = playScale;
+                    break;
+                
+                case 2:
+                    newScale = quickPlayScale;
+                    break;
+                default:
+                    Debug.Log("Error while setting time scale");
+                    break;
+            }
+            if (newScale != 0) lastActiveTimeScale = scale;
             timeScale = newScale;
+        }
+
+        public void UpdateTimeButtons(TimeButton selectedButton)
+        {
+            foreach (var button in timeButtons)
+            {
+                button.DeselectButton();
+            }
+            selectedButton.SelectButton();
         }
     }
 }

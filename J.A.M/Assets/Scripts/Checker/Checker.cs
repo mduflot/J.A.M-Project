@@ -34,6 +34,7 @@ public class Checker : MonoBehaviour
         principalStorylines = ssCampaign.PrincipalStorylines;
         secondaryStorylines = ssCampaign.SecondaryStorylines;
         trivialStorylines = ssCampaign.TrivialStorylines;
+        GenerateRandomEvent();
     }
 
     public void GenerateRandomEvent()
@@ -224,10 +225,11 @@ public class Checker : MonoBehaviour
 
                 if (isAllCompleted)
                 {
+                    storyline.StorylineContainer.StoryStatus = SSStoryStatus.Completed;
                     activeStorylines.Remove(storyline);
                     if (activeStorylines.Count == 0)
                     {
-                        Debug.Log("No storylines available");
+                        Debug.Log($"All timelines from {storyline.StorylineContainer.FileName} are completed");
                         GenerateRandomEvent();
                         return;
                     }

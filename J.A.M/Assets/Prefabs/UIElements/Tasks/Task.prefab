@@ -243,6 +243,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleText: {fileID: 4635246081195309768}
   timeLeftText: {fileID: 6041178504307761493}
+  timeLeftObject: {fileID: 5142585313336346497}
+  startButtonObject: {fileID: 2247877229495449083}
   durationText: {fileID: 6693991154180616693}
   descriptionText: {fileID: 8660771107190252779}
   previewOutcomeText: {fileID: 294932257020883382}
@@ -258,6 +260,7 @@ MonoBehaviour:
   startButton: {fileID: 7958277641743439280}
   cancelButton: {fileID: 2609404647668612}
   dialogueLog: {fileID: 5405028966460645148}
+  separator: {fileID: 0}
   dialogueContainer: {fileID: 0}
   timeLeft: 0
   duration: 0
@@ -1506,7 +1509,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5151779850021021420}
   m_HandleRect: {fileID: 8895499829392316119}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
