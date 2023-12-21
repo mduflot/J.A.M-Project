@@ -14,12 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: HotShower
   <Choices>k__BackingField:
-  - rid: 7990854058925097313
-  - rid: 7990854058925097314
+  - rid: 5268905284392714496
+  - rid: 5268905284392714497
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
-  <Description>k__BackingField: The excess of heat produced by the full power generator
-    might be used to warm the water up and deliver hot shower to all the crew.
+  <Description>k__BackingField: Description
   <TaskStatus>k__BackingField: 0
   <TaskType>k__BackingField: 1
   <Icon>k__BackingField: {fileID: 21300000, guid: ea698d351bd4748449aada363e59d6a3,
@@ -34,7 +33,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7990854058925097313
+    - rid: 5268905284392714496
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -43,7 +42,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The warmth of the generator will heat up
           water for the shower.
-    - rid: 7990854058925097314
+    - rid: 5268905284392714497
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
