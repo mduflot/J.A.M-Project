@@ -96,8 +96,8 @@ namespace Managers
                 }
                 else
                 {
-                    gauge.previewGauge.fillAmount = gauge.gauge.fillAmount;
-                    gauge.gauge.fillAmount += valueToAdd / 50;
+                    gauge.previewGauge.fillAmount = GameManager.Instance.SpaceshipManager.GetGaugeValue(gauge.systemType) / 50;
+                    gauge.gauge.fillAmount = (GameManager.Instance.SpaceshipManager.GetGaugeValue(gauge.systemType) + valueToAdd) / 50;
                     gauge.arrow.sprite = redArrow;
                 }
             }

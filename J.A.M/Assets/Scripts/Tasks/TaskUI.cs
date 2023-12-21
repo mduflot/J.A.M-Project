@@ -267,11 +267,15 @@ namespace Tasks
                                                 break;
                                         }
 
+                                        var value = outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add
+                                            ? outcome.value
+                                            : -outcome.value;
                                         gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
-                                            outcome.value = outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add ? outcome.value : - outcome.value));
+                                            value));
 
                                         break;
                                     case OutcomeData.OutcomeType.GaugeVolition:
+                                        if (characterSlots[0].icon == null) break;
                                         if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
                                             operation = "-";
                                         switch (outcome.OutcomeTargetGauge)
@@ -520,10 +524,14 @@ namespace Tasks
                                                         break;
                                                 }
 
+                                                var value = outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add
+                                                    ? outcome.value
+                                                    : -outcome.value;
                                                 gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
-                                                    outcome.value = outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add ? outcome.value : - outcome.value));
+                                                    value));
                                                 break;
                                             case OutcomeData.OutcomeType.GaugeVolition:
+                                                if (characterSlots[0].icon == null) break;
                                                 if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
                                                     operation = "-";
                                                 switch (outcome.OutcomeTargetGauge)
