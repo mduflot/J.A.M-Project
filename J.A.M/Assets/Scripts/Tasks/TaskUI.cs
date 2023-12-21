@@ -36,6 +36,7 @@ namespace Tasks
         private Animator animator;
         private List<GaugesOutcome> gaugesOutcomes = new List<GaugesOutcome>();
         private List<CharacterOutcome> charOutcome = new List<CharacterOutcome>();
+
         public struct GaugesOutcome
         {
             public SystemType gauge;
@@ -47,11 +48,12 @@ namespace Tasks
                 this.value = value;
             }
         }
-        
+
         public struct CharacterOutcome
         {
             public CharacterBehaviour character;
             public float value;
+
             public CharacterOutcome(CharacterBehaviour c, float value)
             {
                 character = c;
@@ -64,7 +66,7 @@ namespace Tasks
             animator = GetComponent<Animator>();
         }
 
-        public void Initialize(Notification n, bool needToDisplay = true)
+        public void Initialize(Notification n, CharacterIcon icon = null, bool needToDisplay = true)
         {
             notification = n;
             titleText.text = notification.Task.Name;
@@ -92,6 +94,8 @@ namespace Tasks
             }
 
             dialogueLog.DisplayDialogueLog(notification.Dialogues);
+
+            if (icon != null) SetLeader(icon);
 
             if (needToDisplay)
             {
@@ -161,6 +165,7 @@ namespace Tasks
                         canCheck = false;
                     }
                 }
+
                 if (canCheck)
                 {
                     for (int index = 0; index < notification.Task.Conditions.Count; index++)
@@ -667,13 +672,16 @@ namespace Tasks
                     }
                 }
                 else previewOutcomeText.text = null;
-                
+
                 var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
                 GameManager.Instance.UIManager.PreviewOutcomeGauges(gaugesOutcomes);
                 foreach (var c in characterSlots)
                 {
-                    if(c.icon != null) characterOutcomes.Add(new CharacterOutcome(c.icon.character, -GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
+                    if (c.icon != null)
+                        characterOutcomes.Add(new CharacterOutcome(c.icon.character,
+                            -GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
                 }
+
                 GameManager.Instance.UIManager.CharacterPreviewGauges(charOutcome);
                 charOutcome = characterOutcomes;
                 gaugesOutcomes = gaugeOutcomes;

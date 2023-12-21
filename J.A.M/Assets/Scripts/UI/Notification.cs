@@ -39,22 +39,6 @@ namespace UI
             camera = Camera.main;
         }
 
-        /*private void Update()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                RaycastHit hit;
-                Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit))
-                {
-                    if (hit.transform == transform)
-                    {
-                        Display();
-                    }
-                }
-            }
-        }*/
-        
         public void OnPointerDown(PointerEventData eventData)
         {
             Display();
@@ -86,7 +70,7 @@ namespace UI
             CheckingCondition(true);
         }
 
-        public void Display()
+        public void Display(CharacterIcon icon = null)
         {
             TimeTickSystem.ModifyTimeScale(0.0f);
             if (IsStarted)
@@ -95,6 +79,7 @@ namespace UI
             }
             else
             {
+                if (icon != null) GameManager.Instance.UIManager.taskUI.Initialize(this, icon);
                 GameManager.Instance.UIManager.taskUI.Initialize(this);
             }
         }
@@ -145,6 +130,7 @@ namespace UI
                 Task.conditionIndex = Task.Conditions.Count - 1;
                 validatedCondition = true;
             }
+
             Debug.Log("Je start");
             gaugeOutcomes = go;
             CheckingCondition(validatedCondition);
@@ -361,7 +347,7 @@ namespace UI
                 }
                 else
                 {
-                    GameManager.Instance.UIManager.taskUI.Initialize(this, false);
+                    GameManager.Instance.UIManager.taskUI.Initialize(this, null, false);
                     GameManager.Instance.UIManager.taskUI.StartTask();
                 }
             }
@@ -422,7 +408,5 @@ namespace UI
                 character.StopTask();
             }
         }
-
-        
     }
 }
