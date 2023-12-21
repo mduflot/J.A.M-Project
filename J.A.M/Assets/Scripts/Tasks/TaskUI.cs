@@ -746,7 +746,7 @@ namespace Tasks
             }
 
             if (notification.Task.TaskType.Equals(SSTaskType.Permanent) && !taskStarted) CloseNotification();
-            TimeTickSystem.ModifyTimeScale(3.0f);
+            TimeTickSystem.ModifyTimeScale(1);
             previewOutcomeText.text = null;
             characterSlots.Clear();
             dialogueLog.ClearDialogueLog();
@@ -761,7 +761,7 @@ namespace Tasks
         /// </summary>
         public void CloseNotification()
         {
-            TimeTickSystem.ModifyTimeScale(3.0f);
+            TimeTickSystem.ModifyTimeScale(1);
             GameManager.Instance.RefreshCharacterIcons();
             notification.OnCancel();
         }

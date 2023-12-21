@@ -61,7 +61,8 @@ namespace Managers
         {
             gaugeReferences[systemType].gauge.fillAmount = value/50;
             gaugeReferences[systemType].previewGauge.fillAmount = (value + previewValue) / 50;
-            gaugeReferences[systemType].arrow.sprite = redArrow;
+            gaugeReferences[systemType].arrow.sprite = previewValue > 0 ? greenArrow : redArrow;
+            
         }
 
         public void UpdateInGameDate(string newDate)
