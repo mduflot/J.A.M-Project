@@ -69,12 +69,14 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
+        if(GameManager.Instance.taskOpened) return;
         CameraMovement();
         transform.position = ClampCameraToBounds(transform.position);
     }
 
     private void FixedUpdate()
     {
+        if(GameManager.Instance.taskOpened) return;
         transform.Translate(moveVector * moveSpeed);
     }
 
@@ -90,8 +92,12 @@ public class CameraController : MonoBehaviour
     {
         transform.position += new Vector3(0, 0, zoomVector.y * zoomSpeed);
         if (!isDragging) return;
-        difference = (Vector3)GetMousePosition - transform.position;
-        transform.position = origin - difference;
+        var mouse = (Vector3)GetMousePosition;
+        difference = origin - mouse;
+        Debug.Log(difference);
+        difference.z = 0;
+        transform.position -= difference * 0.4f;
+        origin = mouse;
     }
     
     private void OnEnable()

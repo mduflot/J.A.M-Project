@@ -268,7 +268,7 @@ namespace Tasks
                                         }
 
                                         gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
-                                            outcome.value));
+                                            outcome.value = outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add ? outcome.value : - outcome.value));
 
                                         break;
                                     case OutcomeData.OutcomeType.GaugeVolition:
@@ -293,9 +293,14 @@ namespace Tasks
                                                     $"<color=yellow>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                                                 break;
                                         }
-
+                                        
+                                        var volition =
+                                            outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add
+                                                ? characterSlots[0].icon.character.GetVolition()
+                                                : - characterSlots[0].icon.character.GetVolition();
+                                        
                                         gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
-                                            characterSlots[0].icon.character.GetVolition()));
+                                            volition));
                                         break;
                                     case OutcomeData.OutcomeType.Trait:
                                         previewOutcomeText.text += traits;
@@ -516,7 +521,7 @@ namespace Tasks
                                                 }
 
                                                 gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
-                                                    outcome.value));
+                                                    outcome.value = outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add ? outcome.value : - outcome.value));
                                                 break;
                                             case OutcomeData.OutcomeType.GaugeVolition:
                                                 if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
@@ -541,8 +546,12 @@ namespace Tasks
                                                         break;
                                                 }
 
+                                                var volition =
+                                                    outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add
+                                                        ? characterSlots[0].icon.character.GetVolition()
+                                                        : - characterSlots[0].icon.character.GetVolition();
                                                 gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
-                                                    characterSlots[0].icon.character.GetVolition()));
+                                                    volition));
                                                 break;
                                             case OutcomeData.OutcomeType.Trait:
                                                 previewOutcomeText.text += traits;
