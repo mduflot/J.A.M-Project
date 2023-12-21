@@ -54,16 +54,25 @@ namespace SS
         {
             spaceshipManager = GameManager.Instance.SpaceshipManager;
         }
-
-        public void StartTimeline(CharacterIcon icon = null)
+        
+        public void StartTimeline()
         {
             dialogues = new();
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
             isRunning = true;
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
-            if (icon != null) RunNode(node as SSTaskNodeSO, icon);
-            else CheckNodeType(node);
+            CheckNodeType(node);
+        }
+
+        public void StartTimeline(CharacterIcon icon)
+        {
+            dialogues = new();
+            if (currentStoryline) currentStoryline.text = nodeContainer.name;
+            isRunning = true;
+            IsCancelled = false;
+            CanIgnoreDialogueTask = false;
+            RunNode(node as SSTaskNodeSO, icon);
         }
 
         private void ResetTimeline()
