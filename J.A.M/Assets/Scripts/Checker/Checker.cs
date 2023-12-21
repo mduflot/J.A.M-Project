@@ -34,6 +34,7 @@ public class Checker : MonoBehaviour
         principalStorylines = ssCampaign.PrincipalStorylines;
         secondaryStorylines = ssCampaign.SecondaryStorylines;
         trivialStorylines = ssCampaign.TrivialStorylines;
+        GenerateRandomEvent();
     }
 
     public void GenerateRandomEvent()
