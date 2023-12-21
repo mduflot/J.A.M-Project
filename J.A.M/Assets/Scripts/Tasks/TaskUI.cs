@@ -171,18 +171,7 @@ namespace Tasks
             {
                 List<GaugesOutcome> gaugeOutcomes = new List<GaugesOutcome>();
                 List<CharacterOutcome> characterOutcomes = new List<CharacterOutcome>();
-                bool canCheck = true;
-                for (int j = 0; j < characterSlots.Count; j++)
-                {
-                    if (!characterSlots[j].isMandatory) continue;
-                    var character = characterSlots[j];
-                    if (character.icon == null)
-                    {
-                        canCheck = false;
-                    }
-                }
-
-                if (canCheck)
+                
                 {
                     for (int index = 0; index < notification.Task.Conditions.Count; index++)
                     {
@@ -191,7 +180,7 @@ namespace Tasks
                         List<CharacterBehaviour> assistants = new List<CharacterBehaviour>();
                         for (int j = 0; j < characterSlots.Count; j++)
                         {
-                            if (characterSlots[j].isMandatory)
+                            if (characterSlots[j].isMandatory && characterSlots[j].icon != null)
                                 leader = characterSlots[j].icon.character;
                             else if (characterSlots[j].icon != null)
                                 assistants.Add(characterSlots[j].icon.character);
@@ -233,8 +222,8 @@ namespace Tasks
 
                         if (condition)
                         {
-                            previewOutcomeText.text =
-                                $"{characterSlots[0].icon.character.GetCharacterData().name} {notification.Task.Conditions[index].Item2}\n";
+                            if (characterSlots[0].icon != null) previewOutcomeText.text = $"{characterSlots[0].icon.character.GetCharacterData().name} {notification.Task.Conditions[index].Item2}\n";
+                            else previewOutcomeText.text = $"{notification.Task.Conditions[index].Item2}\n";
                             var traits = "";
                             if (notification.Task.Conditions[index].Item1.BaseCondition.Traits.GetJob() !=
                                 TraitsData.Job.None)
@@ -687,7 +676,6 @@ namespace Tasks
                         }
                     }
                 }
-                else previewOutcomeText.text = null;
 
                 var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
                 GameManager.Instance.UIManager.PreviewOutcomeGauges(gaugesOutcomes);
