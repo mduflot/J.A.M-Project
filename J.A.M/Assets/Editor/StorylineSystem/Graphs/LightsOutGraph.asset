@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: LightsOut
   <StoryStatus>k__BackingField: 0
-  <StoryType>k__BackingField: 2
+  <StoryType>k__BackingField: 0
   <IsFirstToPlay>k__BackingField: 0
   <Condition>k__BackingField: {fileID: 0}
   <Groups>k__BackingField:
@@ -23,16 +23,22 @@ MonoBehaviour:
     <IsFirstToPlay>k__BackingField: 0
     <Condition>k__BackingField: {fileID: 0}
     <Name>k__BackingField: LightsOut
-    <Position>k__BackingField: {x: 555, y: 211}
+    <Position>k__BackingField: {x: 555, y: 210}
   <Nodes>k__BackingField:
-  - rid: 9116669315187474594
-  - rid: 9116669315187474595
-  - rid: 9116669315187474596
-  - rid: 9116669315187474597
-  - rid: 9116669315187474598
-  - rid: 9116669315187474599
-  - rid: 9116669315187474600
-  - rid: 9116669315187474601
+  - rid: 5268905284392714438
+  - rid: 5268905284392714439
+  - rid: 5268905284392714440
+  - rid: 5268905284392714441
+  - rid: 5268905284392714442
+  - rid: 5268905284392714443
+  - rid: 5268905284392714444
+  - rid: 5268905284392714445
+  - rid: 5268905284392714446
+  - rid: 5268905284392714447
+  - rid: 5268905284392714448
+  - rid: 5268905284392714449
+  - rid: 5268905284392714450
+  - rid: 5268905284392714451
   <OldGroupNames>k__BackingField:
   - LightsOut
   <OldUngroupedNodeNames>k__BackingField: []
@@ -44,20 +50,26 @@ MonoBehaviour:
       - Exctinction
       - NotMe
       - oughtnt
-      - CheckingOut
       - Seen
       - Check
       - Research
+      - necessary
+      - Found
+      - Restore
+      - Fine
+      - CheckingOut
+      - LightsOut
+      - Ouch
   references:
     version: 2
     RefIds:
-    - rid: 9116669315187474594
+    - rid: 5268905284392714438
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 32bd851b-db44-41e3-97b0-effca1fdb4c6
         <Name>k__BackingField: ShutDown
         <Choices>k__BackingField:
-        - rid: 9116669315187474602
+        - rid: 5268905284392714452
         <GroupID>k__BackingField: 7fe6c3fb-f11b-4e12-9c82-fb92e639450f
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1218, y: 296}
@@ -70,13 +82,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 9116669315187474595
+    - rid: 5268905284392714439
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 33569e0a-dbe4-48a1-9a53-079e2ec8a0c2
         <Name>k__BackingField: Exctinction
         <Choices>k__BackingField:
-        - rid: 9116669315187474603
+        - rid: 5268905284392714453
         <GroupID>k__BackingField: 7fe6c3fb-f11b-4e12-9c82-fb92e639450f
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 580, y: 294}
@@ -88,13 +100,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 9116669315187474596
+    - rid: 5268905284392714440
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 38fa9004-7547-4f8b-a329-8d17042fb0d8
         <Name>k__BackingField: NotMe
         <Choices>k__BackingField:
-        - rid: 9116669315187474604
+        - rid: 5268905284392714454
         <GroupID>k__BackingField: 7fe6c3fb-f11b-4e12-9c82-fb92e639450f
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1857, y: 299}
@@ -106,13 +118,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 9116669315187474597
+    - rid: 5268905284392714441
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 981146c0-8e20-4c62-8b71-15f4520ca388
         <Name>k__BackingField: oughtnt
         <Choices>k__BackingField:
-        - rid: 9116669315187474605
+        - rid: 5268905284392714455
         <GroupID>k__BackingField: 7fe6c3fb-f11b-4e12-9c82-fb92e639450f
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 2497, y: 299}
@@ -124,15 +136,144 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 9116669315187474598
+    - rid: 5268905284392714442
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 0845b7d3-3593-4869-91c9-35cdaab6c1a7
+        <Name>k__BackingField: Seen
+        <Choices>k__BackingField:
+        - rid: 5268905284392714456
+        <GroupID>k__BackingField: 7fe6c3fb-f11b-4e12-9c82-fb92e639450f
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3509, y: 270}
+        <Text>k__BackingField: Someone has seen ASSIGNED ?
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5268905284392714443
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 790ebf4f-20dc-4cb5-8ac4-ddb2894acc77
+        <Name>k__BackingField: Check
+        <Choices>k__BackingField:
+        - rid: 5268905284392714457
+        <GroupID>k__BackingField: 7fe6c3fb-f11b-4e12-9c82-fb92e639450f
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3169, y: 270}
+        <Text>k__BackingField: I'll check the freight
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 0
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5268905284392714444
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 8f44d721-3ed0-47e7-848e-bdb51a5620a6
+        <Name>k__BackingField: Research
+        <Choices>k__BackingField:
+        - rid: 5268905284392714458
+        <GroupID>k__BackingField: 7fe6c3fb-f11b-4e12-9c82-fb92e639450f
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3813, y: 269}
+        <Text>k__BackingField: No, I was supposed to meet him one hour ago, I should
+          go on a research
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5268905284392714445
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 2c00c5c6-c1d8-421b-8d93-c853c266519e
+        <Name>k__BackingField: necessary
+        <Choices>k__BackingField:
+        - rid: 5268905284392714459
+        <GroupID>k__BackingField: 7fe6c3fb-f11b-4e12-9c82-fb92e639450f
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4072, y: 272}
+        <Text>k__BackingField: It isn't necessary I checked in the log history, 'supposed
+          to check in the docking bay
+        <SpeakerType>k__BackingField: 5
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5268905284392714446
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: d9e1b8e3-dd06-406d-be46-ce777116e0cd
+        <Name>k__BackingField: Found
+        <Choices>k__BackingField:
+        - rid: 5268905284392714460
+        <GroupID>k__BackingField: 7fe6c3fb-f11b-4e12-9c82-fb92e639450f
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4719, y: 279}
+        <Text>k__BackingField: I found them ! They're hurt I need assistance !
+        <SpeakerType>k__BackingField: 6
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5268905284392714447
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: d2b78989-10d2-430c-97c3-8c836c8e4f2e
+        <Name>k__BackingField: Restore
+        <Choices>k__BackingField:
+        - rid: 5268905284392714461
+        <GroupID>k__BackingField: 7fe6c3fb-f11b-4e12-9c82-fb92e639450f
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3542, y: 504}
+        <Text>k__BackingField: I checked the freight, everything is fine. The electrical
+          system seems broken because inconsistent voltage.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5268905284392714448
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: e639194a-eed8-40bc-9223-d468539c9114
+        <Name>k__BackingField: Fine
+        <Choices>k__BackingField:
+        - rid: 5268905284392714462
+        <GroupID>k__BackingField: 7fe6c3fb-f11b-4e12-9c82-fb92e639450f
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3797, y: 503}
+        <Text>k__BackingField: Its fine, a specialist could restore it.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5268905284392714449
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 0afc32c9-3261-401a-9577-45119fafb1f2
         <Name>k__BackingField: CheckingOut
         <Choices>k__BackingField:
-        - rid: 9116669315187474606
-        - rid: 9116669315187474607
-        - rid: 9116669315187474608
+        - rid: 5268905284392714463
+        - rid: 5268905284392714464
+        - rid: 5268905284392714465
         <GroupID>k__BackingField: 7fe6c3fb-f11b-4e12-9c82-fb92e639450f
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 2745, y: 303}
@@ -147,82 +288,108 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 5
         <Furniture>k__BackingField: 1
-    - rid: 9116669315187474599
-      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+    - rid: 5268905284392714450
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
-        <ID>k__BackingField: 0845b7d3-3593-4869-91c9-35cdaab6c1a7
-        <Name>k__BackingField: Seen
+        <ID>k__BackingField: cb07c6c9-d32c-4493-86f5-d06569d73756
+        <Name>k__BackingField: LightsOut
         <Choices>k__BackingField:
-        - rid: 9116669315187474609
+        - rid: 5268905284392714466
+        - rid: 5268905284392714467
         <GroupID>k__BackingField: 7fe6c3fb-f11b-4e12-9c82-fb92e639450f
-        <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 3509, y: 270}
-        <Text>k__BackingField: Someone has seen ASSIGNED ?
-        <SpeakerType>k__BackingField: 0
-        <Duration>k__BackingField: 1
-        <IsDialogueTask>k__BackingField: 1
-        <PercentageTask>k__BackingField: 50
-        <Job>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
-    - rid: 9116669315187474600
-      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 6204, y: 345}
+        <DescriptionTask>k__BackingField: An entire area of the ship is in the dark.
+          Operatives are needed to identify the cause of failure and fix it.
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 0
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 85a24ccd89dd9e54f9c67bffe65d4776,
+          type: 3}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 0
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 8
+        <Furniture>k__BackingField: 3
+    - rid: 5268905284392714451
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
-        <ID>k__BackingField: 790ebf4f-20dc-4cb5-8ac4-ddb2894acc77
-        <Name>k__BackingField: Check
+        <ID>k__BackingField: 0f7fb95d-7fd3-4e63-9764-0ae0e1e0ff0a
+        <Name>k__BackingField: Ouch
         <Choices>k__BackingField:
-        - rid: 9116669315187474610
+        - rid: 5268905284392714468
+        - rid: 5268905284392714469
         <GroupID>k__BackingField: 7fe6c3fb-f11b-4e12-9c82-fb92e639450f
-        <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 3169, y: 270}
-        <Text>k__BackingField: I'll check the freight
-        <SpeakerType>k__BackingField: 9
-        <Duration>k__BackingField: 0.5
-        <IsDialogueTask>k__BackingField: 1
-        <PercentageTask>k__BackingField: 0
-        <Job>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
-    - rid: 9116669315187474601
-      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <ID>k__BackingField: 8f44d721-3ed0-47e7-848e-bdb51a5620a6
-        <Name>k__BackingField: Research
-        <Choices>k__BackingField:
-        - rid: 9116669315187474611
-        <GroupID>k__BackingField: 7fe6c3fb-f11b-4e12-9c82-fb92e639450f
-        <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 4236, y: 289}
-        <Text>k__BackingField: No, I was supposed to meet him one hour ago, I should
-          go on a research
-        <SpeakerType>k__BackingField: 0
-        <Duration>k__BackingField: 0.5
-        <IsDialogueTask>k__BackingField: 0
-        <PercentageTask>k__BackingField: 50
-        <Job>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
-    - rid: 9116669315187474602
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 5401, y: 273}
+        <DescriptionTask>k__BackingField: Someone got hurt, the injury must be healed.
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 2
+        <TaskIcon>k__BackingField: {fileID: 0}
+        <TimeLeft>k__BackingField: 3
+        <BaseDuration>k__BackingField: 3
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 5
+        <Furniture>k__BackingField: 1
+    - rid: 5268905284392714452
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 38fa9004-7547-4f8b-a329-8d17042fb0d8
-    - rid: 9116669315187474603
+    - rid: 5268905284392714453
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 32bd851b-db44-41e3-97b0-effca1fdb4c6
-    - rid: 9116669315187474604
+    - rid: 5268905284392714454
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 981146c0-8e20-4c62-8b71-15f4520ca388
-    - rid: 9116669315187474605
+    - rid: 5268905284392714455
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
-        <NextNodeID>k__BackingField: 0afc32c9-3261-401a-9577-45119fafb1f2
-    - rid: 9116669315187474606
+        <NextNodeID>k__BackingField: 
+    - rid: 5268905284392714456
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 8f44d721-3ed0-47e7-848e-bdb51a5620a6
+    - rid: 5268905284392714457
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 0845b7d3-3593-4869-91c9-35cdaab6c1a7
+    - rid: 5268905284392714458
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 2c00c5c6-c1d8-421b-8d93-c853c266519e
+    - rid: 5268905284392714459
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: d9e1b8e3-dd06-406d-be46-ce777116e0cd
+    - rid: 5268905284392714460
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 0f7fb95d-7fd3-4e63-9764-0ae0e1e0ff0a
+    - rid: 5268905284392714461
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: e639194a-eed8-40bc-9223-d468539c9114
+    - rid: 5268905284392714462
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: cb07c6c9-d32c-4493-86f5-d06569d73756
+    - rid: 5268905284392714463
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -231,35 +398,52 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The cargo bay will be inspected in the dark
           to check the freight.
-    - rid: 9116669315187474607
+    - rid: 5268905284392714464
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: SecondChoice
-        <NextNodeID>k__BackingField: 
+        <NextNodeID>k__BackingField: d2b78989-10d2-430c-97c3-8c836c8e4f2e
         <Condition>k__BackingField: {fileID: 11400000, guid: dc930bf742d395b448e4ed8925f975c1,
           type: 2}
         <PreviewOutcome>k__BackingField: The cargo bay will be inspected carefully
           to check the freight.
-    - rid: 9116669315187474608
+    - rid: 5268905284392714465
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: ThirdChoice
-        <NextNodeID>k__BackingField: 
+        <NextNodeID>k__BackingField: cb07c6c9-d32c-4493-86f5-d06569d73756
         <Condition>k__BackingField: {fileID: 11400000, guid: 525cd964447c638499affaf752e7d2bc,
           type: 2}
         <PreviewOutcome>k__BackingField: No one will investigate into the dark area
-    - rid: 9116669315187474609
-      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+    - rid: 5268905284392714466
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
-        <Text>k__BackingField: Next Node
-        <NextNodeID>k__BackingField: 8f44d721-3ed0-47e7-848e-bdb51a5620a6
-    - rid: 9116669315187474610
-      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <Text>k__BackingField: Next Node
-        <NextNodeID>k__BackingField: 0845b7d3-3593-4869-91c9-35cdaab6c1a7
-    - rid: 9116669315187474611
-      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <Text>k__BackingField: Next Node
+        <Text>k__BackingField: FirstChoice
         <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 2d36f520e4583e74d8fa20677695fce7,
+          type: 2}
+        <PreviewOutcome>k__BackingField: Will identified and fix the cause of failure.
+    - rid: 5268905284392714467
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 11ca91246c1713b4496a2d000a1c3efa,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No actions will be taken.
+    - rid: 5268905284392714468
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: cb07c6c9-d32c-4493-86f5-d06569d73756
+        <Condition>k__BackingField: {fileID: 11400000, guid: 2127a4770eeb7ad49b7de075cf5c716a,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will treat the injury.
+    - rid: 5268905284392714469
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: fc1098b15babbeb439136f8e077adb06,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No action will be taken.
