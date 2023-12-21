@@ -72,7 +72,7 @@ namespace UI
 
         public void Display(CharacterIcon icon = null)
         {
-            TimeTickSystem.ModifyTimeScale(0.0f);
+            TimeTickSystem.ModifyTimeScale(0);
             if (IsStarted)
             {
                 GameManager.Instance.UIManager.taskUI.DisplayTaskInfo(this);
@@ -130,9 +130,10 @@ namespace UI
                 Task.conditionIndex = Task.Conditions.Count - 1;
                 validatedCondition = true;
             }
-
-            Debug.Log("Je start");
-            gaugeOutcomes = go;
+            foreach (var outcome in go)
+            {
+                gaugeOutcomes.Add(outcome);
+            }
             CheckingCondition(validatedCondition);
         }
 

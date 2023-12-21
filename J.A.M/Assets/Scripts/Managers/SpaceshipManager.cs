@@ -130,7 +130,7 @@ namespace Managers
                 return;
         
             Debug.Log("Generating random event");
-            //Checker.GenerateRandomEvent();
+            checker.GenerateRandomEvent();
         }
 
         #region Tasks
