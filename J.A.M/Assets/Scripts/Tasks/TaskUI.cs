@@ -16,6 +16,8 @@ namespace Tasks
         [Header("Task")]
         [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI timeLeftText;
+        [SerializeField] private GameObject timeLeftObject;
+        [SerializeField] private Transform startButtonObject;
         [SerializeField] private TextMeshProUGUI durationText;
         [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private TextMeshProUGUI previewOutcomeText;
@@ -80,7 +82,6 @@ namespace Tasks
             taskStarted = false;
 
             startButton.SetActive(true);
-            var button = startButton.GetComponentInChildren<Button>();
             cancelButton.SetActive(false);
             for (int i = 0; i < notification.Task.MandatorySlots; i++)
             {
@@ -101,11 +102,21 @@ namespace Tasks
             dialogueLog.DisplayDialogueLog(notification.Dialogues);
 
             if (icon != null) SetLeader(icon);
-
+            if (notification.Task.TaskType != SSTaskType.Timed)
+            {
+                startButtonObject.localPosition =
+                    new Vector3(50, startButtonObject.localPosition.y, startButtonObject.localPosition.z);
+                timeLeftObject.SetActive(false);
+            }
+            else
+            {
+                startButtonObject.localPosition =
+                    new Vector3(0, startButtonObject.localPosition.y, startButtonObject.localPosition.z);
+                timeLeftObject.SetActive(true);
+            }
             if (needToDisplay)
             {
-                DisplayText(timeLeftText, timeLeft.ToString(), 100);
-                timeLeftText.SetText(timeLeft.ToString());
+                DisplayText(timeLeftText, "Ends in : " + (timeLeft / TimeTickSystem.ticksPerHour).ToString("F2"), 20);
                 separator.SetActive(true);
                 Appear(true);
                 GameManager.Instance.taskOpened = true;
