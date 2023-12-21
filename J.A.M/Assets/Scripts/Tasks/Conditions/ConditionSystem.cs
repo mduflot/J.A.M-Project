@@ -7,9 +7,11 @@ using UnityEngine;
 public class ConditionSystem
 {
     // Call if Target is Leader or Assistant
+    //TODO : GIGA FIX THIS FUNCTION
     public static bool CheckCharacterCondition(CharacterBehaviour leaderCharacter, CharacterBehaviour[] assistantCharacters, ConditionSO taskCondition)
     {
         if (taskCondition.BaseCondition.target == OutcomeData.OutcomeTarget.None) return true;
+        if (leaderCharacter == null) return false;
         
         var ssTraits = GameManager.Instance.SpaceshipManager.SpaceshipTraits;
         var hssTraits = GameManager.Instance.SpaceshipManager.HiddenSpaceshipTraits;
