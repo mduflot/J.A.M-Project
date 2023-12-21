@@ -104,7 +104,7 @@ namespace Managers
                     Debug.Log("Error while setting time scale");
                     break;
             }
-            if (newScale != 0) lastActiveTimeScale = newScale;
+            if (newScale != 0) lastActiveTimeScale = scale;
             timeScale = newScale;
         }
 
