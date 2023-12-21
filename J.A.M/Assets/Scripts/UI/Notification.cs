@@ -112,17 +112,6 @@ namespace UI
             //checkCondition & reference
             var validatedCondition = false;
 
-            for (int i = 0; i < Task.Conditions.Count; i++)
-            {
-                taskCondition = Task.Conditions[i].Item1;
-                validatedCondition = RouteCondition(taskCondition.BaseCondition.target);
-                if (validatedCondition)
-                {
-                    Task.conditionIndex = i;
-                    break;
-                }
-            }
-
             if (LeaderCharacters.Count == 0)
             {
                 Debug.Log("No leader assigned to task");
@@ -130,6 +119,21 @@ namespace UI
                 Task.conditionIndex = Task.Conditions.Count - 1;
                 validatedCondition = true;
             }
+            else
+            {
+                for (int i = 0; i < Task.Conditions.Count; i++)
+                {
+                    taskCondition = Task.Conditions[i].Item1;
+                    validatedCondition = RouteCondition(taskCondition.BaseCondition.target);
+                    if (validatedCondition)
+                    {
+                        Task.conditionIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            
             foreach (var outcome in go)
             {
                 gaugeOutcomes.Add(outcome);
