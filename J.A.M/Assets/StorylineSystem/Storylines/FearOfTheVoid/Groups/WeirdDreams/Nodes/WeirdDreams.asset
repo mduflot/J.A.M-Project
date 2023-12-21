@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: WeirdDreams
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: WeirdDreams
+  <Choices>k__BackingField:
+  - rid: 5268905287328465151
+  - rid: 5268905287328465152
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: Many crew members have experienced very strange dreams
+    lately. Maybe some form of space induced mental illness. Should we investigate
+    ?
+  <TaskStatus>k__BackingField: 0
+  <TaskType>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 21300000, guid: 3d3cd007623c2504c8375e80e68c44bd,
+    type: 3}
+  <TimeLeft>k__BackingField: 2
+  <Duration>k__BackingField: 1
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 0
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 6
+  <Furniture>k__BackingField: 4
+  references:
+    version: 2
+    RefIds:
+    - rid: 5268905287328465151
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 1ebbe3962eb531840be8188b2046fc1e,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 8f9ae8d66b1ebf1409ee84139d7dd488,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will ask about crew members and try to find
+          a pattern or a cause
+    - rid: 5268905287328465152
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNode>k__BackingField: {fileID: 0}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 7becdd247cb599d4791452eae486f23e,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No actions will be taken.

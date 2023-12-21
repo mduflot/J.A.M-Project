@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: TaskNode
   <Choices>k__BackingField:
-  - rid: 5268905267145998409
-  - rid: 5268905267145998410
-  - rid: 5268905267145998411
-  - rid: 5268905267145998412
+  - rid: 5268905284392714483
+  - rid: 5268905284392714484
+  - rid: 5268905284392714485
+  - rid: 5268905284392714486
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
-  <Description>k__BackingField: Description
+  <Description>k__BackingField: The excess of food could be converted into biomass.
+    What should we use it for ?
   <TaskStatus>k__BackingField: 1
   <TaskType>k__BackingField: 1
   <Icon>k__BackingField: {fileID: 21300000, guid: 16241ca68beab624daa21b7813874b15,
@@ -35,7 +36,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5268905267145998409
+    - rid: 5268905284392714483
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -44,7 +45,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: will be turned food excess into biomass
           to permanently fertilize the soil.
-    - rid: 5268905267145998410
+    - rid: 5268905284392714484
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
@@ -53,7 +54,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: will be turned food excess into biomass
           to produce power and permanently fertilize the soil.
-    - rid: 5268905267145998411
+    - rid: 5268905284392714485
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: ThirdChoice
@@ -62,7 +63,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: will be turned food excess into biomass
           to produce fuel and permanently fertilize the soil.
-    - rid: 5268905267145998412
+    - rid: 5268905284392714486
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FourthChoice

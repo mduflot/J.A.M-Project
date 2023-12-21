@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: VentilationNoises
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: VentilationNoises
+  <Choices>k__BackingField:
+  - rid: 5268905284392714574
+  - rid: 5268905284392714575
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: Noises are coming from the vents, someone should
+    be sent to check.
+  <TaskStatus>k__BackingField: 0
+  <TaskType>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: 178ea6ed06e6e114aa5b5ba5f88233cf,
+    type: 3}
+  <TimeLeft>k__BackingField: 3
+  <Duration>k__BackingField: 3
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 0
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 2
+  <Furniture>k__BackingField: 6
+  references:
+    version: 2
+    RefIds:
+    - rid: 5268905284392714574
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 2b40028ed19c75c4480776a666e4414e,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: c1345715a581a134a98518bbba4fe92a,
+          type: 2}
+        <PreviewOutcome>k__BackingField: The crew member send in the vent will stays
+          in contact with the crew in case something bad happens.
+    - rid: 5268905284392714575
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: c5fb3eee23bfb3a48957de2cf873fda6,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 5c384d7b93f51b84ea8264d56178550e,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No one will be sent to investigate the noises.
+          Let's hope its nothing bad.

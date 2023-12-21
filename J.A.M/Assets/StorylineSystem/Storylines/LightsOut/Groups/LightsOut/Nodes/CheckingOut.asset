@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: CheckingOut
   <Choices>k__BackingField:
-  - rid: 5268905269510012985
-  - rid: 5268905269510012986
-  - rid: 5268905269510012987
+  - rid: 5268905284392714431
+  - rid: 5268905284392714432
+  - rid: 5268905284392714433
   <NodeType>k__BackingField: 1
-  <IsStartingNode>k__BackingField: 0
+  <IsStartingNode>k__BackingField: 1
   <Description>k__BackingField: An entire area of the ship is in the dark.
   <TaskStatus>k__BackingField: 0
   <TaskType>k__BackingField: 1
@@ -33,7 +33,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5268905269510012985
+    - rid: 5268905284392714431
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -43,20 +43,22 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The cargo bay will be inspected in the dark
           to check the freight.
-    - rid: 5268905269510012986
+    - rid: 5268905284392714432
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
-        <NextNode>k__BackingField: {fileID: 0}
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 0d04d2839bdc4314db2707dadde6b920,
+          type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: dc930bf742d395b448e4ed8925f975c1,
           type: 2}
         <PreviewOutcome>k__BackingField: The cargo bay will be inspected carefully
           to check the freight.
-    - rid: 5268905269510012987
+    - rid: 5268905284392714433
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: ThirdChoice
-        <NextNode>k__BackingField: {fileID: 0}
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 94e137333445dde49b34691410cd4370,
+          type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: 525cd964447c638499affaf752e7d2bc,
           type: 2}
         <PreviewOutcome>k__BackingField: No one will investigate into the dark area
