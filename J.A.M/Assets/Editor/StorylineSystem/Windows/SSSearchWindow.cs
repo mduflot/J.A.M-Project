@@ -42,6 +42,11 @@ namespace SS.Windows
                     level = 2,
                     userData = SSNodeType.Time
                 },
+                new SearchTreeEntry(new GUIContent("Sound", indentationIcon))
+                {
+                    level = 2,
+                    userData = SSNodeType.Sound
+                },
                 new SearchTreeGroupEntry(new GUIContent("Node Group"), 1),
                 new SearchTreeEntry(new GUIContent("Single Group", indentationIcon))
                 {
@@ -84,6 +89,16 @@ namespace SS.Windows
                         (SSTimeNode)graphView.CreateNode("TimeName", SSNodeType.Time, localMousePosition);
 
                     graphView.AddElement(timeNode);
+
+                    return true;
+                }
+                
+                case SSNodeType.Sound:
+                {
+                    SSSoundNode soundNode =
+                        (SSSoundNode)graphView.CreateNode("SoundNode", SSNodeType.Sound, localMousePosition);
+
+                    graphView.AddElement(soundNode);
 
                     return true;
                 }

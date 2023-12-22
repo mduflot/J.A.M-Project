@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SS.Utilities;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace SS.Elements
 {
-    using Enumerations;
-    using Windows;
     using Data.Save;
+    using Enumerations;
+    using Utilities;
+    using Windows;
     
     public class SSNode : Node
     {

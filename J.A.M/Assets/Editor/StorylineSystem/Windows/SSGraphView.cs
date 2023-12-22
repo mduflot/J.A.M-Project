@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using SS.Utilities;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -11,6 +10,7 @@ namespace SS.Windows
     using Data.Save;
     using Elements;
     using Enumerations;
+    using Utilities;
 
     public class SSGraphView : GraphView
     {
@@ -121,6 +121,7 @@ namespace SS.Windows
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Dialogue)", SSNodeType.Dialogue));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Task)", SSNodeType.Task));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Time)", SSNodeType.Time));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Sound)", SSNodeType.Sound));
 
             this.AddManipulator(CreateGroupContextualMenu());
         }
