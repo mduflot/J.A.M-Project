@@ -77,7 +77,7 @@ namespace Tasks
         {
             notification = n;
             titleText.text = notification.Task.Name;
-            StartCoroutine(DisplayText(descriptionText, notification.Task.Description, 20));
+            StartCoroutine(DisplayText(descriptionText, notification.Task.Description, 0.02f));
             timeLeft = notification.Task.TimeLeft;
             duration = notification.Task.Duration;
             taskStarted = false;
@@ -118,9 +118,10 @@ namespace Tasks
                     new Vector3(0, startButtonObject.localPosition.y, startButtonObject.localPosition.z);
                 timeLeftObject.SetActive(true);
             }
+            
             if (needToDisplay)
             {
-                StartCoroutine(DisplayText(timeLeftText, "Ends in : " + (timeLeft / TimeTickSystem.ticksPerHour).ToString("F2"), 20));
+                StartCoroutine(DisplayText(timeLeftText, "Ends in : " + (timeLeft / TimeTickSystem.ticksPerHour).ToString("F2"), 0.02f));
                 separator.SetActive(true);
                 Appear(true);
                 GameManager.Instance.taskOpened = true;
@@ -131,8 +132,8 @@ namespace Tasks
         {
             notification = n;
             titleText.text = notification.Task.Name;
-            StartCoroutine(DisplayText(descriptionText, notification.Task.Description, 20));
-            StartCoroutine(DisplayText(previewOutcomeText, notification.Task.previewText, 20));
+            StartCoroutine(DisplayText(descriptionText, notification.Task.Description, 0.02f));
+            StartCoroutine(DisplayText(previewOutcomeText, notification.Task.previewText, 0.02f));
             duration = notification.Task.Duration;
             durationText.SetText(TimeTickSystem.GetTicksAsTime((uint)duration));
 
@@ -607,7 +608,7 @@ namespace Tasks
             leader.SetupIconValues();
         }
 
-        private IEnumerator DisplayText(TextMeshProUGUI text, string textToDisplay, int speed)
+        private IEnumerator DisplayText(TextMeshProUGUI text, string textToDisplay, float speed)
         {
             int letterIndex = 0;
             string tempText = "";
