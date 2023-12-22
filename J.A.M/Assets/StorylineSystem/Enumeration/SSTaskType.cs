@@ -4,6 +4,7 @@
     {
         Permanent,
         Timed,
-        Untimed
+        Untimed,
+        Compute
     }
 }

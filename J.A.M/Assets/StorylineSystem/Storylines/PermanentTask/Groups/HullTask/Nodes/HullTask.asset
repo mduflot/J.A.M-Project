@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: HullTask
   <Choices>k__BackingField:
-  - rid: 2368229784506859526
-  - rid: 2368229784506859527
+  - rid: 8412203442186485764
+  - rid: 8412203442186485765
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 1
   <Description>k__BackingField: Small asteroids often damage the hull. It'll need
@@ -34,19 +34,19 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 2368229784506859526
+    - rid: 8412203442186485764
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNode>k__BackingField: {fileID: 0}
         <Condition>k__BackingField: {fileID: 11400000, guid: 85a584a3033441d4b95d5b2884c0453c,
           type: 2}
-        <PreviewOutcome>k__BackingField: Hull...
-    - rid: 2368229784506859527
+        <PreviewOutcome>k__BackingField: 'will add :'
+    - rid: 8412203442186485765
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: LastChoice
         <NextNode>k__BackingField: {fileID: 0}
         <Condition>k__BackingField: {fileID: 11400000, guid: 51a265ec0700b8d429140d8cc71735f2,
           type: 2}
-        <PreviewOutcome>k__BackingField: Nothing...
+        <PreviewOutcome>k__BackingField: 
