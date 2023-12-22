@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: ComputesTaskGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: ComputesTask
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField: []
+  <Nodes>k__BackingField:
+  - rid: 8412203433704554497
+  <OldGroupNames>k__BackingField: []
+  <OldUngroupedNodeNames>k__BackingField:
+  - CakeTrick
+  <OldGroupedNodeNames>k__BackingField:
+    list: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 8412203433704554497
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 3028f91e-faa8-4829-b8d7-cac857d18d1b
+        <Name>k__BackingField: CakeTrick
+        <Choices>k__BackingField:
+        - rid: 8412203433704554498
+        <GroupID>k__BackingField: 
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 432, y: 173.6}
+        <DescriptionTask>k__BackingField: Description
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 3
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: efd495e7e7951104c9be808f109f77dd,
+          type: 3}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 5
+        <MandatorySlots>k__BackingField: 0
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 5
+        <Furniture>k__BackingField: 1
+    - rid: 8412203433704554498
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 8f1f9420dda8eb74cb92b831a1c682d3,
+          type: 2}
+        <PreviewOutcome>k__BackingField: Preview...

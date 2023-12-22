@@ -83,20 +83,23 @@ namespace Tasks
 
             startButton.SetActive(true);
             cancelButton.SetActive(false);
-            for (int i = 0; i < notification.Task.MandatorySlots; i++)
+            if (notification.Task.TaskType != SSTaskType.Compute)
             {
-                var slot = inactiveSlots[i];
-                slot.SetupSlot(true);
-                slot.gameObject.SetActive(true);
-                characterSlots.Add(slot);
-            }
+                for (int i = 0; i < notification.Task.MandatorySlots; i++)
+                {
+                    var slot = inactiveSlots[i];
+                    slot.SetupSlot(true);
+                    slot.gameObject.SetActive(true);
+                    characterSlots.Add(slot);
+                }
 
-            for (int i = 3; i < notification.Task.OptionalSlots + 3; i++)
-            {
-                var slot = inactiveSlots[i];
-                slot.SetupSlot(false);
-                slot.gameObject.SetActive(true);
-                characterSlots.Add(slot);
+                for (int i = 3; i < notification.Task.OptionalSlots + 3; i++)
+                {
+                    var slot = inactiveSlots[i];
+                    slot.SetupSlot(false);
+                    slot.gameObject.SetActive(true);
+                    characterSlots.Add(slot);
+                }
             }
 
             dialogueLog.DisplayDialogueLog(notification.Dialogues);
