@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: OxygenTask
   <Choices>k__BackingField:
-  - rid: 2368229784506859520
-  - rid: 2368229784506859521
+  - rid: 8412203442186485766
+  - rid: 8412203442186485767
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 1
   <Description>k__BackingField: Vents need to be cleaned regularly.
@@ -33,19 +33,19 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 2368229784506859520
+    - rid: 8412203442186485766
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNode>k__BackingField: {fileID: 0}
         <Condition>k__BackingField: {fileID: 11400000, guid: 0130a702343d19f47a4304a8c46de9c7,
           type: 2}
-        <PreviewOutcome>k__BackingField: Airflow...
-    - rid: 2368229784506859521
+        <PreviewOutcome>k__BackingField: 'will add :'
+    - rid: 8412203442186485767
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: LastChoice
         <NextNode>k__BackingField: {fileID: 0}
         <Condition>k__BackingField: {fileID: 11400000, guid: 51a265ec0700b8d429140d8cc71735f2,
           type: 2}
-        <PreviewOutcome>k__BackingField: Nothing...
+        <PreviewOutcome>k__BackingField: 
