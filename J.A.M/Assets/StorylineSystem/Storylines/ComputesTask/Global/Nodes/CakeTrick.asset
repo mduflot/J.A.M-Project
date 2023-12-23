@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: CakeTrick
   <Choices>k__BackingField:
-  - rid: 8412203433704554496
+  - rid: 8412203468160499715
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 1
-  <Description>k__BackingField: Description
+  <Description>k__BackingField: Prepare food !
   <TaskStatus>k__BackingField: 0
   <TaskType>k__BackingField: 3
   <Icon>k__BackingField: {fileID: 21300000, guid: efd495e7e7951104c9be808f109f77dd,
     type: 3}
   <TimeLeft>k__BackingField: 0
-  <Duration>k__BackingField: 5
+  <Duration>k__BackingField: 0
   <MandatorySlots>k__BackingField: 0
   <OptionalSlots>k__BackingField: 0
   <TaskHelpFactor>k__BackingField: 0.75
@@ -32,11 +32,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 8412203433704554496
+    - rid: 8412203468160499715
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNode>k__BackingField: {fileID: 0}
         <Condition>k__BackingField: {fileID: 11400000, guid: 8f1f9420dda8eb74cb92b831a1c682d3,
           type: 2}
-        <PreviewOutcome>k__BackingField: Preview...
+        <PreviewOutcome>k__BackingField: 'You will add :'

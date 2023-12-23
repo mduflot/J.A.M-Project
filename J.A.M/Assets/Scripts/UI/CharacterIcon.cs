@@ -20,7 +20,6 @@ namespace UI
         [NonSerialized] public CharacterBehaviour character;
 
         private Animator animator;
-        private bool isFromRoot;
         private Transform parentAfterDrag;
         private CharacterUI parentScript;
         private float clickTime;
@@ -65,13 +64,6 @@ namespace UI
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (!isFromRoot && Vector3.Distance(transform.position, parentAfterDrag.position) >= 80)
-            {
-                parentAfterDrag = baseParentScript.transform;
-                parentScript = baseParentScript;
-            }
-
-            isFromRoot = false;
             SetupIconValues();
             GameManager.Instance.UIManager.characterInfoUI.ClearCharacterInfo();
         }
@@ -110,7 +102,6 @@ namespace UI
 
         public void SetupIcon(Transform parent, CharacterUI script)
         {
-            isFromRoot = parentScript == baseParentScript;
             parentAfterDrag = parent;
             transform.localPosition = Vector3.zero;
             parentScript = script;

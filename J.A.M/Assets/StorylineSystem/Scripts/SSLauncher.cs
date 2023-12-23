@@ -561,7 +561,7 @@ namespace SS
                 notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
                 spaceshipManager.AddTask(notification);
                 if (nodeSO.TaskType.Equals(SSTaskType.Permanent) && icon != null) notification.Display(icon);
-                else if (nodeSO.TaskType.Equals(SSTaskType.Permanent)) notification.Display();
+                else if (nodeSO.TaskType.Equals(SSTaskType.Permanent) || nodeSO.TaskType.Equals(SSTaskType.Compute)) notification.Display();
                 StartCoroutine(WaiterTask(nodeSO, task));
             }
         }

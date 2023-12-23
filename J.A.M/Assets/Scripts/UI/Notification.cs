@@ -375,7 +375,7 @@ namespace UI
 
         public void OnCancel()
         {
-            if (Task.TaskType.Equals(SSTaskType.Permanent))
+            if (Task.TaskType.Equals(SSTaskType.Permanent) || Task.TaskType.Equals(SSTaskType.Compute))
             {
                 if (!IsStarted || IsCancelled)
                 {

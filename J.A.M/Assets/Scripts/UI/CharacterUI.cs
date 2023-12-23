@@ -15,14 +15,14 @@ namespace UI
         public Image previewMoodGauge;
 
         [SerializeField] private Speaker speaker;
-        
+
         public void Initialize(CharacterBehaviour c)
         {
             character = c;
             c.speaker = speaker;
             icon.Initialize(character, this);
         }
-        
+
         public void ClearCharacter()
         {
             icon = null;
@@ -40,9 +40,6 @@ namespace UI
             icon = dropped.GetComponent<CharacterIcon>();
             icon.SetupIcon(transform, this);
             icon.transform.localScale = transform.localScale;
-            Debug.Log("On me drop dessus");
         }
-        
-       
     }
 }

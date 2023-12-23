@@ -14,8 +14,7 @@ namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-        [Header("Task")]
-        [SerializeField] private TextMeshProUGUI titleText;
+        [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI timeLeftText;
         [SerializeField] private GameObject timeLeftObject;
         [SerializeField] private Transform startButtonObject;
@@ -30,11 +29,9 @@ namespace Tasks
         [SerializeField] private DialogueLog dialogueLog;
         [SerializeField] private GameObject separator;
 
-        [Header("Dialogues")]
-        [SerializeField] private GameObject dialogueContainer;
+        [Header("Dialogues")] [SerializeField] private GameObject dialogueContainer;
 
-        [Header("Values")]
-        [SerializeField] private float timeLeft;
+        [Header("Values")] [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
 
         private Notification notification;
@@ -118,10 +115,11 @@ namespace Tasks
                     new Vector3(0, startButtonObject.localPosition.y, startButtonObject.localPosition.z);
                 timeLeftObject.SetActive(true);
             }
-            
+
             if (needToDisplay)
             {
-                StartCoroutine(DisplayText(timeLeftText, "Ends in : " + (timeLeft / TimeTickSystem.ticksPerHour).ToString("F2"), 0.02f));
+                StartCoroutine(DisplayText(timeLeftText,
+                    "Ends in : " + (timeLeft / TimeTickSystem.ticksPerHour).ToString("F2"), 0.02f));
                 separator.SetActive(true);
                 Appear(true);
                 GameManager.Instance.taskOpened = true;
@@ -176,25 +174,21 @@ namespace Tasks
             {
                 List<GaugesOutcome> gaugeOutcomes = new List<GaugesOutcome>();
                 List<CharacterOutcome> characterOutcomes = new List<CharacterOutcome>();
-                
+
                 for (int index = 0; index < notification.Task.Conditions.Count; index++)
                 {
-                    CharacterBehaviour leader = null;
-                    List<CharacterBehaviour> assistants = new List<CharacterBehaviour>();
-                    for (int j = 0; j < characterSlots.Count; j++)
-                    {
-                        if (characterSlots[j].isMandatory && characterSlots[j].icon != null)
-                            leader = characterSlots[j].icon.character;
-                        else if (characterSlots[j].icon != null)
-                            assistants.Add(characterSlots[j].icon.character);
-                    }
-
-                    bool condition = CheckTarget(notification.Task.Conditions[index].Item1, leader, assistants);
-
+                    bool condition = CheckTarget(notification.Task.Conditions[index].Item1);
+                    
                     if (condition)
                     {
-                        if (characterSlots[0].icon != null) previewOutcomeText.text = $"{characterSlots[0].icon.character.GetCharacterData().name} {notification.Task.Conditions[index].Item2}\n";
+                        if (notification.Task.TaskType != SSTaskType.Compute)
+                        {
+                            if (characterSlots[0].icon != null)
+                                previewOutcomeText.text =
+                                    $"{characterSlots[0].icon.character.GetCharacterData().name} {notification.Task.Conditions[index].Item2}\n";
+                        }
                         else previewOutcomeText.text = $"{notification.Task.Conditions[index].Item2}\n";
+
                         var traits = DisplayTraits(notification.Task.Conditions[index].Item1);
 
                         for (int j = 0; j < notification.Task.Conditions[index].Item1.outcomes.Outcomes.Length; j++)
@@ -209,14 +203,20 @@ namespace Tasks
                              jindex < notification.Task.Conditions[index].Item1.additionnalConditions.Length;
                              jindex++)
                         {
-                            condition = CheckTarget(notification.Task.Conditions[index].Item1.additionnalConditions[jindex], leader, assistants);
+                            condition = CheckTarget(notification.Task.Conditions[index].Item1
+                                .additionnalConditions[jindex]);
 
                             if (condition)
                             {
-                                traits = DisplayTraits(notification.Task.Conditions[index].Item1.additionnalConditions[jindex]);
-                                for (int j = 0; j < notification.Task.Conditions[index].Item1.additionnalConditions[jindex].outcomes.Outcomes.Length; j++)
+                                traits = DisplayTraits(notification.Task.Conditions[index].Item1
+                                    .additionnalConditions[jindex]);
+                                for (int j = 0;
+                                     j < notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
+                                         .outcomes.Outcomes.Length;
+                                     j++)
                                 {
-                                    var outcome = notification.Task.Conditions[index].Item1.additionnalConditions[jindex].outcomes.Outcomes[j];
+                                    var outcome = notification.Task.Conditions[index].Item1
+                                        .additionnalConditions[jindex].outcomes.Outcomes[j];
                                     DisplayPreview(outcome, traits, gaugeOutcomes);
                                 }
 
@@ -328,12 +328,12 @@ namespace Tasks
                                 $"<color=yellow>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                             break;
                     }
-                                        
+
                     var volition =
                         outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add
                             ? characterSlots[0].icon.character.GetVolition()
-                            : - characterSlots[0].icon.character.GetVolition();
-                                        
+                            : -characterSlots[0].icon.character.GetVolition();
+
                     gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
                         volition));
                     break;
@@ -459,8 +459,18 @@ namespace Tasks
             }
         }
 
-        private bool CheckTarget(ConditionSO conditionSO, CharacterBehaviour leader, List<CharacterBehaviour> assistants)
+        private bool CheckTarget(ConditionSO conditionSO)
         {
+            CharacterBehaviour leader = null;
+            List<CharacterBehaviour> assistants = new List<CharacterBehaviour>();
+            for (int j = 0; j < characterSlots.Count; j++)
+            {
+                if (characterSlots[j].isMandatory && characterSlots[j].icon != null)
+                    leader = characterSlots[j].icon.character;
+                else if (characterSlots[j].icon != null)
+                    assistants.Add(characterSlots[j].icon.character);
+            }
+
             var condition = false;
             switch (conditionSO.BaseCondition.target)
             {

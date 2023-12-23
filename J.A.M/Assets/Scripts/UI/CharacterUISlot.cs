@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -7,7 +8,7 @@ namespace UI
     {
         public bool isMandatory;
 
-        [SerializeField] private UnityEngine.UI.Image image;
+        [SerializeField] private Image image;
         [SerializeField] private Transform iconParent;
         [SerializeField] private Sprite mandatorySprite;
         [SerializeField] private Sprite assistantSprite;
