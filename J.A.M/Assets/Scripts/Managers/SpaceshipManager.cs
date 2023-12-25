@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class SpaceshipManager : MonoBehaviour
+    public class SpaceshipManager : MonoBehaviour, IDataPersistence
     {
         public Room[] rooms;
         public ShipSystem[] systems;
@@ -227,5 +227,30 @@ namespace Managers
         }
 
         #endregion
+
+        public void LoadData(GameData gameData)
+        {
+            foreach (var system in systems)
+            {
+                if (gameData.gaugeValues.TryGetValue(system.type, out float value))
+                {
+                    system.gaugeValue = value;
+                }
+            }
+            this.SpaceshipTraits = gameData.spaceshipTraits;
+            this.HiddenSpaceshipTraits = gameData.hiddenSpaceshipTraits;
+        }
+
+        public void SaveData(ref GameData gameData)
+        {
+            foreach (var system in systems)
+            {
+                if (gameData.gaugeValues.TryAdd(system.type, system.gaugeValue)) continue;
+                gameData.gaugeValues.Remove(system.type);
+                gameData.gaugeValues.Add(system.type, system.gaugeValue);
+            }
+            gameData.spaceshipTraits = this.SpaceshipTraits;
+            gameData.hiddenSpaceshipTraits = this.HiddenSpaceshipTraits;
+        }
     }
 }

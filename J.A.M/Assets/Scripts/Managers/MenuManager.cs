@@ -4,6 +4,16 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject optionsContainer;
+
+    public void SaveGame()
+    {
+        DataPersistenceManager.Instance.SaveGame();
+    }
+
+    public void LoadGame()
+    {
+        DataPersistenceManager.Instance.LoadGame();
+    }
     
     public void LoadScene(string sceneName)
     {
