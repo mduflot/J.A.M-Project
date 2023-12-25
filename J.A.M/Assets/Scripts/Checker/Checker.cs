@@ -10,12 +10,14 @@ using Random = UnityEngine.Random;
 
 public class Checker : MonoBehaviour, IDataPersistence
 {
-    [SerializeField] private SSCampaignSO ssCampaign;
+    [SerializeField] private List<SSCampaignSO> ssCampaigns;
     [SerializeField] private SSLauncher principalLauncher;
     [SerializeField] private SSLauncher secondaryLauncher;
     [SerializeField] private SSLauncher trivialLauncher;
     [SerializeField] private GameObject presentationContainer;
     [SerializeField] private TextMeshProUGUI presentationText;
+
+    private SSCampaignSO ssCampaign;
 
     private float priorityFactor;
     private Storyline chosenStoryline;
@@ -29,12 +31,13 @@ public class Checker : MonoBehaviour, IDataPersistence
     private List<Storyline> availableStoryLines = new();
     private List<SSNodeGroupSO> availableTimelines = new();
 
-    public void Initialize()
+    public void Initialize(SSCampaignSO campaign = null)
     {
+        ssCampaign = campaign != null ? campaign : ssCampaigns[0];
         principalStorylines = ssCampaign.PrincipalStorylines;
         secondaryStorylines = ssCampaign.SecondaryStorylines;
         trivialStorylines = ssCampaign.TrivialStorylines;
-        GenerateRandomEvent();
+        // GenerateRandomEvent();
     }
 
     public void GenerateRandomEvent()
@@ -51,7 +54,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         if ((!enabledPStorylines.Any() && !enabledSStorylines.Any() && !enabledTStorylines.Any()) ||
             (principalLauncher.IsRunning && secondaryLauncher.IsRunning && trivialLauncher.IsRunning))
         {
-            Debug.Log("No available storylines");
+            Debug.LogError($"No storylines available or all launchers are running");
             return;
         }
 
@@ -216,7 +219,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                 var storyline = activeStorylines[index];
                 for (int j = 0; j < storyline.Timelines.Count; j++)
                 {
-                    if (storyline.Timelines[j].StoryStatus == SSStoryStatus.Enabled)
+                    if (storyline.Timelines[j].Status == SSStoryStatus.Enabled)
                     {
                         isAllCompleted = false;
                         break;
@@ -242,17 +245,17 @@ public class Checker : MonoBehaviour, IDataPersistence
         for (var index = 0; index < chosenStoryline.Timelines.Count; index++)
         {
             var timeline = chosenStoryline.Timelines[index];
-            if (timeline.StoryStatus != SSStoryStatus.Enabled) continue;
-            if (timeline.IsFirstToPlay)
+            if (timeline.Status != SSStoryStatus.Enabled) continue;
+            if (timeline.TimelineContainer.IsFirstToPlay)
             {
-                StartTimeline(timeline);
+                StartTimeline(timeline.TimelineContainer);
                 return;
             }
 
-            if (timeline.Condition)
-                if (RouteCondition(timeline.Condition))
+            if (timeline.TimelineContainer.Condition)
+                if (RouteCondition(timeline.TimelineContainer.Condition))
                     continue;
-            availableTimelines.Add(timeline);
+            availableTimelines.Add(timeline.TimelineContainer);
         }
 
         if (availableTimelines.Count == 0)
@@ -367,11 +370,135 @@ public class Checker : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData gameData)
     {
-        
+        // Give the campaign ID to the checker and load the campaign
+        for (int index = 0; index < ssCampaigns.Count; index++)
+        {
+            if (ssCampaigns[index].ID == gameData.currentCampaignID)
+            {
+                Initialize(ssCampaigns[index]);
+                break;
+            }
+
+            if (index == ssCampaigns.Count - 1)
+            {
+                Debug.LogError("Campaign not found");
+                return;
+            }
+        }
+
+        for (int indexStoryline = 0; indexStoryline < principalStorylines.Count; indexStoryline++)
+        {
+            var storyline = principalStorylines[indexStoryline];
+            if (gameData.storylineStatus.ContainsKey(storyline.ID))
+            {
+                storyline.Status = gameData.storylineStatus[storyline.ID];
+                for (int indexTimeline = 0; indexTimeline < storyline.Timelines.Count; indexTimeline++)
+                {
+                    var timeline = storyline.Timelines[indexTimeline];
+                    if (gameData.timelineStatus.ContainsKey(timeline.ID))
+                    {
+                        timeline.Status = gameData.timelineStatus[timeline.ID];
+                    }
+                }
+            }
+        }
+
+        for (int indexStoryline = 0; indexStoryline < secondaryStorylines.Count; indexStoryline++)
+        {
+            var storyline = secondaryStorylines[indexStoryline];
+            if (gameData.storylineStatus.ContainsKey(storyline.ID))
+            {
+                storyline.Status = gameData.storylineStatus[storyline.ID];
+                for (int indexTimeline = 0; indexTimeline < storyline.Timelines.Count; indexTimeline++)
+                {
+                    var timeline = storyline.Timelines[indexTimeline];
+                    if (gameData.timelineStatus.ContainsKey(timeline.ID))
+                    {
+                        timeline.Status = gameData.timelineStatus[timeline.ID];
+                    }
+                }
+            }
+        }
+
+        for (int indexStoryline = 0; indexStoryline < trivialStorylines.Count; indexStoryline++)
+        {
+            var storyline = trivialStorylines[indexStoryline];
+            if (gameData.storylineStatus.ContainsKey(storyline.ID))
+            {
+                storyline.Status = gameData.storylineStatus[storyline.ID];
+                for (int indexTimeline = 0; indexTimeline < storyline.Timelines.Count; indexTimeline++)
+                {
+                    var timeline = storyline.Timelines[indexTimeline];
+                    if (gameData.timelineStatus.ContainsKey(timeline.ID))
+                    {
+                        timeline.Status = gameData.timelineStatus[timeline.ID];
+                    }
+                }
+            }
+        }
+
+        activeStorylines.Clear();
+
+        for (int index = 0; index < gameData.activeStorylines.Count; index++)
+        {
+            var storyline = gameData.activeStorylines[index];
+            for (int j = 0; j < ssCampaign.Storylines.Count; j++)
+            {
+                if (ssCampaign.Storylines[j].ID == storyline)
+                {
+                    activeStorylines.Add(ssCampaign.Storylines[j]);
+                    break;
+                }
+            }
+        }
     }
 
     public void SaveData(ref GameData gameData)
     {
-        
+        gameData.currentCampaignID = ssCampaign.ID;
+
+        gameData.storylineStatus.Clear();
+        gameData.timelineStatus.Clear();
+
+        for (int indexStoryline = 0; indexStoryline < principalStorylines.Count; indexStoryline++)
+        {
+            var storyline = principalStorylines[indexStoryline];
+            gameData.storylineStatus.Add(storyline.ID, storyline.Status);
+            for (int indexTimeline = 0; indexTimeline < storyline.Timelines.Count; indexTimeline++)
+            {
+                var timeline = storyline.Timelines[indexTimeline];
+                gameData.timelineStatus.Add(timeline.ID, timeline.Status);
+            }
+        }
+
+        for (int indexStoryline = 0; indexStoryline < secondaryStorylines.Count; indexStoryline++)
+        {
+            var storyline = secondaryStorylines[indexStoryline];
+            gameData.storylineStatus.Add(storyline.ID, storyline.Status);
+            for (int indexTimeline = 0; indexTimeline < storyline.Timelines.Count; indexTimeline++)
+            {
+                var timeline = storyline.Timelines[indexTimeline];
+                gameData.timelineStatus.Add(timeline.ID, timeline.Status);
+            }
+        }
+
+        for (int indexStoryline = 0; indexStoryline < trivialStorylines.Count; indexStoryline++)
+        {
+            var storyline = trivialStorylines[indexStoryline];
+            gameData.storylineStatus.Add(storyline.ID, storyline.Status);
+            for (int indexTimeline = 0; indexTimeline < storyline.Timelines.Count; indexTimeline++)
+            {
+                var timeline = storyline.Timelines[indexTimeline];
+                gameData.timelineStatus.Add(timeline.ID, timeline.Status);
+            }
+        }
+
+        gameData.activeStorylines = new List<string>();
+
+        for (int index = 0; index < activeStorylines.Count; index++)
+        {
+            var storyline = activeStorylines[index];
+            gameData.activeStorylines.Add(storyline.ID);
+        }
     }
 }

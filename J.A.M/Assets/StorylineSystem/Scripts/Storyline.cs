@@ -2,18 +2,26 @@
 
 namespace SS
 {
+    using Enumerations;
     using ScriptableObjects;
 
     [System.Serializable]
     public class Storyline
     {
+        public string ID;
         public SSNodeContainerSO StorylineContainer;
-        public List<SSNodeGroupSO> Timelines;
+        public SSStoryStatus Status;
+        public List<Timeline> Timelines;
 
         public Storyline(SSNodeContainerSO storylineContainer, List<SSNodeGroupSO> timelines)
         {
             StorylineContainer = storylineContainer;
-            Timelines = timelines;
+            Status = storylineContainer.StoryStatus;
+            Timelines = new List<Timeline>();
+            for (int index = 0; index < timelines.Count; index++)
+            {
+                Timelines.Add(new Timeline(timelines[index]));
+            }
         }
     }
 }
