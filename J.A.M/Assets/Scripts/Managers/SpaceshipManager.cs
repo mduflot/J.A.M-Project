@@ -19,14 +19,13 @@ namespace Managers
         [SerializeField] private List<Notification> activeTasks = new();
         [SerializeField] private GameObject taskNotificationPrefab;
 
-        [Header("Character Value")] 
-        public float moodLossOnTaskStart = 7.0f;
+        [Header("Character Value")] public float moodLossOnTaskStart = 7.0f;
 
         [SerializeField] private float hourlyMoodGain = 1.0f;
 
         [SerializeField] private float hourlyMoodLossGaugeEmpty = 0.75f;
         public float moodLossOnCancelTask = 10.0f;
-    
+
         private Dictionary<SystemType, ShipSystem> systemsDictionary = new();
         private Dictionary<RoomType, Room> roomsDictionary = new();
 
@@ -82,6 +81,7 @@ namespace Managers
                 {
                     if (outcome.gauge == system.type) valueToAdd += outcome.value;
                 }
+
                 Debug.Log(valueToAdd);
                 system.previewGaugeValue += valueToAdd;
             }
@@ -97,6 +97,7 @@ namespace Managers
                     Debug.Log(outcome.gauge + " " + outcome.value);
                     if (outcome.gauge == system.type) valueToAdd -= outcome.value;
                 }
+
                 Debug.Log(valueToAdd);
                 system.previewGaugeValue += valueToAdd;
             }
@@ -128,7 +129,7 @@ namespace Managers
         {
             if (e.tick % (TimeTickSystem.ticksPerHour * 24) != 0)
                 return;
-        
+
             Debug.Log("Generating random event");
             checker.GenerateRandomEvent();
         }
@@ -228,6 +229,8 @@ namespace Managers
 
         #endregion
 
+        #region Save&Load
+
         public void LoadData(GameData gameData)
         {
             foreach (var system in systems)
@@ -237,6 +240,7 @@ namespace Managers
                     system.gaugeValue = value;
                 }
             }
+
             this.SpaceshipTraits = gameData.spaceshipTraits;
             this.HiddenSpaceshipTraits = gameData.hiddenSpaceshipTraits;
         }
@@ -249,8 +253,11 @@ namespace Managers
                 gameData.gaugeValues.Remove(system.type);
                 gameData.gaugeValues.Add(system.type, system.gaugeValue);
             }
+
             gameData.spaceshipTraits = this.SpaceshipTraits;
             gameData.hiddenSpaceshipTraits = this.HiddenSpaceshipTraits;
         }
+
+        #endregion
     }
 }

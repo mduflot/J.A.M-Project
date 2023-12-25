@@ -181,6 +181,7 @@ namespace Tasks
                     
                     if (condition)
                     {
+                        previewOutcomeText.text = null;
                         if (notification.Task.TaskType != SSTaskType.Compute)
                         {
                             if (characterSlots[0].icon != null)

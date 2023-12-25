@@ -8,7 +8,7 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Checker : MonoBehaviour
+public class Checker : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private SSCampaignSO ssCampaign;
     [SerializeField] private SSLauncher principalLauncher;
@@ -363,5 +363,15 @@ public class Checker : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         presentationContainer.SetActive(false);
+    }
+
+    public void LoadData(GameData gameData)
+    {
+        
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        
     }
 }
