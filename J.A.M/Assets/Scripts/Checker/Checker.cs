@@ -591,6 +591,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         }
 
         gameData.currentNodes.Clear();
+        gameData.dialogueTimelines.Clear();
 
         if (principalLauncher.IsRunning)
         {
@@ -599,7 +600,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                 var storyline = principalStorylines[index];
                 if (storyline.StorylineContainer == principalLauncher.nodeContainer)
                 {
-                    gameData.currentNodes.Add(storyline.ID, principalLauncher.node.NodeName);
+                    gameData.currentNodes.Add(storyline.ID, principalLauncher.CurrentNode.NodeName);
                     gameData.dialogueTimelines.Add(storyline.ID, principalLauncher.dialogues);
                     break;
                 }
@@ -613,7 +614,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                 var storyline = secondaryStorylines[index];
                 if (storyline.StorylineContainer == secondaryLauncher.nodeContainer)
                 {
-                    gameData.currentNodes.Add(storyline.ID, secondaryLauncher.node.NodeName);
+                    gameData.currentNodes.Add(storyline.ID, secondaryLauncher.CurrentNode.NodeName);
                     gameData.dialogueTimelines.Add(storyline.ID, secondaryLauncher.dialogues);
                     break;
                 }
@@ -627,7 +628,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                 var storyline = trivialStorylines[index];
                 if (storyline.StorylineContainer == trivialLauncher.nodeContainer)
                 {
-                    gameData.currentNodes.Add(storyline.ID, trivialLauncher.node.NodeName);
+                    gameData.currentNodes.Add(storyline.ID, trivialLauncher.CurrentNode.NodeName);
                     gameData.dialogueTimelines.Add(storyline.ID, trivialLauncher.dialogues);
                     break;
                 }

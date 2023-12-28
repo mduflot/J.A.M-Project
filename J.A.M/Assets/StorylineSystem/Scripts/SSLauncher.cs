@@ -22,6 +22,7 @@ namespace SS
         [HideInInspector] public bool CanIgnoreDialogueTask;
         [HideInInspector] public bool IsRunning { get; private set; }
         [HideInInspector] public List<Tuple<Sprite, string, string>> dialogues { get; set; }
+        [HideInInspector] public SSNodeSO CurrentNode { get; private set; }
 
         /* UI GameObjects */
         [SerializeField] private TextMeshProUGUI currentStoryline;
@@ -73,10 +74,6 @@ namespace SS
             RunNode(node as SSTaskNodeSO, icon);
         }
 
-        public void StartTimeline(List<string> nodeNames)
-        {
-        }
-
         private void ResetTimeline()
         {
             dialogues.Clear();
@@ -93,6 +90,7 @@ namespace SS
         /// <param name="nodeSO"> Node you need to run </param>
         private void CheckNodeType(SSNodeSO nodeSO)
         {
+            CurrentNode = nodeSO;
             switch (nodeSO.NodeType)
             {
                 case SSNodeType.Dialogue:
