@@ -178,13 +178,33 @@ namespace CharacterSystem
             {
                 traits = t;
             }
+            if (gameData.characterMoods.TryGetValue(data.ID, out var m))
+            {
+                mood = m;
+            }
+            if (gameData.characterVolitions.TryGetValue(data.ID, out var v))
+            {
+                volition = v;
+            }
         }
 
         public void SaveData(ref GameData gameData)
         {
-            if (gameData.characterTraits.TryAdd(data.ID, traits)) return;
-            gameData.characterTraits.Remove(data.ID);
-            gameData.characterTraits.Add(data.ID, traits);
+            if (!gameData.characterTraits.TryAdd(data.ID, traits))
+            {
+                gameData.characterTraits.Remove(data.ID);
+                gameData.characterTraits.Add(data.ID, traits);
+            }
+            if (!gameData.characterMoods.TryAdd(data.ID, mood))
+            {
+                gameData.characterMoods.Remove(data.ID);
+                gameData.characterMoods.Add(data.ID, mood);return;
+            }
+            if (!gameData.characterVolitions.TryAdd(data.ID, volition))
+            {
+                gameData.characterVolitions.Remove(data.ID);
+                gameData.characterVolitions.Add(data.ID, volition);
+            }
         }
     }
 }

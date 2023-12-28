@@ -33,8 +33,8 @@ namespace Managers
         {
             Initialize();
             InitializeSystems();
-            checker.Initialize();
             notificationPool = new Pool<GameObject>(taskNotificationPrefab, 5);
+            DataPersistenceManager.Instance.InitializeGame();
         }
 
         private void Initialize()
@@ -82,7 +82,6 @@ namespace Managers
                     if (outcome.gauge == system.type) valueToAdd += outcome.value;
                 }
 
-                Debug.Log(valueToAdd);
                 system.previewGaugeValue += valueToAdd;
             }
         }
@@ -94,11 +93,9 @@ namespace Managers
                 var valueToAdd = 0f;
                 foreach (var outcome in outcomes)
                 {
-                    Debug.Log(outcome.gauge + " " + outcome.value);
                     if (outcome.gauge == system.type) valueToAdd -= outcome.value;
                 }
 
-                Debug.Log(valueToAdd);
                 system.previewGaugeValue += valueToAdd;
             }
         }

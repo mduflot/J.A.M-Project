@@ -1,3 +1,4 @@
+using Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,12 +13,15 @@ namespace UI
         [SerializeField] private Transform iconParent;
         [SerializeField] private Sprite mandatorySprite;
         [SerializeField] private Sprite assistantSprite;
+        
+        private TaskUI taskUI;
 
-        public void SetupSlot(bool mandatory)
+        public void SetupSlot(bool mandatory, TaskUI task)
         {
             image.sprite = mandatory ? mandatorySprite : assistantSprite;
             transform.localScale = mandatory ? Vector3.one : Vector3.one / 1.15f;
             isMandatory = mandatory;
+            taskUI = task;
         }
 
         public override void OnDrop(PointerEventData eventData)

@@ -20,6 +20,8 @@ namespace SS
     {
         [HideInInspector] public bool IsCancelled;
         [HideInInspector] public bool CanIgnoreDialogueTask;
+        [HideInInspector] public bool IsRunning { get; private set; }
+        [HideInInspector] public List<Tuple<Sprite, string, string>> dialogues { get; set; }
 
         /* UI GameObjects */
         [SerializeField] private TextMeshProUGUI currentStoryline;
@@ -42,24 +44,20 @@ namespace SS
         private List<CharacterBehaviour> assignedCharacters = new();
         private List<CharacterBehaviour> notAssignedCharacters = new();
         private List<CharacterBehaviour> traitsCharacters = new();
-        private List<Tuple<Sprite, string, string>> dialogues;
         private SSTimeNodeSO timeNode;
         private uint durationTimeNode;
         private Task task;
-        private bool isRunning;
-
-        public bool IsRunning => isRunning;
 
         private void Start()
         {
             spaceshipManager = GameManager.Instance.SpaceshipManager;
         }
-        
+
         public void StartTimeline()
         {
             dialogues = new();
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
-            isRunning = true;
+            IsRunning = true;
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
             CheckNodeType(node);
@@ -69,10 +67,14 @@ namespace SS
         {
             dialogues = new();
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
-            isRunning = true;
+            IsRunning = true;
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
             RunNode(node as SSTaskNodeSO, icon);
+        }
+
+        public void StartTimeline(List<string> nodeNames)
+        {
         }
 
         private void ResetTimeline()
@@ -259,7 +261,7 @@ namespace SS
                     {
                         if (nodeSO.Choices.First().NextNode == null)
                         {
-                            isRunning = false;
+                            IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
                             ResetTimeline();
                             return;
@@ -280,7 +282,7 @@ namespace SS
                     {
                         if (nodeSO.Choices.First().NextNode == null)
                         {
-                            isRunning = false;
+                            IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
                             ResetTimeline();
                             return;
@@ -301,7 +303,7 @@ namespace SS
                     {
                         if (nodeSO.Choices.First().NextNode == null)
                         {
-                            isRunning = false;
+                            IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
                             ResetTimeline();
                             return;
@@ -322,7 +324,7 @@ namespace SS
                     {
                         if (nodeSO.Choices.First().NextNode == null)
                         {
-                            isRunning = false;
+                            IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
                             ResetTimeline();
                             return;
@@ -343,7 +345,7 @@ namespace SS
                     {
                         if (nodeSO.Choices.First().NextNode == null)
                         {
-                            isRunning = false;
+                            IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
                             ResetTimeline();
                             return;
@@ -561,7 +563,8 @@ namespace SS
                 notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
                 spaceshipManager.AddTask(notification);
                 if (nodeSO.TaskType.Equals(SSTaskType.Permanent) && icon != null) notification.Display(icon);
-                else if (nodeSO.TaskType.Equals(SSTaskType.Permanent) || nodeSO.TaskType.Equals(SSTaskType.Compute)) notification.Display();
+                else if (nodeSO.TaskType.Equals(SSTaskType.Permanent) || nodeSO.TaskType.Equals(SSTaskType.Compute))
+                    notification.Display();
                 StartCoroutine(WaiterTask(nodeSO, task));
             }
         }
@@ -590,7 +593,7 @@ namespace SS
             {
                 if (timeNode.Choices.First().NextNode == null)
                 {
-                    isRunning = false;
+                    IsRunning = false;
                     nodeGroup.StoryStatus = SSStoryStatus.Completed;
                     ResetTimeline();
                     TimeTickSystem.OnTick -= WaitingTime;
@@ -632,7 +635,7 @@ namespace SS
             {
                 if (nodeSO.Choices.First().NextNode == null)
                 {
-                    isRunning = false;
+                    IsRunning = false;
                     nodeGroup.StoryStatus = SSStoryStatus.Completed;
                     ResetTimeline();
                     yield break;
@@ -655,7 +658,7 @@ namespace SS
 
             if (nodeSO.Choices.First().NextNode == null)
             {
-                isRunning = false;
+                IsRunning = false;
                 nodeGroup.StoryStatus = SSStoryStatus.Completed;
                 ResetTimeline();
                 yield break;
@@ -676,7 +679,7 @@ namespace SS
 
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
             {
-                isRunning = false;
+                IsRunning = false;
                 nodeGroup.StoryStatus = SSStoryStatus.Completed;
                 ResetTimeline();
                 yield break;

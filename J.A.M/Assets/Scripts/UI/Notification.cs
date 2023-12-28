@@ -331,7 +331,7 @@ namespace UI
 
         public void OnUpdate()
         {
-            if (IsStarted)
+            if (IsStarted && !IsCompleted)
             {
                 if (Task.Duration > 0)
                 {
@@ -350,7 +350,7 @@ namespace UI
                     time.text = TimeTickSystem.GetTicksAsTime((uint)Task.TimeLeft);
                     Task.TimeLeft -= TimeTickSystem.timePerTick;
                 }
-                else
+                else if (!IsStarted)
                 {
                     GameManager.Instance.UIManager.taskUI.Initialize(this, null, false);
                     GameManager.Instance.UIManager.taskUI.StartTask();
@@ -368,7 +368,6 @@ namespace UI
             transform.parent = null;
             notificationContainer.DisplayNotification();
             spaceshipManager.notificationPool.AddToPool(gameObject);
-            Debug.Log(gaugeOutcomes.Count);
             spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             IsStarted = false;
         }

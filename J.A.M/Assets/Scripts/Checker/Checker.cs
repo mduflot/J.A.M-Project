@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using SS;
@@ -37,7 +38,6 @@ public class Checker : MonoBehaviour, IDataPersistence
         principalStorylines = ssCampaign.PrincipalStorylines;
         secondaryStorylines = ssCampaign.SecondaryStorylines;
         trivialStorylines = ssCampaign.TrivialStorylines;
-        // GenerateRandomEvent();
     }
 
     public void GenerateRandomEvent()
@@ -303,61 +303,71 @@ public class Checker : MonoBehaviour, IDataPersistence
         return validateCondition;
     }
 
-    private void StartTimeline(SSNodeGroupSO timeline)
+    private void StartTimeline(SSNodeGroupSO timeline, SSNodeSO node = null, List<Tuple<Sprite, string, string>> dialogues = null)
     {
         chosenTimeline = timeline;
-        SSNodeSO node = null;
         presentationContainer.SetActive(true);
         presentationText.text = "New Storyline : " + chosenStoryline.StorylineContainer.FileName;
         StartCoroutine(DisablePresentation());
-        Debug.Log($"Key : {chosenTimeline}");
         var count = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline].Count;
         switch (chosenStoryline.StorylineContainer.StoryType)
         {
             case SSStoryType.Principal:
                 principalLauncher.nodeContainer = chosenStoryline.StorylineContainer;
                 principalLauncher.nodeGroup = chosenTimeline;
-                for (int index = 0; index < count; index++)
+                if (node == null)
                 {
-                    if (chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index].IsStartingNode)
+                    for (int index = 0; index < count; index++)
                     {
-                        node = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index];
-                        break;
+                        if (chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index].IsStartingNode)
+                        {
+                            node = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index];
+                            break;
+                        }
                     }
                 }
 
                 principalLauncher.node = node;
                 principalLauncher.StartTimeline();
+                if (dialogues != null) principalLauncher.dialogues = dialogues;
                 break;
             case SSStoryType.Secondary:
                 secondaryLauncher.nodeContainer = chosenStoryline.StorylineContainer;
                 secondaryLauncher.nodeGroup = chosenTimeline;
-                for (int index = 0; index < count; index++)
+                if (node == null)
                 {
-                    if (chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index].IsStartingNode)
+                    for (int index = 0; index < count; index++)
                     {
-                        node = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index];
-                        break;
+                        if (chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index].IsStartingNode)
+                        {
+                            node = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index];
+                            break;
+                        }
                     }
                 }
 
                 secondaryLauncher.node = node;
                 secondaryLauncher.StartTimeline();
+                if (dialogues != null) secondaryLauncher.dialogues = dialogues;
                 break;
             case SSStoryType.Trivial:
                 trivialLauncher.nodeContainer = chosenStoryline.StorylineContainer;
                 trivialLauncher.nodeGroup = chosenTimeline;
-                for (int index = 0; index < count; index++)
+                if (node == null)
                 {
-                    if (chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index].IsStartingNode)
+                    for (int index = 0; index < count; index++)
                     {
-                        node = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index];
-                        break;
+                        if (chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index].IsStartingNode)
+                        {
+                            node = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index];
+                            break;
+                        }
                     }
                 }
 
                 trivialLauncher.node = node;
                 trivialLauncher.StartTimeline();
+                if (dialogues != null) trivialLauncher.dialogues = dialogues;
                 break;
         }
     }
@@ -370,7 +380,6 @@ public class Checker : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData gameData)
     {
-        // Give the campaign ID to the checker and load the campaign
         for (int index = 0; index < ssCampaigns.Count; index++)
         {
             if (ssCampaigns[index].ID == gameData.currentCampaignID)
@@ -439,14 +448,47 @@ public class Checker : MonoBehaviour, IDataPersistence
 
         activeStorylines.Clear();
 
-        for (int index = 0; index < gameData.activeStorylines.Count; index++)
+        for (int indexActiveStoryline = 0;
+             indexActiveStoryline < gameData.activeStorylines.Count;
+             indexActiveStoryline++)
         {
-            var storyline = gameData.activeStorylines[index];
-            for (int j = 0; j < ssCampaign.Storylines.Count; j++)
+            var storyline = gameData.activeStorylines[indexActiveStoryline];
+            for (int indexStoryline = 0; indexStoryline < ssCampaign.Storylines.Count; indexStoryline++)
             {
-                if (ssCampaign.Storylines[j].ID == storyline)
+                if (ssCampaign.Storylines[indexStoryline].ID == storyline)
                 {
-                    activeStorylines.Add(ssCampaign.Storylines[j]);
+                    chosenStoryline = ssCampaign.Storylines[indexStoryline];
+                    activeStorylines.Add(chosenStoryline);
+                    if (gameData.activeTimelines.Count > 0)
+                    {
+                        for (int index = 0; index < gameData.activeTimelines.Count; index++)
+                        {
+                            var timeline = gameData.activeTimelines[index];
+                            for (int k = 0; k < chosenStoryline.Timelines.Count; k++)
+                            {
+                                if (chosenStoryline.Timelines[k].ID == timeline)
+                                {
+                                    var chosenTimeline = chosenStoryline.Timelines[k].TimelineContainer;
+                                    if (gameData.currentNodes.TryGetValue(chosenStoryline.ID, out string nodeName))
+                                    {
+                                        for (int indexNode = 0; indexNode < chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline].Count; indexNode++)
+                                        {
+                                            var node = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][indexNode];
+                                            if (node.NodeName == nodeName)
+                                            {
+                                                var dialogues = gameData.dialogueTimelines[chosenStoryline.ID];
+                                                StartTimeline(chosenTimeline, node, dialogues);
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
                     break;
                 }
             }
@@ -493,12 +535,103 @@ public class Checker : MonoBehaviour, IDataPersistence
             }
         }
 
-        gameData.activeStorylines = new List<string>();
+        gameData.activeStorylines.Clear();
 
         for (int index = 0; index < activeStorylines.Count; index++)
         {
             var storyline = activeStorylines[index];
             gameData.activeStorylines.Add(storyline.ID);
+        }
+
+        gameData.activeTimelines.Clear();
+
+        if (principalLauncher.IsRunning)
+        {
+            for (int index = 0; index < principalStorylines.Count; index++)
+            {
+                var storyline = principalStorylines[index];
+                var result =
+                    storyline.Timelines.Where(timeline => timeline.TimelineContainer == principalLauncher.nodeGroup);
+                if (result.Any())
+                {
+                    gameData.activeTimelines.Add(result.First().ID);
+                    break;
+                }
+            }
+        }
+
+        if (secondaryLauncher.IsRunning)
+        {
+            for (int index = 0; index < secondaryStorylines.Count; index++)
+            {
+                var storyline = secondaryStorylines[index];
+                var result =
+                    storyline.Timelines.Where(timeline => timeline.TimelineContainer == secondaryLauncher.nodeGroup);
+                if (result.Any())
+                {
+                    gameData.activeTimelines.Add(result.First().ID);
+                    break;
+                }
+            }
+        }
+
+        if (trivialLauncher.IsRunning)
+        {
+            for (int index = 0; index < trivialStorylines.Count; index++)
+            {
+                var storyline = trivialStorylines[index];
+                var result =
+                    storyline.Timelines.Where(timeline => timeline.TimelineContainer == trivialLauncher.nodeGroup);
+                if (result.Any())
+                {
+                    gameData.activeTimelines.Add(result.First().ID);
+                    break;
+                }
+            }
+        }
+
+        gameData.currentNodes.Clear();
+
+        if (principalLauncher.IsRunning)
+        {
+            for (int index = 0; index < principalStorylines.Count; index++)
+            {
+                var storyline = principalStorylines[index];
+                if (storyline.StorylineContainer == principalLauncher.nodeContainer)
+                {
+                    gameData.currentNodes.Add(storyline.ID, principalLauncher.node.NodeName);
+                    gameData.dialogueTimelines.Add(storyline.ID, principalLauncher.dialogues);
+                    break;
+                }
+            }
+        }
+
+        if (secondaryLauncher.IsRunning)
+        {
+            for (int index = 0; index < secondaryStorylines.Count; index++)
+            {
+                var storyline = secondaryStorylines[index];
+                if (storyline.StorylineContainer == secondaryLauncher.nodeContainer)
+                {
+                    gameData.currentNodes.Add(storyline.ID, secondaryLauncher.node.NodeName);
+                    gameData.dialogueTimelines.Add(storyline.ID, secondaryLauncher.dialogues);
+                    break;
+                }
+            }
+        }
+
+        if (trivialLauncher.IsRunning)
+        {
+            for (int index = 0; index < trivialStorylines.Count; index++)
+            {
+                var storyline = trivialStorylines[index];
+                if (storyline.StorylineContainer == trivialLauncher.nodeContainer)
+                {
+                    gameData.currentNodes.Add(storyline.ID, trivialLauncher.node.NodeName);
+                    gameData.dialogueTimelines.Add(storyline.ID, trivialLauncher.dialogues);
+                    break;
+                }
+            }
         }
     }
 }

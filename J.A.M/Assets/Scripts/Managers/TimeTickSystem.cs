@@ -6,7 +6,7 @@ namespace Managers
     public class TimeTickSystem : MonoBehaviour
     {
         public static uint timePerTick = 1; // InGame Time Unit
-        public static uint ticksPerHour = 48; 
+        public static uint ticksPerHour = 48;
         public static float timeScale = 3.0f;
 
         public static int lastActiveTimeScale = 1;
@@ -19,18 +19,19 @@ namespace Managers
         //[SerializeField] private const uint ticksPerTenMinutes = 5;
 
         [SerializeField] private TimeButton[] timeButtons;
+
         public class OnTickEventArgs : EventArgs
         {
             public uint tick;
         }
 
         public static event EventHandler<OnTickEventArgs> OnTick;
-    
+
         private const float tickTimerMax = .2f;
 
         private uint tick;
         private float tickTimer;
-    
+
         private void Awake()
         {
             tick = 0;
@@ -51,14 +52,14 @@ namespace Managers
                 if (OnTick != null) OnTick(this, new OnTickEventArgs { tick = tick });
             }
         }
-    
+
         public static string GetTimeAsInGameDate(OnTickEventArgs e)
         {
             uint currentTicks = e.tick;
             //ticksPerHour = ticksPerTenMinutes * 6;
-            uint ticksPerTenMinutes = ticksPerHour/6;
+            uint ticksPerTenMinutes = ticksPerHour / 6;
             uint ticksPerDay = ticksPerHour * 24;
-        
+
             uint days = currentTicks / ticksPerDay;
             currentTicks %= ticksPerDay;
 
@@ -66,7 +67,7 @@ namespace Managers
             currentTicks %= ticksPerHour;
 
             uint minutes = (currentTicks / ticksPerTenMinutes) * 10;
-        
+
             return "Day : " + days.ToString("D2") + " // " + hours.ToString("D2") + ":" + minutes.ToString("D2");
         }
 
@@ -90,13 +91,13 @@ namespace Managers
             switch (scale)
             {
                 case 0:
-                    newScale = pauseScale; 
+                    newScale = pauseScale;
                     break;
-                
+
                 case 1:
                     newScale = playScale;
                     break;
-                
+
                 case 2:
                     newScale = quickPlayScale;
                     break;
@@ -104,6 +105,7 @@ namespace Managers
                     Debug.Log("Error while setting time scale");
                     break;
             }
+
             if (newScale != 0) lastActiveTimeScale = scale;
             timeScale = newScale;
         }
@@ -114,6 +116,7 @@ namespace Managers
             {
                 button.DeselectButton();
             }
+
             selectedButton.SelectButton();
         }
     }

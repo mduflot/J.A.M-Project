@@ -28,7 +28,7 @@ namespace SS.ScriptableObjects
                 }
             }
         }
-        
+
         private void FillGroups(Storyline storyline)
         {
             storyline.Timelines = new List<Timeline>();
