@@ -12,8 +12,8 @@ namespace Managers
 {
     public class UIManager : MonoBehaviour
     {
-        public Gauges[] gauges;
-        private Dictionary<SystemType, Gauges> gaugeReferences = new();
+        public GaugeUI[] gauges;
+        private Dictionary<SystemType, GaugeUI> gaugeReferences = new();
         public Transform charactersUIParent;
         public List<CharacterUI> charactersUI;
         private List<CharacterIcon> characterIcons = new();
@@ -59,9 +59,7 @@ namespace Managers
 
         public void UpdateGauges(SystemType systemType, float value, float previewValue)
         {
-            gaugeReferences[systemType].gauge.fillAmount = value/50;
-            gaugeReferences[systemType].previewGauge.fillAmount = (value + previewValue) / 50;
-            gaugeReferences[systemType].arrow.sprite = previewValue > 0 ? greenArrow : redArrow;
+            gaugeReferences[systemType].UpdateGauge(value, previewValue);
             
         }
 
@@ -87,19 +85,8 @@ namespace Managers
                 {
                     if (outcome.gauge == gauge.systemType) valueToAdd += outcome.value;
                 }
-
-                if (valueToAdd > 0)
-                {
-                    valueToAdd += gauge.gauge.fillAmount * 50;
-                    gauge.previewGauge.fillAmount = valueToAdd / 50;
-                    gauge.arrow.sprite = greenArrow;
-                }
-                else
-                {
-                    gauge.previewGauge.fillAmount = GameManager.Instance.SpaceshipManager.GetGaugeValue(gauge.systemType) / 50;
-                    gauge.gauge.fillAmount = (GameManager.Instance.SpaceshipManager.GetGaugeValue(gauge.systemType) + valueToAdd) / 50;
-                    gauge.arrow.sprite = redArrow;
-                }
+                
+                gauge.PreviewOutcomeGauge(valueToAdd);
             }
         }
 
@@ -107,7 +94,7 @@ namespace Managers
         {
             foreach (var gauge in gauges)
             {
-                gauge.previewGauge.fillAmount = 0;
+                gauge.ResetPreviewGauge();
             }
         }
 
@@ -115,8 +102,7 @@ namespace Managers
         {
             foreach (var charUi in charactersUI)
             {
-                charUi.moodGauge.fillAmount = charUi.character.GetMood() / charUi.character.GetMaxMood();
-                charUi.volitionGauge.fillAmount = charUi.character.GetVolition() / charUi.character.GetMaxMood();
+                charUi.UpdateIconDisplay();
             }
         }
 
@@ -131,18 +117,7 @@ namespace Managers
                 {
                     if (c.character == character.character) value += character.value;
                 }
-                if(value < 0)
-                {
-                    c.previewMoodGauge.fillAmount = c.character.GetMood() / c.character.GetMaxMood();
-                    c.moodGauge.fillAmount = (c.character.GetMood() - GameManager.Instance.SpaceshipManager.moodLossOnTaskStart) /
-                                             c.character.GetMaxMood();
-                }
-                else
-                {
-                    value += c.moodGauge.fillAmount * c.character.GetMaxMood();
-                    c.previewMoodGauge.fillAmount = value / c.character.GetMaxMood();
-                    c.moodGauge.fillAmount = c.character.GetMood() / c.character.GetMaxMood();
-                }
+                c.PreviewMoodGauge(value);
             }
         }
 

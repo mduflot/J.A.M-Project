@@ -19,6 +19,7 @@ namespace UI
         [SerializeField] private TextMeshProUGUI characterName;
         [NonSerialized] public CharacterBehaviour character;
 
+
         private Animator animator;
         private Transform parentAfterDrag;
         private CharacterUI parentScript;

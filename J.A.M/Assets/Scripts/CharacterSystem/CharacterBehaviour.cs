@@ -30,6 +30,9 @@ namespace CharacterSystem
     
         private bool isWorking;
         private bool isTaskLeader;
+
+        private bool isMoodIncreasing;
+        
         private Notification currentNotification;
 
         private void Start()
@@ -87,6 +90,7 @@ namespace CharacterSystem
     
         public void IncreaseMood(float value)
         {
+            isMoodIncreasing = value > 0;
             mood += value;
             CapStats();
         }
@@ -164,6 +168,11 @@ namespace CharacterSystem
         {
             isWorking = false;
             currentNotification = null;
+        }
+
+        public bool IsMoodIncreasing()
+        {
+            return isMoodIncreasing;
         }
     }
 }

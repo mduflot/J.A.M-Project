@@ -280,7 +280,7 @@ namespace Tasks
                         operation = "-";
                     switch (outcome.OutcomeTargetGauge)
                     {
-                        case SystemType.Airflow:
+                        case SystemType.Trajectory:
                             previewOutcomeText.text +=
                                 $"<color=lightblue>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
                             break;
@@ -311,7 +311,7 @@ namespace Tasks
                         operation = "-";
                     switch (outcome.OutcomeTargetGauge)
                     {
-                        case SystemType.Airflow:
+                        case SystemType.Trajectory:
                             previewOutcomeText.text +=
                                 $"<color=lightblue>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                             break;
