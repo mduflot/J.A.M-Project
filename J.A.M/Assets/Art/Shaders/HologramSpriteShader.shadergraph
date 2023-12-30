@@ -17,6 +17,9 @@
         },
         {
             "m_Id": "f5717fed872c4602b087f65b26f27a68"
+        },
+        {
+            "m_Id": "41f2ff45998c4d0ca573b01068b01a79"
         }
     ],
     "m_Keywords": [],
@@ -140,6 +143,9 @@
         },
         {
             "m_Id": "6ad1c10498134c1c9a63aaee35e02a59"
+        },
+        {
+            "m_Id": "b6bf8176e12740279d002aab21e974d1"
         }
     ],
     "m_GroupDatas": [
@@ -406,6 +412,20 @@
             "m_InputSlot": {
                 "m_Node": {
                     "m_Id": "0751fa6359ba4375b8934afda6c95288"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "b6bf8176e12740279d002aab21e974d1"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "4c864987a2184f9185fd175e4247ce23"
                 },
                 "m_SlotId": 0
             }
@@ -1753,6 +1773,34 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "41f2ff45998c4d0ca573b01068b01a79",
+    "m_Guid": {
+        "m_GuidSerialized": "dc4c2e36-8274-4c61-9f43-564003672b5e"
+    },
+    "m_Name": "HologramIntensity",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "HologramIntensity",
+    "m_DefaultReferenceName": "_HologramIntensity",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.20000000298023225,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "422b0dc3eeeb486da98141f0924705ce",
@@ -2597,6 +2645,21 @@
         "e32": 0.0,
         "e33": 1.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "70df11eae692438190679734f8f2152e",
+    "m_Id": 0,
+    "m_DisplayName": "HologramIntensity",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {
@@ -3691,6 +3754,42 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "b6bf8176e12740279d002aab21e974d1",
+    "m_Group": {
+        "m_Id": "cef1c001e90f48c1b86fb0ece6ea43d8"
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -1792.0001220703125,
+            "y": 248.00001525878907,
+            "width": 171.0,
+            "height": 33.99998474121094
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "70df11eae692438190679734f8f2152e"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "41f2ff45998c4d0ca573b01068b01a79"
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.SplitNode",
     "m_ObjectId": "b83ef27df30149d7b1e38fd21ff965cb",
     "m_Group": {
@@ -4403,6 +4502,9 @@
         },
         {
             "m_Id": "f5717fed872c4602b087f65b26f27a68"
+        },
+        {
+            "m_Id": "41f2ff45998c4d0ca573b01068b01a79"
         }
     ]
 }
