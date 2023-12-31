@@ -12,7 +12,7 @@ using UnityEngine.EventSystems;
 
 namespace UI
 {
-    public class Notification : MonoBehaviour, IPointerDownHandler
+    public class Notification : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [HideInInspector] public bool IsCompleted;
         [HideInInspector] public bool IsStarted;
@@ -24,7 +24,14 @@ namespace UI
 
         [SerializeField] private SpriteRenderer icon;
         [SerializeField] private TextMeshPro time;
+        [SerializeField] private SpriteRenderer outlineSprite;
+        [SerializeField] private SpriteRenderer timerSprite;
+        [SerializeField] private SpriteRenderer timeLeftSprite;
+        [SerializeField] private Animator animator;
 
+        [SerializeField] private Sprite hoveredSprite;
+        [SerializeField] private Sprite defaultSprite;
+        
         private Camera camera;
         private SpaceshipManager spaceshipManager;
         private ConditionSO taskCondition;
@@ -32,6 +39,7 @@ namespace UI
         private OutcomeSystem.OutcomeEventArgs[] outcomeEventArgs;
         private SSLauncher launcher;
         private SSTaskNodeSO taskNode;
+        private float timeLeft;
         private List<TaskUI.GaugesOutcome> gaugeOutcomes = new List<TaskUI.GaugesOutcome>();
 
         private void Start()
@@ -54,11 +62,14 @@ namespace UI
             taskNode = ssTaskNode;
             time.text = "";
             Task.TimeLeft *= TimeTickSystem.ticksPerHour;
+            timeLeft = Task.TimeLeft;
             icon.sprite = task.Icon;
             Dialogues = dialogues;
             this.spaceshipManager = spaceshipManager;
             launcher = ssLauncher;
             TimeTickSystem.ModifyTimeScale(TimeTickSystem.lastActiveTimeScale);
+            timerSprite.material.SetInt("_Arc2", 360);
+            timeLeftSprite.material.SetInt("_Arc1", 360);
         }
 
         public void InitializeCancelTask()
@@ -337,6 +348,7 @@ namespace UI
                 {
                     time.text = TimeTickSystem.GetTicksAsTime((uint)Task.Duration);
                     Task.Duration -= TimeTickSystem.timePerTick;
+                    timerSprite.material.SetInt("_Arc2", (int)(Task.Duration / Task.BaseDuration * 360));
                 }
                 else
                 {
@@ -349,6 +361,7 @@ namespace UI
                 {
                     time.text = TimeTickSystem.GetTicksAsTime((uint)Task.TimeLeft);
                     Task.TimeLeft -= TimeTickSystem.timePerTick;
+                    timeLeftSprite.material.SetInt("_Arc1", (int)(360 - Task.TimeLeft / timeLeft * 360));
                 }
                 else
                 {
@@ -412,6 +425,18 @@ namespace UI
             {
                 character.StopTask();
             }
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            outlineSprite.sprite = hoveredSprite;
+            animator.SetBool("Selected", true);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            outlineSprite.sprite = defaultSprite;
+            animator.SetBool("Selected", false);
         }
     }
 }
