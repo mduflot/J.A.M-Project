@@ -4,7 +4,22 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject optionsContainer;
-    
+
+    public void NewGame()
+    {
+        DataPersistenceManager.Instance.NewGame();
+    }
+
+    public void SaveGame()
+    {
+        DataPersistenceManager.Instance.SaveGame();
+    }
+
+    public void LoadGame()
+    {
+        DataPersistenceManager.Instance.LoadGame();
+    }
+
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
@@ -22,9 +37,9 @@ public class MenuManager : MonoBehaviour
 
     public void QuitApplication()
     {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #endif
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
         Application.Quit();
     }
 }

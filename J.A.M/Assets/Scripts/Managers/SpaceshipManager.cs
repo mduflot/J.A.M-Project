@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class SpaceshipManager : MonoBehaviour
+    public class SpaceshipManager : MonoBehaviour, IDataPersistence
     {
         public Room[] rooms;
         public ShipSystem[] systems;
@@ -20,14 +20,13 @@ namespace Managers
         [SerializeField] private List<Notification> activeTasks = new();
         [SerializeField] private GameObject taskNotificationPrefab;
 
-        [Header("Character Value")] 
-        public float moodLossOnTaskStart = 7.0f;
+        [Header("Character Value")] public float moodLossOnTaskStart = 7.0f;
 
         [SerializeField] private float hourlyMoodGain = 1.0f;
 
         [SerializeField] private float hourlyMoodLossGaugeEmpty = 0.75f;
         public float moodLossOnCancelTask = 10.0f;
-        
+    
         private Dictionary<SystemType, ShipSystem> systemsDictionary = new();
         private Dictionary<RoomType, Room> roomsDictionary = new();
         
@@ -35,8 +34,8 @@ namespace Managers
         {
             Initialize();
             InitializeSystems();
-            checker.Initialize();
             notificationPool = new Pool<GameObject>(taskNotificationPrefab, 5);
+            DataPersistenceManager.Instance.InitializeGame();
         }
 
         private void Initialize()
@@ -83,7 +82,7 @@ namespace Managers
                 {
                     if (outcome.gauge == system.type) valueToAdd += outcome.value;
                 }
-                Debug.Log(valueToAdd);
+
                 system.previewGaugeValue += valueToAdd;
             }
         }
@@ -95,10 +94,9 @@ namespace Managers
                 var valueToAdd = 0f;
                 foreach (var outcome in outcomes)
                 {
-                    Debug.Log(outcome.gauge + " " + outcome.value);
                     if (outcome.gauge == system.type) valueToAdd -= outcome.value;
                 }
-                Debug.Log(valueToAdd);
+
                 system.previewGaugeValue += valueToAdd;
             }
         }
@@ -129,7 +127,7 @@ namespace Managers
         {
             if (e.tick % (TimeTickSystem.ticksPerHour * 24) != 0)
                 return;
-        
+
             Debug.Log("Generating random event");
             checker.GenerateRandomEvent();
         }
@@ -233,5 +231,36 @@ namespace Managers
         {
             roomsDisplay.SetActive(state);
         }
+
+        #region Save&Load
+
+        public void LoadData(GameData gameData)
+        {
+            foreach (var system in systems)
+            {
+                if (gameData.gaugeValues.TryGetValue(system.type, out float value))
+                {
+                    system.gaugeValue = value;
+                }
+            }
+
+            this.SpaceshipTraits = gameData.spaceshipTraits;
+            this.HiddenSpaceshipTraits = gameData.hiddenSpaceshipTraits;
+        }
+
+        public void SaveData(ref GameData gameData)
+        {
+            foreach (var system in systems)
+            {
+                if (gameData.gaugeValues.TryAdd(system.type, system.gaugeValue)) continue;
+                gameData.gaugeValues.Remove(system.type);
+                gameData.gaugeValues.Add(system.type, system.gaugeValue);
+            }
+
+            gameData.spaceshipTraits = this.SpaceshipTraits;
+            gameData.hiddenSpaceshipTraits = this.HiddenSpaceshipTraits;
+        }
+
+        #endregion
     }
 }

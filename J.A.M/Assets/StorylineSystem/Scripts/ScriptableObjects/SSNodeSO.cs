@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace SS.ScriptableObjects
 {
-    using Enumerations;
     using Data;
-    
+    using Enumerations;
+
     public class SSNodeSO : ScriptableObject
     {
         [field: SerializeField] public string NodeName { get; set; }

@@ -14,7 +14,8 @@ namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-        [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
+        [Header("Task")]
+        [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI timeLeftText;
         [SerializeField] private GameObject timeLeftObject;
         [SerializeField] private Transform startButtonObject;
@@ -29,9 +30,11 @@ namespace Tasks
         [SerializeField] private DialogueLog dialogueLog;
         [SerializeField] private GameObject separator;
 
-        [Header("Dialogues")] [SerializeField] private GameObject dialogueContainer;
+        [Header("Dialogues")]
+        [SerializeField] private GameObject dialogueContainer;
 
-        [Header("Values")] [SerializeField] private float timeLeft;
+        [Header("Values")]
+        [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
 
         private Notification notification;
@@ -86,7 +89,7 @@ namespace Tasks
                 for (int i = 0; i < notification.Task.MandatorySlots; i++)
                 {
                     var slot = inactiveSlots[i];
-                    slot.SetupSlot(true);
+                    slot.SetupSlot(true, this);
                     slot.gameObject.SetActive(true);
                     characterSlots.Add(slot);
                 }
@@ -94,7 +97,7 @@ namespace Tasks
                 for (int i = 3; i < notification.Task.OptionalSlots + 3; i++)
                 {
                     var slot = inactiveSlots[i];
-                    slot.SetupSlot(false);
+                    slot.SetupSlot(false, this);
                     slot.gameObject.SetActive(true);
                     characterSlots.Add(slot);
                 }
@@ -139,7 +142,7 @@ namespace Tasks
             {
                 var charUI = GameManager.Instance.UIManager.GetCharacterUI(notification.Task.leaderCharacters[i]);
                 var slot = inactiveSlots[i];
-                slot.SetupSlot(true);
+                slot.SetupSlot(true, this);
                 slot.gameObject.SetActive(true);
                 characterSlots.Add(slot);
                 slot.icon = charUI.icon;
@@ -151,7 +154,7 @@ namespace Tasks
                 var charUI = GameManager.Instance.UIManager.GetCharacterUI(notification.Task.assistantCharacters[i]);
                 if (charUI == null) continue;
                 var slot = inactiveSlots[i + 3];
-                slot.SetupSlot(false);
+                slot.SetupSlot(false, this);
                 slot.gameObject.SetActive(true);
                 characterSlots.Add(slot);
                 slot.icon = charUI.icon;
@@ -166,7 +169,6 @@ namespace Tasks
             Appear(true);
         }
 
-        // TODO : Refactor this, don't want to use Update for this
         public void Update()
         {
             if (!animator.GetBool("Appear")) return;
@@ -181,6 +183,7 @@ namespace Tasks
                     
                     if (condition)
                     {
+                        previewOutcomeText.text = null;
                         if (notification.Task.TaskType != SSTaskType.Compute)
                         {
                             if (characterSlots[0].icon != null)

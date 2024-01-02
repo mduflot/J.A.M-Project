@@ -20,6 +20,13 @@ namespace SS
     {
         [HideInInspector] public bool IsCancelled;
         [HideInInspector] public bool CanIgnoreDialogueTask;
+        public bool IsRunning { get; private set; }
+        public List<SerializableTuple<string, string>> dialogues { get; set; }
+        public SSNodeSO CurrentNode { get; private set; }
+        public List<CharacterBehaviour> characters { get; set; }
+        public List<CharacterBehaviour> assignedCharacters { get; set; }
+        public List<CharacterBehaviour> notAssignedCharacters { get; set; }
+        public List<CharacterBehaviour> traitsCharacters { get; set; }
 
         /* UI GameObjects */
         [SerializeField] private TextMeshProUGUI currentStoryline;
@@ -37,29 +44,25 @@ namespace SS
         /* Indexes */
         [SerializeField] private int selectedNodeGroupIndex;
         [SerializeField] private int selectedNodeIndex;
-
-        private List<CharacterBehaviour> characters = new();
-        private List<CharacterBehaviour> assignedCharacters = new();
-        private List<CharacterBehaviour> notAssignedCharacters = new();
-        private List<CharacterBehaviour> traitsCharacters = new();
-        private List<Tuple<Sprite, string, string>> dialogues;
+        
         private SSTimeNodeSO timeNode;
         private uint durationTimeNode;
         private Task task;
-        private bool isRunning;
-
-        public bool IsRunning => isRunning;
 
         private void Start()
         {
             spaceshipManager = GameManager.Instance.SpaceshipManager;
+            dialogues = new();
+            characters = new();
+            assignedCharacters = new();
+            notAssignedCharacters = new();
+            traitsCharacters = new();
         }
-        
+
         public void StartTimeline()
         {
-            dialogues = new();
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
-            isRunning = true;
+            IsRunning = true;
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
             CheckNodeType(node);
@@ -67,9 +70,8 @@ namespace SS
 
         public void StartTimeline(CharacterIcon icon)
         {
-            dialogues = new();
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
-            isRunning = true;
+            IsRunning = true;
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
             RunNode(node as SSTaskNodeSO, icon);
@@ -91,6 +93,7 @@ namespace SS
         /// <param name="nodeSO"> Node you need to run </param>
         private void CheckNodeType(SSNodeSO nodeSO)
         {
+            CurrentNode = nodeSO;
             switch (nodeSO.NodeType)
             {
                 case SSNodeType.Dialogue:
@@ -141,7 +144,7 @@ namespace SS
                             var sensor = furniture.transform;
                             if (sensor.TryGetComponent(out Speaker speaker))
                             {
-                                dialogues.Add(new Tuple<Sprite, string, string>(null, "Sensor", nodeSO.Text));
+                                dialogues.Add(new SerializableTuple<string, string>("Sensor", nodeSO.Text));
                                 StartCoroutine(DisplayDialogue(speaker, "Sensor", nodeSO));
                             }
                             else
@@ -165,7 +168,7 @@ namespace SS
                             var sensor = furniture.transform;
                             if (sensor.TryGetComponent(out Speaker speaker))
                             {
-                                dialogues.Add(new Tuple<Sprite, string, string>(null, "Expert", nodeSO.Text));
+                                dialogues.Add(new SerializableTuple<string, string>("Expert", nodeSO.Text));
                                 StartCoroutine(DisplayDialogue(speaker, "Expert", nodeSO));
                             }
                             else
@@ -259,7 +262,7 @@ namespace SS
                     {
                         if (nodeSO.Choices.First().NextNode == null)
                         {
-                            isRunning = false;
+                            IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
                             ResetTimeline();
                             return;
@@ -280,7 +283,7 @@ namespace SS
                     {
                         if (nodeSO.Choices.First().NextNode == null)
                         {
-                            isRunning = false;
+                            IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
                             ResetTimeline();
                             return;
@@ -301,7 +304,7 @@ namespace SS
                     {
                         if (nodeSO.Choices.First().NextNode == null)
                         {
-                            isRunning = false;
+                            IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
                             ResetTimeline();
                             return;
@@ -322,7 +325,7 @@ namespace SS
                     {
                         if (nodeSO.Choices.First().NextNode == null)
                         {
-                            isRunning = false;
+                            IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
                             ResetTimeline();
                             return;
@@ -343,7 +346,7 @@ namespace SS
                     {
                         if (nodeSO.Choices.First().NextNode == null)
                         {
-                            isRunning = false;
+                            IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
                             ResetTimeline();
                             return;
@@ -444,8 +447,7 @@ namespace SS
                     }
 
                     actualSpeaker = tempCharacters[Random.Range(0, tempCharacters.Count)];
-                    dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
-                        actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
+                    dialogues.Add(new SerializableTuple<string, string>(actualSpeaker.GetCharacterData().ID, nodeSO.Text));
                     StartCoroutine(DisplayDialogue(actualSpeaker.speaker, actualSpeaker.GetCharacterData().firstName,
                         nodeSO));
                     traitsCharacters.Add(actualSpeaker);
@@ -517,8 +519,7 @@ namespace SS
 
         private void SetDialogue(CharacterBehaviour character, SSDialogueNodeSO nodeSO)
         {
-            dialogues.Add(new Tuple<Sprite, string, string>(character.GetCharacterData().characterIcon,
-                character.GetCharacterData().firstName, nodeSO.Text));
+            dialogues.Add(new SerializableTuple<string, string>(character.GetCharacterData().ID, nodeSO.Text));
             StartCoroutine(DisplayDialogue(character.speaker,
                 character.GetCharacterData().firstName, nodeSO));
         }
@@ -561,7 +562,8 @@ namespace SS
                 notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
                 spaceshipManager.AddTask(notification);
                 if (nodeSO.TaskType.Equals(SSTaskType.Permanent) && icon != null) notification.Display(icon);
-                else if (nodeSO.TaskType.Equals(SSTaskType.Permanent) || nodeSO.TaskType.Equals(SSTaskType.Compute)) notification.Display();
+                else if (nodeSO.TaskType.Equals(SSTaskType.Permanent) || nodeSO.TaskType.Equals(SSTaskType.Compute))
+                    notification.Display();
                 StartCoroutine(WaiterTask(nodeSO, task));
             }
         }
@@ -590,7 +592,7 @@ namespace SS
             {
                 if (timeNode.Choices.First().NextNode == null)
                 {
-                    isRunning = false;
+                    IsRunning = false;
                     nodeGroup.StoryStatus = SSStoryStatus.Completed;
                     ResetTimeline();
                     TimeTickSystem.OnTick -= WaitingTime;
@@ -632,7 +634,7 @@ namespace SS
             {
                 if (nodeSO.Choices.First().NextNode == null)
                 {
-                    isRunning = false;
+                    IsRunning = false;
                     nodeGroup.StoryStatus = SSStoryStatus.Completed;
                     ResetTimeline();
                     yield break;
@@ -655,7 +657,7 @@ namespace SS
 
             if (nodeSO.Choices.First().NextNode == null)
             {
-                isRunning = false;
+                IsRunning = false;
                 nodeGroup.StoryStatus = SSStoryStatus.Completed;
                 ResetTimeline();
                 yield break;
@@ -676,7 +678,7 @@ namespace SS
 
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
             {
-                isRunning = false;
+                IsRunning = false;
                 nodeGroup.StoryStatus = SSStoryStatus.Completed;
                 ResetTimeline();
                 yield break;

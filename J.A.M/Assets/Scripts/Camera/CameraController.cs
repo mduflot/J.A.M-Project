@@ -94,7 +94,6 @@ public class CameraController : MonoBehaviour
         if (!isDragging) return;
         var mouse = (Vector3)GetMousePosition;
         difference = origin - mouse;
-        Debug.Log(difference);
         difference.z = 0;
         transform.position -= difference * 0.4f;
         origin = mouse;

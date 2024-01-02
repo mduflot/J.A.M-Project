@@ -20,6 +20,12 @@ namespace CharacterSystem
         private Tuple<Task, SSDialogueNodeSO, string, float> tuple;
         private float durationToDecrease;
 
+        private void OnDisable()
+        {
+            sentences.Clear();
+            TimeTickSystem.OnTick -= DisplayDialogue;
+        }
+
         public void CallDialogue()
         {
             if (isSpeaking || sentences.Count <= 0) return;

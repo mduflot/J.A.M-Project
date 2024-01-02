@@ -17,7 +17,7 @@ namespace UI
         [HideInInspector] public bool IsCompleted;
         [HideInInspector] public bool IsStarted;
         [HideInInspector] public bool IsCancelled;
-        [HideInInspector] public List<Tuple<Sprite, string, string>> Dialogues;
+        [HideInInspector] public List<SerializableTuple<string, string>> Dialogues;
         [HideInInspector] public Task Task;
         [HideInInspector] public List<CharacterBehaviour> LeaderCharacters = new();
         [HideInInspector] public List<CharacterBehaviour> AssistantCharacters = new();
@@ -54,7 +54,7 @@ namespace UI
 
         public void Initialize(Task task, SSTaskNodeSO ssTaskNode, SpaceshipManager spaceshipManager,
             SSLauncher ssLauncher,
-            List<Tuple<Sprite, string, string>> dialogues = null)
+            List<SerializableTuple<string, string>> dialogues = null)
         {
             IsCompleted = false;
             IsCancelled = false;
@@ -342,7 +342,7 @@ namespace UI
 
         public void OnUpdate()
         {
-            if (IsStarted)
+            if (IsStarted && !IsCompleted)
             {
                 if (Task.Duration > 0)
                 {
@@ -363,7 +363,7 @@ namespace UI
                     Task.TimeLeft -= TimeTickSystem.timePerTick;
                     timeLeftSprite.material.SetInt("_Arc1", (int)(360 - Task.TimeLeft / timeLeft * 360));
                 }
-                else
+                else if (!IsStarted)
                 {
                     GameManager.Instance.UIManager.taskUI.Initialize(this, null, false);
                     GameManager.Instance.UIManager.taskUI.StartTask();
@@ -381,7 +381,6 @@ namespace UI
             transform.parent = null;
             notificationContainer.DisplayNotification();
             spaceshipManager.notificationPool.AddToPool(gameObject);
-            Debug.Log(gaugeOutcomes.Count);
             spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             IsStarted = false;
         }

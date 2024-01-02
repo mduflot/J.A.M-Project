@@ -1,33 +1,30 @@
+using System;
+using System.Collections.Generic;
 using Tasks;
 using UI;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SubsystemsImplementation;
-using UnityEngine.UIElements;
 
 namespace CharacterSystem
 {
-    public class CharacterBehaviour : MonoBehaviour
+    public class CharacterBehaviour : MonoBehaviour, IDataPersistence
     {
         public Speaker speaker;
-    
+
         [SerializeField] private CharacterDataScriptable data;
         [SerializeField] private float moveSpeed;
-    
+
         /*
          * gauge = 0 -> mood + param
          */
-    
+
         private const float MaxMood = 20.0f;
-    
-        [Range(0,100)]
-        private float mood = 50.0f;
-    
-        [Range(0,100)]
-        private float volition = 10.0f;
-    
+
+        [Range(0, 100)] private float mood = 50.0f;
+
+        [Range(0, 100)] private float volition = 10.0f;
+
         [SerializeField] private TraitsData.Traits traits;
-    
+
         private bool isWorking;
         private bool isTaskLeader;
 
@@ -54,29 +51,38 @@ namespace CharacterSystem
             switch (co)
             {
                 case ConditionSystem.ComparisonOperator.Equal:
-                    return (int) targetValue == (int) compValue; //Cheating to avoid floating point comparison error
-                
+                    return (int)targetValue == (int)compValue; //Cheating to avoid floating point comparison error
+
                 case ConditionSystem.ComparisonOperator.Higher:
                     return targetValue > compValue;
-                
+
                 case ConditionSystem.ComparisonOperator.Less:
                     return targetValue < compValue;
-                
+
                 case ConditionSystem.ComparisonOperator.HigherOrEqual:
                     return targetValue >= compValue;
-                
+
                 case ConditionSystem.ComparisonOperator.LessOrEqual:
                     return targetValue <= compValue;
             }
 
             return true;
         }
-        
-        public TraitsData.Job GetJob() { return traits.GetJob(); }
 
-        public TraitsData.PositiveTraits GetPositiveTraits() { return traits.GetPositiveTraits(); }
+        public TraitsData.Job GetJob()
+        {
+            return traits.GetJob();
+        }
 
-        public TraitsData.NegativeTraits GetNegativeTraits() { return traits.GetNegativeTraits(); }
+        public TraitsData.PositiveTraits GetPositiveTraits()
+        {
+            return traits.GetPositiveTraits();
+        }
+
+        public TraitsData.NegativeTraits GetNegativeTraits()
+        {
+            return traits.GetNegativeTraits();
+        }
 
         public void AddTrait(TraitsData.Traits argTraits)
         {
@@ -87,7 +93,7 @@ namespace CharacterSystem
         {
             traits.RemoveTraits(argTraits);
         }
-    
+
         public void IncreaseMood(float value)
         {
             isMoodIncreasing = value > 0;
@@ -99,12 +105,12 @@ namespace CharacterSystem
         {
             volition += value;
         }
-    
+
         private void CapStats()
         {
             mood = Mathf.Clamp(mood, 0, MaxMood);
         }
-    
+
         public void MoveTo(Transform destination)
         {
             float timeToTravel = Vector2.Distance(transform.position, destination.position) * moveSpeed;
@@ -148,7 +154,7 @@ namespace CharacterSystem
         {
             return MaxMood;
         }
-    
+
         public float GetVolition()
         {
             return mood < volition ? mood : volition;
@@ -163,7 +169,7 @@ namespace CharacterSystem
         {
             return traits;
         }
-    
+
         public void StopTask()
         {
             isWorking = false;
@@ -173,6 +179,41 @@ namespace CharacterSystem
         public bool IsMoodIncreasing()
         {
             return isMoodIncreasing;
+        }
+
+        public void LoadData(GameData gameData)
+        {
+            if (gameData.characterTraits.TryGetValue(data.ID, out var t))
+            {
+                traits = t;
+            }
+            if (gameData.characterMoods.TryGetValue(data.ID, out var m))
+            {
+                mood = m;
+            }
+            if (gameData.characterVolitions.TryGetValue(data.ID, out var v))
+            {
+                volition = v;
+            }
+        }
+
+        public void SaveData(ref GameData gameData)
+        {
+            if (!gameData.characterTraits.TryAdd(data.ID, traits))
+            {
+                gameData.characterTraits.Remove(data.ID);
+                gameData.characterTraits.Add(data.ID, traits);
+            }
+            if (!gameData.characterMoods.TryAdd(data.ID, mood))
+            {
+                gameData.characterMoods.Remove(data.ID);
+                gameData.characterMoods.Add(data.ID, mood);return;
+            }
+            if (!gameData.characterVolitions.TryAdd(data.ID, volition))
+            {
+                gameData.characterVolitions.Remove(data.ID);
+                gameData.characterVolitions.Add(data.ID, volition);
+            }
         }
     }
 }
