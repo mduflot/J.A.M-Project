@@ -305,7 +305,7 @@ public class Checker : MonoBehaviour, IDataPersistence
     }
 
     private void StartTimeline(SSNodeGroupSO timeline, SSNodeSO node = null,
-        List<Tuple<Sprite, string, string>> dialogues = null, List<string> characters = null,
+        List<SerializableTuple<string, string>> dialogues = null, List<string> characters = null,
         List<string> assignedCharacters = null, List<string> notAssignedCharacters = null,
         List<string> traitsCharacters = null)
     {
@@ -332,7 +332,6 @@ public class Checker : MonoBehaviour, IDataPersistence
                 }
 
                 principalLauncher.node = node;
-                principalLauncher.StartTimeline();
                 if (dialogues != null) principalLauncher.dialogues = dialogues;
                 if (characters != null)
                 {
@@ -414,6 +413,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                     principalLauncher.traitsCharacters = charactersList;
                 }
 
+                principalLauncher.StartTimeline();
                 break;
             case SSStoryType.Secondary:
                 secondaryLauncher.nodeContainer = chosenStoryline.StorylineContainer;
@@ -431,7 +431,6 @@ public class Checker : MonoBehaviour, IDataPersistence
                 }
 
                 secondaryLauncher.node = node;
-                secondaryLauncher.StartTimeline();
                 if (dialogues != null) secondaryLauncher.dialogues = dialogues;
                 if (characters != null)
                 {
@@ -513,6 +512,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                     secondaryLauncher.traitsCharacters = charactersList;
                 }
 
+                secondaryLauncher.StartTimeline();
                 break;
             case SSStoryType.Trivial:
                 trivialLauncher.nodeContainer = chosenStoryline.StorylineContainer;
@@ -530,7 +530,6 @@ public class Checker : MonoBehaviour, IDataPersistence
                 }
 
                 trivialLauncher.node = node;
-                trivialLauncher.StartTimeline();
                 if (dialogues != null) trivialLauncher.dialogues = dialogues;
                 if (characters != null)
                 {
@@ -612,6 +611,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                     trivialLauncher.traitsCharacters = charactersList;
                 }
 
+                trivialLauncher.StartTimeline();
                 break;
         }
     }
@@ -634,7 +634,8 @@ public class Checker : MonoBehaviour, IDataPersistence
 
             if (index == ssCampaigns.Count - 1)
             {
-                Debug.LogError("Campaign not found");
+                Debug.LogError("Campaign was not found in the list of campaigns. Initializing to default.");
+                Initialize();
                 return;
             }
         }
@@ -849,6 +850,10 @@ public class Checker : MonoBehaviour, IDataPersistence
 
         gameData.currentNodes.Clear();
         gameData.dialogueTimelines.Clear();
+        gameData.charactersActiveTimelines.Clear();
+        gameData.assignedActiveTimelines.Clear();
+        gameData.notAssignedActiveTimelines.Clear();
+        gameData.traitsCharactersActiveStorylines.Clear();
 
         if (principalLauncher.IsRunning)
         {

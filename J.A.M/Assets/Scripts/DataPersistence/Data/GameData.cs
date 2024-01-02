@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using SS.Enumerations;
-using UnityEngine;
 
 [System.Serializable]
 public class GameData
@@ -21,7 +20,7 @@ public class GameData
     public List<string> activeStorylines;
     public List<string> activeTimelines;
     public SerializableDictionary<string, string> currentNodes;
-    public SerializableDictionary<string, List<Tuple<Sprite, string, string>>> dialogueTimelines;
+    public SerializableDictionary<string, List<SerializableTuple<string, string>>> dialogueTimelines;
     public SerializableDictionary<string, List<string>> charactersActiveTimelines;
     public SerializableDictionary<string, List<string>> assignedActiveTimelines;
     public SerializableDictionary<string, List<string>> notAssignedActiveTimelines;
@@ -40,6 +39,10 @@ public class GameData
         timelineStatus = new SerializableDictionary<string, SSStoryStatus>();
         activeStorylines = new List<string>();
         currentNodes = new SerializableDictionary<string, string>();
-        dialogueTimelines = new SerializableDictionary<string, List<Tuple<Sprite, string, string>>>();
+        dialogueTimelines = new SerializableDictionary<string, List<SerializableTuple<string, string>>>();
+        charactersActiveTimelines = new SerializableDictionary<string, List<string>>();
+        assignedActiveTimelines = new SerializableDictionary<string, List<string>>();
+        notAssignedActiveTimelines = new SerializableDictionary<string, List<string>>();
+        traitsCharactersActiveStorylines = new SerializableDictionary<string, List<string>>();
     }
 }

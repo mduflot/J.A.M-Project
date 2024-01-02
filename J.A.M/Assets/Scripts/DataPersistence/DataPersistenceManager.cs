@@ -22,6 +22,8 @@ public class DataPersistenceManager : MonoBehaviour
             return;
         }
 
+        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        dataPersistenceObjects = new List<IDataPersistence>();
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
@@ -36,6 +38,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void NewGame()
     {
         gameData = new GameData();
+        dataHandler.Save(gameData);
     }
 
     public void LoadGame()

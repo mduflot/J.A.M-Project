@@ -21,7 +21,7 @@ namespace SS
         [HideInInspector] public bool IsCancelled;
         [HideInInspector] public bool CanIgnoreDialogueTask;
         public bool IsRunning { get; private set; }
-        public List<Tuple<Sprite, string, string>> dialogues { get; set; }
+        public List<SerializableTuple<string, string>> dialogues { get; set; }
         public SSNodeSO CurrentNode { get; private set; }
         public List<CharacterBehaviour> characters { get; set; }
         public List<CharacterBehaviour> assignedCharacters { get; set; }
@@ -52,11 +52,15 @@ namespace SS
         private void Start()
         {
             spaceshipManager = GameManager.Instance.SpaceshipManager;
+            dialogues = new();
+            characters = new();
+            assignedCharacters = new();
+            notAssignedCharacters = new();
+            traitsCharacters = new();
         }
 
         public void StartTimeline()
         {
-            dialogues = new();
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
             IsRunning = true;
             IsCancelled = false;
@@ -66,7 +70,6 @@ namespace SS
 
         public void StartTimeline(CharacterIcon icon)
         {
-            dialogues = new();
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
             IsRunning = true;
             IsCancelled = false;
@@ -141,7 +144,7 @@ namespace SS
                             var sensor = furniture.transform;
                             if (sensor.TryGetComponent(out Speaker speaker))
                             {
-                                dialogues.Add(new Tuple<Sprite, string, string>(null, "Sensor", nodeSO.Text));
+                                dialogues.Add(new SerializableTuple<string, string>("Sensor", nodeSO.Text));
                                 StartCoroutine(DisplayDialogue(speaker, "Sensor", nodeSO));
                             }
                             else
@@ -165,7 +168,7 @@ namespace SS
                             var sensor = furniture.transform;
                             if (sensor.TryGetComponent(out Speaker speaker))
                             {
-                                dialogues.Add(new Tuple<Sprite, string, string>(null, "Expert", nodeSO.Text));
+                                dialogues.Add(new SerializableTuple<string, string>("Expert", nodeSO.Text));
                                 StartCoroutine(DisplayDialogue(speaker, "Expert", nodeSO));
                             }
                             else
@@ -444,8 +447,7 @@ namespace SS
                     }
 
                     actualSpeaker = tempCharacters[Random.Range(0, tempCharacters.Count)];
-                    dialogues.Add(new Tuple<Sprite, string, string>(actualSpeaker.GetCharacterData().characterIcon,
-                        actualSpeaker.GetCharacterData().firstName, nodeSO.Text));
+                    dialogues.Add(new SerializableTuple<string, string>(actualSpeaker.GetCharacterData().ID, nodeSO.Text));
                     StartCoroutine(DisplayDialogue(actualSpeaker.speaker, actualSpeaker.GetCharacterData().firstName,
                         nodeSO));
                     traitsCharacters.Add(actualSpeaker);
@@ -517,8 +519,7 @@ namespace SS
 
         private void SetDialogue(CharacterBehaviour character, SSDialogueNodeSO nodeSO)
         {
-            dialogues.Add(new Tuple<Sprite, string, string>(character.GetCharacterData().characterIcon,
-                character.GetCharacterData().firstName, nodeSO.Text));
+            dialogues.Add(new SerializableTuple<string, string>(character.GetCharacterData().ID, nodeSO.Text));
             StartCoroutine(DisplayDialogue(character.speaker,
                 character.GetCharacterData().firstName, nodeSO));
         }

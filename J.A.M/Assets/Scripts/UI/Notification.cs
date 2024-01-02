@@ -17,7 +17,7 @@ namespace UI
         [HideInInspector] public bool IsCompleted;
         [HideInInspector] public bool IsStarted;
         [HideInInspector] public bool IsCancelled;
-        [HideInInspector] public List<Tuple<Sprite, string, string>> Dialogues;
+        [HideInInspector] public List<SerializableTuple<string, string>> Dialogues;
         [HideInInspector] public Task Task;
         [HideInInspector] public List<CharacterBehaviour> LeaderCharacters = new();
         [HideInInspector] public List<CharacterBehaviour> AssistantCharacters = new();
@@ -46,7 +46,7 @@ namespace UI
 
         public void Initialize(Task task, SSTaskNodeSO ssTaskNode, SpaceshipManager spaceshipManager,
             SSLauncher ssLauncher,
-            List<Tuple<Sprite, string, string>> dialogues = null)
+            List<SerializableTuple<string, string>> dialogues = null)
         {
             IsCompleted = false;
             IsCancelled = false;
