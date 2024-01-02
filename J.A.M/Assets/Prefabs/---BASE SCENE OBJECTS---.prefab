@@ -1027,6 +1027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIManager: {fileID: 5141046857822228766}
   SpaceshipManager: {fileID: 2253770339199655299}
+  TimeTickSystem: {fileID: 0}
   mainCamera: {fileID: 0}
   taskOpened: 0
 --- !u!1001 &3677315064026946176
@@ -1040,7 +1041,7 @@ PrefabInstance:
     - target: {fileID: 104874725725033929, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000026538968
+      value: -0.000017248094
       objectReference: {fileID: 0}
     - target: {fileID: 517833843658764157, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
@@ -1125,7 +1126,7 @@ PrefabInstance:
     - target: {fileID: 1086552785536429881, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1086552785536429881, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
@@ -1210,7 +1211,7 @@ PrefabInstance:
     - target: {fileID: 1480378885052406975, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1480378885052406975, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
@@ -1367,26 +1368,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2359439157800779338, guid: cd48a9106dc08db449fe7c8159846151,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2359439157800779338, guid: cd48a9106dc08db449fe7c8159846151,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2359439157800779338, guid: cd48a9106dc08db449fe7c8159846151,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2359439157800779338, guid: cd48a9106dc08db449fe7c8159846151,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2488304772987450208, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1415,7 +1396,7 @@ PrefabInstance:
     - target: {fileID: 2950790313862705844, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3286908021925739728, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
@@ -1445,7 +1426,7 @@ PrefabInstance:
     - target: {fileID: 3301070007106207493, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 162.50002
+      value: 162.5
       objectReference: {fileID: 0}
     - target: {fileID: 3764641166798672170, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
@@ -1700,7 +1681,7 @@ PrefabInstance:
     - target: {fileID: 8414902525328035754, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8414902525328035754, guid: cd48a9106dc08db449fe7c8159846151,
         type: 3}

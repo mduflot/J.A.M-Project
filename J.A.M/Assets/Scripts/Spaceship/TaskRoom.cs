@@ -22,7 +22,11 @@ namespace Spaceship
         {
             GameObject dropped = eventData.pointerDrag;
             var icon = dropped.GetComponent<CharacterIcon>();
-            if (icon != null) launcher.StartTimeline(icon);
+            if (icon != null)
+            {
+                launcher.StartTimeline(icon);
+                GameManager.Instance.SpaceshipManager.DisplayRooms(false);
+            }
         }
 
         public void OnPointerDown(PointerEventData eventData)

@@ -7,12 +7,27 @@ namespace UI
 {
     public class CharacterUI : MonoBehaviour, IDropHandler
     {
+        [Header("Static Data")]
         public CharacterBehaviour character;
         public CharacterIcon icon;
         public CharacterIcon defaultIcon;
-        public Image moodGauge;
-        public Image volitionGauge;
+        
+        [Header("Data")]
+        [SerializeField] private Image moodGauge;
+        [SerializeField] private Slider volitionGauge;
         public Image previewMoodGauge;
+        
+        [Space]
+        
+        public Image moodArrow;
+        [SerializeField] private Sprite redArrow;
+        [SerializeField] private Sprite greenArrow;
+        
+        [Space]
+        
+        [SerializeField] private Image moodIcon;
+        [SerializeField] private Sprite happyIcon;
+        [SerializeField] private Sprite sadIcon;
 
         [SerializeField] private Speaker speaker;
 
@@ -31,6 +46,32 @@ namespace UI
         public void SetCharacter(CharacterIcon i)
         {
             icon = i;
+        }
+
+        public void UpdateIconDisplay()
+        {
+            moodGauge.fillAmount = character.GetMood() / character.GetMaxMood();
+            volitionGauge.value = character.GetVolition() / character.GetMaxMood();
+            
+            moodIcon.sprite = character.GetMood() < character.GetVolition() ? sadIcon : happyIcon;
+            moodArrow.sprite = character.IsMoodIncreasing() ? greenArrow : redArrow;
+        }
+
+        public void PreviewMoodGauge(float value)
+        {
+            if (value < 0)
+            {
+                previewMoodGauge.fillAmount = character.GetMood() / character.GetMaxMood();
+                moodGauge.fillAmount =
+                    (character.GetMood() - GameManager.Instance.SpaceshipManager.moodLossOnTaskStart) /
+                    character.GetMaxMood();
+            }
+            else
+            {
+                value += moodGauge.fillAmount * character.GetMaxMood();
+                previewMoodGauge.fillAmount = value / character.GetMaxMood();
+                moodGauge.fillAmount = character.GetMood() / character.GetMaxMood();
+            }
         }
 
         public virtual void OnDrop(PointerEventData eventData)

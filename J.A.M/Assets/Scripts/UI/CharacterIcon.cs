@@ -19,6 +19,7 @@ namespace UI
         [SerializeField] private TextMeshProUGUI characterName;
         [NonSerialized] public CharacterBehaviour character;
 
+
         private Animator animator;
         private Transform parentAfterDrag;
         private CharacterUI parentScript;
@@ -52,6 +53,7 @@ namespace UI
             parentScript.ClearCharacter();
             image.raycastTarget = false;
             transform.SetParent(GameManager.Instance.UIManager.canvas.transform);
+            if(!GameManager.Instance.taskOpened) GameManager.Instance.SpaceshipManager.DisplayRooms(true);
             animator.SetBool("Selected", true);
         }
 
@@ -66,6 +68,7 @@ namespace UI
         {
             SetupIconValues();
             GameManager.Instance.UIManager.characterInfoUI.ClearCharacterInfo();
+            if(!GameManager.Instance.taskOpened) GameManager.Instance.SpaceshipManager.DisplayRooms(false);
         }
 
         public void SetupIconValues()

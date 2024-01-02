@@ -14,6 +14,7 @@ namespace Managers
         public Pool<GameObject> notificationPool;
         public TraitsData.SpaceshipTraits SpaceshipTraits = TraitsData.SpaceshipTraits.None;
         public TraitsData.HiddenSpaceshipTraits HiddenSpaceshipTraits = TraitsData.HiddenSpaceshipTraits.None;
+        [SerializeField] private GameObject roomsDisplay;
 
         [SerializeField] private Checker checker;
         [SerializeField] private List<Notification> activeTasks = new();
@@ -25,10 +26,10 @@ namespace Managers
 
         [SerializeField] private float hourlyMoodLossGaugeEmpty = 0.75f;
         public float moodLossOnCancelTask = 10.0f;
-
+    
         private Dictionary<SystemType, ShipSystem> systemsDictionary = new();
         private Dictionary<RoomType, Room> roomsDictionary = new();
-
+        
         private void Start()
         {
             Initialize();
@@ -225,6 +226,11 @@ namespace Managers
         }
 
         #endregion
+
+        public void DisplayRooms(bool state)
+        {
+            roomsDisplay.SetActive(state);
+        }
 
         #region Save&Load
 

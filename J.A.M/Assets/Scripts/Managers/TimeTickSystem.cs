@@ -32,9 +32,14 @@ namespace Managers
         private uint tick;
         private float tickTimer;
 
+        delegate void TimeScaleChanged(int scale);
+
+        private static TimeScaleChanged timeScaleChanged;
+    
         private void Awake()
         {
             tick = 0;
+            timeScaleChanged = UpdateTimeButtons;
         }
 
         private void Start()
@@ -105,19 +110,18 @@ namespace Managers
                     Debug.Log("Error while setting time scale");
                     break;
             }
-
+            timeScaleChanged(scale);
             if (newScale != 0) lastActiveTimeScale = scale;
             timeScale = newScale;
         }
 
-        public void UpdateTimeButtons(TimeButton selectedButton)
+        public void UpdateTimeButtons(int index)
         {
             foreach (var button in timeButtons)
             {
                 button.DeselectButton();
             }
-
-            selectedButton.SelectButton();
+            timeButtons[index].SelectButton();
         }
     }
 }
