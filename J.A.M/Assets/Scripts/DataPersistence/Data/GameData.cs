@@ -6,12 +6,15 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
+    /*** SPACESHIP ***/
     public SerializableDictionary<SystemType, float> gaugeValues;
     public SerializableDictionary<string, TraitsData.Traits> characterTraits;
     public SerializableDictionary<string, float> characterMoods;
     public SerializableDictionary<string, float> characterVolitions;
     public TraitsData.SpaceshipTraits spaceshipTraits;
     public TraitsData.HiddenSpaceshipTraits hiddenSpaceshipTraits;
+
+    /*** STORYLINES ***/
     public string currentCampaignID;
     public SerializableDictionary<string, SSStoryStatus> storylineStatus;
     public SerializableDictionary<string, SSStoryStatus> timelineStatus;
@@ -19,6 +22,12 @@ public class GameData
     public List<string> activeTimelines;
     public SerializableDictionary<string, string> currentNodes;
     public SerializableDictionary<string, List<Tuple<Sprite, string, string>>> dialogueTimelines;
+    public SerializableDictionary<string, List<string>> charactersActiveTimelines;
+    public SerializableDictionary<string, List<string>> assignedActiveTimelines;
+    public SerializableDictionary<string, List<string>> notAssignedActiveTimelines;
+    public SerializableDictionary<string, List<string>> traitsCharactersActiveStorylines;
+
+    /*** STORYLINES LOG ***/
 
     public GameData()
     {

@@ -20,9 +20,13 @@ namespace SS
     {
         [HideInInspector] public bool IsCancelled;
         [HideInInspector] public bool CanIgnoreDialogueTask;
-        [HideInInspector] public bool IsRunning { get; private set; }
-        [HideInInspector] public List<Tuple<Sprite, string, string>> dialogues { get; set; }
-        [HideInInspector] public SSNodeSO CurrentNode { get; private set; }
+        public bool IsRunning { get; private set; }
+        public List<Tuple<Sprite, string, string>> dialogues { get; set; }
+        public SSNodeSO CurrentNode { get; private set; }
+        public List<CharacterBehaviour> characters { get; set; }
+        public List<CharacterBehaviour> assignedCharacters { get; set; }
+        public List<CharacterBehaviour> notAssignedCharacters { get; set; }
+        public List<CharacterBehaviour> traitsCharacters { get; set; }
 
         /* UI GameObjects */
         [SerializeField] private TextMeshProUGUI currentStoryline;
@@ -40,11 +44,7 @@ namespace SS
         /* Indexes */
         [SerializeField] private int selectedNodeGroupIndex;
         [SerializeField] private int selectedNodeIndex;
-
-        private List<CharacterBehaviour> characters = new();
-        private List<CharacterBehaviour> assignedCharacters = new();
-        private List<CharacterBehaviour> notAssignedCharacters = new();
-        private List<CharacterBehaviour> traitsCharacters = new();
+        
         private SSTimeNodeSO timeNode;
         private uint durationTimeNode;
         private Task task;

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using CharacterSystem;
 using SS;
 using SS.Enumerations;
 using SS.ScriptableObjects;
@@ -303,7 +304,10 @@ public class Checker : MonoBehaviour, IDataPersistence
         return validateCondition;
     }
 
-    private void StartTimeline(SSNodeGroupSO timeline, SSNodeSO node = null, List<Tuple<Sprite, string, string>> dialogues = null)
+    private void StartTimeline(SSNodeGroupSO timeline, SSNodeSO node = null,
+        List<Tuple<Sprite, string, string>> dialogues = null, List<string> characters = null,
+        List<string> assignedCharacters = null, List<string> notAssignedCharacters = null,
+        List<string> traitsCharacters = null)
     {
         chosenTimeline = timeline;
         presentationContainer.SetActive(true);
@@ -330,6 +334,86 @@ public class Checker : MonoBehaviour, IDataPersistence
                 principalLauncher.node = node;
                 principalLauncher.StartTimeline();
                 if (dialogues != null) principalLauncher.dialogues = dialogues;
+                if (characters != null)
+                {
+                    List<CharacterBehaviour> charactersList = new List<CharacterBehaviour>();
+                    for (int index = 0; index < characters.Count; index++)
+                    {
+                        for (int indexCharacter = 0;
+                             indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                             indexCharacter++)
+                        {
+                            var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
+                            if (character.GetCharacterData().ID == characters[index])
+                            {
+                                charactersList.Add(character);
+                            }
+                        }
+                    }
+
+                    principalLauncher.characters = charactersList;
+                }
+
+                if (notAssignedCharacters != null)
+                {
+                    List<CharacterBehaviour> charactersList = new List<CharacterBehaviour>();
+                    for (int index = 0; index < notAssignedCharacters.Count; index++)
+                    {
+                        for (int indexCharacter = 0;
+                             indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                             indexCharacter++)
+                        {
+                            var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
+                            if (character.GetCharacterData().ID == notAssignedCharacters[index])
+                            {
+                                charactersList.Add(character);
+                            }
+                        }
+                    }
+
+                    principalLauncher.notAssignedCharacters = charactersList;
+                }
+
+                if (assignedCharacters != null)
+                {
+                    List<CharacterBehaviour> charactersList = new List<CharacterBehaviour>();
+                    for (int index = 0; index < assignedCharacters.Count; index++)
+                    {
+                        for (int indexCharacter = 0;
+                             indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                             indexCharacter++)
+                        {
+                            var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
+                            if (character.GetCharacterData().ID == assignedCharacters[index])
+                            {
+                                charactersList.Add(character);
+                            }
+                        }
+                    }
+
+                    principalLauncher.assignedCharacters = charactersList;
+                }
+
+                if (traitsCharacters != null)
+                {
+                    List<CharacterBehaviour> charactersList = new List<CharacterBehaviour>();
+                    for (int index = 0; index < traitsCharacters.Count; index++)
+                    {
+                        for (int indexCharacter = 0;
+                             indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                             indexCharacter++)
+                        {
+                            var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
+                            if (character.GetCharacterData().ID == traitsCharacters[index])
+                            {
+                                charactersList.Add(character);
+                            }
+                        }
+                    }
+
+                    principalLauncher.traitsCharacters = charactersList;
+                }
+
                 break;
             case SSStoryType.Secondary:
                 secondaryLauncher.nodeContainer = chosenStoryline.StorylineContainer;
@@ -349,6 +433,86 @@ public class Checker : MonoBehaviour, IDataPersistence
                 secondaryLauncher.node = node;
                 secondaryLauncher.StartTimeline();
                 if (dialogues != null) secondaryLauncher.dialogues = dialogues;
+                if (characters != null)
+                {
+                    List<CharacterBehaviour> charactersList = new List<CharacterBehaviour>();
+                    for (int index = 0; index < characters.Count; index++)
+                    {
+                        for (int indexCharacter = 0;
+                             indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                             indexCharacter++)
+                        {
+                            var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
+                            if (character.GetCharacterData().ID == characters[index])
+                            {
+                                charactersList.Add(character);
+                            }
+                        }
+                    }
+
+                    secondaryLauncher.characters = charactersList;
+                }
+
+                if (notAssignedCharacters != null)
+                {
+                    List<CharacterBehaviour> charactersList = new List<CharacterBehaviour>();
+                    for (int index = 0; index < notAssignedCharacters.Count; index++)
+                    {
+                        for (int indexCharacter = 0;
+                             indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                             indexCharacter++)
+                        {
+                            var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
+                            if (character.GetCharacterData().ID == notAssignedCharacters[index])
+                            {
+                                charactersList.Add(character);
+                            }
+                        }
+                    }
+
+                    secondaryLauncher.notAssignedCharacters = charactersList;
+                }
+
+                if (assignedCharacters != null)
+                {
+                    List<CharacterBehaviour> charactersList = new List<CharacterBehaviour>();
+                    for (int index = 0; index < assignedCharacters.Count; index++)
+                    {
+                        for (int indexCharacter = 0;
+                             indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                             indexCharacter++)
+                        {
+                            var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
+                            if (character.GetCharacterData().ID == assignedCharacters[index])
+                            {
+                                charactersList.Add(character);
+                            }
+                        }
+                    }
+
+                    secondaryLauncher.assignedCharacters = charactersList;
+                }
+
+                if (traitsCharacters != null)
+                {
+                    List<CharacterBehaviour> charactersList = new List<CharacterBehaviour>();
+                    for (int index = 0; index < traitsCharacters.Count; index++)
+                    {
+                        for (int indexCharacter = 0;
+                             indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                             indexCharacter++)
+                        {
+                            var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
+                            if (character.GetCharacterData().ID == traitsCharacters[index])
+                            {
+                                charactersList.Add(character);
+                            }
+                        }
+                    }
+
+                    secondaryLauncher.traitsCharacters = charactersList;
+                }
+
                 break;
             case SSStoryType.Trivial:
                 trivialLauncher.nodeContainer = chosenStoryline.StorylineContainer;
@@ -368,6 +532,86 @@ public class Checker : MonoBehaviour, IDataPersistence
                 trivialLauncher.node = node;
                 trivialLauncher.StartTimeline();
                 if (dialogues != null) trivialLauncher.dialogues = dialogues;
+                if (characters != null)
+                {
+                    List<CharacterBehaviour> charactersList = new List<CharacterBehaviour>();
+                    for (int index = 0; index < characters.Count; index++)
+                    {
+                        for (int indexCharacter = 0;
+                             indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                             indexCharacter++)
+                        {
+                            var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
+                            if (character.GetCharacterData().ID == characters[index])
+                            {
+                                charactersList.Add(character);
+                            }
+                        }
+                    }
+
+                    trivialLauncher.characters = charactersList;
+                }
+
+                if (notAssignedCharacters != null)
+                {
+                    List<CharacterBehaviour> charactersList = new List<CharacterBehaviour>();
+                    for (int index = 0; index < notAssignedCharacters.Count; index++)
+                    {
+                        for (int indexCharacter = 0;
+                             indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                             indexCharacter++)
+                        {
+                            var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
+                            if (character.GetCharacterData().ID == notAssignedCharacters[index])
+                            {
+                                charactersList.Add(character);
+                            }
+                        }
+                    }
+
+                    trivialLauncher.notAssignedCharacters = charactersList;
+                }
+
+                if (assignedCharacters != null)
+                {
+                    List<CharacterBehaviour> charactersList = new List<CharacterBehaviour>();
+                    for (int index = 0; index < assignedCharacters.Count; index++)
+                    {
+                        for (int indexCharacter = 0;
+                             indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                             indexCharacter++)
+                        {
+                            var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
+                            if (character.GetCharacterData().ID == assignedCharacters[index])
+                            {
+                                charactersList.Add(character);
+                            }
+                        }
+                    }
+
+                    trivialLauncher.assignedCharacters = charactersList;
+                }
+
+                if (traitsCharacters != null)
+                {
+                    List<CharacterBehaviour> charactersList = new List<CharacterBehaviour>();
+                    for (int index = 0; index < traitsCharacters.Count; index++)
+                    {
+                        for (int indexCharacter = 0;
+                             indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                             indexCharacter++)
+                        {
+                            var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
+                            if (character.GetCharacterData().ID == traitsCharacters[index])
+                            {
+                                charactersList.Add(character);
+                            }
+                        }
+                    }
+
+                    trivialLauncher.traitsCharacters = charactersList;
+                }
+
                 break;
         }
     }
@@ -471,13 +715,26 @@ public class Checker : MonoBehaviour, IDataPersistence
                                     var chosenTimeline = chosenStoryline.Timelines[k].TimelineContainer;
                                     if (gameData.currentNodes.TryGetValue(chosenStoryline.ID, out string nodeName))
                                     {
-                                        for (int indexNode = 0; indexNode < chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline].Count; indexNode++)
+                                        for (int indexNode = 0;
+                                             indexNode < chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline]
+                                                 .Count;
+                                             indexNode++)
                                         {
-                                            var node = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][indexNode];
+                                            var node =
+                                                chosenStoryline.StorylineContainer
+                                                    .NodeGroups[chosenTimeline][indexNode];
                                             if (node.NodeName == nodeName)
                                             {
                                                 var dialogues = gameData.dialogueTimelines[chosenStoryline.ID];
-                                                StartTimeline(chosenTimeline, node, dialogues);
+                                                var characters = gameData.charactersActiveTimelines[chosenStoryline.ID];
+                                                var assignedCharacters =
+                                                    gameData.assignedActiveTimelines[chosenStoryline.ID];
+                                                var notAssignedCharacters =
+                                                    gameData.notAssignedActiveTimelines[chosenStoryline.ID];
+                                                var traitsCharacters =
+                                                    gameData.traitsCharactersActiveStorylines[chosenStoryline.ID];
+                                                StartTimeline(chosenTimeline, node, dialogues, characters,
+                                                    assignedCharacters, notAssignedCharacters, traitsCharacters);
                                                 break;
                                             }
                                         }
@@ -602,6 +859,39 @@ public class Checker : MonoBehaviour, IDataPersistence
                 {
                     gameData.currentNodes.Add(storyline.ID, principalLauncher.CurrentNode.NodeName);
                     gameData.dialogueTimelines.Add(storyline.ID, principalLauncher.dialogues);
+                    List<string> charactersID = new List<string>();
+                    for (int indexCharacter = 0; indexCharacter < principalLauncher.characters.Count; indexCharacter++)
+                    {
+                        charactersID.Add(principalLauncher.characters[indexCharacter].GetCharacterData().ID);
+                    }
+
+                    gameData.charactersActiveTimelines.Add(storyline.ID, charactersID);
+                    charactersID.Clear();
+                    for (int indexAssigned = 0;
+                         indexAssigned < principalLauncher.assignedCharacters.Count;
+                         indexAssigned++)
+                    {
+                        charactersID.Add(principalLauncher.assignedCharacters[indexAssigned].GetCharacterData().ID);
+                    }
+
+                    gameData.assignedActiveTimelines.Add(storyline.ID, charactersID);
+                    charactersID.Clear();
+                    for (int indexNotAssigned = 0;
+                         indexNotAssigned < principalLauncher.notAssignedCharacters.Count;
+                         indexNotAssigned++)
+                    {
+                        charactersID.Add(
+                            principalLauncher.notAssignedCharacters[indexNotAssigned].GetCharacterData().ID);
+                    }
+
+                    gameData.notAssignedActiveTimelines.Add(storyline.ID, charactersID);
+                    charactersID.Clear();
+                    for (int indexTraits = 0; indexTraits < principalLauncher.traitsCharacters.Count; indexTraits++)
+                    {
+                        charactersID.Add(principalLauncher.traitsCharacters[indexTraits].GetCharacterData().ID);
+                    }
+
+                    gameData.traitsCharactersActiveStorylines.Add(storyline.ID, charactersID);
                     break;
                 }
             }
@@ -616,6 +906,39 @@ public class Checker : MonoBehaviour, IDataPersistence
                 {
                     gameData.currentNodes.Add(storyline.ID, secondaryLauncher.CurrentNode.NodeName);
                     gameData.dialogueTimelines.Add(storyline.ID, secondaryLauncher.dialogues);
+                    List<string> charactersID = new List<string>();
+                    for (int indexCharacter = 0; indexCharacter < secondaryLauncher.characters.Count; indexCharacter++)
+                    {
+                        charactersID.Add(secondaryLauncher.characters[indexCharacter].GetCharacterData().ID);
+                    }
+
+                    gameData.charactersActiveTimelines.Add(storyline.ID, charactersID);
+                    charactersID.Clear();
+                    for (int indexAssigned = 0;
+                         indexAssigned < secondaryLauncher.assignedCharacters.Count;
+                         indexAssigned++)
+                    {
+                        charactersID.Add(secondaryLauncher.assignedCharacters[indexAssigned].GetCharacterData().ID);
+                    }
+
+                    gameData.assignedActiveTimelines.Add(storyline.ID, charactersID);
+                    charactersID.Clear();
+                    for (int indexNotAssigned = 0;
+                         indexNotAssigned < secondaryLauncher.notAssignedCharacters.Count;
+                         indexNotAssigned++)
+                    {
+                        charactersID.Add(
+                            secondaryLauncher.notAssignedCharacters[indexNotAssigned].GetCharacterData().ID);
+                    }
+
+                    gameData.notAssignedActiveTimelines.Add(storyline.ID, charactersID);
+                    charactersID.Clear();
+                    for (int indexTraits = 0; indexTraits < secondaryLauncher.traitsCharacters.Count; indexTraits++)
+                    {
+                        charactersID.Add(secondaryLauncher.traitsCharacters[indexTraits].GetCharacterData().ID);
+                    }
+
+                    gameData.traitsCharactersActiveStorylines.Add(storyline.ID, charactersID);
                     break;
                 }
             }
@@ -630,6 +953,38 @@ public class Checker : MonoBehaviour, IDataPersistence
                 {
                     gameData.currentNodes.Add(storyline.ID, trivialLauncher.CurrentNode.NodeName);
                     gameData.dialogueTimelines.Add(storyline.ID, trivialLauncher.dialogues);
+                    List<string> charactersID = new List<string>();
+                    for (int indexCharacter = 0; indexCharacter < trivialLauncher.characters.Count; indexCharacter++)
+                    {
+                        charactersID.Add(trivialLauncher.characters[indexCharacter].GetCharacterData().ID);
+                    }
+
+                    gameData.charactersActiveTimelines.Add(storyline.ID, charactersID);
+                    charactersID.Clear();
+                    for (int indexAssigned = 0;
+                         indexAssigned < trivialLauncher.assignedCharacters.Count;
+                         indexAssigned++)
+                    {
+                        charactersID.Add(trivialLauncher.assignedCharacters[indexAssigned].GetCharacterData().ID);
+                    }
+
+                    gameData.assignedActiveTimelines.Add(storyline.ID, charactersID);
+                    charactersID.Clear();
+                    for (int indexNotAssigned = 0;
+                         indexNotAssigned < trivialLauncher.notAssignedCharacters.Count;
+                         indexNotAssigned++)
+                    {
+                        charactersID.Add(trivialLauncher.notAssignedCharacters[indexNotAssigned].GetCharacterData().ID);
+                    }
+
+                    gameData.notAssignedActiveTimelines.Add(storyline.ID, charactersID);
+                    charactersID.Clear();
+                    for (int indexTraits = 0; indexTraits < trivialLauncher.traitsCharacters.Count; indexTraits++)
+                    {
+                        charactersID.Add(trivialLauncher.traitsCharacters[indexTraits].GetCharacterData().ID);
+                    }
+
+                    gameData.traitsCharactersActiveStorylines.Add(storyline.ID, charactersID);
                     break;
                 }
             }
