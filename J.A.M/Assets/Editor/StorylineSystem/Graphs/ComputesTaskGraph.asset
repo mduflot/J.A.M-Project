@@ -19,26 +19,34 @@ MonoBehaviour:
   <Condition>k__BackingField: {fileID: 0}
   <Groups>k__BackingField: []
   <Nodes>k__BackingField:
-  - rid: 8412203468160499716
+  - rid: 1640970607491547152
+  - rid: 1640970607491547153
+  - rid: 1640970607491547154
+  - rid: 1640970607491547155
   <OldGroupNames>k__BackingField: []
   <OldUngroupedNodeNames>k__BackingField:
-  - CakeTrick
+  - TheCakeTrick
+  - SelfRepair
+  - EmergencyPlotting
+  - FortifiedFood
   <OldGroupedNodeNames>k__BackingField:
     list: []
   references:
     version: 2
     RefIds:
-    - rid: 8412203468160499716
+    - rid: 1640970607491547152
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 3028f91e-faa8-4829-b8d7-cac857d18d1b
-        <Name>k__BackingField: CakeTrick
+        <Name>k__BackingField: TheCakeTrick
         <Choices>k__BackingField:
-        - rid: 8412203468160499717
+        - rid: 1640970607491547156
         <GroupID>k__BackingField: 
         <NodeType>k__BackingField: 1
-        <Position>k__BackingField: {x: 432, y: 173.33334}
-        <DescriptionTask>k__BackingField: Prepare food !
+        <Position>k__BackingField: {x: 356.80002, y: 172.8}
+        <DescriptionTask>k__BackingField: The AI cooks something nice from the rations.
+          All idle crewmate separate the mood gain between each other (disp. a list
+          of gains)
         <TaskStatus>k__BackingField: 0
         <TaskType>k__BackingField: 3
         <TaskIcon>k__BackingField: {fileID: 21300000, guid: efd495e7e7951104c9be808f109f77dd,
@@ -50,11 +58,104 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 5
         <Furniture>k__BackingField: 1
-    - rid: 8412203468160499717
+    - rid: 1640970607491547153
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 29252533-fa5c-4063-a0b8-a9b6750379d4
+        <Name>k__BackingField: SelfRepair
+        <Choices>k__BackingField:
+        - rid: 1640970607491547157
+        <GroupID>k__BackingField: 
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 740.8, y: 172.8}
+        <DescriptionTask>k__BackingField: The ship will enter Self-Repair mode, losing
+          trajectory precision to focus on restoring the Hull.
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 3
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 1d8c6b9704e0a014a82461b6c1d65d4c,
+          type: 3}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 0
+        <MandatorySlots>k__BackingField: 0
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 5
+        <Furniture>k__BackingField: 1
+    - rid: 1640970607491547154
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 30b91c3f-f3e8-4312-9ff9-cffe73daed31
+        <Name>k__BackingField: EmergencyPlotting
+        <Choices>k__BackingField:
+        - rid: 1640970607491547158
+        <GroupID>k__BackingField: 
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 1134.3999, y: 172.8}
+        <DescriptionTask>k__BackingField: The Computer will use its power to plot
+          our course, replacing the need for a pilot.
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 3
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 178ea6ed06e6e114aa5b5ba5f88233cf,
+          type: 3}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 0
+        <MandatorySlots>k__BackingField: 0
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 5
+        <Furniture>k__BackingField: 1
+    - rid: 1640970607491547155
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: edb711e5-6698-4f87-b5aa-8b03c86dd01b
+        <Name>k__BackingField: FortifiedFood
+        <Choices>k__BackingField:
+        - rid: 1640970607491547159
+        <GroupID>k__BackingField: 
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 1538.3999, y: 172.8}
+        <DescriptionTask>k__BackingField: Some of the hull's rare minerals could
+          improve the quantites of human rations.
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 3
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: efd495e7e7951104c9be808f109f77dd,
+          type: 3}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 0
+        <MandatorySlots>k__BackingField: 0
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 5
+        <Furniture>k__BackingField: 1
+    - rid: 1640970607491547156
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNodeID>k__BackingField: 
         <Condition>k__BackingField: {fileID: 11400000, guid: 8f1f9420dda8eb74cb92b831a1c682d3,
+          type: 2}
+        <PreviewOutcome>k__BackingField: 'You will add :'
+    - rid: 1640970607491547157
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 84a4ea6eecce185428fefbdb9333c5c8,
+          type: 2}
+        <PreviewOutcome>k__BackingField: 'You will add :'
+    - rid: 1640970607491547158
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 0e7934f7329085646b90b75f62e15f2f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: 'You will add :'
+    - rid: 1640970607491547159
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 7dbe2e3d176acb14a92931dedad35bf7,
           type: 2}
         <PreviewOutcome>k__BackingField: 'You will add :'
