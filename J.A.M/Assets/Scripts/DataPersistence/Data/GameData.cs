@@ -1,10 +1,12 @@
-using System;
 using System.Collections.Generic;
 using SS.Enumerations;
 
 [System.Serializable]
 public class GameData
 {
+    /*** TIME ***/
+    public uint time;
+
     /*** SPACESHIP ***/
     public SerializableDictionary<SystemType, float> gaugeValues;
     public SerializableDictionary<string, TraitsData.Traits> characterTraits;
@@ -30,6 +32,7 @@ public class GameData
 
     public GameData()
     {
+        time = 0;
         gaugeValues = new SerializableDictionary<SystemType, float>();
         characterTraits = new SerializableDictionary<string, TraitsData.Traits>();
         spaceshipTraits = new TraitsData.SpaceshipTraits();
