@@ -750,6 +750,10 @@ public class Checker : MonoBehaviour, IDataPersistence
                 }
             }
         }
+        
+        principalLauncher.storylineLogs = gameData.principalStorylineLogs;
+        secondaryLauncher.storylineLogs = gameData.secondaryStorylineLogs;
+        trivialLauncher.storylineLogs = gameData.trivialStorylineLogs;
     }
 
     public void SaveData(ref GameData gameData)
@@ -993,5 +997,13 @@ public class Checker : MonoBehaviour, IDataPersistence
                 }
             }
         }
+        
+        gameData.principalStorylineLogs.Clear();
+        gameData.secondaryStorylineLogs.Clear();
+        gameData.trivialStorylineLogs.Clear();
+
+        gameData.principalStorylineLogs = principalLauncher.storylineLogs;
+        gameData.secondaryStorylineLogs = secondaryLauncher.storylineLogs;
+        gameData.trivialStorylineLogs = trivialLauncher.storylineLogs;
     }
 }

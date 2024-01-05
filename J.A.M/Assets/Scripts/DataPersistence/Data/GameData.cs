@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SS;
 using SS.Enumerations;
 
 [System.Serializable]
@@ -29,14 +30,22 @@ public class GameData
     public SerializableDictionary<string, List<string>> traitsCharactersActiveStorylines;
 
     /*** STORYLINES LOG ***/
+    public List<StorylineLog> principalStorylineLogs;
+    public List<StorylineLog> secondaryStorylineLogs;
+    public List<StorylineLog> trivialStorylineLogs;
 
     public GameData()
     {
+        /*** TIME ***/
         time = 0;
+
+        /*** SPACESHIP ***/
         gaugeValues = new SerializableDictionary<SystemType, float>();
         characterTraits = new SerializableDictionary<string, TraitsData.Traits>();
         spaceshipTraits = new TraitsData.SpaceshipTraits();
         hiddenSpaceshipTraits = new TraitsData.HiddenSpaceshipTraits();
+
+        /*** STORYLINES ***/
         currentCampaignID = "";
         storylineStatus = new SerializableDictionary<string, SSStoryStatus>();
         timelineStatus = new SerializableDictionary<string, SSStoryStatus>();
@@ -47,5 +56,10 @@ public class GameData
         assignedActiveTimelines = new SerializableDictionary<string, List<string>>();
         notAssignedActiveTimelines = new SerializableDictionary<string, List<string>>();
         traitsCharactersActiveStorylines = new SerializableDictionary<string, List<string>>();
+
+        /*** STORYLINES LOG ***/
+        principalStorylineLogs = new List<StorylineLog>();
+        secondaryStorylineLogs = new List<StorylineLog>();
+        trivialStorylineLogs = new List<StorylineLog>();
     }
 }

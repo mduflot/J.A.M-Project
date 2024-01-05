@@ -27,6 +27,7 @@ namespace SS
         public List<CharacterBehaviour> assignedCharacters { get; set; }
         public List<CharacterBehaviour> notAssignedCharacters { get; set; }
         public List<CharacterBehaviour> traitsCharacters { get; set; }
+        public List<StorylineLog> storylineLogs { get; set; }
 
         /* UI GameObjects */
         [SerializeField] private TextMeshProUGUI currentStoryline;
@@ -44,7 +45,7 @@ namespace SS
         /* Indexes */
         [SerializeField] private int selectedNodeGroupIndex;
         [SerializeField] private int selectedNodeIndex;
-        
+
         private SSTimeNodeSO timeNode;
         private uint durationTimeNode;
         private Task task;
@@ -52,6 +53,7 @@ namespace SS
         private void Start()
         {
             spaceshipManager = GameManager.Instance.SpaceshipManager;
+            storylineLogs = new List<StorylineLog>();
             dialogues = new();
             characters = new();
             assignedCharacters = new();
@@ -447,7 +449,8 @@ namespace SS
                     }
 
                     actualSpeaker = tempCharacters[Random.Range(0, tempCharacters.Count)];
-                    dialogues.Add(new SerializableTuple<string, string>(actualSpeaker.GetCharacterData().ID, nodeSO.Text));
+                    dialogues.Add(
+                        new SerializableTuple<string, string>(actualSpeaker.GetCharacterData().ID, nodeSO.Text));
                     StartCoroutine(DisplayDialogue(actualSpeaker.speaker, actualSpeaker.GetCharacterData().firstName,
                         nodeSO));
                     traitsCharacters.Add(actualSpeaker);
