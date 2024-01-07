@@ -1,0 +1,1463 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: ArtifactInstallationGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: ArtifactInstallation
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: 9fb86115-c889-4c62-b995-0b86bfe8cde8
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: Intro
+    <Position>k__BackingField: {x: 305, y: -152}
+  - <ID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: TheRoom
+    <Position>k__BackingField: {x: 1111.0001, y: 967.9999}
+  - <ID>k__BackingField: 5cd7eda3-82c0-4865-84ef-482c6abfdf86
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: Instability
+    <Position>k__BackingField: {x: 3807.0002, y: 2090}
+  <Nodes>k__BackingField:
+  - rid: 5750222787035267705
+  - rid: 5750222787035267706
+  - rid: 5750222787035267707
+  - rid: 5750222787035267708
+  - rid: 5750222787035267709
+  - rid: 5750222787035267710
+  - rid: 5750222787035267711
+  - rid: 5750222787035267712
+  - rid: 5750222787035267713
+  - rid: 5750222787035267714
+  - rid: 5750222787035267715
+  - rid: 5750222787035267716
+  - rid: 5750222787035267717
+  - rid: 5750222787035267718
+  - rid: 5750222787035267719
+  - rid: 5750222787035267720
+  - rid: 5750222787035267721
+  - rid: 5750222787035267722
+  - rid: 5750222787035267723
+  - rid: 5750222787035267724
+  - rid: 5750222787035267725
+  - rid: 5750222787035267726
+  - rid: 5750222787035267727
+  - rid: 5750222787035267728
+  - rid: 5750222787035267729
+  - rid: 5750222787035267730
+  - rid: 5750222787035267731
+  - rid: 5750222787035267732
+  - rid: 5750222787035267733
+  - rid: 5750222787035267734
+  - rid: 5750222787035267735
+  - rid: 5750222787035267736
+  - rid: 5750222787035267737
+  - rid: 5750222787035267738
+  - rid: 5750222787035267739
+  - rid: 5750222787035267740
+  - rid: 5750222787035267741
+  - rid: 5750222787035267742
+  - rid: 5750222787035267743
+  - rid: 5750222787035267744
+  - rid: 5750222787035267745
+  - rid: 5750222787035267746
+  - rid: 5750222787035267747
+  - rid: 5750222787035267748
+  - rid: 5750222787035267749
+  - rid: 5750222787035267750
+  - rid: 5750222787035267751
+  - rid: 5750222787035267752
+  - rid: 5750222787035267753
+  - rid: 5750222787035267754
+  - rid: 5750222787035267755
+  - rid: 5750222787035267756
+  <OldGroupNames>k__BackingField:
+  - Intro
+  - TheRoom
+  - Instability
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: Intro
+      Value:
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 1
+      - 2
+      - 3
+      - 4
+      - MissionBriefing
+    - Key: TheRoom
+      Value:
+      - 1
+      - 2
+      - 5
+      - 6
+      - 8
+      - 9
+      - 12
+      - 13
+      - 14
+      - 16
+      - 15
+      - 18
+      - 19
+      - 20
+      - 17
+      - 21
+      - 22
+      - 24
+      - 23
+      - 3
+      - 4
+      - 7
+      - MakingRoom
+      - 10
+      - 11
+      - InstallingTheArtifact
+    - Key: Instability
+      Value:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 7
+      - 11
+      - 8
+      - 9
+      - 10
+      - 12
+      - 6
+      - FixTheLeakage
+  references:
+    version: 2
+    RefIds:
+    - rid: 5750222787035267705
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 3b3d6b11-e9c2-43da-85da-68779cfac2d7
+        <Name>k__BackingField: 5
+        <Choices>k__BackingField:
+        - rid: 5750222787035267757
+        <GroupID>k__BackingField: 9fb86115-c889-4c62-b995-0b86bfe8cde8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3519, y: -80}
+        <Text>k__BackingField: Alright, everybody. We owe you some explanations as
+          to our presence in this ship.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 0
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267706
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 7ccd59fd-58aa-4eaf-9f28-16ca3efa6aeb
+        <Name>k__BackingField: 6
+        <Choices>k__BackingField:
+        - rid: 5750222787035267758
+        <GroupID>k__BackingField: 9fb86115-c889-4c62-b995-0b86bfe8cde8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4174, y: -93}
+        <Text>k__BackingField: We are transporting a unique Artifact of the Ktetorian
+          Civilization, that we have secured during a very secret mission.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 20
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267707
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: a1684e1e-f6bc-458f-a7f2-cbaf8aac82f3
+        <Name>k__BackingField: 7
+        <Choices>k__BackingField:
+        - rid: 5750222787035267759
+        <GroupID>k__BackingField: 9fb86115-c889-4c62-b995-0b86bfe8cde8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4831, y: -93}
+        <Text>k__BackingField: We don't know anything about how the Artifact works.
+          What we do know is it could be our only chance in the War.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 40
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267708
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 4f237695-f8f4-4e4c-b2fb-5977acc8de79
+        <Name>k__BackingField: 8
+        <Choices>k__BackingField:
+        - rid: 5750222787035267760
+        <GroupID>k__BackingField: 9fb86115-c889-4c62-b995-0b86bfe8cde8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5549, y: -93}
+        <Text>k__BackingField: Our ship being severely damaged, we are taking control
+          of this Freighter in order to fulfill our initial mission.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 60
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267709
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 7b8e22a1-3032-4872-ab4f-18b656b14e67
+        <Name>k__BackingField: 9
+        <Choices>k__BackingField:
+        - rid: 5750222787035267761
+        <GroupID>k__BackingField: 9fb86115-c889-4c62-b995-0b86bfe8cde8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6234, y: -93}
+        <Text>k__BackingField: Now let's bring this Artifact home and show the Echtrians
+          what Humanity is worth.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267710
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: bec17c91-9905-47ec-b6ff-653afcc79842
+        <Name>k__BackingField: 10
+        <Choices>k__BackingField:
+        - rid: 5750222787035267762
+        <GroupID>k__BackingField: 9fb86115-c889-4c62-b995-0b86bfe8cde8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3513, y: 208}
+        <Text>k__BackingField: Come on, are you really not gonna tell us what this
+          "artifact" is? At least tell us where you found it!
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 0
+        <Job>k__BackingField: 128
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267711
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 7cd1a796-4336-4f1e-8cda-308d6e3d75f2
+        <Name>k__BackingField: 11
+        <Choices>k__BackingField:
+        - rid: 5750222787035267763
+        <GroupID>k__BackingField: 9fb86115-c889-4c62-b995-0b86bfe8cde8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4188, y: 208}
+        <Text>k__BackingField: I heard they got it from a super secret mission. Must
+          be important for the war.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 128
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267712
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: faf27bb5-487a-4b2d-bb48-2f4713d885e9
+        <Name>k__BackingField: 12
+        <Choices>k__BackingField:
+        - rid: 5750222787035267764
+        <GroupID>k__BackingField: 9fb86115-c889-4c62-b995-0b86bfe8cde8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4923, y: 208}
+        <Text>k__BackingField: If the Military can't trust us with their secret,
+          how are we gonna trust them with our ship?
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 75
+        <Job>k__BackingField: 128
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267713
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 32fcb614-2c29-405d-a96a-2ff59be9968e
+        <Name>k__BackingField: 1
+        <Choices>k__BackingField:
+        - rid: 5750222787035267765
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1136, y: 1101}
+        <Text>k__BackingField: Alright everyone. We must install the Artifact in
+          a secure location of the ship.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 1
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267714
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 8cd6e241-e2f5-45d1-88d3-f5e19d71e6b9
+        <Name>k__BackingField: 2
+        <Choices>k__BackingField:
+        - rid: 5750222787035267766
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1831, y: 1101}
+        <Text>k__BackingField: There should be some storage room we could use for
+          it.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 128
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267715
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 2d4ce04e-8cff-4f74-b01d-53305c814b6e
+        <Name>k__BackingField: 5
+        <Choices>k__BackingField:
+        - rid: 5750222787035267767
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4347, y: 1064}
+        <Text>k__BackingField: Hell, this is tedious! I'm halfway done with the Artifact
+          Room.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267716
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ffb8e214-ec54-4883-87fd-4923e8bc78ff
+        <Name>k__BackingField: 6
+        <Choices>k__BackingField:
+        - rid: 5750222787035267768
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5072, y: 1064}
+        <Text>k__BackingField: There we go! This should ensure the Artifact is properly
+          installed.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 90
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267717
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: d127d485-b8a9-4f09-a794-bd3236b0be9c
+        <Name>k__BackingField: 8
+        <Choices>k__BackingField:
+        - rid: 5750222787035267769
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4347, y: 1346}
+        <Text>k__BackingField: I guess we have no choice. Let's empty the whole cargo.
+        <SpeakerType>k__BackingField: 25
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 30
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267718
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 1f93d6e7-8898-455a-aa45-df69c32291bc
+        <Name>k__BackingField: 9
+        <Choices>k__BackingField:
+        - rid: 5750222787035267770
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5072, y: 1346}
+        <Text>k__BackingField: What are you doing?! We might need the cargo later!
+        <SpeakerType>k__BackingField: 24
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 40
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267719
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 77081aef-9c4d-4499-9727-ea2b931ece3c
+        <Name>k__BackingField: 12
+        <Choices>k__BackingField:
+        - rid: 5750222787035267771
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 7228, y: 1027}
+        <Text>k__BackingField: I should be able to take care of this. Bring in the
+          Artifact!
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 0
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267720
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 01f27170-223b-4f99-a843-1202759e41de
+        <Name>k__BackingField: 13
+        <Choices>k__BackingField:
+        - rid: 5750222787035267772
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 7912, y: 1027}
+        <Text>k__BackingField: I've never seen such artistry in a piece of technology.
+          How fascinating!
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267721
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: cca97a54-d7ca-484e-9190-af3174c9d705
+        <Name>k__BackingField: 14
+        <Choices>k__BackingField:
+        - rid: 5750222787035267773
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8588, y: 1027}
+        <Text>k__BackingField: The Artifact should be properly plugged to the power
+          source now.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 90
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267722
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 2699fb62-4b4e-4f9c-aa88-7c5900e212cb
+        <Name>k__BackingField: 16
+        <Choices>k__BackingField:
+        - rid: 5750222787035267774
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 7886, y: 1357}
+        <Text>k__BackingField: Red wire should go in there... Where are the instructions
+          for this?!
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 30
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267723
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 2254e963-71af-4016-90da-41a86c7e096a
+        <Name>k__BackingField: 15
+        <Choices>k__BackingField:
+        - rid: 5750222787035267775
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 7228, y: 1357}
+        <Text>k__BackingField: I... Don't know much about alien tech, but I'll give
+          it a try!
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 0
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267724
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 165db4d9-3ef7-40f0-9c88-b57b0aea23f1
+        <Name>k__BackingField: 18
+        <Choices>k__BackingField:
+        - rid: 5750222787035267776
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 9264, y: 1357}
+        <Text>k__BackingField: OUCH! Wrong wire!
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 69
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267725
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 0dc8ed06-90cd-41b3-a8b2-67366d8ea98c
+        <Name>k__BackingField: 19
+        <Choices>k__BackingField:
+        - rid: 5750222787035267777
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 9537, y: 1357}
+        <Text>k__BackingField: Looks like we lost some power... Do you know what
+          you're doing with the Artifact?
+        <SpeakerType>k__BackingField: 15
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 80
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267726
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 18371672-907c-4696-ba2a-80d587b24cd6
+        <Name>k__BackingField: 20
+        <Choices>k__BackingField:
+        - rid: 5750222787035267778
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 10220, y: 1357}
+        <Text>k__BackingField: I am now... We should be good!
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 95
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267727
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: d682d1f4-78e6-442b-aa9c-c5e243414c72
+        <Name>k__BackingField: 17
+        <Choices>k__BackingField:
+        - rid: 5750222787035267779
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8568, y: 1357}
+        <Text>k__BackingField: Ahah, there we are! Let's plug this in...
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 60
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267728
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 4863f462-b475-4571-abef-f8e5d8a204e1
+        <Name>k__BackingField: 21
+        <Choices>k__BackingField:
+        - rid: 5750222787035267780
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 7228, y: 1663}
+        <Text>k__BackingField: Let's bring in the Artifact.
+        <SpeakerType>k__BackingField: 23
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 0
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267729
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: cdf180f7-e5dd-44ff-aa1f-9ce16762e8e3
+        <Name>k__BackingField: 22
+        <Choices>k__BackingField:
+        - rid: 5750222787035267781
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 7886, y: 1663}
+        <Text>k__BackingField: Hey, no one's there to install this properly?! It's
+          gonna overheat!
+        <SpeakerType>k__BackingField: 25
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267730
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: cbeb5fd6-93a9-4f01-9543-079f64410715
+        <Name>k__BackingField: 24
+        <Choices>k__BackingField:
+        - rid: 5750222787035267782
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 9264, y: 1663}
+        <Text>k__BackingField: 'Registering damage coming from : Artifact Room.'
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 90
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267731
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 95e07c1d-dea4-47a6-a3ad-2e8bb050ff71
+        <Name>k__BackingField: 23
+        <Choices>k__BackingField:
+        - rid: 5750222787035267783
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8568, y: 1663}
+        <Text>k__BackingField: Shit, it's pretty hot in there...
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 75
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267732
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 8994f052-7c3c-40ac-b649-6bd0bff59046
+        <Name>k__BackingField: 1
+        <Choices>k__BackingField:
+        - rid: 5750222787035267784
+        <GroupID>k__BackingField: 9fb86115-c889-4c62-b995-0b86bfe8cde8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 330, y: 131}
+        <Text>k__BackingField: Now that we're docked in, we'll be able to install
+          the artifact in a secure room.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 1
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267733
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 4c25d492-d4f0-4757-98dc-caf657109ed9
+        <Name>k__BackingField: 2
+        <Choices>k__BackingField:
+        - rid: 5750222787035267785
+        <GroupID>k__BackingField: 9fb86115-c889-4c62-b995-0b86bfe8cde8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1136, y: 131}
+        <Text>k__BackingField: The... What?
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267734
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ada911b4-fd0f-4c97-a625-d4e294c2ff97
+        <Name>k__BackingField: 3
+        <Choices>k__BackingField:
+        - rid: 5750222787035267786
+        <GroupID>k__BackingField: 9fb86115-c889-4c62-b995-0b86bfe8cde8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1449, y: 138}
+        <Text>k__BackingField: Right... We should consider briefing the civilians
+          on board about the nature of the artifact.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 1
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267735
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 3a900cc4-1e23-4ec6-9160-11c6fe9374e3
+        <Name>k__BackingField: 4
+        <Choices>k__BackingField:
+        - rid: 5750222787035267787
+        <GroupID>k__BackingField: 9fb86115-c889-4c62-b995-0b86bfe8cde8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2144, y: 131}
+        <Text>k__BackingField: This smells like trouble...
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267736
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 7053e6a3-3980-4810-b894-dde894547c95
+        <Name>k__BackingField: MissionBriefing
+        <Choices>k__BackingField:
+        - rid: 5750222787035267788
+        - rid: 5750222787035267789
+        <GroupID>k__BackingField: 9fb86115-c889-4c62-b995-0b86bfe8cde8
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 2822, y: 35}
+        <DescriptionTask>k__BackingField: 'It could be time for the civilians of
+          the crew to be informed about the true nature of the mission : securely
+          bringing the Artifact to Earth. Or, we could avoid sharing too much information
+          with them.'
+        <TaskStatus>k__BackingField: 2
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 0}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 10
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 6
+        <Furniture>k__BackingField: 3
+    - rid: 5750222787035267737
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 4429f158-d7ce-46bf-96bd-e1428e120781
+        <Name>k__BackingField: 3
+        <Choices>k__BackingField:
+        - rid: 5750222787035267790
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2485, y: 1101}
+        <Text>k__BackingField: Right... If someone could prepare the room, it would
+          save us some trouble.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 1
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267738
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: bc077425-a51d-4df9-ae42-de58ecd0ebc2
+        <Name>k__BackingField: 4
+        <Choices>k__BackingField:
+        - rid: 5750222787035267791
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3721, y: 1064}
+        <Text>k__BackingField: There we go. I'll clear the path for the Artifact
+          in the room.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 0
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267739
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 123f0520-121c-425d-8d58-be150f479497
+        <Name>k__BackingField: 7
+        <Choices>k__BackingField:
+        - rid: 5750222787035267792
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3748, y: 1346}
+        <Text>k__BackingField: No one is gonna clear the room for the Artifact?
+        <SpeakerType>k__BackingField: 23
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 0
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267740
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: e60c241b-5c92-4ec5-87c6-a0ee16af9c5f
+        <Name>k__BackingField: MakingRoom
+        <Choices>k__BackingField:
+        - rid: 5750222787035267793
+        - rid: 5750222787035267794
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 3122, y: 1070}
+        <DescriptionTask>k__BackingField: We should prepare and clean up the Artifact
+          Room to install it properly. Someone that knows the ship would be better
+          suited.
+        <TaskStatus>k__BackingField: 2
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 0}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 10
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 4
+        <Furniture>k__BackingField: 9
+    - rid: 5750222787035267741
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 575182f4-77c3-4ad9-91b0-8b351ce0a020
+        <Name>k__BackingField: 10
+        <Choices>k__BackingField:
+        - rid: 5750222787035267795
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5728, y: 1432}
+        <Text>k__BackingField: The mission is more important. Let's empty the cargo
+          now.
+        <SpeakerType>k__BackingField: 23
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 70
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267742
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 6ce162f9-648d-4e6b-ba51-60d1e58e51b6
+        <Name>k__BackingField: 11
+        <Choices>k__BackingField:
+        - rid: 5750222787035267796
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6385, y: 1346}
+        <Text>k__BackingField: Orders are orders!
+        <SpeakerType>k__BackingField: 25
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 90
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267743
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: a5f7c144-442a-407d-a3a3-8b28ad67485b
+        <Name>k__BackingField: InstallingTheArtifact
+        <Choices>k__BackingField:
+        - rid: 5750222787035267797
+        - rid: 5750222787035267798
+        - rid: 5750222787035267799
+        <GroupID>k__BackingField: 0fd5f506-9e15-4715-82cd-42a6cd8ea390
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 6570, y: 1037}
+        <DescriptionTask>k__BackingField: Now that we have made room for the Artifact,
+          a trained scientist should be able to install it and plug it to the power
+          source to cool it and stabilize it.
+        <TaskStatus>k__BackingField: 2
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 0}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 10
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 4
+        <Furniture>k__BackingField: 9
+    - rid: 5750222787035267744
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 6bde377e-55c0-4997-99eb-59ff935848c2
+        <Name>k__BackingField: 1
+        <Choices>k__BackingField:
+        - rid: 5750222787035267800
+        <GroupID>k__BackingField: 5cd7eda3-82c0-4865-84ef-482c6abfdf86
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3832, y: 2309}
+        <Text>k__BackingField: Irregular Artifact activity detected.
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267745
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 28d1fd58-6bbf-449d-9391-d3561cd5ddbf
+        <Name>k__BackingField: 2
+        <Choices>k__BackingField:
+        - rid: 5750222787035267801
+        <GroupID>k__BackingField: 5cd7eda3-82c0-4865-84ef-482c6abfdf86
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4493, y: 2309}
+        <Text>k__BackingField: What was that? Power went down for a few seconds.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267746
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 1a83ec62-0e82-4e46-9849-7b7363aa96c8
+        <Name>k__BackingField: 3
+        <Choices>k__BackingField:
+        - rid: 5750222787035267802
+        <GroupID>k__BackingField: 5cd7eda3-82c0-4865-84ef-482c6abfdf86
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5163, y: 2309}
+        <Text>k__BackingField: Hey! It looks like power went down in some rooms!
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267747
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 23312161-fa16-4028-bf20-c02404fb3fdc
+        <Name>k__BackingField: 4
+        <Choices>k__BackingField:
+        - rid: 5750222787035267803
+        <GroupID>k__BackingField: 5cd7eda3-82c0-4865-84ef-482c6abfdf86
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5842, y: 2309}
+        <Text>k__BackingField: It's the Artifact. It's causing leakages in the power
+          system! We should check that out quick.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 32
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267748
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 20a3508a-3881-4d40-a55d-fb147754b53e
+        <Name>k__BackingField: 5
+        <Choices>k__BackingField:
+        - rid: 5750222787035267804
+        <GroupID>k__BackingField: 5cd7eda3-82c0-4865-84ef-482c6abfdf86
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6862, y: 2149}
+        <Text>k__BackingField: I'll just go in there and fix the damn wiring.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 0
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267749
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 53f902ee-eeeb-4595-be3b-d1e7e9ae92bc
+        <Name>k__BackingField: 7
+        <Choices>k__BackingField:
+        - rid: 5750222787035267805
+        <GroupID>k__BackingField: 5cd7eda3-82c0-4865-84ef-482c6abfdf86
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8184, y: 2149}
+        <Text>k__BackingField: Alright, the Artifact seems stable enough now.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 90
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267750
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 6034d267-11ae-4efb-97c5-95b556b7ade6
+        <Name>k__BackingField: 11
+        <Choices>k__BackingField:
+        - rid: 5750222787035267806
+        <GroupID>k__BackingField: 5cd7eda3-82c0-4865-84ef-482c6abfdf86
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8878, y: 2426}
+        <Text>k__BackingField: We can't do anything else now but wait for the end
+          of whatever this is.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 70
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267751
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: e6efc842-b9d8-42e1-a104-038ae2f0df2b
+        <Name>k__BackingField: 8
+        <Choices>k__BackingField:
+        - rid: 5750222787035267807
+        <GroupID>k__BackingField: 5cd7eda3-82c0-4865-84ef-482c6abfdf86
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6862, y: 2449}
+        <Text>k__BackingField: Is someone taking care of the Artifact?
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 0
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267752
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 10abfaca-356a-4f58-81b4-bffdad6ec770
+        <Name>k__BackingField: 9
+        <Choices>k__BackingField:
+        - rid: 5750222787035267808
+        <GroupID>k__BackingField: 5cd7eda3-82c0-4865-84ef-482c6abfdf86
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 7542, y: 2426}
+        <Text>k__BackingField: Global power surge detected.
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 30
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267753
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: f290841d-7157-43f1-9fe9-e1c04edd608c
+        <Name>k__BackingField: 10
+        <Choices>k__BackingField:
+        - rid: 5750222787035267809
+        <GroupID>k__BackingField: 5cd7eda3-82c0-4865-84ef-482c6abfdf86
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8187, y: 2426}
+        <Text>k__BackingField: Shit, power's leaking all over the ship!
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 40
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267754
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 2531992c-7778-4743-9e4a-dad5d82132b2
+        <Name>k__BackingField: 12
+        <Choices>k__BackingField:
+        - rid: 5750222787035267810
+        <GroupID>k__BackingField: 5cd7eda3-82c0-4865-84ef-482c6abfdf86
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 9536, y: 2426}
+        <Text>k__BackingField: The Artifact seems to have stabilized itself.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 90
+        <Job>k__BackingField: 32
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267755
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 04ee3136-f702-4247-8b39-2faa59501efe
+        <Name>k__BackingField: 6
+        <Choices>k__BackingField:
+        - rid: 5750222787035267811
+        <GroupID>k__BackingField: 5cd7eda3-82c0-4865-84ef-482c6abfdf86
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 7542, y: 2149}
+        <Text>k__BackingField: Pfew, we just avoided a disaster. The power leakage
+          could have been much, much worse.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750222787035267756
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 85ac5174-4a84-44cd-bc90-d69ce51f8f03
+        <Name>k__BackingField: FixTheLeakage
+        <Choices>k__BackingField:
+        - rid: 5750222787035267812
+        - rid: 5750222787035267813
+        <GroupID>k__BackingField: 5cd7eda3-82c0-4865-84ef-482c6abfdf86
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 6520, y: 2264}
+        <DescriptionTask>k__BackingField: The Artifact seems to emit some power leakage
+          that is damaging other rooms!
+        <TaskStatus>k__BackingField: 2
+        <TaskType>k__BackingField: 0
+        <TaskIcon>k__BackingField: {fileID: 0}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 10
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 4
+        <Furniture>k__BackingField: 9
+    - rid: 5750222787035267757
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 7ccd59fd-58aa-4eaf-9f28-16ca3efa6aeb
+    - rid: 5750222787035267758
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: a1684e1e-f6bc-458f-a7f2-cbaf8aac82f3
+    - rid: 5750222787035267759
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 4f237695-f8f4-4e4c-b2fb-5977acc8de79
+    - rid: 5750222787035267760
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 7b8e22a1-3032-4872-ab4f-18b656b14e67
+    - rid: 5750222787035267761
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750222787035267762
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 7cd1a796-4336-4f1e-8cda-308d6e3d75f2
+    - rid: 5750222787035267763
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: faf27bb5-487a-4b2d-bb48-2f4713d885e9
+    - rid: 5750222787035267764
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750222787035267765
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 8cd6e241-e2f5-45d1-88d3-f5e19d71e6b9
+    - rid: 5750222787035267766
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 4429f158-d7ce-46bf-96bd-e1428e120781
+    - rid: 5750222787035267767
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: ffb8e214-ec54-4883-87fd-4923e8bc78ff
+    - rid: 5750222787035267768
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: a5f7c144-442a-407d-a3a3-8b28ad67485b
+    - rid: 5750222787035267769
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 1f93d6e7-8898-455a-aa45-df69c32291bc
+    - rid: 5750222787035267770
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 575182f4-77c3-4ad9-91b0-8b351ce0a020
+    - rid: 5750222787035267771
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 01f27170-223b-4f99-a843-1202759e41de
+    - rid: 5750222787035267772
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: cca97a54-d7ca-484e-9190-af3174c9d705
+    - rid: 5750222787035267773
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750222787035267774
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: d682d1f4-78e6-442b-aa9c-c5e243414c72
+    - rid: 5750222787035267775
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 2699fb62-4b4e-4f9c-aa88-7c5900e212cb
+    - rid: 5750222787035267776
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 0dc8ed06-90cd-41b3-a8b2-67366d8ea98c
+    - rid: 5750222787035267777
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 18371672-907c-4696-ba2a-80d587b24cd6
+    - rid: 5750222787035267778
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750222787035267779
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 165db4d9-3ef7-40f0-9c88-b57b0aea23f1
+    - rid: 5750222787035267780
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750222787035267781
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 95e07c1d-dea4-47a6-a3ad-2e8bb050ff71
+    - rid: 5750222787035267782
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750222787035267783
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: cbeb5fd6-93a9-4f01-9543-079f64410715
+    - rid: 5750222787035267784
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 4c25d492-d4f0-4757-98dc-caf657109ed9
+    - rid: 5750222787035267785
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: ada911b4-fd0f-4c97-a625-d4e294c2ff97
+    - rid: 5750222787035267786
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 3a900cc4-1e23-4ec6-9160-11c6fe9374e3
+    - rid: 5750222787035267787
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 7053e6a3-3980-4810-b894-dde894547c95
+    - rid: 5750222787035267788
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 3b3d6b11-e9c2-43da-85da-68779cfac2d7
+        <Condition>k__BackingField: {fileID: 11400000, guid: 5aca91f49b0127b45bd4e4d100758576,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ' will brief the civilians about the Artifact
+          and the mission.'
+    - rid: 5750222787035267789
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNodeID>k__BackingField: bec17c91-9905-47ec-b6ff-653afcc79842
+        <Condition>k__BackingField: {fileID: 11400000, guid: 53e3797781fb2ce49a28b5c786b13e3e,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No one will brief the civilians about our
+          mission.
+    - rid: 5750222787035267790
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: e60c241b-5c92-4ec5-87c6-a0ee16af9c5f
+    - rid: 5750222787035267791
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 2d4ce04e-8cff-4f74-b01d-53305c814b6e
+    - rid: 5750222787035267792
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: d127d485-b8a9-4f09-a794-bd3236b0be9c
+    - rid: 5750222787035267793
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: bc077425-a51d-4df9-ae42-de58ecd0ebc2
+        <Condition>k__BackingField: {fileID: 11400000, guid: c8b63c1494e50c845a5042cc3ba5c91c,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ' will clear the storage room for the Artifact
+          and recycle whatever is left there.'
+    - rid: 5750222787035267794
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNodeID>k__BackingField: 123f0520-121c-425d-8d58-be150f479497
+        <Condition>k__BackingField: {fileID: 11400000, guid: 77be09d5034522a41b5eafbc5f00150c,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No one will prepare the room.
+    - rid: 5750222787035267795
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 6ce162f9-648d-4e6b-ba51-60d1e58e51b6
+    - rid: 5750222787035267796
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: a5f7c144-442a-407d-a3a3-8b28ad67485b
+    - rid: 5750222787035267797
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 77081aef-9c4d-4499-9727-ea2b931ece3c
+        <Condition>k__BackingField: {fileID: 11400000, guid: bf944faf4b3c4ee4bab1c413784376ce,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ' will install the Artifact properly.'
+    - rid: 5750222787035267798
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNodeID>k__BackingField: 2254e963-71af-4016-90da-41a86c7e096a
+        <Condition>k__BackingField: {fileID: 11400000, guid: 1f655fa0f59871a47a4e13ebefa97d32,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ' will try their best to install the Artifact.'
+    - rid: 5750222787035267799
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNodeID>k__BackingField: 4863f462-b475-4571-abef-f8e5d8a204e1
+        <Condition>k__BackingField: {fileID: 11400000, guid: 41554c4911f2f324ea48489cab92cf14,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No one will install the Artifact properly.
+    - rid: 5750222787035267800
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750222787035267801
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 1a83ec62-0e82-4e46-9849-7b7363aa96c8
+    - rid: 5750222787035267802
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 23312161-fa16-4028-bf20-c02404fb3fdc
+    - rid: 5750222787035267803
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 85ac5174-4a84-44cd-bc90-d69ce51f8f03
+    - rid: 5750222787035267804
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 04ee3136-f702-4247-8b39-2faa59501efe
+    - rid: 5750222787035267805
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750222787035267806
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 2531992c-7778-4743-9e4a-dad5d82132b2
+    - rid: 5750222787035267807
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 10abfaca-356a-4f58-81b4-bffdad6ec770
+    - rid: 5750222787035267808
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: f290841d-7157-43f1-9fe9-e1c04edd608c
+    - rid: 5750222787035267809
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 6034d267-11ae-4efb-97c5-95b556b7ade6
+    - rid: 5750222787035267810
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750222787035267811
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 53f902ee-eeeb-4595-be3b-d1e7e9ae92bc
+    - rid: 5750222787035267812
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 20a3508a-3881-4d40-a55d-fb147754b53e
+        <Condition>k__BackingField: {fileID: 11400000, guid: e58a3020b4ed1b943a95d09f04fbf4ff,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ' will try and fix the power leakage from
+          the Artifact Room.'
+    - rid: 5750222787035267813
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNodeID>k__BackingField: e6efc842-b9d8-42e1-a104-038ae2f0df2b
+        <Condition>k__BackingField: {fileID: 11400000, guid: 86c13d411d0b7ec4292769e9154573a1,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No one will fix the power leakage.
