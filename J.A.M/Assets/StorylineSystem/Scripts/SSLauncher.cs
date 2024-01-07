@@ -59,18 +59,15 @@ namespace SS
         /* TASK */
         private Task task;
 
-        private void Awake()
+        public void StartTimeline()
         {
+            if (currentStoryline) currentStoryline.text = nodeContainer.name;
+            spaceshipManager = GameManager.Instance.SpaceshipManager;
             dialogues = new();
             characters = new();
             assignedCharacters = new();
             notAssignedCharacters = new();
             traitsCharacters = new();
-        }
-
-        public void StartTimeline()
-        {
-            if (currentStoryline) currentStoryline.text = nodeContainer.name;
             IsRunning = true;
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
@@ -80,6 +77,12 @@ namespace SS
         public void StartTimeline(CharacterIcon icon)
         {
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
+            spaceshipManager = GameManager.Instance.SpaceshipManager;
+            dialogues = new();
+            characters = new();
+            assignedCharacters = new();
+            notAssignedCharacters = new();
+            traitsCharacters = new();
             IsRunning = true;
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
@@ -88,11 +91,6 @@ namespace SS
 
         private void ResetTimeline()
         {
-            dialogues.Clear();
-            characters.Clear();
-            assignedCharacters.Clear();
-            notAssignedCharacters.Clear();
-            traitsCharacters.Clear();
             if (currentStoryline) currentStoryline.text = "No timeline";
         }
 
@@ -779,7 +777,7 @@ namespace SS
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
             {
                 IsRunning = false;
-                timeline.Status = SSStoryStatus.Completed;
+                if (task.TaskType == SSTaskType.Timed || task.TaskType == SSTaskType.Untimed) timeline.Status = SSStoryStatus.Completed;
                 ResetTimeline();
                 if (nodeGroup.TimeIsOverride) waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
                 else

@@ -199,7 +199,6 @@ public class Checker : MonoBehaviour, IDataPersistence
         var count = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline].Count;
         var launcherObject = launcherPool.GetFromPool();
         var launcher = launcherObject.GetComponent<SSLauncher>();
-        launcher.spaceshipManager = GameManager.Instance.SpaceshipManager;
         launcher.storyline = chosenStoryline;
         launcher.timeline = chosenStoryline.Timelines.First(timeline => timeline.TimelineContainer == chosenTimeline);
         activeLaunchers.Add(launcher);
