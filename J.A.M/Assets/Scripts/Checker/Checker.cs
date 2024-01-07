@@ -14,6 +14,7 @@ public class Checker : MonoBehaviour, IDataPersistence
 {
     public static Checker Instance { get; private set; }
     public Pool<GameObject> launcherPool;
+    public List<SSLauncher> activeLaunchers;
 
     [SerializeField] private List<SSCampaignSO> ssCampaigns;
     [SerializeField] private GameObject presentationContainer;
@@ -24,8 +25,6 @@ public class Checker : MonoBehaviour, IDataPersistence
     [SerializeField] private uint maxWaitTimeMain = 10;
     [SerializeField] private uint minWaitTimeSecondary = 10;
     [SerializeField] private uint maxWaitTimeSecondary = 20;
-
-    private List<SSLauncher> activeLaunchers;
 
     private SSCampaignSO ssCampaign;
 
@@ -44,7 +43,7 @@ public class Checker : MonoBehaviour, IDataPersistence
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             Debug.LogError("Found more than one Checker in the scene.");
             return;
         }
@@ -54,7 +53,7 @@ public class Checker : MonoBehaviour, IDataPersistence
 
     public void Initialize(SSCampaignSO campaign = null)
     {
-        launcherPool = new Pool<GameObject>(launcherPrefab, 3);
+        launcherPool = new(launcherPrefab, 3);
         activeLaunchers = new();
         ssCampaign = campaign != null ? campaign : ssCampaigns[0];
         principalStorylines = ssCampaign.PrincipalStorylines;
@@ -68,20 +67,18 @@ public class Checker : MonoBehaviour, IDataPersistence
             ChooseNewStoryline(SSStoryType.Principal); 
             return;
         }
-        else 
-        {
-            for (int index = 0; index < activeLaunchers.Count; index++)
-            {
-                var launcher = activeLaunchers[index];
-                if (launcher.nodeContainer.StoryType == SSStoryType.Principal && launcher.storyline.Status == SSStoryStatus.Completed)
-                {
-                    ChooseNewStoryline(SSStoryType.Principal);
-                    return;
-                }
-            }
 
-            ChooseNewStoryline(SSStoryType.Secondary);
+        for (int index = 0; index < activeLaunchers.Count; index++)
+        {
+            var launcher = activeLaunchers[index];
+            if (launcher.nodeContainer.StoryType == SSStoryType.Principal && launcher.storyline.Status == SSStoryStatus.Completed)
+            {
+                ChooseNewStoryline(SSStoryType.Principal);
+                return;
+            }
         }
+
+        ChooseNewStoryline(SSStoryType.Secondary);
     }
 
     private void WaitStoryline(object sender, TimeTickSystem.OnTickEventArgs e)
@@ -202,6 +199,10 @@ public class Checker : MonoBehaviour, IDataPersistence
         var count = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline].Count;
         var launcherObject = launcherPool.GetFromPool();
         var launcher = launcherObject.GetComponent<SSLauncher>();
+        launcher.spaceshipManager = GameManager.Instance.SpaceshipManager;
+        launcher.storyline = chosenStoryline;
+        launcher.timeline = chosenStoryline.Timelines.First(timeline => timeline.TimelineContainer == chosenTimeline);
+        activeLaunchers.Add(launcher);
         launcher.nodeContainer = chosenStoryline.StorylineContainer;
         launcher.nodeGroup = chosenTimeline;
         if (node == null)

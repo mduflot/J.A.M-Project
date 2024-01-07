@@ -34,6 +34,7 @@ namespace SS
         public List<CharacterBehaviour> assignedCharacters { get; set; }
         public List<CharacterBehaviour> notAssignedCharacters { get; set; }
         public List<CharacterBehaviour> traitsCharacters { get; set; }
+        public SpaceshipManager spaceshipManager { get; set; }
 
         /* UI GameObjects */
         [SerializeField] private TextMeshProUGUI currentStoryline;
@@ -58,13 +59,8 @@ namespace SS
         /* TASK */
         private Task task;
 
-        private SpaceshipManager spaceshipManager;
-
         private void Awake()
         {
-            Debug.Log($"GameManager: {GameManager.Instance}");
-            Debug.Log($"GameManager.SpaceshipManager: {GameManager.Instance.SpaceshipManager}");
-            spaceshipManager = GameManager.Instance.SpaceshipManager;
             dialogues = new();
             characters = new();
             assignedCharacters = new();
@@ -102,18 +98,20 @@ namespace SS
 
         private void WaitTimeline(object sender, TimeTickSystem.OnTickEventArgs e)
         {
-            if (waitingTime > 0) 
+            if (waitingTime > 0)
             {
                 waitingTime -= TimeTickSystem.timePerTick;
                 return;
             }
 
             List<Timeline> availablesTimelines = new();
-            for(var i = 0; i < storyline.Timelines.Count; i++)
+            for (var i = 0; i < storyline.Timelines.Count; i++)
             {
                 var timeline = storyline.Timelines[i];
                 if (timeline.Status.Equals(SSStoryStatus.Completed)) continue;
-                if (timeline.TimelineContainer.Condition) if (RouteCondition(timeline.TimelineContainer.Condition)) continue;
+                if (timeline.TimelineContainer.Condition)
+                    if (RouteCondition(timeline.TimelineContainer.Condition))
+                        continue;
                 availablesTimelines.Add(timeline);
             }
 
@@ -123,13 +121,16 @@ namespace SS
                 storyline.Status = SSStoryStatus.Completed;
                 if (nodeContainer.StoryType == SSStoryType.Principal) Checker.Instance.GenerateNewEvent();
                 Checker.Instance.launcherPool.AddToPool(this.gameObject);
+                Checker.Instance.activeLaunchers.Remove(this);
                 TimeTickSystem.OnTick -= WaitTimeline;
                 return;
             }
 
             timeline = availablesTimelines[Random.Range(0, availablesTimelines.Count)];
             nodeGroup = timeline.TimelineContainer;
-            for (int index = 0; index < storyline.StorylineContainer.NodeGroups[timeline.TimelineContainer].Count; index++)
+            for (int index = 0;
+                 index < storyline.StorylineContainer.NodeGroups[timeline.TimelineContainer].Count;
+                 index++)
             {
                 if (storyline.StorylineContainer.NodeGroups[timeline.TimelineContainer][index].IsStartingNode)
                 {
@@ -173,6 +174,7 @@ namespace SS
         /// <param name="nodeSO"> Node you need to run </param>
         private void CheckNodeType(SSNodeSO nodeSO)
         {
+            Debug.Log("CheckNodeType");
             CurrentNode = nodeSO;
             switch (nodeSO.NodeType)
             {
@@ -677,8 +679,11 @@ namespace SS
                     timeline.Status = SSStoryStatus.Completed;
                     ResetTimeline();
                     TimeTickSystem.OnTick -= WaitingTime;
-                    if (nodeGroup.TimeIsOverride) waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                    else waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) * TimeTickSystem.ticksPerHour);
+                    if (nodeGroup.TimeIsOverride)
+                        waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                    else
+                        waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                             TimeTickSystem.ticksPerHour);
                     TimeTickSystem.OnTick += WaitTimeline;
                     return;
                 }
@@ -721,8 +726,11 @@ namespace SS
                     IsRunning = false;
                     timeline.Status = SSStoryStatus.Completed;
                     ResetTimeline();
-                    if (nodeGroup.TimeIsOverride) waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                    else waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) * TimeTickSystem.ticksPerHour);
+                    if (nodeGroup.TimeIsOverride)
+                        waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                    else
+                        waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                             TimeTickSystem.ticksPerHour);
                     TimeTickSystem.OnTick += WaitTimeline;
                     yield break;
                 }
@@ -748,7 +756,9 @@ namespace SS
                 timeline.Status = SSStoryStatus.Completed;
                 ResetTimeline();
                 if (nodeGroup.TimeIsOverride) waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                else waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) * TimeTickSystem.ticksPerHour);
+                else
+                    waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                         TimeTickSystem.ticksPerHour);
                 TimeTickSystem.OnTick += WaitTimeline;
                 yield break;
             }
@@ -772,7 +782,9 @@ namespace SS
                 timeline.Status = SSStoryStatus.Completed;
                 ResetTimeline();
                 if (nodeGroup.TimeIsOverride) waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                else waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) * TimeTickSystem.ticksPerHour);
+                else
+                    waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                         TimeTickSystem.ticksPerHour);
                 TimeTickSystem.OnTick += WaitTimeline;
                 yield break;
             }
