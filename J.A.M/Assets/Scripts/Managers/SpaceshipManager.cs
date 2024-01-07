@@ -16,7 +16,6 @@ namespace Managers
         public TraitsData.HiddenSpaceshipTraits HiddenSpaceshipTraits = TraitsData.HiddenSpaceshipTraits.None;
         [SerializeField] private GameObject roomsDisplay;
 
-        [SerializeField] private Checker checker;
         [SerializeField] private List<Notification> activeTasks = new();
         [SerializeField] private GameObject taskNotificationPrefab;
 
@@ -125,11 +124,9 @@ namespace Managers
 
         public void GenerateRandomEventOnDayStart(object sender, TimeTickSystem.OnTickEventArgs e)
         {
-            if (e.tick % (TimeTickSystem.ticksPerHour * 24) != 0)
-                return;
+            if (e.tick % (TimeTickSystem.ticksPerHour * 24) != 0) return;
 
-            Debug.Log("Generating random event");
-            checker.GenerateRandomEvent();
+            Checker.Instance.GenerateNewEvent();
         }
 
         #region Tasks

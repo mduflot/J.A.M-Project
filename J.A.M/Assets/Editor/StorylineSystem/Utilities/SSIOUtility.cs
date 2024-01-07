@@ -98,6 +98,10 @@ namespace SS.Utilities
                 Name = group.title,
                 StoryStatus = group.StoryStatus,
                 IsFirstToPlay = group.IsFirstToPlay,
+                minWaitTime = group.minWaitTime,
+                maxWaitTime = group.maxWaitTime,
+                timeIsOverride = group.timeIsOverride,
+                overrideWaitTime = group.overrideWaitTime,
                 Condition = group.Condition,
                 Position = group.GetPosition().position
             };
@@ -115,7 +119,7 @@ namespace SS.Utilities
             SSNodeGroupSO nodeGroup =
                 CreateAsset<SSNodeGroupSO>($"{containerFolderPath}/Groups/{groupName}", groupName);
 
-            nodeGroup.Initialize(groupName, group.StoryStatus, group.IsFirstToPlay, group.Condition);
+            nodeGroup.Initialize(groupName, group.StoryStatus, group.IsFirstToPlay, group.minWaitTime, group.maxWaitTime, group.timeIsOverride, group.overrideWaitTime, group.Condition);
 
             createdNodeGroups.Add(group.ID, nodeGroup);
 

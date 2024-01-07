@@ -13,7 +13,6 @@ namespace SS.ScriptableObjects
         [field: SerializeField] public List<Storyline> Storylines { get; set; }
         [field: HideInInspector] public List<Storyline> PrincipalStorylines = new();
         [field: HideInInspector] public List<Storyline> SecondaryStorylines = new();
-        [field: HideInInspector] public List<Storyline> TrivialStorylines = new();
 
         [ContextMenu("Initialize GUID")]
         private void Initialize()
@@ -44,7 +43,6 @@ namespace SS.ScriptableObjects
         {
             PrincipalStorylines.Clear();
             SecondaryStorylines.Clear();
-            TrivialStorylines.Clear();
             for (var index = 0; index < Storylines.Count; index++)
             {
                 var storyline = Storylines[index];
@@ -58,9 +56,6 @@ namespace SS.ScriptableObjects
                         break;
                     case SSStoryType.Secondary:
                         SecondaryStorylines.Add(storyline);
-                        break;
-                    case SSStoryType.Trivial:
-                        TrivialStorylines.Add(storyline);
                         break;
                 }
 

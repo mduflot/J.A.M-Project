@@ -61,6 +61,30 @@ namespace SS.Windows
 
                 rootVisualElement.Add(toggle);
 
+                UnsignedIntegerField integerFieldMinWaitTime = SSElementUtility.CreateUnsignedIntegerField(group.Value.Groups[0].minWaitTime,
+                    $"{group.Value.Groups[0].title} Min Wait Time:",
+                    callback => { group.Value.Groups[0].minWaitTime = (uint)callback.newValue; });
+
+                rootVisualElement.Add(integerFieldMinWaitTime);
+
+                UnsignedIntegerField integerFieldMaxWaitTime = SSElementUtility.CreateUnsignedIntegerField(group.Value.Groups[0].maxWaitTime,
+                    $"{group.Value.Groups[0].title} Max Wait Time:",
+                    callback => { group.Value.Groups[0].maxWaitTime = (uint)callback.newValue; });
+
+                rootVisualElement.Add(integerFieldMaxWaitTime);
+
+                Toggle toggleTimeIsOverride = SSElementUtility.CreateToggle(group.Value.Groups[0].timeIsOverride,
+                    $"{group.Value.Groups[0].title} Time Is Override:",
+                    callback => { group.Value.Groups[0].timeIsOverride = callback.newValue; });
+
+                rootVisualElement.Add(toggleTimeIsOverride);
+
+                UnsignedIntegerField integerFieldOverrideWaitTime = SSElementUtility.CreateUnsignedIntegerField(group.Value.Groups[0].overrideWaitTime,
+                    $"{group.Value.Groups[0].title} Override Wait Time:",
+                    callback => { group.Value.Groups[0].overrideWaitTime = (uint)callback.newValue; });
+
+                rootVisualElement.Add(integerFieldOverrideWaitTime);
+
                 ObjectField objectField = SSElementUtility.CreateObjectField(group.Value.Groups[0].Condition,
                     typeof(ConditionSO),
                     $"{group.Value.Groups[0].title} Condition:",

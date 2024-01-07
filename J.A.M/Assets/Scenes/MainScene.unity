@@ -739,7 +739,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1495234967}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 566365839759430509, guid: 041598292b3af924096c92612644b661,
         type: 3}
@@ -813,12 +813,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 492d9394a84d71d40a3b95791f82cb08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &664443832 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5726377259442475488, guid: 041598292b3af924096c92612644b661,
-    type: 3}
-  m_PrefabInstance: {fileID: 664443830}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &697694642
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,107 +946,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 697694642}
   m_CullTransparentMesh: 1
---- !u!1 &701981756
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 701981758}
-  - component: {fileID: 701981757}
-  m_Layer: 0
-  m_Name: SecondaryStoryline
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &701981757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701981756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsCancelled: 0
-  CanIgnoreDialogueTask: 0
-  currentStoryline: {fileID: 1107620578}
-  spaceshipManager: {fileID: 1360174038}
-  nodeContainer: {fileID: 0}
-  nodeGroup: {fileID: 0}
-  node: {fileID: 0}
-  groupedNodes: 1
-  startingNodesOnly: 0
-  selectedNodeGroupIndex: 0
-  selectedNodeIndex: 0
---- !u!4 &701981758
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701981756}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 885315564}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &885315563
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 885315564}
-  m_Layer: 0
-  m_Name: Storylines
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &885315564
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 885315563}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1503467685}
-  - {fileID: 701981758}
-  - {fileID: 1908046486}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &908526471 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6196855536627165640, guid: f4b0ad034b47349458511baeb5fff145,
-    type: 3}
-  m_PrefabInstance: {fileID: 1360174037}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1068316623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,18 +1081,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1068316623}
   m_CullTransparentMesh: 1
---- !u!114 &1107620578 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4155142919507163934, guid: f4b0ad034b47349458511baeb5fff145,
-    type: 3}
-  m_PrefabInstance: {fileID: 1360174037}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1133349121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1554,7 +1435,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1495234966}
         m_TargetAssemblyTypeName: Checker, Assembly-CSharp
-        m_MethodName: GenerateRandomEvent
+        m_MethodName: GenerateNewEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1738,7 +1619,6 @@ MonoBehaviour:
   IsCancelled: 0
   CanIgnoreDialogueTask: 0
   currentStoryline: {fileID: 0}
-  spaceshipManager: {fileID: 1360174038}
   nodeContainer: {fileID: 11400000, guid: 8d44940479619b44a892c87ea09ee890, type: 2}
   nodeGroup: {fileID: 11400000, guid: cf171edb63c37dd4dba10692f84adc4b, type: 2}
   node: {fileID: 11400000, guid: 2c53ac99bda453548a3b7628fc4eccae, type: 2}
@@ -3118,11 +2998,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ssCampaigns:
   - {fileID: 11400000, guid: fa2fd418c25b6424ebf8e20158df4b2f, type: 2}
-  principalLauncher: {fileID: 1503467686}
-  secondaryLauncher: {fileID: 701981757}
-  trivialLauncher: {fileID: 1908046485}
   presentationContainer: {fileID: 1559333373}
   presentationText: {fileID: 1475129206}
+  launcherPrefab: {fileID: 2274616241945452143, guid: f7a97982248498448a8a3d381ddefae2,
+    type: 3}
+  minWaitTimeMain: 5
+  maxWaitTimeMain: 10
+  minWaitTimeSecondary: 10
+  maxWaitTimeSecondary: 20
 --- !u!4 &1495234967
 Transform:
   m_ObjectHideFlags: 0
@@ -3135,65 +3018,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 664443832}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1503467684
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1503467685}
-  - component: {fileID: 1503467686}
-  m_Layer: 0
-  m_Name: PrincipalStoryline
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1503467685
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1503467684}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 885315564}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1503467686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1503467684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsCancelled: 0
-  CanIgnoreDialogueTask: 0
-  currentStoryline: {fileID: 908526471}
-  spaceshipManager: {fileID: 1360174038}
-  nodeContainer: {fileID: 0}
-  nodeGroup: {fileID: 0}
-  node: {fileID: 0}
-  groupedNodes: 1
-  startingNodesOnly: 0
-  selectedNodeGroupIndex: 0
-  selectedNodeIndex: 0
 --- !u!1 &1559333373 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2912516809443410745, guid: f4b0ad034b47349458511baeb5fff145,
@@ -3831,61 +3658,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1876964505}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1908046484
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1908046486}
-  - component: {fileID: 1908046485}
-  m_Layer: 0
-  m_Name: TrivialStoryline
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1908046485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908046484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e063a7f424f1e23419fc580a2d075c31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsCancelled: 0
-  CanIgnoreDialogueTask: 0
-  currentStoryline: {fileID: 2073672110}
-  spaceshipManager: {fileID: 1360174038}
-  nodeContainer: {fileID: 0}
-  nodeGroup: {fileID: 0}
-  node: {fileID: 0}
-  groupedNodes: 1
-  startingNodesOnly: 0
-  selectedNodeGroupIndex: 0
-  selectedNodeIndex: 0
---- !u!4 &1908046486
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908046484}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 885315564}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2065705522
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4063,18 +3835,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2065705522}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2073672110 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1292848350423454869, guid: f4b0ad034b47349458511baeb5fff145,
-    type: 3}
-  m_PrefabInstance: {fileID: 1360174037}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4085,5 +3845,5 @@ SceneRoots:
   - {fileID: 1360174037}
   - {fileID: 1859755811}
   - {fileID: 1495234967}
-  - {fileID: 885315564}
   - {fileID: 1350031688}
+  - {fileID: 664443830}
