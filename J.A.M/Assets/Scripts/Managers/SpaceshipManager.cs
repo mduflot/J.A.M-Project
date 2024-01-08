@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CharacterSystem;
+using SS.Enumerations;
 using Tasks;
 using UI;
 using UnityEngine;
@@ -42,7 +43,7 @@ namespace Managers
             TimeTickSystem.OnTick += UpdateSystems;
             TimeTickSystem.OnTick += UpdateTasks;
             TimeTickSystem.OnTick += UpdateCharacters;
-            TimeTickSystem.OnTick += GenerateRandomEventOnDayStart;
+            TimeTickSystem.OnTick += GenerateSecondaryEventOnFirstDay;
         }
 
         private void InitializeSystems()
@@ -122,11 +123,12 @@ namespace Managers
             systemsDictionary[systemType].gaugeValue = gaugeValue;
         }
 
-        public void GenerateRandomEventOnDayStart(object sender, TimeTickSystem.OnTickEventArgs e)
+        private void GenerateSecondaryEventOnFirstDay(object sender, TimeTickSystem.OnTickEventArgs e)
         {
             if (e.tick % (TimeTickSystem.ticksPerHour * 24) != 0) return;
 
-            Checker.Instance.GenerateNewEvent();
+            Checker.Instance.ChooseNewStoryline(SSStoryType.Secondary);
+            TimeTickSystem.OnTick -= GenerateSecondaryEventOnFirstDay;
         }
 
         #region Tasks

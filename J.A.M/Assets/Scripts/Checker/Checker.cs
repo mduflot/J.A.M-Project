@@ -44,17 +44,17 @@ public class Checker : MonoBehaviour, IDataPersistence
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
-            Debug.LogError("Found more than one Checker in the scene.");
+            Debug.Log("Found more than one Checker in the scene.");
             return;
         }
 
         Instance = this;
     }
 
-    public void Initialize(SSCampaignSO campaign = null)
+    private void Initialize(SSCampaignSO campaign = null)
     {
-        launcherPool = new(launcherPrefab, 3);
-        activeLaunchers = new();
+        launcherPool = new Pool<GameObject>(launcherPrefab, 3);
+        activeLaunchers = new List<SSLauncher>();
         ssCampaign = campaign != null ? campaign : ssCampaigns[0];
         principalStorylines = ssCampaign.PrincipalStorylines;
         secondaryStorylines = ssCampaign.SecondaryStorylines;
@@ -62,23 +62,8 @@ public class Checker : MonoBehaviour, IDataPersistence
 
     public void GenerateNewEvent()
     {
-        if (activeLaunchers.Count < 1)
-        {
-            ChooseNewStoryline(SSStoryType.Principal); 
-            return;
-        }
-
-        for (int index = 0; index < activeLaunchers.Count; index++)
-        {
-            var launcher = activeLaunchers[index];
-            if (launcher.nodeContainer.StoryType == SSStoryType.Principal && launcher.storyline.Status == SSStoryStatus.Completed)
-            {
-                ChooseNewStoryline(SSStoryType.Principal);
-                return;
-            }
-        }
-
-        ChooseNewStoryline(SSStoryType.Secondary);
+        Debug.Log("Generating new event. Maybe nothing will happen.");
+        ChooseNewStoryline(Random.Range(0, 2) == 0 ? SSStoryType.Principal : SSStoryType.Secondary);
     }
 
     private void WaitStoryline(object sender, TimeTickSystem.OnTickEventArgs e)
@@ -93,7 +78,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         ChooseNewStoryline(SSStoryType.Secondary);
     }
 
-    private void ChooseNewStoryline(SSStoryType storyType)
+    public void ChooseNewStoryline(SSStoryType storyType)
     {
         availableStoryLines.Clear();
         switch (storyType)
@@ -103,7 +88,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                 for (var index = 0; index < principalStorylines.Count; index++)
                 {
                     var storyline = principalStorylines[index];
-                    if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
+                    if (storyline.StorylineContainer.StoryStatus == SSStoryStatus.Completed) continue;
                     if (storyline.StorylineContainer.Condition)
                         if (RouteCondition(storyline.StorylineContainer.Condition))
                             continue;
@@ -117,7 +102,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                 for (var index = 0; index < secondaryStorylines.Count; index++)
                 {
                     var storyline = secondaryStorylines[index];
-                    if (storyline.StorylineContainer.StoryStatus != SSStoryStatus.Enabled) continue;
+                    if (storyline.StorylineContainer.StoryStatus == SSStoryStatus.Completed) continue;
                     if (storyline.StorylineContainer.Condition)
                         if (RouteCondition(storyline.StorylineContainer.Condition))
                             continue;
@@ -130,7 +115,7 @@ public class Checker : MonoBehaviour, IDataPersistence
 
         if (availableStoryLines.Count == 0)
         {
-            Debug.LogError($"All {storyType} storylines are completed or don't have a valid condition.");
+            Debug.Log($"All {storyType} storylines are completed or don't have a valid condition.");
             return;
         }
 
@@ -169,7 +154,7 @@ public class Checker : MonoBehaviour, IDataPersistence
 
         if (availableTimelines.Count == 0)
         {
-            Debug.LogError("All timelines are completed or don't have a valid condition.");
+            Debug.Log("All timelines are completed or don't have a valid condition.");
             return;
         }
 
@@ -190,7 +175,7 @@ public class Checker : MonoBehaviour, IDataPersistence
     private void StartTimeline(SSNodeGroupSO timeline, SSNodeSO node = null,
         List<SerializableTuple<string, string>> dialogues = null, List<string> characters = null,
         List<string> assignedCharacters = null, List<string> notAssignedCharacters = null,
-        List<string> traitsCharacters = null)
+        List<string> traitsCharacters = null, uint waitingTime = 0)
     {
         chosenTimeline = timeline;
         presentationContainer.SetActive(true);
@@ -200,6 +185,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         var launcherObject = launcherPool.GetFromPool();
         var launcher = launcherObject.GetComponent<SSLauncher>();
         launcher.storyline = chosenStoryline;
+        launcher.waitingTime = waitingTime;
         launcher.timeline = chosenStoryline.Timelines.First(timeline => timeline.TimelineContainer == chosenTimeline);
         activeLaunchers.Add(launcher);
         launcher.nodeContainer = chosenStoryline.StorylineContainer;
@@ -355,7 +341,7 @@ public class Checker : MonoBehaviour, IDataPersistence
 
             if (index == ssCampaigns.Count - 1)
             {
-                Debug.LogError("Campaign was not found in the list of campaigns. Initializing to default.");
+                Debug.Log("Campaign was not found in the list of campaigns. Initializing to default.");
                 Initialize();
                 return;
             }
@@ -405,6 +391,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                 if (ssCampaign.Storylines[indexStoryline].ID == storyline)
                 {
                     chosenStoryline = ssCampaign.Storylines[indexStoryline];
+                    var waitingTimeTimeline = gameData.waitingTimesTimeline[chosenStoryline.ID];
                     if (gameData.activeTimelines.Count > 0)
                     {
                         for (int index = 0; index < gameData.activeTimelines.Count; index++)
@@ -436,7 +423,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                                                 var traitsCharacters =
                                                     gameData.traitsCharactersActiveStorylines[chosenStoryline.ID];
                                                 StartTimeline(chosenTimeline, node, dialogues, characters,
-                                                    assignedCharacters, notAssignedCharacters, traitsCharacters);
+                                                    assignedCharacters, notAssignedCharacters, traitsCharacters, waitingTimeTimeline);
                                                 break;
                                             }
                                         }
@@ -497,6 +484,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         {
             var launcher = activeLaunchers[indexLauncher];
             if (!launcher.IsRunning) continue;
+            gameData.waitingTimesTimeline.Add(launcher.storyline.ID, launcher.waitingTime);
             for (int index = 0; index < principalStorylines.Count; index++)
             {
                 var storyline = principalStorylines[index];

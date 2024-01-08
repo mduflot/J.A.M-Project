@@ -23,6 +23,7 @@ public class GameData
     public List<string> activeStorylines;
     public List<string> activeTimelines;
     public SerializableDictionary<string, string> currentNodes;
+    public SerializableDictionary<string, uint> waitingTimesTimeline;
     public SerializableDictionary<string, List<SerializableTuple<string, string>>> dialogueTimelines;
     public SerializableDictionary<string, List<string>> charactersActiveTimelines;
     public SerializableDictionary<string, List<string>> assignedActiveTimelines;
@@ -51,6 +52,7 @@ public class GameData
         timelineStatus = new SerializableDictionary<string, SSStoryStatus>();
         activeStorylines = new List<string>();
         currentNodes = new SerializableDictionary<string, string>();
+        waitingTimesTimeline = new SerializableDictionary<string, uint>();
         dialogueTimelines = new SerializableDictionary<string, List<SerializableTuple<string, string>>>();
         charactersActiveTimelines = new SerializableDictionary<string, List<string>>();
         assignedActiveTimelines = new SerializableDictionary<string, List<string>>();

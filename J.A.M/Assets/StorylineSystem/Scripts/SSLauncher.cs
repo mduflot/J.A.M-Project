@@ -61,6 +61,11 @@ namespace SS
 
         public void StartTimeline()
         {
+            if (timeline.Status == SSStoryStatus.Completed)
+            {
+                TimeTickSystem.OnTick += WaitTimeline;
+                return;
+            }
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
             spaceshipManager = GameManager.Instance.SpaceshipManager;
             dialogues = new();
@@ -115,11 +120,11 @@ namespace SS
 
             if (availablesTimelines.Count == 0)
             {
-                // TODO - Need to check if it's completed or not
                 storyline.Status = SSStoryStatus.Completed;
-                if (nodeContainer.StoryType == SSStoryType.Principal) Checker.Instance.GenerateNewEvent();
+                if (nodeContainer.StoryType == SSStoryType.Principal) Checker.Instance.ChooseNewStoryline(SSStoryType.Principal);
                 Checker.Instance.launcherPool.AddToPool(this.gameObject);
                 Checker.Instance.activeLaunchers.Remove(this);
+                Debug.Log("No more timeline available / Storyline completed");
                 TimeTickSystem.OnTick -= WaitTimeline;
                 return;
             }
