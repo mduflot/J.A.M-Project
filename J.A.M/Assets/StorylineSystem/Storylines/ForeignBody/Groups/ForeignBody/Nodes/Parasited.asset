@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: Parasited
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: Parasited
+  <Choices>k__BackingField:
+  - rid: 5750222806274539804
+  - rid: 5750222806274539805
+  - rid: 5750222806274539806
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: The unknown presence seems to be some sort of parasite,
+    and has took up residence in the crew member's arm! Who should take a look at
+    it?
+  <TaskStatus>k__BackingField: 1
+  <TaskType>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 0}
+  <TimeLeft>k__BackingField: 0
+  <Duration>k__BackingField: 10
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 0
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 6
+  <Furniture>k__BackingField: 3
+  references:
+    version: 2
+    RefIds:
+    - rid: 5750222806274539804
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: e12200d1f2980ad4aac4ab49aa04b8f4,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 49b5923d2589a5f44bbb566d898b416f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ' has notions in medicine. They should be
+          able to cut the thing off. And the passenger''s arm alltogether.'
+    - rid: 5750222806274539805
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: a1136215944458746b8d5a520fe4b9bb,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 1090d2f63c99b2342871a67e8f6ae1cc,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ' says it should be better to take the infected
+          member to quarantine until the situation is resolved.'
+    - rid: 5750222806274539806
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: e9aa16246fe649a4a8da94b100199824,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 0ba1693d94fc87c48b01c8f4c1544cae,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No one will take care of this.
