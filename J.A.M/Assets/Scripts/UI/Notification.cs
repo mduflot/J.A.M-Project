@@ -98,8 +98,9 @@ namespace UI
         public void OnStart(List<CharacterUISlot> characters, List<TaskUI.GaugesOutcome> go)
         {
             TimeTickSystem.ModifyTimeScale(TimeTickSystem.lastActiveTimeScale);
-            foreach (var character in characters)
+            for (var index = 0; index < characters.Count; index++)
             {
+                var character = characters[index];
                 if (character.isMandatory)
                 {
                     if (character.icon != null)
@@ -143,7 +144,6 @@ namespace UI
                     }
                 }
             }
-
             
             foreach (var outcome in go)
             {

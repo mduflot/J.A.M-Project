@@ -86,6 +86,7 @@ namespace Tasks
             cancelButton.SetActive(false);
             if (notification.Task.TaskType != SSTaskType.Compute)
             {
+                characterSlots.Clear();
                 for (int i = 0; i < notification.Task.MandatorySlots; i++)
                 {
                     var slot = inactiveSlots[i];
