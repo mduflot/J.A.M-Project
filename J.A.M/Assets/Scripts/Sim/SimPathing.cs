@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO.Enumeration;
 using System.Linq;
 using System.Xml.Linq;
+using Cysharp.Threading.Tasks.Triggers;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = System.Random;
@@ -13,11 +14,13 @@ public class SimPathing : MonoBehaviour
     public static SimPathing instance;
     
     [SerializeField] private SimDoor[] doors;
-
+    [SerializeField] private SimRoom[] rooms;
+    
     private void Awake()
     {
         if (instance == null) instance = this;
         InitializeDoorIDs();
+        instance.rooms = rooms;
     }
 
     //Call once at game start;
@@ -74,11 +77,23 @@ public class SimPathing : MonoBehaviour
         return false;
     }
     
-    //experimental code, reimplement if broken :)
     public static SimDoor FindDoorByID(uint doorID)
     {
         int index = 0;
         for (; (index != instance.doors.Length - 1) && (instance.doors[index].doorID != doorID); index++) ;
         return index == instance.doors.Length ? null : instance.doors[index];
+    }
+
+    public static SimRoom FindRoomByDoorID(uint doorID)
+    {
+        for (int i = 0; i < instance.rooms.Length; i++)
+        {
+            foreach (SimDoor door in instance.rooms[i].roomDoors)
+            {
+                if (door.doorID == doorID) return instance.rooms[i];
+            }
+        }
+
+        return null;
     }
 }
