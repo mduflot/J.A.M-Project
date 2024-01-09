@@ -389,8 +389,6 @@ namespace UI
         {
             for (uint i = 0; i < outcomeEvents.Length; i++)
             {
-                Debug.Log($"outcomeEvent {i} : {outcomeEvents[i]}; outcomeEventArgs {i} : {outcomeEventArgs[i]};");
-                Debug.Log($"{outcomeEventArgs[i].outcomeType} / {outcomeEventArgs[i].value}");
                 outcomeEvents[i].Invoke(outcomeEventArgs[i]);
             }
             IsCompleted = true;

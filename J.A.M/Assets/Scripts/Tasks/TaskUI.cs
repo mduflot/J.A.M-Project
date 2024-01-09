@@ -314,8 +314,6 @@ namespace Tasks
                     if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
                         operation = "-";
                     var valueVolition = characterSlots[0].icon.character.GetVolition();
-                    if (characterSlots[0].icon.character.GetMood() < characterSlots[0].icon.character.GetVolition())
-                        valueVolition /= 2;
                     switch (outcome.OutcomeTargetGauge)
                     {
                         case SystemType.Trajectory:
@@ -336,6 +334,12 @@ namespace Tasks
                             break;
                     }
 
+                    if (characterSlots[0].icon.character.GetMood() < characterSlots[0].icon.character.GetVolition())
+                    {
+                        valueVolition /= 2;
+                        previewOutcomeText.text += $"<color=#ff00ffff>Bad Mood: - {valueVolition.ToString("F2")}</color>\n";
+                    }
+                    
                     var volition =
                         outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add ? valueVolition : -valueVolition;
 

@@ -157,7 +157,7 @@ namespace CharacterSystem
 
         public float GetVolition()
         {
-            return mood < volition ? mood : volition;
+            return volition;
         }
 
         public float GetBaseVolition()
