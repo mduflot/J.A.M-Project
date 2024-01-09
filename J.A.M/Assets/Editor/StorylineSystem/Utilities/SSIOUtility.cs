@@ -119,7 +119,7 @@ namespace SS.Utilities
             SSNodeGroupSO nodeGroup =
                 CreateAsset<SSNodeGroupSO>($"{containerFolderPath}/Groups/{groupName}", groupName);
 
-            nodeGroup.Initialize(groupName, group.StoryStatus, group.IsFirstToPlay, group.minWaitTime, group.maxWaitTime, group.timeIsOverride, group.overrideWaitTime, group.Condition);
+            nodeGroup.Initialize(groupName, group.ID, group.StoryStatus, group.IsFirstToPlay, group.minWaitTime, group.maxWaitTime, group.timeIsOverride, group.overrideWaitTime, group.Condition);
 
             createdNodeGroups.Add(group.ID, nodeGroup);
 

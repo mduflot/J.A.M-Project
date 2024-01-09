@@ -65,11 +65,11 @@ public class Checker : MonoBehaviour, IDataPersistence
             var storyline = ssCampaign.Storylines[i];
             if (storyline.StoryType == SSStoryType.Principal)
             {
-                principalStorylines.Add(new Storyline(storyline.ID, storyline, storyline.NodeGroups.Keys.ToList()));
+                principalStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
             }
             else
             {
-                secondaryStorylines.Add(new Storyline(storyline.ID, storyline, storyline.NodeGroups.Keys.ToList()));
+                secondaryStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
             }
         }
         allStorylines.AddRange(principalStorylines);
