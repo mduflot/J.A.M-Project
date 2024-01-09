@@ -646,6 +646,7 @@ namespace Tasks
                     tagBuffer += textToDisplay[letterIndex];
                     tempText = string.Concat(tempText, tagBuffer);
                     letterIndex++;
+                    tagBuffer = ""; //Reset buffer in case of multiple tags.
                     continue;
                 }
                 //If buffering tag, write to buffer instead of tempText and skip waiting
