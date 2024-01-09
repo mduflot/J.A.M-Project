@@ -313,33 +313,33 @@ namespace Tasks
                     if (characterSlots[0].icon == null) break;
                     if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
                         operation = "-";
+                    var valueVolition = characterSlots[0].icon.character.GetVolition();
+                    if (characterSlots[0].icon.character.GetMood() < characterSlots[0].icon.character.GetVolition())
+                        valueVolition /= 2;
                     switch (outcome.OutcomeTargetGauge)
                     {
                         case SystemType.Trajectory:
                             previewOutcomeText.text +=
-                                $"<color=lightblue>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"<color=lightblue>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                             break;
                         case SystemType.Food:
                             previewOutcomeText.text +=
-                                $"<color=green>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"<color=green>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                             break;
                         case SystemType.Hull:
                             previewOutcomeText.text +=
-                                $"<color=red>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"<color=red>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                             break;
                         case SystemType.Power:
                             previewOutcomeText.text +=
-                                $"<color=yellow>{traits} Volition: {operation} {characterSlots[0].icon.character.GetVolition().ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"<color=yellow>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                             break;
                     }
 
                     var volition =
-                        outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add
-                            ? characterSlots[0].icon.character.GetVolition()
-                            : -characterSlots[0].icon.character.GetVolition();
+                        outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add ? valueVolition : -valueVolition;
 
-                    gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
-                        volition));
+                    gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge, volition));
                     break;
                 case OutcomeData.OutcomeType.Trait:
                     previewOutcomeText.text += traits;
