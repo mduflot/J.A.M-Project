@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TheMessGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: TheMess
+  <ID>k__BackingField: 8b818bfd-3131-42b4-bb3f-d5135496fee1
   <StoryStatus>k__BackingField: 0
   <StoryType>k__BackingField: 1
   <IsFirstToPlay>k__BackingField: 0
@@ -27,12 +28,12 @@ MonoBehaviour:
     <overrideWaitTime>k__BackingField: 10
     <Condition>k__BackingField: {fileID: 0}
     <Name>k__BackingField: TheMess
-    <Position>k__BackingField: {x: 720.8, y: 292.8}
+    <Position>k__BackingField: {x: 720.9999, y: 294.00012}
   <Nodes>k__BackingField:
-  - rid: 1640970678879649889
-  - rid: 1640970678879649890
-  - rid: 1640970678879649891
-  - rid: 1640970678879649892
+  - rid: 8851122692241490735
+  - rid: 8851122692241490736
+  - rid: 8851122692241490737
+  - rid: 8851122692241490738
   <OldGroupNames>k__BackingField:
   - TheMess
   <OldUngroupedNodeNames>k__BackingField: []
@@ -47,16 +48,16 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1640970678879649889
+    - rid: 8851122692241490735
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: e7ea274a-fac5-46b6-a383-a26a4fcd897b
         <Name>k__BackingField: Starving
         <Choices>k__BackingField:
-        - rid: 1640970678879649893
+        - rid: 8851122692241490739
         <GroupID>k__BackingField: 3071f4a3-45f8-413e-8751-fd4b7facbdf1
         <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 746.4, y: 352.8}
+        <Position>k__BackingField: {x: 746, y: 353}
         <Text>k__BackingField: I'm starving
         <SpeakerType>k__BackingField: 0
         <Duration>k__BackingField: 0.5
@@ -65,16 +66,16 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 1640970678879649890
+    - rid: 8851122692241490736
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 9bd79d26-aa44-4e10-b89c-34a7a984bff4
         <Name>k__BackingField: Enough
         <Choices>k__BackingField:
-        - rid: 1640970678879649894
+        - rid: 8851122692241490740
         <GroupID>k__BackingField: 3071f4a3-45f8-413e-8751-fd4b7facbdf1
         <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 998.4, y: 352.8}
+        <Position>k__BackingField: {x: 998, y: 353}
         <Text>k__BackingField: That's enough, if we continue like this our food supply
           won't sustain us all
         <SpeakerType>k__BackingField: 22
@@ -84,16 +85,16 @@ MonoBehaviour:
         <Job>k__BackingField: 1
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 1640970678879649891
+    - rid: 8851122692241490737
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: dfb0757a-197b-485a-82fb-c37602c5f94e
         <Name>k__BackingField: Discipline
         <Choices>k__BackingField:
-        - rid: 1640970678879649895
+        - rid: 8851122692241490741
         <GroupID>k__BackingField: 3071f4a3-45f8-413e-8751-fd4b7facbdf1
         <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 1650.4, y: 353.59998}
+        <Position>k__BackingField: {x: 1650, y: 354}
         <Text>k__BackingField: I know what's the problem, people on this ship lack
           the discipline to face this situation
         <SpeakerType>k__BackingField: 22
@@ -103,19 +104,19 @@ MonoBehaviour:
         <Job>k__BackingField: 1
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 1640970678879649892
+    - rid: 8851122692241490738
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 495547cd-9274-4924-a672-ad951239f98d
         <Name>k__BackingField: TheMess
         <Choices>k__BackingField:
-        - rid: 1640970678879649896
-        - rid: 1640970678879649897
-        - rid: 1640970678879649898
-        - rid: 1640970678879649899
+        - rid: 8851122692241490742
+        - rid: 8851122692241490743
+        - rid: 8851122692241490744
+        - rid: 8851122692241490745
         <GroupID>k__BackingField: 3071f4a3-45f8-413e-8751-fd4b7facbdf1
         <NodeType>k__BackingField: 1
-        <Position>k__BackingField: {x: 2326.4, y: 357.59998}
+        <Position>k__BackingField: {x: 2326, y: 358}
         <DescriptionTask>k__BackingField: Military crew member want to install a
           scheduled meals and limited ration to everyone.
         <TaskStatus>k__BackingField: 1
@@ -129,22 +130,22 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 6
         <Furniture>k__BackingField: 3
-    - rid: 1640970678879649893
+    - rid: 8851122692241490739
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 9bd79d26-aa44-4e10-b89c-34a7a984bff4
-    - rid: 1640970678879649894
+    - rid: 8851122692241490740
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: dfb0757a-197b-485a-82fb-c37602c5f94e
-    - rid: 1640970678879649895
+    - rid: 8851122692241490741
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 495547cd-9274-4924-a672-ad951239f98d
-    - rid: 1640970678879649896
+    - rid: 8851122692241490742
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -153,7 +154,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: A military crew member will handle the delivery
           of restricted rations.
-    - rid: 1640970678879649897
+    - rid: 8851122692241490743
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: SeconChoice
@@ -162,7 +163,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: A civilian crew member will handle the delivery
           of restricted rations.
-    - rid: 1640970678879649898
+    - rid: 8851122692241490744
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: ThirChoice
@@ -171,7 +172,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The assigned crew member will impartially
           handle the delivery of restricted rations.
-    - rid: 1640970678879649899
+    - rid: 8851122692241490745
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FourthChoice

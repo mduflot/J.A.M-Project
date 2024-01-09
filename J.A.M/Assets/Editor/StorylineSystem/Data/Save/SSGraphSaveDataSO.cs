@@ -8,6 +8,7 @@ namespace SS.Data.Save
     public class SSGraphSaveDataSO : ScriptableObject
     {
         [field: SerializeField] public string FileName { get; set; }
+        [field: SerializeField] public string ID { get; set; }
         [field: SerializeField] public SSStoryStatus StoryStatus { get; set; }
         [field: SerializeField] public SSStoryType StoryType { get; set; }
         [field: SerializeField] public bool IsFirstToPlay { get; set; }
@@ -18,8 +19,9 @@ namespace SS.Data.Save
         [field: SerializeField] public List<string> OldUngroupedNodeNames { get; set; }
         [field: SerializeField] public SerializableDictionary<string, List<string>> OldGroupedNodeNames { get; set; }
 
-        public void Initialize(string fileName, SSStoryStatus storyStatus, SSStoryType storyType, bool isFirstToPlay, ConditionSO condition)
+        public void Initialize(string fileName, string id, SSStoryStatus storyStatus, SSStoryType storyType, bool isFirstToPlay, ConditionSO condition)
         {
+            ID = id;
             FileName = fileName;
             StoryStatus = storyStatus;
             StoryType = storyType;

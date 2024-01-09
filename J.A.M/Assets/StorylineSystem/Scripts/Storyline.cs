@@ -13,8 +13,9 @@ namespace SS
         public SSStoryStatus Status;
         public List<Timeline> Timelines;
 
-        public Storyline(SSNodeContainerSO storylineContainer, List<SSNodeGroupSO> timelines)
+        public Storyline(string id, SSNodeContainerSO storylineContainer, List<SSNodeGroupSO> timelines)
         {
+            ID = id;
             StorylineContainer = storylineContainer;
             Status = storylineContainer.StoryStatus;
             Timelines = new List<Timeline>();

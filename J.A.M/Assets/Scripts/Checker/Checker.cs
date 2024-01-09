@@ -31,6 +31,7 @@ public class Checker : MonoBehaviour, IDataPersistence
     private Storyline chosenStoryline;
     private SSNodeGroupSO chosenTimeline;
 
+    private List<Storyline> allStorylines;
     private List<Storyline> principalStorylines;
     private List<Storyline> secondaryStorylines;
 
@@ -56,8 +57,23 @@ public class Checker : MonoBehaviour, IDataPersistence
         launcherPool = new Pool<GameObject>(launcherPrefab, 3);
         activeLaunchers = new List<SSLauncher>();
         ssCampaign = campaign != null ? campaign : ssCampaigns[0];
-        principalStorylines = ssCampaign.PrincipalStorylines;
-        secondaryStorylines = ssCampaign.SecondaryStorylines;
+        allStorylines = new List<Storyline>();
+        principalStorylines = new();
+        secondaryStorylines = new();
+        for (int i = 0; i < ssCampaign.Storylines.Count; i++)
+        {
+            var storyline = ssCampaign.Storylines[i];
+            if (storyline.StoryType == SSStoryType.Principal)
+            {
+                principalStorylines.Add(new Storyline(storyline.ID, storyline, storyline.NodeGroups.Keys.ToList()));
+            }
+            else
+            {
+                secondaryStorylines.Add(new Storyline(storyline.ID, storyline, storyline.NodeGroups.Keys.ToList()));
+            }
+        }
+        allStorylines.AddRange(principalStorylines);
+        allStorylines.AddRange(secondaryStorylines);
     }
 
     public void GenerateNewEvent()
@@ -407,11 +423,11 @@ public class Checker : MonoBehaviour, IDataPersistence
              indexActiveStoryline++)
         {
             var storyline = gameData.activeStorylines[indexActiveStoryline];
-            for (int indexStoryline = 0; indexStoryline < ssCampaign.Storylines.Count; indexStoryline++)
+            for (int indexStoryline = 0; indexStoryline < allStorylines.Count; indexStoryline++)
             {
-                if (ssCampaign.Storylines[indexStoryline].ID == storyline)
+                if (allStorylines[indexStoryline].ID == storyline)
                 {
-                    chosenStoryline = ssCampaign.Storylines[indexStoryline];
+                    chosenStoryline = allStorylines[indexStoryline];
                     var waitingTimeTimeline = gameData.waitingTimesTimeline[chosenStoryline.ID];
                     if (gameData.activeTimelines.Count > 0)
                     {

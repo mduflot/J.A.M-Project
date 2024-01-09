@@ -5,9 +5,10 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject optionsContainer;
 
-    public void NewGame()
+    public void NewGame(string sceneName)
     {
         DataPersistenceManager.Instance.NewGame();
+        LoadScene(sceneName);
     }
 
     public void SaveGame()
