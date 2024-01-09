@@ -36,6 +36,12 @@ public class TraitsData
         Old = 2,
         ShellShocked = 4,
         HighOnFumes = 8,
+        Hallucination = 16,
+        Distrustful = 32,
+        Crippled = 34,
+        Parasited = 128,
+        LockedUp = 256,
+        Scarred = 512,
     }
 
     [Flags]
@@ -59,6 +65,16 @@ public class TraitsData
         SpeedMode = 16,
         FightMode = 32,
         StealthMode = 64,
+        DamagedMedicalRoom = 128,
+        DamagedElectricalRoom = 256,
+        Restriction = 512,
+        ObstructedVentilation = 1024,
+        Rot = 2048,
+        Malfunction = 4096,
+        BadInsulation = 8192,
+        Leak = 16384,
+        WeakenedHull = 32768,
+        DamagedRations = 65536,
     }
     
     [Flags]
@@ -66,6 +82,7 @@ public class TraitsData
     {
         None = 0,
         WreckedPirateShip = 1,
+        ArtifactInstalled = 2,
     }
     
     public enum TraitOperator
