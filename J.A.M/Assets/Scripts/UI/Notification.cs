@@ -247,8 +247,18 @@ namespace UI
                                 outcomeEventArgs[i] =
                                     OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
                             else
-                                outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
-                                    outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition());
+                            {
+                                if (LeaderCharacters[0].GetMood() < LeaderCharacters[0].GetVolition())
+                                {
+                                    outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
+                                        outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition() / 2);
+                                }
+                                else
+                                {
+                                    outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
+                                        outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition());
+                                }
+                            }
                             break;
                     }
                 }
