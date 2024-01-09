@@ -140,7 +140,6 @@ public class Checker : MonoBehaviour, IDataPersistence
                         if (RouteCondition(storyline.StorylineContainer.Condition))
                             continue;
                     if (activeLaunchers.Any(launcher => launcher.storyline == storyline)) continue;
-                    Debug.Log($"Available storyline : {storyline.StorylineContainer.FileName}");
                     availableStoryLines.Add(storyline);
                 }
 
@@ -162,7 +161,6 @@ public class Checker : MonoBehaviour, IDataPersistence
         {
             if (randPicker <= pickPercent * i)
             {
-                Debug.Log($"New storyline chosen : {availableStoryLines[i - 1].StorylineContainer.FileName}");
                 PickTimelineFromStoryline(availableStoryLines[i - 1]);
                 break;
             }
@@ -213,6 +211,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         List<string> assignedCharacters = null, List<string> notAssignedCharacters = null,
         List<string> traitsCharacters = null, uint waitingTime = 0)
     {
+        Debug.Log("Starting new timeline.");
         presentationContainer.SetActive(true);
         presentationText.text = "New Storyline : " + storyline.StorylineContainer.FileName;
         StartCoroutine(DisablePresentation());
@@ -382,26 +381,9 @@ public class Checker : MonoBehaviour, IDataPersistence
             }
         }
 
-        for (int indexStoryline = 0; indexStoryline < principalStorylines.Count; indexStoryline++)
+        for (int indexStoryline = 0; indexStoryline < allStorylines.Count; indexStoryline++)
         {
-            var storyline = principalStorylines[indexStoryline];
-            if (gameData.storylineStatus.ContainsKey(storyline.ID))
-            {
-                storyline.Status = gameData.storylineStatus[storyline.ID];
-                for (int indexTimeline = 0; indexTimeline < storyline.Timelines.Count; indexTimeline++)
-                {
-                    var timeline = storyline.Timelines[indexTimeline];
-                    if (gameData.timelineStatus.ContainsKey(timeline.ID))
-                    {
-                        timeline.Status = gameData.timelineStatus[timeline.ID];
-                    }
-                }
-            }
-        }
-
-        for (int indexStoryline = 0; indexStoryline < secondaryStorylines.Count; indexStoryline++)
-        {
-            var storyline = secondaryStorylines[indexStoryline];
+            var storyline = allStorylines[indexStoryline];
             if (gameData.storylineStatus.ContainsKey(storyline.ID))
             {
                 storyline.Status = gameData.storylineStatus[storyline.ID];
@@ -483,20 +465,9 @@ public class Checker : MonoBehaviour, IDataPersistence
         gameData.storylineStatus.Clear();
         gameData.timelineStatus.Clear();
 
-        for (int indexStoryline = 0; indexStoryline < principalStorylines.Count; indexStoryline++)
+        for (int indexStoryline = 0; indexStoryline < allStorylines.Count; indexStoryline++)
         {
-            var storyline = principalStorylines[indexStoryline];
-            gameData.storylineStatus.Add(storyline.ID, storyline.Status);
-            for (int indexTimeline = 0; indexTimeline < storyline.Timelines.Count; indexTimeline++)
-            {
-                var timeline = storyline.Timelines[indexTimeline];
-                gameData.timelineStatus.Add(timeline.ID, timeline.Status);
-            }
-        }
-
-        for (int indexStoryline = 0; indexStoryline < secondaryStorylines.Count; indexStoryline++)
-        {
-            var storyline = secondaryStorylines[indexStoryline];
+            var storyline = allStorylines[indexStoryline];
             gameData.storylineStatus.Add(storyline.ID, storyline.Status);
             for (int indexTimeline = 0; indexTimeline < storyline.Timelines.Count; indexTimeline++)
             {
@@ -514,15 +485,16 @@ public class Checker : MonoBehaviour, IDataPersistence
         }
 
         gameData.activeTimelines.Clear();
+        gameData.waitingTimesTimeline.Clear();
 
         for (int indexLauncher = 0; indexLauncher < activeLaunchers.Count; indexLauncher++)
         {
             var launcher = activeLaunchers[indexLauncher];
             if (!launcher.IsRunning) continue;
             gameData.waitingTimesTimeline.Add(launcher.storyline.ID, launcher.waitingTime);
-            for (int index = 0; index < principalStorylines.Count; index++)
+            for (int index = 0; index < allStorylines.Count; index++)
             {
-                var storyline = principalStorylines[index];
+                var storyline = allStorylines[index];
                 var result = storyline.Timelines.Where(timeline => timeline.TimelineContainer == launcher.nodeGroup);
                 if (result.Any())
                 {
@@ -544,9 +516,9 @@ public class Checker : MonoBehaviour, IDataPersistence
             var launcher = activeLaunchers[indexLauncher];
             if (launcher.IsRunning)
             {
-                for (int index = 0; index < principalStorylines.Count; index++)
+                for (int index = 0; index < allStorylines.Count; index++)
                 {
-                    var storyline = principalStorylines[index];
+                    var storyline = allStorylines[index];
                     if (storyline.StorylineContainer == launcher.nodeContainer)
                     {
                         gameData.currentNodes.Add(storyline.ID, launcher.CurrentNode.NodeName);

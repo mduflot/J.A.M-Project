@@ -63,7 +63,6 @@ namespace SS
         {
             if (timeline.Status == SSStoryStatus.Completed)
             {
-                Debug.Log($"Storyline {nodeContainer.name} completed");
                 TimeTickSystem.OnTick += WaitTimeline;
                 return;
             }
@@ -185,7 +184,6 @@ namespace SS
         /// <param name="nodeSO"> Node you need to run </param>
         private void CheckNodeType(SSNodeSO nodeSO)
         {
-            // Debug.Log("CheckNodeType");
             CurrentNode = nodeSO;
             switch (nodeSO.NodeType)
             {
