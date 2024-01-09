@@ -76,7 +76,7 @@ public class Checker : MonoBehaviour, IDataPersistence
     public void GenerateNewEvent()
     {
         Debug.Log("Generating new event. Maybe nothing will happen.");
-        ChooseNewStoryline(Random.Range(0, 2) == 0 ? SSStoryType.Principal : SSStoryType.Secondary);
+        ChooseNewStoryline(SSStoryType.Secondary);
     }
 
     public void GenerateNewPrincipalEvent()
@@ -123,6 +123,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                     if (storyline.StorylineContainer.Condition)
                         if (RouteCondition(storyline.StorylineContainer.Condition))
                             continue;
+                    if (activeLaunchers.Any(launcher => launcher.storyline == storyline)) continue;
                     Debug.Log($"Available storyline : {storyline.StorylineContainer.FileName}");
                     availableStoryLines.Add(storyline);
                 }
@@ -138,6 +139,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                     if (storyline.StorylineContainer.Condition)
                         if (RouteCondition(storyline.StorylineContainer.Condition))
                             continue;
+                    if (activeLaunchers.Any(launcher => launcher.storyline == storyline)) continue;
                     Debug.Log($"Available storyline : {storyline.StorylineContainer.FileName}");
                     availableStoryLines.Add(storyline);
                 }
@@ -169,6 +171,7 @@ public class Checker : MonoBehaviour, IDataPersistence
 
     private void PickTimelineFromStoryline(Storyline storyline)
     {
+        availableTimelines.Clear();
         for (var index = 0; index < storyline.Timelines.Count; index++)
         {
             var timeline = storyline.Timelines[index];
