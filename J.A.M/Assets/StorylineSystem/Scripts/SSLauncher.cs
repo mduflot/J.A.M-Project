@@ -783,6 +783,7 @@ namespace SS
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
             {
                 IsRunning = false;
+                timeline.Status = SSStoryStatus.Completed;
                 if (task.TaskType == SSTaskType.Timed || task.TaskType == SSTaskType.Untimed) timeline.Status = SSStoryStatus.Completed;
                 ResetTimeline();
                 if (nodeGroup.TimeIsOverride) waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
