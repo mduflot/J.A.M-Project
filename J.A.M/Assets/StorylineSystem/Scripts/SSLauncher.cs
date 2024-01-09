@@ -230,9 +230,9 @@ namespace SS
                 }
                 case SSSpeakerType.Sensor:
                 {
-                    for (int index = 0; index < spaceshipManager.GetRoom(RoomType.Flight).roomObjects.Length; index++)
+                    for (int index = 0; index < spaceshipManager.GetRoom(RoomType.Trajectory).roomObjects.Length; index++)
                     {
-                        var furniture = spaceshipManager.GetRoom(RoomType.Flight).roomObjects[index];
+                        var furniture = spaceshipManager.GetRoom(RoomType.Trajectory).roomObjects[index];
                         if (furniture.furnitureType == FurnitureType.Console)
                         {
                             var sensor = furniture.transform;
@@ -254,9 +254,9 @@ namespace SS
                 }
                 case SSSpeakerType.Expert:
                 {
-                    for (int index = 0; index < spaceshipManager.GetRoom(RoomType.Docking).roomObjects.Length; index++)
+                    for (int index = 0; index < spaceshipManager.GetRoom(RoomType.DockingBay).roomObjects.Length; index++)
                     {
-                        var furniture = spaceshipManager.GetRoom(RoomType.Docking).roomObjects[index];
+                        var furniture = spaceshipManager.GetRoom(RoomType.DockingBay).roomObjects[index];
                         if (furniture.furnitureType == FurnitureType.PortHole)
                         {
                             var sensor = furniture.transform;
