@@ -36,7 +36,7 @@ public class TraitsData
         Old = 2,
         ShellShocked = 4,
         HighOnFumes = 8,
-        Hallucination = 16,
+        Hallucinating = 16,
         Distrustful = 32,
         Crippled = 34,
         Parasited = 128,
