@@ -5,4 +5,5 @@ using UnityEngine;
 public class SimRoom : MonoBehaviour
 {
     public SimDoor[] roomDoors;
+    public RoomType roomType;
 }
