@@ -24,7 +24,7 @@ public class SimPathing : MonoBehaviour
     }
 
     //Call once at game start;
-    public static void InitializeDoorIDs()
+    private static void InitializeDoorIDs()
     {
         for (uint i = 0; i < instance.doors.Length; i++)
             instance.doors[i].doorID = i+1; 
