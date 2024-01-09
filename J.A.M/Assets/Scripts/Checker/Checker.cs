@@ -28,9 +28,6 @@ public class Checker : MonoBehaviour, IDataPersistence
 
     private SSCampaignSO ssCampaign;
 
-    private Storyline chosenStoryline;
-    private SSNodeGroupSO chosenTimeline;
-
     private List<Storyline> allStorylines;
     private List<Storyline> principalStorylines;
     private List<Storyline> secondaryStorylines;
@@ -163,23 +160,22 @@ public class Checker : MonoBehaviour, IDataPersistence
         {
             if (randPicker <= pickPercent * i)
             {
-                chosenStoryline = availableStoryLines[i - 1];
-                Debug.Log($"New storyline chosen : {chosenStoryline.StorylineContainer.FileName}");
-                PickTimelineFromStoryline();
+                Debug.Log($"New storyline chosen : {availableStoryLines[i - 1].StorylineContainer.FileName}");
+                PickTimelineFromStoryline(availableStoryLines[i - 1]);
                 break;
             }
         }
     }
 
-    private void PickTimelineFromStoryline()
+    private void PickTimelineFromStoryline(Storyline storyline)
     {
-        for (var index = 0; index < chosenStoryline.Timelines.Count; index++)
+        for (var index = 0; index < storyline.Timelines.Count; index++)
         {
-            var timeline = chosenStoryline.Timelines[index];
+            var timeline = storyline.Timelines[index];
             if (timeline.Status != SSStoryStatus.Enabled) continue;
             if (timeline.TimelineContainer.IsFirstToPlay)
             {
-                StartTimeline(timeline.TimelineContainer);
+                StartTimeline(storyline, timeline.TimelineContainer);
                 return;
             }
 
@@ -203,37 +199,36 @@ public class Checker : MonoBehaviour, IDataPersistence
         {
             if (randPicker <= pickPercent * i)
             {
-                StartTimeline(availableTimelines[i - 1]);
+                StartTimeline(storyline, availableTimelines[i - 1]);
                 break;
             }
         }
     }
 
-    private void StartTimeline(SSNodeGroupSO timeline, SSNodeSO node = null,
+    private void StartTimeline(Storyline storyline, SSNodeGroupSO timeline, SSNodeSO node = null,
         List<SerializableTuple<string, string>> dialogues = null, List<string> characters = null,
         List<string> assignedCharacters = null, List<string> notAssignedCharacters = null,
         List<string> traitsCharacters = null, uint waitingTime = 0)
     {
-        chosenTimeline = timeline;
         presentationContainer.SetActive(true);
-        presentationText.text = "New Storyline : " + chosenStoryline.StorylineContainer.FileName;
+        presentationText.text = "New Storyline : " + storyline.StorylineContainer.FileName;
         StartCoroutine(DisablePresentation());
-        var count = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline].Count;
+        var count = storyline.StorylineContainer.NodeGroups[timeline].Count;
         var launcherObject = launcherPool.GetFromPool();
         var launcher = launcherObject.GetComponent<SSLauncher>();
-        launcher.storyline = chosenStoryline;
+        launcher.storyline = storyline;
         launcher.waitingTime = waitingTime;
-        launcher.timeline = chosenStoryline.Timelines.First(timeline => timeline.TimelineContainer == chosenTimeline);
+        launcher.timeline = storyline.Timelines.First(timelineToChoose => timelineToChoose.TimelineContainer == timeline);
         activeLaunchers.Add(launcher);
-        launcher.nodeContainer = chosenStoryline.StorylineContainer;
-        launcher.nodeGroup = chosenTimeline;
+        launcher.nodeContainer = storyline.StorylineContainer;
+        launcher.nodeGroup = timeline;
         if (node == null)
         {
             for (int index = 0; index < count; index++)
             {
-                if (chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index].IsStartingNode)
+                if (storyline.StorylineContainer.NodeGroups[timeline][index].IsStartingNode)
                 {
-                    node = chosenStoryline.StorylineContainer.NodeGroups[chosenTimeline][index];
+                    node = storyline.StorylineContainer.NodeGroups[timeline][index];
                     break;
                 }
             }
@@ -321,7 +316,7 @@ public class Checker : MonoBehaviour, IDataPersistence
             launcher.traitsCharacters = charactersList;
         }
 
-        if (chosenStoryline.StorylineContainer.StoryType == SSStoryType.Secondary)
+        if (storyline.StorylineContainer.StoryType == SSStoryType.Secondary)
         {
             this.waitingTime = (uint) Random.Range(minWaitTimeSecondary, maxWaitTimeSecondary) * TimeTickSystem.ticksPerHour;
             TimeTickSystem.OnTick += WaitStorylineSecondary;
@@ -427,7 +422,7 @@ public class Checker : MonoBehaviour, IDataPersistence
             {
                 if (allStorylines[indexStoryline].ID == storyline)
                 {
-                    chosenStoryline = allStorylines[indexStoryline];
+                    var chosenStoryline = allStorylines[indexStoryline];
                     var waitingTimeTimeline = gameData.waitingTimesTimeline[chosenStoryline.ID];
                     if (gameData.activeTimelines.Count > 0)
                     {
@@ -459,7 +454,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                                                     gameData.notAssignedActiveTimelines[chosenStoryline.ID];
                                                 var traitsCharacters =
                                                     gameData.traitsCharactersActiveStorylines[chosenStoryline.ID];
-                                                StartTimeline(chosenTimeline, node, dialogues, characters,
+                                                StartTimeline(chosenStoryline, chosenTimeline, node, dialogues, characters,
                                                     assignedCharacters, notAssignedCharacters, traitsCharacters, waitingTimeTimeline);
                                                 break;
                                             }

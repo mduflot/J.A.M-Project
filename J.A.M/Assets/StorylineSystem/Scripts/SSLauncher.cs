@@ -695,7 +695,7 @@ namespace SS
                     else
                         waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
                                              TimeTickSystem.ticksPerHour);
-                    if (IsFinish()) return;
+                    if (IsFinish()) waitingTime = 0;
                     TimeTickSystem.OnTick += WaitTimeline;
                     return;
                 }
@@ -743,7 +743,7 @@ namespace SS
                     else
                         waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
                                              TimeTickSystem.ticksPerHour);
-                    if (IsFinish()) yield break;
+                    if (IsFinish()) waitingTime = 0;
                     TimeTickSystem.OnTick += WaitTimeline;
                     yield break;
                 }
@@ -772,7 +772,7 @@ namespace SS
                 else
                     waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
                                          TimeTickSystem.ticksPerHour);
-                if (IsFinish()) yield break;
+                if (IsFinish()) waitingTime = 0;
                 TimeTickSystem.OnTick += WaitTimeline;
                 yield break;
             }
@@ -800,7 +800,7 @@ namespace SS
                 else
                     waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
                                          TimeTickSystem.ticksPerHour);
-                if (IsFinish()) yield break;
+                if (IsFinish()) waitingTime = 0;
                 TimeTickSystem.OnTick += WaitTimeline;
                 yield break;
             }
