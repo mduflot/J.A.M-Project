@@ -61,10 +61,13 @@ namespace SS
 
         public void StartTimeline()
         {
-            if (timeline.Status == SSStoryStatus.Completed)
+            if (nodeContainer.StoryType != SSStoryType.Tasks)
             {
-                TimeTickSystem.OnTick += WaitTimeline;
-                return;
+                if (timeline.Status == SSStoryStatus.Completed)
+                {
+                    TimeTickSystem.OnTick += WaitTimeline;
+                    return;
+                }
             }
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
             spaceshipManager = GameManager.Instance.SpaceshipManager;
@@ -685,16 +688,18 @@ namespace SS
                 if (timeNode.Choices.First().NextNode == null)
                 {
                     IsRunning = false;
-                    timeline.Status = SSStoryStatus.Completed;
                     ResetTimeline();
-                    TimeTickSystem.OnTick -= WaitingTime;
-                    if (nodeGroup.TimeIsOverride)
-                        waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                    else
-                        waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
-                                             TimeTickSystem.ticksPerHour);
-                    if (IsFinish()) waitingTime = 0;
-                    TimeTickSystem.OnTick += WaitTimeline;
+                    if (nodeContainer.StoryType != SSStoryType.Tasks)
+                    {
+                        timeline.Status = SSStoryStatus.Completed;
+                        if (nodeGroup.TimeIsOverride)
+                            waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                        else
+                            waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                                 TimeTickSystem.ticksPerHour);
+                        if (IsFinish()) waitingTime = 0;
+                        TimeTickSystem.OnTick += WaitTimeline;
+                    }
                     return;
                 }
 
@@ -734,15 +739,18 @@ namespace SS
                 if (nodeSO.Choices.First().NextNode == null)
                 {
                     IsRunning = false;
-                    timeline.Status = SSStoryStatus.Completed;
                     ResetTimeline();
-                    if (nodeGroup.TimeIsOverride)
-                        waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                    else
-                        waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
-                                             TimeTickSystem.ticksPerHour);
-                    if (IsFinish()) waitingTime = 0;
-                    TimeTickSystem.OnTick += WaitTimeline;
+                    if (nodeContainer.StoryType != SSStoryType.Tasks)
+                    {
+                        timeline.Status = SSStoryStatus.Completed;
+                        if (nodeGroup.TimeIsOverride)
+                            waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                        else
+                            waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                                 TimeTickSystem.ticksPerHour);
+                        if (IsFinish()) waitingTime = 0;
+                        TimeTickSystem.OnTick += WaitTimeline;
+                    }
                     yield break;
                 }
             }
@@ -764,14 +772,17 @@ namespace SS
             if (nodeSO.Choices.First().NextNode == null)
             {
                 IsRunning = false;
-                timeline.Status = SSStoryStatus.Completed;
                 ResetTimeline();
-                if (nodeGroup.TimeIsOverride) waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                else
-                    waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
-                                         TimeTickSystem.ticksPerHour);
-                if (IsFinish()) waitingTime = 0;
-                TimeTickSystem.OnTick += WaitTimeline;
+                if (nodeContainer.StoryType != SSStoryType.Tasks)
+                {
+                    timeline.Status = SSStoryStatus.Completed;
+                    if (nodeGroup.TimeIsOverride) waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                    else
+                        waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                             TimeTickSystem.ticksPerHour);
+                    if (IsFinish()) waitingTime = 0;
+                    TimeTickSystem.OnTick += WaitTimeline;
+                }
                 yield break;
             }
 
@@ -791,15 +802,17 @@ namespace SS
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
             {
                 IsRunning = false;
-                timeline.Status = SSStoryStatus.Completed;
-                if (task.TaskType == SSTaskType.Timed || task.TaskType == SSTaskType.Untimed) timeline.Status = SSStoryStatus.Completed;
                 ResetTimeline();
-                if (nodeGroup.TimeIsOverride) waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                else
-                    waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
-                                         TimeTickSystem.ticksPerHour);
-                if (IsFinish()) waitingTime = 0;
-                TimeTickSystem.OnTick += WaitTimeline;
+                if (nodeContainer.StoryType != SSStoryType.Tasks)
+                {
+                    timeline.Status = SSStoryStatus.Completed;
+                    if (nodeGroup.TimeIsOverride) waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                    else
+                        waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                             TimeTickSystem.ticksPerHour);
+                    if (IsFinish()) waitingTime = 0;
+                    TimeTickSystem.OnTick += WaitTimeline;
+                }
                 yield break;
             }
 

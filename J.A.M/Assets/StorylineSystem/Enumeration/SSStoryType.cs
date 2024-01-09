@@ -3,6 +3,7 @@
     public enum SSStoryType
     {
         Principal,
-        Secondary
+        Secondary,
+        Tasks
     }
 }

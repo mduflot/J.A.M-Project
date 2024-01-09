@@ -13,40 +13,57 @@ MonoBehaviour:
   m_Name: PermanentTaskGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: PermanentTask
+  <ID>k__BackingField: 4f8be335-a376-4585-aac4-836de13164e3
   <StoryStatus>k__BackingField: 0
-  <StoryType>k__BackingField: 0
+  <StoryType>k__BackingField: 2
   <IsFirstToPlay>k__BackingField: 0
   <Condition>k__BackingField: {fileID: 0}
   <Groups>k__BackingField:
   - <ID>k__BackingField: fb8ffb14-947a-41d6-8fd8-114a1def90cd
     <StoryStatus>k__BackingField: 0
     <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
     <Condition>k__BackingField: {fileID: 0}
     <Name>k__BackingField: OxygenTask
-    <Position>k__BackingField: {x: -1196, y: 400}
+    <Position>k__BackingField: {x: -1195, y: 401}
   - <ID>k__BackingField: 182beb71-3d2f-4234-a202-a5fc4cb41f50
     <StoryStatus>k__BackingField: 0
     <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
     <Condition>k__BackingField: {fileID: 0}
     <Name>k__BackingField: FoodTask
-    <Position>k__BackingField: {x: -736.80005, y: 397.59995}
+    <Position>k__BackingField: {x: -736, y: 399}
   - <ID>k__BackingField: 63f2d831-fb93-4af7-ac34-475d56991055
     <StoryStatus>k__BackingField: 0
     <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
     <Condition>k__BackingField: {fileID: 0}
     <Name>k__BackingField: PowerTask
-    <Position>k__BackingField: {x: -273.59998, y: 397.59995}
+    <Position>k__BackingField: {x: -273, y: 399}
   - <ID>k__BackingField: 7e0fd00a-b837-4cfc-ab76-7a5bbc854bca
     <StoryStatus>k__BackingField: 0
     <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
     <Condition>k__BackingField: {fileID: 0}
     <Name>k__BackingField: HullTask
-    <Position>k__BackingField: {x: 180.79991, y: 397.59995}
+    <Position>k__BackingField: {x: 181, y: 399}
   <Nodes>k__BackingField:
-  - rid: 8412203442186485768
-  - rid: 8412203442186485769
-  - rid: 8412203442186485770
-  - rid: 8412203442186485771
+  - rid: 8851122693635834196
+  - rid: 8851122693635834197
+  - rid: 8851122693635834198
+  - rid: 8851122693635834199
   <OldGroupNames>k__BackingField:
   - OxygenTask
   - FoodTask
@@ -70,17 +87,17 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 8412203442186485768
+    - rid: 8851122693635834196
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 5f019f8b-b151-40b9-a893-28acfb5b1946
         <Name>k__BackingField: FoodTask
         <Choices>k__BackingField:
-        - rid: 8412203442186485772
-        - rid: 8412203442186485773
+        - rid: 8851122693635834200
+        - rid: 8851122693635834201
         <GroupID>k__BackingField: 182beb71-3d2f-4234-a202-a5fc4cb41f50
         <NodeType>k__BackingField: 1
-        <Position>k__BackingField: {x: -711.2, y: 457.59998}
+        <Position>k__BackingField: {x: -711, y: 458}
         <DescriptionTask>k__BackingField: Our crops need love to sustain our food
           supply.
         <TaskStatus>k__BackingField: 0
@@ -94,17 +111,17 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 3
         <Furniture>k__BackingField: 0
-    - rid: 8412203442186485769
+    - rid: 8851122693635834197
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 5a408429-531f-4cc8-b0bd-759769c93925
         <Name>k__BackingField: PowerTask
         <Choices>k__BackingField:
-        - rid: 8412203442186485774
-        - rid: 8412203442186485775
+        - rid: 8851122693635834202
+        - rid: 8851122693635834203
         <GroupID>k__BackingField: 63f2d831-fb93-4af7-ac34-475d56991055
         <NodeType>k__BackingField: 1
-        <Position>k__BackingField: {x: -248, y: 457.59998}
+        <Position>k__BackingField: {x: -248, y: 458}
         <DescriptionTask>k__BackingField: The generator needs tuning in order to
           bring us safely to our destination.
         <TaskStatus>k__BackingField: 0
@@ -118,17 +135,17 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 1
         <Furniture>k__BackingField: 0
-    - rid: 8412203442186485770
+    - rid: 8851122693635834198
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 8b80c32a-c161-4771-a942-95bcd8b5a470
         <Name>k__BackingField: HullTask
         <Choices>k__BackingField:
-        - rid: 8412203442186485776
-        - rid: 8412203442186485777
+        - rid: 8851122693635834204
+        - rid: 8851122693635834205
         <GroupID>k__BackingField: 7e0fd00a-b837-4cfc-ab76-7a5bbc854bca
         <NodeType>k__BackingField: 1
-        <Position>k__BackingField: {x: 206.4, y: 457.59998}
+        <Position>k__BackingField: {x: 206, y: 458}
         <DescriptionTask>k__BackingField: Small asteroids often damage the hull.
           It'll need to be fixed.
         <TaskStatus>k__BackingField: 0
@@ -142,17 +159,17 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 7
         <Furniture>k__BackingField: 0
-    - rid: 8412203442186485771
+    - rid: 8851122693635834199
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 78c8d6ba-f705-4d20-8537-dd1d6519ec99
         <Name>k__BackingField: OxygenTask
         <Choices>k__BackingField:
-        - rid: 8412203442186485778
-        - rid: 8412203442186485779
+        - rid: 8851122693635834206
+        - rid: 8851122693635834207
         <GroupID>k__BackingField: fb8ffb14-947a-41d6-8fd8-114a1def90cd
         <NodeType>k__BackingField: 1
-        <Position>k__BackingField: {x: -1170.4, y: 460}
+        <Position>k__BackingField: {x: -1170, y: 460}
         <DescriptionTask>k__BackingField: Vents need to be cleaned regularly.
         <TaskStatus>k__BackingField: 0
         <TaskType>k__BackingField: 0
@@ -165,7 +182,7 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 2
         <Furniture>k__BackingField: 0
-    - rid: 8412203442186485772
+    - rid: 8851122693635834200
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -173,7 +190,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: ac1e5ca885e6cff4082152a44cbfdafa,
           type: 2}
         <PreviewOutcome>k__BackingField: 'will add :'
-    - rid: 8412203442186485773
+    - rid: 8851122693635834201
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: LastChoice
@@ -181,7 +198,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 51a265ec0700b8d429140d8cc71735f2,
           type: 2}
         <PreviewOutcome>k__BackingField: 
-    - rid: 8412203442186485774
+    - rid: 8851122693635834202
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -189,7 +206,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: d7c97afebe496c340b41a82a5c828858,
           type: 2}
         <PreviewOutcome>k__BackingField: 'will add :'
-    - rid: 8412203442186485775
+    - rid: 8851122693635834203
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: LastChoice
@@ -197,7 +214,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 51a265ec0700b8d429140d8cc71735f2,
           type: 2}
         <PreviewOutcome>k__BackingField: 
-    - rid: 8412203442186485776
+    - rid: 8851122693635834204
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -205,7 +222,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 85a584a3033441d4b95d5b2884c0453c,
           type: 2}
         <PreviewOutcome>k__BackingField: 'will add :'
-    - rid: 8412203442186485777
+    - rid: 8851122693635834205
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: LastChoice
@@ -213,7 +230,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 51a265ec0700b8d429140d8cc71735f2,
           type: 2}
         <PreviewOutcome>k__BackingField: 
-    - rid: 8412203442186485778
+    - rid: 8851122693635834206
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -221,7 +238,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 0130a702343d19f47a4304a8c46de9c7,
           type: 2}
         <PreviewOutcome>k__BackingField: 'will add :'
-    - rid: 8412203442186485779
+    - rid: 8851122693635834207
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: LastChoice

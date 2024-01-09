@@ -373,7 +373,12 @@ namespace UI
 
         private void OnComplete()
         {
-            for (uint i = 0; i < outcomeEvents.Length; i++) outcomeEvents[i].Invoke(outcomeEventArgs[i]);
+            for (uint i = 0; i < outcomeEvents.Length; i++)
+            {
+                Debug.Log($"outcomeEvent {i} : {outcomeEvents[i]}; outcomeEventArgs {i} : {outcomeEventArgs[i]};");
+                Debug.Log($"{outcomeEventArgs[i].outcomeType} / {outcomeEventArgs[i].value}");
+                outcomeEvents[i].Invoke(outcomeEventArgs[i]);
+            }
             IsCompleted = true;
             ResetCharacters();
             GameManager.Instance.RefreshCharacterIcons();
