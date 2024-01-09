@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: LastChanceToEscape
   <Choices>k__BackingField:
-  - rid: 7990854049067696154
-  - rid: 7990854049067696155
-  - rid: 7990854049067696156
+  - rid: 197800162083209454
+  - rid: 197800162083209455
+  - rid: 197800162083209456
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: 
   <TaskStatus>k__BackingField: 0
-  <TaskType>k__BackingField: 0
+  <TaskType>k__BackingField: 2
   <Icon>k__BackingField: {fileID: 0}
   <TimeLeft>k__BackingField: 0
   <Duration>k__BackingField: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7990854049067696154
+    - rid: 197800162083209454
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Choice1
@@ -41,7 +41,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 0}
         <PreviewOutcome>k__BackingField: will take care of the hostile crew member
           and perform a psychiatric test.
-    - rid: 7990854049067696155
+    - rid: 197800162083209455
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Choice2
@@ -49,7 +49,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 0}
         <PreviewOutcome>k__BackingField: will lock the hostile crew member up to
           avoid further harm.
-    - rid: 7990854049067696156
+    - rid: 197800162083209456
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Choice3

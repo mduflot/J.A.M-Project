@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: Leak
   <Choices>k__BackingField:
-  - rid: 8851122693436343008
-  - rid: 8851122693436343009
+  - rid: 197800162083209483
+  - rid: 197800162083209484
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: Description
   <TaskStatus>k__BackingField: 0
-  <TaskType>k__BackingField: 0
+  <TaskType>k__BackingField: 2
   <Icon>k__BackingField: {fileID: 21300000, guid: 45cb8f736de03074f92753a85f42b8be,
     type: 3}
   <TimeLeft>k__BackingField: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 8851122693436343008
+    - rid: 197800162083209483
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -41,7 +41,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 62b8bd32649d7dc4ea8975145d412c4f,
           type: 2}
         <PreviewOutcome>k__BackingField: The leak will be fix.
-    - rid: 8851122693436343009
+    - rid: 197800162083209484
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
