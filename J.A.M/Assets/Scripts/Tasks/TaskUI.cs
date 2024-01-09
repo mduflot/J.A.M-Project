@@ -630,9 +630,32 @@ namespace Tasks
         {
             int letterIndex = 0;
             string tempText = "";
+            string tagBuffer = "";
+            bool bufferTag = false;
             text.text = tempText;
+            
             while (letterIndex < textToDisplay.Length)
             {
+                //If tag-beginning character is parsed, start buffering the tag
+                if (textToDisplay[letterIndex] == '<')
+                    bufferTag = true;
+                //If tag-ending character is parsed, buffer the tag ending character and concatenate with text
+                if (textToDisplay[letterIndex] == '>')
+                {
+                    bufferTag = false;
+                    tagBuffer += textToDisplay[letterIndex];
+                    tempText = string.Concat(tempText, tagBuffer);
+                    letterIndex++;
+                    continue;
+                }
+                //If buffering tag, write to buffer instead of tempText and skip waiting
+                if (bufferTag)
+                {
+                    tagBuffer += textToDisplay[letterIndex];
+                    letterIndex++;
+                    continue;
+                }
+                
                 yield return new WaitForSeconds(speed);
                 tempText += textToDisplay[letterIndex];
                 text.text = tempText;
