@@ -63,6 +63,7 @@ namespace SS
         {
             if (timeline.Status == SSStoryStatus.Completed)
             {
+                Debug.Log($"Storyline {nodeContainer.name} completed");
                 TimeTickSystem.OnTick += WaitTimeline;
                 return;
             }
@@ -111,7 +112,7 @@ namespace SS
             for (var i = 0; i < storyline.Timelines.Count; i++)
             {
                 var timeline = storyline.Timelines[i];
-                if (timeline.Status.Equals(SSStoryStatus.Completed)) continue;
+                if (timeline.Status == SSStoryStatus.Completed) continue;
                 if (timeline.TimelineContainer.Condition)
                     if (RouteCondition(timeline.TimelineContainer.Condition))
                         continue;
@@ -121,7 +122,7 @@ namespace SS
             if (availablesTimelines.Count == 0)
             {
                 storyline.Status = SSStoryStatus.Completed;
-                if (nodeContainer.StoryType == SSStoryType.Principal) Checker.Instance.ChooseNewStoryline(SSStoryType.Principal);
+                if (nodeContainer.StoryType == SSStoryType.Principal) Checker.Instance.GenerateNewPrincipalEvent();
                 Checker.Instance.launcherPool.AddToPool(this.gameObject);
                 Checker.Instance.activeLaunchers.Remove(this);
                 Debug.Log("No more timeline available / Storyline completed");
@@ -177,7 +178,7 @@ namespace SS
         /// <param name="nodeSO"> Node you need to run </param>
         private void CheckNodeType(SSNodeSO nodeSO)
         {
-            Debug.Log("CheckNodeType");
+            // Debug.Log("CheckNodeType");
             CurrentNode = nodeSO;
             switch (nodeSO.NodeType)
             {

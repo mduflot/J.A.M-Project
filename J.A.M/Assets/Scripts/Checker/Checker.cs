@@ -21,10 +21,10 @@ public class Checker : MonoBehaviour, IDataPersistence
     [SerializeField] private TextMeshProUGUI presentationText;
 
     [SerializeField] private GameObject launcherPrefab;
-    [SerializeField] private uint minWaitTimeMain = 5;
-    [SerializeField] private uint maxWaitTimeMain = 10;
-    [SerializeField] private uint minWaitTimeSecondary = 10;
-    [SerializeField] private uint maxWaitTimeSecondary = 20;
+    [SerializeField] private uint minWaitTimePrincipal = 20;
+    [SerializeField] private uint maxWaitTimePrincipal = 30;
+    [SerializeField] private uint minWaitTimeSecondary = 20;
+    [SerializeField] private uint maxWaitTimeSecondary = 30;
 
     private SSCampaignSO ssCampaign;
 
@@ -66,7 +66,13 @@ public class Checker : MonoBehaviour, IDataPersistence
         ChooseNewStoryline(Random.Range(0, 2) == 0 ? SSStoryType.Principal : SSStoryType.Secondary);
     }
 
-    private void WaitStoryline(object sender, TimeTickSystem.OnTickEventArgs e)
+    public void GenerateNewPrincipalEvent()
+    {
+        waitingTime = (uint) Random.Range(minWaitTimePrincipal, maxWaitTimePrincipal) * TimeTickSystem.ticksPerHour;
+        TimeTickSystem.OnTick += WaitStorylinePrincipal;
+    }
+
+    private void WaitStorylinePrincipal(object sender, TimeTickSystem.OnTickEventArgs e)
     {
         if (waitingTime > 0)
         {
@@ -74,7 +80,19 @@ public class Checker : MonoBehaviour, IDataPersistence
             return;
         }
 
-        TimeTickSystem.OnTick -= WaitStoryline;
+        TimeTickSystem.OnTick -= WaitStorylinePrincipal;
+        ChooseNewStoryline(SSStoryType.Principal);
+    }
+    
+    private void WaitStorylineSecondary(object sender, TimeTickSystem.OnTickEventArgs e)
+    {
+        if (waitingTime > 0)
+        {
+            waitingTime -= TimeTickSystem.timePerTick;
+            return;
+        }
+
+        TimeTickSystem.OnTick -= WaitStorylineSecondary;
         ChooseNewStoryline(SSStoryType.Secondary);
     }
 
@@ -88,10 +106,11 @@ public class Checker : MonoBehaviour, IDataPersistence
                 for (var index = 0; index < principalStorylines.Count; index++)
                 {
                     var storyline = principalStorylines[index];
-                    if (storyline.StorylineContainer.StoryStatus == SSStoryStatus.Completed) continue;
+                    if (storyline.Status == SSStoryStatus.Completed) continue;
                     if (storyline.StorylineContainer.Condition)
                         if (RouteCondition(storyline.StorylineContainer.Condition))
                             continue;
+                    Debug.Log($"Available storyline : {storyline.StorylineContainer.FileName}");
                     availableStoryLines.Add(storyline);
                 }
 
@@ -102,10 +121,11 @@ public class Checker : MonoBehaviour, IDataPersistence
                 for (var index = 0; index < secondaryStorylines.Count; index++)
                 {
                     var storyline = secondaryStorylines[index];
-                    if (storyline.StorylineContainer.StoryStatus == SSStoryStatus.Completed) continue;
+                    if (storyline.Status == SSStoryStatus.Completed) continue;
                     if (storyline.StorylineContainer.Condition)
                         if (RouteCondition(storyline.StorylineContainer.Condition))
                             continue;
+                    Debug.Log($"Available storyline : {storyline.StorylineContainer.FileName}");
                     availableStoryLines.Add(storyline);
                 }
 
@@ -128,6 +148,7 @@ public class Checker : MonoBehaviour, IDataPersistence
             if (randPicker <= pickPercent * i)
             {
                 chosenStoryline = availableStoryLines[i - 1];
+                Debug.Log($"New storyline chosen : {chosenStoryline.StorylineContainer.FileName}");
                 PickTimelineFromStoryline();
                 break;
             }
@@ -286,8 +307,8 @@ public class Checker : MonoBehaviour, IDataPersistence
 
         if (chosenStoryline.StorylineContainer.StoryType == SSStoryType.Secondary)
         {
-            waitingTime = (uint) Random.Range(minWaitTimeSecondary, maxWaitTimeSecondary);
-            TimeTickSystem.OnTick += WaitStoryline;
+            this.waitingTime = (uint) Random.Range(minWaitTimeSecondary, maxWaitTimeSecondary) * TimeTickSystem.ticksPerHour;
+            TimeTickSystem.OnTick += WaitStorylineSecondary;
         }
         launcher.StartTimeline();
     }
