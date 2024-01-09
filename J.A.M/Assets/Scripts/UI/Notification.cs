@@ -90,7 +90,11 @@ namespace UI
             }
             else
             {
-                if (icon != null) GameManager.Instance.UIManager.taskUI.Initialize(this, icon);
+                if (icon != null)
+                {
+                    GameManager.Instance.UIManager.taskUI.Initialize(this, icon);
+                    return;
+                }
                 GameManager.Instance.UIManager.taskUI.Initialize(this);
             }
         }
