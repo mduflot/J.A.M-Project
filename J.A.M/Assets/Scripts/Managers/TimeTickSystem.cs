@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class TimeTickSystem : MonoBehaviour
+    public class TimeTickSystem : MonoBehaviour, IDataPersistence
     {
         public static uint timePerTick = 1; // InGame Time Unit
         public static uint ticksPerHour = 48;
@@ -122,6 +122,16 @@ namespace Managers
                 button.DeselectButton();
             }
             timeButtons[index].SelectButton();
+        }
+
+        public void LoadData(GameData gameData)
+        {
+            tick = gameData.time;
+        }
+
+        public void SaveData(ref GameData gameData)
+        {
+            gameData.time = tick;
         }
     }
 }

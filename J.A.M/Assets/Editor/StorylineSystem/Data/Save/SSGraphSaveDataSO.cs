@@ -8,6 +8,7 @@ namespace SS.Data.Save
     public class SSGraphSaveDataSO : ScriptableObject
     {
         [field: SerializeField] public string FileName { get; set; }
+        [field: SerializeField] public string ID { get; set; }
         [field: SerializeField] public SSStoryStatus StoryStatus { get; set; }
         [field: SerializeField] public SSStoryType StoryType { get; set; }
         [field: SerializeField] public bool IsFirstToPlay { get; set; }
@@ -20,6 +21,7 @@ namespace SS.Data.Save
 
         public void Initialize(string fileName, SSStoryStatus storyStatus, SSStoryType storyType, bool isFirstToPlay, ConditionSO condition)
         {
+            ID = System.Guid.NewGuid().ToString();
             FileName = fileName;
             StoryStatus = storyStatus;
             StoryType = storyType;

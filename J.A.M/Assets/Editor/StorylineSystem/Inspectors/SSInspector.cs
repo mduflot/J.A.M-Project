@@ -11,7 +11,6 @@ namespace SS.Inspectors
     {
         /* UI GameObjects */
         private SerializedProperty currentStorylineProperty;
-        private SerializedProperty spaceshipManagerProperty;
 
         /* Node Scriptable Objects */
         private SerializedProperty nodeContainerProperty;
@@ -29,7 +28,6 @@ namespace SS.Inspectors
         private void OnEnable()
         {
             currentStorylineProperty = serializedObject.FindProperty("currentStoryline");
-            spaceshipManagerProperty = serializedObject.FindProperty("spaceshipManager");
             
             nodeContainerProperty = serializedObject.FindProperty("nodeContainer");
             nodeGroupProperty = serializedObject.FindProperty("nodeGroup");
@@ -47,7 +45,6 @@ namespace SS.Inspectors
             serializedObject.Update();
 
             currentStorylineProperty.DrawPropertyField();
-            spaceshipManagerProperty.DrawPropertyField();
 
             DrawNodeContainerArea();
 
