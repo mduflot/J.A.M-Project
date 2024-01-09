@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CornucopiaGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: Cornucopia
-  <ID>k__BackingField: 4409dbb6-154a-4db0-a6f9-2b385d3e382e
+  <ID>k__BackingField: ab685c13-2af9-4d56-ace8-a6beffc260d6
   <StoryStatus>k__BackingField: 0
   <StoryType>k__BackingField: 1
   <IsFirstToPlay>k__BackingField: 0
@@ -28,10 +28,10 @@ MonoBehaviour:
     <overrideWaitTime>k__BackingField: 10
     <Condition>k__BackingField: {fileID: 0}
     <Name>k__BackingField: Cornucopia
-    <Position>k__BackingField: {x: 449, y: 255.00006}
+    <Position>k__BackingField: {x: 449, y: 255}
   <Nodes>k__BackingField:
-  - rid: 8851122692241490911
-  - rid: 8851122692241490912
+  - rid: 8851122693436342985
+  - rid: 8851122693436342986
   <OldGroupNames>k__BackingField:
   - Cornucopia
   <OldUngroupedNodeNames>k__BackingField: []
@@ -44,13 +44,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 8851122692241490911
+    - rid: 8851122693436342985
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: ca6940c7-0ea5-4b59-9841-5ae7586b9525
         <Name>k__BackingField: DialogueNode
         <Choices>k__BackingField:
-        - rid: 8851122692241490913
+        - rid: 8851122693436342987
         <GroupID>k__BackingField: 5b79b9f9-f636-4882-b675-7041fefb6e4f
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 474, y: 314}
@@ -63,16 +63,16 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 8851122692241490912
+    - rid: 8851122693436342986
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 6dfc459c-3587-4c00-983c-b471cd2c3edd
         <Name>k__BackingField: TaskNode
         <Choices>k__BackingField:
-        - rid: 8851122692241490914
-        - rid: 8851122692241490915
-        - rid: 8851122692241490916
-        - rid: 8851122692241490917
+        - rid: 8851122693436342988
+        - rid: 8851122693436342989
+        - rid: 8851122693436342990
+        - rid: 8851122693436342991
         <GroupID>k__BackingField: 5b79b9f9-f636-4882-b675-7041fefb6e4f
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 1136, y: 314}
@@ -89,12 +89,12 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 6
         <Furniture>k__BackingField: 1
-    - rid: 8851122692241490913
+    - rid: 8851122693436342987
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 6dfc459c-3587-4c00-983c-b471cd2c3edd
-    - rid: 8851122692241490914
+    - rid: 8851122693436342988
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -103,7 +103,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: will be turned food excess into biomass
           to permanently fertilize the soil.
-    - rid: 8851122692241490915
+    - rid: 8851122693436342989
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: SecondChoice
@@ -112,7 +112,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: will be turned food excess into biomass
           to produce power and permanently fertilize the soil.
-    - rid: 8851122692241490916
+    - rid: 8851122693436342990
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: ThirdChoice
@@ -121,7 +121,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: will be turned food excess into biomass
           to produce fuel and permanently fertilize the soil.
-    - rid: 8851122692241490917
+    - rid: 8851122693436342991
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FourthChoice

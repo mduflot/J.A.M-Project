@@ -19,9 +19,9 @@ namespace SS.Data.Save
         [field: SerializeField] public List<string> OldUngroupedNodeNames { get; set; }
         [field: SerializeField] public SerializableDictionary<string, List<string>> OldGroupedNodeNames { get; set; }
 
-        public void Initialize(string fileName, string id, SSStoryStatus storyStatus, SSStoryType storyType, bool isFirstToPlay, ConditionSO condition)
+        public void Initialize(string fileName, SSStoryStatus storyStatus, SSStoryType storyType, bool isFirstToPlay, ConditionSO condition)
         {
-            ID = id;
+            ID = System.Guid.NewGuid().ToString();
             FileName = fileName;
             StoryStatus = storyStatus;
             StoryType = storyType;

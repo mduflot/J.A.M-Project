@@ -100,6 +100,13 @@ namespace SS
             if (currentStoryline) currentStoryline.text = "No timeline";
         }
 
+        private bool IsFinish()
+        {
+            if (storyline.Timelines.Any(timeline => timeline.Status == SSStoryStatus.Enabled))
+                return false;
+            return true;
+        }
+
         private void WaitTimeline(object sender, TimeTickSystem.OnTickEventArgs e)
         {
             if (waitingTime > 0)
@@ -688,6 +695,7 @@ namespace SS
                     else
                         waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
                                              TimeTickSystem.ticksPerHour);
+                    if (IsFinish()) return;
                     TimeTickSystem.OnTick += WaitTimeline;
                     return;
                 }
@@ -735,6 +743,7 @@ namespace SS
                     else
                         waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
                                              TimeTickSystem.ticksPerHour);
+                    if (IsFinish()) yield break;
                     TimeTickSystem.OnTick += WaitTimeline;
                     yield break;
                 }
@@ -763,6 +772,7 @@ namespace SS
                 else
                     waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
                                          TimeTickSystem.ticksPerHour);
+                if (IsFinish()) yield break;
                 TimeTickSystem.OnTick += WaitTimeline;
                 yield break;
             }
@@ -790,6 +800,7 @@ namespace SS
                 else
                     waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
                                          TimeTickSystem.ticksPerHour);
+                if (IsFinish()) yield break;
                 TimeTickSystem.OnTick += WaitTimeline;
                 yield break;
             }
