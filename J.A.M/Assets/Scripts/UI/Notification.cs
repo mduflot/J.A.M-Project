@@ -293,6 +293,44 @@ namespace UI
                     Task.Duration = AssistantCharacters.Count > 0
                         ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
                         : Task.Duration;
+                    
+                    switch (Task.Room)
+                    {
+                        case RoomType.Common:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCommonRoom))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.Docking:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedDockingBay))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.Electrical:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedElectricalRoom))
+                                Task.Duration *= 2;
+                            break;
+
+                        case RoomType.Flight:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedBridge))
+                                Task.Duration *= 2;
+                            break;
+
+                        case RoomType.Laboratory:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedMedicalRoom))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.Greenhouse:
+                            break;
+                        
+                        case RoomType.Storage: 
+                            break;
+                        
+                        case RoomType.Ventilation:
+                            break;
+                    }
+                    
                     Task.Duration *= TimeTickSystem.ticksPerHour;
                     Task.BaseDuration = Task.Duration;
                 }
