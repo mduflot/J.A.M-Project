@@ -71,8 +71,9 @@ namespace SS
                 }
                 else
                 {
-                    // storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName, TimeTickSystem.GetTimeAsInGameDate());
-                    // Checker.Instance.allStorylineLogs.Add(storylineLog);
+                    storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName,
+                        GameManager.Instance.UIManager.date.text);
+                    Checker.Instance.allStorylineLogs.Add(storylineLog);
                 }
                 if (timeline.Status == SSStoryStatus.Completed)
                 {
@@ -120,8 +121,8 @@ namespace SS
                 }
                 else
                 {
-                    // storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName, TimeTickSystem.GetTimeAsInGameDate());
-                    // Checker.Instance.allStorylineLogs.Add(storylineLog);
+                    storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName, GameManager.Instance.UIManager.date.text);
+                    Checker.Instance.allStorylineLogs.Add(storylineLog);
                 }
                 if (timeline.Status == SSStoryStatus.Completed)
                 {
@@ -140,6 +141,7 @@ namespace SS
             IsRunning = true;
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
+            CurrentNode = node;
             StartCoroutine(RunNode(node as SSTaskNodeSO, null, taskLog));
         }
 
@@ -705,6 +707,7 @@ namespace SS
                         0, taskToPlay.Duration,
                         nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
                         conditions);
+                    notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues, taskToPlay);
                 }
                 else
                 {
@@ -712,8 +715,8 @@ namespace SS
                         nodeSO.TimeLeft, nodeSO.Duration,
                         nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
                         conditions);
+                    notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
                 }
-                notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
                 spaceshipManager.AddTask(notification);
                 if (nodeSO.TaskType.Equals(SSTaskType.Permanent) && icon != null) notification.Display(icon);
                 else if (nodeSO.TaskType.Equals(SSTaskType.Permanent) || nodeSO.TaskType.Equals(SSTaskType.Compute))
@@ -864,6 +867,7 @@ namespace SS
 
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
             {
+                yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
                 IsRunning = false;
                 ResetTimeline();
                 if (nodeContainer.StoryType != SSStoryType.Tasks)

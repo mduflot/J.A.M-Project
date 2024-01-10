@@ -306,11 +306,15 @@ namespace UI
 
                 if (!IsCancelled)
                 {
-                    Task.Duration = AssistantCharacters.Count > 0
-                        ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
-                        : Task.Duration;
-                    Task.Duration *= TimeTickSystem.ticksPerHour;
+                    if (taskLog == null)
+                    {
+                        Task.Duration = AssistantCharacters.Count > 0
+                            ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
+                            : Task.Duration;
+                        Task.Duration *= TimeTickSystem.ticksPerHour;
+                    }
                     Task.BaseDuration = Task.Duration;
+                    taskLog = null;
                 }
 
                 IsCancelled = false;
@@ -381,7 +385,14 @@ namespace UI
                 }
                 else if (!IsStarted)
                 {
-                    GameManager.Instance.UIManager.taskUI.Initialize(this, null, false);
+                    if (taskLog != null)
+                    {
+                        GameManager.Instance.UIManager.taskUI.Initialize(this, null, false, taskLog); 
+                    }
+                    else
+                    {
+                        GameManager.Instance.UIManager.taskUI.Initialize(this, null, false);
+                    }
                     GameManager.Instance.UIManager.taskUI.StartTask();
                 }
             }

@@ -81,7 +81,8 @@ namespace Tasks
             titleText.text = notification.Task.Name;
             StartCoroutine(DisplayText(descriptionText, notification.Task.Description, 0.02f));
             timeLeft = notification.Task.TimeLeft;
-            duration = notification.Task.Duration;
+            if (taskLog != null) timeLeft = taskLog.Duration;
+            else duration = notification.Task.Duration;
             taskStarted = false;
 
             startButton.SetActive(true);
