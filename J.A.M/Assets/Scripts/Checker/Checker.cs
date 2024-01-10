@@ -7,7 +7,6 @@ using SS;
 using SS.Enumerations;
 using SS.ScriptableObjects;
 using TMPro;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -37,7 +36,9 @@ public class Checker : MonoBehaviour, IDataPersistence
     private List<Storyline> availableStoryLines = new();
     private List<SSNodeGroupSO> availableTimelines = new();
 
-    private uint waitingTime;
+    private uint waitingTimePrincipal;
+    private uint waitingTimeSecondary;
+    private bool isAlreadyWaiting;
 
     private void Awake()
     {
@@ -74,40 +75,42 @@ public class Checker : MonoBehaviour, IDataPersistence
 
         allStorylines.AddRange(principalStorylines);
         allStorylines.AddRange(secondaryStorylines);
+        isAlreadyWaiting = false;
     }
 
     public void GenerateNewEvent()
     {
-        Debug.Log("Generating new event. Maybe nothing will happen.");
+        Debug.Log("Generating new secondary event. Maybe nothing will happen.");
         ChooseNewStoryline(SSStoryType.Secondary);
     }
 
     public void GenerateNewPrincipalEvent()
     {
-        waitingTime = (uint)Random.Range(minWaitTimePrincipal, maxWaitTimePrincipal) * TimeTickSystem.ticksPerHour;
+        waitingTimePrincipal = (uint)Random.Range(minWaitTimePrincipal, maxWaitTimePrincipal) * TimeTickSystem.ticksPerHour;
         TimeTickSystem.OnTick += WaitStorylinePrincipal;
     }
 
     private void WaitStorylinePrincipal(object sender, TimeTickSystem.OnTickEventArgs e)
     {
-        if (waitingTime > 0)
+        if (waitingTimePrincipal > 0)
         {
-            waitingTime -= TimeTickSystem.timePerTick;
+            waitingTimePrincipal -= TimeTickSystem.timePerTick;
             return;
         }
-
+        
         TimeTickSystem.OnTick -= WaitStorylinePrincipal;
         ChooseNewStoryline(SSStoryType.Principal);
     }
 
     private void WaitStorylineSecondary(object sender, TimeTickSystem.OnTickEventArgs e)
     {
-        if (waitingTime > 0)
+        if (waitingTimeSecondary > 0)
         {
-            waitingTime -= TimeTickSystem.timePerTick;
+            waitingTimeSecondary -= TimeTickSystem.timePerTick;
             return;
         }
 
+        this.isAlreadyWaiting = false;
         TimeTickSystem.OnTick -= WaitStorylineSecondary;
         ChooseNewStoryline(SSStoryType.Secondary);
     }
@@ -321,9 +324,10 @@ public class Checker : MonoBehaviour, IDataPersistence
             launcher.traitsCharacters = charactersList;
         }
 
-        if (storyline.StorylineContainer.StoryType == SSStoryType.Secondary)
+        if (storyline.StorylineContainer.StoryType == SSStoryType.Secondary && !isAlreadyWaiting)
         {
-            this.waitingTime = (uint)Random.Range(minWaitTimeSecondary, maxWaitTimeSecondary) *
+            this.isAlreadyWaiting = true;
+            this.waitingTimeSecondary = (uint)Random.Range(minWaitTimeSecondary, maxWaitTimeSecondary) *
                                TimeTickSystem.ticksPerHour;
             TimeTickSystem.OnTick += WaitStorylineSecondary;
         }
@@ -459,21 +463,10 @@ public class Checker : MonoBehaviour, IDataPersistence
                                                         gameData.notAssignedActiveTimelines[chosenStoryline.ID];
                                                     var traitsCharacters =
                                                         gameData.traitsCharactersActiveStorylines[chosenStoryline.ID];
-                                                    if (taskLog != null)
-                                                    {
-                                                        StartTimeline(chosenStoryline, chosenTimeline, node, dialogues,
-                                                            characters,
-                                                            assignedCharacters, notAssignedCharacters, traitsCharacters,
-                                                            waitingTimeTimeline, taskLog);
-                                                    }
-                                                    else
-                                                    {
-                                                        StartTimeline(chosenStoryline, chosenTimeline, node, dialogues,
-                                                            characters,
-                                                            assignedCharacters, notAssignedCharacters, traitsCharacters,
-                                                            waitingTimeTimeline);
-                                                    }
-
+                                                    StartTimeline(chosenStoryline, chosenTimeline, node, dialogues,
+                                                        characters,
+                                                        assignedCharacters, notAssignedCharacters, traitsCharacters,
+                                                        waitingTimeTimeline, taskLog);
                                                     break;
                                                 }
                                             }
@@ -490,21 +483,10 @@ public class Checker : MonoBehaviour, IDataPersistence
                                                         gameData.notAssignedActiveTimelines[chosenStoryline.ID];
                                                     var traitsCharacters =
                                                         gameData.traitsCharactersActiveStorylines[chosenStoryline.ID];
-                                                    if (taskLog != null)
-                                                    {
-                                                        StartTimeline(chosenStoryline, chosenTimeline, node, dialogues,
-                                                            characters,
-                                                            assignedCharacters, notAssignedCharacters, traitsCharacters,
-                                                            waitingTimeTimeline, taskLog);
-                                                    }
-                                                    else
-                                                    {
-                                                        StartTimeline(chosenStoryline, chosenTimeline, node, dialogues,
-                                                            characters,
-                                                            assignedCharacters, notAssignedCharacters, traitsCharacters,
-                                                            waitingTimeTimeline);
-                                                    }
-
+                                                    StartTimeline(chosenStoryline, chosenTimeline, node, dialogues,
+                                                        characters,
+                                                        assignedCharacters, notAssignedCharacters, traitsCharacters,
+                                                        waitingTimeTimeline);
                                                     break;
                                                 }
                                             }
