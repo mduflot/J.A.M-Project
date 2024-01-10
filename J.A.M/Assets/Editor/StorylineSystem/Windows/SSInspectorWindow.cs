@@ -40,6 +40,11 @@ namespace SS.Windows
                 callback => { graphView.IsFirstToPlay = callback.newValue; });
 
             rootVisualElement.Add(toggleGraph);
+            
+            Toggle toggleGraphReplayable = SSElementUtility.CreateToggle(graphView.IsReplayable, "Is Replayable:",
+                callback => { graphView.IsReplayable = callback.newValue; });
+            
+            rootVisualElement.Add(toggleGraphReplayable);
 
             ObjectField objectFieldGraphCondition = SSElementUtility.CreateObjectField(graphView.Condition,
                 typeof(ConditionSO), "SS Condition:",

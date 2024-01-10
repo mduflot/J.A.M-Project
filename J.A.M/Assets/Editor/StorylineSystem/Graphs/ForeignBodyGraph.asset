@@ -13,39 +13,45 @@ MonoBehaviour:
   m_Name: ForeignBodyGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: ForeignBody
+  <ID>k__BackingField: 5be96d37-6597-42f0-be73-9e6a41141624
   <StoryStatus>k__BackingField: 0
   <StoryType>k__BackingField: 0
   <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
   <Condition>k__BackingField: {fileID: 0}
   <Groups>k__BackingField:
   - <ID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
     <StoryStatus>k__BackingField: 0
     <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
     <Condition>k__BackingField: {fileID: 0}
     <Name>k__BackingField: ForeignBody
     <Position>k__BackingField: {x: 407, y: 80}
   <Nodes>k__BackingField:
-  - rid: 5750222806274539807
-  - rid: 5750222806274539808
-  - rid: 5750222806274539809
-  - rid: 5750222806274539810
-  - rid: 5750222806274539811
-  - rid: 5750222806274539812
-  - rid: 5750222806274539813
-  - rid: 5750222806274539814
-  - rid: 5750222806274539815
-  - rid: 5750222806274539816
-  - rid: 5750222806274539817
-  - rid: 5750222806274539818
-  - rid: 5750222806274539819
-  - rid: 5750222806274539820
-  - rid: 5750222806274539821
-  - rid: 5750222806274539822
-  - rid: 5750222806274539823
-  - rid: 5750222806274539824
-  - rid: 5750222806274539825
-  - rid: 5750222806274539826
-  - rid: 5750222806274539827
+  - rid: 8851122716615377562
+  - rid: 8851122716615377563
+  - rid: 8851122716615377564
+  - rid: 8851122716615377565
+  - rid: 8851122716615377566
+  - rid: 8851122716615377567
+  - rid: 8851122716615377568
+  - rid: 8851122716615377569
+  - rid: 8851122716615377570
+  - rid: 8851122716615377571
+  - rid: 8851122716615377572
+  - rid: 8851122716615377573
+  - rid: 8851122716615377574
+  - rid: 8851122716615377575
+  - rid: 8851122716615377576
+  - rid: 8851122716615377577
+  - rid: 8851122716615377578
+  - rid: 8851122716615377579
+  - rid: 8851122716615377580
+  - rid: 8851122716615377581
+  - rid: 8851122716615377582
   <OldGroupNames>k__BackingField:
   - ForeignBody
   <OldUngroupedNodeNames>k__BackingField: []
@@ -77,13 +83,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5750222806274539807
+    - rid: 8851122716615377562
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 62e43339-7791-4acf-afe2-e95ac9a316fc
         <Name>k__BackingField: 1
         <Choices>k__BackingField:
-        - rid: 5750222806274539828
+        - rid: 8851122716615377583
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 432, y: 334}
@@ -96,13 +102,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539808
+    - rid: 8851122716615377563
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: a6bf89cb-86d8-41e2-9799-e1158d4948d7
         <Name>k__BackingField: 2
         <Choices>k__BackingField:
-        - rid: 5750222806274539829
+        - rid: 8851122716615377584
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1100, y: 334}
@@ -115,13 +121,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539809
+    - rid: 8851122716615377564
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 5ca4372b-029d-4dfa-a0c7-30aa56d5aa08
         <Name>k__BackingField: 3
         <Choices>k__BackingField:
-        - rid: 5750222806274539830
+        - rid: 8851122716615377585
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1802, y: 334}
@@ -134,13 +140,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539810
+    - rid: 8851122716615377565
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: a043e751-65f7-4978-9d19-0463f1fca06e
         <Name>k__BackingField: 4
         <Choices>k__BackingField:
-        - rid: 5750222806274539831
+        - rid: 8851122716615377586
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 2801, y: 265}
@@ -152,13 +158,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539811
+    - rid: 8851122716615377566
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 329b6aed-0c41-4ddb-9212-ab1acc909841
         <Name>k__BackingField: 5
         <Choices>k__BackingField:
-        - rid: 5750222806274539832
+        - rid: 8851122716615377587
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 3502, y: 265}
@@ -170,13 +176,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539812
+    - rid: 8851122716615377567
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: ee3ea639-b804-4256-b833-486a3ba91376
         <Name>k__BackingField: 6
         <Choices>k__BackingField:
-        - rid: 5750222806274539833
+        - rid: 8851122716615377588
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 4195, y: 265}
@@ -188,13 +194,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539813
+    - rid: 8851122716615377568
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 80b2c85d-686a-42a2-b120-f5957f39d0e7
         <Name>k__BackingField: 7
         <Choices>k__BackingField:
-        - rid: 5750222806274539834
+        - rid: 8851122716615377589
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 4871, y: 265}
@@ -206,13 +212,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539814
+    - rid: 8851122716615377569
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 8d82655e-8dff-4927-ada1-10cba9eaeeb9
         <Name>k__BackingField: 11
         <Choices>k__BackingField:
-        - rid: 5750222806274539835
+        - rid: 8851122716615377590
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 7916, y: 139}
@@ -224,13 +230,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539815
+    - rid: 8851122716615377570
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 1f309324-cc3a-4dde-8814-c466b46c6b25
         <Name>k__BackingField: 12
         <Choices>k__BackingField:
-        - rid: 5750222806274539836
+        - rid: 8851122716615377591
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 8601, y: 139}
@@ -242,13 +248,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539816
+    - rid: 8851122716615377571
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 71106933-632e-4b60-9fb9-79ca45bca04b
         <Name>k__BackingField: 13
         <Choices>k__BackingField:
-        - rid: 5750222806274539837
+        - rid: 8851122716615377592
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 6576, y: 427}
@@ -261,13 +267,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539817
+    - rid: 8851122716615377572
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 4ccc588a-4228-4fc2-a416-b4920265bad0
         <Name>k__BackingField: 14
         <Choices>k__BackingField:
-        - rid: 5750222806274539838
+        - rid: 8851122716615377593
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 7234, y: 427}
@@ -280,13 +286,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539818
+    - rid: 8851122716615377573
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: c8067ac5-04c4-4ca9-9220-e07720fda48c
         <Name>k__BackingField: 15
         <Choices>k__BackingField:
-        - rid: 5750222806274539839
+        - rid: 8851122716615377594
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 7916, y: 427}
@@ -299,13 +305,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539819
+    - rid: 8851122716615377574
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: dd0ae32e-278b-48a7-9675-e27c0b22366a
         <Name>k__BackingField: 16
         <Choices>k__BackingField:
-        - rid: 5750222806274539840
+        - rid: 8851122716615377595
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 6576, y: 713}
@@ -317,13 +323,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539820
+    - rid: 8851122716615377575
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: ec0d4cbe-6a02-4c06-80c4-5466cf5f5c12
         <Name>k__BackingField: 17
         <Choices>k__BackingField:
-        - rid: 5750222806274539841
+        - rid: 8851122716615377596
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 7234, y: 713}
@@ -335,13 +341,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539821
+    - rid: 8851122716615377576
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: e668fee0-4040-42b6-b3b8-066a5632931f
         <Name>k__BackingField: 18
         <Choices>k__BackingField:
-        - rid: 5750222806274539842
+        - rid: 8851122716615377597
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 7916, y: 713}
@@ -353,13 +359,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539822
+    - rid: 8851122716615377577
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: bfc39915-0c54-4ebb-9f10-a65839eba239
         <Name>k__BackingField: 19
         <Choices>k__BackingField:
-        - rid: 5750222806274539843
+        - rid: 8851122716615377598
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 8601, y: 713}
@@ -372,13 +378,13 @@ MonoBehaviour:
         <Job>k__BackingField: 32
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539823
+    - rid: 8851122716615377578
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 54137742-1058-4ab1-a66d-2c094fc4a122
         <Name>k__BackingField: 8
         <Choices>k__BackingField:
-        - rid: 5750222806274539844
+        - rid: 8851122716615377599
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 5539, y: 265}
@@ -390,13 +396,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539824
+    - rid: 8851122716615377579
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: e352ae89-5fbf-41b8-8356-14f68096b0a0
         <Name>k__BackingField: 9
         <Choices>k__BackingField:
-        - rid: 5750222806274539845
+        - rid: 8851122716615377600
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 6576, y: 139}
@@ -408,13 +414,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539825
+    - rid: 8851122716615377580
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: b873e115-d444-4430-97e8-9b753617b574
         <Name>k__BackingField: 10
         <Choices>k__BackingField:
-        - rid: 5750222806274539846
+        - rid: 8851122716615377601
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 7234, y: 139}
@@ -426,14 +432,14 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750222806274539826
+    - rid: 8851122716615377581
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 86614483-9a6a-4ae2-a35c-bb11af0183d1
         <Name>k__BackingField: AnUninvitedGuest
         <Choices>k__BackingField:
-        - rid: 5750222806274539847
-        - rid: 5750222806274539848
+        - rid: 8851122716615377602
+        - rid: 8851122716615377603
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 2480, y: 442}
@@ -450,15 +456,15 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 6
         <Furniture>k__BackingField: 3
-    - rid: 5750222806274539827
+    - rid: 8851122716615377582
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: ba5cf4b2-e967-4790-b202-c334a3bc7cf4
         <Name>k__BackingField: Parasited
         <Choices>k__BackingField:
-        - rid: 5750222806274539849
-        - rid: 5750222806274539850
-        - rid: 5750222806274539851
+        - rid: 8851122716615377604
+        - rid: 8851122716615377605
+        - rid: 8851122716615377606
         <GroupID>k__BackingField: 3e21c0de-69f1-45b8-8643-0162c50ac905
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 6237, y: 209}
@@ -475,102 +481,102 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 6
         <Furniture>k__BackingField: 3
-    - rid: 5750222806274539828
+    - rid: 8851122716615377583
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: a6bf89cb-86d8-41e2-9799-e1158d4948d7
-    - rid: 5750222806274539829
+    - rid: 8851122716615377584
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 5ca4372b-029d-4dfa-a0c7-30aa56d5aa08
-    - rid: 5750222806274539830
+    - rid: 8851122716615377585
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 86614483-9a6a-4ae2-a35c-bb11af0183d1
-    - rid: 5750222806274539831
+    - rid: 8851122716615377586
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 329b6aed-0c41-4ddb-9212-ab1acc909841
-    - rid: 5750222806274539832
+    - rid: 8851122716615377587
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: ee3ea639-b804-4256-b833-486a3ba91376
-    - rid: 5750222806274539833
+    - rid: 8851122716615377588
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 80b2c85d-686a-42a2-b120-f5957f39d0e7
-    - rid: 5750222806274539834
+    - rid: 8851122716615377589
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 54137742-1058-4ab1-a66d-2c094fc4a122
-    - rid: 5750222806274539835
+    - rid: 8851122716615377590
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 1f309324-cc3a-4dde-8814-c466b46c6b25
-    - rid: 5750222806274539836
+    - rid: 8851122716615377591
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 
-    - rid: 5750222806274539837
+    - rid: 8851122716615377592
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 4ccc588a-4228-4fc2-a416-b4920265bad0
-    - rid: 5750222806274539838
+    - rid: 8851122716615377593
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: c8067ac5-04c4-4ca9-9220-e07720fda48c
-    - rid: 5750222806274539839
+    - rid: 8851122716615377594
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 
-    - rid: 5750222806274539840
+    - rid: 8851122716615377595
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: ec0d4cbe-6a02-4c06-80c4-5466cf5f5c12
-    - rid: 5750222806274539841
+    - rid: 8851122716615377596
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: e668fee0-4040-42b6-b3b8-066a5632931f
-    - rid: 5750222806274539842
+    - rid: 8851122716615377597
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: bfc39915-0c54-4ebb-9f10-a65839eba239
-    - rid: 5750222806274539843
+    - rid: 8851122716615377598
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 
-    - rid: 5750222806274539844
+    - rid: 8851122716615377599
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: ba5cf4b2-e967-4790-b202-c334a3bc7cf4
-    - rid: 5750222806274539845
+    - rid: 8851122716615377600
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: b873e115-d444-4430-97e8-9b753617b574
-    - rid: 5750222806274539846
+    - rid: 8851122716615377601
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 8d82655e-8dff-4927-ada1-10cba9eaeeb9
-    - rid: 5750222806274539847
+    - rid: 8851122716615377602
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -579,7 +585,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: ASSIGNED will check for suspicious activity
           in the cafeteria.
-    - rid: 5750222806274539848
+    - rid: 8851122716615377603
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: New Choice
@@ -587,7 +593,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 0ba1693d94fc87c48b01c8f4c1544cae,
           type: 2}
         <PreviewOutcome>k__BackingField: No one will take care of this.
-    - rid: 5750222806274539849
+    - rid: 8851122716615377604
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -596,7 +602,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: ' has notions in medicine. They should be
           able to cut the thing off. And the passenger''s arm alltogether.'
-    - rid: 5750222806274539850
+    - rid: 8851122716615377605
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: New Choice
@@ -605,7 +611,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: ' says it should be better to take the infected
           member to quarantine until the situation is resolved.'
-    - rid: 5750222806274539851
+    - rid: 8851122716615377606
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: New Choice
