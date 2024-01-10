@@ -1626,6 +1626,11 @@ MonoBehaviour:
   startingNodesOnly: 0
   selectedNodeGroupIndex: 0
   selectedNodeIndex: 0
+  storylineLog:
+    storylineID: 
+    storylineName: 
+    storylineDate: 
+    timelineLogs: []
 --- !u!4 &1350031688
 Transform:
   m_ObjectHideFlags: 0
@@ -2804,6 +2809,7 @@ PrefabInstance:
     - {fileID: 2331754271234717213, guid: f4b0ad034b47349458511baeb5fff145, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6996151459405342800, guid: f4b0ad034b47349458511baeb5fff145, type: 3}
+    - {fileID: 8862612441521824232, guid: f4b0ad034b47349458511baeb5fff145, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 9116798404472142877, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
@@ -2997,14 +3003,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeLaunchers: []
+  allStorylineLogs: []
   ssCampaigns:
   - {fileID: 11400000, guid: fa2fd418c25b6424ebf8e20158df4b2f, type: 2}
   presentationContainer: {fileID: 1559333373}
   presentationText: {fileID: 1475129206}
   launcherPrefab: {fileID: 2274616241945452143, guid: f7a97982248498448a8a3d381ddefae2,
     type: 3}
-  minWaitTimeMain: 5
-  maxWaitTimeMain: 10
+  minWaitTimePrincipal: 20
+  maxWaitTimePrincipal: 30
   minWaitTimeSecondary: 10
   maxWaitTimeSecondary: 20
 --- !u!4 &1495234967

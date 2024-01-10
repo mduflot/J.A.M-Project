@@ -75,6 +75,7 @@ namespace SS
                         GameManager.Instance.UIManager.date.text);
                     Checker.Instance.allStorylineLogs.Add(storylineLog);
                 }
+
                 if (timeline.Status == SSStoryStatus.Completed)
                 {
                     TimeTickSystem.OnTick += WaitTimeline;
@@ -92,6 +93,7 @@ namespace SS
             IsRunning = true;
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
+            task = null;
             CheckNodeType(node);
         }
 
@@ -107,6 +109,7 @@ namespace SS
             IsRunning = true;
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
+            task = null;
             StartCoroutine(RunNode(node as SSTaskNodeSO, icon));
         }
 
@@ -121,9 +124,11 @@ namespace SS
                 }
                 else
                 {
-                    storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName, GameManager.Instance.UIManager.date.text);
+                    storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName,
+                        GameManager.Instance.UIManager.date.text);
                     Checker.Instance.allStorylineLogs.Add(storylineLog);
                 }
+
                 if (timeline.Status == SSStoryStatus.Completed)
                 {
                     TimeTickSystem.OnTick += WaitTimeline;
@@ -142,6 +147,7 @@ namespace SS
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
             CurrentNode = node;
+            task = null;
             StartCoroutine(RunNode(node as SSTaskNodeSO, null, taskLog));
         }
 
@@ -165,7 +171,9 @@ namespace SS
                 return;
             }
 
-            // Checker.Instance.allStorylineLogs.First(storylineLog => storylineLog.storylineID == storyline.ID).timelineLogs.Add(new TimelineLog(timeline.ID, timeline.TimelineContainer.GroupName, TimeTickSystem.GetTimeAsInGameDate()));
+            Checker.Instance.allStorylineLogs.First(storylineLog => storylineLog.storylineID == storyline.ID)
+                .timelineLogs.Add(new TimelineLog(timeline.ID, timeline.TimelineContainer.GroupName,
+                    GameManager.Instance.UIManager.date.text));
 
             List<Timeline> availablesTimelines = new();
             for (var i = 0; i < storyline.Timelines.Count; i++)
@@ -189,6 +197,7 @@ namespace SS
                         timeline.Status = SSStoryStatus.Enabled;
                     }
                 }
+
                 if (nodeContainer.StoryType == SSStoryType.Principal) Checker.Instance.GenerateNewPrincipalEvent();
                 Checker.Instance.launcherPool.AddToPool(this.gameObject);
                 Checker.Instance.activeLaunchers.Remove(this);
@@ -680,8 +689,12 @@ namespace SS
         private IEnumerator RunNode(SSTaskNodeSO nodeSO, CharacterIcon icon = null, TaskLog taskToPlay = null)
         {
             if (nodeSO.TaskType.Equals(SSTaskType.Permanent))
+            {
                 if (spaceshipManager.IsTaskActive(nodeSO.name))
+                {
                     yield break;
+                }
+            }
             if (task != null && taskToPlay == null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
             var room = spaceshipManager.GetRoom(nodeSO.Room);
             var notificationGO = spaceshipManager.notificationPool.GetFromPool();
@@ -725,6 +738,7 @@ namespace SS
                         conditions);
                     notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
                 }
+
                 spaceshipManager.AddTask(notification);
                 if (nodeSO.TaskType.Equals(SSTaskType.Permanent) && icon != null) notification.Display(icon);
                 else if (nodeSO.TaskType.Equals(SSTaskType.Permanent) || nodeSO.TaskType.Equals(SSTaskType.Compute))
