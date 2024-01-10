@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using SS;
 using SS.Enumerations;
+using Tasks;
 
 [System.Serializable]
 public class GameData
@@ -23,6 +24,7 @@ public class GameData
     public List<string> activeStorylines;
     public List<string> activeTimelines;
     public SerializableDictionary<string, string> currentNodes;
+    public SerializableDictionary<string, TaskLog> currentTasks;
     public SerializableDictionary<string, uint> waitingTimesTimeline;
     public SerializableDictionary<string, List<SerializableTuple<string, string>>> dialogueTimelines;
     public SerializableDictionary<string, List<string>> charactersActiveTimelines;

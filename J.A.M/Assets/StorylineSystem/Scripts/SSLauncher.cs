@@ -28,6 +28,7 @@ namespace SS
         public Storyline storyline { get; set; }
         public Timeline timeline { get; set; }
         public uint waitingTime { get; set; }
+        public Task task { get; set; }
 
         /* CHARACTERS SPEAKER */
         public List<CharacterBehaviour> characters { get; set; }
@@ -52,14 +53,11 @@ namespace SS
         [SerializeField] private int selectedNodeGroupIndex;
         [SerializeField] private int selectedNodeIndex;
 
-        /* Time Node */
+        /* Nodes */
         private SSTimeNodeSO timeNode;
         private uint durationTimeNode;
 
-        /* TASK */
-        private Task task;
-        
-        /*** LOGS ***/
+        /* Logs */
         public StorylineLog storylineLog;
 
         public void StartTimeline()
@@ -74,6 +72,7 @@ namespace SS
                 // storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName, TimeTickSystem.GetTimeAsInGameDate());
                 // Checker.Instance.allStorylineLogs.Add(storylineLog);
             }
+
             if (nodeContainer.StoryType != SSStoryType.Tasks)
             {
                 if (timeline.Status == SSStoryStatus.Completed)
@@ -82,6 +81,7 @@ namespace SS
                     return;
                 }
             }
+
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
             spaceshipManager = GameManager.Instance.SpaceshipManager;
             dialogues = new();
@@ -107,7 +107,7 @@ namespace SS
             IsRunning = true;
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
-            RunNode(node as SSTaskNodeSO, icon);
+            StartCoroutine(RunNode(node as SSTaskNodeSO, icon));
         }
 
         private void ResetTimeline()
@@ -131,7 +131,7 @@ namespace SS
             }
 
             // Checker.Instance.allStorylineLogs.First(storylineLog => storylineLog.storylineID == storyline.ID).timelineLogs.Add(new TimelineLog(timeline.ID, timeline.TimelineContainer.GroupName, TimeTickSystem.GetTimeAsInGameDate()));
-            
+
             List<Timeline> availablesTimelines = new();
             for (var i = 0; i < storyline.Timelines.Count; i++)
             {
@@ -212,7 +212,7 @@ namespace SS
                 }
                 case SSNodeType.Task:
                 {
-                    RunNode(nodeSO as SSTaskNodeSO);
+                    StartCoroutine(RunNode(nodeSO as SSTaskNodeSO));
                     break;
                 }
                 case SSNodeType.Time:
@@ -634,11 +634,12 @@ namespace SS
                 character.GetCharacterData().firstName, nodeSO));
         }
 
-        private void RunNode(SSTaskNodeSO nodeSO, CharacterIcon icon = null)
+        private IEnumerator RunNode(SSTaskNodeSO nodeSO, CharacterIcon icon = null, Task taskToPlay = null)
         {
             if (nodeSO.TaskType.Equals(SSTaskType.Permanent))
                 if (spaceshipManager.IsTaskActive(nodeSO.name))
-                    return;
+                    yield break;
+            if (task != null && taskToPlay == null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
             var room = spaceshipManager.GetRoom(nodeSO.Room);
             var notificationGO = spaceshipManager.notificationPool.GetFromPool();
             if (notificationGO.TryGetComponent(out Notification notification))
@@ -665,10 +666,17 @@ namespace SS
                         ((SSNodeChoiceTaskData)choiceData).PreviewOutcome));
                 }
 
-                task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
-                    nodeSO.TimeLeft, nodeSO.Duration,
-                    nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
-                    conditions);
+                if (taskToPlay == null)
+                {
+                    task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
+                        nodeSO.TimeLeft, nodeSO.Duration,
+                        nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
+                        conditions);
+                }
+                else
+                {
+                    task = taskToPlay;
+                }
                 notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
                 spaceshipManager.AddTask(notification);
                 if (nodeSO.TaskType.Equals(SSTaskType.Permanent) && icon != null) notification.Display(icon);
@@ -715,6 +723,7 @@ namespace SS
                         if (IsFinish()) waitingTime = 0;
                         TimeTickSystem.OnTick += WaitTimeline;
                     }
+
                     return;
                 }
 
@@ -766,6 +775,7 @@ namespace SS
                         if (IsFinish()) waitingTime = 0;
                         TimeTickSystem.OnTick += WaitTimeline;
                     }
+
                     yield break;
                 }
             }
@@ -791,13 +801,15 @@ namespace SS
                 if (nodeContainer.StoryType != SSStoryType.Tasks)
                 {
                     timeline.Status = SSStoryStatus.Completed;
-                    if (nodeGroup.TimeIsOverride) waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                    if (nodeGroup.TimeIsOverride)
+                        waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
                     else
                         waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
                                              TimeTickSystem.ticksPerHour);
                     if (IsFinish()) waitingTime = 0;
                     TimeTickSystem.OnTick += WaitTimeline;
                 }
+
                 yield break;
             }
 
@@ -821,13 +833,15 @@ namespace SS
                 if (nodeContainer.StoryType != SSStoryType.Tasks)
                 {
                     timeline.Status = SSStoryStatus.Completed;
-                    if (nodeGroup.TimeIsOverride) waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                    if (nodeGroup.TimeIsOverride)
+                        waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
                     else
                         waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
                                              TimeTickSystem.ticksPerHour);
                     if (IsFinish()) waitingTime = 0;
                     TimeTickSystem.OnTick += WaitTimeline;
                 }
+
                 yield break;
             }
 

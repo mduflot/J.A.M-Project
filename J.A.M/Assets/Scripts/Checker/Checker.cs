@@ -7,6 +7,7 @@ using SS;
 using SS.Enumerations;
 using SS.ScriptableObjects;
 using TMPro;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -506,6 +507,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         }
 
         gameData.currentNodes.Clear();
+        gameData.currentTasks.Clear();
         gameData.dialogueTimelines.Clear();
         gameData.charactersActiveTimelines.Clear();
         gameData.assignedActiveTimelines.Clear();
@@ -522,6 +524,21 @@ public class Checker : MonoBehaviour, IDataPersistence
                     var storyline = allStorylines[index];
                     if (storyline.StorylineContainer == launcher.nodeContainer)
                     {
+                        if (launcher.task is { Duration: > 0 })
+                        {
+                            List<string> assistantCharacters = new List<string>();
+                            for (int indexAssistant = 0;
+                                indexAssistant < launcher.task.assistantCharacters.Count;
+                                indexAssistant++)
+                            {
+                                assistantCharacters.Add(launcher.task.assistantCharacters[indexAssistant]
+                                    .GetCharacterData().ID);
+                            }
+
+                            var taskLog = new TaskLog(launcher.task.Duration,
+                                launcher.task.leaderCharacters[0].GetCharacterData().ID, assistantCharacters);
+                            gameData.currentTasks.Add(storyline.ID, taskLog);
+                        }
                         gameData.currentNodes.Add(storyline.ID, launcher.CurrentNode.NodeName);
                         gameData.dialogueTimelines.Add(storyline.ID, launcher.dialogues);
                         List<string> charactersID = new List<string>();
