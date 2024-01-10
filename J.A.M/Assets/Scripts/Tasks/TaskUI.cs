@@ -537,10 +537,15 @@ namespace Tasks
         public void StartTask()
         {
             if (notification.IsStarted) return;
-            if (notification.Task.TaskType.Equals(SSTaskType.Permanent) ||
-                notification.Task.TaskType.Equals(SSTaskType.Untimed))
-                if (!CanStartTask())
-                    return;
+            if (!notification.Task.TaskType.Equals(SSTaskType.Timed))
+            {
+                if (!CanStartTask()) return;
+                if (notification.Task.TaskType.Equals(SSTaskType.Compute))
+                {
+                    bool condition = CheckTarget(notification.Task.Conditions[0].Item1);
+                    if (!condition) return;
+                }
+            }
             if (CharactersWorking()) return;
             notification.OnStart(characterSlots, gaugesOutcomes);
             taskStarted = true;
