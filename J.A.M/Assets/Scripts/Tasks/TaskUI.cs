@@ -111,7 +111,24 @@ namespace Tasks
             if (icon != null) SetLeader(icon);
             if (taskLog != null)
             {
-                // TODO - Get Character Icon
+                if (GameManager.Instance.UIManager.characterIcons.First(characterIcon =>
+                        characterIcon.character.GetCharacterData().ID == taskLog.LeaderCharacter))
+                {
+                    SetLeader(GameManager.Instance.UIManager.characterIcons.First(characterIcon =>
+                        characterIcon.character.GetCharacterData().ID == taskLog.LeaderCharacter));
+                }
+
+                for (int indexAssistant = 0; indexAssistant < taskLog.AssistantCharacters.Count; indexAssistant++)
+                {
+                    if (GameManager.Instance.UIManager.characterIcons.First(characterIcon =>
+                            characterIcon.character.GetCharacterData().ID ==
+                            taskLog.AssistantCharacters[indexAssistant]))
+                    {
+                        SetAssistant(GameManager.Instance.UIManager.characterIcons.First(characterIcon =>
+                            characterIcon.character.GetCharacterData().ID ==
+                            taskLog.AssistantCharacters[indexAssistant]));
+                    }
+                }
             }
             if (notification.Task.TaskType != SSTaskType.Timed)
             {
@@ -630,6 +647,19 @@ namespace Tasks
         {
             characterSlots[0].SetupIcon(leader);
             leader.SetupIconValues();
+        }
+
+        public void SetAssistant(CharacterIcon assistant)
+        {
+            for (int i = 0; i < characterSlots.Count; i++)
+            {
+                var slot = characterSlots[i];
+                if (slot.isMandatory) continue;
+                if (slot.icon != null) continue;
+                slot.SetupIcon(assistant);
+                assistant.SetupIconValues();
+                break;
+            }
         }
 
         private IEnumerator DisplayText(TextMeshProUGUI text, string textToDisplay, float speed)
