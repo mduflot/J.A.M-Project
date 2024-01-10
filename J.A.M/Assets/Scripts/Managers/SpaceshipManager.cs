@@ -44,6 +44,9 @@ namespace Managers
             TimeTickSystem.OnTick += UpdateTasks;
             TimeTickSystem.OnTick += UpdateCharacters;
             TimeTickSystem.OnTick += GenerateRandomEventOnDayStart;
+            
+            for (int i = 0; i < characters.Length; i++)
+                TimeTickSystem.OnTick += characters[i].GetSimCharacter().Simulate;
         }
 
         private void InitializeSystems()

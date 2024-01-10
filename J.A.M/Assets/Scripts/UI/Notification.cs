@@ -305,6 +305,8 @@ namespace UI
                 outcomeEventArgs = Array.Empty<OutcomeSystem.OutcomeEventArgs>();
                 outcomeEvents = Array.Empty<OutcomeSystem.OutcomeEvent>();
             }
+            
+            LeaderCharacters[0].GetSimCharacter().SendToRoom(Task.Room);
         }
 
         private bool RouteCondition(OutcomeData.OutcomeTarget target)
@@ -383,6 +385,8 @@ namespace UI
             spaceshipManager.notificationPool.AddToPool(gameObject);
             spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             IsStarted = false;
+            
+            LeaderCharacters[0].GetSimCharacter().SendToIdleRoom();
         }
 
         public void OnCancel()
@@ -411,6 +415,7 @@ namespace UI
                 launcher.RunUntimedNodeCancel(this, Task, taskNode);
                 spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             }
+            LeaderCharacters[0].GetSimCharacter().SendToIdleRoom();
         }
 
         private void ResetCharacters()

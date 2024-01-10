@@ -13,6 +13,8 @@ namespace CharacterSystem
         [SerializeField] private CharacterDataScriptable data;
         [SerializeField] private float moveSpeed;
 
+        [SerializeField] private SimCharacter simCharacter;
+        
         /*
          * gauge = 0 -> mood + param
          */
@@ -181,6 +183,11 @@ namespace CharacterSystem
             return isMoodIncreasing;
         }
 
+        public SimCharacter GetSimCharacter()
+        {
+            return simCharacter;
+        }
+        
         public void LoadData(GameData gameData)
         {
             if (gameData.characterTraits.TryGetValue(data.ID, out var t))

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Managers;
 using UnityEditor.AddressableAssets.Build.BuildPipelineTasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -7,27 +8,23 @@ using Random = UnityEngine.Random;
 public class SimCharacter : MonoBehaviour
 {
     [HideInInspector] public bool isIdle = true;
-    [HideInInspector] public uint currentRoomDoor = 3;
+    [HideInInspector] public uint currentRoomDoor = 0;
     public Stack<uint> doorPath = new();
 
     public SimRoom currentRoom;
-
-    private void Update()
+    public SimRoom idleRoom;
+    
+    private void Start()
     {
-        Simulate();
-        if(Input.GetKey(KeyCode.Space))
-            SendToRoom(RoomType.Docking);
-        if(Input.GetKey(KeyCode.Q))
-            SendToRoom(RoomType.Flight);
-        if(Input.GetKey(KeyCode.W))
-            SendToRoom(RoomType.Common);
+        currentRoom = idleRoom;
+        currentRoomDoor = currentRoom.roomDoors[0].doorID;
     }
-
+    
     //todo : add movment towards furniture
     //todo : scale w/ time tick
     //todo : assurer que tout marche avec plusieurs persos
     //todo : stress test
-    private void Simulate()
+    public void Simulate(object sender, TimeTickSystem.OnTickEventArgs e)
     {
         currentRoom = SimPathing.FindRoomByDoorID(currentRoomDoor);
         if (isIdle)
@@ -66,7 +63,7 @@ public class SimCharacter : MonoBehaviour
     {
         SimDoor door = SimPathing.FindDoorByID(currentRoomDoor);
         Vector3 pos = transform.position;
-        pos = Vector3.Lerp(pos, door.transform.position, .075f);
+        pos = Vector3.Lerp(pos, door.transform.position, 75f * Time.deltaTime);
         transform.position = pos;
     }
 
@@ -75,7 +72,7 @@ public class SimCharacter : MonoBehaviour
         if (currentRoom == null) return;
         
         Vector3 pos = transform.position;
-        pos = Vector3.Lerp(pos, currentRoom.transform.position, .075f);
+        pos = Vector3.Lerp(pos, currentRoom.transform.position, 75f * Time.deltaTime);
         transform.position = pos;
     }
 
@@ -85,5 +82,10 @@ public class SimCharacter : MonoBehaviour
         doorPath.Clear();
         isIdle = false;
         SimPathing.CreatePath(this, SimPathing.FindRoomByRoomType(roomType));
+    }
+
+    public void SendToIdleRoom()
+    {
+        SendToRoom(idleRoom.roomType);
     }
 }
