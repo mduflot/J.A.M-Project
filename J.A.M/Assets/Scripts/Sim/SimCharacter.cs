@@ -11,20 +11,23 @@ public class SimCharacter : MonoBehaviour
     [HideInInspector] public uint currentRoomDoor = 0;
     public Stack<uint> doorPath = new();
 
-    public SimRoom currentRoom;
+    [HideInInspector] public SimRoom currentRoom;
     public SimRoom idleRoom;
+
+    private GameObject taskFurniture;
     
     private void Start()
     {
         currentRoom = idleRoom;
         currentRoomDoor = currentRoom.roomDoors[0].doorID;
     }
-    
-    //todo : add movment towards furniture
-    //todo : scale w/ time tick
-    //todo : assurer que tout marche avec plusieurs persos
-    //todo : stress test
-    public void Simulate(object sender, TimeTickSystem.OnTickEventArgs e)
+
+    private void Update()
+    {
+        Simulate();
+    }
+
+    public void Simulate()
     {
         currentRoom = SimPathing.FindRoomByDoorID(currentRoomDoor);
         if (isIdle)
@@ -36,7 +39,7 @@ public class SimCharacter : MonoBehaviour
         //Add scaling based on TimeTickSystem
 
         SimDoor door = SimPathing.FindDoorByID(currentRoomDoor);
-        if ((door.transform.position - transform.position).magnitude < .1f)
+        if ((door.transform.position - transform.position).magnitude < 1.5f)
             FadeToNextDoor();
         else
             MoveToCurrentDoor();
@@ -61,9 +64,10 @@ public class SimCharacter : MonoBehaviour
 
     private void MoveToCurrentDoor()
     {
+        float lerpT = (1 - Mathf.Exp(-GameManager.Instance.SpaceshipManager.simMoveSpeed * Time.deltaTime)) * TimeTickSystem.timeScale;
         SimDoor door = SimPathing.FindDoorByID(currentRoomDoor);
         Vector3 pos = transform.position;
-        pos = Vector3.Lerp(pos, door.transform.position, 75f * Time.deltaTime);
+        pos = Vector3.Lerp(pos, door.transform.position, lerpT);
         transform.position = pos;
     }
 
@@ -71,8 +75,11 @@ public class SimCharacter : MonoBehaviour
     {
         if (currentRoom == null) return;
         
+        float lerpT = (1 - Mathf.Exp(-GameManager.Instance.SpaceshipManager.simMoveSpeed * Time.deltaTime)) * TimeTickSystem.timeScale;
         Vector3 pos = transform.position;
-        pos = Vector3.Lerp(pos, currentRoom.transform.position, 75f * Time.deltaTime);
+        pos = Vector3.Lerp(pos,
+            taskFurniture == null ? currentRoom.transform.position : taskFurniture.transform.position,
+            lerpT);
         transform.position = pos;
     }
 

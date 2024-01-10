@@ -26,7 +26,9 @@ namespace Managers
 
         [SerializeField] private float hourlyMoodLossGaugeEmpty = 0.75f;
         public float moodLossOnCancelTask = 10.0f;
-    
+
+        public float simMoveSpeed = .9f;
+        
         private Dictionary<SystemType, ShipSystem> systemsDictionary = new();
         private Dictionary<RoomType, Room> roomsDictionary = new();
         
@@ -44,9 +46,6 @@ namespace Managers
             TimeTickSystem.OnTick += UpdateTasks;
             TimeTickSystem.OnTick += UpdateCharacters;
             TimeTickSystem.OnTick += GenerateRandomEventOnDayStart;
-            
-            for (int i = 0; i < characters.Length; i++)
-                TimeTickSystem.OnTick += characters[i].GetSimCharacter().Simulate;
         }
 
         private void InitializeSystems()
