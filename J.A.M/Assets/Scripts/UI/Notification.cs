@@ -41,6 +41,7 @@ namespace UI
         private SSTaskNodeSO taskNode;
         private float timeLeft;
         private List<TaskUI.GaugesOutcome> gaugeOutcomes = new List<TaskUI.GaugesOutcome>();
+        private TaskLog taskLog;
 
         private void Start()
         {
@@ -54,7 +55,7 @@ namespace UI
 
         public void Initialize(Task task, SSTaskNodeSO ssTaskNode, SpaceshipManager spaceshipManager,
             SSLauncher ssLauncher,
-            List<SerializableTuple<string, string>> dialogues = null)
+            List<SerializableTuple<string, string>> dialogues = null, TaskLog taskToPlay = null)
         {
             IsCompleted = false;
             IsCancelled = false;
@@ -70,6 +71,7 @@ namespace UI
             TimeTickSystem.ModifyTimeScale(TimeTickSystem.lastActiveTimeScale);
             timerSprite.material.SetInt("_Arc2", 360);
             timeLeftSprite.material.SetInt("_Arc1", 360);
+            taskLog = taskToPlay;
         }
 
         public void InitializeCancelTask()

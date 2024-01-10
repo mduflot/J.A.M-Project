@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using CharacterSystem;
 using Managers;
+using SS;
 using SS.Enumerations;
 using TMPro;
 using UI;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -73,7 +75,7 @@ namespace Tasks
             animator = GetComponent<Animator>();
         }
 
-        public void Initialize(Notification n, CharacterIcon icon = null, bool needToDisplay = true)
+        public void Initialize(Notification n, CharacterIcon icon = null, bool needToDisplay = true, TaskLog taskLog = null)
         {
             notification = n;
             titleText.text = notification.Task.Name;
@@ -107,6 +109,10 @@ namespace Tasks
             dialogueLog.DisplayDialogueLog(notification.Dialogues);
 
             if (icon != null) SetLeader(icon);
+            if (taskLog != null)
+            {
+                // TODO - Get Character Icon
+            }
             if (notification.Task.TaskType != SSTaskType.Timed)
             {
                 startButtonObject.localPosition =

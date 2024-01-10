@@ -62,19 +62,18 @@ namespace SS
 
         public void StartTimeline()
         {
-            if (Checker.Instance.allStorylineLogs.Any(storylineLog => storylineLog.storylineID == storyline.ID))
-            {
-                storylineLog = Checker.Instance.allStorylineLogs.First(storylineLog =>
-                    storylineLog.storylineID == storyline.ID);
-            }
-            else
-            {
-                // storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName, TimeTickSystem.GetTimeAsInGameDate());
-                // Checker.Instance.allStorylineLogs.Add(storylineLog);
-            }
-
             if (nodeContainer.StoryType != SSStoryType.Tasks)
             {
+                if (Checker.Instance.allStorylineLogs.Any(storylineLog => storylineLog.storylineID == storyline.ID))
+                {
+                    storylineLog = Checker.Instance.allStorylineLogs.First(storylineLog =>
+                        storylineLog.storylineID == storyline.ID);
+                }
+                else
+                {
+                    // storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName, TimeTickSystem.GetTimeAsInGameDate());
+                    // Checker.Instance.allStorylineLogs.Add(storylineLog);
+                }
                 if (timeline.Status == SSStoryStatus.Completed)
                 {
                     TimeTickSystem.OnTick += WaitTimeline;
@@ -95,7 +94,7 @@ namespace SS
             CheckNodeType(node);
         }
 
-        public void StartTimeline(CharacterIcon icon)
+        public void StartTimelineOnDrop(CharacterIcon icon)
         {
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
             spaceshipManager = GameManager.Instance.SpaceshipManager;
@@ -108,6 +107,40 @@ namespace SS
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
             StartCoroutine(RunNode(node as SSTaskNodeSO, icon));
+        }
+
+        public void StartTimelineOnTask(TaskLog taskLog)
+        {
+            if (nodeContainer.StoryType != SSStoryType.Tasks)
+            {
+                if (Checker.Instance.allStorylineLogs.Any(storylineLog => storylineLog.storylineID == storyline.ID))
+                {
+                    storylineLog = Checker.Instance.allStorylineLogs.First(storylineLog =>
+                        storylineLog.storylineID == storyline.ID);
+                }
+                else
+                {
+                    // storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName, TimeTickSystem.GetTimeAsInGameDate());
+                    // Checker.Instance.allStorylineLogs.Add(storylineLog);
+                }
+                if (timeline.Status == SSStoryStatus.Completed)
+                {
+                    TimeTickSystem.OnTick += WaitTimeline;
+                    return;
+                }
+            }
+
+            if (currentStoryline) currentStoryline.text = nodeContainer.name;
+            spaceshipManager = GameManager.Instance.SpaceshipManager;
+            dialogues = new();
+            characters = new();
+            assignedCharacters = new();
+            notAssignedCharacters = new();
+            traitsCharacters = new();
+            IsRunning = true;
+            IsCancelled = false;
+            CanIgnoreDialogueTask = false;
+            StartCoroutine(RunNode(node as SSTaskNodeSO, null, taskLog));
         }
 
         private void ResetTimeline()
@@ -634,7 +667,7 @@ namespace SS
                 character.GetCharacterData().firstName, nodeSO));
         }
 
-        private IEnumerator RunNode(SSTaskNodeSO nodeSO, CharacterIcon icon = null, Task taskToPlay = null)
+        private IEnumerator RunNode(SSTaskNodeSO nodeSO, CharacterIcon icon = null, TaskLog taskToPlay = null)
         {
             if (nodeSO.TaskType.Equals(SSTaskType.Permanent))
                 if (spaceshipManager.IsTaskActive(nodeSO.name))
@@ -666,16 +699,19 @@ namespace SS
                         ((SSNodeChoiceTaskData)choiceData).PreviewOutcome));
                 }
 
-                if (taskToPlay == null)
+                if (taskToPlay != null)
                 {
                     task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
-                        nodeSO.TimeLeft, nodeSO.Duration,
+                        0, taskToPlay.Duration,
                         nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
                         conditions);
                 }
                 else
                 {
-                    task = taskToPlay;
+                    task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
+                        nodeSO.TimeLeft, nodeSO.Duration,
+                        nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
+                        conditions);
                 }
                 notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
                 spaceshipManager.AddTask(notification);

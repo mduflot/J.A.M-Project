@@ -24,7 +24,7 @@ namespace Spaceship
             var icon = dropped.GetComponent<CharacterIcon>();
             if (icon != null)
             {
-                launcher.StartTimeline(icon);
+                launcher.StartTimelineOnDrop(icon);
                 GameManager.Instance.SpaceshipManager.DisplayRooms(false);
             }
         }

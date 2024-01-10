@@ -71,6 +71,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                 secondaryStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
             }
         }
+
         allStorylines.AddRange(principalStorylines);
         allStorylines.AddRange(secondaryStorylines);
     }
@@ -83,7 +84,7 @@ public class Checker : MonoBehaviour, IDataPersistence
 
     public void GenerateNewPrincipalEvent()
     {
-        waitingTime = (uint) Random.Range(minWaitTimePrincipal, maxWaitTimePrincipal) * TimeTickSystem.ticksPerHour;
+        waitingTime = (uint)Random.Range(minWaitTimePrincipal, maxWaitTimePrincipal) * TimeTickSystem.ticksPerHour;
         TimeTickSystem.OnTick += WaitStorylinePrincipal;
     }
 
@@ -98,7 +99,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         TimeTickSystem.OnTick -= WaitStorylinePrincipal;
         ChooseNewStoryline(SSStoryType.Principal);
     }
-    
+
     private void WaitStorylineSecondary(object sender, TimeTickSystem.OnTickEventArgs e)
     {
         if (waitingTime > 0)
@@ -211,7 +212,7 @@ public class Checker : MonoBehaviour, IDataPersistence
     private void StartTimeline(Storyline storyline, SSNodeGroupSO timeline, SSNodeSO node = null,
         List<SerializableTuple<string, string>> dialogues = null, List<string> characters = null,
         List<string> assignedCharacters = null, List<string> notAssignedCharacters = null,
-        List<string> traitsCharacters = null, uint waitingTime = 0)
+        List<string> traitsCharacters = null, uint waitingTime = 0, TaskLog taskLog = null)
     {
         Debug.Log("Starting new timeline.");
         presentationContainer.SetActive(true);
@@ -222,7 +223,8 @@ public class Checker : MonoBehaviour, IDataPersistence
         var launcher = launcherObject.GetComponent<SSLauncher>();
         launcher.storyline = storyline;
         launcher.waitingTime = waitingTime;
-        launcher.timeline = storyline.Timelines.First(timelineToChoose => timelineToChoose.TimelineContainer == timeline);
+        launcher.timeline =
+            storyline.Timelines.First(timelineToChoose => timelineToChoose.TimelineContainer == timeline);
         activeLaunchers.Add(launcher);
         launcher.nodeContainer = storyline.StorylineContainer;
         launcher.nodeGroup = timeline;
@@ -246,8 +248,8 @@ public class Checker : MonoBehaviour, IDataPersistence
             for (int index = 0; index < characters.Count; index++)
             {
                 for (int indexCharacter = 0;
-                        indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
-                        indexCharacter++)
+                     indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                     indexCharacter++)
                 {
                     var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
                     if (character.GetCharacterData().ID == characters[index])
@@ -266,8 +268,8 @@ public class Checker : MonoBehaviour, IDataPersistence
             for (int index = 0; index < notAssignedCharacters.Count; index++)
             {
                 for (int indexCharacter = 0;
-                        indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
-                        indexCharacter++)
+                     indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                     indexCharacter++)
                 {
                     var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
                     if (character.GetCharacterData().ID == notAssignedCharacters[index])
@@ -286,8 +288,8 @@ public class Checker : MonoBehaviour, IDataPersistence
             for (int index = 0; index < assignedCharacters.Count; index++)
             {
                 for (int indexCharacter = 0;
-                        indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
-                        indexCharacter++)
+                     indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                     indexCharacter++)
                 {
                     var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
                     if (character.GetCharacterData().ID == assignedCharacters[index])
@@ -306,8 +308,8 @@ public class Checker : MonoBehaviour, IDataPersistence
             for (int index = 0; index < traitsCharacters.Count; index++)
             {
                 for (int indexCharacter = 0;
-                        indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
-                        indexCharacter++)
+                     indexCharacter < GameManager.Instance.SpaceshipManager.characters.Length;
+                     indexCharacter++)
                 {
                     var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
                     if (character.GetCharacterData().ID == traitsCharacters[index])
@@ -322,10 +324,19 @@ public class Checker : MonoBehaviour, IDataPersistence
 
         if (storyline.StorylineContainer.StoryType == SSStoryType.Secondary)
         {
-            this.waitingTime = (uint) Random.Range(minWaitTimeSecondary, maxWaitTimeSecondary) * TimeTickSystem.ticksPerHour;
+            this.waitingTime = (uint)Random.Range(minWaitTimeSecondary, maxWaitTimeSecondary) *
+                               TimeTickSystem.ticksPerHour;
             TimeTickSystem.OnTick += WaitStorylineSecondary;
         }
-        launcher.StartTimeline();
+
+        if (taskLog != null)
+        {
+            launcher.StartTimelineOnTask(taskLog);
+        }
+        else
+        {
+            launcher.StartTimeline();
+        }
     }
 
     #region Utilities
@@ -410,6 +421,11 @@ public class Checker : MonoBehaviour, IDataPersistence
                 if (allStorylines[indexStoryline].ID == storyline)
                 {
                     var chosenStoryline = allStorylines[indexStoryline];
+                    TaskLog taskLog = null;
+                    if (gameData.currentTasks.ContainsKey(chosenStoryline.ID))
+                    {
+                        taskLog = gameData.currentTasks[chosenStoryline.ID];
+                    }
                     var waitingTimeTimeline = gameData.waitingTimesTimeline[chosenStoryline.ID];
                     if (gameData.activeTimelines.Count > 0)
                     {
@@ -441,8 +457,20 @@ public class Checker : MonoBehaviour, IDataPersistence
                                                     gameData.notAssignedActiveTimelines[chosenStoryline.ID];
                                                 var traitsCharacters =
                                                     gameData.traitsCharactersActiveStorylines[chosenStoryline.ID];
-                                                StartTimeline(chosenStoryline, chosenTimeline, node, dialogues, characters,
-                                                    assignedCharacters, notAssignedCharacters, traitsCharacters, waitingTimeTimeline);
+                                                if (taskLog != null)
+                                                {
+                                                    StartTimeline(chosenStoryline, chosenTimeline, node, dialogues,
+                                                        characters,
+                                                        assignedCharacters, notAssignedCharacters, traitsCharacters,
+                                                        waitingTimeTimeline, taskLog);
+                                                }
+                                                else
+                                                {
+                                                    StartTimeline(chosenStoryline, chosenTimeline, node, dialogues,
+                                                        characters,
+                                                        assignedCharacters, notAssignedCharacters, traitsCharacters,
+                                                        waitingTimeTimeline);
+                                                }
                                                 break;
                                             }
                                         }
@@ -528,8 +556,8 @@ public class Checker : MonoBehaviour, IDataPersistence
                         {
                             List<string> assistantCharacters = new List<string>();
                             for (int indexAssistant = 0;
-                                indexAssistant < launcher.task.assistantCharacters.Count;
-                                indexAssistant++)
+                                 indexAssistant < launcher.task.assistantCharacters.Count;
+                                 indexAssistant++)
                             {
                                 assistantCharacters.Add(launcher.task.assistantCharacters[indexAssistant]
                                     .GetCharacterData().ID);
@@ -539,6 +567,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                                 launcher.task.leaderCharacters[0].GetCharacterData().ID, assistantCharacters);
                             gameData.currentTasks.Add(storyline.ID, taskLog);
                         }
+
                         gameData.currentNodes.Add(storyline.ID, launcher.CurrentNode.NodeName);
                         gameData.dialogueTimelines.Add(storyline.ID, launcher.dialogues);
                         List<string> charactersID = new List<string>();
@@ -550,8 +579,8 @@ public class Checker : MonoBehaviour, IDataPersistence
                         gameData.charactersActiveTimelines.Add(storyline.ID, charactersID);
                         charactersID.Clear();
                         for (int indexAssigned = 0;
-                            indexAssigned < launcher.assignedCharacters.Count;
-                            indexAssigned++)
+                             indexAssigned < launcher.assignedCharacters.Count;
+                             indexAssigned++)
                         {
                             charactersID.Add(launcher.assignedCharacters[indexAssigned].GetCharacterData().ID);
                         }
@@ -559,8 +588,8 @@ public class Checker : MonoBehaviour, IDataPersistence
                         gameData.assignedActiveTimelines.Add(storyline.ID, charactersID);
                         charactersID.Clear();
                         for (int indexNotAssigned = 0;
-                            indexNotAssigned < launcher.notAssignedCharacters.Count;
-                            indexNotAssigned++)
+                             indexNotAssigned < launcher.notAssignedCharacters.Count;
+                             indexNotAssigned++)
                         {
                             charactersID.Add(launcher.notAssignedCharacters[indexNotAssigned].GetCharacterData().ID);
                         }
@@ -580,7 +609,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         }
 
         gameData.allStorylineLogs.Clear();
-        
+
         gameData.allStorylineLogs = allStorylineLogs;
     }
 
