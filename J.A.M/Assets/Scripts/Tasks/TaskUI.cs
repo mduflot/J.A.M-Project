@@ -578,7 +578,7 @@ namespace Tasks
                 slot.gameObject.SetActive(false);
             }
 
-            if (notification.Task.TaskType.Equals(SSTaskType.Permanent) && !taskStarted) CloseNotification();
+            if ((notification.Task.TaskType.Equals(SSTaskType.Permanent) || notification.Task.TaskType.Equals(SSTaskType.Compute)) && !taskStarted) CloseNotification();
             TimeTickSystem.ModifyTimeScale(1);
             previewOutcomeText.text = null;
             characterSlots.Clear();
