@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using CharacterSystem;
 using Managers;
+using SS;
 using SS.Enumerations;
 using TMPro;
 using UI;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -73,13 +75,14 @@ namespace Tasks
             animator = GetComponent<Animator>();
         }
 
-        public void Initialize(Notification n, CharacterIcon icon = null, bool needToDisplay = true)
+        public void Initialize(Notification n, CharacterIcon icon = null, bool needToDisplay = true, TaskLog taskLog = null)
         {
             notification = n;
             titleText.text = notification.Task.Name;
             StartCoroutine(DisplayText(descriptionText, notification.Task.Description, 0.02f));
             timeLeft = notification.Task.TimeLeft;
-            duration = notification.Task.Duration;
+            if (taskLog != null) timeLeft = taskLog.Duration;
+            else duration = notification.Task.Duration;
             taskStarted = false;
 
             startButton.SetActive(true);
@@ -107,6 +110,27 @@ namespace Tasks
             dialogueLog.DisplayDialogueLog(notification.Dialogues);
 
             if (icon != null) SetLeader(icon);
+            if (taskLog != null)
+            {
+                if (GameManager.Instance.UIManager.characterIcons.First(characterIcon =>
+                        characterIcon.character.GetCharacterData().ID == taskLog.LeaderCharacter))
+                {
+                    SetLeader(GameManager.Instance.UIManager.characterIcons.First(characterIcon =>
+                        characterIcon.character.GetCharacterData().ID == taskLog.LeaderCharacter));
+                }
+
+                for (int indexAssistant = 0; indexAssistant < taskLog.AssistantCharacters.Count; indexAssistant++)
+                {
+                    if (GameManager.Instance.UIManager.characterIcons.First(characterIcon =>
+                            characterIcon.character.GetCharacterData().ID ==
+                            taskLog.AssistantCharacters[indexAssistant]))
+                    {
+                        SetAssistant(GameManager.Instance.UIManager.characterIcons.First(characterIcon =>
+                            characterIcon.character.GetCharacterData().ID ==
+                            taskLog.AssistantCharacters[indexAssistant]));
+                    }
+                }
+            }
             if (notification.Task.TaskType != SSTaskType.Timed)
             {
                 startButtonObject.localPosition =
@@ -624,6 +648,19 @@ namespace Tasks
         {
             characterSlots[0].SetupIcon(leader);
             leader.SetupIconValues();
+        }
+
+        public void SetAssistant(CharacterIcon assistant)
+        {
+            for (int i = 0; i < characterSlots.Count; i++)
+            {
+                var slot = characterSlots[i];
+                if (slot.isMandatory) continue;
+                if (slot.icon != null) continue;
+                slot.SetupIcon(assistant);
+                assistant.SetupIconValues();
+                break;
+            }
         }
 
         private IEnumerator DisplayText(TextMeshProUGUI text, string textToDisplay, float speed)

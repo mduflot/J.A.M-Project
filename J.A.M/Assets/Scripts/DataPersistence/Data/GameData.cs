@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using SS;
 using SS.Enumerations;
+using Tasks;
 
 [System.Serializable]
 public class GameData
@@ -23,6 +24,7 @@ public class GameData
     public List<string> activeStorylines;
     public List<string> activeTimelines;
     public SerializableDictionary<string, string> currentNodes;
+    public SerializableDictionary<string, TaskLog> currentTasks;
     public SerializableDictionary<string, uint> waitingTimesTimeline;
     public SerializableDictionary<string, List<SerializableTuple<string, string>>> dialogueTimelines;
     public SerializableDictionary<string, List<string>> charactersActiveTimelines;
@@ -31,9 +33,7 @@ public class GameData
     public SerializableDictionary<string, List<string>> traitsCharactersActiveStorylines;
 
     /*** STORYLINES LOG ***/
-    public List<StorylineLog> principalStorylineLogs;
-    public List<StorylineLog> secondaryStorylineLogs;
-    public List<StorylineLog> trivialStorylineLogs;
+    public List<StorylineLog> allStorylineLogs;
 
     public GameData()
     {
@@ -60,8 +60,6 @@ public class GameData
         traitsCharactersActiveStorylines = new SerializableDictionary<string, List<string>>();
 
         /*** STORYLINES LOG ***/
-        principalStorylineLogs = new List<StorylineLog>();
-        secondaryStorylineLogs = new List<StorylineLog>();
-        trivialStorylineLogs = new List<StorylineLog>();
+        allStorylineLogs = new List<StorylineLog>();
     }
 }

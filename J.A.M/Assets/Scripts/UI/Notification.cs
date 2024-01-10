@@ -41,6 +41,7 @@ namespace UI
         private SSTaskNodeSO taskNode;
         private float timeLeft;
         private List<TaskUI.GaugesOutcome> gaugeOutcomes = new List<TaskUI.GaugesOutcome>();
+        private TaskLog taskLog;
 
         private void Start()
         {
@@ -54,7 +55,7 @@ namespace UI
 
         public void Initialize(Task task, SSTaskNodeSO ssTaskNode, SpaceshipManager spaceshipManager,
             SSLauncher ssLauncher,
-            List<SerializableTuple<string, string>> dialogues = null)
+            List<SerializableTuple<string, string>> dialogues = null, TaskLog taskToPlay = null)
         {
             IsCompleted = false;
             IsCancelled = false;
@@ -70,6 +71,7 @@ namespace UI
             TimeTickSystem.ModifyTimeScale(TimeTickSystem.lastActiveTimeScale);
             timerSprite.material.SetInt("_Arc2", 360);
             timeLeftSprite.material.SetInt("_Arc1", 360);
+            taskLog = taskToPlay;
         }
 
         public void InitializeCancelTask()
@@ -304,11 +306,15 @@ namespace UI
 
                 if (!IsCancelled)
                 {
-                    Task.Duration = AssistantCharacters.Count > 0
-                        ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
-                        : Task.Duration;
-                    Task.Duration *= TimeTickSystem.ticksPerHour;
+                    if (taskLog == null)
+                    {
+                        Task.Duration = AssistantCharacters.Count > 0
+                            ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
+                            : Task.Duration;
+                        Task.Duration *= TimeTickSystem.ticksPerHour;
+                    }
                     Task.BaseDuration = Task.Duration;
+                    taskLog = null;
                 }
 
                 IsCancelled = false;
@@ -379,7 +385,14 @@ namespace UI
                 }
                 else if (!IsStarted)
                 {
-                    GameManager.Instance.UIManager.taskUI.Initialize(this, null, false);
+                    if (taskLog != null)
+                    {
+                        GameManager.Instance.UIManager.taskUI.Initialize(this, null, false, taskLog); 
+                    }
+                    else
+                    {
+                        GameManager.Instance.UIManager.taskUI.Initialize(this, null, false);
+                    }
                     GameManager.Instance.UIManager.taskUI.StartTask();
                 }
             }
