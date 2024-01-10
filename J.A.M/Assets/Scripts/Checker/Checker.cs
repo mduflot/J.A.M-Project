@@ -15,6 +15,7 @@ public class Checker : MonoBehaviour, IDataPersistence
     public static Checker Instance { get; private set; }
     public Pool<GameObject> launcherPool;
     public List<SSLauncher> activeLaunchers;
+    public List<StorylineLog> allStorylineLogs;
 
     [SerializeField] private List<SSCampaignSO> ssCampaigns;
     [SerializeField] private GameObject presentationContainer;
@@ -561,9 +562,9 @@ public class Checker : MonoBehaviour, IDataPersistence
             }
         }
 
-        gameData.principalStorylineLogs.Clear();
-        gameData.secondaryStorylineLogs.Clear();
-        gameData.trivialStorylineLogs.Clear();
+        gameData.allStorylineLogs.Clear();
+        
+        gameData.allStorylineLogs = allStorylineLogs;
     }
 
     #endregion

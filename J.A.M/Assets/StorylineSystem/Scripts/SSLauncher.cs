@@ -58,9 +58,22 @@ namespace SS
 
         /* TASK */
         private Task task;
+        
+        /*** LOGS ***/
+        public StorylineLog storylineLog;
 
         public void StartTimeline()
         {
+            if (Checker.Instance.allStorylineLogs.Any(storylineLog => storylineLog.storylineID == storyline.ID))
+            {
+                storylineLog = Checker.Instance.allStorylineLogs.First(storylineLog =>
+                    storylineLog.storylineID == storyline.ID);
+            }
+            else
+            {
+                // storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName, TimeTickSystem.GetTimeAsInGameDate());
+                // Checker.Instance.allStorylineLogs.Add(storylineLog);
+            }
             if (nodeContainer.StoryType != SSStoryType.Tasks)
             {
                 if (timeline.Status == SSStoryStatus.Completed)
@@ -117,6 +130,8 @@ namespace SS
                 return;
             }
 
+            // Checker.Instance.allStorylineLogs.First(storylineLog => storylineLog.storylineID == storyline.ID).timelineLogs.Add(new TimelineLog(timeline.ID, timeline.TimelineContainer.GroupName, TimeTickSystem.GetTimeAsInGameDate()));
+            
             List<Timeline> availablesTimelines = new();
             for (var i = 0; i < storyline.Timelines.Count; i++)
             {

@@ -31,9 +31,7 @@ public class GameData
     public SerializableDictionary<string, List<string>> traitsCharactersActiveStorylines;
 
     /*** STORYLINES LOG ***/
-    public List<StorylineLog> principalStorylineLogs;
-    public List<StorylineLog> secondaryStorylineLogs;
-    public List<StorylineLog> trivialStorylineLogs;
+    public List<StorylineLog> allStorylineLogs;
 
     public GameData()
     {
@@ -60,8 +58,6 @@ public class GameData
         traitsCharactersActiveStorylines = new SerializableDictionary<string, List<string>>();
 
         /*** STORYLINES LOG ***/
-        principalStorylineLogs = new List<StorylineLog>();
-        secondaryStorylineLogs = new List<StorylineLog>();
-        trivialStorylineLogs = new List<StorylineLog>();
+        allStorylineLogs = new List<StorylineLog>();
     }
 }
