@@ -130,7 +130,15 @@ namespace SS
 
             if (availablesTimelines.Count == 0)
             {
-                storyline.Status = SSStoryStatus.Completed;
+                if (!nodeContainer.IsReplayable) storyline.Status = SSStoryStatus.Completed;
+                else
+                {
+                    for (int i = 0; i < storyline.Timelines.Count; i++)
+                    {
+                        var timeline = storyline.Timelines[i];
+                        timeline.Status = SSStoryStatus.Enabled;
+                    }
+                }
                 if (nodeContainer.StoryType == SSStoryType.Principal) Checker.Instance.GenerateNewPrincipalEvent();
                 Checker.Instance.launcherPool.AddToPool(this.gameObject);
                 Checker.Instance.activeLaunchers.Remove(this);
