@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
+  m_Name: able
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: able
+  <Choices>k__BackingField:
+  - rid: 197800181841264959
+  <NodeType>k__BackingField: 0
+  <IsStartingNode>k__BackingField: 0
+  <Text>k__BackingField: I may be able to synthesize the material that we need to
+    repair the hull, but I will need this particular piece of metal
+  <SpeakerType>k__BackingField: 9
+  <Duration>k__BackingField: 0.5
+  <IsDialogueTask>k__BackingField: 0
+  <PercentageTask>k__BackingField: 50
+  <IsCompleted>k__BackingField: 0
+  <Job>k__BackingField: 0
+  <PositiveTraits>k__BackingField: 0
+  <NegativeTraits>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 197800181841264959
+      type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 97b0eb9be5e51ea42bd06d5ddba65e64,
+          type: 2}
