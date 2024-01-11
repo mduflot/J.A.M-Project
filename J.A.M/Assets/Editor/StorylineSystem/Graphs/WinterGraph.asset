@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: WinterGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: Winter
-  <ID>k__BackingField: 598a4086-072a-4457-94cc-cd7f8d40d3e2
+  <ID>k__BackingField: 5b7032a2-53c9-4407-a836-e0ea29b4ded5
   <StoryStatus>k__BackingField: 0
   <StoryType>k__BackingField: 1
   <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
   <Condition>k__BackingField: {fileID: 0}
   <Groups>k__BackingField:
   - <ID>k__BackingField: 96ca9069-3273-4064-bb9e-7fec6753fa8d
@@ -28,13 +29,13 @@ MonoBehaviour:
     <overrideWaitTime>k__BackingField: 10
     <Condition>k__BackingField: {fileID: 0}
     <Name>k__BackingField: Winter
-    <Position>k__BackingField: {x: 610, y: 418.00003}
+    <Position>k__BackingField: {x: 609.60004, y: 416.8}
   <Nodes>k__BackingField:
-  - rid: 197800181841264649
-  - rid: 197800181841264650
-  - rid: 197800181841264651
-  - rid: 197800181841264652
-  - rid: 197800181841264653
+  - rid: 1640970789610323974
+  - rid: 1640970789610323975
+  - rid: 1640970789610323976
+  - rid: 1640970789610323977
+  - rid: 1640970789610323978
   <OldGroupNames>k__BackingField:
   - Winter
   <OldUngroupedNodeNames>k__BackingField: []
@@ -50,16 +51,16 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 197800181841264649
+    - rid: 1640970789610323974
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 3a8271d4-bb8b-404e-9653-116280a3a45d
         <Name>k__BackingField: Snowing
         <Choices>k__BackingField:
-        - rid: 197800181841264654
+        - rid: 1640970789610323979
         <GroupID>k__BackingField: 96ca9069-3273-4064-bb9e-7fec6753fa8d
         <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 635, y: 477}
+        <Position>k__BackingField: {x: 635.2, y: 476.8}
         <Text>k__BackingField: Wow it's snowing inside !
         <SpeakerType>k__BackingField: 0
         <Duration>k__BackingField: 0.5
@@ -68,16 +69,16 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 197800181841264650
+    - rid: 1640970789610323975
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: e6afdd12-39cd-4d3c-b7c8-022913a2c50e
         <Name>k__BackingField: Ice
         <Choices>k__BackingField:
-        - rid: 197800181841264655
+        - rid: 1640970789610323980
         <GroupID>k__BackingField: 96ca9069-3273-4064-bb9e-7fec6753fa8d
         <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 1183, y: 480}
+        <Position>k__BackingField: {x: 1183.2, y: 480}
         <Text>k__BackingField: There is a sheet of ice covering the kitchen
         <SpeakerType>k__BackingField: 3
         <Duration>k__BackingField: 0.5
@@ -86,16 +87,16 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 197800181841264651
+    - rid: 1640970789610323976
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 570b87d1-ced5-4b99-93ce-bc51196bb140
         <Name>k__BackingField: Explain
         <Choices>k__BackingField:
-        - rid: 197800181841264656
+        - rid: 1640970789610323981
         <GroupID>k__BackingField: 96ca9069-3273-4064-bb9e-7fec6753fa8d
         <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 906, y: 479}
+        <Position>k__BackingField: {x: 906.4, y: 479.19998}
         <Text>k__BackingField: I'm sorry could you explain ?
         <SpeakerType>k__BackingField: 0
         <Duration>k__BackingField: 0.5
@@ -104,16 +105,16 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 197800181841264652
+    - rid: 1640970789610323977
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: e3177c48-7864-4c67-a487-da3d540d9fe0
         <Name>k__BackingField: Condensation
         <Choices>k__BackingField:
-        - rid: 197800181841264657
+        - rid: 1640970789610323982
         <GroupID>k__BackingField: 96ca9069-3273-4064-bb9e-7fec6753fa8d
         <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 1460, y: 485}
+        <Position>k__BackingField: {x: 1460, y: 484.8}
         <Text>k__BackingField: It's condensation, it will destroy the rations !
         <SpeakerType>k__BackingField: 4
         <Duration>k__BackingField: 0.5
@@ -122,17 +123,17 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 197800181841264653
+    - rid: 1640970789610323978
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 3678e552-2b48-493a-9323-c408604f4a8f
         <Name>k__BackingField: Winter
         <Choices>k__BackingField:
-        - rid: 197800181841264658
-        - rid: 197800181841264659
+        - rid: 1640970789610323983
+        - rid: 1640970789610323984
         <GroupID>k__BackingField: 96ca9069-3273-4064-bb9e-7fec6753fa8d
         <NodeType>k__BackingField: 1
-        <Position>k__BackingField: {x: 1731, y: 484}
+        <Position>k__BackingField: {x: 1731.2, y: 484}
         <DescriptionTask>k__BackingField: A rupture in the ventilation has exposed
           crops to the cold. It must be fixed or the entire harvest might be lost.
         <TaskStatus>k__BackingField: 0
@@ -146,27 +147,27 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 6
         <Furniture>k__BackingField: 3
-    - rid: 197800181841264654
+    - rid: 1640970789610323979
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 570b87d1-ced5-4b99-93ce-bc51196bb140
-    - rid: 197800181841264655
+    - rid: 1640970789610323980
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: e3177c48-7864-4c67-a487-da3d540d9fe0
-    - rid: 197800181841264656
+    - rid: 1640970789610323981
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: e6afdd12-39cd-4d3c-b7c8-022913a2c50e
-    - rid: 197800181841264657
+    - rid: 1640970789610323982
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 3678e552-2b48-493a-9323-c408604f4a8f
-    - rid: 197800181841264658
+    - rid: 1640970789610323983
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -175,7 +176,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The ventilation system will be fixed and
           the crops will cease to freeze.
-    - rid: 197800181841264659
+    - rid: 1640970789610323984
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: SecondChoice
