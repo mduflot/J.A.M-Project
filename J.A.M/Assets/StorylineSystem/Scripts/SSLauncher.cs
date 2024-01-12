@@ -60,6 +60,8 @@ namespace SS
         /* Logs */
         public StorylineLog storylineLog;
 
+        [SerializeField] private bool isCheatLauncher;
+
         public void StartTimeline()
         {
             if (nodeContainer.StoryType != SSStoryType.Tasks)
@@ -71,15 +73,21 @@ namespace SS
                 }
                 else
                 {
-                    storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName,
-                        GameManager.Instance.UIManager.date.text);
-                    Checker.Instance.allStorylineLogs.Add(storylineLog);
+                    if (!isCheatLauncher)
+                    {
+                        storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName,
+                            GameManager.Instance.UIManager.date.text);
+                        Checker.Instance.allStorylineLogs.Add(storylineLog);
+                    }
                 }
 
-                if (timeline.Status == SSStoryStatus.Completed)
+                if (!isCheatLauncher)
                 {
-                    TimeTickSystem.OnTick += WaitTimeline;
-                    return;
+                    if (timeline.Status == SSStoryStatus.Completed)
+                    {
+                        TimeTickSystem.OnTick += WaitTimeline;
+                        return;
+                    }
                 }
             }
 
@@ -124,15 +132,21 @@ namespace SS
                 }
                 else
                 {
-                    storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName,
-                        GameManager.Instance.UIManager.date.text);
-                    Checker.Instance.allStorylineLogs.Add(storylineLog);
+                    if (!isCheatLauncher)
+                    {
+                        storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName,
+                            GameManager.Instance.UIManager.date.text);
+                        Checker.Instance.allStorylineLogs.Add(storylineLog);
+                    }
                 }
 
-                if (timeline.Status == SSStoryStatus.Completed)
+                if (!isCheatLauncher)
                 {
-                    TimeTickSystem.OnTick += WaitTimeline;
-                    return;
+                    if (timeline.Status == SSStoryStatus.Completed)
+                    {
+                        TimeTickSystem.OnTick += WaitTimeline;
+                        return;
+                    }
                 }
             }
 
@@ -775,14 +789,17 @@ namespace SS
                     ResetTimeline();
                     if (nodeContainer.StoryType != SSStoryType.Tasks)
                     {
-                        timeline.Status = SSStoryStatus.Completed;
-                        if (nodeGroup.TimeIsOverride)
-                            waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                        else
-                            waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
-                                                 TimeTickSystem.ticksPerHour);
-                        if (IsFinish()) waitingTime = 0;
-                        TimeTickSystem.OnTick += WaitTimeline;
+                        if (!isCheatLauncher)
+                        {
+                            timeline.Status = SSStoryStatus.Completed;
+                            if (nodeGroup.TimeIsOverride)
+                                waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                            else
+                                waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                                     TimeTickSystem.ticksPerHour);
+                            if (IsFinish()) waitingTime = 0;
+                            TimeTickSystem.OnTick += WaitTimeline;
+                        }
                     }
 
                     return;
@@ -827,14 +844,17 @@ namespace SS
                     ResetTimeline();
                     if (nodeContainer.StoryType != SSStoryType.Tasks)
                     {
-                        timeline.Status = SSStoryStatus.Completed;
-                        if (nodeGroup.TimeIsOverride)
-                            waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                        else
-                            waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
-                                                 TimeTickSystem.ticksPerHour);
-                        if (IsFinish()) waitingTime = 0;
-                        TimeTickSystem.OnTick += WaitTimeline;
+                        if (!isCheatLauncher)
+                        {
+                            timeline.Status = SSStoryStatus.Completed;
+                            if (nodeGroup.TimeIsOverride)
+                                waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                            else
+                                waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                                     TimeTickSystem.ticksPerHour);
+                            if (IsFinish()) waitingTime = 0;
+                            TimeTickSystem.OnTick += WaitTimeline;
+                        }
                     }
 
                     yield break;
@@ -861,14 +881,17 @@ namespace SS
                 ResetTimeline();
                 if (nodeContainer.StoryType != SSStoryType.Tasks)
                 {
-                    timeline.Status = SSStoryStatus.Completed;
-                    if (nodeGroup.TimeIsOverride)
-                        waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                    else
-                        waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
-                                             TimeTickSystem.ticksPerHour);
-                    if (IsFinish()) waitingTime = 0;
-                    TimeTickSystem.OnTick += WaitTimeline;
+                    if (!isCheatLauncher)
+                    {
+                        timeline.Status = SSStoryStatus.Completed;
+                        if (nodeGroup.TimeIsOverride)
+                            waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                        else
+                            waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                                 TimeTickSystem.ticksPerHour);
+                        if (IsFinish()) waitingTime = 0;
+                        TimeTickSystem.OnTick += WaitTimeline;
+                    }
                 }
 
                 yield break;
@@ -894,14 +917,17 @@ namespace SS
                 ResetTimeline();
                 if (nodeContainer.StoryType != SSStoryType.Tasks)
                 {
-                    timeline.Status = SSStoryStatus.Completed;
-                    if (nodeGroup.TimeIsOverride)
-                        waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                    else
-                        waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
-                                             TimeTickSystem.ticksPerHour);
-                    if (IsFinish()) waitingTime = 0;
-                    TimeTickSystem.OnTick += WaitTimeline;
+                    if (!isCheatLauncher)
+                    {
+                        timeline.Status = SSStoryStatus.Completed;
+                        if (nodeGroup.TimeIsOverride)
+                            waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                        else
+                            waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                                 TimeTickSystem.ticksPerHour);
+                        if (IsFinish()) waitingTime = 0;
+                        TimeTickSystem.OnTick += WaitTimeline;
+                    }
                 }
 
                 yield break;
