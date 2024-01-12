@@ -206,6 +206,16 @@ namespace Tasks
                 {
                     bool condition = CheckTarget(notification.Task.Conditions[index].Item1);
                     
+                    if (!condition && notification.Task.TaskType == SSTaskType.Compute)
+                    {
+                        previewOutcomeText.text = "Condition not met";
+                        startButton.GetComponentInChildren<Button>().interactable = false;
+                    }
+                    else
+                    {
+                        startButton.GetComponentInChildren<Button>().interactable = true;
+                    }
+                    
                     if (condition)
                     {
                         previewOutcomeText.text = null;
