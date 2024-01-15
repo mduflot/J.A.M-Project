@@ -76,6 +76,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         allStorylines.AddRange(principalStorylines);
         allStorylines.AddRange(secondaryStorylines);
         isAlreadyWaiting = false;
+        if (DataPersistenceManager.Instance.IsNewGame) ChooseNewStoryline(SSStoryType.Principal);
     }
 
     public void GenerateNewEvent()
@@ -130,6 +131,11 @@ public class Checker : MonoBehaviour, IDataPersistence
                         if (RouteCondition(storyline.StorylineContainer.Condition))
                             continue;
                     if (activeLaunchers.Any(launcher => launcher.storyline == storyline)) continue;
+                    if (storyline.StorylineContainer.IsFirstToPlay)
+                    {
+                        PickTimelineFromStoryline(storyline);
+                        return;
+                    }
                     Debug.Log($"Available storyline : {storyline.StorylineContainer.FileName}");
                     availableStoryLines.Add(storyline);
                 }
