@@ -306,7 +306,10 @@ namespace UI
                 outcomeEvents = Array.Empty<OutcomeSystem.OutcomeEvent>();
             }
             
-            LeaderCharacters[0].GetSimCharacter().SendToRoom(Task.Room);
+            if(!LeaderCharacters[0].GetSimCharacter().IsBusy())
+                LeaderCharacters[0].GetSimCharacter().SendToRoom(Task.Room);
+
+            LeaderCharacters[0].GetSimCharacter().taskRoom = SimPathing.FindRoomByRoomType(Task.Room);
         }
 
         private bool RouteCondition(OutcomeData.OutcomeTarget target)
@@ -386,7 +389,10 @@ namespace UI
             spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             IsStarted = false;
             
-            LeaderCharacters[0].GetSimCharacter().SendToIdleRoom();
+            if(!LeaderCharacters[0].GetSimCharacter().IsBusy())
+                LeaderCharacters[0].GetSimCharacter().SendToIdleRoom();
+
+            LeaderCharacters[0].GetSimCharacter().taskRoom = null;
         }
 
         public void OnCancel()

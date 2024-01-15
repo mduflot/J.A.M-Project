@@ -15,10 +15,6 @@ namespace CharacterSystem
 
         [SerializeField] private SimCharacter simCharacter;
         
-        /*
-         * gauge = 0 -> mood + param
-         */
-
         private const float MaxMood = 20.0f;
 
         [Range(0, 100)] private float mood = 50.0f;

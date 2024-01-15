@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Managers;
 using UnityEditor.AddressableAssets.Build.BuildPipelineTasks;
 using UnityEngine;
@@ -12,14 +13,20 @@ public class SimCharacter : MonoBehaviour
     public Stack<uint> doorPath = new();
 
     [HideInInspector] public SimRoom currentRoom;
+    [HideInInspector] public SimRoom taskRoom;
     public SimRoom idleRoom;
 
+    public SimStatus simStatus;
+    public int tick;
+    public int ticksToEat;
+    
     private GameObject taskFurniture;
     
     private void Start()
     {
         currentRoom = idleRoom;
         currentRoomDoor = currentRoom.roomDoors[0].doorID;
+        ticksToEat = GameManager.Instance.SpaceshipManager.simHungerBaseThreshold + Random.Range((int) -TimeTickSystem.ticksPerHour * 2, (int) TimeTickSystem.ticksPerHour * 2);
     }
 
     private void Update()
@@ -50,6 +57,15 @@ public class SimCharacter : MonoBehaviour
         if (doorPath.Count == 0)
         {
             isIdle = true;
+
+            if (simStatus == SimStatus.GoToEat)
+            {
+                simStatus = SimStatus.IdleEat;
+                ticksToEat = 0;
+            }
+            else
+                simStatus = SimStatus.Idle;
+            
             GetComponent<SpriteRenderer>().enabled = true;
             return;
         }
@@ -85,14 +101,34 @@ public class SimCharacter : MonoBehaviour
 
     public void SendToRoom(RoomType roomType)
     {
+        //if (roomType == currentRoom.roomType) return;
         //cancel last path
         doorPath.Clear();
         isIdle = false;
         SimPathing.CreatePath(this, SimPathing.FindRoomByRoomType(roomType));
+        simStatus = SimStatus.GoToRoom;
     }
 
     public void SendToIdleRoom()
     {
         SendToRoom(idleRoom.roomType);
+        simStatus = SimStatus.GoToIdle;
+    }
+
+    public bool IsBusy()
+    {
+        return simStatus == SimStatus.GoToEat 
+               || simStatus == SimStatus.GoToIdle 
+               || simStatus == SimStatus.GoToRoom 
+               || simStatus == SimStatus.IdleEat;
+    }
+    
+    public enum SimStatus
+    {
+        Idle,
+        IdleEat,
+        GoToRoom,
+        GoToIdle,
+        GoToEat,
     }
 }
