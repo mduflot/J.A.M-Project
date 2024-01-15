@@ -112,10 +112,10 @@ namespace Tasks
             if (taskLog != null)
             {
                 if (GameManager.Instance.UIManager.characterIcons.First(characterIcon =>
-                        characterIcon.character.GetCharacterData().ID == taskLog.LeaderCharacter))
+                        characterIcon.character.GetCharacterData().ID == taskLog.LeaderCharacter[0]))
                 {
                     SetLeader(GameManager.Instance.UIManager.characterIcons.First(characterIcon =>
-                        characterIcon.character.GetCharacterData().ID == taskLog.LeaderCharacter));
+                        characterIcon.character.GetCharacterData().ID == taskLog.LeaderCharacter[0]));
                 }
 
                 for (int indexAssistant = 0; indexAssistant < taskLog.AssistantCharacters.Count; indexAssistant++)

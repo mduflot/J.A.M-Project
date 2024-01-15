@@ -739,9 +739,9 @@ namespace SS
                 if (taskToPlay != null)
                 {
                     task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
-                        0, taskToPlay.Duration,
+                        taskToPlay.TimeLeft, taskToPlay.Duration,
                         nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
-                        conditions);
+                        conditions, taskToPlay.IsStarted);
                     notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues, taskToPlay);
                 }
                 else

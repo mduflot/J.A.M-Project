@@ -569,8 +569,14 @@ public class Checker : MonoBehaviour, IDataPersistence
                     var storyline = allStorylines[index];
                     if (storyline.StorylineContainer == launcher.nodeContainer)
                     {
-                        if (launcher.task is { Duration: > 0 })
+                        if (launcher.task is not null)
                         {
+                            List<string> leaderCharacters = new List<string>();
+                            for (int indexLeader = 0; indexLeader < launcher.task.leaderCharacters.Count; indexLeader++)
+                            {
+                                leaderCharacters.Add(launcher.task.leaderCharacters[indexLeader].GetCharacterData().ID);
+                            }
+                            
                             List<string> assistantCharacters = new List<string>();
                             for (int indexAssistant = 0;
                                  indexAssistant < launcher.task.assistantCharacters.Count;
@@ -580,8 +586,8 @@ public class Checker : MonoBehaviour, IDataPersistence
                                     .GetCharacterData().ID);
                             }
 
-                            var taskLog = new TaskLog(launcher.task.Name, launcher.task.Duration,
-                                launcher.task.leaderCharacters[0].GetCharacterData().ID, assistantCharacters);
+                            var taskLog = new TaskLog(launcher.task.Name, launcher.task.Duration, launcher.task.TimeLeft, launcher.task.IsStarted,
+                                leaderCharacters, assistantCharacters);
                             gameData.currentTasks.Add(storyline.ID, taskLog);
                         }
 

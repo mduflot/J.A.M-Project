@@ -7,13 +7,17 @@ namespace SS
     {
         public string NodeTaskName;
         public float Duration;
-        public string LeaderCharacter;
+        public float TimeLeft;
+        public bool IsStarted;
+        public List<string> LeaderCharacter;
         public List<string> AssistantCharacters;
         
-        public TaskLog(string nodeTaskName, float duration, string leaderCharacter, List<string> assistantCharacters)
+        public TaskLog(string nodeTaskName, float duration, float timeLeft, bool isStarted, List<string> leaderCharacter, List<string> assistantCharacters)
         {
             this.NodeTaskName = nodeTaskName;
             this.Duration = duration;
+            this.TimeLeft = timeLeft;
+            this.IsStarted = isStarted;
             this.LeaderCharacter = leaderCharacter;
             this.AssistantCharacters = assistantCharacters;
         }

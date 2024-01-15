@@ -62,7 +62,7 @@ namespace UI
             Task = task;
             taskNode = ssTaskNode;
             time.text = "";
-            Task.TimeLeft *= TimeTickSystem.ticksPerHour;
+            if (taskToPlay == null) Task.TimeLeft *= TimeTickSystem.ticksPerHour;
             timeLeft = Task.TimeLeft;
             icon.sprite = task.Icon;
             Dialogues = dialogues;
@@ -166,7 +166,7 @@ namespace UI
             {
                 if (!IsCancelled)
                 {
-                    if (taskLog == null)
+                    if (taskLog == null || !Task.IsStarted)
                     {
                         Task.Duration = AssistantCharacters.Count > 0
                             ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count,
@@ -272,14 +272,12 @@ namespace UI
                                     if (LeaderCharacters[0].GetMood() < LeaderCharacters[0].GetVolition())
                                     {
                                         var value = (LeaderCharacters[0].GetVolition() / 2) / Task.Duration;
-                                        Debug.Log($"mood < volition : value = {value}");
                                         outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
                                             outcome.OutcomeTargetGauge, value);
                                     }
                                     else
                                     {
                                         var value = LeaderCharacters[0].GetVolition() / Task.Duration;
-                                        Debug.Log($"mood > volition : value = {value}");
                                         outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
                                             outcome.OutcomeTargetGauge, value);
                                     }
