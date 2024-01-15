@@ -136,7 +136,6 @@ public class Checker : MonoBehaviour, IDataPersistence
                         PickTimelineFromStoryline(storyline);
                         return;
                     }
-                    Debug.Log($"Available storyline : {storyline.StorylineContainer.FileName}");
                     availableStoryLines.Add(storyline);
                 }
 

@@ -13,10 +13,12 @@ public class DialogueLog : MonoBehaviour
 
     public void DisplayDialogueLog(List<SerializableTuple<string, string>> Dialogues)
     {
+        Debug.Log("Displaying dialogue log : " + Dialogues.Count + " dialogues");
         for (var indexDialogue = 0; indexDialogue < Dialogues.Count; indexDialogue++)
         {
             var dialogue = Dialogues[indexDialogue];
             var line = Instantiate(dialogueLinePrefab, dialogueLogContent);
+            dialogueLines.Add(line);
             if (dialogue.Item1 == "Sensor")
             {
                 line.DisplayDialogueLine(null, dialogue.Item2);
@@ -40,6 +42,7 @@ public class DialogueLog : MonoBehaviour
     {
         foreach (var line in dialogueLines)
         {
+            Debug.Log("Destroying line");
             Destroy(line);
         }
 

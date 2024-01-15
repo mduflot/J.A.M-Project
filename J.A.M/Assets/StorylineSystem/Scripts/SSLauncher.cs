@@ -93,11 +93,11 @@ namespace SS
 
             if (currentStoryline) currentStoryline.text = nodeContainer.name;
             spaceshipManager = GameManager.Instance.SpaceshipManager;
-            dialogues = new();
-            characters = new();
-            assignedCharacters = new();
-            notAssignedCharacters = new();
-            traitsCharacters = new();
+            if (dialogues == null) dialogues = new();
+            if (characters == null) characters = new();
+            if (assignedCharacters == null) assignedCharacters = new();
+            if (notAssignedCharacters == null) notAssignedCharacters = new();
+            if (traitsCharacters == null) traitsCharacters = new();
             IsRunning = true;
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
