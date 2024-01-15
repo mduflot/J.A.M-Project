@@ -463,6 +463,8 @@ namespace UI
             spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             IsStarted = false;
 
+            if (LeaderCharacters.Count == 0) return;
+            
             if (LeaderCharacters[0].GetSimCharacter() != null)
             {
                 if(!LeaderCharacters[0].GetSimCharacter().IsBusy())
@@ -499,6 +501,8 @@ namespace UI
                 spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             }
 
+            if (LeaderCharacters.Count == 0) return;
+            
             if (LeaderCharacters[0].GetSimCharacter() != null)
             {
                 if(!LeaderCharacters[0].GetSimCharacter().IsBusy())
