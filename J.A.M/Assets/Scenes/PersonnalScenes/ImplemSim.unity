@@ -171,7 +171,11 @@ MonoBehaviour:
   isIdle: 0
   currentRoomDoor: 6
   currentRoom: {fileID: 1070569353}
+  taskRoom: {fileID: 0}
   idleRoom: {fileID: 1070569353}
+  simStatus: 0
+  tick: 0
+  ticksToEat: 0
 --- !u!212 &29280507
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -407,7 +411,11 @@ MonoBehaviour:
   isIdle: 0
   currentRoomDoor: 6
   currentRoom: {fileID: 1891010131}
+  taskRoom: {fileID: 0}
   idleRoom: {fileID: 1891010131}
+  simStatus: 0
+  tick: 0
+  ticksToEat: 0
 --- !u!212 &129529688
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1206,7 +1214,6 @@ MonoBehaviour:
   IsCancelled: 0
   CanIgnoreDialogueTask: 0
   currentStoryline: {fileID: 1107620578}
-  spaceshipManager: {fileID: 1360174038}
   nodeContainer: {fileID: 0}
   nodeGroup: {fileID: 0}
   node: {fileID: 0}
@@ -1214,6 +1221,12 @@ MonoBehaviour:
   startingNodesOnly: 0
   selectedNodeGroupIndex: 0
   selectedNodeIndex: 0
+  storylineLog:
+    storylineID: 
+    storylineName: 
+    storylineDate: 
+    timelineLogs: []
+  isCheatLauncher: 0
 --- !u!4 &701981758
 Transform:
   m_ObjectHideFlags: 0
@@ -1277,7 +1290,11 @@ MonoBehaviour:
   isIdle: 0
   currentRoomDoor: 6
   currentRoom: {fileID: 2064211452}
+  taskRoom: {fileID: 0}
   idleRoom: {fileID: 2064211452}
+  simStatus: 0
+  tick: 0
+  ticksToEat: 0
 --- !u!212 &719406482
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2098,7 +2115,6 @@ MonoBehaviour:
   IsCancelled: 0
   CanIgnoreDialogueTask: 0
   currentStoryline: {fileID: 0}
-  spaceshipManager: {fileID: 1360174038}
   nodeContainer: {fileID: 11400000, guid: 8d44940479619b44a892c87ea09ee890, type: 2}
   nodeGroup: {fileID: 11400000, guid: cf171edb63c37dd4dba10692f84adc4b, type: 2}
   node: {fileID: 11400000, guid: 2c53ac99bda453548a3b7628fc4eccae, type: 2}
@@ -2106,6 +2122,12 @@ MonoBehaviour:
   startingNodesOnly: 0
   selectedNodeGroupIndex: 0
   selectedNodeIndex: 0
+  storylineLog:
+    storylineID: 
+    storylineName: 
+    storylineDate: 
+    timelineLogs: []
+  isCheatLauncher: 0
 --- !u!4 &1350031688
 Transform:
   m_ObjectHideFlags: 0
@@ -2438,7 +2460,7 @@ PrefabInstance:
     - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: systems.Array.data[2].decreaseSpeed
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
@@ -3512,13 +3534,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6ec60b760704462ab4f39d239f0f8c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeLaunchers: []
+  allStorylineLogs: []
   ssCampaigns:
   - {fileID: 11400000, guid: fa2fd418c25b6424ebf8e20158df4b2f, type: 2}
-  principalLauncher: {fileID: 1503467686}
-  secondaryLauncher: {fileID: 701981757}
-  trivialLauncher: {fileID: 1908046485}
   presentationContainer: {fileID: 1559333373}
   presentationText: {fileID: 1475129206}
+  launcherPrefab: {fileID: 0}
+  minWaitTimePrincipal: 20
+  maxWaitTimePrincipal: 30
+  minWaitTimeSecondary: 20
+  maxWaitTimeSecondary: 30
 --- !u!4 &1495234967
 Transform:
   m_ObjectHideFlags: 0
@@ -3582,7 +3608,6 @@ MonoBehaviour:
   IsCancelled: 0
   CanIgnoreDialogueTask: 0
   currentStoryline: {fileID: 908526471}
-  spaceshipManager: {fileID: 1360174038}
   nodeContainer: {fileID: 0}
   nodeGroup: {fileID: 0}
   node: {fileID: 0}
@@ -3590,6 +3615,12 @@ MonoBehaviour:
   startingNodesOnly: 0
   selectedNodeGroupIndex: 0
   selectedNodeIndex: 0
+  storylineLog:
+    storylineID: 
+    storylineName: 
+    storylineDate: 
+    timelineLogs: []
+  isCheatLauncher: 0
 --- !u!1 &1531982857
 GameObject:
   m_ObjectHideFlags: 0
@@ -3638,7 +3669,11 @@ MonoBehaviour:
   isIdle: 0
   currentRoomDoor: 6
   currentRoom: {fileID: 1034699085}
+  taskRoom: {fileID: 0}
   idleRoom: {fileID: 1034699085}
+  simStatus: 0
+  tick: 0
+  ticksToEat: 0
 --- !u!212 &1531982860
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3739,7 +3774,11 @@ MonoBehaviour:
   isIdle: 0
   currentRoomDoor: 6
   currentRoom: {fileID: 1070186719}
+  taskRoom: {fileID: 0}
   idleRoom: {fileID: 1070186719}
+  simStatus: 0
+  tick: 0
+  ticksToEat: 0
 --- !u!212 &1536450562
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3846,7 +3885,11 @@ MonoBehaviour:
   isIdle: 0
   currentRoomDoor: 6
   currentRoom: {fileID: 2125116633}
+  taskRoom: {fileID: 0}
   idleRoom: {fileID: 2125116633}
+  simStatus: 0
+  tick: 0
+  ticksToEat: 0
 --- !u!212 &1581731749
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4576,7 +4619,6 @@ MonoBehaviour:
   IsCancelled: 0
   CanIgnoreDialogueTask: 0
   currentStoryline: {fileID: 2073672110}
-  spaceshipManager: {fileID: 1360174038}
   nodeContainer: {fileID: 0}
   nodeGroup: {fileID: 0}
   node: {fileID: 0}
@@ -4584,6 +4626,12 @@ MonoBehaviour:
   startingNodesOnly: 0
   selectedNodeGroupIndex: 0
   selectedNodeIndex: 0
+  storylineLog:
+    storylineID: 
+    storylineName: 
+    storylineDate: 
+    timelineLogs: []
+  isCheatLauncher: 0
 --- !u!4 &1908046486
 Transform:
   m_ObjectHideFlags: 0

@@ -90,6 +90,8 @@ public class SimCharacter : MonoBehaviour
     private void IdleInRoom()
     {
         if (currentRoom == null) return;
+        if(taskRoom == null && simStatus != SimStatus.IdleEat && currentRoom != idleRoom)
+            SendToIdleRoom();
         
         float lerpT = (1 - Mathf.Exp(-GameManager.Instance.SpaceshipManager.simMoveSpeed * Time.deltaTime)) * TimeTickSystem.timeScale;
         Vector3 pos = transform.position;
