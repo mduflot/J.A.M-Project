@@ -267,34 +267,21 @@ namespace UI
                                     OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
                             else
                             {
-                                if (Task.TaskType == SSTaskType.Permanent)
+                                if (LeaderCharacters[0].GetMood() < LeaderCharacters[0].GetVolition())
                                 {
-                                    if (LeaderCharacters[0].GetMood() < LeaderCharacters[0].GetVolition())
-                                    {
-                                        var value = (LeaderCharacters[0].GetVolition() / 2) / Task.Duration;
-                                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
-                                            outcome.OutcomeTargetGauge, value);
-                                    }
-                                    else
-                                    {
-                                        var value = LeaderCharacters[0].GetVolition() / Task.Duration;
-                                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
-                                            outcome.OutcomeTargetGauge, value);
-                                    }
+                                    outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
+                                        outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition() / 2);
                                 }
                                 else
                                 {
-                                    if (LeaderCharacters[0].GetMood() < LeaderCharacters[0].GetVolition())
-                                    {
-                                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
-                                            outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition() / 2);
-                                    }
-                                    else
-                                    {
-                                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
-                                            outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition());
-                                    }
+                                    outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
+                                        outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition());
                                 }
+                            }
+                            if (Task.TaskType == SSTaskType.Permanent)
+                            {
+                                outcomeEventArgs[i].value /= Task.Duration;
+                                Debug.Log($"ValueGauge: {outcomeEventArgs[i].value}");
                             }
 
                             break;
@@ -329,6 +316,11 @@ namespace UI
                         case OutcomeData.OutcomeTarget.Gauge:
                             outcomeEventArgs[numberOfBaseOutcomes + i] =
                                 OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
+                            if (Task.TaskType == SSTaskType.Permanent)
+                            {
+                                outcomeEventArgs[numberOfBaseOutcomes + i].value /= Task.Duration;
+                                Debug.Log($"ValueAdditional: {outcomeEventArgs[numberOfBaseOutcomes + i].value}");
+                            }
                             break;
                     }
                 }
@@ -399,6 +391,7 @@ namespace UI
         {
             for (uint i = 0; i < outcomeEvents.Length; i++)
             {
+                Debug.Log($"ValueToAdd : {outcomeEventArgs[i].value}");
                 outcomeEvents[i].Invoke(outcomeEventArgs[i]);
             }
         }
