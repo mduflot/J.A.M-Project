@@ -326,7 +326,17 @@ namespace UI
                             break;
                         
                         case RoomType.Cargo1:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCargoBay))
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCargoBays))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.Cargo2:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCargoBays))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.Cargo3:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCargoBays))
                                 Task.Duration *= 2;
                             break;
                             
@@ -345,6 +355,12 @@ namespace UI
                                 Task.Duration *= 2;
                             break;
                             
+                        case RoomType.BedroomMusician:
+                            break;
+                        
+                        case RoomType.BedroomProfessor:
+                            break;
+                            
                         case RoomType.Artifact:
                             if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedArtifactRoom))
                                 Task.Duration *= 2;
@@ -353,6 +369,9 @@ namespace UI
                         case RoomType.Kitchen:
                             if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCommodities))
                                 Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.Bath:
                             break;
                     }
                     

@@ -83,7 +83,7 @@ public class TraitsData
         DamagedRations = 32768,
         DamagedElectricalRoom = 65536,
         DamagedDockingBay = 131072,
-        DamagedCargoBay = 262144,
+        DamagedCargoBays = 262144,
         DamagedCamp = 524288,
         DamagedBridge = 1048576,
         DamagedAI = 2097152,
