@@ -15,6 +15,12 @@ public class TraitsData
         Scientist = 32,
         Mechanic = 64,
         Civilian = 128,
+        Elrenda = 256,
+        Leisin = 512,
+        Malda = 1024,
+        Varus = 2048,
+        Lammy = 4096,
+        Seltis = 8192
     };
 
     [Flags]
@@ -26,6 +32,7 @@ public class TraitsData
         Cautious = 4,
         Curious = 8,
         Extroverted = 16,
+        CalmUnderPressure = 32
     };
 
     [Flags]
@@ -103,7 +110,7 @@ public class TraitsData
         NOT
     }
     
-    [System.Serializable]
+    [Serializable]
     public class Traits
     {
         [SerializeField] public SerializableTuple<Job, PositiveTraits, NegativeTraits> traits;

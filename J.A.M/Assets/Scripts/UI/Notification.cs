@@ -321,6 +321,38 @@ namespace UI
                                 Task.Duration *= 2;
                             break;
                         
+                        /*
+                        case RoomType.Cargo:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCargoBay))
+                                Task.Duration *= 2;
+                            break;
+                            
+                        case RoomType.Camp:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCamp))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.AI:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedAI))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.Bedroom:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedBedrooms))
+                                Task.Duration *= 2;
+                            break;
+                            
+                        case RoomType.Artifact:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedArtifactRoom))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.Commodities:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCommodities))
+                                Task.Duration *= 2;
+                            break;
+                        */
+                        
                         case RoomType.Greenhouse:
                             break;
                         
