@@ -15,6 +15,7 @@ namespace SS
 
         public Storyline(SSNodeContainerSO storylineContainer, List<SSNodeGroupSO> timelines)
         {
+            ID = storylineContainer.ID;
             StorylineContainer = storylineContainer;
             Status = storylineContainer.StoryStatus;
             Timelines = new List<Timeline>();

@@ -500,15 +500,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenuCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 985344726678413344, guid: eabfd321868487c4496a6adfa4f43fb3,
+        type: 3}
+      propertyPath: m_Name
+      value: NewButton
+      objectReference: {fileID: 0}
     - target: {fileID: 1799607287517663038, guid: eabfd321868487c4496a6adfa4f43fb3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1799607287517663038, guid: eabfd321868487c4496a6adfa4f43fb3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1799607287517663038, guid: eabfd321868487c4496a6adfa4f43fb3,
         type: 3}
@@ -519,8 +524,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8673547500490475682, guid: 041598292b3af924096c92612644b661,
-        type: 3}
+      objectReference: {fileID: 49519530}
     - target: {fileID: 1799607287517663038, guid: eabfd321868487c4496a6adfa4f43fb3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -554,7 +558,7 @@ PrefabInstance:
     - target: {fileID: 1799607287517663038, guid: eabfd321868487c4496a6adfa4f43fb3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: 
+      value: MainScene
       objectReference: {fileID: 0}
     - target: {fileID: 1799607287517663038, guid: eabfd321868487c4496a6adfa4f43fb3,
         type: 3}
@@ -765,6 +769,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9013339795311225651, guid: eabfd321868487c4496a6adfa4f43fb3,
+        type: 3}
+      propertyPath: m_text
+      value: New Game
       objectReference: {fileID: 0}
     - target: {fileID: 9069146719774534606, guid: eabfd321868487c4496a6adfa4f43fb3,
         type: 3}

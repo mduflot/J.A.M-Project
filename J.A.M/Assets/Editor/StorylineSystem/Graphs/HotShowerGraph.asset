@@ -13,22 +13,27 @@ MonoBehaviour:
   m_Name: HotShowerGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: HotShower
+  <ID>k__BackingField: d91dc829-1b79-4caa-819e-8033ca182579
   <StoryStatus>k__BackingField: 0
-  <StoryType>k__BackingField: 0
+  <StoryType>k__BackingField: 1
   <IsFirstToPlay>k__BackingField: 0
   <Condition>k__BackingField: {fileID: 0}
   <Groups>k__BackingField:
   - <ID>k__BackingField: 918f54f2-422f-44fe-98a4-b34429a897bc
     <StoryStatus>k__BackingField: 0
     <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
     <Condition>k__BackingField: {fileID: 0}
     <Name>k__BackingField: HotShower
     <Position>k__BackingField: {x: 314, y: 165}
   <Nodes>k__BackingField:
-  - rid: 5268905284392714499
-  - rid: 5268905284392714500
-  - rid: 5268905284392714501
-  - rid: 5268905284392714502
+  - rid: 8851122693436343232
+  - rid: 8851122693436343233
+  - rid: 8851122693436343234
+  - rid: 8851122693436343235
   <OldGroupNames>k__BackingField:
   - HotShower
   <OldUngroupedNodeNames>k__BackingField: []
@@ -43,13 +48,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5268905284392714499
+    - rid: 8851122693436343232
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: a5be18fd-fa46-4e24-ab33-84f9651f0f28
         <Name>k__BackingField: Passing
         <Choices>k__BackingField:
-        - rid: 5268905284392714503
+        - rid: 8851122693436343236
         <GroupID>k__BackingField: 918f54f2-422f-44fe-98a4-b34429a897bc
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 339, y: 224}
@@ -62,13 +67,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5268905284392714500
+    - rid: 8851122693436343233
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 4a7bc50f-4bba-4765-96aa-a2a4fc825f5c
         <Name>k__BackingField: Full
         <Choices>k__BackingField:
-        - rid: 5268905284392714504
+        - rid: 8851122693436343237
         <GroupID>k__BackingField: 918f54f2-422f-44fe-98a4-b34429a897bc
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 994, y: 225}
@@ -81,14 +86,14 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5268905284392714501
+    - rid: 8851122693436343234
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 2c2fd1f9-13c1-42fd-bc86-62a7e33284cb
         <Name>k__BackingField: HotShower
         <Choices>k__BackingField:
-        - rid: 5268905284392714505
-        - rid: 5268905284392714506
+        - rid: 8851122693436343238
+        - rid: 8851122693436343239
         <GroupID>k__BackingField: 918f54f2-422f-44fe-98a4-b34429a897bc
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 2286, y: 230}
@@ -104,13 +109,13 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 1
         <Furniture>k__BackingField: 7
-    - rid: 5268905284392714502
+    - rid: 8851122693436343235
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: fa933790-b8fd-4733-8ab9-cdd335d0bcc8
         <Name>k__BackingField: Idea
         <Choices>k__BackingField:
-        - rid: 5268905284392714507
+        - rid: 8851122693436343240
         <GroupID>k__BackingField: 918f54f2-422f-44fe-98a4-b34429a897bc
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1637, y: 226}
@@ -123,17 +128,17 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5268905284392714503
+    - rid: 8851122693436343236
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 4a7bc50f-4bba-4765-96aa-a2a4fc825f5c
-    - rid: 5268905284392714504
+    - rid: 8851122693436343237
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: fa933790-b8fd-4733-8ab9-cdd335d0bcc8
-    - rid: 5268905284392714505
+    - rid: 8851122693436343238
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -142,7 +147,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The warmth of the generator will heat up
           water for the shower.
-    - rid: 5268905284392714506
+    - rid: 8851122693436343239
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: SecondChoice
@@ -151,7 +156,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: No one will be attributed to such a menial
           task.
-    - rid: 5268905284392714507
+    - rid: 8851122693436343240
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node

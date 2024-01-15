@@ -12,6 +12,7 @@
 
         public Timeline(SSNodeGroupSO timelineContainer)
         {
+            ID = timelineContainer.ID;
             TimelineContainer = timelineContainer;
             Status = timelineContainer.StoryStatus;
         }

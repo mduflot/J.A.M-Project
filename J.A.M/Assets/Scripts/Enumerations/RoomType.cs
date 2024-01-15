@@ -1,11 +1,20 @@
 ﻿public enum RoomType
 {
-    Electrical = 1,
-    Ventilation = 2,
-    Greenhouse = 3,
-    Storage = 4,
-    Flight = 5,
-    Common = 6,
-    Docking = 7,
-    Laboratory = 8
+    AI,
+    Trajectory,
+    Medbay,
+    CommonRoom,
+    Kitchen,
+    Artifact,
+    Military,
+    Cargo1,
+    Cargo2,
+    Cargo3,
+    Power,
+    Corridor,
+    DockingBay,
+    BedroomCaptain,
+    BedroomProfessor,
+    BedroomMusician,
+    Bath
 }

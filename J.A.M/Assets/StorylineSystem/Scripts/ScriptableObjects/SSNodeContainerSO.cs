@@ -8,6 +8,7 @@ namespace SS.ScriptableObjects
     public class SSNodeContainerSO : ScriptableObject
     {
         [field: SerializeField] public string FileName { get; set; }
+        [field: SerializeField] public string ID { get; set; }
         [field: SerializeField] public SSStoryStatus StoryStatus { get; set; }
         [field: SerializeField] public SSStoryType StoryType { get; set; }
         [field: SerializeField] public bool IsFirstToPlay { get; set; }
@@ -15,9 +16,10 @@ namespace SS.ScriptableObjects
         [field: SerializeField] public SerializableDictionary<SSNodeGroupSO, List<SSNodeSO>> NodeGroups { get; set; }
         [field: SerializeField] public List<SSNodeSO> UngroupedNodes { get; set; }
 
-        public void Initialize(string fileName, SSStoryStatus storyStatus, SSStoryType storyType, bool isFirstToPlay, ConditionSO condition)
+        public void Initialize(string fileName, string id, SSStoryStatus storyStatus, SSStoryType storyType, bool isFirstToPlay, ConditionSO condition)
         {
             FileName = fileName;
+            ID = id;
             StoryStatus = storyStatus;
             StoryType = storyType;
             IsFirstToPlay = isFirstToPlay;

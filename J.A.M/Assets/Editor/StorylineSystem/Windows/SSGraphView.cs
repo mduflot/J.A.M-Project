@@ -14,6 +14,7 @@ namespace SS.Windows
 
     public class SSGraphView : GraphView
     {
+        public string ID;
         public SSStoryStatus StoryStatus;
         public SSStoryType StoryType;
         public bool IsFirstToPlay;
@@ -54,6 +55,7 @@ namespace SS.Windows
         {
             editorWindow = ssEditorWindow;
 
+            ID = Guid.NewGuid().ToString();
             StoryStatus = SSStoryStatus.Enabled;
             StoryType = SSStoryType.Principal;
             IsFirstToPlay = false;
