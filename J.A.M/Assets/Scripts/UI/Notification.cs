@@ -31,7 +31,7 @@ namespace UI
 
         [SerializeField] private Sprite hoveredSprite;
         [SerializeField] private Sprite defaultSprite;
-        
+
         private Camera camera;
         private SpaceshipManager spaceshipManager;
         private ConditionSO taskCondition;
@@ -40,7 +40,7 @@ namespace UI
         private SSLauncher launcher;
         private SSTaskNodeSO taskNode;
         private float timeLeft;
-        private List<TaskUI.GaugesOutcome> gaugeOutcomes = new List<TaskUI.GaugesOutcome>();
+        private List<TaskUI.GaugesOutcome> gaugeOutcomes = new();
         private TaskLog taskLog;
 
         private void Start()
@@ -97,6 +97,7 @@ namespace UI
                     GameManager.Instance.UIManager.taskUI.Initialize(this, icon);
                     return;
                 }
+
                 GameManager.Instance.UIManager.taskUI.Initialize(this);
             }
         }
@@ -150,11 +151,12 @@ namespace UI
                     }
                 }
             }
-            
+
             foreach (var outcome in go)
             {
                 gaugeOutcomes.Add(outcome);
             }
+
             CheckingCondition(validatedCondition);
         }
 
@@ -162,6 +164,21 @@ namespace UI
         {
             if (validatedCondition)
             {
+                if (!IsCancelled)
+                {
+                    if (taskLog == null)
+                    {
+                        Task.Duration = AssistantCharacters.Count > 0
+                            ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count,
+                                Task.HelpFactor)
+                            : Task.Duration;
+                        Task.Duration *= TimeTickSystem.ticksPerHour;
+                    }
+
+                    Task.BaseDuration = Task.Duration;
+                    taskLog = null;
+                }
+
                 //Check additional conditions
                 var additionalConditionOutcomes = new List<Outcome>();
                 for (uint i = 0; i < taskCondition.additionnalConditions.Length; i++)
@@ -250,17 +267,38 @@ namespace UI
                                     OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
                             else
                             {
-                                if (LeaderCharacters[0].GetMood() < LeaderCharacters[0].GetVolition())
+                                if (Task.TaskType == SSTaskType.Permanent)
                                 {
-                                    outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
-                                        outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition() / 2);
+                                    if (LeaderCharacters[0].GetMood() < LeaderCharacters[0].GetVolition())
+                                    {
+                                        var value = (LeaderCharacters[0].GetVolition() / 2) / Task.Duration;
+                                        Debug.Log($"mood < volition : value = {value}");
+                                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
+                                            outcome.OutcomeTargetGauge, value);
+                                    }
+                                    else
+                                    {
+                                        var value = LeaderCharacters[0].GetVolition() / Task.Duration;
+                                        Debug.Log($"mood > volition : value = {value}");
+                                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
+                                            outcome.OutcomeTargetGauge, value);
+                                    }
                                 }
                                 else
                                 {
-                                    outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
-                                        outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition());
+                                    if (LeaderCharacters[0].GetMood() < LeaderCharacters[0].GetVolition())
+                                    {
+                                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
+                                            outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition() / 2);
+                                    }
+                                    else
+                                    {
+                                        outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
+                                            outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition());
+                                    }
                                 }
                             }
+
                             break;
                     }
                 }
@@ -304,19 +342,6 @@ namespace UI
                     outcomeEvents[i] = OutcomeSystem.GenerateOutcomeEvent(outcomeEventArgs[i]);
                 }
 
-                if (!IsCancelled)
-                {
-                    if (taskLog == null)
-                    {
-                        Task.Duration = AssistantCharacters.Count > 0
-                            ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
-                            : Task.Duration;
-                        Task.Duration *= TimeTickSystem.ticksPerHour;
-                    }
-                    Task.BaseDuration = Task.Duration;
-                    taskLog = null;
-                }
-
                 IsCancelled = false;
                 IsStarted = true;
             }
@@ -325,6 +350,8 @@ namespace UI
                 outcomeEventArgs = Array.Empty<OutcomeSystem.OutcomeEventArgs>();
                 outcomeEvents = Array.Empty<OutcomeSystem.OutcomeEvent>();
             }
+
+            if (Task.TaskType == SSTaskType.Permanent) TimeTickSystem.OnTick += AddOutcomeOnTick;
         }
 
         private bool RouteCondition(OutcomeData.OutcomeTarget target)
@@ -360,6 +387,16 @@ namespace UI
             return validateCondition;
         }
 
+        private float total = 0;
+        
+        private void AddOutcomeOnTick(object sender, TimeTickSystem.OnTickEventArgs e)
+        {
+            for (uint i = 0; i < outcomeEvents.Length; i++)
+            {
+                outcomeEvents[i].Invoke(outcomeEventArgs[i]);
+            }
+        }
+
         public void OnUpdate()
         {
             if (IsStarted && !IsCompleted)
@@ -372,6 +409,7 @@ namespace UI
                 }
                 else
                 {
+                    TimeTickSystem.OnTick -= AddOutcomeOnTick;
                     OnComplete();
                 }
             }
@@ -387,12 +425,13 @@ namespace UI
                 {
                     if (taskLog != null)
                     {
-                        GameManager.Instance.UIManager.taskUI.Initialize(this, null, false, taskLog); 
+                        GameManager.Instance.UIManager.taskUI.Initialize(this, null, false, taskLog);
                     }
                     else
                     {
                         GameManager.Instance.UIManager.taskUI.Initialize(this, null, false);
                     }
+
                     GameManager.Instance.UIManager.taskUI.StartTask();
                 }
             }
@@ -400,10 +439,14 @@ namespace UI
 
         private void OnComplete()
         {
-            for (uint i = 0; i < outcomeEvents.Length; i++)
+            if (Task.TaskType != SSTaskType.Permanent)
             {
-                outcomeEvents[i].Invoke(outcomeEventArgs[i]);
+                for (uint i = 0; i < outcomeEvents.Length; i++)
+                {
+                    outcomeEvents[i].Invoke(outcomeEventArgs[i]);
+                }
             }
+
             IsCompleted = true;
             ResetCharacters();
             GameManager.Instance.RefreshCharacterIcons();

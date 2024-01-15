@@ -119,7 +119,6 @@ namespace Managers
             {
                 gaugeValue = 0;
             }
-
             systemsDictionary[systemType].gaugeValue = gaugeValue;
         }
 
