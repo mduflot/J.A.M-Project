@@ -3,7 +3,7 @@
     AI,
     Trajectory,
     Medbay,
-    CommonRoom,
+    Common,
     Kitchen,
     Artifact,
     Military,
@@ -16,5 +16,5 @@
     BedroomCaptain,
     BedroomProfessor,
     BedroomMusician,
-    Bath
+    Bath,
 }

@@ -305,33 +305,32 @@ namespace UI
                                 Task.Duration *= 2;
                             break;
                         
-                        case RoomType.Docking:
+                        case RoomType.DockingBay:
                             if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedDockingBay))
                                 Task.Duration *= 2;
                             break;
                         
-                        case RoomType.Electrical:
+                        case RoomType.Power:
                             if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedElectricalRoom))
                                 Task.Duration *= 2;
                             break;
 
-                        case RoomType.Flight:
+                        case RoomType.Trajectory:
                             if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedBridge))
                                 Task.Duration *= 2;
                             break;
 
-                        case RoomType.Laboratory:
+                        case RoomType.Medbay:
                             if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedMedicalRoom))
                                 Task.Duration *= 2;
                             break;
                         
-                        /*
-                        case RoomType.Cargo:
+                        case RoomType.Cargo1:
                             if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCargoBay))
                                 Task.Duration *= 2;
                             break;
                             
-                        case RoomType.Camp:
+                        case RoomType.Military:
                             if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCamp))
                                 Task.Duration *= 2;
                             break;
@@ -341,7 +340,7 @@ namespace UI
                                 Task.Duration *= 2;
                             break;
                         
-                        case RoomType.Bedroom:
+                        case RoomType.BedroomCaptain:
                             if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedBedrooms))
                                 Task.Duration *= 2;
                             break;
@@ -351,19 +350,9 @@ namespace UI
                                 Task.Duration *= 2;
                             break;
                         
-                        case RoomType.Commodities:
+                        case RoomType.Kitchen:
                             if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCommodities))
                                 Task.Duration *= 2;
-                            break;
-                        */
-                        
-                        case RoomType.Greenhouse:
-                            break;
-                        
-                        case RoomType.Storage: 
-                            break;
-                        
-                        case RoomType.Ventilation:
                             break;
                     }
                     
