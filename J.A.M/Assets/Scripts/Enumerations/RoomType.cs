@@ -2,7 +2,7 @@
 {
     AI,
     Trajectory,
-    Medbay,
+    MedicalBay,
     Common,
     Kitchen,
     Artifact,

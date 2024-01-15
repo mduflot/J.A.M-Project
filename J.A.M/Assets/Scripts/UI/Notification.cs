@@ -320,7 +320,7 @@ namespace UI
                                 Task.Duration *= 2;
                             break;
 
-                        case RoomType.Medbay:
+                        case RoomType.MedicalBay:
                             if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedMedicalRoom))
                                 Task.Duration *= 2;
                             break;
