@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -13,7 +12,6 @@ public class DialogueLog : MonoBehaviour
 
     public void DisplayDialogueLog(List<SerializableTuple<string, string>> Dialogues)
     {
-        Debug.Log("Displaying dialogue log : " + Dialogues.Count + " dialogues");
         for (var indexDialogue = 0; indexDialogue < Dialogues.Count; indexDialogue++)
         {
             var dialogue = Dialogues[indexDialogue];
@@ -40,10 +38,10 @@ public class DialogueLog : MonoBehaviour
 
     public void ClearDialogueLog()
     {
-        foreach (var line in dialogueLines)
+        for (var index = 0; index < dialogueLines.Count; index++)
         {
-            Debug.Log("Destroying line");
-            Destroy(line);
+            var line = dialogueLines[index];
+            Destroy(line.gameObject);
         }
 
         dialogueLines.Clear();
