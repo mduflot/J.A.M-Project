@@ -284,7 +284,7 @@ namespace Managers
                         default:
                             if (simCharacter.tick >= simCharacter.ticksToEat)
                             {
-                                simCharacter.SendToRoom(RoomType.Greenhouse);
+                                simCharacter.SendToRoom(RoomType.Kitchen);
                                 simCharacter.simStatus = SimCharacter.SimStatus.GoToEat;
                                 simCharacter.tick = 0;
                             }

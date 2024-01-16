@@ -166,15 +166,88 @@ namespace UI
             {
                 if (!IsCancelled)
                 {
-                    if (taskLog == null || !Task.IsStarted)
+                    Task.Duration = AssistantCharacters.Count > 0
+                        ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
+                        : Task.Duration;
+                    
+                    switch (Task.Room)
                     {
-                        Task.Duration = AssistantCharacters.Count > 0
-                            ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count,
-                                Task.HelpFactor)
-                            : Task.Duration;
-                        Task.Duration *= TimeTickSystem.ticksPerHour;
-                    }
+                        case RoomType.Common:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCommonRoom))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.DockingBay:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedDockingBay))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.Power:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedElectricalRoom))
+                                Task.Duration *= 2;
+                            break;
 
+                        case RoomType.Trajectory:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedBridge))
+                                Task.Duration *= 2;
+                            break;
+
+                        case RoomType.MedicalBay:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedMedicalRoom))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.Cargo1:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCargoBays))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.Cargo2:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCargoBays))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.Cargo3:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCargoBays))
+                                Task.Duration *= 2;
+                            break;
+                            
+                        case RoomType.Military:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCamp))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.AI:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedAI))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.BedroomCaptain:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedBedrooms))
+                                Task.Duration *= 2;
+                            break;
+                            
+                        case RoomType.BedroomMusician:
+                            break;
+                        
+                        case RoomType.BedroomProfessor:
+                            break;
+                            
+                        case RoomType.Artifact:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedArtifactRoom))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.Kitchen:
+                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCommodities))
+                                Task.Duration *= 2;
+                            break;
+                        
+                        case RoomType.Bath:
+                            break;
+                    }
+                    
+                    Task.Duration *= TimeTickSystem.ticksPerHour;
                     Task.BaseDuration = Task.Duration;
                     taskLog = null;
                 }
@@ -335,93 +408,6 @@ namespace UI
                 for (int i = 0; i < outcomeEventArgs.Length; i++)
                 {
                     outcomeEvents[i] = OutcomeSystem.GenerateOutcomeEvent(outcomeEventArgs[i]);
-                }
-
-                if (!IsCancelled)
-                {
-                    Task.Duration = AssistantCharacters.Count > 0
-                        ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
-                        : Task.Duration;
-                    
-                    switch (Task.Room)
-                    {
-                        case RoomType.Common:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCommonRoom))
-                                Task.Duration *= 2;
-                            break;
-                        
-                        case RoomType.DockingBay:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedDockingBay))
-                                Task.Duration *= 2;
-                            break;
-                        
-                        case RoomType.Power:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedElectricalRoom))
-                                Task.Duration *= 2;
-                            break;
-
-                        case RoomType.Trajectory:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedBridge))
-                                Task.Duration *= 2;
-                            break;
-
-                        case RoomType.MedicalBay:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedMedicalRoom))
-                                Task.Duration *= 2;
-                            break;
-                        
-                        case RoomType.Cargo1:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCargoBays))
-                                Task.Duration *= 2;
-                            break;
-                        
-                        case RoomType.Cargo2:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCargoBays))
-                                Task.Duration *= 2;
-                            break;
-                        
-                        case RoomType.Cargo3:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCargoBays))
-                                Task.Duration *= 2;
-                            break;
-                            
-                        case RoomType.Military:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCamp))
-                                Task.Duration *= 2;
-                            break;
-                        
-                        case RoomType.AI:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedAI))
-                                Task.Duration *= 2;
-                            break;
-                        
-                        case RoomType.BedroomCaptain:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedBedrooms))
-                                Task.Duration *= 2;
-                            break;
-                            
-                        case RoomType.BedroomMusician:
-                            break;
-                        
-                        case RoomType.BedroomProfessor:
-                            break;
-                            
-                        case RoomType.Artifact:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedArtifactRoom))
-                                Task.Duration *= 2;
-                            break;
-                        
-                        case RoomType.Kitchen:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCommodities))
-                                Task.Duration *= 2;
-                            break;
-                        
-                        case RoomType.Bath:
-                            break;
-                    }
-                    
-                    Task.Duration *= TimeTickSystem.ticksPerHour;
-                    Task.BaseDuration = Task.Duration;
                 }
 
                 IsCancelled = false;
