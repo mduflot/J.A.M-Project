@@ -1054,7 +1054,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a0bca960178684cbf45d411ca29b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomOffset: 50
+  roomXOffset: 15
+  roomYOffset: 100
   roomDoors:
   - {fileID: 1704852146}
   - {fileID: 1011591870}
@@ -1856,7 +1857,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a0bca960178684cbf45d411ca29b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomOffset: 50
+  roomXOffset: 15
+  roomYOffset: 25
   roomDoors:
   - {fileID: 393613016}
   roomType: 14
@@ -3783,7 +3785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a0bca960178684cbf45d411ca29b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomOffset: 50
+  roomXOffset: 15
+  roomYOffset: 25
   roomDoors:
   - {fileID: 401578749}
   roomType: 15
@@ -5166,7 +5169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a0bca960178684cbf45d411ca29b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomOffset: 50
+  roomXOffset: 15
+  roomYOffset: 100
   roomDoors:
   - {fileID: 641066229}
   - {fileID: 1809632956}
@@ -5440,6 +5444,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 339062252183344559, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
+      propertyPath: roomYOffset
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 339062252183344559, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
       propertyPath: roomDoors.Array.data[0]
       value: 
       objectReference: {fileID: 1185086509}
@@ -5495,6 +5504,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 546627778955671349, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
+      propertyPath: roomYOffset
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 546627778955671349, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
       propertyPath: roomDoors.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -5542,22 +5556,22 @@ PrefabInstance:
     - target: {fileID: 602282818940796731, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 602282818940796731, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 602282818940796731, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 602282818940796731, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -102.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 702899783219473920, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
@@ -5582,6 +5596,11 @@ PrefabInstance:
     - target: {fileID: 736372874902781823, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: roomOffset
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 736372874902781823, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: roomYOffset
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 736372874902781823, guid: f4b0ad034b47349458511baeb5fff145,
@@ -5708,22 +5727,22 @@ PrefabInstance:
     - target: {fileID: 1261094278736095712, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1261094278736095712, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1261094278736095712, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1261094278736095712, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -172.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1435088804897447883, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
@@ -6669,6 +6688,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2296499542651437885, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
+      propertyPath: roomYOffset
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2296499542651437885, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
       propertyPath: roomDoors.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -6815,22 +6839,22 @@ PrefabInstance:
     - target: {fileID: 3002728193234690579, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3002728193234690579, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3002728193234690579, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3002728193234690579, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -242.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3040124399743478226, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
@@ -6841,6 +6865,11 @@ PrefabInstance:
         type: 3}
       propertyPath: roomOffset
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3040124399743478226, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: roomYOffset
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3040124399743478226, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
@@ -7116,6 +7145,11 @@ PrefabInstance:
         type: 3}
       propertyPath: roomOffset
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902497022776953823, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: roomYOffset
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3902497022776953823, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
@@ -7532,6 +7566,11 @@ PrefabInstance:
         type: 3}
       propertyPath: roomOffset
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4910798608286740456, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: roomYOffset
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4910798608286740456, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
@@ -8228,7 +8267,7 @@ PrefabInstance:
     - target: {fileID: 7751214115931913091, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00085391995
+      value: -0.000023841858
       objectReference: {fileID: 0}
     - target: {fileID: 8025172175911566407, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
@@ -8300,22 +8339,22 @@ PrefabInstance:
     - target: {fileID: 8393443191859325744, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8393443191859325744, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8393443191859325744, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8393443191859325744, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -32.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8423735103717916578, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
@@ -9237,7 +9276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a0bca960178684cbf45d411ca29b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomOffset: 50
+  roomXOffset: 15
+  roomYOffset: 15
   roomDoors: []
   roomType: 0
   presentCharacters: []
@@ -10662,7 +10702,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a0bca960178684cbf45d411ca29b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomOffset: 50
+  roomXOffset: 15
+  roomYOffset: 25
   roomDoors:
   - {fileID: 1365722267}
   roomType: 13
