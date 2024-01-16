@@ -276,8 +276,10 @@ namespace Managers
                         case SimCharacter.SimStatus.IdleEat:
                             if (simCharacter.tick >= simEatThreshold)
                             {
-                                if(character.IsWorking())
+                                if (character.IsWorking() || simCharacter.taskRoom != null)
+                                {
                                     simCharacter.SendToRoom(simCharacter.taskRoom.roomType);
+                                }
                                 else
                                     simCharacter.SendToIdleRoom();
                                 systems[2].gaugeValue -= 2;

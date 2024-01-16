@@ -425,12 +425,17 @@ namespace UI
 
             if (LeaderCharacters.Count > 0)
             {
-                if (LeaderCharacters[0].GetSimCharacter() != null)
-                {
-                    if (!LeaderCharacters[0].GetSimCharacter().IsBusy())
+                if (!LeaderCharacters[0].GetSimCharacter().IsBusy())
                         LeaderCharacters[0].GetSimCharacter().SendToRoom(Task.Room);
 
-                    LeaderCharacters[0].GetSimCharacter().taskRoom = SimPathing.FindRoomByRoomType(Task.Room);
+                LeaderCharacters[0].GetSimCharacter().taskRoom = SimPathing.FindRoomByRoomType(Task.Room);
+
+                for (int i = 0; i < AssistantCharacters.Count; i++)
+                {
+                    if (!AssistantCharacters[i].GetSimCharacter().IsBusy())
+                        AssistantCharacters[i].GetSimCharacter().SendToRoom(Task.Room);
+
+                    AssistantCharacters[i].GetSimCharacter().taskRoom = SimPathing.FindRoomByRoomType(Task.Room);
                 }
             }
 
@@ -545,12 +550,17 @@ namespace UI
 
             if (LeaderCharacters.Count == 0) return;
             
-            if (LeaderCharacters[0].GetSimCharacter() != null)
-            {
-                if(!LeaderCharacters[0].GetSimCharacter().IsBusy())
-                    LeaderCharacters[0].GetSimCharacter().SendToIdleRoom();
+            if(!LeaderCharacters[0].GetSimCharacter().IsBusy())
+                LeaderCharacters[0].GetSimCharacter().SendToIdleRoom();
 
-                LeaderCharacters[0].GetSimCharacter().taskRoom = null;
+            LeaderCharacters[0].GetSimCharacter().taskRoom = null;
+            
+            for (int i = 0; i < AssistantCharacters.Count; i++)
+            {
+                if(!AssistantCharacters[i].GetSimCharacter().IsBusy())
+                    AssistantCharacters[i].GetSimCharacter().SendToIdleRoom();
+
+                AssistantCharacters[i].GetSimCharacter().taskRoom = null;
             }
         }
 
@@ -583,10 +593,13 @@ namespace UI
 
             if (LeaderCharacters.Count == 0) return;
             
-            if (LeaderCharacters[0].GetSimCharacter() != null)
+            if(!LeaderCharacters[0].GetSimCharacter().IsBusy())
+                LeaderCharacters[0].GetSimCharacter().SendToIdleRoom();
+            
+            for (int i = 0; i < AssistantCharacters.Count; i++)
             {
-                if(!LeaderCharacters[0].GetSimCharacter().IsBusy())
-                    LeaderCharacters[0].GetSimCharacter().SendToIdleRoom();
+                if(!AssistantCharacters[i].GetSimCharacter().IsBusy())
+                    AssistantCharacters[i].GetSimCharacter().SendToIdleRoom();
             }
         }
 

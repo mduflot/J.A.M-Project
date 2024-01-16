@@ -83,32 +83,50 @@ public class SimCharacter : MonoBehaviour
         float lerpT = (1 - Mathf.Exp(-GameManager.Instance.SpaceshipManager.simMoveSpeed * Time.deltaTime)) * TimeTickSystem.timeScale;
         SimDoor door = SimPathing.FindDoorByID(currentRoomDoor);
         Vector3 pos = transform.position;
-        pos = Vector3.Lerp(pos, door.transform.position, lerpT);
+        //pos = Vector3.Lerp(pos, door.transform.position, lerpT);
+        pos += (door.transform.position - transform.position).normalized * GameManager.Instance.SpaceshipManager.simMoveSpeed;
         transform.position = pos;
     }
 
     private void IdleInRoom()
     {
         if (currentRoom == null) return;
+        
         if(taskRoom == null && simStatus != SimStatus.IdleEat && currentRoom != idleRoom)
             SendToIdleRoom();
         
+        
         float lerpT = (1 - Mathf.Exp(-GameManager.Instance.SpaceshipManager.simMoveSpeed * Time.deltaTime)) * TimeTickSystem.timeScale;
         Vector3 pos = transform.position;
-        pos = Vector3.Lerp(pos,
-            taskFurniture == null ? currentRoom.transform.position : taskFurniture.transform.position,
-            lerpT);
+
+        Vector3 newPos = currentRoom.transform.position;
+        int charIndex = currentRoom.presentCharacters.IndexOf(this);
+        newPos.x += currentRoom.roomXOffset * (charIndex - 3);
+        newPos.y -= currentRoom.roomYOffset;
+
+        if ((newPos - transform.position).magnitude < .5f) return;
+        
+        //pos = Vector3.Lerp(pos, taskFurniture == null ? newPos : taskFurniture.transform.position, lerpT);
+
+        pos += (newPos - transform.position).normalized * GameManager.Instance.SpaceshipManager.simMoveSpeed;
+        
         transform.position = pos;
     }
 
     public void SendToRoom(RoomType roomType)
     {
-        //if (roomType == currentRoom.roomType) return;
+        if (roomType == currentRoom.roomType) return;
+        
         //cancel last path
         doorPath.Clear();
+
+        SimRoom nextRoom = SimPathing.FindRoomByRoomType(roomType);
+        
         isIdle = false;
-        SimPathing.CreatePath(this, SimPathing.FindRoomByRoomType(roomType));
+        SimPathing.CreatePath(this, nextRoom);
         simStatus = SimStatus.GoToRoom;
+        currentRoom.presentCharacters.Remove(this);
+        nextRoom.presentCharacters.Add(this);
     }
 
     public void SendToIdleRoom()

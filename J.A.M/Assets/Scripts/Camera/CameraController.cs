@@ -7,6 +7,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float zoomSpeed;
     [SerializeField] private float maxZoom;
     [SerializeField] private float minZoom;
+    [SerializeField] private float maxXOffset;
+    [SerializeField] private float maxYOffset;
     [SerializeField] private GameObject menuContainer;
     [SerializeField] private GameObject cheatContainer;
 
@@ -82,8 +84,8 @@ public class CameraController : MonoBehaviour
 
     private Vector3 ClampCameraToBounds(Vector3 position)
     {
-        position = new Vector3(Mathf.Clamp(position.x, -750, 700),
-            Mathf.Clamp(position.y, -300, 300),
+        position = new Vector3(Mathf.Clamp(position.x, -maxXOffset, maxXOffset),
+            Mathf.Clamp(position.y, -maxYOffset, maxYOffset),
             Mathf.Clamp(position.z, minZoom, maxZoom));
         return position;
     }
