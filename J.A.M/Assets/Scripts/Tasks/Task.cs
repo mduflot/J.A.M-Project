@@ -25,10 +25,11 @@ namespace Tasks
         public List<CharacterBehaviour> leaderCharacters = new();
         public List<CharacterBehaviour> assistantCharacters = new();
         public string previewText;
+        public bool IsStarted;
 
         public Task(string name, string description, SSTaskStatus taskStatus, SSTaskType taskType, Sprite icon,
             float timeLeft, float duration, int mandatorySlots,
-            int optionalSlots, float helpFactor, RoomType room, List<Tuple<ConditionSO, string>> conditions)
+            int optionalSlots, float helpFactor, RoomType room, List<Tuple<ConditionSO, string>> conditions, bool isStarted = false)
         {
             Name = name;
             Description = description;
@@ -44,6 +45,7 @@ namespace Tasks
             Room = room;
             Conditions = conditions;
             previewText = "";
+            IsStarted = isStarted;
         }
     }
 }

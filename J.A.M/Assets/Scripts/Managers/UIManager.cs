@@ -16,7 +16,7 @@ namespace Managers
         private Dictionary<SystemType, GaugeUI> gaugeReferences = new();
         public Transform charactersUIParent;
         public List<CharacterUI> charactersUI;
-        private List<CharacterIcon> characterIcons = new();
+        public List<CharacterIcon> characterIcons = new();
         public CharacterUI characterUIPrefab;
         public Transform taskNotificationParent;
         public Transform taskParent;

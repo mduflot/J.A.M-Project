@@ -12,6 +12,7 @@ namespace SS.Data.Save
         [field: SerializeField] public SSStoryStatus StoryStatus { get; set; }
         [field: SerializeField] public SSStoryType StoryType { get; set; }
         [field: SerializeField] public bool IsFirstToPlay { get; set; }
+        [field: SerializeField] public bool IsReplayable { get; set; }
         [field: SerializeField] public ConditionSO Condition { get; set; }
         [field: SerializeField] public List<SSGroupSaveData> Groups { get; set; }
         [field: SerializeReference] public List<SSNodeSaveData> Nodes { get; set; }
@@ -19,13 +20,14 @@ namespace SS.Data.Save
         [field: SerializeField] public List<string> OldUngroupedNodeNames { get; set; }
         [field: SerializeField] public SerializableDictionary<string, List<string>> OldGroupedNodeNames { get; set; }
 
-        public void Initialize(string fileName, SSStoryStatus storyStatus, SSStoryType storyType, bool isFirstToPlay, ConditionSO condition)
+        public void Initialize(string fileName, SSStoryStatus storyStatus, SSStoryType storyType, bool isFirstToPlay, bool isReplayable, ConditionSO condition)
         {
             ID = System.Guid.NewGuid().ToString();
             FileName = fileName;
             StoryStatus = storyStatus;
             StoryType = storyType;
             IsFirstToPlay = isFirstToPlay;
+            IsReplayable = isReplayable;
             Condition = condition;
             Groups = new List<SSGroupSaveData>();
             Nodes = new List<SSNodeSaveData>();

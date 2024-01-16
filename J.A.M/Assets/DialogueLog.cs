@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -17,6 +16,7 @@ public class DialogueLog : MonoBehaviour
         {
             var dialogue = Dialogues[indexDialogue];
             var line = Instantiate(dialogueLinePrefab, dialogueLogContent);
+            dialogueLines.Add(line);
             if (dialogue.Item1 == "Sensor")
             {
                 line.DisplayDialogueLine(null, dialogue.Item2);
@@ -38,9 +38,10 @@ public class DialogueLog : MonoBehaviour
 
     public void ClearDialogueLog()
     {
-        foreach (var line in dialogueLines)
+        for (var index = 0; index < dialogueLines.Count; index++)
         {
-            Destroy(line);
+            var line = dialogueLines[index];
+            Destroy(line.gameObject);
         }
 
         dialogueLines.Clear();

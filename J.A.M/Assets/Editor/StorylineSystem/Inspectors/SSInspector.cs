@@ -25,6 +25,8 @@ namespace SS.Inspectors
         private SerializedProperty selectedNodeGroupIndexProperty;
         private SerializedProperty selectedNodeIndexProperty;
 
+        private SerializedProperty isCheatLauncherProperty;
+
         private void OnEnable()
         {
             currentStorylineProperty = serializedObject.FindProperty("currentStoryline");
@@ -38,6 +40,8 @@ namespace SS.Inspectors
 
             selectedNodeGroupIndexProperty = serializedObject.FindProperty("selectedNodeGroupIndex");
             selectedNodeIndexProperty = serializedObject.FindProperty("selectedNodeIndex");
+            
+            isCheatLauncherProperty = serializedObject.FindProperty("isCheatLauncher");
         }
 
         public override void OnInspectorGUI()
@@ -45,6 +49,7 @@ namespace SS.Inspectors
             serializedObject.Update();
 
             currentStorylineProperty.DrawPropertyField();
+            isCheatLauncherProperty.DrawPropertyField();
 
             DrawNodeContainerArea();
 

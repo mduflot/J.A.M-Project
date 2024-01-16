@@ -31,7 +31,8 @@ public class OutcomeData : MonoBehaviour
         Assistant,
         Crew,
         Ship,
-        Gauge
+        Gauge,
+        GaugeValue
     }
 
 }

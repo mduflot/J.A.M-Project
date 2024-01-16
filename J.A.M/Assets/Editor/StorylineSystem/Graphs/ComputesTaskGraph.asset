@@ -13,17 +13,18 @@ MonoBehaviour:
   m_Name: ComputesTaskGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: ComputesTask
-  <ID>k__BackingField: f7a08eba-68cd-4e13-b23f-5d73d75e545c
+  <ID>k__BackingField: bfe885f3-d70d-4e91-b567-cfbbd37d8b3e
   <StoryStatus>k__BackingField: 0
   <StoryType>k__BackingField: 2
   <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
   <Condition>k__BackingField: {fileID: 0}
   <Groups>k__BackingField: []
   <Nodes>k__BackingField:
-  - rid: 8851122693635834180
-  - rid: 8851122693635834181
-  - rid: 8851122693635834182
-  - rid: 8851122693635834183
+  - rid: 8851122716615377226
+  - rid: 8851122716615377227
+  - rid: 8851122716615377228
+  - rid: 8851122716615377229
   <OldGroupNames>k__BackingField: []
   <OldUngroupedNodeNames>k__BackingField:
   - TheCakeTrick
@@ -35,13 +36,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 8851122693635834180
+    - rid: 8851122716615377226
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 3028f91e-faa8-4829-b8d7-cac857d18d1b
         <Name>k__BackingField: TheCakeTrick
         <Choices>k__BackingField:
-        - rid: 8851122693635834184
+        - rid: 8851122716615377230
         <GroupID>k__BackingField: 
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 357, y: 173}
@@ -59,13 +60,13 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 5
         <Furniture>k__BackingField: 1
-    - rid: 8851122693635834181
+    - rid: 8851122716615377227
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 29252533-fa5c-4063-a0b8-a9b6750379d4
         <Name>k__BackingField: SelfRepair
         <Choices>k__BackingField:
-        - rid: 8851122693635834185
+        - rid: 8851122716615377231
         <GroupID>k__BackingField: 
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 741, y: 173}
@@ -82,13 +83,13 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 5
         <Furniture>k__BackingField: 1
-    - rid: 8851122693635834182
+    - rid: 8851122716615377228
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 30b91c3f-f3e8-4312-9ff9-cffe73daed31
         <Name>k__BackingField: EmergencyPlotting
         <Choices>k__BackingField:
-        - rid: 8851122693635834186
+        - rid: 8851122716615377232
         <GroupID>k__BackingField: 
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 1134, y: 173}
@@ -105,13 +106,13 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 5
         <Furniture>k__BackingField: 1
-    - rid: 8851122693635834183
+    - rid: 8851122716615377229
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: edb711e5-6698-4f87-b5aa-8b03c86dd01b
         <Name>k__BackingField: FortifiedFood
         <Choices>k__BackingField:
-        - rid: 8851122693635834187
+        - rid: 8851122716615377233
         <GroupID>k__BackingField: 
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 1538, y: 173}
@@ -128,7 +129,7 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 5
         <Furniture>k__BackingField: 1
-    - rid: 8851122693635834184
+    - rid: 8851122716615377230
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -136,7 +137,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 8f1f9420dda8eb74cb92b831a1c682d3,
           type: 2}
         <PreviewOutcome>k__BackingField: 'You will add :'
-    - rid: 8851122693635834185
+    - rid: 8851122716615377231
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -144,7 +145,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 84a4ea6eecce185428fefbdb9333c5c8,
           type: 2}
         <PreviewOutcome>k__BackingField: 'You will add :'
-    - rid: 8851122693635834186
+    - rid: 8851122716615377232
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -152,7 +153,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 0e7934f7329085646b90b75f62e15f2f,
           type: 2}
         <PreviewOutcome>k__BackingField: 'You will add :'
-    - rid: 8851122693635834187
+    - rid: 8851122716615377233
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice

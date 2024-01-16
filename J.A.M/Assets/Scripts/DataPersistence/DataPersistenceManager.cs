@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DataPersistenceManager : MonoBehaviour
 {
+    public bool IsNewGame;
+
     [Header("File Storage Config")]
     [SerializeField] private string fileName;
 
@@ -37,6 +39,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void NewGame()
     {
         gameData = new GameData();
+        IsNewGame = true;
         dataHandler.Save(gameData);
     }
 

@@ -154,7 +154,6 @@ namespace Managers
             {
                 gaugeValue = 0;
             }
-
             systemsDictionary[systemType].gaugeValue = gaugeValue;
         }
 
@@ -256,38 +255,41 @@ namespace Managers
 
                     character.IncreaseMood(moodIncrease);
                 }
-                simCharacter.tick++;
-                
+
                 //SimCharacter
-                switch (simCharacter.simStatus)
+                if (character.GetSimCharacter() != null)
                 {
-                    case SimCharacter.SimStatus.IdleEat:
-                        if (simCharacter.tick >= simEatThreshold)
-                        {
-                            if(character.IsWorking())
-                                simCharacter.SendToRoom(simCharacter.taskRoom.roomType);
-                            else
-                                simCharacter.SendToIdleRoom();
-                            systems[2].gaugeValue -= 2;
+                    simCharacter.tick++;
+                    switch (simCharacter.simStatus)
+                    {
+                        case SimCharacter.SimStatus.IdleEat:
+                            if (simCharacter.tick >= simEatThreshold)
+                            {
+                                if(character.IsWorking())
+                                    simCharacter.SendToRoom(simCharacter.taskRoom.roomType);
+                                else
+                                    simCharacter.SendToIdleRoom();
+                                systems[2].gaugeValue -= 2;
+                                simCharacter.tick = 0;
+                                simCharacter.ticksToEat = simHungerBaseThreshold +
+                                                          Random.Range((int)-TimeTickSystem.ticksPerHour * 2,
+                                                              (int)TimeTickSystem.ticksPerHour * 2);
+                            }
+                            break;
+                        
+                        case SimCharacter.SimStatus.GoToEat:
                             simCharacter.tick = 0;
-                            simCharacter.ticksToEat = simHungerBaseThreshold +
-                                                      Random.Range((int)-TimeTickSystem.ticksPerHour * 2,
-                                                          (int)TimeTickSystem.ticksPerHour * 2);
-                        }
-                        break;
-                    
-                    case SimCharacter.SimStatus.GoToEat:
-                        simCharacter.tick = 0;
-                        break;
-                    
-                    default:
-                        if (simCharacter.tick >= simCharacter.ticksToEat)
-                        {
-                            simCharacter.SendToRoom(RoomType.Greenhouse);
-                            simCharacter.simStatus = SimCharacter.SimStatus.GoToEat;
-                            simCharacter.tick = 0;
-                        }
-                        break;
+                            break;
+                        
+                        default:
+                            if (simCharacter.tick >= simCharacter.ticksToEat)
+                            {
+                                simCharacter.SendToRoom(RoomType.Greenhouse);
+                                simCharacter.simStatus = SimCharacter.SimStatus.GoToEat;
+                                simCharacter.tick = 0;
+                            }
+                            break;
+                    }
                 }
             }
 
