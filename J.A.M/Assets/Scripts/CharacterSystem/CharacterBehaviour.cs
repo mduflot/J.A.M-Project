@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Managers;
 using Tasks;
 using UI;
 using UnityEngine;
@@ -145,17 +146,32 @@ namespace CharacterSystem
 
         public float GetMood()
         {
-            return mood;
+            float finalMood = mood;
+            return finalMood;
         }
 
         public float GetMaxMood()
         {
-            return MaxMood;
+            float finalMaxMood = MaxMood;
+            finalMaxMood -=
+                GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits
+                    .ObstructedVentilation)
+                    ? 4
+                    : 0;
+            finalMaxMood -=
+                GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits
+                    .Malfunction)
+                    ? 4
+                    : 0;
+            return finalMaxMood;
         }
 
         public float GetVolition()
         {
-            return volition;
+            float finalVolition = volition;
+            finalVolition -= traits.GetNegativeTraits().HasFlag(TraitsData.NegativeTraits.Crippled) ? 3 : 0;
+            finalVolition -= traits.GetNegativeTraits().HasFlag(TraitsData.NegativeTraits.Scarred) ? 1 : 0;
+            return mood < finalVolition ? mood : finalVolition;
         }
 
         public float GetBaseVolition()

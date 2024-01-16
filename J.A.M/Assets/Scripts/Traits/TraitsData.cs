@@ -15,6 +15,12 @@ public class TraitsData
         Scientist = 32,
         Mechanic = 64,
         Civilian = 128,
+        Elrenda = 256,
+        Leisin = 512,
+        Malda = 1024,
+        Varus = 2048,
+        Lammy = 4096,
+        Seltis = 8192
     };
 
     [Flags]
@@ -26,6 +32,7 @@ public class TraitsData
         Cautious = 4,
         Curious = 8,
         Extroverted = 16,
+        CalmUnderPressure = 32
     };
 
     [Flags]
@@ -36,6 +43,12 @@ public class TraitsData
         Old = 2,
         ShellShocked = 4,
         HighOnFumes = 8,
+        Hallucinating = 16,
+        Distrustful = 32,
+        Crippled = 34,
+        Parasited = 128,
+        LockedUp = 256,
+        Scarred = 512,
     }
 
     [Flags]
@@ -59,6 +72,25 @@ public class TraitsData
         SpeedMode = 16,
         FightMode = 32,
         StealthMode = 64,
+        DamagedMedicalRoom = 128,
+        Restriction = 256,
+        ObstructedVentilation = 512,
+        Rot = 1024,
+        Malfunction = 2048,
+        BadInsulation = 4096,
+        Leak = 8192,
+        WeakenedHull = 16384,
+        DamagedRations = 32768,
+        DamagedElectricalRoom = 65536,
+        DamagedDockingBay = 131072,
+        DamagedCargoBays = 262144,
+        DamagedCamp = 524288,
+        DamagedBridge = 1048576,
+        DamagedAI = 2097152,
+        DamagedCommonRoom = 4194304,
+        DamagedBedrooms = 8388608,
+        DamagedArtifactRoom = 16777216,
+        DamagedCommodities = 33554432,
     }
     
     [Flags]
@@ -66,6 +98,7 @@ public class TraitsData
     {
         None = 0,
         WreckedPirateShip = 1,
+        ArtifactInstalled = 2,
     }
     
     public enum TraitOperator
@@ -77,7 +110,7 @@ public class TraitsData
         NOT
     }
     
-    [System.Serializable]
+    [Serializable]
     public class Traits
     {
         [SerializeField] public SerializableTuple<Job, PositiveTraits, NegativeTraits> traits;

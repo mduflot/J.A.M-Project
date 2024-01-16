@@ -71,7 +71,37 @@ namespace Managers
             {
                 if (system.gaugeValue < 0) system.gaugeValue = 0;
                 else
-                    system.gaugeValue -= system.decreaseSpeed / TimeTickSystem.ticksPerHour;
+                {
+                    float decreaseValue = system.decreaseSpeed;
+                    switch (system.type)
+                    {
+                        case SystemType.Food:
+                            if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.Rot))
+                                decreaseValue += system.decreaseSpeed * 3 / 10;
+                            if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.Restriction))
+                                decreaseValue += system.decreaseSpeed / 10;
+                            if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedRations))
+                                decreaseValue += system.decreaseSpeed * 3 / 10;
+                            break;
+                                
+                        case SystemType.Hull:
+                            if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.WeakenedHull))
+                                decreaseValue += system.decreaseSpeed * 3 / 10;
+                            break;
+                                
+                        case SystemType.Power:
+                            if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.BadInsulation))
+                                decreaseValue += system.decreaseSpeed * 3 / 10;
+                            break;
+                                
+                        case SystemType.Trajectory:
+                            if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.Leak))
+                                decreaseValue += .2f;
+                            break;
+                    }
+                    system.gaugeValue -= decreaseValue / TimeTickSystem.ticksPerHour;
+                }
+                
                 GameManager.Instance.UIManager.UpdateGauges(system.type, system.gaugeValue, system.previewGaugeValue);
             }
 
@@ -254,7 +284,7 @@ namespace Managers
                         default:
                             if (simCharacter.tick >= simCharacter.ticksToEat)
                             {
-                                simCharacter.SendToRoom(RoomType.Greenhouse);
+                                simCharacter.SendToRoom(RoomType.Kitchen);
                                 simCharacter.simStatus = SimCharacter.SimStatus.GoToEat;
                                 simCharacter.tick = 0;
                             }

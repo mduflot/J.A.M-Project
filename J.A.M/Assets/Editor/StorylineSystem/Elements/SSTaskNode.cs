@@ -38,7 +38,7 @@ namespace SS.Elements
             MandatorySlots = 1;
             OptionalSlots = 0;
             TaskHelpFactor = 0.75f;
-            Room = RoomType.Flight;
+            Room = RoomType.Trajectory;
             Furniture = FurnitureType.Console;
 
             SSChoiceTaskSaveData firstChoiceData = new SSChoiceTaskSaveData()
