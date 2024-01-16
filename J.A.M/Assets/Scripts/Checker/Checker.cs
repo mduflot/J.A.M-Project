@@ -78,9 +78,17 @@ public class Checker : MonoBehaviour, IDataPersistence
         isAlreadyWaiting = false;
         if (DataPersistenceManager.Instance.IsNewGame)
         {
-            ChooseNewStoryline(SSStoryType.Principal);
+            TimeTickSystem.OnTick += GeneratePrincipalEventOnFirstDay;
             DataPersistenceManager.Instance.IsNewGame = false;
         }
+    }
+    
+    private void GeneratePrincipalEventOnFirstDay(object sender, TimeTickSystem.OnTickEventArgs e)
+    {
+        if (e.tick % (TimeTickSystem.ticksPerHour * 1) != 0) return;
+
+        ChooseNewStoryline(SSStoryType.Principal);
+        TimeTickSystem.OnTick -= GeneratePrincipalEventOnFirstDay;
     }
 
     public void GenerateNewEvent()
