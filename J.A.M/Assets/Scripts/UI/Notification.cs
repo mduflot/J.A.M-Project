@@ -346,12 +346,15 @@ namespace UI
                 outcomeEvents = Array.Empty<OutcomeSystem.OutcomeEvent>();
             }
 
-            if (LeaderCharacters[0].GetSimCharacter() != null)
+            if (LeaderCharacters.Count > 0)
             {
-                if(!LeaderCharacters[0].GetSimCharacter().IsBusy())
-                    LeaderCharacters[0].GetSimCharacter().SendToRoom(Task.Room);
+                if (LeaderCharacters[0].GetSimCharacter() != null)
+                {
+                    if (!LeaderCharacters[0].GetSimCharacter().IsBusy())
+                        LeaderCharacters[0].GetSimCharacter().SendToRoom(Task.Room);
 
-                LeaderCharacters[0].GetSimCharacter().taskRoom = SimPathing.FindRoomByRoomType(Task.Room);
+                    LeaderCharacters[0].GetSimCharacter().taskRoom = SimPathing.FindRoomByRoomType(Task.Room);
+                }
             }
 
             if (Task.TaskType == SSTaskType.Permanent) TimeTickSystem.OnTick += AddOutcomeOnTick;
