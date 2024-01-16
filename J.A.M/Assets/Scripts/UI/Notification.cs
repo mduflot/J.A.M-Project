@@ -48,6 +48,11 @@ namespace UI
             camera = Camera.main;
         }
 
+        private void OnDisable()
+        {
+            TimeTickSystem.OnTick -= AddOutcomeOnTick;
+        }
+
         public void OnPointerDown(PointerEventData eventData)
         {
             Display();
@@ -475,7 +480,6 @@ namespace UI
         {
             for (uint i = 0; i < outcomeEvents.Length; i++)
             {
-                Debug.Log($"ValueToAdd : {outcomeEventArgs[i].value}");
                 outcomeEvents[i].Invoke(outcomeEventArgs[i]);
             }
         }

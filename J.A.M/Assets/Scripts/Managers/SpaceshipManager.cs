@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using CharacterSystem;
 using SS.Enumerations;
 using Tasks;
 using UI;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -41,6 +43,15 @@ namespace Managers
             InitializeSystems();
             notificationPool = new Pool<GameObject>(taskNotificationPrefab, 5);
             DataPersistenceManager.Instance.InitializeGame();
+        }
+
+        private void OnDisable()
+        {
+            TimeTickSystem.OnTick -= UpdateSystems;
+            TimeTickSystem.OnTick -= UpdateTasks;
+            TimeTickSystem.OnTick -= UpdateCharacters;
+            TimeTickSystem.OnTick -= GenerateSecondaryEventOnFirstDay;
+            activeTasks.Clear();
         }
 
         private void Initialize()

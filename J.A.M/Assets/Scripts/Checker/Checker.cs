@@ -76,7 +76,11 @@ public class Checker : MonoBehaviour, IDataPersistence
         allStorylines.AddRange(principalStorylines);
         allStorylines.AddRange(secondaryStorylines);
         isAlreadyWaiting = false;
-        if (DataPersistenceManager.Instance.IsNewGame) ChooseNewStoryline(SSStoryType.Principal);
+        if (DataPersistenceManager.Instance.IsNewGame)
+        {
+            ChooseNewStoryline(SSStoryType.Principal);
+            DataPersistenceManager.Instance.IsNewGame = false;
+        }
     }
 
     public void GenerateNewEvent()
