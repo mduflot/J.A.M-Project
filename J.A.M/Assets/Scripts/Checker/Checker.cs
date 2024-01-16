@@ -363,6 +363,9 @@ public class Checker : MonoBehaviour, IDataPersistence
             case OutcomeData.OutcomeTarget.Gauge:
                 validateCondition = ConditionSystem.CheckGaugeCondition(condition);
                 break;
+            case OutcomeData.OutcomeTarget.GaugeValue:
+                validateCondition = ConditionSystem.CheckGaugeValueCondition(condition);
+                break;
             case OutcomeData.OutcomeTarget.Crew:
                 validateCondition = ConditionSystem.CheckCrewCondition(condition);
                 break;
