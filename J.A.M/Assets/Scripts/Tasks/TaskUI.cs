@@ -15,8 +15,7 @@ namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-        [Header("Task")]
-        [SerializeField] private TextMeshProUGUI titleText;
+        [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI timeLeftText;
         [SerializeField] private GameObject timeLeftObject;
         [SerializeField] private Transform startButtonObject;
@@ -31,11 +30,9 @@ namespace Tasks
         [SerializeField] private DialogueLog dialogueLog;
         [SerializeField] private GameObject separator;
 
-        [Header("Dialogues")]
-        [SerializeField] private GameObject dialogueContainer;
+        [Header("Dialogues")] [SerializeField] private GameObject dialogueContainer;
 
-        [Header("Values")]
-        [SerializeField] private float timeLeft;
+        [Header("Values")] [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
 
         private Notification notification;
@@ -74,7 +71,8 @@ namespace Tasks
             animator = GetComponent<Animator>();
         }
 
-        public void Initialize(Notification n, CharacterIcon icon = null, bool needToDisplay = true, TaskLog taskLog = null)
+        public void Initialize(Notification n, CharacterIcon icon = null, bool needToDisplay = true,
+            TaskLog taskLog = null)
         {
             notification = n;
             titleText.text = notification.Task.Name;
@@ -130,6 +128,7 @@ namespace Tasks
                     }
                 }
             }
+
             if (notification.Task.TaskType != SSTaskType.Timed)
             {
                 startButtonObject.localPosition =
@@ -204,7 +203,7 @@ namespace Tasks
                 for (int index = 0; index < notification.Task.Conditions.Count; index++)
                 {
                     bool condition = CheckTarget(notification.Task.Conditions[index].Item1);
-                    
+
                     if (!condition && notification.Task.TaskType == SSTaskType.Compute)
                     {
                         previewOutcomeText.text = "Condition not met";
@@ -214,7 +213,7 @@ namespace Tasks
                     {
                         startButton.GetComponentInChildren<Button>().interactable = true;
                     }
-                    
+
                     if (condition)
                     {
                         previewOutcomeText.text = null;
@@ -370,9 +369,10 @@ namespace Tasks
                     if (characterSlots[0].icon.character.GetMood() < characterSlots[0].icon.character.GetVolition())
                     {
                         valueVolition /= 2;
-                        previewOutcomeText.text += $"<color=#ff00ffff>Bad Mood: - {valueVolition.ToString("F2")}</color>\n";
+                        previewOutcomeText.text +=
+                            $"<color=#ff00ffff>Bad Mood: - {valueVolition.ToString("F2")}</color>\n";
                     }
-                    
+
                     var volition =
                         outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add ? valueVolition : -valueVolition;
 
@@ -532,9 +532,14 @@ namespace Tasks
                     condition = ConditionSystem.CheckGaugeCondition(conditionSO);
                     break;
 
+                case OutcomeData.OutcomeTarget.GaugeValue:
+                    condition = ConditionSystem.CheckGaugeValueCondition(conditionSO);
+                    break;
+
                 case OutcomeData.OutcomeTarget.Ship:
                     condition = ConditionSystem.CheckSpaceshipCondition(conditionSO);
                     break;
+
                 case OutcomeData.OutcomeTarget.None:
                     condition = true;
                     break;
@@ -555,6 +560,7 @@ namespace Tasks
                     if (!condition) return;
                 }
             }
+
             if (CharactersWorking()) return;
             notification.OnStart(characterSlots, gaugesOutcomes);
             taskStarted = true;
@@ -592,7 +598,8 @@ namespace Tasks
                 slot.gameObject.SetActive(false);
             }
 
-            if ((notification.Task.TaskType.Equals(SSTaskType.Permanent) || notification.Task.TaskType.Equals(SSTaskType.Compute)) && !taskStarted) CloseNotification();
+            if ((notification.Task.TaskType.Equals(SSTaskType.Permanent) ||
+                 notification.Task.TaskType.Equals(SSTaskType.Compute)) && !taskStarted) CloseNotification();
             TimeTickSystem.ModifyTimeScale(1);
             previewOutcomeText.text = null;
             characterSlots.Clear();
@@ -684,7 +691,7 @@ namespace Tasks
             string tagBuffer = "";
             bool bufferTag = false;
             text.text = tempText;
-            
+
             while (letterIndex < textToDisplay.Length)
             {
                 //If tag-beginning character is parsed, start buffering the tag
@@ -700,6 +707,7 @@ namespace Tasks
                     tagBuffer = ""; //Reset buffer in case of multiple tags.
                     continue;
                 }
+
                 //If buffering tag, write to buffer instead of tempText and skip waiting
                 if (bufferTag)
                 {
@@ -707,7 +715,7 @@ namespace Tasks
                     letterIndex++;
                     continue;
                 }
-                
+
                 yield return new WaitForSeconds(speed);
                 tempText += textToDisplay[letterIndex];
                 text.text = tempText;

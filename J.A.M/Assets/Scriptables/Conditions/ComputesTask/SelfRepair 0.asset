@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f3a298838b420346a8b6588d8248e9c, type: 3}
-  m_Name: FortifiedFood
+  m_Name: SelfRepair 0
   m_EditorClassIdentifier: 
   BaseCondition:
-    target: 5
+    target: 6
     Traits:
       traits:
         Item1: 0
@@ -21,12 +21,15 @@ MonoBehaviour:
         Item3: 0
     SpaceshipTraits: 0
     HiddenSpaceshipTraits: 0
-    GaugeValue: 1
+    GaugeValue: 0
+    GaugeValueToCheck: 35
   targetStat: 0
   statComparison: 0
   statThreshold: 0
   targetGauge: 1
   supplementaryConditions:
-    list: []
+    list:
+    - Key: 0
+      Value: {fileID: 11400000, guid: a8d9fa756622a6e4faf7a3d0c06b46c1, type: 2}
   additionnalConditions: []
-  outcomes: {fileID: 11400000, guid: 4f7b8c2636ba57448874295d6c1ce2ff, type: 2}
+  outcomes: {fileID: 11400000, guid: 215ebe9a31d22394abf04a8fb6e56647, type: 2}
