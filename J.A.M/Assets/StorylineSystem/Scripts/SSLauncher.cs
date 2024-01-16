@@ -314,9 +314,9 @@ namespace SS
                 }
                 case SSSpeakerType.Sensor:
                 {
-                    for (int index = 0; index < spaceshipManager.GetRoom(RoomType.Trajectory).roomObjects.Length; index++)
+                    for (int index = 0; index < spaceshipManager.GetRoom(RoomType.Common).roomObjects.Length; index++)
                     {
-                        var furniture = spaceshipManager.GetRoom(RoomType.Trajectory).roomObjects[index];
+                        var furniture = spaceshipManager.GetRoom(RoomType.Common).roomObjects[index];
                         if (furniture.furnitureType == FurnitureType.Console)
                         {
                             var sensor = furniture.transform;

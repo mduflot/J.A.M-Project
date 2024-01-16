@@ -14,8 +14,8 @@ public class Checker : MonoBehaviour, IDataPersistence
 {
     public static Checker Instance { get; private set; }
     public Pool<GameObject> launcherPool;
-    public List<SSLauncher> activeLaunchers;
-    public List<StorylineLog> allStorylineLogs;
+    [HideInInspector] public List<SSLauncher> activeLaunchers;
+    [HideInInspector] public List<StorylineLog> allStorylineLogs;
 
     [SerializeField] private List<SSCampaignSO> ssCampaigns;
     [SerializeField] private GameObject presentationContainer;

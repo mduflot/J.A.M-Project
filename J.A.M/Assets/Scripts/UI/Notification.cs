@@ -364,7 +364,6 @@ namespace UI
                             if (Task.TaskType == SSTaskType.Permanent)
                             {
                                 outcomeEventArgs[i].value /= Task.Duration;
-                                Debug.Log($"ValueGauge: {outcomeEventArgs[i].value}");
                             }
 
                             break;
