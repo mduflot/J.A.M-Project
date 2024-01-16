@@ -226,6 +226,11 @@ namespace UI
                             if (!ConditionSystem.CheckGaugeCondition(cond))
                                 continue;
                             break;
+                        
+                        case OutcomeData.OutcomeTarget.GaugeValue:
+                            if (!ConditionSystem.CheckGaugeValueCondition(cond))
+                                continue;
+                            break;
 
                         case OutcomeData.OutcomeTarget.None:
                             break;
@@ -370,6 +375,9 @@ namespace UI
                     break;
                 case OutcomeData.OutcomeTarget.Gauge:
                     validateCondition = ConditionSystem.CheckGaugeCondition(taskCondition);
+                    break;
+                case OutcomeData.OutcomeTarget.GaugeValue:
+                    validateCondition = ConditionSystem.CheckGaugeValueCondition(taskCondition);
                     break;
                 case OutcomeData.OutcomeTarget.Crew:
                     validateCondition = ConditionSystem.CheckCrewCondition(taskCondition);
