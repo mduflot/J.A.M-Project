@@ -204,13 +204,14 @@ namespace Tasks
                 {
                     bool condition = CheckTarget(notification.Task.Conditions[index].Item1);
 
-                    if (!condition && notification.Task.TaskType == SSTaskType.Compute)
+                    if ((!condition && notification.Task.TaskType == SSTaskType.Compute) || (characterSlots[0].icon == null && notification.Task.TaskType == SSTaskType.Untimed))
                     {
                         previewOutcomeText.text = "Condition not met";
                         startButton.GetComponentInChildren<Button>().interactable = false;
                     }
                     else
                     {
+                        previewOutcomeText.text = null;
                         startButton.GetComponentInChildren<Button>().interactable = true;
                     }
 
