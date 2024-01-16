@@ -387,6 +387,11 @@ namespace UI
                 outcomeEventArgs = Array.Empty<OutcomeSystem.OutcomeEventArgs>();
                 outcomeEvents = Array.Empty<OutcomeSystem.OutcomeEvent>();
             }
+            
+            if(!LeaderCharacters[0].GetSimCharacter().IsBusy())
+                LeaderCharacters[0].GetSimCharacter().SendToRoom(Task.Room);
+
+            LeaderCharacters[0].GetSimCharacter().taskRoom = SimPathing.FindRoomByRoomType(Task.Room);
         }
 
         private bool RouteCondition(OutcomeData.OutcomeTarget target)
@@ -470,6 +475,11 @@ namespace UI
             spaceshipManager.notificationPool.AddToPool(gameObject);
             spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             IsStarted = false;
+            
+            if(!LeaderCharacters[0].GetSimCharacter().IsBusy())
+                LeaderCharacters[0].GetSimCharacter().SendToIdleRoom();
+
+            LeaderCharacters[0].GetSimCharacter().taskRoom = null;
         }
 
         public void OnCancel()
@@ -498,6 +508,7 @@ namespace UI
                 launcher.RunUntimedNodeCancel(this, Task, taskNode);
                 spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             }
+            LeaderCharacters[0].GetSimCharacter().SendToIdleRoom();
         }
 
         private void ResetCharacters()

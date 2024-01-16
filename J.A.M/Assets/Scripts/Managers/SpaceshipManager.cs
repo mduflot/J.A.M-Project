@@ -26,7 +26,12 @@ namespace Managers
 
         [SerializeField] private float hourlyMoodLossGaugeEmpty = 0.75f;
         public float moodLossOnCancelTask = 10.0f;
-    
+
+        [Header("Sim Values")]
+        public float simMoveSpeed = .9f;
+        public int simHungerBaseThreshold = 576;
+        [SerializeField] private int simEatThreshold = 192;
+        
         private Dictionary<SystemType, ShipSystem> systemsDictionary = new();
         private Dictionary<RoomType, Room> roomsDictionary = new();
         
@@ -234,8 +239,10 @@ namespace Managers
 
         private void UpdateCharacters(object sender, TimeTickSystem.OnTickEventArgs e)
         {
+            //CharacterBehaviour
             foreach (var character in characters)
             {
+                SimCharacter simCharacter = character.GetSimCharacter();
                 if (!character.IsWorking())
                 {
                     float moodIncrease = hourlyMoodGain / TimeTickSystem.ticksPerHour;
@@ -248,6 +255,39 @@ namespace Managers
                     }
 
                     character.IncreaseMood(moodIncrease);
+                }
+                simCharacter.tick++;
+                
+                //SimCharacter
+                switch (simCharacter.simStatus)
+                {
+                    case SimCharacter.SimStatus.IdleEat:
+                        if (simCharacter.tick >= simEatThreshold)
+                        {
+                            if(character.IsWorking())
+                                simCharacter.SendToRoom(simCharacter.taskRoom.roomType);
+                            else
+                                simCharacter.SendToIdleRoom();
+                            systems[2].gaugeValue -= 2;
+                            simCharacter.tick = 0;
+                            simCharacter.ticksToEat = simHungerBaseThreshold +
+                                                      Random.Range((int)-TimeTickSystem.ticksPerHour * 2,
+                                                          (int)TimeTickSystem.ticksPerHour * 2);
+                        }
+                        break;
+                    
+                    case SimCharacter.SimStatus.GoToEat:
+                        simCharacter.tick = 0;
+                        break;
+                    
+                    default:
+                        if (simCharacter.tick >= simCharacter.ticksToEat)
+                        {
+                            simCharacter.SendToRoom(RoomType.Greenhouse);
+                            simCharacter.simStatus = SimCharacter.SimStatus.GoToEat;
+                            simCharacter.tick = 0;
+                        }
+                        break;
                 }
             }
 
