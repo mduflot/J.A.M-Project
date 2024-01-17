@@ -5,6 +5,7 @@ namespace SS.Enumerations
         Dialogue,
         Task,
         Time,
-        Sound
+        Sound,
+        Popup
     }
 }

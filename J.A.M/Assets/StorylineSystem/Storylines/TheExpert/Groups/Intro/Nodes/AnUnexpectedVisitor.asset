@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: AnUnexpectedVisitor
   <Choices>k__BackingField:
-  - rid: 8851122716615377859
-  - rid: 8851122716615377860
+  - rid: 1640970927817097274
+  - rid: 1640970927817097275
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: A small human leisure vessel requests to dock in.
@@ -31,10 +31,11 @@ MonoBehaviour:
   <TaskHelpFactor>k__BackingField: 0.75
   <Room>k__BackingField: 7
   <Furniture>k__BackingField: 0
+  <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 8851122716615377859
+    - rid: 1640970927817097274
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -44,7 +45,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: will open the docking bay for them and welcome
           them aboard.
-    - rid: 8851122716615377860
+    - rid: 1640970927817097275
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: LastChoice

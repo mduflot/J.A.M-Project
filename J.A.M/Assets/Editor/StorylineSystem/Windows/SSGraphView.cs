@@ -125,7 +125,7 @@ namespace SS.Windows
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Dialogue)", SSNodeType.Dialogue));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Task)", SSNodeType.Task));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Time)", SSNodeType.Time));
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Sound)", SSNodeType.Sound));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Popup)", SSNodeType.Popup));
 
             this.AddManipulator(CreateGroupContextualMenu());
         }

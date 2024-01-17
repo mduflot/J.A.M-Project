@@ -38,9 +38,12 @@ namespace Managers
         
         private Dictionary<SystemType, ShipSystem> systemsDictionary = new();
         private Dictionary<RoomType, Room> roomsDictionary = new();
+
+        public bool IsInTutorial;
         
         private void Start()
         {
+            if (DataPersistenceManager.Instance.IsNewGame) IsInTutorial = true;
             Initialize();
             InitializeSystems();
             notificationPool = new Pool<GameObject>(taskNotificationPrefab, 5);
@@ -115,7 +118,7 @@ namespace Managers
                     system.gaugeValue -= decreaseValue / TimeTickSystem.ticksPerHour;
                 }
                 
-                GameManager.Instance.UIManager.UpdateGauges(system.type, system.gaugeValue, system.previewGaugeValue);
+                if (!IsInTutorial) GameManager.Instance.UIManager.UpdateGauges(system.type, system.gaugeValue, system.previewGaugeValue);
             }
 
             GameManager.Instance.UIManager.UpdateInGameDate(TimeTickSystem.GetTimeAsInGameDate(e));
@@ -173,7 +176,8 @@ namespace Managers
         private void GenerateSecondaryEventOnFirstDay(object sender, TimeTickSystem.OnTickEventArgs e)
         {
             if (e.tick % (TimeTickSystem.ticksPerHour * 24) != 0) return;
-
+            if (IsInTutorial) return;
+            
             Checker.Instance.ChooseNewStoryline(SSStoryType.Secondary);
             TimeTickSystem.OnTick -= GenerateSecondaryEventOnFirstDay;
         }
