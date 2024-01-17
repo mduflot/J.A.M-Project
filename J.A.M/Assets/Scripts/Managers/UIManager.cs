@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CharacterSystem;
+using SS;
 using Tasks;
 using TMPro;
 using UI;
@@ -26,6 +27,10 @@ namespace Managers
         [SerializeField] private Sprite redArrow;
         [SerializeField] private Sprite greenArrow;
         public CharacterInfoUI characterInfoUI;
+        public Popup PopupHelp;
+        public GameObject TasksMenu;
+        public List<GameObject> GaugesMenu;
+        public GameObject SpaceshipMenu;
     
         [Serializable] 
         public struct Gauges

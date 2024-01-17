@@ -78,6 +78,13 @@ public class Checker : MonoBehaviour, IDataPersistence
         isAlreadyWaiting = false;
         if (DataPersistenceManager.Instance.IsNewGame)
         {
+            GameManager.Instance.UIManager.TasksMenu.SetActive(false);
+            GameManager.Instance.UIManager.SpaceshipMenu.SetActive(false);
+            for (int index = 0; index < GameManager.Instance.UIManager.GaugesMenu.Count; index++)
+            {
+                var gauge = GameManager.Instance.UIManager.GaugesMenu[index];
+                gauge.SetActive(false);
+            }
             TimeTickSystem.OnTick += GeneratePrincipalEventOnFirstDay;
             DataPersistenceManager.Instance.IsNewGame = false;
         }

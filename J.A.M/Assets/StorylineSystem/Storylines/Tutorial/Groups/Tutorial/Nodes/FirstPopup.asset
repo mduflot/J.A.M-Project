@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7dc82bf72f4c909a330508245e176e, type: 3}
+  m_Name: FirstPopup
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: FirstPopup
+  <Choices>k__BackingField:
+  - rid: 1640970927817097363
+  <NodeType>k__BackingField: 4
+  <IsStartingNode>k__BackingField: 1
+  <Text>k__BackingField: Voulez-vous faire le tutoriel
+  <PopupUIType>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 1640970927817097363
+      type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 226bf8d5eba352a4a9a739d75bf676b6,
+          type: 2}

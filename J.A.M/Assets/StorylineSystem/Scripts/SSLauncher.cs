@@ -298,7 +298,7 @@ namespace SS
         }
 
         #region Dialogue
-        
+
         private void RunNode(SSDialogueNodeSO nodeSO)
         {
             CharacterBehaviour actualSpeaker;
@@ -345,7 +345,9 @@ namespace SS
                 }
                 case SSSpeakerType.Expert:
                 {
-                    for (int index = 0; index < spaceshipManager.GetRoom(RoomType.DockingBay).roomObjects.Length; index++)
+                    for (int index = 0;
+                         index < spaceshipManager.GetRoom(RoomType.DockingBay).roomObjects.Length;
+                         index++)
                     {
                         var furniture = spaceshipManager.GetRoom(RoomType.DockingBay).roomObjects[index];
                         if (furniture.furnitureType == FurnitureType.PortHole)
@@ -709,7 +711,7 @@ namespace SS
             StartCoroutine(DisplayDialogue(character.speaker,
                 character.GetCharacterData().firstName, nodeSO));
         }
-        
+
         private IEnumerator DisplayDialogue(Speaker speaker, string characterName, SSDialogueNodeSO nodeSO)
         {
             nodeSO.IsCompleted = false;
@@ -776,11 +778,11 @@ namespace SS
 
             CheckNodeType(nodeSO.Choices.First().NextNode);
         }
-        
+
         #endregion
 
         #region Cancel
-        
+
         public void RunTimedNodeCancel(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
         {
             StartCoroutine(WaitTimedRunCancelNode(notification, actualTask, taskNode));
@@ -790,7 +792,7 @@ namespace SS
         {
             StartCoroutine(WaitUntimedRunCancelNode(notification, actualTask, taskNode));
         }
-        
+
         private IEnumerator WaitTimedRunCancelNode(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
         {
             yield return new WaitUntil(() => IsCancelled == false);
@@ -805,11 +807,11 @@ namespace SS
             notification.Initialize(actualTask, taskNode, spaceshipManager, this, dialogues);
             StartCoroutine(WaiterTask(taskNode, actualTask));
         }
-        
+
         #endregion
 
         #region Time
-        
+
         private void RunNode(SSTimeNodeSO nodeSO)
         {
             timeNode = nodeSO;
@@ -858,9 +860,9 @@ namespace SS
         }
 
         #endregion
-        
+
         #region Task
-        
+
         private IEnumerator RunNode(SSTaskNodeSO nodeSO, CharacterIcon icon = null, TaskLog taskToPlay = null)
         {
             if (nodeSO.TaskType.Equals(SSTaskType.Permanent))
@@ -870,6 +872,7 @@ namespace SS
                     yield break;
                 }
             }
+
             if (task != null && taskToPlay == null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
             var room = spaceshipManager.GetRoom(nodeSO.Room);
             var notificationGO = spaceshipManager.notificationPool.GetFromPool();
@@ -901,7 +904,8 @@ namespace SS
                 {
                     task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
                         taskToPlay.TimeLeft, taskToPlay.Duration,
-                        nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room, nodeSO.IsTaskTutorial,
+                        nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
+                        nodeSO.IsTaskTutorial,
                         conditions, taskToPlay.IsStarted);
                     notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues, taskToPlay);
                 }
@@ -909,7 +913,8 @@ namespace SS
                 {
                     task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
                         nodeSO.TimeLeft, nodeSO.Duration,
-                        nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room, nodeSO.IsTaskTutorial,
+                        nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
+                        nodeSO.IsTaskTutorial,
                         conditions);
                     notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
                 }
@@ -921,7 +926,7 @@ namespace SS
                 StartCoroutine(WaiterTask(nodeSO, task));
             }
         }
-        
+
         private IEnumerator WaiterTask(SSTaskNodeSO nodeSO, Task task)
         {
             var notification = spaceshipManager.GetTaskNotification(task);
@@ -967,18 +972,74 @@ namespace SS
 
             CheckNodeType(nodeSO.Choices[task.conditionIndex].NextNode);
         }
-        
+
         #endregion
 
+        #region Popup
+        
         private void RunNode(SSPopupNodeSO nodeSO)
         {
-            // TODO - Popup Object
-            StartCoroutine(WaitingPopup());
+            GameManager.Instance.UIManager.PopupHelp.Initialize(nodeSO.Text);
+            switch (nodeSO.PopupUIType)
+            {
+                case SSPopupUIType.None:
+                    break;
+                case SSPopupUIType.Gauges:
+                    for (int index = 0; index < GameManager.Instance.UIManager.GaugesMenu.Count; index++)
+                    {
+                        var gauge = GameManager.Instance.UIManager.GaugesMenu[index];
+                        gauge.SetActive(true);
+                    }
+                    break;
+                case SSPopupUIType.Tasks:
+                    GameManager.Instance.UIManager.TasksMenu.SetActive(true);
+                    break;
+                case SSPopupUIType.Spaceship:
+                    GameManager.Instance.UIManager.SpaceshipMenu.SetActive(true);
+                    break;
+            }
+            StartCoroutine(WaitingPopup(nodeSO));
         }
 
-        private IEnumerator WaitingPopup()
+        private IEnumerator WaitingPopup(SSPopupNodeSO nodeSO)
         {
-            yield return null;
+            yield return new WaitUntil(() => GameManager.Instance.UIManager.PopupHelp.continueButtonPressed ||
+                                             GameManager.Instance.UIManager.PopupHelp.passTutorialPressed);
+
+            if (nodeSO.Choices[task.conditionIndex].NextNode == null ||
+                GameManager.Instance.UIManager.PopupHelp.passTutorialPressed)
+            {
+                IsRunning = false;
+                ResetTimeline();
+                GameManager.Instance.SpaceshipManager.IsInTutorial = false;
+                for (int index = 0; index < GameManager.Instance.UIManager.GaugesMenu.Count; index++)
+                {
+                    var gauge = GameManager.Instance.UIManager.GaugesMenu[index];
+                    gauge.SetActive(true);
+                }
+                GameManager.Instance.UIManager.TasksMenu.SetActive(true);
+                GameManager.Instance.UIManager.SpaceshipMenu.SetActive(true);
+                if (nodeContainer.StoryType != SSStoryType.Tasks)
+                {
+                    if (!isCheatLauncher)
+                    {
+                        timeline.Status = SSStoryStatus.Completed;
+                        if (nodeGroup.TimeIsOverride)
+                            waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                        else
+                            waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                                 TimeTickSystem.ticksPerHour);
+                        if (IsFinish()) waitingTime = 0;
+                        TimeTickSystem.OnTick += WaitTimeline;
+                    }
+                }
+                Debug.Log("End of tutorial");
+                yield break;
+            }
+
+            CheckNodeType(nodeSO.Choices[task.conditionIndex].NextNode);
         }
+        
+        #endregion
     }
 }
