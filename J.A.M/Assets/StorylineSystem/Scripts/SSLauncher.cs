@@ -976,9 +976,16 @@ namespace SS
         #endregion
 
         #region Popup
-        
+
         private void RunNode(SSPopupNodeSO nodeSO)
         {
+            StartCoroutine(WaitingPopup(nodeSO));
+        }
+
+        private IEnumerator WaitingPopup(SSPopupNodeSO nodeSO)
+        {
+            if (task != null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
+            
             GameManager.Instance.UIManager.PopupHelp.Initialize(nodeSO.Text);
             switch (nodeSO.PopupUIType)
             {
@@ -990,6 +997,7 @@ namespace SS
                         var gauge = GameManager.Instance.UIManager.GaugesMenu[index];
                         gauge.SetActive(true);
                     }
+
                     break;
                 case SSPopupUIType.Tasks:
                     GameManager.Instance.UIManager.TasksMenu.SetActive(true);
@@ -998,11 +1006,7 @@ namespace SS
                     GameManager.Instance.UIManager.SpaceshipMenu.SetActive(true);
                     break;
             }
-            StartCoroutine(WaitingPopup(nodeSO));
-        }
 
-        private IEnumerator WaitingPopup(SSPopupNodeSO nodeSO)
-        {
             yield return new WaitUntil(() => GameManager.Instance.UIManager.PopupHelp.continueButtonPressed ||
                                              GameManager.Instance.UIManager.PopupHelp.passTutorialPressed);
 
@@ -1017,6 +1021,7 @@ namespace SS
                     var gauge = GameManager.Instance.UIManager.GaugesMenu[index];
                     gauge.SetActive(true);
                 }
+
                 GameManager.Instance.UIManager.TasksMenu.SetActive(true);
                 GameManager.Instance.UIManager.SpaceshipMenu.SetActive(true);
                 if (nodeContainer.StoryType != SSStoryType.Tasks)
@@ -1033,13 +1038,14 @@ namespace SS
                         TimeTickSystem.OnTick += WaitTimeline;
                     }
                 }
+
                 Debug.Log("End of tutorial");
                 yield break;
             }
 
             CheckNodeType(nodeSO.Choices.First().NextNode);
         }
-        
+
         #endregion
     }
 }

@@ -174,7 +174,8 @@ namespace Managers
         private void GenerateSecondaryEventOnFirstDay(object sender, TimeTickSystem.OnTickEventArgs e)
         {
             if (e.tick % (TimeTickSystem.ticksPerHour * 24) != 0) return;
-
+            if (IsInTutorial) return;
+            
             Checker.Instance.ChooseNewStoryline(SSStoryType.Secondary);
             TimeTickSystem.OnTick -= GenerateSecondaryEventOnFirstDay;
         }

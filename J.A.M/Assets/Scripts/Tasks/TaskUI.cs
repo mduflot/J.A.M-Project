@@ -193,6 +193,7 @@ namespace Tasks
             dialogueLog.DisplayDialogueLog(notification.Dialogues);
             startButton.SetActive(false);
             cancelButton.SetActive(true);
+            cancelButton.GetComponentInChildren<Button>().interactable = !notification.Task.IsTaskTutorial;
             separator.SetActive(true);
             GameManager.Instance.taskOpened = true;
             Appear(true);

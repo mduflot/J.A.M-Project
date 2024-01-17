@@ -107,6 +107,7 @@ public class Checker : MonoBehaviour, IDataPersistence
     public void GenerateNewPrincipalEvent()
     {
         waitingTimePrincipal = (uint)Random.Range(minWaitTimePrincipal, maxWaitTimePrincipal) * TimeTickSystem.ticksPerHour;
+        Debug.Log("Generating new principal event. Maybe nothing will happen.");
         TimeTickSystem.OnTick += WaitStorylinePrincipal;
     }
 
