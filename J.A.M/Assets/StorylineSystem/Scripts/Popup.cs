@@ -25,14 +25,14 @@ namespace SS
         {
             continueButton.onClick.RemoveAllListeners();
             passTutorialButton.onClick.RemoveAllListeners();
-            continueButtonPressed = false;
-            passTutorialPressed = false;
         }
 
         public void Initialize(string text)
         {
             popupText.text = text;
             gameObject.SetActive(true);
+            continueButtonPressed = false;
+            passTutorialPressed = false;
         }
     }
 }

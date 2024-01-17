@@ -1006,7 +1006,7 @@ namespace SS
             yield return new WaitUntil(() => GameManager.Instance.UIManager.PopupHelp.continueButtonPressed ||
                                              GameManager.Instance.UIManager.PopupHelp.passTutorialPressed);
 
-            if (nodeSO.Choices[task.conditionIndex].NextNode == null ||
+            if (nodeSO.Choices.First().NextNode == null ||
                 GameManager.Instance.UIManager.PopupHelp.passTutorialPressed)
             {
                 IsRunning = false;
@@ -1037,7 +1037,7 @@ namespace SS
                 yield break;
             }
 
-            CheckNodeType(nodeSO.Choices[task.conditionIndex].NextNode);
+            CheckNodeType(nodeSO.Choices.First().NextNode);
         }
         
         #endregion
