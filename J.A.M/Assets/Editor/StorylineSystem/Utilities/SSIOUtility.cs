@@ -240,17 +240,18 @@ namespace SS.Utilities
 
                 graphData.Nodes.Add(nodeData);
             }
-            else if (node is SSSoundNode soundNode)
+            else if (node is SSPopupNode popupNode)
             {
-                SSSoundNodeSaveData nodeData = new SSSoundNodeSaveData()
+                SSPopupNodeSaveData nodeData = new SSPopupNodeSaveData()
                 {
-                    ID = soundNode.ID,
-                    Name = soundNode.NodeName,
+                    ID = popupNode.ID,
+                    Name = popupNode.NodeName,
                     Choices = choices,
-                    GroupID = soundNode.Group?.ID,
-                    NodeType = soundNode.NodeType,
-                    Position = soundNode.GetPosition().position,
-                    AudioClip = soundNode.AudioClip
+                    GroupID =popupNode.Group?.ID,
+                    NodeType = popupNode.NodeType,
+                    Position = popupNode.GetPosition().position,
+                    Text = popupNode.Text,
+                    PopupUIType = popupNode.PopupUIType
                 };
 
                 graphData.Nodes.Add(nodeData);
@@ -343,29 +344,29 @@ namespace SS.Utilities
 
                 SaveAsset(nodeSO);
             }
-            else if (node is SSSoundNode soundNode)
+            else if (node is SSPopupNode popupNode)
             {
-                SSSoundNodeSO nodeSO;
+                SSPopupNodeSO nodeSO;
 
-                if (soundNode.Group != null)
+                if (popupNode.Group != null)
                 {
-                    nodeSO = CreateAsset<SSSoundNodeSO>($"{containerFolderPath}/Groups/{soundNode.Group.title}/Nodes",
-                        soundNode.NodeName);
+                    nodeSO = CreateAsset<SSPopupNodeSO>($"{containerFolderPath}/Groups/{popupNode.Group.title}/Nodes",
+                        popupNode.NodeName);
 
-                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[soundNode.Group.ID], nodeSO);
+                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[popupNode.Group.ID], nodeSO);
                 }
                 else
                 {
-                    nodeSO = CreateAsset<SSSoundNodeSO>($"{containerFolderPath}/Global/Nodes", soundNode.NodeName);
+                    nodeSO = CreateAsset<SSPopupNodeSO>($"{containerFolderPath}/Global/Nodes", popupNode.NodeName);
 
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(soundNode.NodeName, ConvertNodeChoicesToNodeChoicesData(soundNode.Choices),
-                    soundNode.NodeType,
-                    soundNode.IsStartingNode(), soundNode.AudioClip);
+                nodeSO.Initialize(popupNode.NodeName, popupNode.Text, ConvertNodeChoicesToNodeChoicesData(popupNode.Choices),
+                    popupNode.NodeType,
+                    popupNode.IsStartingNode(), popupNode.PopupUIType);
 
-                createdNodes.Add(soundNode.ID, nodeSO);
+                createdNodes.Add(popupNode.ID, nodeSO);
 
                 SaveAsset(nodeSO);
             }
