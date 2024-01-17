@@ -257,7 +257,7 @@ namespace Tasks
                                     DisplayPreview(outcome, traits, gaugeOutcomes);
                                 }
 
-                                break;
+                                //break;
                             }
                         }
 

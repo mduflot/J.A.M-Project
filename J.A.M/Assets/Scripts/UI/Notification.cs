@@ -313,7 +313,6 @@ namespace UI
                         case OutcomeData.OutcomeTarget.None:
                             break;
                     }
-
                     additionalConditionOutcomes.AddRange(cond.outcomes.Outcomes);
                 }
 
