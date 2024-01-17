@@ -60,7 +60,6 @@ namespace Managers
         public void UpdateGauges(SystemType systemType, float value, float previewValue)
         {
             gaugeReferences[systemType].UpdateGauge(value, previewValue);
-            
         }
 
         public void UpdateInGameDate(string newDate)
@@ -80,7 +79,7 @@ namespace Managers
         {
             foreach (var gauge in gauges)
             {
-                var valueToAdd = 0f;
+                var valueToAdd = 0.0f;
                 foreach (var outcome in gaugesOutcomes)
                 {
                     if (outcome.gauge == gauge.systemType) valueToAdd += outcome.value;

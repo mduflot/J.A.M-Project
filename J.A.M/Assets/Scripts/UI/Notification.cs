@@ -477,8 +477,6 @@ namespace UI
 
             return validateCondition;
         }
-
-        private float total = 0;
         
         private void AddOutcomeOnTick(object sender, TimeTickSystem.OnTickEventArgs e)
         {
@@ -545,7 +543,7 @@ namespace UI
             transform.parent = null;
             notificationContainer.DisplayNotification();
             spaceshipManager.notificationPool.AddToPool(gameObject);
-            spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
+            if (Task.TaskType != SSTaskType.Permanent) spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             IsStarted = false;
 
             if (LeaderCharacters.Count == 0) return;

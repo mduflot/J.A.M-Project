@@ -8,7 +8,7 @@ public class ShipSystem
     public GameObject systemObject;
     public float decreaseSpeed;
     [Range(0, 50)] public float gaugeValue;
-    public float previewGaugeValue = 0;
+    public float previewGaugeValue;
 
     public float maxGauge = 50.0f;
 }
