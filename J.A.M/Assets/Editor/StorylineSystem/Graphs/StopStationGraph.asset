@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: StopStationGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: StopStation
+  <ID>k__BackingField: d6eef9c3-5675-41a1-a380-388b151bebec
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: c1c6bdfa-754f-455a-8301-ad7a6c46839c
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: Refuel
+    <Position>k__BackingField: {x: 283, y: 114}
+  <Nodes>k__BackingField:
+  - rid: 197800337919181022
+  - rid: 197800337919181023
+  <OldGroupNames>k__BackingField:
+  - Refuel
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: Refuel
+      Value:
+      - need
+      - Refuel
+  references:
+    version: 2
+    RefIds:
+    - rid: 197800337919181022
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 117a771f-9e15-47fc-8146-8d022a6ca738
+        <Name>k__BackingField: need
+        <Choices>k__BackingField:
+        - rid: 197800337919181024
+        <GroupID>k__BackingField: c1c6bdfa-754f-455a-8301-ad7a6c46839c
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 308, y: 173}
+        <Text>k__BackingField: We need to get a refuel from the nearest station
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800337919181023
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 3bc862c0-b9d0-4d52-9c2a-71437046d8a0
+        <Name>k__BackingField: Refuel
+        <Choices>k__BackingField:
+        - rid: 197800337919181025
+        - rid: 197800337919181026
+        <GroupID>k__BackingField: c1c6bdfa-754f-455a-8301-ad7a6c46839c
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 618, y: 183}
+        <DescriptionTask>k__BackingField: We will soon need to make a stop by the
+          nearest space station.
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 2
+        <TaskIcon>k__BackingField: {fileID: 0}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 0
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 1
+        <Furniture>k__BackingField: 1
+    - rid: 197800337919181024
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 3bc862c0-b9d0-4d52-9c2a-71437046d8a0
+    - rid: 197800337919181025
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 43d1ae962bcf39d43ae387b075f08efe,
+          type: 2}
+        <PreviewOutcome>k__BackingField: The assigned crew member will redirect the
+          ship trajectory.
+    - rid: 197800337919181026
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: e4d9ed6c4ff6eb440ada07aba69d7c45,
+          type: 2}
+        <PreviewOutcome>k__BackingField: 
