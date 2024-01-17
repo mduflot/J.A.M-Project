@@ -32,6 +32,8 @@ namespace UI
         [SerializeField] private Sprite hoveredSprite;
         [SerializeField] private Sprite defaultSprite;
 
+        [SerializeField] private GameObject pointerArrow;
+        
         private Camera camera;
         private SpaceshipManager spaceshipManager;
         private ConditionSO taskCondition;
@@ -77,6 +79,8 @@ namespace UI
             timerSprite.material.SetInt("_Arc2", 360);
             timeLeftSprite.material.SetInt("_Arc1", 360);
             taskLog = taskToPlay;
+            
+            pointerArrow.GetComponent<PointerArrow>().Init(gameObject, false);
         }
 
         public void InitializeCancelTask()

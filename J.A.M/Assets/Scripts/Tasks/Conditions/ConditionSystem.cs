@@ -459,7 +459,7 @@ public class ConditionSystem
 
     private static bool CheckJob(TraitsData.Job job, TraitsData.Job conditionJob)
     {
-        return (job & conditionJob) == conditionJob;
+        return job.HasFlag(conditionJob);
     }
 
     private static bool CheckPositiveTraits(TraitsData.PositiveTraits pTraits,

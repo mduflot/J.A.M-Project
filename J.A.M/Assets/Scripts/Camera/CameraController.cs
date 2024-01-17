@@ -130,4 +130,9 @@ public class CameraController : MonoBehaviour
     }
     
     private Vector2 GetMousePosition => camera.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, -500));
+
+    public Vector2 GetZoomVector()
+    {
+        return zoomVector;
+    }
 }
