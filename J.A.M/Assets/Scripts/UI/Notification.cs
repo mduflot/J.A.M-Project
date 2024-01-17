@@ -32,6 +32,8 @@ namespace UI
         [SerializeField] private Sprite hoveredSprite;
         [SerializeField] private Sprite defaultSprite;
 
+        [SerializeField] private GameObject popupHelp;
+
         private Camera camera;
         private SpaceshipManager spaceshipManager;
         private ConditionSO taskCondition;
@@ -51,6 +53,7 @@ namespace UI
         private void OnDisable()
         {
             TimeTickSystem.OnTick -= AddOutcomeOnTick;
+            popupHelp.SetActive(false);
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -68,6 +71,7 @@ namespace UI
             taskNode = ssTaskNode;
             time.text = "";
             if (taskToPlay == null) Task.TimeLeft *= TimeTickSystem.ticksPerHour;
+            if (task.IsTaskTutorial) popupHelp.SetActive(true);
             timeLeft = Task.TimeLeft;
             icon.sprite = task.Icon;
             Dialogues = dialogues;

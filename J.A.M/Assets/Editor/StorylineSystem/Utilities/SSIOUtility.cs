@@ -220,7 +220,8 @@ namespace SS.Utilities
                     OptionalSlots = taskNode.OptionalSlots,
                     TaskHelpFactor = taskNode.TaskHelpFactor,
                     Room = taskNode.Room,
-                    Furniture = taskNode.Furniture
+                    Furniture = taskNode.Furniture,
+                    IsTaskTutorial = taskNode.IsTaskTutorial
                 };
 
                 graphData.Nodes.Add(nodeData);
@@ -312,7 +313,7 @@ namespace SS.Utilities
                     taskNode.IsStartingNode(), taskNode.DescriptionTask, taskNode.TaskStatus, taskNode.TaskType,
                     taskNode.TaskIcon, taskNode.TimeLeft,
                     taskNode.BaseDuration, taskNode.MandatorySlots, taskNode.OptionalSlots, taskNode.TaskHelpFactor,
-                    taskNode.Room, taskNode.Furniture);
+                    taskNode.Room, taskNode.Furniture, taskNode.IsTaskTutorial);
 
                 createdNodes.Add(taskNode.ID, nodeSO);
 
@@ -550,14 +551,16 @@ namespace SS.Utilities
                     ((SSTaskNode)node).TaskHelpFactor = ((SSTaskNodeSaveData)nodeData).TaskHelpFactor;
                     ((SSTaskNode)node).Room = ((SSTaskNodeSaveData)nodeData).Room;
                     ((SSTaskNode)node).Furniture = ((SSTaskNodeSaveData)nodeData).Furniture;
+                    ((SSTaskNode)node).IsTaskTutorial = ((SSTaskNodeSaveData)nodeData).IsTaskTutorial;
                 }
                 else if (nodeData.NodeType == SSNodeType.Time)
                 {
                     ((SSTimeNode)node).TimeToWait = ((SSTimeNodeSaveData)nodeData).TimeToWait;
                 }
-                else if (nodeData.NodeType == SSNodeType.Sound)
+                else if (nodeData.NodeType == SSNodeType.Popup)
                 {
-                    ((SSSoundNode)node).AudioClip = ((SSSoundNodeSaveData)nodeData).AudioClip;
+                    ((SSPopupNode)node).Text = ((SSPopupNodeSaveData)nodeData).Text;
+                    ((SSPopupNode)node).PopupUIType = ((SSPopupNodeSaveData)nodeData).PopupUIType;
                 }
 
                 node.Draw();

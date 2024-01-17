@@ -289,9 +289,16 @@ namespace SS
                     RunNode(nodeSO as SSTimeNodeSO);
                     break;
                 }
+                case SSNodeType.Popup:
+                {
+                    RunNode(nodeSO as SSPopupNodeSO);
+                    break;
+                }
             }
         }
 
+        #region Dialogue
+        
         private void RunNode(SSDialogueNodeSO nodeSO)
         {
             CharacterBehaviour actualSpeaker;
@@ -702,140 +709,7 @@ namespace SS
             StartCoroutine(DisplayDialogue(character.speaker,
                 character.GetCharacterData().firstName, nodeSO));
         }
-
-        private IEnumerator RunNode(SSTaskNodeSO nodeSO, CharacterIcon icon = null, TaskLog taskToPlay = null)
-        {
-            if (nodeSO.TaskType.Equals(SSTaskType.Permanent))
-            {
-                if (spaceshipManager.IsTaskActive(nodeSO.name))
-                {
-                    yield break;
-                }
-            }
-            if (task != null && taskToPlay == null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
-            var room = spaceshipManager.GetRoom(nodeSO.Room);
-            var notificationGO = spaceshipManager.notificationPool.GetFromPool();
-            if (notificationGO.TryGetComponent(out Notification notification))
-            {
-                Transform roomTransform;
-                if (room.roomObjects.Any(furniture => furniture.furnitureType == nodeSO.Furniture))
-                {
-                    roomTransform = room.roomObjects.First(furniture => furniture.furnitureType == nodeSO.Furniture)
-                        .transform;
-                    roomTransform.GetComponent<NotificationContainer>().DisplayNotification();
-                }
-                else
-                {
-                    roomTransform = room.roomObjects[0].transform;
-                }
-
-                notification.transform.position = roomTransform.position;
-                notificationGO.transform.parent = roomTransform;
-                roomTransform.GetComponent<NotificationContainer>().DisplayNotification();
-                var conditions = new List<Tuple<ConditionSO, string>>();
-                foreach (var choiceData in nodeSO.Choices)
-                {
-                    conditions.Add(new Tuple<ConditionSO, string>(((SSNodeChoiceTaskData)choiceData).Condition,
-                        ((SSNodeChoiceTaskData)choiceData).PreviewOutcome));
-                }
-
-                if (taskToPlay != null)
-                {
-                    task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
-                        taskToPlay.TimeLeft, taskToPlay.Duration,
-                        nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
-                        conditions, taskToPlay.IsStarted);
-                    notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues, taskToPlay);
-                }
-                else
-                {
-                    task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
-                        nodeSO.TimeLeft, nodeSO.Duration,
-                        nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
-                        conditions);
-                    notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
-                }
-
-                spaceshipManager.AddTask(notification);
-                if (nodeSO.TaskType.Equals(SSTaskType.Permanent) && icon != null) notification.Display(icon);
-                else if (nodeSO.TaskType.Equals(SSTaskType.Permanent) || nodeSO.TaskType.Equals(SSTaskType.Compute))
-                    notification.Display();
-                StartCoroutine(WaiterTask(nodeSO, task));
-            }
-        }
-
-        public void RunTimedNodeCancel(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
-        {
-            StartCoroutine(WaitTimedRunCancelNode(notification, actualTask, taskNode));
-        }
-
-        public void RunUntimedNodeCancel(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
-        {
-            StartCoroutine(WaitUntimedRunCancelNode(notification, actualTask, taskNode));
-        }
-
-        private void RunNode(SSTimeNodeSO nodeSO)
-        {
-            timeNode = nodeSO;
-            durationTimeNode = nodeSO.TimeToWait * TimeTickSystem.ticksPerHour;
-            TimeTickSystem.OnTick += WaitingTime;
-        }
-
-        private void WaitingTime(object sender, TimeTickSystem.OnTickEventArgs e)
-        {
-            durationTimeNode -= TimeTickSystem.timePerTick;
-            if (durationTimeNode <= 0)
-            {
-                if (timeNode.Choices.First().NextNode == null)
-                {
-                    IsRunning = false;
-                    ResetTimeline();
-                    if (nodeContainer.StoryType != SSStoryType.Tasks)
-                    {
-                        if (!isCheatLauncher)
-                        {
-                            timeline.Status = SSStoryStatus.Completed;
-                            if (nodeGroup.TimeIsOverride)
-                                waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                            else
-                                waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
-                                                     TimeTickSystem.ticksPerHour);
-                            if (IsFinish()) waitingTime = 0;
-                            TimeTickSystem.OnTick += WaitTimeline;
-                        }
-                    }
-
-                    return;
-                }
-
-                if (IsCancelled)
-                {
-                    CanIgnoreDialogueTask = true;
-                    IsCancelled = false;
-                    TimeTickSystem.OnTick -= WaitingTime;
-                    return;
-                }
-
-                TimeTickSystem.OnTick -= WaitingTime;
-                CheckNodeType(timeNode.Choices.First().NextNode);
-            }
-        }
-
-        private IEnumerator WaitTimedRunCancelNode(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
-        {
-            yield return new WaitUntil(() => IsCancelled == false);
-            notification.InitializeCancelTask();
-            StartCoroutine(WaiterTask(taskNode, actualTask));
-        }
-
-        private IEnumerator WaitUntimedRunCancelNode(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
-        {
-            yield return new WaitUntil(() => IsCancelled == false);
-            CanIgnoreDialogueTask = false;
-            notification.Initialize(actualTask, taskNode, spaceshipManager, this, dialogues);
-            StartCoroutine(WaiterTask(taskNode, actualTask));
-        }
-
+        
         private IEnumerator DisplayDialogue(Speaker speaker, string characterName, SSDialogueNodeSO nodeSO)
         {
             nodeSO.IsCompleted = false;
@@ -902,7 +776,152 @@ namespace SS
 
             CheckNodeType(nodeSO.Choices.First().NextNode);
         }
+        
+        #endregion
 
+        #region Cancel
+        
+        public void RunTimedNodeCancel(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
+        {
+            StartCoroutine(WaitTimedRunCancelNode(notification, actualTask, taskNode));
+        }
+
+        public void RunUntimedNodeCancel(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
+        {
+            StartCoroutine(WaitUntimedRunCancelNode(notification, actualTask, taskNode));
+        }
+        
+        private IEnumerator WaitTimedRunCancelNode(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
+        {
+            yield return new WaitUntil(() => IsCancelled == false);
+            notification.InitializeCancelTask();
+            StartCoroutine(WaiterTask(taskNode, actualTask));
+        }
+
+        private IEnumerator WaitUntimedRunCancelNode(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
+        {
+            yield return new WaitUntil(() => IsCancelled == false);
+            CanIgnoreDialogueTask = false;
+            notification.Initialize(actualTask, taskNode, spaceshipManager, this, dialogues);
+            StartCoroutine(WaiterTask(taskNode, actualTask));
+        }
+        
+        #endregion
+
+        #region Time
+        
+        private void RunNode(SSTimeNodeSO nodeSO)
+        {
+            timeNode = nodeSO;
+            durationTimeNode = nodeSO.TimeToWait * TimeTickSystem.ticksPerHour;
+            TimeTickSystem.OnTick += WaitingTime;
+        }
+
+        private void WaitingTime(object sender, TimeTickSystem.OnTickEventArgs e)
+        {
+            durationTimeNode -= TimeTickSystem.timePerTick;
+            if (durationTimeNode <= 0)
+            {
+                if (timeNode.Choices.First().NextNode == null)
+                {
+                    IsRunning = false;
+                    ResetTimeline();
+                    if (nodeContainer.StoryType != SSStoryType.Tasks)
+                    {
+                        if (!isCheatLauncher)
+                        {
+                            timeline.Status = SSStoryStatus.Completed;
+                            if (nodeGroup.TimeIsOverride)
+                                waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                            else
+                                waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                                     TimeTickSystem.ticksPerHour);
+                            if (IsFinish()) waitingTime = 0;
+                            TimeTickSystem.OnTick += WaitTimeline;
+                        }
+                    }
+
+                    return;
+                }
+
+                if (IsCancelled)
+                {
+                    CanIgnoreDialogueTask = true;
+                    IsCancelled = false;
+                    TimeTickSystem.OnTick -= WaitingTime;
+                    return;
+                }
+
+                TimeTickSystem.OnTick -= WaitingTime;
+                CheckNodeType(timeNode.Choices.First().NextNode);
+            }
+        }
+
+        #endregion
+        
+        #region Task
+        
+        private IEnumerator RunNode(SSTaskNodeSO nodeSO, CharacterIcon icon = null, TaskLog taskToPlay = null)
+        {
+            if (nodeSO.TaskType.Equals(SSTaskType.Permanent))
+            {
+                if (spaceshipManager.IsTaskActive(nodeSO.name))
+                {
+                    yield break;
+                }
+            }
+            if (task != null && taskToPlay == null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
+            var room = spaceshipManager.GetRoom(nodeSO.Room);
+            var notificationGO = spaceshipManager.notificationPool.GetFromPool();
+            if (notificationGO.TryGetComponent(out Notification notification))
+            {
+                Transform roomTransform;
+                if (room.roomObjects.Any(furniture => furniture.furnitureType == nodeSO.Furniture))
+                {
+                    roomTransform = room.roomObjects.First(furniture => furniture.furnitureType == nodeSO.Furniture)
+                        .transform;
+                    roomTransform.GetComponent<NotificationContainer>().DisplayNotification();
+                }
+                else
+                {
+                    roomTransform = room.roomObjects[0].transform;
+                }
+
+                notification.transform.position = roomTransform.position;
+                notificationGO.transform.parent = roomTransform;
+                roomTransform.GetComponent<NotificationContainer>().DisplayNotification();
+                var conditions = new List<Tuple<ConditionSO, string>>();
+                foreach (var choiceData in nodeSO.Choices)
+                {
+                    conditions.Add(new Tuple<ConditionSO, string>(((SSNodeChoiceTaskData)choiceData).Condition,
+                        ((SSNodeChoiceTaskData)choiceData).PreviewOutcome));
+                }
+
+                if (taskToPlay != null)
+                {
+                    task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
+                        taskToPlay.TimeLeft, taskToPlay.Duration,
+                        nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room, nodeSO.IsTaskTutorial,
+                        conditions, taskToPlay.IsStarted);
+                    notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues, taskToPlay);
+                }
+                else
+                {
+                    task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
+                        nodeSO.TimeLeft, nodeSO.Duration,
+                        nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room, nodeSO.IsTaskTutorial,
+                        conditions);
+                    notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
+                }
+
+                spaceshipManager.AddTask(notification);
+                if (nodeSO.TaskType.Equals(SSTaskType.Permanent) && icon != null) notification.Display(icon);
+                else if (nodeSO.TaskType.Equals(SSTaskType.Permanent) || nodeSO.TaskType.Equals(SSTaskType.Compute))
+                    notification.Display();
+                StartCoroutine(WaiterTask(nodeSO, task));
+            }
+        }
+        
         private IEnumerator WaiterTask(SSTaskNodeSO nodeSO, Task task)
         {
             var notification = spaceshipManager.GetTaskNotification(task);
@@ -947,6 +966,19 @@ namespace SS
             }
 
             CheckNodeType(nodeSO.Choices[task.conditionIndex].NextNode);
+        }
+        
+        #endregion
+
+        private void RunNode(SSPopupNodeSO nodeSO)
+        {
+            // TODO - Popup Object
+            StartCoroutine(WaitingPopup());
+        }
+
+        private IEnumerator WaitingPopup()
+        {
+            yield return null;
         }
     }
 }

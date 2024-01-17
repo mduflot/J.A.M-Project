@@ -23,6 +23,7 @@ namespace SS.Elements
         public float TaskHelpFactor { get; set; }
         public RoomType Room { get; set; }
         public FurnitureType Furniture { get; set; }
+        public bool IsTaskTutorial { get; set; }
 
         private VisualElement customDataContainer = new();
 
@@ -40,6 +41,7 @@ namespace SS.Elements
             TaskHelpFactor = 0.75f;
             Room = RoomType.Trajectory;
             Furniture = FurnitureType.Console;
+            IsTaskTutorial = false;
 
             SSChoiceTaskSaveData firstChoiceData = new SSChoiceTaskSaveData()
             {
@@ -149,6 +151,11 @@ namespace SS.Elements
                 callback => { Furniture = (FurnitureType)callback.newValue; });
 
             customDataContainer.Add(furnitureEnumField);
+
+            Toggle isTaskTutorialToggle = SSElementUtility.CreateToggle(IsTaskTutorial, "Is Task Tutorial :",
+                callback => { IsTaskTutorial = callback.newValue; });
+
+            customDataContainer.Add(isTaskTutorialToggle);
 
             extensionContainer.Add(customDataContainer);
 
