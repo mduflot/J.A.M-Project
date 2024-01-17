@@ -50,7 +50,7 @@ public class SimCharacter : MonoBehaviour
         //Add scaling based on TimeTickSystem
 
         SimDoor door = SimPathing.FindDoorByID(currentRoomDoor);
-        if ((door.transform.position - transform.position).magnitude < 1.5f)
+        if ((door.transform.position - transform.position).magnitude < 1.5f * TimeTickSystem.timeScale)
             FadeToNextDoor();
         else
             MoveToCurrentDoor();
@@ -108,11 +108,11 @@ public class SimCharacter : MonoBehaviour
         newPos.x += currentRoom.roomXOffset * (charIndex - 3);
         newPos.y -= currentRoom.roomYOffset;
 
-        if ((newPos - transform.position).magnitude < .5f) return;
+        if ((newPos - transform.position).magnitude < .5f * TimeTickSystem.timeScale) return;
         
         //pos = Vector3.Lerp(pos, taskFurniture == null ? newPos : taskFurniture.transform.position, lerpT);
 
-        pos += TimeTickSystem.timeScale * GameManager.Instance.SpaceshipManager.simMoveSpeed * (newPos - transform.position).normalized;
+        pos += GameManager.Instance.SpaceshipManager.simMoveSpeed * (newPos - transform.position).normalized;
         
         transform.position = pos;
     }
