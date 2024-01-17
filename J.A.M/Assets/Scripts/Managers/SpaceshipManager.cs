@@ -31,8 +31,10 @@ namespace Managers
 
         [Header("Sim Values")]
         public float simMoveSpeed = .9f;
-        public int simHungerBaseThreshold = 576;
-        [SerializeField] private int simEatThreshold = 192;
+        public int simHungerBaseThreshold = 12;
+        public int simHungerNoise = 6;
+        [SerializeField] private int simEatThreshold = 3;
+        [SerializeField] private float simEatAmount;
         
         private Dictionary<SystemType, ShipSystem> systemsDictionary = new();
         private Dictionary<RoomType, Room> roomsDictionary = new();
@@ -274,7 +276,7 @@ namespace Managers
                     switch (simCharacter.simStatus)
                     {
                         case SimCharacter.SimStatus.IdleEat:
-                            if (simCharacter.tick >= simEatThreshold)
+                            if (simCharacter.tick >= simEatThreshold * TimeTickSystem.ticksPerHour)
                             {
                                 if (character.IsWorking() || simCharacter.taskRoom != null)
                                 {
@@ -282,11 +284,13 @@ namespace Managers
                                 }
                                 else
                                     simCharacter.SendToIdleRoom();
-                                systems[2].gaugeValue -= 2;
+                                systems[2].gaugeValue -= simEatAmount;
                                 simCharacter.tick = 0;
-                                simCharacter.ticksToEat = simHungerBaseThreshold +
-                                                          Random.Range((int)-TimeTickSystem.ticksPerHour * 2,
-                                                              (int)TimeTickSystem.ticksPerHour * 2);
+                                simCharacter.ticksToEat = (simHungerBaseThreshold 
+                                                            * (int) TimeTickSystem.ticksPerHour) 
+                                                            + Random.Range(
+                                                              (int)-TimeTickSystem.ticksPerHour * simHungerNoise,
+                                                              (int)TimeTickSystem.ticksPerHour * simHungerNoise);
                             }
                             break;
                         

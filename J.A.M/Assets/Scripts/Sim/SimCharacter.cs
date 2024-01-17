@@ -26,7 +26,11 @@ public class SimCharacter : MonoBehaviour
     {
         currentRoom = idleRoom;
         currentRoomDoor = currentRoom.roomDoors[0].doorID;
-        ticksToEat = GameManager.Instance.SpaceshipManager.simHungerBaseThreshold + Random.Range((int) -TimeTickSystem.ticksPerHour * 2, (int) TimeTickSystem.ticksPerHour * 2);
+        ticksToEat = (GameManager.Instance.SpaceshipManager.simHungerBaseThreshold 
+                      * (int) TimeTickSystem.ticksPerHour) 
+                     + Random.Range(
+                         (int) -TimeTickSystem.ticksPerHour * GameManager.Instance.SpaceshipManager.simHungerNoise, 
+                         (int) TimeTickSystem.ticksPerHour * GameManager.Instance.SpaceshipManager.simHungerNoise);
     }
 
     private void Update()
