@@ -97,7 +97,7 @@ public class CameraController : MonoBehaviour
         var mouse = (Vector3)GetMousePosition;
         difference = origin - mouse;
         difference.z = 0;
-        transform.position -= difference * 0.4f;
+        transform.position -= difference * 0.6f;
         origin = mouse;
     }
     
