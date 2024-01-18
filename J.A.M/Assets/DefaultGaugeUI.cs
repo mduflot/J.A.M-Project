@@ -12,7 +12,8 @@ public class DefaultGaugeUI : GaugeUI
     public override void UpdateGauge(float value, float previewValue)
     {
         gauge.fillAmount = value / 50;
-        previewGauge.fillAmount = (value + previewValue) / 50;
+        if (!IsPreviewing || (previewGauge.fillAmount > (value + previewValue) / 50))
+            previewGauge.fillAmount = (value + previewValue) / 50;
         arrow.sprite = previewValue > 0 ? greenArrow : redArrow;
     }
 
@@ -36,5 +37,4 @@ public class DefaultGaugeUI : GaugeUI
     {
         previewGauge.fillAmount = 0;
     }
-    
 }

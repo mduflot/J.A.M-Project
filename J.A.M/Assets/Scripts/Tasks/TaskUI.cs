@@ -274,7 +274,9 @@ namespace Tasks
                 }
 
                 var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
+                gaugesOutcomes = gaugeOutcomes;
                 GameManager.Instance.UIManager.PreviewOutcomeGauges(gaugesOutcomes);
+                
                 foreach (var c in characterSlots)
                 {
                     if (c.icon != null)
@@ -284,7 +286,6 @@ namespace Tasks
 
                 GameManager.Instance.UIManager.CharacterPreviewGauges(charOutcome);
                 charOutcome = characterOutcomes;
-                gaugesOutcomes = gaugeOutcomes;
                 duration = assistantCharacters > 0
                     ? notification.Task.Duration /
                       (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
@@ -397,19 +398,6 @@ namespace Tasks
 
                     var volition =
                         outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add ? valueVolition : -valueVolition;
-
-                    if (notification.Task.TaskType == SSTaskType.Permanent)
-                    {
-                        for (int index = 0; index < GameManager.Instance.SpaceshipManager.systems.Length; index++)
-                        {
-                            var system = GameManager.Instance.SpaceshipManager.systems[index];
-                            if (system.type == outcome.OutcomeTargetGauge)
-                            {
-                                volition -= system.decreaseSpeed * notification.Task.Duration;
-                                break;
-                            }
-                        }
-                    }
 
                     gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge, volition));
                     break;
@@ -599,7 +587,6 @@ namespace Tasks
             if (CharactersWorking()) return;
             notification.OnStart(characterSlots, gaugesOutcomes);
             taskStarted = true;
-            GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.UIManager.ResetCharactersPreviewGauges();
             GameManager.Instance.SpaceshipManager.ApplyGaugeOutcomes(gaugesOutcomes);
             gaugesOutcomes.Clear();
@@ -641,7 +628,6 @@ namespace Tasks
             dialogueLog.ClearDialogueLog();
             popupHelp.SetActive(false);
             separator.SetActive(false);
-            GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.RefreshCharacterIcons();
             GameManager.Instance.taskOpened = false;
         }
@@ -670,6 +656,7 @@ namespace Tasks
             notification.IsCancelled = true;
             previewOutcomeText.text = null;
             characterSlots.Clear();
+            GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.RefreshCharacterIcons();
             separator.SetActive(false);
             Appear(false);

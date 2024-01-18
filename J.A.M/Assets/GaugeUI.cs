@@ -1,22 +1,13 @@
 using UnityEngine;
 
-public class GaugeUI : MonoBehaviour
+public abstract class GaugeUI : MonoBehaviour
 {
     public SystemType systemType;
-    public virtual void UpdateGauge(float value, float previewValue)
-    {
-        
-    }
+    public bool IsPreviewing;
 
-    public virtual void PreviewOutcomeGauge(float value)
-    {
-        
-    }
+    public abstract void UpdateGauge(float value, float previewValue);
 
-    public virtual void ResetPreviewGauge()
-    {
-        
-    }
-    
-    
+    public abstract void PreviewOutcomeGauge(float value);
+
+    public abstract void ResetPreviewGauge();
 }

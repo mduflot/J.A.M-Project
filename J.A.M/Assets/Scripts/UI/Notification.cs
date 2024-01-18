@@ -168,6 +168,20 @@ namespace UI
             }
 
             CheckingCondition(validatedCondition);
+
+            for (int index = 0; index < GameManager.Instance.UIManager.gauges.Length; index++)
+            {
+                var gauge = GameManager.Instance.UIManager.gauges[index];
+
+                for (uint i = 0; i < outcomeEvents.Length; i++)
+                {
+                    if (gauge.systemType == outcomeEventArgs[i].gauge)
+                    {
+                        gauge.IsPreviewing = true;
+                        break;
+                    }
+                }
+            }
         }
 
         private void CheckingCondition(bool validatedCondition)
@@ -179,84 +193,97 @@ namespace UI
                     Task.Duration = AssistantCharacters.Count > 0
                         ? Task.Duration / Mathf.Pow(AssistantCharacters.Count + LeaderCharacters.Count, Task.HelpFactor)
                         : Task.Duration;
-                    
+
                     switch (Task.Room)
                     {
                         case RoomType.Common:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCommonRoom))
+                            if (GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits
+                                    .DamagedCommonRoom))
                                 Task.Duration *= 2;
                             break;
-                        
+
                         case RoomType.DockingBay:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedDockingBay))
+                            if (GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits
+                                    .DamagedDockingBay))
                                 Task.Duration *= 2;
                             break;
-                        
+
                         case RoomType.Power:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedElectricalRoom))
+                            if (GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits
+                                    .DamagedElectricalRoom))
                                 Task.Duration *= 2;
                             break;
 
                         case RoomType.Trajectory:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedBridge))
+                            if (GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits
+                                    .DamagedBridge))
                                 Task.Duration *= 2;
                             break;
 
                         case RoomType.MedicalBay:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedMedicalRoom))
+                            if (GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits
+                                    .DamagedMedicalRoom))
                                 Task.Duration *= 2;
                             break;
-                        
+
                         case RoomType.Cargo1:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCargoBays))
+                            if (GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits
+                                    .DamagedCargoBays))
                                 Task.Duration *= 2;
                             break;
-                        
+
                         case RoomType.Cargo2:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCargoBays))
+                            if (GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits
+                                    .DamagedCargoBays))
                                 Task.Duration *= 2;
                             break;
-                        
+
                         case RoomType.Cargo3:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCargoBays))
+                            if (GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits
+                                    .DamagedCargoBays))
                                 Task.Duration *= 2;
                             break;
-                            
+
                         case RoomType.Military:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCamp))
+                            if (GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits
+                                    .DamagedCamp))
                                 Task.Duration *= 2;
                             break;
-                        
+
                         case RoomType.AI:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedAI))
+                            if (GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits
+                                    .DamagedAI))
                                 Task.Duration *= 2;
                             break;
-                        
+
                         case RoomType.BedroomCaptain:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedBedrooms))
+                            if (GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits
+                                    .DamagedBedrooms))
                                 Task.Duration *= 2;
                             break;
-                            
+
                         case RoomType.BedroomMusician:
                             break;
-                        
+
                         case RoomType.BedroomProfessor:
                             break;
-                            
+
                         case RoomType.Artifact:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedArtifactRoom))
+                            if (GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits
+                                    .DamagedArtifactRoom))
                                 Task.Duration *= 2;
                             break;
-                        
+
                         case RoomType.Kitchen:
-                            if(GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedCommodities))
+                            if (GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits
+                                    .DamagedCommodities))
                                 Task.Duration *= 2;
                             break;
-                        
+
                         case RoomType.Bath:
                             break;
                     }
-                    
+
                     Task.Duration *= TimeTickSystem.ticksPerHour;
                     Task.BaseDuration = Task.Duration;
                     taskLog = null;
@@ -309,7 +336,7 @@ namespace UI
                             if (!ConditionSystem.CheckGaugeCondition(cond))
                                 continue;
                             break;
-                        
+
                         case OutcomeData.OutcomeTarget.GaugeValue:
                             if (!ConditionSystem.CheckGaugeValueCondition(cond))
                                 continue;
@@ -318,6 +345,7 @@ namespace UI
                         case OutcomeData.OutcomeTarget.None:
                             break;
                     }
+
                     additionalConditionOutcomes.AddRange(cond.outcomes.Outcomes);
                 }
 
@@ -365,10 +393,8 @@ namespace UI
                                         outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition());
                                 }
                             }
-                            if (Task.TaskType == SSTaskType.Permanent)
-                            {
-                                outcomeEventArgs[i].value /= Task.Duration;
-                            }
+
+                            if (Task.TaskType == SSTaskType.Permanent) outcomeEventArgs[i].value /= Task.Duration;
 
                             break;
                     }
@@ -403,10 +429,7 @@ namespace UI
                             outcomeEventArgs[numberOfBaseOutcomes + i] =
                                 OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
                             if (Task.TaskType == SSTaskType.Permanent)
-                            {
                                 outcomeEventArgs[numberOfBaseOutcomes + i].value /= Task.Duration;
-                                Debug.Log($"ValueAdditional: {outcomeEventArgs[numberOfBaseOutcomes + i].value}");
-                            }
                             break;
                     }
                 }
@@ -430,7 +453,7 @@ namespace UI
             if (LeaderCharacters.Count > 0)
             {
                 if (!LeaderCharacters[0].GetSimCharacter().IsBusy())
-                        LeaderCharacters[0].GetSimCharacter().SendToRoom(Task.Room);
+                    LeaderCharacters[0].GetSimCharacter().SendToRoom(Task.Room);
 
                 LeaderCharacters[0].GetSimCharacter().taskRoom = SimPathing.FindRoomByRoomType(Task.Room);
 
@@ -481,7 +504,7 @@ namespace UI
 
             return validateCondition;
         }
-        
+
         private void AddOutcomeOnTick(object sender, TimeTickSystem.OnTickEventArgs e)
         {
             for (uint i = 0; i < outcomeEvents.Length; i++)
@@ -537,29 +560,39 @@ namespace UI
                 for (uint i = 0; i < outcomeEvents.Length; i++)
                 {
                     outcomeEvents[i].Invoke(outcomeEventArgs[i]);
+                    for (int j = 0; j < GameManager.Instance.UIManager.gauges.Length; j++)
+                    {
+                        var gauge = GameManager.Instance.UIManager.gauges[j];
+                        if (gauge.systemType == outcomeEventArgs[i].gauge)
+                        {
+                            gauge.IsPreviewing = false;
+                            break;
+                        }
+                    }
                 }
             }
 
             IsCompleted = true;
             ResetCharacters();
+            GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.RefreshCharacterIcons();
             var notificationContainer = transform.parent.GetComponent<NotificationContainer>();
             transform.parent = null;
             notificationContainer.DisplayNotification();
             spaceshipManager.notificationPool.AddToPool(gameObject);
-            if (Task.TaskType != SSTaskType.Permanent) spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
+            spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             IsStarted = false;
 
             if (LeaderCharacters.Count == 0) return;
-            
-            if(!LeaderCharacters[0].GetSimCharacter().IsBusy())
+
+            if (!LeaderCharacters[0].GetSimCharacter().IsBusy())
                 LeaderCharacters[0].GetSimCharacter().SendToIdleRoom();
 
             LeaderCharacters[0].GetSimCharacter().taskRoom = null;
-            
+
             for (int i = 0; i < AssistantCharacters.Count; i++)
             {
-                if(!AssistantCharacters[i].GetSimCharacter().IsBusy())
+                if (!AssistantCharacters[i].GetSimCharacter().IsBusy())
                     AssistantCharacters[i].GetSimCharacter().SendToIdleRoom();
 
                 AssistantCharacters[i].GetSimCharacter().taskRoom = null;
@@ -594,13 +627,13 @@ namespace UI
             }
 
             if (LeaderCharacters.Count == 0) return;
-            
-            if(!LeaderCharacters[0].GetSimCharacter().IsBusy())
+
+            if (!LeaderCharacters[0].GetSimCharacter().IsBusy())
                 LeaderCharacters[0].GetSimCharacter().SendToIdleRoom();
-            
+
             for (int i = 0; i < AssistantCharacters.Count; i++)
             {
-                if(!AssistantCharacters[i].GetSimCharacter().IsBusy())
+                if (!AssistantCharacters[i].GetSimCharacter().IsBusy())
                     AssistantCharacters[i].GetSimCharacter().SendToIdleRoom();
             }
         }
