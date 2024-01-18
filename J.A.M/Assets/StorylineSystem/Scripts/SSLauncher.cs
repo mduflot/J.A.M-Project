@@ -986,7 +986,8 @@ namespace SS
         {
             if (task != null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
             
-            GameManager.Instance.UIManager.PopupHelp.Initialize(nodeSO.Text);
+            if (nodeSO.IsTutorialPopup) GameManager.Instance.UIManager.PopupHelp.Initialize(nodeSO.Text);
+            else GameManager.Instance.UIManager.PopupHelp.Initialize(nodeSO.Text, nodeContainer.FileName);
             switch (nodeSO.PopupUIType)
             {
                 case SSPopupUIType.None:
@@ -1039,7 +1040,7 @@ namespace SS
                     }
                 }
 
-                Debug.Log("End of tutorial");
+                if (nodeSO.IsTutorialPopup) Debug.Log("End of tutorial");
                 yield break;
             }
 

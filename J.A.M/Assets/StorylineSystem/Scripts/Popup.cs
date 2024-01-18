@@ -6,6 +6,7 @@ namespace SS
 {
     public class Popup : MonoBehaviour
     {
+        [SerializeField] private TextMeshProUGUI popupTitle;
         [SerializeField] private TextMeshProUGUI popupText;
         [SerializeField] private Button continueButton;
         [SerializeField] private Button passTutorialButton;
@@ -16,9 +17,12 @@ namespace SS
         private void OnEnable()
         {
             continueButton.onClick.AddListener(() => gameObject.SetActive(false));
-            passTutorialButton.onClick.AddListener(() => gameObject.SetActive(false));
             continueButton.onClick.AddListener(() => continueButtonPressed = true);
-            passTutorialButton.onClick.AddListener(() => passTutorialPressed = true);
+            if (passTutorialButton != null)
+            {
+                passTutorialButton.onClick.AddListener(() => gameObject.SetActive(false));
+                passTutorialButton.onClick.AddListener(() => passTutorialPressed = true);
+            }
         }
         
         private void OnDisable()
@@ -27,8 +31,9 @@ namespace SS
             passTutorialButton.onClick.RemoveAllListeners();
         }
 
-        public void Initialize(string text)
+        public void Initialize(string text, string title = null)
         {
+            if (title != null && popupTitle != null) popupTitle.text = title;
             popupText.text = text;
             gameObject.SetActive(true);
             continueButtonPressed = false;
