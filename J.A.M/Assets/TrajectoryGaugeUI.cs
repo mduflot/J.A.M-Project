@@ -9,6 +9,7 @@ public class TrajectoryGaugeUI : GaugeUI
     [SerializeField] private Image bottomPreviewGauge;
     [SerializeField] private RectTransform shipTransform;
     private bool isTop;
+    private bool isDecreasing;
     private float maxAngle = 27.0f;
 
     public override void UpdateGauge(float value, float previewValue)
@@ -21,9 +22,19 @@ public class TrajectoryGaugeUI : GaugeUI
         }
         else
         {
-            if (!IsPreviewing || bottomGauge.fillAmount <  1 - (value - previewValue) / 50) bottomGauge.fillAmount = 1 - (value - previewValue) / 50;
-            bottomPreviewGauge.fillAmount = 1 - value / 50;
-            shipTransform.eulerAngles = new Vector3(0, 0, bottomPreviewGauge.fillAmount * maxAngle);
+            if (!isDecreasing)
+            {
+                if (!IsPreviewing || bottomGauge.fillAmount <  1 - (value - previewValue) / 50) bottomGauge.fillAmount = 1 - (value - previewValue) / 50;
+                bottomPreviewGauge.fillAmount = 1 - value / 50;
+                shipTransform.eulerAngles = new Vector3(0, 0, bottomPreviewGauge.fillAmount * maxAngle);
+            }
+            else
+            {
+                bottomGauge.fillAmount = 1 - value / 50;
+                if (!IsPreviewing || bottomPreviewGauge.fillAmount > 1 - (value - previewValue) / 50) bottomPreviewGauge.fillAmount = 1 - (value - previewValue) / 50;
+                shipTransform.eulerAngles = new Vector3(0, 0, bottomGauge.fillAmount * maxAngle);
+            }
+            
         }
     }
 
@@ -34,12 +45,14 @@ public class TrajectoryGaugeUI : GaugeUI
         
         if (value < 0)
         {
+            isDecreasing = true;
             value *= -1;
             value += gauge.fillAmount * 50;
             previewGauge.fillAmount = value / 50;
         }
         else
         {
+            isDecreasing = false;
             previewGauge.fillAmount = 1 - GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) / 50;
             gauge.fillAmount = 1 - (GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) + value) / 50;
         }
