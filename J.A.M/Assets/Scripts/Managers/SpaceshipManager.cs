@@ -74,9 +74,11 @@ namespace Managers
                 system.gaugeValue = 35;
                 systemsDictionary.Add(system.type, system);
             }
-
+            
+            Debug.Log($">{rooms.Length}");
             foreach (var room in rooms)
             {
+                Debug.Log($">>{room.type}");
                 roomsDictionary.Add(room.type, room);
             }
         }
