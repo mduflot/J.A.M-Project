@@ -79,8 +79,12 @@ namespace UI
             timerSprite.material.SetInt("_Arc2", 360);
             timeLeftSprite.material.SetInt("_Arc1", 360);
             taskLog = taskToPlay;
-            
-            pointerArrow.GetComponent<PointerArrow>().Init(gameObject, task.TaskType == SSTaskType.Timed);
+
+            if (task.TaskType != SSTaskType.Permanent)
+            {
+                pointerArrow.SetActive(true);
+                pointerArrow.GetComponent<PointerArrow>().Init(gameObject, task.TaskType == SSTaskType.Timed);
+            }
         }
 
         public void InitializeCancelTask()
@@ -167,6 +171,8 @@ namespace UI
             }
 
             CheckingCondition(validatedCondition);
+            
+            pointerArrow.SetActive(false);
         }
 
         private void CheckingCondition(bool validatedCondition)
