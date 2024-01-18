@@ -28,7 +28,7 @@ namespace SS
         private void OnDisable()
         {
             continueButton.onClick.RemoveAllListeners();
-            passTutorialButton.onClick.RemoveAllListeners();
+            if (passTutorialButton != null) passTutorialButton.onClick.RemoveAllListeners();
         }
 
         public void Initialize(string text, string title = null)
