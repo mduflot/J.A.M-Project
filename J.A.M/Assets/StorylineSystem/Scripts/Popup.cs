@@ -39,5 +39,13 @@ namespace SS
             continueButtonPressed = false;
             if (passTutorialButton != null) passTutorialPressed = false;
         }
+
+        public void InitializeEndGame(string text, string title)
+        {
+            popupTitle.text = title;
+            popupText.text = text;
+            gameObject.SetActive(true);
+            continueButton.onClick.AddListener(() => GameManager.Instance.MenuManager.LoadScene("MenuScene"));
+        }
     }
 }

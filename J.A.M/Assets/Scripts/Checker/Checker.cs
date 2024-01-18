@@ -30,7 +30,7 @@ public class Checker : MonoBehaviour, IDataPersistence
     private SSCampaignSO ssCampaign;
 
     private List<Storyline> allStorylines;
-    private List<Storyline> principalStorylines;
+    [SerializeField] private List<Storyline> principalStorylines;
     private List<Storyline> secondaryStorylines;
 
     private List<Storyline> availableStoryLines = new();
@@ -179,6 +179,13 @@ public class Checker : MonoBehaviour, IDataPersistence
         if (availableStoryLines.Count == 0)
         {
             Debug.Log($"All {storyType} storylines are completed or don't have a valid condition.");
+            if (storyType == SSStoryType.Principal)
+            {
+                TimeTickSystem.ModifyTimeScale(0);
+                GameManager.Instance.UIManager.PopupEndGame.InitializeEndGame("Earth has been reached. You won the game!", "Victory!");
+                TimeTickSystem.OnTick -= WaitStorylinePrincipal;
+                TimeTickSystem.OnTick -= WaitStorylineSecondary;
+            } 
             return;
         }
 
