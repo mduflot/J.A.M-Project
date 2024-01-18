@@ -47,7 +47,7 @@ public class PointerArrow : MonoBehaviour
         if (!flicker) return;
         
         var color = GetComponent<SpriteRenderer>().color;
-        color.a = 2 * Mathf.Cos(Time.time) + .25f;
+        color.a = 10 * Mathf.Cos(Time.time) + .25f;
         GetComponent<SpriteRenderer>().color = color;
     }
 }
