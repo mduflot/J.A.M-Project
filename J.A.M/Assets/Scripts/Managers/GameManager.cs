@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public TimeTickSystem TimeTickSystem;
     public Camera mainCamera;
     public bool taskOpened;
+    public MenuManager MenuManager;
 
     private void Awake()
     {

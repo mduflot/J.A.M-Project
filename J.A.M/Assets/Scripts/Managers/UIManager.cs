@@ -29,6 +29,7 @@ namespace Managers
         public CharacterInfoUI characterInfoUI;
         public Popup PopupTutorial;
         public Popup PopupStoryline;
+        public Popup PopupEndGame;
         public GameObject TasksMenu;
         public List<GameObject> GaugesMenu;
         public GameObject SpaceshipMenu;

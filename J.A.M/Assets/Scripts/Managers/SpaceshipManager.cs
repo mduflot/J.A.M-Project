@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using CharacterSystem;
 using SS.Enumerations;
 using Tasks;
@@ -85,6 +86,17 @@ namespace Managers
 
         private void UpdateSystems(object sender, TimeTickSystem.OnTickEventArgs e)
         {
+            if (systems.All(system => system.gaugeValue <= 0))
+            {
+                TimeTickSystem.ModifyTimeScale(0);
+                GameManager.Instance.UIManager.PopupEndGame.InitializeEndGame("You might be forgiven, it was a long way to earth...", "Defeat !");
+                TimeTickSystem.OnTick -= UpdateSystems;
+                TimeTickSystem.OnTick -= UpdateTasks;
+                TimeTickSystem.OnTick -= UpdateCharacters;
+                TimeTickSystem.OnTick -= GenerateSecondaryEventOnFirstDay;
+                return;
+            }
+            
             foreach (var system in systems)
             {
                 if (system.gaugeValue < 0) system.gaugeValue = 0;
