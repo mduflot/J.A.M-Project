@@ -11,18 +11,20 @@ namespace SS.ScriptableObjects
         [field: SerializeField] public string ID { get; set; }
         [field: SerializeField] public SSStoryStatus StoryStatus { get; set; }
         [field: SerializeField] public SSStoryType StoryType { get; set; }
+        [field: SerializeField] public bool IsTutorialToPlay { get; set; }
         [field: SerializeField] public bool IsFirstToPlay { get; set; }
         [field: SerializeField] public bool IsReplayable { get; set; }
         [field: SerializeField] public ConditionSO Condition { get; set; }
         [field: SerializeField] public SerializableDictionary<SSNodeGroupSO, List<SSNodeSO>> NodeGroups { get; set; }
         [field: SerializeField] public List<SSNodeSO> UngroupedNodes { get; set; }
 
-        public void Initialize(string fileName, string id, SSStoryStatus storyStatus, SSStoryType storyType, bool isFirstToPlay, bool isReplayable, ConditionSO condition)
+        public void Initialize(string fileName, string id, SSStoryStatus storyStatus, SSStoryType storyType, bool isTutorialToPlay, bool isFirstToPlay, bool isReplayable, ConditionSO condition)
         {
             FileName = fileName;
             ID = id;
             StoryStatus = storyStatus;
             StoryType = storyType;
+            IsTutorialToPlay = isTutorialToPlay;
             IsFirstToPlay = isFirstToPlay;
             IsReplayable = isReplayable;
             Condition = condition;

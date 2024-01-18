@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: TutorialGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: Tutorial
-  <ID>k__BackingField: 7e3d4fa0-7514-46e6-9bba-41a8c985b03b
+  <ID>k__BackingField: 8f7dd51e-c14a-4430-873f-e5caea7e6311
   <StoryStatus>k__BackingField: 0
   <StoryType>k__BackingField: 0
-  <IsFirstToPlay>k__BackingField: 1
+  <IsTutorialToPlay>k__BackingField: 1
+  <IsFirstToPlay>k__BackingField: 0
   <IsReplayable>k__BackingField: 0
   <Condition>k__BackingField: {fileID: 0}
   <Groups>k__BackingField:
@@ -31,13 +32,13 @@ MonoBehaviour:
     <Name>k__BackingField: Tutorial
     <Position>k__BackingField: {x: 15.200001, y: 146.40001}
   <Nodes>k__BackingField:
-  - rid: 1640970927817097433
-  - rid: 1640970927817097434
-  - rid: 1640970927817097435
-  - rid: 1640970927817097436
-  - rid: 1640970927817097437
-  - rid: 1640970927817097438
-  - rid: 1640970927817097439
+  - rid: 1640970943387926535
+  - rid: 1640970943387926536
+  - rid: 1640970943387926537
+  - rid: 1640970943387926538
+  - rid: 1640970943387926539
+  - rid: 1640970943387926540
+  - rid: 1640970943387926541
   <OldGroupNames>k__BackingField:
   - Tutorial
   <OldUngroupedNodeNames>k__BackingField: []
@@ -55,25 +56,25 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1640970927817097433
+    - rid: 1640970943387926535
       type: {class: SSPopupNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 9c4c606f-8f07-4ca4-9d2b-cf2243f3940f
         <Name>k__BackingField: FirstPopup
         <Choices>k__BackingField:
-        - rid: 1640970927817097440
+        - rid: 1640970943387926542
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 4
         <Position>k__BackingField: {x: 40.8, y: 206.40001}
         <Text>k__BackingField: Voulez-vous faire le tutoriel
         <PopupUIType>k__BackingField: 0
-    - rid: 1640970927817097434
+    - rid: 1640970943387926536
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 1b44e0cf-804c-4894-afe7-484473f24fe4
         <Name>k__BackingField: FirstDialogue
         <Choices>k__BackingField:
-        - rid: 1640970927817097441
+        - rid: 1640970943387926543
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 375.2, y: 206.40001}
@@ -85,13 +86,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 1640970927817097435
+    - rid: 1640970943387926537
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 7be0fd62-0c69-4543-980f-3a50ba09793d
         <Name>k__BackingField: FirstTask
         <Choices>k__BackingField:
-        - rid: 1640970927817097442
+        - rid: 1640970943387926544
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 672.8, y: 206.40001}
@@ -107,13 +108,13 @@ MonoBehaviour:
         <Room>k__BackingField: 1
         <Furniture>k__BackingField: 1
         <IsTaskTutorial>k__BackingField: 1
-    - rid: 1640970927817097436
+    - rid: 1640970943387926538
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 48696e4a-b1a3-4c07-9883-904820e843ff
         <Name>k__BackingField: SecondDialogue
         <Choices>k__BackingField:
-        - rid: 1640970927817097443
+        - rid: 1640970943387926545
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1012, y: 206.40001}
@@ -125,25 +126,25 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 1640970927817097437
+    - rid: 1640970943387926539
       type: {class: SSPopupNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 0cde2fbf-8f5c-4c3e-909c-75f11b66925b
         <Name>k__BackingField: SecondPopup
         <Choices>k__BackingField:
-        - rid: 1640970927817097444
+        - rid: 1640970943387926546
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 4
         <Position>k__BackingField: {x: 1319.2, y: 206.40001}
         <Text>k__BackingField: Y'A DES GAUGES
         <PopupUIType>k__BackingField: 1
-    - rid: 1640970927817097438
+    - rid: 1640970943387926540
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 8342727e-e2f5-42cd-a9f5-30e4c6b5506b
         <Name>k__BackingField: SecondTask
         <Choices>k__BackingField:
-        - rid: 1640970927817097445
+        - rid: 1640970943387926547
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 1628.8, y: 206.40001}
@@ -159,29 +160,29 @@ MonoBehaviour:
         <Room>k__BackingField: 1
         <Furniture>k__BackingField: 1
         <IsTaskTutorial>k__BackingField: 1
-    - rid: 1640970927817097439
+    - rid: 1640970943387926541
       type: {class: SSPopupNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 5dd5684e-9fa9-4112-897c-3e8a36c05424
         <Name>k__BackingField: PopupNode
         <Choices>k__BackingField:
-        - rid: 1640970927817097446
+        - rid: 1640970943387926548
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 4
         <Position>k__BackingField: {x: 1966.4, y: 206.40001}
         <Text>k__BackingField: FIN DES HARICOTS
         <PopupUIType>k__BackingField: 0
-    - rid: 1640970927817097440
+    - rid: 1640970943387926542
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 1b44e0cf-804c-4894-afe7-484473f24fe4
-    - rid: 1640970927817097441
+    - rid: 1640970943387926543
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 7be0fd62-0c69-4543-980f-3a50ba09793d
-    - rid: 1640970927817097442
+    - rid: 1640970943387926544
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -189,17 +190,17 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 622f0ef1db117034da30f4a736990d51,
           type: 2}
         <PreviewOutcome>k__BackingField: Preview...
-    - rid: 1640970927817097443
+    - rid: 1640970943387926545
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 0cde2fbf-8f5c-4c3e-909c-75f11b66925b
-    - rid: 1640970927817097444
+    - rid: 1640970943387926546
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 8342727e-e2f5-42cd-a9f5-30e4c6b5506b
-    - rid: 1640970927817097445
+    - rid: 1640970943387926547
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -207,7 +208,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 622f0ef1db117034da30f4a736990d51,
           type: 2}
         <PreviewOutcome>k__BackingField: Preview...
-    - rid: 1640970927817097446
+    - rid: 1640970943387926548
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node

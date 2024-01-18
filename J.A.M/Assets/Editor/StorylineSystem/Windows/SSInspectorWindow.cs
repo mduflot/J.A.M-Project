@@ -35,6 +35,11 @@ namespace SS.Windows
                 callback => { graphView.StoryType = (SSStoryType)callback.newValue; });
 
             rootVisualElement.Add(enumFieldGraphType);
+            
+            Toggle toggleGraphTutorial = SSElementUtility.CreateToggle(graphView.IsTutorialToPlay, "Is Tutorial To Play:",
+                callback => { graphView.IsTutorialToPlay = callback.newValue; });
+            
+            rootVisualElement.Add(toggleGraphTutorial);
 
             Toggle toggleGraph = SSElementUtility.CreateToggle(graphView.IsFirstToPlay, "Is First To Play:",
                 callback => { graphView.IsFirstToPlay = callback.newValue; });
