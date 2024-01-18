@@ -874,6 +874,8 @@ namespace SS
             }
 
             if (task != null && taskToPlay == null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
+            assignedCharacters.Clear();
+            notAssignedCharacters.Clear();
             var room = spaceshipManager.GetRoom(nodeSO.Room);
             var notificationGO = spaceshipManager.notificationPool.GetFromPool();
             if (notificationGO.TryGetComponent(out Notification notification))
@@ -986,7 +988,8 @@ namespace SS
         {
             if (task != null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
             
-            GameManager.Instance.UIManager.PopupHelp.Initialize(nodeSO.Text);
+            if (nodeSO.IsTutorialPopup) GameManager.Instance.UIManager.PopupTutorial.Initialize(nodeSO.Text);
+            else GameManager.Instance.UIManager.PopupStoryline.Initialize(nodeSO.Text, nodeContainer.FileName);
             switch (nodeSO.PopupUIType)
             {
                 case SSPopupUIType.None:
@@ -1007,11 +1010,11 @@ namespace SS
                     break;
             }
 
-            yield return new WaitUntil(() => GameManager.Instance.UIManager.PopupHelp.continueButtonPressed ||
-                                             GameManager.Instance.UIManager.PopupHelp.passTutorialPressed);
+            yield return new WaitUntil(() => GameManager.Instance.UIManager.PopupTutorial.continueButtonPressed ||
+                                             GameManager.Instance.UIManager.PopupTutorial.passTutorialPressed);
 
             if (nodeSO.Choices.First().NextNode == null ||
-                GameManager.Instance.UIManager.PopupHelp.passTutorialPressed)
+                GameManager.Instance.UIManager.PopupTutorial.passTutorialPressed)
             {
                 IsRunning = false;
                 ResetTimeline();
@@ -1039,7 +1042,7 @@ namespace SS
                     }
                 }
 
-                Debug.Log("End of tutorial");
+                if (nodeSO.IsTutorialPopup) Debug.Log("End of tutorial");
                 yield break;
             }
 

@@ -252,7 +252,8 @@ namespace SS.Utilities
                     NodeType = popupNode.NodeType,
                     Position = popupNode.GetPosition().position,
                     Text = popupNode.Text,
-                    PopupUIType = popupNode.PopupUIType
+                    PopupUIType = popupNode.PopupUIType,
+                    IsTutorialPopup = popupNode.IsTutorialPopup
                 };
 
                 graphData.Nodes.Add(nodeData);
@@ -363,9 +364,10 @@ namespace SS.Utilities
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(popupNode.NodeName, popupNode.Text, ConvertNodeChoicesToNodeChoicesData(popupNode.Choices),
+                nodeSO.Initialize(popupNode.NodeName, popupNode.Text,
+                    ConvertNodeChoicesToNodeChoicesData(popupNode.Choices),
                     popupNode.NodeType,
-                    popupNode.IsStartingNode(), popupNode.PopupUIType);
+                    popupNode.IsStartingNode(), popupNode.PopupUIType, popupNode.IsTutorialPopup);
 
                 createdNodes.Add(popupNode.ID, nodeSO);
 
@@ -562,6 +564,7 @@ namespace SS.Utilities
                 {
                     ((SSPopupNode)node).Text = ((SSPopupNodeSaveData)nodeData).Text;
                     ((SSPopupNode)node).PopupUIType = ((SSPopupNodeSaveData)nodeData).PopupUIType;
+                    ((SSPopupNode)node).IsTutorialPopup = ((SSPopupNodeSaveData)nodeData).IsTutorialPopup;
                 }
 
                 node.Draw();
