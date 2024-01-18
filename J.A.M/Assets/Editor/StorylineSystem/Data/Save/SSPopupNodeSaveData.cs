@@ -10,5 +10,6 @@ namespace SS.Data.Save
     {
         [field: SerializeField] public string Text { get; set; }
         [field: SerializeField] public SSPopupUIType PopupUIType { get; set; }
+        [field: SerializeField] public bool IsTutorialPopup { get; set; }
     }
 }

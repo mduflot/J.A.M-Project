@@ -13,8 +13,8 @@ namespace SS.Elements
     public class SSPopupNode : SSNode
     {
         public string Text { get; set; }
-
         public SSPopupUIType PopupUIType { get; set; }
+        public bool IsTutorialPopup { get; set; }
 
         public override void Initialize(string nodeName, SSGraphView ssGraphView, Vector2 position)
         {
@@ -22,6 +22,8 @@ namespace SS.Elements
 
             NodeType = SSNodeType.Popup;
             Text = "Node text.";
+            PopupUIType = SSPopupUIType.None;
+            IsTutorialPopup = false;
 
             SSChoiceSaveData choiceData = new SSChoiceSaveData()
             {
@@ -67,9 +69,14 @@ namespace SS.Elements
                 callbackUI => { PopupUIType = (SSPopupUIType)callbackUI.newValue; });
 
             customDataContainer.Add(popupEnumFlagsField);
-            
+
+            Toggle isTutorialPopupToggle = SSElementUtility.CreateToggle(IsTutorialPopup, "Tutorial",
+                callback => { IsTutorialPopup = callback.newValue; });
+
+            customDataContainer.Add(isTutorialPopupToggle);
+
             extensionContainer.Add(customDataContainer);
-            
+
             RefreshExpandedState();
         }
     }
