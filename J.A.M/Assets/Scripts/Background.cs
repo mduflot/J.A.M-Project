@@ -11,6 +11,7 @@ public class Background : MonoBehaviour
     [SerializeField] private float yOffset;
     [SerializeField] private float scrollSpeed;
     [SerializeField] private float minScale, maxScale;
+    [SerializeField] private float gazScale;
     [SerializeField] private float starScale;
     [SerializeField] private float galaxyScale;
     
@@ -23,6 +24,7 @@ public class Background : MonoBehaviour
     [SerializeField] private Sprite[] backgrounds;
     [SerializeField] private Sprite[] planetBack;
     [SerializeField] private Sprite[] planetFronts;
+    [SerializeField] private Sprite[] gazFronts;
     [SerializeField] private Sprite[] stars;
     [SerializeField] private Sprite[] galaxies;
 
@@ -71,19 +73,18 @@ public class Background : MonoBehaviour
 
     private void ResetPlanet(int index)
     {
-        var rand = Random.Range(0, 3);
+        var rand = Random.Range(0, 4);
 
-        Sprite newBg;
-        Sprite newFg;
-        float newScale;
+        Sprite newBg = null;
+        Sprite newFg = null;
+        float newScale = 1f;
         
         switch (rand)
         {
             case 0:
                 var planetIndex = Random.Range(0, planetFronts.Length);
                 
-                
-                newBg = planetBack[planetIndex < 12 ? 0 : 1];
+                newBg = planetBack[0];
                 newFg = planetFronts[planetIndex];
                 
                 planetBackgrounds[index].GetComponent<SpriteRenderer>().color =
@@ -97,21 +98,28 @@ public class Background : MonoBehaviour
                 break;
             
             case 1:
-                newBg = stars[Random.Range(0, stars.Length)];
-                newFg = null;
-                newScale = Random.Range(minScale * starScale, maxScale * starScale);
+                var gazIndex = Random.Range(0, gazFronts.Length);
+                
+                newBg = planetBack[1];
+                newFg = gazFronts[gazIndex];
+                
+                planetBackgrounds[index].GetComponent<SpriteRenderer>().color =
+                    new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+                
+                planetForegrounds[index].GetComponent<SpriteRenderer>().color =
+                    new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+                
+                newScale = Random.Range(minScale, maxScale)  * gazScale;
                 break;
             
             case 2:
-                newBg = galaxies[Random.Range(0, galaxies.Length)];
-                newFg = null;
-                newScale = Random.Range(minScale * galaxyScale, maxScale * galaxyScale);
+                newBg = stars[Random.Range(0, stars.Length)];
+                newScale = Random.Range(minScale, maxScale) * starScale;
                 break;
             
-            default:
-                newBg = null;
-                newFg = null;
-                newScale = 1f;
+            case 3:
+                newBg = galaxies[Random.Range(0, galaxies.Length)];
+                newScale = Random.Range(minScale, maxScale) * galaxyScale;
                 break;
         }
         
