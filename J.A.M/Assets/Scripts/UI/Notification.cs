@@ -80,7 +80,7 @@ namespace UI
             timeLeftSprite.material.SetInt("_Arc1", 360);
             taskLog = taskToPlay;
             
-            pointerArrow.GetComponent<PointerArrow>().Init(gameObject, false);
+            pointerArrow.GetComponent<PointerArrow>().Init(gameObject, task.TaskType == SSTaskType.Timed);
         }
 
         public void InitializeCancelTask()

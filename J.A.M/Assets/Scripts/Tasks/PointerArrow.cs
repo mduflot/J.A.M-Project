@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PointerArrow : MonoBehaviour
@@ -25,11 +26,12 @@ public class PointerArrow : MonoBehaviour
 
     private void MovePointer()
     {
-        Vector2 bounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        Vector2 boundsBL = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        Vector2 boundsTR = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, Camera.main.transform.position.z));
         var pos = target.transform.position;
-        pos.x = Mathf.Clamp(pos.x, bounds.x + boundW, bounds.x + Screen.width - boundW);
-        pos.y = Mathf.Clamp(pos.y, bounds.y + boundH, bounds.y + Screen.height - boundH);
-        Debug.Log($"{bounds.x + Screen.width - boundW} // {pos.x}");
+        pos.x = Mathf.Clamp(pos.x, boundsBL.x + boundW, boundsTR.x - boundW);
+        pos.y = Mathf.Clamp(pos.y, boundsBL.y + boundH, boundsTR.y - boundH);
+        Debug.Log($"{boundsTR.x} // {pos.x}");
         transform.position = pos;
     }
 
