@@ -17,4 +17,5 @@
     BedroomProfessor,
     BedroomMusician,
     Bath,
+    Stairs,
 }
