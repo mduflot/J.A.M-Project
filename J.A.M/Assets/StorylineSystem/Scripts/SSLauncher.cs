@@ -986,8 +986,8 @@ namespace SS
         {
             if (task != null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
             
-            if (nodeSO.IsTutorialPopup) GameManager.Instance.UIManager.PopupHelp.Initialize(nodeSO.Text);
-            else GameManager.Instance.UIManager.PopupHelp.Initialize(nodeSO.Text, nodeContainer.FileName);
+            if (nodeSO.IsTutorialPopup) GameManager.Instance.UIManager.PopupTutorial.Initialize(nodeSO.Text);
+            else GameManager.Instance.UIManager.PopupStoryline.Initialize(nodeSO.Text, nodeContainer.FileName);
             switch (nodeSO.PopupUIType)
             {
                 case SSPopupUIType.None:
@@ -1008,11 +1008,11 @@ namespace SS
                     break;
             }
 
-            yield return new WaitUntil(() => GameManager.Instance.UIManager.PopupHelp.continueButtonPressed ||
-                                             GameManager.Instance.UIManager.PopupHelp.passTutorialPressed);
+            yield return new WaitUntil(() => GameManager.Instance.UIManager.PopupTutorial.continueButtonPressed ||
+                                             GameManager.Instance.UIManager.PopupTutorial.passTutorialPressed);
 
             if (nodeSO.Choices.First().NextNode == null ||
-                GameManager.Instance.UIManager.PopupHelp.passTutorialPressed)
+                GameManager.Instance.UIManager.PopupTutorial.passTutorialPressed)
             {
                 IsRunning = false;
                 ResetTimeline();
