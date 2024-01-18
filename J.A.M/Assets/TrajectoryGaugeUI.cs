@@ -15,15 +15,15 @@ public class TrajectoryGaugeUI : GaugeUI
     {
         if (isTop)
         {
-            topGauge.fillAmount = 1 - value / 50;
-            topPreviewGauge.fillAmount = 1 - (value + previewValue) / 50;
-            shipTransform.eulerAngles = new Vector3(0, 0, topGauge.fillAmount * -maxAngle);
+            if (!IsPreviewing || topGauge.fillAmount < 1 - (value - previewValue) / 50) topGauge.fillAmount = 1 - (value - previewValue) / 50;
+            topPreviewGauge.fillAmount = 1 - value / 50;
+            shipTransform.eulerAngles = new Vector3(0, 0, topPreviewGauge.fillAmount * -maxAngle);
         }
         else
         {
-            bottomGauge.fillAmount = 1 - value / 50;
-            bottomPreviewGauge.fillAmount = 1 - (value + previewValue) / 50;
-            shipTransform.eulerAngles = new Vector3(0, 0, bottomGauge.fillAmount * maxAngle);
+            if (!IsPreviewing || bottomGauge.fillAmount <  1 - (value - previewValue) / 50) bottomGauge.fillAmount = 1 - (value - previewValue) / 50;
+            bottomPreviewGauge.fillAmount = 1 - value / 50;
+            shipTransform.eulerAngles = new Vector3(0, 0, bottomPreviewGauge.fillAmount * maxAngle);
         }
     }
 
@@ -32,10 +32,11 @@ public class TrajectoryGaugeUI : GaugeUI
         var gauge = isTop ? topGauge : bottomGauge;
         var previewGauge = isTop ? topPreviewGauge : bottomPreviewGauge;
         
-        if (value > 0)
+        if (value < 0)
         {
-            value += 1 - gauge.fillAmount * 50;
-            previewGauge.fillAmount = 1 - value / 50;
+            value *= -1;
+            value += gauge.fillAmount * 50;
+            previewGauge.fillAmount = value / 50;
         }
         else
         {

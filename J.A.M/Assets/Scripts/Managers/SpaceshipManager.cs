@@ -134,7 +134,8 @@ namespace Managers
                     if (outcome.gauge == system.type) valueToAdd += outcome.value;
                 }
 
-                system.previewGaugeValue += valueToAdd;
+                if (system.type == SystemType.Trajectory) system.previewGaugeValue -= valueToAdd;
+                else system.previewGaugeValue += valueToAdd;
             }
         }
 
@@ -148,7 +149,8 @@ namespace Managers
                     if (outcome.gauge == system.type) valueToAdd -= outcome.value;
                 }
 
-                system.previewGaugeValue += valueToAdd;
+                if (system.type == SystemType.Trajectory) system.previewGaugeValue -= valueToAdd;
+                else system.previewGaugeValue += valueToAdd;
             }
         }
 

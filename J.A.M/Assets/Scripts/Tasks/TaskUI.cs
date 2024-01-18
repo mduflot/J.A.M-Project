@@ -347,19 +347,6 @@ namespace Tasks
                         ? outcome.value
                         : -outcome.value;
                     
-                    if (notification.Task.TaskType == SSTaskType.Permanent)
-                    {
-                        for (int index = 0; index < GameManager.Instance.SpaceshipManager.systems.Length; index++)
-                        {
-                            var system = GameManager.Instance.SpaceshipManager.systems[index];
-                            if (system.type == outcome.OutcomeTargetGauge)
-                            {
-                                value -= system.decreaseSpeed * notification.Task.Duration;
-                                break;
-                            }
-                        }
-                    }
-                    
                     gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
                         value));
 
@@ -398,6 +385,19 @@ namespace Tasks
 
                     var volition =
                         outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add ? valueVolition : -valueVolition;
+                    
+                    if (notification.Task.TaskType == SSTaskType.Permanent)
+                    {
+                        for (int index = 0; index < GameManager.Instance.SpaceshipManager.systems.Length; index++)
+                        {
+                            var system = GameManager.Instance.SpaceshipManager.systems[index];
+                            if (system.type == outcome.OutcomeTargetGauge)
+                            {
+                                volition -= system.decreaseSpeed * notification.Task.Duration;
+                                break;
+                            }
+                        }
+                    }
 
                     gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge, volition));
                     break;
