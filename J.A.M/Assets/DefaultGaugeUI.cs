@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class DefaultGaugeUI : GaugeUI
@@ -10,6 +11,8 @@ public class DefaultGaugeUI : GaugeUI
     [SerializeField] private Image arrow;
     [SerializeField] private Sprite greenArrow;
     [SerializeField] private Sprite redArrow;
+
+    private bool isHovered;
 
     public override void UpdateGauge(float value, float previewValue)
     {
@@ -37,6 +40,18 @@ public class DefaultGaugeUI : GaugeUI
     public override void ResetPreviewGauge()
     {
         previewGauge.fillAmount = 0;
+    }
+
+    public override void OnHover(PointerEventData eventData)
+    {
+        isHovered = true;
+        base.OnHover(eventData);
+    }
+
+    public override void OnExit(PointerEventData eventData)
+    {
+        isHovered = false;
+        base.OnExit(eventData);
     }
     
 }

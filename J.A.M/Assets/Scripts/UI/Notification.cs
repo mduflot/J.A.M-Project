@@ -12,7 +12,7 @@ using UnityEngine.EventSystems;
 
 namespace UI
 {
-    public class Notification : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
+    public class Notification : HoverableObject, IPointerDownHandler
     {
         [HideInInspector] public bool IsCompleted;
         [HideInInspector] public bool IsStarted;
@@ -42,9 +42,14 @@ namespace UI
         private float timeLeft;
         private List<TaskUI.GaugesOutcome> gaugeOutcomes = new List<TaskUI.GaugesOutcome>();
 
+        private bool isHovered;
+
         private void Start()
         {
             camera = Camera.main;
+            data = new HoverMenuData();
+            data.parent = transform;
+            data.baseParent = transform;
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -347,6 +352,11 @@ namespace UI
                 if (Task.Duration > 0)
                 {
                     time.text = TimeTickSystem.GetTicksAsTime((uint)Task.Duration);
+                    if (isHovered)
+                    {
+                        data.text2 = time.text;
+                        hoverMenu.UpdateMenu(data);
+                    }
                     Task.Duration -= TimeTickSystem.timePerTick;
                     timerSprite.material.SetInt("_Arc2", (int)(Task.Duration / Task.BaseDuration * 360));
                 }
@@ -426,16 +436,23 @@ namespace UI
             }
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
+        public override void OnHover(PointerEventData eventData)
         {
             outlineSprite.sprite = hoveredSprite;
             animator.SetBool("Selected", true);
+            data.text1 = Task.Name;
+            data.text2 = TimeTickSystem.GetTicksAsTime((uint)Task.Duration);
+            data.Task = Task;
+            isHovered = true;
+            base.OnHover(eventData);
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        public override void OnExit(PointerEventData eventData)
         {
+            isHovered = false;
             outlineSprite.sprite = defaultSprite;
             animator.SetBool("Selected", false);
+            base.OnExit(eventData);
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GaugeUI : MonoBehaviour
+public class GaugeUI : HoverableObject
 {
     public SystemType systemType;
     public virtual void UpdateGauge(float value, float previewValue)

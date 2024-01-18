@@ -11,6 +11,6 @@ public class TaskButtonHoverMenu : HoverMenu
     {
         base.Initialize(data);
         taskDescription.text = data.text1;
-        transform.parent = data.parent;
+        transform.SetParent(data.parent);
     }
 }

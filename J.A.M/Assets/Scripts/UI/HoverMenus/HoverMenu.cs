@@ -1,3 +1,4 @@
+using Tasks;
 using UnityEngine;
 
 public class HoverMenu : MonoBehaviour
@@ -9,8 +10,13 @@ public class HoverMenu : MonoBehaviour
 
     public void QuitMenu(HoverMenuData data)
     {
-        transform.parent = data.baseParent;
+        transform.SetParent(data.baseParent);
         gameObject.SetActive(false);
+    }
+
+    public virtual void UpdateMenu(HoverMenuData data)
+    {
+        
     }
 }
 
@@ -20,4 +26,5 @@ public class HoverMenuData
     public Transform baseParent;
     public Transform parent;
     public string text2;
+    public Task Task;
 }
