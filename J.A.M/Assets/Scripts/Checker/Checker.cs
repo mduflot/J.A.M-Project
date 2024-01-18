@@ -143,6 +143,12 @@ public class Checker : MonoBehaviour, IDataPersistence
         {
             case SSStoryType.Principal:
             {
+                if (principalStorylines.Any(storyline => storyline.StorylineContainer.IsTutorialToPlay && storyline.Status == SSStoryStatus.Enabled))
+                {
+                    PickTimelineFromStoryline(principalStorylines.First(storyline =>
+                        storyline.StorylineContainer.IsTutorialToPlay));
+                    return;
+                }
                 for (var index = 0; index < principalStorylines.Count; index++)
                 {
                     var storyline = principalStorylines[index];
