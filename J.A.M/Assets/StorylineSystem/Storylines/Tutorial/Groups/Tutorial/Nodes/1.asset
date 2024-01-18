@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a7dc82bf72f4c909a330508245e176e, type: 3}
-  m_Name: PopupNode
+  m_Name: 1
   m_EditorClassIdentifier: 
-  <NodeName>k__BackingField: PopupNode
+  <NodeName>k__BackingField: 1
   <Choices>k__BackingField:
-  - rid: 5750223035560624460
+  - rid: 5750223035560624452
   <NodeType>k__BackingField: 4
-  <IsStartingNode>k__BackingField: 0
-  <Text>k__BackingField: FIN DES HARICOTS
+  <IsStartingNode>k__BackingField: 1
+  <Text>k__BackingField: Launching Shyrka Protocol...
   <PopupUIType>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 5750223035560624460
+    - rid: 5750223035560624452
       type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Next Node
-        <NextNode>k__BackingField: {fileID: 0}
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 619f6692bcdec8d4abea3d4557d74636,
+          type: 2}

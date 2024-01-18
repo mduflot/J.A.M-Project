@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
-  m_Name: FirstDialogue
+  m_Name: 10
   m_EditorClassIdentifier: 
-  <NodeName>k__BackingField: FirstDialogue
+  <NodeName>k__BackingField: 10
   <Choices>k__BackingField:
-  - rid: 1640970943387926529
+  - rid: 5750223035560624462
   <NodeType>k__BackingField: 0
   <IsStartingNode>k__BackingField: 0
-  <Text>k__BackingField: WESH BIEN !
-  <SpeakerType>k__BackingField: 0
+  <Text>k__BackingField: This is ridiculous. I've been in charge of this ship for
+    28 years, dammit!
+  <SpeakerType>k__BackingField: 24
   <Duration>k__BackingField: 1
-  <IsDialogueTask>k__BackingField: 0
-  <PercentageTask>k__BackingField: 50
+  <IsDialogueTask>k__BackingField: 1
+  <PercentageTask>k__BackingField: 30
   <IsCompleted>k__BackingField: 0
   <Job>k__BackingField: 0
   <PositiveTraits>k__BackingField: 0
@@ -29,9 +30,9 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1640970943387926529
+    - rid: 5750223035560624462
       type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Next Node
-        <NextNode>k__BackingField: {fileID: 11400000, guid: ad3a36c85dea39c4f9663ef03299b10f,
+        <NextNode>k__BackingField: {fileID: 11400000, guid: e1f6da5961575dd4296ebf40f4b53ef3,
           type: 2}

@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
-  m_Name: SecondDialogue
+  m_Name: 7
   m_EditorClassIdentifier: 
-  <NodeName>k__BackingField: SecondDialogue
+  <NodeName>k__BackingField: 7
   <Choices>k__BackingField:
-  - rid: 1640970943387926531
+  - rid: 5750223035560624457
   <NodeType>k__BackingField: 0
   <IsStartingNode>k__BackingField: 0
-  <Text>k__BackingField: "Bien jou\xE9!"
-  <SpeakerType>k__BackingField: 0
+  <Text>k__BackingField: Not while it is being requisitionned by a Network authority
+    on a special mission. This is Spatial Code 101.
+  <SpeakerType>k__BackingField: 23
   <Duration>k__BackingField: 1
   <IsDialogueTask>k__BackingField: 0
   <PercentageTask>k__BackingField: 50
@@ -29,9 +30,9 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1640970943387926531
+    - rid: 5750223035560624457
       type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Next Node
-        <NextNode>k__BackingField: {fileID: 11400000, guid: b4976bf7195ebcb459358022641ac8b8,
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 6df77b3809bf99f47a8d8b15b0bc9eab,
           type: 2}
