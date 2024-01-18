@@ -30,18 +30,17 @@ namespace Managers
         [SerializeField] private float hourlyMoodLossGaugeEmpty = 0.75f;
         public float moodLossOnCancelTask = 10.0f;
 
-        [Header("Sim Values")]
-        public float simMoveSpeed = .9f;
+        [Header("Sim Values")] public float simMoveSpeed = .9f;
         public int simHungerBaseThreshold = 12;
         public int simHungerNoise = 6;
         [SerializeField] private int simEatThreshold = 3;
         [SerializeField] private float simEatAmount;
-        
+
         private Dictionary<SystemType, ShipSystem> systemsDictionary = new();
         private Dictionary<RoomType, Room> roomsDictionary = new();
 
         public bool IsInTutorial;
-        
+
         private void Start()
         {
             if (DataPersistenceManager.Instance.IsNewGame) IsInTutorial = true;
@@ -75,11 +74,9 @@ namespace Managers
                 system.gaugeValue = 35;
                 systemsDictionary.Add(system.type, system);
             }
-            
-            Debug.Log($">{rooms.Length}");
+
             foreach (var room in rooms)
             {
-                Debug.Log($">>{room.type}");
                 roomsDictionary.Add(room.type, room);
             }
         }
@@ -89,14 +86,15 @@ namespace Managers
             if (systems.All(system => system.gaugeValue <= 0))
             {
                 TimeTickSystem.ModifyTimeScale(0);
-                GameManager.Instance.UIManager.PopupEndGame.InitializeEndGame("You might be forgiven, it was a long way to earth...", "Defeat !");
+                GameManager.Instance.UIManager.PopupEndGame.InitializeEndGame(
+                    "You might be forgiven, it was a long way to earth...", "Defeat !");
                 TimeTickSystem.OnTick -= UpdateSystems;
                 TimeTickSystem.OnTick -= UpdateTasks;
                 TimeTickSystem.OnTick -= UpdateCharacters;
                 TimeTickSystem.OnTick -= GenerateSecondaryEventOnFirstDay;
                 return;
             }
-            
+
             foreach (var system in systems)
             {
                 if (system.gaugeValue < 0) system.gaugeValue = 0;
@@ -113,26 +111,29 @@ namespace Managers
                             if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedRations))
                                 decreaseValue += system.decreaseSpeed * 3 / 10;
                             break;
-                                
+
                         case SystemType.Hull:
                             if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.WeakenedHull))
                                 decreaseValue += system.decreaseSpeed * 3 / 10;
                             break;
-                                
+
                         case SystemType.Power:
                             if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.BadInsulation))
                                 decreaseValue += system.decreaseSpeed * 3 / 10;
                             break;
-                                
+
                         case SystemType.Trajectory:
                             if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.Leak))
                                 decreaseValue += .2f;
                             break;
                     }
+
                     system.gaugeValue -= decreaseValue / TimeTickSystem.ticksPerHour;
                 }
-                
-                if (!IsInTutorial) GameManager.Instance.UIManager.UpdateGauges(system.type, system.gaugeValue, system.previewGaugeValue);
+
+                if (!IsInTutorial)
+                    GameManager.Instance.UIManager.UpdateGauges(system.type, system.gaugeValue,
+                        system.previewGaugeValue);
             }
 
             GameManager.Instance.UIManager.UpdateInGameDate(TimeTickSystem.GetTimeAsInGameDate(e));
@@ -186,6 +187,7 @@ namespace Managers
             {
                 gaugeValue = 0;
             }
+
             systemsDictionary[systemType].gaugeValue = gaugeValue;
         }
 
@@ -193,7 +195,7 @@ namespace Managers
         {
             if (e.tick % (TimeTickSystem.ticksPerHour * 24) != 0) return;
             if (IsInTutorial) return;
-            
+
             Checker.Instance.ChooseNewStoryline(SSStoryType.Secondary);
             TimeTickSystem.OnTick -= GenerateSecondaryEventOnFirstDay;
         }
@@ -304,20 +306,22 @@ namespace Managers
                                 }
                                 else
                                     simCharacter.SendToIdleRoom();
+
                                 systems[2].gaugeValue -= simEatAmount;
                                 simCharacter.tick = 0;
-                                simCharacter.ticksToEat = (simHungerBaseThreshold 
-                                                            * (int) TimeTickSystem.ticksPerHour) 
-                                                            + Random.Range(
+                                simCharacter.ticksToEat = (simHungerBaseThreshold
+                                                           * (int)TimeTickSystem.ticksPerHour)
+                                                          + Random.Range(
                                                               (int)-TimeTickSystem.ticksPerHour * simHungerNoise,
                                                               (int)TimeTickSystem.ticksPerHour * simHungerNoise);
                             }
+
                             break;
-                        
+
                         case SimCharacter.SimStatus.GoToEat:
                             simCharacter.tick = 0;
                             break;
-                        
+
                         default:
                             if (simCharacter.tick >= simCharacter.ticksToEat)
                             {
@@ -325,6 +329,7 @@ namespace Managers
                                 simCharacter.simStatus = SimCharacter.SimStatus.GoToEat;
                                 simCharacter.tick = 0;
                             }
+
                             break;
                     }
                 }
