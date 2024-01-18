@@ -37,7 +37,7 @@ namespace SS
             popupText.text = text;
             gameObject.SetActive(true);
             continueButtonPressed = false;
-            passTutorialPressed = false;
+            if (passTutorialButton != null) passTutorialPressed = false;
         }
     }
 }
