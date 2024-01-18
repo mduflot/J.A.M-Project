@@ -42,10 +42,10 @@ namespace SS.Windows
                     level = 2,
                     userData = SSNodeType.Time
                 },
-                new SearchTreeEntry(new GUIContent("Sound", indentationIcon))
+                new SearchTreeEntry(new GUIContent("Popup", indentationIcon))
                 {
                     level = 2,
-                    userData = SSNodeType.Sound
+                    userData = SSNodeType.Popup
                 },
                 new SearchTreeGroupEntry(new GUIContent("Node Group"), 1),
                 new SearchTreeEntry(new GUIContent("Single Group", indentationIcon))
@@ -93,12 +93,12 @@ namespace SS.Windows
                     return true;
                 }
                 
-                case SSNodeType.Sound:
+                case SSNodeType.Popup:
                 {
-                    SSSoundNode soundNode =
-                        (SSSoundNode)graphView.CreateNode("SoundNode", SSNodeType.Sound, localMousePosition);
+                    SSPopupNode popupNode =
+                        (SSPopupNode)graphView.CreateNode("PopupNode", SSNodeType.Popup, localMousePosition);
 
-                    graphView.AddElement(soundNode);
+                    graphView.AddElement(popupNode);
 
                     return true;
                 }

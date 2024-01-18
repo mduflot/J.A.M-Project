@@ -31,14 +31,19 @@ namespace Managers
 
         [Header("Sim Values")]
         public float simMoveSpeed = .9f;
-        public int simHungerBaseThreshold = 576;
-        [SerializeField] private int simEatThreshold = 192;
+        public int simHungerBaseThreshold = 12;
+        public int simHungerNoise = 6;
+        [SerializeField] private int simEatThreshold = 3;
+        [SerializeField] private float simEatAmount;
         
         private Dictionary<SystemType, ShipSystem> systemsDictionary = new();
         private Dictionary<RoomType, Room> roomsDictionary = new();
+
+        public bool IsInTutorial;
         
         private void Start()
         {
+            if (DataPersistenceManager.Instance.IsNewGame) IsInTutorial = true;
             Initialize();
             InitializeSystems();
             notificationPool = new Pool<GameObject>(taskNotificationPrefab, 5);
@@ -113,7 +118,7 @@ namespace Managers
                     system.gaugeValue -= decreaseValue / TimeTickSystem.ticksPerHour;
                 }
                 
-                GameManager.Instance.UIManager.UpdateGauges(system.type, system.gaugeValue, system.previewGaugeValue);
+                if (!IsInTutorial) GameManager.Instance.UIManager.UpdateGauges(system.type, system.gaugeValue, system.previewGaugeValue);
             }
 
             GameManager.Instance.UIManager.UpdateInGameDate(TimeTickSystem.GetTimeAsInGameDate(e));
@@ -171,7 +176,8 @@ namespace Managers
         private void GenerateSecondaryEventOnFirstDay(object sender, TimeTickSystem.OnTickEventArgs e)
         {
             if (e.tick % (TimeTickSystem.ticksPerHour * 24) != 0) return;
-
+            if (IsInTutorial) return;
+            
             Checker.Instance.ChooseNewStoryline(SSStoryType.Secondary);
             TimeTickSystem.OnTick -= GenerateSecondaryEventOnFirstDay;
         }
@@ -274,7 +280,7 @@ namespace Managers
                     switch (simCharacter.simStatus)
                     {
                         case SimCharacter.SimStatus.IdleEat:
-                            if (simCharacter.tick >= simEatThreshold)
+                            if (simCharacter.tick >= simEatThreshold * TimeTickSystem.ticksPerHour)
                             {
                                 if (character.IsWorking() || simCharacter.taskRoom != null)
                                 {
@@ -282,11 +288,13 @@ namespace Managers
                                 }
                                 else
                                     simCharacter.SendToIdleRoom();
-                                systems[2].gaugeValue -= 2;
+                                systems[2].gaugeValue -= simEatAmount;
                                 simCharacter.tick = 0;
-                                simCharacter.ticksToEat = simHungerBaseThreshold +
-                                                          Random.Range((int)-TimeTickSystem.ticksPerHour * 2,
-                                                              (int)TimeTickSystem.ticksPerHour * 2);
+                                simCharacter.ticksToEat = (simHungerBaseThreshold 
+                                                            * (int) TimeTickSystem.ticksPerHour) 
+                                                            + Random.Range(
+                                                              (int)-TimeTickSystem.ticksPerHour * simHungerNoise,
+                                                              (int)TimeTickSystem.ticksPerHour * simHungerNoise);
                             }
                             break;
                         

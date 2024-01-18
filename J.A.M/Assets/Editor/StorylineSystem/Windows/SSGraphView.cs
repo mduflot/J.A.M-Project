@@ -17,6 +17,7 @@ namespace SS.Windows
         public string ID;
         public SSStoryStatus StoryStatus;
         public SSStoryType StoryType;
+        public bool IsTutorialToPlay;
         public bool IsFirstToPlay;
         public bool IsReplayable;
         public ConditionSO Condition;
@@ -59,6 +60,7 @@ namespace SS.Windows
             ID = Guid.NewGuid().ToString();
             StoryStatus = SSStoryStatus.Enabled;
             StoryType = SSStoryType.Principal;
+            IsTutorialToPlay = false;
             IsFirstToPlay = false;
             IsReplayable = false;
 
@@ -125,7 +127,7 @@ namespace SS.Windows
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Dialogue)", SSNodeType.Dialogue));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Task)", SSNodeType.Task));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Time)", SSNodeType.Time));
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Sound)", SSNodeType.Sound));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Popup)", SSNodeType.Popup));
 
             this.AddManipulator(CreateGroupContextualMenu());
         }

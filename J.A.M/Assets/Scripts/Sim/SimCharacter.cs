@@ -26,7 +26,11 @@ public class SimCharacter : MonoBehaviour
     {
         currentRoom = idleRoom;
         currentRoomDoor = currentRoom.roomDoors[0].doorID;
-        ticksToEat = GameManager.Instance.SpaceshipManager.simHungerBaseThreshold + Random.Range((int) -TimeTickSystem.ticksPerHour * 2, (int) TimeTickSystem.ticksPerHour * 2);
+        ticksToEat = (GameManager.Instance.SpaceshipManager.simHungerBaseThreshold 
+                      * (int) TimeTickSystem.ticksPerHour) 
+                     + Random.Range(
+                         (int) -TimeTickSystem.ticksPerHour * GameManager.Instance.SpaceshipManager.simHungerNoise, 
+                         (int) TimeTickSystem.ticksPerHour * GameManager.Instance.SpaceshipManager.simHungerNoise);
     }
 
     private void Update()
@@ -46,7 +50,7 @@ public class SimCharacter : MonoBehaviour
         //Add scaling based on TimeTickSystem
 
         SimDoor door = SimPathing.FindDoorByID(currentRoomDoor);
-        if ((door.transform.position - transform.position).magnitude < 1.5f)
+        if ((door.transform.position - transform.position).magnitude < 1.5f * TimeTickSystem.timeScale)
             FadeToNextDoor();
         else
             MoveToCurrentDoor();
@@ -80,11 +84,11 @@ public class SimCharacter : MonoBehaviour
 
     private void MoveToCurrentDoor()
     {
-        float lerpT = (1 - Mathf.Exp(-GameManager.Instance.SpaceshipManager.simMoveSpeed * Time.deltaTime)) * TimeTickSystem.timeScale;
+        //float lerpT = (1 - Mathf.Exp(-GameManager.Instance.SpaceshipManager.simMoveSpeed * Time.deltaTime)) * TimeTickSystem.timeScale;
         SimDoor door = SimPathing.FindDoorByID(currentRoomDoor);
         Vector3 pos = transform.position;
         //pos = Vector3.Lerp(pos, door.transform.position, lerpT);
-        pos += (door.transform.position - transform.position).normalized * GameManager.Instance.SpaceshipManager.simMoveSpeed;
+        pos += TimeTickSystem.timeScale * GameManager.Instance.SpaceshipManager.simMoveSpeed * (door.transform.position - transform.position).normalized;
         transform.position = pos;
     }
 
@@ -96,7 +100,7 @@ public class SimCharacter : MonoBehaviour
             SendToIdleRoom();
         
         
-        float lerpT = (1 - Mathf.Exp(-GameManager.Instance.SpaceshipManager.simMoveSpeed * Time.deltaTime)) * TimeTickSystem.timeScale;
+        //float lerpT = (1 - Mathf.Exp(-GameManager.Instance.SpaceshipManager.simMoveSpeed * Time.deltaTime)) * TimeTickSystem.timeScale;
         Vector3 pos = transform.position;
 
         Vector3 newPos = currentRoom.transform.position;
@@ -104,11 +108,11 @@ public class SimCharacter : MonoBehaviour
         newPos.x += currentRoom.roomXOffset * (charIndex - 3);
         newPos.y -= currentRoom.roomYOffset;
 
-        if ((newPos - transform.position).magnitude < .5f) return;
+        if ((newPos - transform.position).magnitude < .5f * TimeTickSystem.timeScale) return;
         
         //pos = Vector3.Lerp(pos, taskFurniture == null ? newPos : taskFurniture.transform.position, lerpT);
 
-        pos += (newPos - transform.position).normalized * GameManager.Instance.SpaceshipManager.simMoveSpeed;
+        pos += GameManager.Instance.SpaceshipManager.simMoveSpeed * (newPos - transform.position).normalized;
         
         transform.position = pos;
     }

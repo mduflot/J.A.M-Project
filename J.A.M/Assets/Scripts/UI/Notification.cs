@@ -32,6 +32,8 @@ namespace UI
         [SerializeField] private Sprite hoveredSprite;
         [SerializeField] private Sprite defaultSprite;
 
+        [SerializeField] private GameObject popupHelp;
+
         private Camera camera;
         private SpaceshipManager spaceshipManager;
         private ConditionSO taskCondition;
@@ -51,6 +53,7 @@ namespace UI
         private void OnDisable()
         {
             TimeTickSystem.OnTick -= AddOutcomeOnTick;
+            popupHelp.SetActive(false);
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -68,6 +71,7 @@ namespace UI
             taskNode = ssTaskNode;
             time.text = "";
             if (taskToPlay == null) Task.TimeLeft *= TimeTickSystem.ticksPerHour;
+            if (task.IsTaskTutorial) popupHelp.SetActive(true);
             timeLeft = Task.TimeLeft;
             icon.sprite = task.Icon;
             Dialogues = dialogues;
@@ -109,6 +113,7 @@ namespace UI
 
         public void OnStart(List<CharacterUISlot> characters, List<TaskUI.GaugesOutcome> go)
         {
+            popupHelp.SetActive(false);
             TimeTickSystem.ModifyTimeScale(TimeTickSystem.lastActiveTimeScale);
             for (var index = 0; index < characters.Count; index++)
             {
@@ -313,7 +318,6 @@ namespace UI
                         case OutcomeData.OutcomeTarget.None:
                             break;
                     }
-
                     additionalConditionOutcomes.AddRange(cond.outcomes.Outcomes);
                 }
 
@@ -477,8 +481,6 @@ namespace UI
 
             return validateCondition;
         }
-
-        private float total = 0;
         
         private void AddOutcomeOnTick(object sender, TimeTickSystem.OnTickEventArgs e)
         {
@@ -545,7 +547,7 @@ namespace UI
             transform.parent = null;
             notificationContainer.DisplayNotification();
             spaceshipManager.notificationPool.AddToPool(gameObject);
-            spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
+            if (Task.TaskType != SSTaskType.Permanent) spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             IsStarted = false;
 
             if (LeaderCharacters.Count == 0) return;

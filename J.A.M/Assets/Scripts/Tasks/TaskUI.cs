@@ -15,7 +15,8 @@ namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-        [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
+        [Header("Task")]
+        [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI timeLeftText;
         [SerializeField] private GameObject timeLeftObject;
         [SerializeField] private Transform startButtonObject;
@@ -29,10 +30,13 @@ namespace Tasks
         [SerializeField] private GameObject cancelButton;
         [SerializeField] private DialogueLog dialogueLog;
         [SerializeField] private GameObject separator;
+        [SerializeField] private GameObject popupHelp;
 
-        [Header("Dialogues")] [SerializeField] private GameObject dialogueContainer;
+        [Header("Dialogues")]
+        [SerializeField] private GameObject dialogueContainer;
 
-        [Header("Values")] [SerializeField] private float timeLeft;
+        [Header("Values")]
+        [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
 
         private Notification notification;
@@ -75,6 +79,7 @@ namespace Tasks
             TaskLog taskLog = null)
         {
             notification = n;
+            if (notification.Task.IsTaskTutorial) popupHelp.SetActive(true);
             titleText.text = notification.Task.Name;
             StartCoroutine(DisplayText(descriptionText, notification.Task.Description, 0.02f));
             timeLeft = notification.Task.TimeLeft;
@@ -155,6 +160,7 @@ namespace Tasks
         public void DisplayTaskInfo(Notification n)
         {
             notification = n;
+            if (notification.Task.IsTaskTutorial) popupHelp.SetActive(true);
             titleText.text = notification.Task.Name;
             StartCoroutine(DisplayText(descriptionText, notification.Task.Description, 0.02f));
             StartCoroutine(DisplayText(previewOutcomeText, notification.Task.previewText, 0.02f));
@@ -187,6 +193,7 @@ namespace Tasks
             dialogueLog.DisplayDialogueLog(notification.Dialogues);
             startButton.SetActive(false);
             cancelButton.SetActive(true);
+            cancelButton.GetComponentInChildren<Button>().interactable = !notification.Task.IsTaskTutorial;
             separator.SetActive(true);
             GameManager.Instance.taskOpened = true;
             Appear(true);
@@ -257,7 +264,7 @@ namespace Tasks
                                     DisplayPreview(outcome, traits, gaugeOutcomes);
                                 }
 
-                                break;
+                                //break;
                             }
                         }
 
@@ -338,6 +345,20 @@ namespace Tasks
                     var value = outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add
                         ? outcome.value
                         : -outcome.value;
+                    
+                    if (notification.Task.TaskType == SSTaskType.Permanent)
+                    {
+                        for (int index = 0; index < GameManager.Instance.SpaceshipManager.systems.Length; index++)
+                        {
+                            var system = GameManager.Instance.SpaceshipManager.systems[index];
+                            if (system.type == outcome.OutcomeTargetGauge)
+                            {
+                                value -= system.decreaseSpeed * notification.Task.Duration;
+                                break;
+                            }
+                        }
+                    }
+                    
                     gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
                         value));
 
@@ -376,6 +397,19 @@ namespace Tasks
 
                     var volition =
                         outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add ? valueVolition : -valueVolition;
+
+                    if (notification.Task.TaskType == SSTaskType.Permanent)
+                    {
+                        for (int index = 0; index < GameManager.Instance.SpaceshipManager.systems.Length; index++)
+                        {
+                            var system = GameManager.Instance.SpaceshipManager.systems[index];
+                            if (system.type == outcome.OutcomeTargetGauge)
+                            {
+                                volition -= system.decreaseSpeed * notification.Task.Duration;
+                                break;
+                            }
+                        }
+                    }
 
                     gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge, volition));
                     break;
@@ -605,6 +639,7 @@ namespace Tasks
             previewOutcomeText.text = null;
             characterSlots.Clear();
             dialogueLog.ClearDialogueLog();
+            popupHelp.SetActive(false);
             separator.SetActive(false);
             GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.RefreshCharacterIcons();

@@ -78,6 +78,13 @@ public class Checker : MonoBehaviour, IDataPersistence
         isAlreadyWaiting = false;
         if (DataPersistenceManager.Instance.IsNewGame)
         {
+            GameManager.Instance.UIManager.TasksMenu.SetActive(false);
+            GameManager.Instance.UIManager.SpaceshipMenu.SetActive(false);
+            for (int index = 0; index < GameManager.Instance.UIManager.GaugesMenu.Count; index++)
+            {
+                var gauge = GameManager.Instance.UIManager.GaugesMenu[index];
+                gauge.SetActive(false);
+            }
             TimeTickSystem.OnTick += GeneratePrincipalEventOnFirstDay;
             DataPersistenceManager.Instance.IsNewGame = false;
         }
@@ -100,6 +107,7 @@ public class Checker : MonoBehaviour, IDataPersistence
     public void GenerateNewPrincipalEvent()
     {
         waitingTimePrincipal = (uint)Random.Range(minWaitTimePrincipal, maxWaitTimePrincipal) * TimeTickSystem.ticksPerHour;
+        Debug.Log("Generating new principal event. Maybe nothing will happen.");
         TimeTickSystem.OnTick += WaitStorylinePrincipal;
     }
 
@@ -135,6 +143,12 @@ public class Checker : MonoBehaviour, IDataPersistence
         {
             case SSStoryType.Principal:
             {
+                if (principalStorylines.Any(storyline => storyline.StorylineContainer.IsTutorialToPlay && storyline.Status == SSStoryStatus.Enabled))
+                {
+                    PickTimelineFromStoryline(principalStorylines.First(storyline =>
+                        storyline.StorylineContainer.IsTutorialToPlay));
+                    return;
+                }
                 for (var index = 0; index < principalStorylines.Count; index++)
                 {
                     var storyline = principalStorylines[index];

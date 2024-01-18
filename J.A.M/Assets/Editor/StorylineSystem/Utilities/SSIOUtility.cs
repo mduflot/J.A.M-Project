@@ -58,12 +58,12 @@ namespace SS.Utilities
             SSGraphSaveDataSO graphData =
                 CreateAsset<SSGraphSaveDataSO>("Assets/Editor/StorylineSystem/Graphs", $"{graphFileName}Graph");
 
-            graphData.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.IsFirstToPlay, graphView.IsReplayable,
+            graphData.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.IsTutorialToPlay, graphView.IsFirstToPlay, graphView.IsReplayable,
                 graphView.Condition);
 
             SSNodeContainerSO nodeContainer = CreateAsset<SSNodeContainerSO>(containerFolderPath, graphFileName);
 
-            nodeContainer.Initialize(graphFileName, graphData.ID, graphView.StoryStatus, graphView.StoryType, graphView.IsFirstToPlay, graphView.IsReplayable,
+            nodeContainer.Initialize(graphFileName, graphData.ID, graphView.StoryStatus, graphView.StoryType, graphView.IsTutorialToPlay, graphView.IsFirstToPlay, graphView.IsReplayable,
                 graphView.Condition);
 
             SaveGroups(graphData, nodeContainer);
@@ -220,7 +220,8 @@ namespace SS.Utilities
                     OptionalSlots = taskNode.OptionalSlots,
                     TaskHelpFactor = taskNode.TaskHelpFactor,
                     Room = taskNode.Room,
-                    Furniture = taskNode.Furniture
+                    Furniture = taskNode.Furniture,
+                    IsTaskTutorial = taskNode.IsTaskTutorial
                 };
 
                 graphData.Nodes.Add(nodeData);
@@ -240,17 +241,18 @@ namespace SS.Utilities
 
                 graphData.Nodes.Add(nodeData);
             }
-            else if (node is SSSoundNode soundNode)
+            else if (node is SSPopupNode popupNode)
             {
-                SSSoundNodeSaveData nodeData = new SSSoundNodeSaveData()
+                SSPopupNodeSaveData nodeData = new SSPopupNodeSaveData()
                 {
-                    ID = soundNode.ID,
-                    Name = soundNode.NodeName,
+                    ID = popupNode.ID,
+                    Name = popupNode.NodeName,
                     Choices = choices,
-                    GroupID = soundNode.Group?.ID,
-                    NodeType = soundNode.NodeType,
-                    Position = soundNode.GetPosition().position,
-                    AudioClip = soundNode.AudioClip
+                    GroupID =popupNode.Group?.ID,
+                    NodeType = popupNode.NodeType,
+                    Position = popupNode.GetPosition().position,
+                    Text = popupNode.Text,
+                    PopupUIType = popupNode.PopupUIType
                 };
 
                 graphData.Nodes.Add(nodeData);
@@ -311,7 +313,7 @@ namespace SS.Utilities
                     taskNode.IsStartingNode(), taskNode.DescriptionTask, taskNode.TaskStatus, taskNode.TaskType,
                     taskNode.TaskIcon, taskNode.TimeLeft,
                     taskNode.BaseDuration, taskNode.MandatorySlots, taskNode.OptionalSlots, taskNode.TaskHelpFactor,
-                    taskNode.Room, taskNode.Furniture);
+                    taskNode.Room, taskNode.Furniture, taskNode.IsTaskTutorial);
 
                 createdNodes.Add(taskNode.ID, nodeSO);
 
@@ -343,29 +345,29 @@ namespace SS.Utilities
 
                 SaveAsset(nodeSO);
             }
-            else if (node is SSSoundNode soundNode)
+            else if (node is SSPopupNode popupNode)
             {
-                SSSoundNodeSO nodeSO;
+                SSPopupNodeSO nodeSO;
 
-                if (soundNode.Group != null)
+                if (popupNode.Group != null)
                 {
-                    nodeSO = CreateAsset<SSSoundNodeSO>($"{containerFolderPath}/Groups/{soundNode.Group.title}/Nodes",
-                        soundNode.NodeName);
+                    nodeSO = CreateAsset<SSPopupNodeSO>($"{containerFolderPath}/Groups/{popupNode.Group.title}/Nodes",
+                        popupNode.NodeName);
 
-                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[soundNode.Group.ID], nodeSO);
+                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[popupNode.Group.ID], nodeSO);
                 }
                 else
                 {
-                    nodeSO = CreateAsset<SSSoundNodeSO>($"{containerFolderPath}/Global/Nodes", soundNode.NodeName);
+                    nodeSO = CreateAsset<SSPopupNodeSO>($"{containerFolderPath}/Global/Nodes", popupNode.NodeName);
 
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(soundNode.NodeName, ConvertNodeChoicesToNodeChoicesData(soundNode.Choices),
-                    soundNode.NodeType,
-                    soundNode.IsStartingNode(), soundNode.AudioClip);
+                nodeSO.Initialize(popupNode.NodeName, popupNode.Text, ConvertNodeChoicesToNodeChoicesData(popupNode.Choices),
+                    popupNode.NodeType,
+                    popupNode.IsStartingNode(), popupNode.PopupUIType);
 
-                createdNodes.Add(soundNode.ID, nodeSO);
+                createdNodes.Add(popupNode.ID, nodeSO);
 
                 SaveAsset(nodeSO);
             }
@@ -494,6 +496,7 @@ namespace SS.Utilities
             LoadNodes(graphData.Nodes);
             LoadNodesConnections();
 
+            graphView.IsTutorialToPlay = graphData.IsTutorialToPlay;
             graphView.IsFirstToPlay = graphData.IsFirstToPlay;
             graphView.StoryStatus = graphData.StoryStatus;
             graphView.StoryType = graphData.StoryType;
@@ -549,14 +552,16 @@ namespace SS.Utilities
                     ((SSTaskNode)node).TaskHelpFactor = ((SSTaskNodeSaveData)nodeData).TaskHelpFactor;
                     ((SSTaskNode)node).Room = ((SSTaskNodeSaveData)nodeData).Room;
                     ((SSTaskNode)node).Furniture = ((SSTaskNodeSaveData)nodeData).Furniture;
+                    ((SSTaskNode)node).IsTaskTutorial = ((SSTaskNodeSaveData)nodeData).IsTaskTutorial;
                 }
                 else if (nodeData.NodeType == SSNodeType.Time)
                 {
                     ((SSTimeNode)node).TimeToWait = ((SSTimeNodeSaveData)nodeData).TimeToWait;
                 }
-                else if (nodeData.NodeType == SSNodeType.Sound)
+                else if (nodeData.NodeType == SSNodeType.Popup)
                 {
-                    ((SSSoundNode)node).AudioClip = ((SSSoundNodeSaveData)nodeData).AudioClip;
+                    ((SSPopupNode)node).Text = ((SSPopupNodeSaveData)nodeData).Text;
+                    ((SSPopupNode)node).PopupUIType = ((SSPopupNodeSaveData)nodeData).PopupUIType;
                 }
 
                 node.Draw();

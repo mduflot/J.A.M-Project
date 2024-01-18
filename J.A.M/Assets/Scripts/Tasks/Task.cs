@@ -20,6 +20,7 @@ namespace Tasks
         public int OptionalSlots;
         public float HelpFactor;
         public RoomType Room;
+        public bool IsTaskTutorial;
         public List<Tuple<ConditionSO, string>> Conditions;
         public int conditionIndex = 0;
         public List<CharacterBehaviour> leaderCharacters = new();
@@ -29,7 +30,7 @@ namespace Tasks
 
         public Task(string name, string description, SSTaskStatus taskStatus, SSTaskType taskType, Sprite icon,
             float timeLeft, float duration, int mandatorySlots,
-            int optionalSlots, float helpFactor, RoomType room, List<Tuple<ConditionSO, string>> conditions, bool isStarted = false)
+            int optionalSlots, float helpFactor, RoomType room, bool isTaskTutorial, List<Tuple<ConditionSO, string>> conditions, bool isStarted = false)
         {
             Name = name;
             Description = description;
@@ -43,6 +44,7 @@ namespace Tasks
             OptionalSlots = optionalSlots;
             HelpFactor = helpFactor;
             Room = room;
+            IsTaskTutorial = isTaskTutorial;
             Conditions = conditions;
             previewText = "";
             IsStarted = isStarted;

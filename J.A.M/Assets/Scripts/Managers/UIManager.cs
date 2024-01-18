@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CharacterSystem;
+using SS;
 using Tasks;
 using TMPro;
 using UI;
@@ -26,6 +27,10 @@ namespace Managers
         [SerializeField] private Sprite redArrow;
         [SerializeField] private Sprite greenArrow;
         public CharacterInfoUI characterInfoUI;
+        public Popup PopupHelp;
+        public GameObject TasksMenu;
+        public List<GameObject> GaugesMenu;
+        public GameObject SpaceshipMenu;
     
         [Serializable] 
         public struct Gauges
@@ -60,7 +65,6 @@ namespace Managers
         public void UpdateGauges(SystemType systemType, float value, float previewValue)
         {
             gaugeReferences[systemType].UpdateGauge(value, previewValue);
-            
         }
 
         public void UpdateInGameDate(string newDate)
@@ -80,7 +84,7 @@ namespace Managers
         {
             foreach (var gauge in gauges)
             {
-                var valueToAdd = 0f;
+                var valueToAdd = 0.0f;
                 foreach (var outcome in gaugesOutcomes)
                 {
                     if (outcome.gauge == gauge.systemType) valueToAdd += outcome.value;
