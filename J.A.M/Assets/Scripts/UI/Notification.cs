@@ -382,15 +382,15 @@ namespace UI
                                     OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
                             else
                             {
-                                if (LeaderCharacters[0].GetMood() < LeaderCharacters[0].GetVolition())
+                                if (LeaderCharacters[0].GetMood() < LeaderCharacters[0].GetBaseVolition())
                                 {
                                     outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
-                                        outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition() / 2);
+                                        outcome.OutcomeTargetGauge, LeaderCharacters[0].GetBaseVolition() / 2);
                                 }
                                 else
                                 {
                                     outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome,
-                                        outcome.OutcomeTargetGauge, LeaderCharacters[0].GetVolition());
+                                        outcome.OutcomeTargetGauge, LeaderCharacters[0].GetBaseVolition());
                                 }
                             }
 

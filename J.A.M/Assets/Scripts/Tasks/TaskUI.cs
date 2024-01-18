@@ -368,7 +368,7 @@ namespace Tasks
                     if (characterSlots[0].icon == null) break;
                     if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
                         operation = "-";
-                    var valueVolition = characterSlots[0].icon.character.GetVolition();
+                    var valueVolition = characterSlots[0].icon.character.GetBaseVolition();
                     switch (outcome.OutcomeTargetGauge)
                     {
                         case SystemType.Trajectory:
@@ -389,7 +389,7 @@ namespace Tasks
                             break;
                     }
 
-                    if (characterSlots[0].icon.character.GetMood() < characterSlots[0].icon.character.GetVolition())
+                    if (characterSlots[0].icon.character.GetMood() < characterSlots[0].icon.character.GetBaseVolition())
                     {
                         valueVolition /= 2;
                         previewOutcomeText.text +=
