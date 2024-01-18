@@ -1,19 +1,22 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PointerArrow : MonoBehaviour
 {
     [SerializeField] private GameObject target;
     private bool flicker;
-
+    private float boundW;
+    float boundH;
+    
     public void Init(GameObject t, bool f)
     {
         target = t;
         flicker = f;
         if (f) GetComponent<SpriteRenderer>().color = Color.red;
+        boundW = transform.GetComponent<SpriteRenderer>().bounds.size.x * 1.5f;
+        boundH = transform.GetComponent<SpriteRenderer>().bounds.size.y * 1.5f;
     }
     
-    private void FixedUpdate()
+    private void Update()
     {
         RotatePointer();
         MovePointer();
@@ -22,44 +25,19 @@ public class PointerArrow : MonoBehaviour
 
     private void MovePointer()
     {
-        Camera mainCam = Camera.main;
-        Vector3 newPos = new Vector3();
-
-        if (target.transform.position.x < mainCam.transform.position.x)
-        {
-            newPos.x = target.transform.position.x < (mainCam.transform.position.x - mainCam.pixelWidth/2f) 
-                ? mainCam.transform.position.x - mainCam.pixelWidth/2f + (30.0f) 
-                : target.transform.position.x;            
-        }
-        else
-        {
-            newPos.x = target.transform.position.x > (mainCam.transform.position.x + mainCam.pixelWidth/2f) 
-                ? mainCam.transform.position.x + mainCam.pixelWidth/2f - (30.0f)
-                : target.transform.position.x;
-        }
-
-        if (target.transform.position.y < mainCam.transform.position.y)
-        {
-            newPos.y = target.transform.position.y < (mainCam.transform.position.y - mainCam.pixelHeight/2f) 
-                ? mainCam.transform.position.y - mainCam.pixelHeight/2f + (15f)
-                : target.transform.position.y;
-        }
-        else
-        {
-            newPos.y = target.transform.position.y > (mainCam.transform.position.y + mainCam.pixelHeight/2f) 
-                ? mainCam.transform.position.y + mainCam.pixelHeight/2f - (15f)
-                : target.transform.position.y;
-        }
-        
-        newPos.z = 0f;
-        
-        transform.position = newPos;
+        Vector2 bounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        var pos = target.transform.position;
+        pos.x = Mathf.Clamp(pos.x, bounds.x + boundW, bounds.x + Screen.width - boundW);
+        pos.y = Mathf.Clamp(pos.y, bounds.y + boundH, bounds.y + Screen.height - boundH);
+        Debug.Log($"{bounds.x + Screen.width - boundW} // {pos.x}");
+        transform.position = pos;
     }
 
     private void RotatePointer()
     {
-        transform.LookAt(target.transform);
-        transform.rotation = new Quaternion(0f, 0f, transform.rotation.z, 1);
+        var dir = target.transform.position - transform.position;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle - 90.0f, Vector3.forward);
     }
 
     private void Flicker()
