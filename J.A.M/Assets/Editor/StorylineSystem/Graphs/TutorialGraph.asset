@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TutorialGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: Tutorial
-  <ID>k__BackingField: a3a21dd1-7b50-4f1b-97a7-7271c84bfb11
+  <ID>k__BackingField: ca69495b-990f-4c3e-bd09-d8698f8b9117
   <StoryStatus>k__BackingField: 0
   <StoryType>k__BackingField: 0
   <IsTutorialToPlay>k__BackingField: 1
@@ -32,24 +32,34 @@ MonoBehaviour:
     <Name>k__BackingField: Tutorial
     <Position>k__BackingField: {x: -4207, y: 17}
   <Nodes>k__BackingField:
-  - rid: 5750223035560624470
-  - rid: 5750223035560624471
-  - rid: 5750223035560624472
-  - rid: 5750223035560624473
-  - rid: 5750223035560624474
-  - rid: 5750223035560624475
-  - rid: 5750223035560624476
-  - rid: 5750223035560624477
-  - rid: 5750223035560624478
-  - rid: 5750223035560624479
-  - rid: 5750223035560624480
-  - rid: 5750223035560624481
-  - rid: 5750223035560624482
-  - rid: 5750223035560624483
-  - rid: 5750223035560624484
-  - rid: 5750223035560624485
-  - rid: 5750223035560624486
-  - rid: 5750223035560624487
+  - rid: 5750223035560624537
+  - rid: 5750223035560624538
+  - rid: 5750223035560624539
+  - rid: 5750223035560624540
+  - rid: 5750223035560624541
+  - rid: 5750223035560624542
+  - rid: 5750223035560624543
+  - rid: 5750223035560624544
+  - rid: 5750223035560624545
+  - rid: 5750223035560624546
+  - rid: 5750223035560624547
+  - rid: 5750223035560624548
+  - rid: 5750223035560624549
+  - rid: 5750223035560624550
+  - rid: 5750223035560624551
+  - rid: 5750223035560624552
+  - rid: 5750223035560624553
+  - rid: 5750223035560624554
+  - rid: 5750223035560624555
+  - rid: 5750223035560624556
+  - rid: 5750223035560624557
+  - rid: 5750223035560624558
+  - rid: 5750223035560624559
+  - rid: 5750223035560624560
+  - rid: 5750223035560624561
+  - rid: 5750223035560624562
+  - rid: 5750223035560624563
+  - rid: 5750223035560624564
   <OldGroupNames>k__BackingField:
   - Tutorial
   <OldUngroupedNodeNames>k__BackingField: []
@@ -66,49 +76,59 @@ MonoBehaviour:
       - 7
       - 8
       - 9
-      - PopupNode
-      - SecondTask
       - 10
       - 11
-      - 12
       - 13
       - 15
       - 14
       - FirstTask
+      - 12
+      - popupgauges
+      - 16
+      - 17
+      - 18
+      - 19
+      - 20
+      - popuptask
+      - 21
+      - 22
+      - 23
+      - DialogueNode
+      - SecondTask
   references:
     version: 2
     RefIds:
-    - rid: 5750223035560624470
+    - rid: 5750223035560624537
       type: {class: SSPopupNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 7aa3a57c-c0f1-47d2-909e-80a031778395
         <Name>k__BackingField: 2
         <Choices>k__BackingField:
-        - rid: 5750223035560624488
+        - rid: 5750223035560624565
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 4
         <Position>k__BackingField: {x: -3524, y: 102}
         <Text>k__BackingField: Protocol Launched Successfully. Welcome, Shyrka S-842.456.215.
         <PopupUIType>k__BackingField: 0
-    - rid: 5750223035560624471
+    - rid: 5750223035560624538
       type: {class: SSPopupNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 9c4c606f-8f07-4ca4-9d2b-cf2243f3940f
         <Name>k__BackingField: 1
         <Choices>k__BackingField:
-        - rid: 5750223035560624489
+        - rid: 5750223035560624566
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 4
         <Position>k__BackingField: {x: -4182, y: 102}
         <Text>k__BackingField: Launching Shyrka Protocol...
         <PopupUIType>k__BackingField: 0
-    - rid: 5750223035560624472
+    - rid: 5750223035560624539
       type: {class: SSPopupNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 852ebca0-4d2a-4c29-a45f-83dd5b84e068
         <Name>k__BackingField: 3
         <Choices>k__BackingField:
-        - rid: 5750223035560624490
+        - rid: 5750223035560624567
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 4
         <Position>k__BackingField: {x: -2876, y: 102}
@@ -116,26 +136,26 @@ MonoBehaviour:
           Earth, no matter the cost. This piece of Ktetorian tech could be our only
           chance in the War.
         <PopupUIType>k__BackingField: 0
-    - rid: 5750223035560624473
+    - rid: 5750223035560624540
       type: {class: SSPopupNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 61ae1786-303b-4b05-b511-fd6dd7863e3d
         <Name>k__BackingField: 4
         <Choices>k__BackingField:
-        - rid: 5750223035560624491
+        - rid: 5750223035560624568
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 4
         <Position>k__BackingField: {x: -2200, y: 102}
         <Text>k__BackingField: The member of highest authority has to grant you Administrator
           Permissions to enable all your functions.
         <PopupUIType>k__BackingField: 4
-    - rid: 5750223035560624474
+    - rid: 5750223035560624541
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 1b44e0cf-804c-4894-afe7-484473f24fe4
         <Name>k__BackingField: 5
         <Choices>k__BackingField:
-        - rid: 5750223035560624492
+        - rid: 5750223035560624569
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: -1509, y: 102}
@@ -148,13 +168,13 @@ MonoBehaviour:
         <Job>k__BackingField: 512
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750223035560624475
+    - rid: 5750223035560624542
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 629a4ded-19f3-4978-8539-8a5c727b7dea
         <Name>k__BackingField: 6
         <Choices>k__BackingField:
-        - rid: 5750223035560624493
+        - rid: 5750223035560624570
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: -856, y: 102}
@@ -167,13 +187,13 @@ MonoBehaviour:
         <Job>k__BackingField: 256
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750223035560624476
+    - rid: 5750223035560624543
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: b71d0826-3029-45a7-9ce2-91783b10c48a
         <Name>k__BackingField: 7
         <Choices>k__BackingField:
-        - rid: 5750223035560624494
+        - rid: 5750223035560624571
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: -209, y: 102}
@@ -186,13 +206,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750223035560624477
+    - rid: 5750223035560624544
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: ed88cf4f-cbd2-4289-931a-5488d5fd7f37
         <Name>k__BackingField: 8
         <Choices>k__BackingField:
-        - rid: 5750223035560624495
+        - rid: 5750223035560624572
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 437, y: 102}
@@ -205,13 +225,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750223035560624478
+    - rid: 5750223035560624545
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 48696e4a-b1a3-4c07-9883-904820e843ff
         <Name>k__BackingField: 9
         <Choices>k__BackingField:
-        - rid: 5750223035560624496
+        - rid: 5750223035560624573
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1527, y: 76}
@@ -223,47 +243,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750223035560624479
-      type: {class: SSPopupNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <ID>k__BackingField: 5dd5684e-9fa9-4112-897c-3e8a36c05424
-        <Name>k__BackingField: PopupNode
-        <Choices>k__BackingField:
-        - rid: 5750223035560624497
-        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
-        <NodeType>k__BackingField: 4
-        <Position>k__BackingField: {x: 5143, y: 76}
-        <Text>k__BackingField: FIN DES HARICOTS
-        <PopupUIType>k__BackingField: 0
-    - rid: 5750223035560624480
-      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <ID>k__BackingField: 8342727e-e2f5-42cd-a9f5-30e4c6b5506b
-        <Name>k__BackingField: SecondTask
-        <Choices>k__BackingField:
-        - rid: 5750223035560624498
-        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
-        <NodeType>k__BackingField: 1
-        <Position>k__BackingField: {x: 4330, y: 76}
-        <DescriptionTask>k__BackingField: Description
-        <TaskStatus>k__BackingField: 0
-        <TaskType>k__BackingField: 2
-        <TaskIcon>k__BackingField: {fileID: 0}
-        <TimeLeft>k__BackingField: 0
-        <BaseDuration>k__BackingField: 2
-        <MandatorySlots>k__BackingField: 1
-        <OptionalSlots>k__BackingField: 0
-        <TaskHelpFactor>k__BackingField: 0.75
-        <Room>k__BackingField: 1
-        <Furniture>k__BackingField: 1
-        <IsTaskTutorial>k__BackingField: 1
-    - rid: 5750223035560624481
+    - rid: 5750223035560624546
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 44efc975-c019-4c6b-875f-05229a56bc40
         <Name>k__BackingField: 10
         <Choices>k__BackingField:
-        - rid: 5750223035560624499
+        - rid: 5750223035560624574
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 2183, y: 76}
@@ -276,13 +262,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750223035560624482
+    - rid: 5750223035560624547
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 1834cc48-0dbf-40e6-a509-1e6221c72383
         <Name>k__BackingField: 11
         <Choices>k__BackingField:
-        - rid: 5750223035560624500
+        - rid: 5750223035560624575
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 2854, y: 76}
@@ -296,26 +282,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750223035560624483
-      type: {class: SSPopupNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <ID>k__BackingField: 0cde2fbf-8f5c-4c3e-909c-75f11b66925b
-        <Name>k__BackingField: 12
-        <Choices>k__BackingField:
-        - rid: 5750223035560624501
-        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
-        <NodeType>k__BackingField: 4
-        <Position>k__BackingField: {x: 3626, y: 228}
-        <Text>k__BackingField: Administrator Permisssions granted. The Shyrka System
-          has now access to all the Mobius' systems.
-        <PopupUIType>k__BackingField: 1
-    - rid: 5750223035560624484
+    - rid: 5750223035560624548
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 11611e3d-bd04-415e-b463-48bed3ea2f8e
         <Name>k__BackingField: 13
         <Choices>k__BackingField:
-        - rid: 5750223035560624502
+        - rid: 5750223035560624576
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1527, y: 395}
@@ -327,13 +300,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750223035560624485
+    - rid: 5750223035560624549
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: d63dac9f-3dee-4c1a-aed2-1a07c99e022a
         <Name>k__BackingField: 15
         <Choices>k__BackingField:
-        - rid: 5750223035560624503
+        - rid: 5750223035560624577
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 2854, y: 395}
@@ -346,13 +319,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750223035560624486
+    - rid: 5750223035560624550
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 00d877e6-1139-493a-a17b-489ee7a547d4
         <Name>k__BackingField: 14
         <Choices>k__BackingField:
-        - rid: 5750223035560624504
+        - rid: 5750223035560624578
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 2183, y: 395}
@@ -365,17 +338,17 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 5750223035560624487
+    - rid: 5750223035560624551
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 7be0fd62-0c69-4543-980f-3a50ba09793d
         <Name>k__BackingField: FirstTask
         <Choices>k__BackingField:
-        - rid: 5750223035560624505
-        - rid: 5750223035560624506
+        - rid: 5750223035560624579
+        - rid: 5750223035560624580
         <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
         <NodeType>k__BackingField: 1
-        <Position>k__BackingField: {x: 849, y: 76}
+        <Position>k__BackingField: {x: 847, y: 76}
         <DescriptionTask>k__BackingField: Only the highest authority on board can
           legally grant you the ship's permissions. Should it be the ship's usual
           captain, or the sergent who's in charge of the mission?
@@ -390,95 +363,307 @@ MonoBehaviour:
         <Room>k__BackingField: 0
         <Furniture>k__BackingField: 1
         <IsTaskTutorial>k__BackingField: 1
-    - rid: 5750223035560624488
+    - rid: 5750223035560624552
+      type: {class: SSPopupNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 0cde2fbf-8f5c-4c3e-909c-75f11b66925b
+        <Name>k__BackingField: 12
+        <Choices>k__BackingField:
+        - rid: 5750223035560624581
+        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
+        <NodeType>k__BackingField: 4
+        <Position>k__BackingField: {x: 3380, y: 221}
+        <Text>k__BackingField: Administrator Permisssions granted. The Shyrka System
+          has now access to all the Mobius' systems.
+        <PopupUIType>k__BackingField: 1
+    - rid: 5750223035560624553
+      type: {class: SSPopupNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 9d7ba981-47c6-4ea6-8e55-fe564294e8ed
+        <Name>k__BackingField: popupgauges
+        <Choices>k__BackingField:
+        - rid: 5750223035560624582
+        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
+        <NodeType>k__BackingField: 4
+        <Position>k__BackingField: {x: 4135, y: 221}
+        <Text>k__BackingField: If the ship's gauges drop to zero, your crew member's
+          mood will go down and they'll be less efficient!
+        <PopupUIType>k__BackingField: 0
+    - rid: 5750223035560624554
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 93de3d5b-6829-4d4c-b89e-7f83fa3daf24
+        <Name>k__BackingField: 16
+        <Choices>k__BackingField:
+        - rid: 5750223035560624583
+        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5840, y: 216}
+        <Text>k__BackingField: Hey, erm... Don't know if you've noticed, but this
+          ship has been following us since you came here...
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 128
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624555
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: bd31c8f1-ddbd-4e7f-94f1-2106d00bf5c7
+        <Name>k__BackingField: 17
+        <Choices>k__BackingField:
+        - rid: 5750223035560624584
+        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6519, y: 216}
+        <Text>k__BackingField: What? How... Let's run a diagnostic. We can never
+          be too sure.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 1
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624556
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: d6e444ae-01e1-4be6-bc23-3f86caece469
+        <Name>k__BackingField: 18
+        <Choices>k__BackingField:
+        - rid: 5750223035560624585
+        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 7194, y: 216}
+        <Text>k__BackingField: Ktetorian ship detected.
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624557
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 1ca3f7b5-fed0-4181-b244-71383f5da77b
+        <Name>k__BackingField: 19
+        <Choices>k__BackingField:
+        - rid: 5750223035560624586
+        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 7870, y: 216}
+        <Text>k__BackingField: Shit, the damn Sentinels want their Artifact back.
+          We can't let them have it.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 1
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624558
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 22389f5d-d9ed-4ece-a652-4921c7e14e92
+        <Name>k__BackingField: 20
+        <Choices>k__BackingField:
+        - rid: 5750223035560624587
+        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8566, y: 216}
+        <Text>k__BackingField: We could outrun them, but it would change the Trajectory.
+          We would have to correct it afterwards.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 16
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624559
+      type: {class: SSPopupNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: f5fa407b-2198-4aed-8115-f35b7a807ffd
+        <Name>k__BackingField: popuptask
+        <Choices>k__BackingField:
+        - rid: 5750223035560624588
+        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
+        <NodeType>k__BackingField: 4
+        <Position>k__BackingField: {x: 4883, y: 216}
+        <Text>k__BackingField: Raise the gauges by assigning people to maintenance
+          tasks.
+        <PopupUIType>k__BackingField: 2
+    - rid: 5750223035560624560
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: be08e106-5067-49af-a79b-e3e60aa22750
+        <Name>k__BackingField: 21
+        <Choices>k__BackingField:
+        - rid: 5750223035560624589
+        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 10024, y: 85}
+        <Text>k__BackingField: I'll maneuver the ship!
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 20
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624561
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 9367480c-60eb-44c6-bbdf-ccebce3df04e
+        <Name>k__BackingField: 22
+        <Choices>k__BackingField:
+        - rid: 5750223035560624590
+        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 10304, y: 85}
+        <Text>k__BackingField: Mission accomplished! Those Ktetorians are long gone.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 90
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624562
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: fca665c1-ddba-4ad2-8808-c7154dfb91d4
+        <Name>k__BackingField: 23
+        <Choices>k__BackingField:
+        - rid: 5750223035560624591
+        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 10024, y: 458}
+        <Text>k__BackingField: The ship's boosters are good enough to leave us from
+          harm.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 20
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624563
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 83e68c5c-c590-43fe-8ea4-ac3c4e6efbe1
+        <Name>k__BackingField: DialogueNode
+        <Choices>k__BackingField:
+        - rid: 5750223035560624592
+        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 10701, y: 458}
+        <Text>k__BackingField: ...Shit! The Ktetorians did some damage to the hull.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 90
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624564
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 8342727e-e2f5-42cd-a9f5-30e4c6b5506b
+        <Name>k__BackingField: SecondTask
+        <Choices>k__BackingField:
+        - rid: 5750223035560624593
+        - rid: 5750223035560624594
+        <GroupID>k__BackingField: 5c78597f-0528-42c4-8c63-c187ee5f9bbb
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 9292, y: 85}
+        <DescriptionTask>k__BackingField: Should we lose some trajectory precision
+          to escape the Ktetorians, or keep going and risk the ship being damaged?
+        <TaskStatus>k__BackingField: 2
+        <TaskType>k__BackingField: 2
+        <TaskIcon>k__BackingField: {fileID: 0}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 2
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 1
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 1
+    - rid: 5750223035560624565
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 852ebca0-4d2a-4c29-a45f-83dd5b84e068
-    - rid: 5750223035560624489
+    - rid: 5750223035560624566
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 7aa3a57c-c0f1-47d2-909e-80a031778395
-    - rid: 5750223035560624490
+    - rid: 5750223035560624567
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 61ae1786-303b-4b05-b511-fd6dd7863e3d
-    - rid: 5750223035560624491
+    - rid: 5750223035560624568
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 1b44e0cf-804c-4894-afe7-484473f24fe4
-    - rid: 5750223035560624492
+    - rid: 5750223035560624569
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 629a4ded-19f3-4978-8539-8a5c727b7dea
-    - rid: 5750223035560624493
+    - rid: 5750223035560624570
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: b71d0826-3029-45a7-9ce2-91783b10c48a
-    - rid: 5750223035560624494
+    - rid: 5750223035560624571
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: ed88cf4f-cbd2-4289-931a-5488d5fd7f37
-    - rid: 5750223035560624495
+    - rid: 5750223035560624572
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 7be0fd62-0c69-4543-980f-3a50ba09793d
-    - rid: 5750223035560624496
+    - rid: 5750223035560624573
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 44efc975-c019-4c6b-875f-05229a56bc40
-    - rid: 5750223035560624497
-      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <Text>k__BackingField: Next Node
-        <NextNodeID>k__BackingField: 
-    - rid: 5750223035560624498
-      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <Text>k__BackingField: FirstChoice
-        <NextNodeID>k__BackingField: 5dd5684e-9fa9-4112-897c-3e8a36c05424
-        <Condition>k__BackingField: {fileID: 11400000, guid: 622f0ef1db117034da30f4a736990d51,
-          type: 2}
-        <PreviewOutcome>k__BackingField: Preview...
-    - rid: 5750223035560624499
+    - rid: 5750223035560624574
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 1834cc48-0dbf-40e6-a509-1e6221c72383
-    - rid: 5750223035560624500
+    - rid: 5750223035560624575
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 0cde2fbf-8f5c-4c3e-909c-75f11b66925b
-    - rid: 5750223035560624501
-      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <Text>k__BackingField: Next Node
-        <NextNodeID>k__BackingField: 8342727e-e2f5-42cd-a9f5-30e4c6b5506b
-    - rid: 5750223035560624502
+    - rid: 5750223035560624576
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 00d877e6-1139-493a-a17b-489ee7a547d4
-    - rid: 5750223035560624503
+    - rid: 5750223035560624577
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 0cde2fbf-8f5c-4c3e-909c-75f11b66925b
-    - rid: 5750223035560624504
+    - rid: 5750223035560624578
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: d63dac9f-3dee-4c1a-aed2-1a07c99e022a
-    - rid: 5750223035560624505
+    - rid: 5750223035560624579
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -487,7 +672,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: ' will grant us the ship''s permissions
           since he''s the one in charge around here.'
-    - rid: 5750223035560624506
+    - rid: 5750223035560624580
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: New Choice
@@ -496,3 +681,80 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: ' will grant us the ship''s permissions
           since she''s the one in charge around here.'
+    - rid: 5750223035560624581
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 9d7ba981-47c6-4ea6-8e55-fe564294e8ed
+    - rid: 5750223035560624582
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: f5fa407b-2198-4aed-8115-f35b7a807ffd
+    - rid: 5750223035560624583
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: bd31c8f1-ddbd-4e7f-94f1-2106d00bf5c7
+    - rid: 5750223035560624584
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: d6e444ae-01e1-4be6-bc23-3f86caece469
+    - rid: 5750223035560624585
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 1ca3f7b5-fed0-4181-b244-71383f5da77b
+    - rid: 5750223035560624586
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 22389f5d-d9ed-4ece-a652-4921c7e14e92
+    - rid: 5750223035560624587
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 8342727e-e2f5-42cd-a9f5-30e4c6b5506b
+    - rid: 5750223035560624588
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 93de3d5b-6829-4d4c-b89e-7f83fa3daf24
+    - rid: 5750223035560624589
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 9367480c-60eb-44c6-bbdf-ccebce3df04e
+    - rid: 5750223035560624590
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750223035560624591
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 83e68c5c-c590-43fe-8ea4-ac3c4e6efbe1
+    - rid: 5750223035560624592
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750223035560624593
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: be08e106-5067-49af-a79b-e3e60aa22750
+        <Condition>k__BackingField: {fileID: 11400000, guid: 622f0ef1db117034da30f4a736990d51,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ' will maneuver the ship, sacrificing some
+          trajectory precision to escape the Ktetorian ship.'
+    - rid: 5750223035560624594
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNodeID>k__BackingField: fca665c1-ddba-4ad2-8808-c7154dfb91d4
+        <Condition>k__BackingField: {fileID: 0}
+        <PreviewOutcome>k__BackingField: We won't modify our trajectory as we're
+          faster than the Ktetorians, but they could damage our ship.

@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: SecondTask
   <Choices>k__BackingField:
-  - rid: 5750223035560624461
+  - rid: 5750223035560624535
+  - rid: 5750223035560624536
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
-  <Description>k__BackingField: Description
-  <TaskStatus>k__BackingField: 0
+  <Description>k__BackingField: Should we lose some trajectory precision to escape
+    the Ktetorians, or keep going and risk the ship being damaged?
+  <TaskStatus>k__BackingField: 2
   <TaskType>k__BackingField: 2
   <Icon>k__BackingField: {fileID: 0}
   <TimeLeft>k__BackingField: 0
@@ -32,12 +34,22 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5750223035560624461
+    - rid: 5750223035560624535
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
-        <NextNode>k__BackingField: {fileID: 11400000, guid: e10625df580bb084693beb3ba1a9656c,
+        <NextNode>k__BackingField: {fileID: 11400000, guid: d3aa835c8f263f146ab7f5a55897eb18,
           type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: 622f0ef1db117034da30f4a736990d51,
           type: 2}
-        <PreviewOutcome>k__BackingField: Preview...
+        <PreviewOutcome>k__BackingField: ' will maneuver the ship, sacrificing some
+          trajectory precision to escape the Ktetorian ship.'
+    - rid: 5750223035560624536
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 1975128ccf80f3c4aaef68731cbdc27d,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 0}
+        <PreviewOutcome>k__BackingField: We won't modify our trajectory as we're
+          faster than the Ktetorians, but they could damage our ship.

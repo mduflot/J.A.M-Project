@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a7dc82bf72f4c909a330508245e176e, type: 3}
-  m_Name: 1
+  m_Name: popuptask
   m_EditorClassIdentifier: 
-  <NodeName>k__BackingField: 1
+  <NodeName>k__BackingField: popuptask
   <Choices>k__BackingField:
-  - rid: 5750223035560624508
+  - rid: 5750223035560624530
   <NodeType>k__BackingField: 4
-  <IsStartingNode>k__BackingField: 1
-  <Text>k__BackingField: Launching Shyrka Protocol...
-  <PopupUIType>k__BackingField: 0
+  <IsStartingNode>k__BackingField: 0
+  <Text>k__BackingField: Raise the gauges by assigning people to maintenance tasks.
+  <PopupUIType>k__BackingField: 2
   references:
     version: 2
     RefIds:
-    - rid: 5750223035560624508
+    - rid: 5750223035560624530
       type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Next Node
-        <NextNode>k__BackingField: {fileID: 11400000, guid: 619f6692bcdec8d4abea3d4557d74636,
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 638e70f610770b5438a6379e8f797f78,
           type: 2}
