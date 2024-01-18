@@ -47,8 +47,6 @@ public class SimCharacter : MonoBehaviour
             return;
         }
         
-        //Add scaling based on TimeTickSystem
-
         SimDoor door = SimPathing.FindDoorByID(currentRoomDoor);
         if ((door.transform.position - transform.position).magnitude < 1.5f * TimeTickSystem.timeScale)
             FadeToNextDoor();
@@ -84,10 +82,27 @@ public class SimCharacter : MonoBehaviour
 
     private void MoveToCurrentDoor()
     {
-        //float lerpT = (1 - Mathf.Exp(-GameManager.Instance.SpaceshipManager.simMoveSpeed * Time.deltaTime)) * TimeTickSystem.timeScale;
+        if(doorPath.Count == 1)
+            switch (simStatus)
+            {
+                case SimStatus.GoToIdle:
+                    if (currentRoom == idleRoom)
+                    {
+                        doorPath.Clear();
+                        return;
+                    }
+                    break;
+                
+                case SimStatus.GoToRoom:
+                    if (currentRoom == taskRoom)
+                    {
+                        doorPath.Clear();
+                        return;
+                    }
+                    break;
+            }
         SimDoor door = SimPathing.FindDoorByID(currentRoomDoor);
         Vector3 pos = transform.position;
-        //pos = Vector3.Lerp(pos, door.transform.position, lerpT);
         pos += TimeTickSystem.timeScale * GameManager.Instance.SpaceshipManager.simMoveSpeed * (door.transform.position - transform.position).normalized;
         transform.position = pos;
     }
@@ -100,7 +115,6 @@ public class SimCharacter : MonoBehaviour
             SendToIdleRoom();
         
         
-        //float lerpT = (1 - Mathf.Exp(-GameManager.Instance.SpaceshipManager.simMoveSpeed * Time.deltaTime)) * TimeTickSystem.timeScale;
         Vector3 pos = transform.position;
 
         Vector3 newPos = currentRoom.transform.position;
@@ -110,8 +124,6 @@ public class SimCharacter : MonoBehaviour
 
         if ((newPos - transform.position).magnitude < .5f * TimeTickSystem.timeScale) return;
         
-        //pos = Vector3.Lerp(pos, taskFurniture == null ? newPos : taskFurniture.transform.position, lerpT);
-
         pos += GameManager.Instance.SpaceshipManager.simMoveSpeed * (newPos - transform.position).normalized;
         
         transform.position = pos;

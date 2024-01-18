@@ -31,7 +31,6 @@ public class PointerArrow : MonoBehaviour
         var pos = target.transform.position;
         pos.x = Mathf.Clamp(pos.x, boundsBL.x + boundW, boundsTR.x - boundW);
         pos.y = Mathf.Clamp(pos.y, boundsBL.y + boundH, boundsTR.y - boundH);
-        Debug.Log($"{boundsTR.x} // {pos.x}");
         transform.position = pos;
     }
 

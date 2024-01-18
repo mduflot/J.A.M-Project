@@ -14,8 +14,9 @@ public class Background : MonoBehaviour
     [SerializeField] private float gazScale;
     [SerializeField] private float starScale;
     [SerializeField] private float galaxyScale;
-    
-    [Header("Display")]
+
+    [Header("Display")] 
+    [SerializeField] private GameObject[] anchors;
     [SerializeField] private GameObject[] backgroundTiles;
     [SerializeField] private SpriteRenderer[] planetBackgrounds;
     [SerializeField] private SpriteRenderer[] planetForegrounds;
@@ -46,19 +47,17 @@ public class Background : MonoBehaviour
 
         for (int i = 0; i < planetBackgrounds.Length; i++)
         {
-            if (planetBackgrounds[i].transform.position.x < minX)
+            if (anchors[i].transform.position.x < minX)
             {
-                Vector3 pos = planetBackgrounds[i].transform.position;
+                Vector3 pos = anchors[i].transform.position;
                 pos.x = -minX;
-                pos.y = Random.Range(-yOffset, yOffset);
+                pos.y = Random.Range(-1f, 1f) * yOffset;
                 pos.z = Random.Range(250f, 500f);
-                planetBackgrounds[i].transform.position = pos;
-                planetForegrounds[i].transform.position = pos;
+                anchors[i].transform.position = pos;
                 ResetPlanet(i);
             }
             
-            planetBackgrounds[i].transform.Translate(scrollSpeed * planetBackgrounds[i].transform.localScale.x * TimeTickSystem.timeScale * Vector3.left);
-            planetForegrounds[i].transform.Translate(scrollSpeed * planetBackgrounds[i].transform.localScale.x * TimeTickSystem.timeScale * Vector3.left);
+            anchors[i].transform.Translate(scrollSpeed * planetBackgrounds[i].transform.localScale.x * TimeTickSystem.timeScale * Vector3.left);
         }
     }
 
@@ -103,11 +102,14 @@ public class Background : MonoBehaviour
                 newBg = planetBack[1];
                 newFg = gazFronts[gazIndex];
                 
-                planetBackgrounds[index].GetComponent<SpriteRenderer>().color =
-                    new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-                
-                planetForegrounds[index].GetComponent<SpriteRenderer>().color =
-                    new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+                Color newColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+                planetBackgrounds[index].GetComponent<SpriteRenderer>().color = newColor;
+
+                newColor.r += .1f;
+                newColor.g += .1f;
+                newColor.b += .1f;
+
+                planetForegrounds[index].GetComponent<SpriteRenderer>().color = newColor;
                 
                 newScale = Random.Range(minScale, maxScale)  * gazScale;
                 break;
