@@ -15,14 +15,14 @@ public class TrajectoryGaugeUI : GaugeUI
     {
         if (isTop)
         {
-            topGauge.fillAmount = value / 50;
-            topPreviewGauge.fillAmount = (value + previewValue) / 50;
+            topGauge.fillAmount = 1 - value / 50;
+            topPreviewGauge.fillAmount = 1 - (value + previewValue) / 50;
             shipTransform.eulerAngles = new Vector3(0, 0, topGauge.fillAmount * -maxAngle);
         }
         else
         {
-            bottomGauge.fillAmount = value / 50;
-            bottomPreviewGauge.fillAmount = (value + previewValue) / 50;
+            bottomGauge.fillAmount = 1 - value / 50;
+            bottomPreviewGauge.fillAmount = 1 - (value + previewValue) / 50;
             shipTransform.eulerAngles = new Vector3(0, 0, bottomGauge.fillAmount * maxAngle);
         }
     }
@@ -34,13 +34,13 @@ public class TrajectoryGaugeUI : GaugeUI
         
         if (value > 0)
         {
-            value += gauge.fillAmount * 50;
-            previewGauge.fillAmount = value / 50;
+            value += 1 - gauge.fillAmount * 50;
+            previewGauge.fillAmount = 1 - value / 50;
         }
         else
         {
-            previewGauge.fillAmount = GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) / 50;
-            gauge.fillAmount = (GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) + value) / 50;
+            previewGauge.fillAmount = 1 - GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) / 50;
+            gauge.fillAmount = 1 - (GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) + value) / 50;
         }
     }
 
