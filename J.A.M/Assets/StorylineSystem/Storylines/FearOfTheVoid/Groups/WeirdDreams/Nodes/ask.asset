@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
-  m_Name: DialogueNode
+  m_Name: ask
   m_EditorClassIdentifier: 
-  <NodeName>k__BackingField: DialogueNode
+  <NodeName>k__BackingField: ask
   <Choices>k__BackingField:
-  - rid: 8851122716615377304
+  - rid: 197800360853635212
   <NodeType>k__BackingField: 0
   <IsStartingNode>k__BackingField: 1
-  <Text>k__BackingField: Node text.
-  <SpeakerType>k__BackingField: 0
+  <Text>k__BackingField: It feels a bit awkward to ask this, but how was your dream
+    ?
+  <SpeakerType>k__BackingField: 9
   <Duration>k__BackingField: 1
   <IsDialogueTask>k__BackingField: 0
   <PercentageTask>k__BackingField: 50
@@ -29,7 +30,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 8851122716615377304
+    - rid: 197800360853635212
       type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Next Node

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: HotShower
   <Choices>k__BackingField:
-  - rid: 8851122716615377609
-  - rid: 8851122716615377610
+  - rid: 197800360853635492
+  - rid: 197800360853635493
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: Description
@@ -23,17 +23,18 @@ MonoBehaviour:
   <TaskType>k__BackingField: 1
   <Icon>k__BackingField: {fileID: 21300000, guid: ea698d351bd4748449aada363e59d6a3,
     type: 3}
-  <TimeLeft>k__BackingField: 2
+  <TimeLeft>k__BackingField: 10
   <Duration>k__BackingField: 2
   <MandatorySlots>k__BackingField: 1
   <OptionalSlots>k__BackingField: 0
   <TaskHelpFactor>k__BackingField: 0.75
-  <Room>k__BackingField: 1
+  <Room>k__BackingField: 10
   <Furniture>k__BackingField: 7
+  <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 8851122716615377609
+    - rid: 197800360853635492
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -42,7 +43,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The warmth of the generator will heat up
           water for the shower.
-    - rid: 8851122716615377610
+    - rid: 197800360853635493
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice

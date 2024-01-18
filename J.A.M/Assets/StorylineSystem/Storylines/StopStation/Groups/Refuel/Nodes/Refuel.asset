@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: Refuel
   <Choices>k__BackingField:
-  - rid: 197800337919181020
-  - rid: 197800337919181021
+  - rid: 197800360088437711
+  - rid: 197800360088437712
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: We will soon need to make a stop by the nearest space
@@ -30,10 +30,11 @@ MonoBehaviour:
   <TaskHelpFactor>k__BackingField: 0.75
   <Room>k__BackingField: 1
   <Furniture>k__BackingField: 1
+  <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 197800337919181020
+    - rid: 197800360088437711
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -42,7 +43,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The assigned crew member will redirect the
           ship trajectory.
-    - rid: 197800337919181021
+    - rid: 197800360088437712
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice

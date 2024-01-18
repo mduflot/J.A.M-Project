@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: LeakGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: Leak
-  <ID>k__BackingField: 1c810222-0ff7-4e0a-9f97-11cb6ba396f3
+  <ID>k__BackingField: 8b62da14-672f-498a-ac1e-12ea4a2346f6
   <StoryStatus>k__BackingField: 0
   <StoryType>k__BackingField: 1
+  <IsTutorialToPlay>k__BackingField: 0
   <IsFirstToPlay>k__BackingField: 0
-  <Condition>k__BackingField: {fileID: 0}
+  <IsReplayable>k__BackingField: 1
+  <Condition>k__BackingField: {fileID: 11400000, guid: cddcb656980cb9045ac34234fcf42600,
+    type: 2}
   <Groups>k__BackingField:
   - <ID>k__BackingField: b774968b-c12d-4f43-8213-8c086dc7c071
     <StoryStatus>k__BackingField: 0
@@ -28,12 +31,12 @@ MonoBehaviour:
     <overrideWaitTime>k__BackingField: 10
     <Condition>k__BackingField: {fileID: 0}
     <Name>k__BackingField: Leak
-    <Position>k__BackingField: {x: 1008, y: 619}
+    <Position>k__BackingField: {x: 1008.00006, y: 619}
   <Nodes>k__BackingField:
-  - rid: 197800179276709945
-  - rid: 197800179276709946
-  - rid: 197800179276709947
-  - rid: 197800179276709948
+  - rid: 197800360853635439
+  - rid: 197800360853635440
+  - rid: 197800360853635441
+  - rid: 197800360853635442
   <OldGroupNames>k__BackingField:
   - Leak
   <OldUngroupedNodeNames>k__BackingField: []
@@ -41,38 +44,20 @@ MonoBehaviour:
     list:
     - Key: Leak
       Value:
-      - analysis
       - Fuel
       - DialogueNode
       - Leak
+      - analysis
   references:
     version: 2
     RefIds:
-    - rid: 197800179276709945
-      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <ID>k__BackingField: 762fec2c-71b4-45c9-9868-bfe65eb0b8a2
-        <Name>k__BackingField: analysis
-        <Choices>k__BackingField:
-        - rid: 197800179276709949
-        <GroupID>k__BackingField: b774968b-c12d-4f43-8213-8c086dc7c071
-        <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 1289, y: 688}
-        <Text>k__BackingField: That's not a good sign, I will set an analysis
-        <SpeakerType>k__BackingField: 0
-        <Duration>k__BackingField: 1
-        <IsDialogueTask>k__BackingField: 0
-        <PercentageTask>k__BackingField: 50
-        <Job>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
-    - rid: 197800179276709946
+    - rid: 197800360853635439
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 441c8574-9a64-4ba9-b5ae-81e9fd5e8e87
         <Name>k__BackingField: Fuel
         <Choices>k__BackingField:
-        - rid: 197800179276709950
+        - rid: 197800360853635443
         <GroupID>k__BackingField: b774968b-c12d-4f43-8213-8c086dc7c071
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1033, y: 678}
@@ -84,13 +69,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 197800179276709947
+    - rid: 197800360853635440
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: c2d71204-c2bc-4269-9783-44685147e77c
         <Name>k__BackingField: DialogueNode
         <Choices>k__BackingField:
-        - rid: 197800179276709951
+        - rid: 197800360853635444
         <GroupID>k__BackingField: b774968b-c12d-4f43-8213-8c086dc7c071
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1551, y: 709}
@@ -102,14 +87,14 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 197800179276709948
+    - rid: 197800360853635441
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 6558b5cd-00d6-4d45-a830-e1c3a1332863
         <Name>k__BackingField: Leak
         <Choices>k__BackingField:
-        - rid: 197800179276709952
-        - rid: 197800179276709953
+        - rid: 197800360853635445
+        - rid: 197800360853635446
         <GroupID>k__BackingField: b774968b-c12d-4f43-8213-8c086dc7c071
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 1863, y: 714}
@@ -125,22 +110,36 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 5
         <Furniture>k__BackingField: 1
-    - rid: 197800179276709949
-      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 197800360853635442
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
-        <Text>k__BackingField: Next Node
-        <NextNodeID>k__BackingField: c2d71204-c2bc-4269-9783-44685147e77c
-    - rid: 197800179276709950
+        <ID>k__BackingField: 762fec2c-71b4-45c9-9868-bfe65eb0b8a2
+        <Name>k__BackingField: analysis
+        <Choices>k__BackingField:
+        - rid: 197800360853635447
+        <GroupID>k__BackingField: b774968b-c12d-4f43-8213-8c086dc7c071
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1289, y: 688}
+        <Text>k__BackingField: That's not a good sign, I will set an analysis
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800360853635443
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 762fec2c-71b4-45c9-9868-bfe65eb0b8a2
-    - rid: 197800179276709951
+    - rid: 197800360853635444
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 6558b5cd-00d6-4d45-a830-e1c3a1332863
-    - rid: 197800179276709952
+    - rid: 197800360853635445
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -148,7 +147,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 62b8bd32649d7dc4ea8975145d412c4f,
           type: 2}
         <PreviewOutcome>k__BackingField: Preview...
-    - rid: 197800179276709953
+    - rid: 197800360853635446
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: SecondChoice
@@ -156,3 +155,8 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 877e6b37effb1f74f825c1d666074037,
           type: 2}
         <PreviewOutcome>k__BackingField: The leak will be fixed.
+    - rid: 197800360853635447
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: c2d71204-c2bc-4269-9783-44685147e77c
