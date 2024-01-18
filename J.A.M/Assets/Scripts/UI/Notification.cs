@@ -34,6 +34,8 @@ namespace UI
 
         [SerializeField] private GameObject popupHelp;
 
+        [SerializeField] private GameObject pointerArrow;
+        
         private Camera camera;
         private SpaceshipManager spaceshipManager;
         private ConditionSO taskCondition;
@@ -81,6 +83,12 @@ namespace UI
             timerSprite.material.SetInt("_Arc2", 360);
             timeLeftSprite.material.SetInt("_Arc1", 360);
             taskLog = taskToPlay;
+
+            if (task.TaskType != SSTaskType.Permanent)
+            {
+                pointerArrow.SetActive(true);
+                pointerArrow.GetComponent<PointerArrow>().Init(gameObject, task.TaskType == SSTaskType.Timed);
+            }
         }
 
         public void InitializeCancelTask()
@@ -168,6 +176,8 @@ namespace UI
             }
 
             CheckingCondition(validatedCondition);
+            
+            pointerArrow.SetActive(false);
 
             for (int index = 0; index < GameManager.Instance.UIManager.gauges.Length; index++)
             {
