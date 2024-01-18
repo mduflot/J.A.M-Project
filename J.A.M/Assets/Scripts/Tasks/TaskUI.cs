@@ -658,6 +658,7 @@ namespace Tasks
             characterSlots.Clear();
             GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.RefreshCharacterIcons();
+            GameManager.Instance.taskOpened = false;
             separator.SetActive(false);
             Appear(false);
             CloseNotification();

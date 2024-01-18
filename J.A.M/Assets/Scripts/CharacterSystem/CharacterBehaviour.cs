@@ -179,6 +179,11 @@ namespace CharacterSystem
             return volition;
         }
 
+        public Sprite GetSprite()
+        {
+            return data.characterIcon;
+        }
+
         public TraitsData.Traits GetTraits()
         {
             return traits;

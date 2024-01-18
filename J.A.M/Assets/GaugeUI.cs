@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public abstract class GaugeUI : MonoBehaviour
+public class GaugeUI : HoverableObject
+
 {
     public SystemType systemType;
     public bool IsPreviewing;

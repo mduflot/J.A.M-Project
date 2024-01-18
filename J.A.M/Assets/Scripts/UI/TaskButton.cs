@@ -5,11 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(SSLauncher))]
-public class TaskButton : MonoBehaviour
+public class TaskButton : HoverableObject
 {
     [SerializeField] private TextMeshProUGUI taskName;
     [SerializeField] private TextMeshProUGUI taskDuration;
     [SerializeField] private Image taskIcon;
+    [SerializeField] private string taskShortDescription;
     private SSTaskNodeSO task;
     private SSLauncher launcher;
 
@@ -20,5 +21,9 @@ public class TaskButton : MonoBehaviour
         taskName.text = task.name;
         taskDuration.text = task.Duration + " hours";
         taskIcon.sprite = task.Icon;
+        data = new HoverMenuData();
+        data.text1 = taskShortDescription;
+        data.baseParent = transform;
+        data.parent = transform.parent.parent.parent;
     }
 }
