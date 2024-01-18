@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: StopStationGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: StopStation
-  <ID>k__BackingField: d6eef9c3-5675-41a1-a380-388b151bebec
+  <ID>k__BackingField: 4838265e-d743-4ced-8fe2-4572f3af0cf0
   <StoryStatus>k__BackingField: 0
   <StoryType>k__BackingField: 0
+  <IsTutorialToPlay>k__BackingField: 0
   <IsFirstToPlay>k__BackingField: 0
   <IsReplayable>k__BackingField: 0
   <Condition>k__BackingField: {fileID: 0}
@@ -29,10 +30,10 @@ MonoBehaviour:
     <overrideWaitTime>k__BackingField: 10
     <Condition>k__BackingField: {fileID: 0}
     <Name>k__BackingField: Refuel
-    <Position>k__BackingField: {x: 283, y: 114}
+    <Position>k__BackingField: {x: 283, y: 114.000015}
   <Nodes>k__BackingField:
-  - rid: 197800337919181022
-  - rid: 197800337919181023
+  - rid: 197800360088437713
+  - rid: 197800360088437714
   <OldGroupNames>k__BackingField:
   - Refuel
   <OldUngroupedNodeNames>k__BackingField: []
@@ -45,13 +46,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 197800337919181022
+    - rid: 197800360088437713
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 117a771f-9e15-47fc-8146-8d022a6ca738
         <Name>k__BackingField: need
         <Choices>k__BackingField:
-        - rid: 197800337919181024
+        - rid: 197800360088437715
         <GroupID>k__BackingField: c1c6bdfa-754f-455a-8301-ad7a6c46839c
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 308, y: 173}
@@ -63,14 +64,14 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 197800337919181023
+    - rid: 197800360088437714
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 3bc862c0-b9d0-4d52-9c2a-71437046d8a0
         <Name>k__BackingField: Refuel
         <Choices>k__BackingField:
-        - rid: 197800337919181025
-        - rid: 197800337919181026
+        - rid: 197800360088437716
+        - rid: 197800360088437717
         <GroupID>k__BackingField: c1c6bdfa-754f-455a-8301-ad7a6c46839c
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 618, y: 183}
@@ -86,12 +87,13 @@ MonoBehaviour:
         <TaskHelpFactor>k__BackingField: 0.75
         <Room>k__BackingField: 1
         <Furniture>k__BackingField: 1
-    - rid: 197800337919181024
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 197800360088437715
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 3bc862c0-b9d0-4d52-9c2a-71437046d8a0
-    - rid: 197800337919181025
+    - rid: 197800360088437716
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -100,7 +102,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The assigned crew member will redirect the
           ship trajectory.
-    - rid: 197800337919181026
+    - rid: 197800360088437717
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: SecondChoice

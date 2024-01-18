@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: Winter
   <Choices>k__BackingField:
-  - rid: 1640970789610323972
-  - rid: 1640970789610323973
+  - rid: 197800360853635452
+  - rid: 197800360853635453
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: A rupture in the ventilation has exposed crops to
@@ -25,16 +25,17 @@ MonoBehaviour:
   <Icon>k__BackingField: {fileID: 21300000, guid: f7fda6e306a63eb4888f8266b87acf8d,
     type: 3}
   <TimeLeft>k__BackingField: 0
-  <Duration>k__BackingField: 0
+  <Duration>k__BackingField: 3
   <MandatorySlots>k__BackingField: 1
   <OptionalSlots>k__BackingField: 0
   <TaskHelpFactor>k__BackingField: 0.75
   <Room>k__BackingField: 6
   <Furniture>k__BackingField: 3
+  <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 1640970789610323972
+    - rid: 197800360853635452
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -43,7 +44,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The ventilation system will be fixed and
           the crops will cease to freeze.
-    - rid: 1640970789610323973
+    - rid: 197800360853635453
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
