@@ -1,0 +1,572 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: WarZoneGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: WarZone
+  <ID>k__BackingField: 38817a37-72cf-49f5-bff5-dd85a620bef8
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
+  <IsTutorialToPlay>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: CrossingFire
+    <Position>k__BackingField: {x: 385.99957, y: 34.99999}
+  <Nodes>k__BackingField:
+  - rid: 197800365375881495
+  - rid: 197800365375881496
+  - rid: 197800365375881497
+  - rid: 197800365375881498
+  - rid: 197800365375881499
+  - rid: 197800365375881500
+  - rid: 197800365375881501
+  - rid: 197800365375881502
+  - rid: 197800365375881503
+  - rid: 197800365375881504
+  - rid: 197800365375881505
+  - rid: 197800365375881506
+  - rid: 197800365375881507
+  - rid: 197800365375881508
+  - rid: 197800365375881509
+  - rid: 197800365375881510
+  - rid: 197800365375881511
+  - rid: 197800365375881512
+  - rid: 197800365375881513
+  - rid: 197800365375881514
+  <OldGroupNames>k__BackingField:
+  - CrossingFire
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: CrossingFire
+      Value:
+      - crossing
+      - sector
+      - attack
+      - fighting
+      - correct
+      - CrossingFire
+      - spotting
+      - Look
+      - boost
+      - screwed
+      - worry
+      - away
+      - really
+      - jolt
+      - targeted
+      - Echtrian
+      - pursue
+      - engine
+      - close
+      - confrontation
+  references:
+    version: 2
+    RefIds:
+    - rid: 197800365375881495
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: f3da8177-9773-4a6c-9607-f9ec49bede2d
+        <Name>k__BackingField: crossing
+        <Choices>k__BackingField:
+        - rid: 197800365375881515
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 411, y: 169}
+        <Text>k__BackingField: WARNING ! The ship is crossing a zone of open warfare
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881496
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: eac04492-4b70-4648-87c5-1fa33158b566
+        <Name>k__BackingField: sector
+        <Choices>k__BackingField:
+        - rid: 197800365375881516
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1092, y: 186}
+        <Text>k__BackingField: Wait, I didn't know this sector was dangerous at all
+          ! Let me check the starmap
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881497
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: dbe02556-81f3-4282-b887-551765d31e61
+        <Name>k__BackingField: attack
+        <Choices>k__BackingField:
+        - rid: 197800365375881517
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2108, y: 231}
+        <Text>k__BackingField: Probably an attack from the Echtrian on some local
+          colony
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881498
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: c53b61d6-55ca-4009-9034-235c48d810cd
+        <Name>k__BackingField: fighting
+        <Choices>k__BackingField:
+        - rid: 197800365375881518
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1813, y: 201}
+        <Text>k__BackingField: War ? Who is fighting ?
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 0.75
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881499
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 9e6d780f-12cd-4d14-8231-f1a0a2eae989
+        <Name>k__BackingField: correct
+        <Choices>k__BackingField:
+        - rid: 197800365375881519
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2801, y: 248}
+        <Text>k__BackingField: Correct, we need to get out of there, quickly
+        <SpeakerType>k__BackingField: 3
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881500
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 624f191e-9b40-476c-9f56-20c7413ce07d
+        <Name>k__BackingField: CrossingFire
+        <Choices>k__BackingField:
+        - rid: 197800365375881520
+        - rid: 197800365375881521
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 3501, y: 250}
+        <DescriptionTask>k__BackingField: The ship is crossing over a war zone, we're
+          might be exposed to ennemy fire. Someone should take control of the ship
+          to avoid danger.
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 0}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 5
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 1
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 197800365375881501
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: b6b99320-b6bd-44ff-8517-2b97fd86ec38
+        <Name>k__BackingField: spotting
+        <Choices>k__BackingField:
+        - rid: 197800365375881522
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4068, y: 214}
+        <Text>k__BackingField: I'm spotting some minor defensive tower, we should
+          be able to avoid if them we get around this asteroid belt
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881502
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: b1790e12-553c-4fee-be96-80bb8f522b57
+        <Name>k__BackingField: Look
+        <Choices>k__BackingField:
+        - rid: 197800365375881523
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4804, y: 182}
+        <Text>k__BackingField: Look, its an Echtrian warship !
+        <SpeakerType>k__BackingField: 15
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881503
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ef310a3f-18c9-4f08-9d2f-4d719ab80010
+        <Name>k__BackingField: boost
+        <Choices>k__BackingField:
+        - rid: 197800365375881524
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5498, y: 170}
+        <Text>k__BackingField: I'll boost the engine and try to loose him
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881504
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 8e2cbb39-f418-44b7-8805-e5306d37e1ba
+        <Name>k__BackingField: screwed
+        <Choices>k__BackingField:
+        - rid: 197800365375881525
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6196, y: 164}
+        <Text>k__BackingField: Ah ! we're getting shoot, we're screwed !
+        <SpeakerType>k__BackingField: 15
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881505
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: b569b953-1e4c-4e29-8837-c390e873a020
+        <Name>k__BackingField: worry
+        <Choices>k__BackingField:
+        - rid: 197800365375881526
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6937, y: 127}
+        <Text>k__BackingField: Don't worry it was an other set of defending human
+          tower, we were small enough to avoid most of the damage
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881506
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 489acf0b-d7c9-4f86-afff-4407321f19b9
+        <Name>k__BackingField: away
+        <Choices>k__BackingField:
+        - rid: 197800365375881527
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 7613, y: 108}
+        <Text>k__BackingField: And it drove the Echtrian ship away, perfect !
+        <SpeakerType>k__BackingField: 16
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881507
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 1c6fdb69-472a-4188-905a-1901a1db99b8
+        <Name>k__BackingField: really
+        <Choices>k__BackingField:
+        - rid: 197800365375881528
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8298, y: 94}
+        <Text>k__BackingField: Pff... We really came close to the end this time
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881508
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 1ab048d0-6326-4238-ba42-e7a7369b684a
+        <Name>k__BackingField: jolt
+        <Choices>k__BackingField:
+        - rid: 197800365375881529
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4071, y: 504}
+        <Text>k__BackingField: Did you guys felt that jolt ?
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881509
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 721f0b58-b211-495f-bc42-fe039a2a1df8
+        <Name>k__BackingField: targeted
+        <Choices>k__BackingField:
+        - rid: 197800365375881530
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4739, y: 523}
+        <Text>k__BackingField: Yes ! we're getting targeted by a defense ship
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881510
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ab9f1dc6-e18d-4502-b373-bd70016a3fc2
+        <Name>k__BackingField: Echtrian
+        <Choices>k__BackingField:
+        - rid: 197800365375881531
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5480, y: 564}
+        <Text>k__BackingField: Do you think its human or Echtrian ?
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881511
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 3c6bf548-9c7c-4290-894d-5e93ad3e5ace
+        <Name>k__BackingField: pursue
+        <Choices>k__BackingField:
+        - rid: 197800365375881532
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6144, y: 590}
+        <Text>k__BackingField: I don't know and I don't care, if we leave the zone
+          they might not pursue us !
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881512
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 01ab15d2-868b-46a6-858b-9c012726a9c2
+        <Name>k__BackingField: engine
+        <Choices>k__BackingField:
+        - rid: 197800365375881533
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6828, y: 613}
+        <Text>k__BackingField: we should boost the engine to get out quickly
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881513
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: bf4c69b9-b45b-4afc-8778-d4e9e7fd24eb
+        <Name>k__BackingField: close
+        <Choices>k__BackingField:
+        - rid: 197800365375881534
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 7529, y: 658}
+        <Text>k__BackingField: That was close, I saw my life playing out in front
+          of my eyes
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881514
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ee05fb81-8b9c-4bb0-af2a-548e5eacabac
+        <Name>k__BackingField: confrontation
+        <Choices>k__BackingField:
+        - rid: 197800365375881535
+        <GroupID>k__BackingField: 8c3defe3-04f9-466c-8fe4-ab8bb7c4457a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8208, y: 672}
+        <Text>k__BackingField: The next time we should avoid any confrontation, we're
+          not correctly equipped against this type of war ships
+        <SpeakerType>k__BackingField: 7
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800365375881515
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: eac04492-4b70-4648-87c5-1fa33158b566
+    - rid: 197800365375881516
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: c53b61d6-55ca-4009-9034-235c48d810cd
+    - rid: 197800365375881517
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 9e6d780f-12cd-4d14-8231-f1a0a2eae989
+    - rid: 197800365375881518
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: dbe02556-81f3-4282-b887-551765d31e61
+    - rid: 197800365375881519
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 624f191e-9b40-476c-9f56-20c7413ce07d
+    - rid: 197800365375881520
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: b6b99320-b6bd-44ff-8517-2b97fd86ec38
+        <Condition>k__BackingField: {fileID: 11400000, guid: 9027864d2f51b3d4da5fd8f049856180,
+          type: 2}
+        <PreviewOutcome>k__BackingField: The assigned crew member will try to maneuver
+          the ship through this hostile environment, it will be difficult to avoid
+          any harm
+    - rid: 197800365375881521
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNodeID>k__BackingField: 1ab048d0-6326-4238-ba42-e7a7369b684a
+        <Condition>k__BackingField: {fileID: 11400000, guid: 0f71103651a1f9a4f89c1c1c04584a7d,
+          type: 2}
+        <PreviewOutcome>k__BackingField: The ship will keep its trajectory but problems
+          may ensue.
+    - rid: 197800365375881522
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: b1790e12-553c-4fee-be96-80bb8f522b57
+    - rid: 197800365375881523
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: ef310a3f-18c9-4f08-9d2f-4d719ab80010
+    - rid: 197800365375881524
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 8e2cbb39-f418-44b7-8805-e5306d37e1ba
+    - rid: 197800365375881525
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: b569b953-1e4c-4e29-8837-c390e873a020
+    - rid: 197800365375881526
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 489acf0b-d7c9-4f86-afff-4407321f19b9
+    - rid: 197800365375881527
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 1c6fdb69-472a-4188-905a-1901a1db99b8
+    - rid: 197800365375881528
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 197800365375881529
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 721f0b58-b211-495f-bc42-fe039a2a1df8
+    - rid: 197800365375881530
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: ab9f1dc6-e18d-4502-b373-bd70016a3fc2
+    - rid: 197800365375881531
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 3c6bf548-9c7c-4290-894d-5e93ad3e5ace
+    - rid: 197800365375881532
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 01ab15d2-868b-46a6-858b-9c012726a9c2
+    - rid: 197800365375881533
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: bf4c69b9-b45b-4afc-8778-d4e9e7fd24eb
+    - rid: 197800365375881534
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: ee05fb81-8b9c-4bb0-af2a-548e5eacabac
+    - rid: 197800365375881535
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
