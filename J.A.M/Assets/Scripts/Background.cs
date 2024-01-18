@@ -8,8 +8,11 @@ public class Background : MonoBehaviour
 {
     [Header("Values")] 
     [SerializeField] private float minX;
+    [SerializeField] private float yOffset;
     [SerializeField] private float scrollSpeed;
     [SerializeField] private float minScale, maxScale;
+    [SerializeField] private float starScale;
+    [SerializeField] private float galaxyScale;
     
     [Header("Display")]
     [SerializeField] private GameObject[] backgroundTiles;
@@ -45,6 +48,8 @@ public class Background : MonoBehaviour
             {
                 Vector3 pos = planetBackgrounds[i].transform.position;
                 pos.x = -minX;
+                pos.y = Random.Range(-yOffset, yOffset);
+                pos.z = Random.Range(250f, 500f);
                 planetBackgrounds[i].transform.position = pos;
                 planetForegrounds[i].transform.position = pos;
                 ResetPlanet(i);
@@ -66,12 +71,11 @@ public class Background : MonoBehaviour
 
     private void ResetPlanet(int index)
     {
-        //var rand = Random.Range(0, 3);
+        var rand = Random.Range(0, 3);
 
-        var rand = 0;
-        
         Sprite newBg;
         Sprite newFg;
+        float newScale;
         
         switch (rand)
         {
@@ -88,28 +92,31 @@ public class Background : MonoBehaviour
                 planetForegrounds[index].GetComponent<SpriteRenderer>().color =
                     new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
                 
+                newScale = Random.Range(minScale, maxScale);
+                
                 break;
             
             case 1:
-                newBg = null;
+                newBg = stars[Random.Range(0, stars.Length)];
                 newFg = null;
+                newScale = Random.Range(minScale * starScale, maxScale * starScale);
                 break;
             
             case 2:
-                newBg = null;
+                newBg = galaxies[Random.Range(0, galaxies.Length)];
                 newFg = null;
+                newScale = Random.Range(minScale * galaxyScale, maxScale * galaxyScale);
                 break;
             
             default:
                 newBg = null;
                 newFg = null;
+                newScale = 1f;
                 break;
         }
         
         planetBackgrounds[index].GetComponent<SpriteRenderer>().sprite = newBg;
         planetForegrounds[index].GetComponent<SpriteRenderer>().sprite = newFg;
-        
-        float newScale = Random.Range(minScale, maxScale);
         
         planetBackgrounds[index].transform.SetScaleX(newScale);
         planetBackgrounds[index].transform.SetScaleY(newScale);
