@@ -113,6 +113,7 @@ namespace UI
 
         public void OnStart(List<CharacterUISlot> characters, List<TaskUI.GaugesOutcome> go)
         {
+            popupHelp.SetActive(false);
             TimeTickSystem.ModifyTimeScale(TimeTickSystem.lastActiveTimeScale);
             for (var index = 0; index < characters.Count; index++)
             {
