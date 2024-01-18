@@ -874,6 +874,8 @@ namespace SS
             }
 
             if (task != null && taskToPlay == null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
+            assignedCharacters.Clear();
+            notAssignedCharacters.Clear();
             var room = spaceshipManager.GetRoom(nodeSO.Room);
             var notificationGO = spaceshipManager.notificationPool.GetFromPool();
             if (notificationGO.TryGetComponent(out Notification notification))
