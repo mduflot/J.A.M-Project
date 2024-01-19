@@ -224,7 +224,7 @@ namespace Tasks
 
                     if (notification.Task.TaskType != SSTaskType.Compute)
                     {
-                        if (characterSlots[0].icon == null && notification.Task.TaskType == SSTaskType.Untimed)
+                        if (!condition && notification.Task.TaskType == SSTaskType.Untimed)
                         {
                             previewOutcomeText.text = "Condition not met";
                             startButton.GetComponentInChildren<Button>().interactable = false;

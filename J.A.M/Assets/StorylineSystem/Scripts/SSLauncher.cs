@@ -76,7 +76,7 @@ namespace SS
                     if (!isCheatLauncher)
                     {
                         storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName,
-                            GameManager.Instance.UIManager.date.text);
+                            GameManager.Instance.UIManager.date.text, "");
                         Checker.Instance.allStorylineLogs.Add(storylineLog);
                     }
                 }
@@ -135,7 +135,7 @@ namespace SS
                     if (!isCheatLauncher)
                     {
                         storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName,
-                            GameManager.Instance.UIManager.date.text);
+                            GameManager.Instance.UIManager.date.text, "");
                         Checker.Instance.allStorylineLogs.Add(storylineLog);
                     }
                 }
@@ -321,10 +321,10 @@ namespace SS
                 }
                 case SSSpeakerType.Sensor:
                 {
-                    for (int index = 0; index < spaceshipManager.GetRoom(RoomType.Common).roomObjects.Length; index++)
+                    for (int index = 0; index < spaceshipManager.GetRoom(RoomType.AI).roomObjects.Length; index++)
                     {
-                        var furniture = spaceshipManager.GetRoom(RoomType.Common).roomObjects[index];
-                        if (furniture.furnitureType == FurnitureType.Console)
+                        var furniture = spaceshipManager.GetRoom(RoomType.AI).roomObjects[index];
+                        if (furniture.furnitureType == FurnitureType.ConsoleSide)
                         {
                             var sensor = furniture.transform;
                             if (sensor.TryGetComponent(out Speaker speaker))
@@ -989,7 +989,11 @@ namespace SS
             if (task != null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
             
             if (nodeSO.IsTutorialPopup) GameManager.Instance.UIManager.PopupTutorial.Initialize(nodeSO.Text);
-            else GameManager.Instance.UIManager.PopupStoryline.Initialize(nodeSO.Text, nodeContainer.FileName);
+            else
+            {
+                storylineLog.storylineEndLog = nodeSO.Text;
+                GameManager.Instance.UIManager.PopupStoryline.Initialize(nodeSO.Text, nodeContainer.FileName);
+            }
             switch (nodeSO.PopupUIType)
             {
                 case SSPopupUIType.None:
