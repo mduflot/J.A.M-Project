@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: rogueai
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: rogueai
+  <Choices>k__BackingField:
+  - rid: 5750223053362823518
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: A rogue AI has infiltrated our system. Let's get
+    rid of it.
+  <TaskStatus>k__BackingField: 1
+  <TaskType>k__BackingField: 2
+  <Icon>k__BackingField: {fileID: 0}
+  <TimeLeft>k__BackingField: 20
+  <Duration>k__BackingField: 0
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 0
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 0
+  <Furniture>k__BackingField: 1
+  <IsTaskTutorial>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 5750223053362823518
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 79b9cc99f7d49a24282a9ca810f288ca,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 3474762aa43e0d94fb6c9ced9ed2a705,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will run a security check and eliminate
+          any malware within the Shyrka system.

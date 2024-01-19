@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: GameEndingGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: GameEnding
+  <ID>k__BackingField: 29d19f68-ca99-4032-88b8-d556cc8ad035
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
+  <IsTutorialToPlay>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: 46d20a06-544a-40ee-b326-7948545c9950
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: NoFreeWill
+    <Position>k__BackingField: {x: -279.2, y: -61.600037}
+  <Nodes>k__BackingField:
+  - rid: 5750223053362823566
+  - rid: 5750223053362823567
+  <OldGroupNames>k__BackingField:
+  - NoFreeWill
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: NoFreeWill
+      Value:
+      - 1
+      - 2
+  references:
+    version: 2
+    RefIds:
+    - rid: 5750223053362823566
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 4b1cf384-dd40-459f-b87e-1220ce2dab8e
+        <Name>k__BackingField: 1
+        <Choices>k__BackingField:
+        - rid: 5750223053362823568
+        <GroupID>k__BackingField: 46d20a06-544a-40ee-b326-7948545c9950
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: -253.6, y: -1.5999985}
+        <Text>k__BackingField: Earth is up ahead. It's littered with Echtrian scum.
+          What should we do?
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823567
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: e34eca04-234a-4f6f-8ff0-186c490a825f
+        <Name>k__BackingField: 2
+        <Choices>k__BackingField:
+        - rid: 5750223053362823569
+        <GroupID>k__BackingField: 46d20a06-544a-40ee-b326-7948545c9950
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 406.4, y: -1.5999985}
+        <Text>k__BackingField: 
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823568
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: e34eca04-234a-4f6f-8ff0-186c490a825f
+    - rid: 5750223053362823569
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
