@@ -11,6 +11,7 @@ public class CharacterDataScriptable : ScriptableObject
     public TraitsData.Traits traits;
     public Sprite characterIcon;
     public string firstName, lastName;
+    [TextArea] public string description;
 
     [ContextMenu("Initialize GUID")]
     public void Initialize()
