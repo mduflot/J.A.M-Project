@@ -16,7 +16,6 @@ public class HoverMenu : MonoBehaviour
 
     public virtual void UpdateMenu(HoverMenuData data)
     {
-        
     }
 }
 
