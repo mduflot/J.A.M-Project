@@ -259,7 +259,7 @@ namespace Tasks
                         {
                             if (characterSlots[0].icon != null)
                                 previewOutcomeText.text =
-                                    $"{characterSlots[0].icon.character.GetCharacterData().name} {notification.Task.Conditions[index].Item2}\n";
+                                    $"{characterSlots[0].icon.character.GetCharacterData().firstName} {notification.Task.Conditions[index].Item2}\n";
                         }
                         else previewOutcomeText.text = $"{notification.Task.Conditions[index].Item2}\n";
 
