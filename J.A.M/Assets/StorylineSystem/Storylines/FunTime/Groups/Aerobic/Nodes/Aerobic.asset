@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: Aerobic
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: Aerobic
+  <Choices>k__BackingField:
+  - rid: 197800388056580564
+  - rid: 197800388056580565
+  - rid: 197800388056580566
+  - rid: 197800388056580567
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: Unused muscles atrophy, some crew member had express
+    their need to exercise and pass the time. Who should organize this ?
+  <TaskStatus>k__BackingField: 0
+  <TaskType>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+    type: 3}
+  <TimeLeft>k__BackingField: 15
+  <Duration>k__BackingField: 4
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 1
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 3
+  <Furniture>k__BackingField: 1
+  <IsTaskTutorial>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 197800388056580564
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: e45be7bc228036d478e6d817c34180e5,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 81aa271d74bdb1c49921fba8c95cea7b,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will manage the workout.
+    - rid: 197800388056580565
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: b4f9aaddbf0ebcf4a9af52644411a3da,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 479c30869cebcc44fb7bb22daa6e1841,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will manage the workout, and power the ship
+          in the same time.
+    - rid: 197800388056580566
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: ThirdChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 996c887f7dd5b5e4798f5f912178e728,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: a94483af3058a6f44887e4e2e74f042b,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will manage the workout, and power the ship
+          in the same time.
+    - rid: 197800388056580567
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FourthChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 93ffa3518509d5f48b482f68a0e7f21b,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: f4d2f2dd526b782429df28e51fd1a454,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No one will manage the workout.

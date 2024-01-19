@@ -14,46 +14,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: RareMaterials
   <Choices>k__BackingField:
-  - rid: 197800181841264942
-  - rid: 197800181841264943
-  - rid: 197800181841264944
+  - rid: 197800388056580715
+  - rid: 197800388056580716
+  - rid: 197800388056580717
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: The hull needs rare metal alloy to be fixed, we can
     reach a space station to buy it but that will devitate us from our trajectory.
   <TaskStatus>k__BackingField: 0
   <TaskType>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+    type: 3}
   <TimeLeft>k__BackingField: 0
   <Duration>k__BackingField: 3
   <MandatorySlots>k__BackingField: 1
   <OptionalSlots>k__BackingField: 0
   <TaskHelpFactor>k__BackingField: 0.75
-  <Room>k__BackingField: 5
+  <Room>k__BackingField: 1
   <Furniture>k__BackingField: 1
+  <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 197800181841264942
+    - rid: 197800388056580715
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNode>k__BackingField: {fileID: 0}
         <Condition>k__BackingField: {fileID: 11400000, guid: 1b2a6ab1258555744a7ae49edd9d29a9,
           type: 2}
-        <PreviewOutcome>k__BackingField: The assigned crew member asked to lead the
-          mission on the mining colony, maybe they will be able to make a good deal.
-    - rid: 197800181841264943
+        <PreviewOutcome>k__BackingField: will ask to lead the mission on the station,
+          maybe they will be able to make a good deal.
+    - rid: 197800388056580716
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
         <NextNode>k__BackingField: {fileID: 0}
         <Condition>k__BackingField: {fileID: 11400000, guid: ed22d0eba153a8148b963a95679ef1de,
           type: 2}
-        <PreviewOutcome>k__BackingField: The ship will keep its trajectory but the
-          problem may get worse. The assigned crew member will pilot and lead the
-          negotiations
-    - rid: 197800181841264944
+        <PreviewOutcome>k__BackingField: will pilot and lead the negotiation. The
+          ship will have to make a detour.
+    - rid: 197800388056580717
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: ThirdChoice

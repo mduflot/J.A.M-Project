@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: Cooking
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: Cooking
+  <Choices>k__BackingField:
+  - rid: 197800388056580558
+  - rid: 197800388056580559
+  - rid: 197800388056580560
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: A cooking workshop would be very nice to pass time,
+    but someone has to prepare the activity.
+  <TaskStatus>k__BackingField: 0
+  <TaskType>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+    type: 3}
+  <TimeLeft>k__BackingField: 15
+  <Duration>k__BackingField: 4
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 0
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 4
+  <Furniture>k__BackingField: 1
+  <IsTaskTutorial>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 197800388056580558
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: f63418f8a8c1171489e9c529c695adc1,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 71b303e5a2f1af14da9a3fbe9206f9af,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will handle the activity and be more efficient
+          at it.
+    - rid: 197800388056580559
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 1ce9f2d13aec748468df1d70c38910d0,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 5e2ee587044a7364690cdbd2a840e69f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will handle the activity and learn how to
+          cook.
+    - rid: 197800388056580560
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: ThirdChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 44edd3604ee43ef439c398d27ac53b3a,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: dcf5450995d258e42a4af8883823b35f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No one will handle this activity.

@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: Winter
   <Choices>k__BackingField:
-  - rid: 197800360853635452
-  - rid: 197800360853635453
+  - rid: 197800386652537112
+  - rid: 197800386652537113
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
-  <Description>k__BackingField: A rupture in the ventilation has exposed crops to
-    the cold. It must be fixed or the entire harvest might be lost.
+  <Description>k__BackingField: A rupture in the ventilation has exposed the kitchen
+    to the cold. It must be fixed or all the rations might be lost.
   <TaskStatus>k__BackingField: 0
   <TaskType>k__BackingField: 2
   <Icon>k__BackingField: {fileID: 21300000, guid: f7fda6e306a63eb4888f8266b87acf8d,
@@ -35,16 +35,16 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 197800360853635452
+    - rid: 197800386652537112
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNode>k__BackingField: {fileID: 0}
         <Condition>k__BackingField: {fileID: 11400000, guid: dcb545826d693d94abf3411efdce86ca,
           type: 2}
-        <PreviewOutcome>k__BackingField: The ventilation system will be fixed and
-          the crops will cease to freeze.
-    - rid: 197800360853635453
+        <PreviewOutcome>k__BackingField: will fix the ventilation system and the
+          rations will cease to freeze.
+    - rid: 197800386652537113
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
