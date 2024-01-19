@@ -89,7 +89,7 @@ public class ShipControlManager : MonoBehaviour
         characterTraits.Clear();
         nameText.text = character.firstName + " " + character.lastName;
         descriptionText.text = character.description;
-        characterImage.sprite = character.characterIcon;
+        characterImage.sprite = character.characterBody;
         characterImage.preserveAspect = true;
         
         foreach (TraitsData.Job trait in Enum.GetValues(typeof(TraitsData.Job)))
