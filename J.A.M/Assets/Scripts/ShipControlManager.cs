@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,20 +19,38 @@ public class ShipControlManager : MonoBehaviour
     [Header("Crew")]
     [SerializeField] private GameObject characterProfilePrefab;
     [SerializeField] private GameObject characterProfileParent;
-    [SerializeField] private List<CharacterProfile> characterProfiles;
+    [SerializeField] private List<CharacterProfile> characterProfiles = new();
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private GameObject characterTraitsContainer;
     [SerializeField] private Image characterImage;
     
     [Header("Traits")]
-    [SerializeField] private GameObject traitPrefab;
+    [SerializeField] private TraitHoverable traitPrefab;
     [SerializeField] private GameObject shipTraitParent;
     [SerializeField] private GameObject characterTraitParent;
+    private List<TraitHoverable> characterTraits = new();
+    [SerializeField] private TraitsHoverMenu traitsHoverMenu;
 
     public void Initialize()
     {
-        // TODO - Instantiate all ship traits
+        foreach (TraitsData.SpaceshipTraits trait in Enum.GetValues(typeof(TraitsData.SpaceshipTraits)))
+        {
+            if (trait == TraitsData.SpaceshipTraits.None) continue;
+            if (GameManager.Instance.SpaceshipManager.SpaceshipTraits.HasFlag(trait))
+            {
+                var traitHoverable = Instantiate(traitPrefab, shipTraitParent.transform);
+                traitHoverable.Initialize(trait.ToString());
+                traitHoverable.hoverMenu = traitsHoverMenu;
+                traitHoverable.data = new HoverMenuData
+                {
+                    text1 = trait.ToString(),
+                    text2 = "Need to have description on trait",
+                    baseParent = transform.parent,
+                    parent = transform
+                };
+            }
+        }
         
         for (int index = 0; index < GameManager.Instance.SpaceshipManager.characters.Length; index++)
         {
@@ -62,10 +82,71 @@ public class ShipControlManager : MonoBehaviour
     
     public void DisplayCharacterInfo(CharacterDataScriptable character)
     {
+        foreach (var trait in characterTraits)
+        {
+            Destroy(trait.gameObject);
+        }
+        characterTraits.Clear();
         nameText.text = character.firstName + " " + character.lastName;
         descriptionText.text = character.description;
         characterImage.sprite = character.characterIcon;
         characterImage.preserveAspect = true;
-        // TODO - Instantiate all character traits
+        
+        foreach (TraitsData.Job trait in Enum.GetValues(typeof(TraitsData.Job)))
+        {
+            if (trait == TraitsData.Job.None) continue;
+            if (character.traits.GetJob().HasFlag(trait))
+            {
+                var traitHoverable = Instantiate(traitPrefab, characterTraitParent.transform);
+                traitHoverable.Initialize(trait.ToString());
+                traitHoverable.hoverMenu = traitsHoverMenu;
+                traitHoverable.data = new HoverMenuData
+                {
+                    text1 = trait.ToString(),
+                    text2 = "Need to have description on trait",
+                    baseParent = transform.parent,
+                    parent = transform
+                };
+                characterTraits.Add(traitHoverable);
+            }
+        }
+        
+        foreach (TraitsData.PositiveTraits trait in Enum.GetValues(typeof(TraitsData.PositiveTraits)))
+        {
+            if (trait == TraitsData.PositiveTraits.None) continue;
+            if (character.traits.GetPositiveTraits().HasFlag(trait))
+            {
+                var traitHoverable = Instantiate(traitPrefab, characterTraitParent.transform);
+                traitHoverable.Initialize(trait.ToString());
+                traitHoverable.hoverMenu = traitsHoverMenu;
+                traitHoverable.data = new HoverMenuData
+                {
+                    text1 = trait.ToString(),
+                    text2 = "Need to have description on trait",
+                    baseParent = transform.parent,
+                    parent = transform
+                };
+                characterTraits.Add(traitHoverable);
+            }
+        }
+        
+        foreach (TraitsData.NegativeTraits trait in Enum.GetValues(typeof(TraitsData.NegativeTraits)))
+        {
+            if (trait == TraitsData.NegativeTraits.None) continue;
+            if (character.traits.GetNegativeTraits().HasFlag(trait))
+            {
+                var traitHoverable = Instantiate(traitPrefab, characterTraitParent.transform);
+                traitHoverable.Initialize(trait.ToString());
+                traitHoverable.hoverMenu = traitsHoverMenu;
+                traitHoverable.data = new HoverMenuData
+                {
+                    text1 = trait.ToString(),
+                    text2 = "Need to have description on trait",
+                    baseParent = transform.parent,
+                    parent = transform
+                };
+                characterTraits.Add(traitHoverable);
+            }
+        }
     }
 }
