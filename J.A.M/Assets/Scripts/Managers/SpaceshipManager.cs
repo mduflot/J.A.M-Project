@@ -307,7 +307,7 @@ namespace Managers
                                 else
                                     simCharacter.SendToIdleRoom();
 
-                                systems[2].gaugeValue -= simEatAmount;
+                                if (!IsInTutorial) systems[2].gaugeValue -= simEatAmount;
                                 simCharacter.tick = 0;
                                 simCharacter.ticksToEat = (simHungerBaseThreshold
                                                            * (int)TimeTickSystem.ticksPerHour)
