@@ -66,23 +66,20 @@ namespace SS
         {
             if (nodeContainer.StoryType != SSStoryType.Tasks)
             {
-                if (Checker.Instance.allStorylineLogs.Any(storylineLog => storylineLog.storylineID == storyline.ID))
+                if (!isCheatLauncher)
                 {
-                    storylineLog = Checker.Instance.allStorylineLogs.First(storylineLog =>
-                        storylineLog.storylineID == storyline.ID);
-                }
-                else
-                {
-                    if (!isCheatLauncher)
+                    if (Checker.Instance.allStorylineLogs.Any(storylineLog => storylineLog.storylineID == storyline.ID))
+                    {
+                        storylineLog = Checker.Instance.allStorylineLogs.First(storylineLog =>
+                            storylineLog.storylineID == storyline.ID);
+                    }
+                    else
                     {
                         storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName,
                             GameManager.Instance.UIManager.date.text, "");
                         Checker.Instance.allStorylineLogs.Add(storylineLog);
                     }
-                }
 
-                if (!isCheatLauncher)
-                {
                     if (timeline.Status == SSStoryStatus.Completed)
                     {
                         TimeTickSystem.OnTick += WaitTimeline;
@@ -987,13 +984,14 @@ namespace SS
         private IEnumerator WaitingPopup(SSPopupNodeSO nodeSO)
         {
             if (task != null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
-            
+
             if (nodeSO.IsTutorialPopup) GameManager.Instance.UIManager.PopupTutorial.Initialize(nodeSO.Text);
             else
             {
                 storylineLog.storylineEndLog = nodeSO.Text;
                 GameManager.Instance.UIManager.PopupStoryline.Initialize(nodeSO.Text, nodeContainer.FileName);
             }
+
             switch (nodeSO.PopupUIType)
             {
                 case SSPopupUIType.None:
