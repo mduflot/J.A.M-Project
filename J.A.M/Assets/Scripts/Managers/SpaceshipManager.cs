@@ -97,7 +97,7 @@ namespace Managers
 
             foreach (var system in systems)
             {
-                if (system.gaugeValue < 0) system.gaugeValue = 0;
+                if (system.gaugeValue <= 0) system.gaugeValue = 0;
                 else
                 {
                     float decreaseValue = system.decreaseSpeed;
@@ -350,7 +350,7 @@ namespace Managers
         public void LoadData(GameData gameData)
         {
             IsInTutorial = gameData.isInTutorial;
-            
+
             foreach (var system in systems)
             {
                 if (gameData.gaugeValues.TryGetValue(system.type, out float value))
@@ -366,7 +366,7 @@ namespace Managers
         public void SaveData(ref GameData gameData)
         {
             gameData.isInTutorial = this.IsInTutorial;
-            
+
             foreach (var system in systems)
             {
                 if (gameData.gaugeValues.TryAdd(system.type, system.gaugeValue)) continue;

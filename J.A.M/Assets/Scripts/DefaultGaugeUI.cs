@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -19,7 +20,21 @@ public class DefaultGaugeUI : GaugeUI
         gauge.fillAmount = value / 50;
         if (!IsPreviewing || (previewGauge.fillAmount > (value + previewValue) / 50))
             previewGauge.fillAmount = (value + previewValue) / 50;
-        arrow.sprite = previewValue > 0.0f ? greenArrow : redArrow;
+        if (previewValue > 0.0f)
+        {
+            arrow.sprite = greenArrow;
+            arrow.color = colorOpaque;
+        }
+        else if (GameManager.Instance.SpaceshipManager.systems.Any(system => system.type == systemType && system.isBlocked))
+        {
+            arrow.sprite = null;
+            arrow.color = colorTransparent;
+        }
+        else
+        {
+            arrow.sprite = redArrow;
+            arrow.color = colorOpaque;
+        }
     }
 
     public override void PreviewOutcomeGauge(float value)
@@ -54,5 +69,4 @@ public class DefaultGaugeUI : GaugeUI
         isHovered = false;
         base.OnExit(eventData);
     }
-    
 }

@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,7 +42,21 @@ public class TrajectoryGaugeUI : GaugeUI
                 shipTransform.eulerAngles = new Vector3(0, 0, bottomGauge.fillAmount * maxAngle);
             }
         }
-        arrow.sprite = previewValue > 0.0f ? greenArrow : redArrow;
+        if (previewValue > 0.0f)
+        {
+            arrow.sprite = greenArrow;
+            arrow.color = colorOpaque;
+        }
+        else if (GameManager.Instance.SpaceshipManager.systems.Any(system => system.type == systemType && system.isBlocked))
+        {
+            arrow.sprite = null;
+            arrow.color = colorTransparent;
+        }
+        else
+        {
+            arrow.sprite = redArrow;
+            arrow.color = colorOpaque;
+        }
     }
 
     public override void PreviewOutcomeGauge(float value)
