@@ -695,7 +695,7 @@ namespace Tasks
             return false;
         }
 
-        private void Appear(bool state)
+        public void Appear(bool state)
         {
             animator.SetBool("Appear", state);
         }

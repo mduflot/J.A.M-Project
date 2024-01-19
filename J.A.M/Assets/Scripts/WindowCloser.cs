@@ -8,6 +8,6 @@ public class WindowCloser : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        taskUI.CloseTask();
+        taskUI.Appear(false);
     }
 }
