@@ -371,19 +371,19 @@ namespace Tasks
                     {
                         case SystemType.Trajectory:
                             previewOutcomeText.text +=
-                                $"<color=lightblue>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"<color=lightblue>{traits} Efficiency: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                             break;
                         case SystemType.Food:
                             previewOutcomeText.text +=
-                                $"<color=green>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"<color=green>{traits} Efficiency: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                             break;
                         case SystemType.Hull:
                             previewOutcomeText.text +=
-                                $"<color=red>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"<color=red>{traits} Efficiency: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                             break;
                         case SystemType.Power:
                             previewOutcomeText.text +=
-                                $"<color=yellow>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"<color=yellow>{traits} Efficiency: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                             break;
                     }
 
