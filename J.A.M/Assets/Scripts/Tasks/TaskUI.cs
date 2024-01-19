@@ -15,8 +15,7 @@ namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-        [Header("Task")]
-        [SerializeField] private TextMeshProUGUI titleText;
+        [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI timeLeftText;
         [SerializeField] private GameObject timeLeftObject;
         [SerializeField] private Transform startButtonObject;
@@ -32,11 +31,9 @@ namespace Tasks
         [SerializeField] private GameObject separator;
         [SerializeField] private GameObject popupHelp;
 
-        [Header("Dialogues")]
-        [SerializeField] private GameObject dialogueContainer;
+        [Header("Dialogues")] [SerializeField] private GameObject dialogueContainer;
 
-        [Header("Values")]
-        [SerializeField] private float timeLeft;
+        [Header("Values")] [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
 
         private Notification notification;
@@ -207,10 +204,29 @@ namespace Tasks
                 List<GaugesOutcome> gaugeOutcomes = new List<GaugesOutcome>();
                 List<CharacterOutcome> characterOutcomes = new List<CharacterOutcome>();
 
+                var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
+                foreach (var c in characterSlots)
+                {
+                    if (c.icon != null)
+                        characterOutcomes.Add(new CharacterOutcome(c.icon.character,
+                            -GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
+                }
+
+                GameManager.Instance.UIManager.CharacterPreviewGauges(charOutcome);
+                charOutcome = characterOutcomes;
+                duration = assistantCharacters > 0
+                    ? notification.Task.Duration /
+                      (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
+                    : notification.Task.Duration;
+
+                durationText.text = TimeTickSystem.GetTicksAsTime((uint)(duration * TimeTickSystem.ticksPerHour));
+                var button = startButton.GetComponentInChildren<Button>();
+                button.Select();
+
                 for (int index = 0; index < notification.Task.Conditions.Count; index++)
                 {
                     bool condition = CheckTarget(notification.Task.Conditions[index].Item1);
-                    
+
                     if ((!condition && notification.Task.TaskType == SSTaskType.Compute))
                     {
                         previewOutcomeText.text = "Condition not met";
@@ -236,7 +252,6 @@ namespace Tasks
                         }
                     }
                     
-
                     if (condition)
                     {
                         previewOutcomeText.text = null;
@@ -288,27 +303,8 @@ namespace Tasks
                     }
                 }
 
-                var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
                 gaugesOutcomes = gaugeOutcomes;
                 GameManager.Instance.UIManager.PreviewOutcomeGauges(gaugesOutcomes);
-                
-                foreach (var c in characterSlots)
-                {
-                    if (c.icon != null)
-                        characterOutcomes.Add(new CharacterOutcome(c.icon.character,
-                            -GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
-                }
-
-                GameManager.Instance.UIManager.CharacterPreviewGauges(charOutcome);
-                charOutcome = characterOutcomes;
-                duration = assistantCharacters > 0
-                    ? notification.Task.Duration /
-                      (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
-                    : notification.Task.Duration;
-
-                durationText.text = TimeTickSystem.GetTicksAsTime((uint)(duration * TimeTickSystem.ticksPerHour));
-                var button = startButton.GetComponentInChildren<Button>();
-                button.Select();
             }
         }
 
@@ -361,7 +357,7 @@ namespace Tasks
                     var value = outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add
                         ? outcome.value
                         : -outcome.value;
-                    
+
                     gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
                         value));
 
@@ -400,7 +396,7 @@ namespace Tasks
 
                     var volition =
                         outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add ? valueVolition : -valueVolition;
-                    
+
                     if (notification.Task.TaskType == SSTaskType.Permanent)
                     {
                         for (int index = 0; index < GameManager.Instance.SpaceshipManager.systems.Length; index++)
@@ -408,7 +404,7 @@ namespace Tasks
                             var system = GameManager.Instance.SpaceshipManager.systems[index];
                             if (system.type == outcome.OutcomeTargetGauge)
                             {
-                                volition -= system.decreaseSpeed * notification.Task.Duration;
+                                volition -= system.decreaseSpeed * Mathf.FloorToInt(duration);
                                 break;
                             }
                         }
