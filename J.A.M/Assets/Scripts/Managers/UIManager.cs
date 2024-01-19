@@ -33,8 +33,9 @@ namespace Managers
         public GameObject TasksMenu;
         public List<GameObject> GaugesMenu;
         public GameObject SpaceshipMenu;
-    
-        [Serializable] 
+        public ShipControlManager shipControlManager;
+
+        [Serializable]
         public struct Gauges
         {
             [FormerlySerializedAs("system")] public SystemType systemType;
@@ -42,7 +43,7 @@ namespace Managers
             public Image previewGauge;
             public Image arrow;
         }
-    
+
         private void Start()
         {
             Initialize();
@@ -62,6 +63,8 @@ namespace Managers
                 charactersUI.Add(ui);
                 characterIcons.Add(ui.icon);
             }
+
+            shipControlManager.Initialize();
         }
 
         public void UpdateGauges(SystemType systemType, float value, float previewValue)
@@ -91,7 +94,7 @@ namespace Managers
                 {
                     if (outcome.gauge == gauge.systemType) valueToAdd += outcome.value;
                 }
-                
+
                 gauge.PreviewOutcomeGauge(valueToAdd);
             }
         }
@@ -112,7 +115,7 @@ namespace Managers
             }
         }
 
-        
+
         //TODO : Modifier une fois qu'on aura les traits et des bonus de Mood
         public void CharacterPreviewGauges(List<TaskUI.CharacterOutcome> characters)
         {
@@ -123,6 +126,7 @@ namespace Managers
                 {
                     if (c.character == character.character) value += character.value;
                 }
+
                 c.PreviewMoodGauge(value);
             }
         }
@@ -134,7 +138,7 @@ namespace Managers
                 charUI.previewMoodGauge.fillAmount = 0;
             }
         }
-        
+
         public CharacterUI GetCharacterUI(CharacterBehaviour c)
         {
             foreach (var charUI in charactersUI)
@@ -144,6 +148,5 @@ namespace Managers
 
             return null;
         }
-        
     }
 }
