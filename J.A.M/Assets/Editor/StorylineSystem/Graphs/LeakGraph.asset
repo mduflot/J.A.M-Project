@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LeakGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: Leak
-  <ID>k__BackingField: 8b62da14-672f-498a-ac1e-12ea4a2346f6
+  <ID>k__BackingField: 6ed54924-51ee-4fb9-a26a-674f74037df2
   <StoryStatus>k__BackingField: 0
   <StoryType>k__BackingField: 1
   <IsTutorialToPlay>k__BackingField: 0
@@ -31,12 +31,12 @@ MonoBehaviour:
     <overrideWaitTime>k__BackingField: 10
     <Condition>k__BackingField: {fileID: 0}
     <Name>k__BackingField: Leak
-    <Position>k__BackingField: {x: 1008.00006, y: 619}
+    <Position>k__BackingField: {x: 1008, y: 619}
   <Nodes>k__BackingField:
-  - rid: 197800360853635439
-  - rid: 197800360853635440
-  - rid: 197800360853635441
-  - rid: 197800360853635442
+  - rid: 197800386652537065
+  - rid: 197800386652537066
+  - rid: 197800386652537067
+  - rid: 197800386652537068
   <OldGroupNames>k__BackingField:
   - Leak
   <OldUngroupedNodeNames>k__BackingField: []
@@ -46,18 +46,18 @@ MonoBehaviour:
       Value:
       - Fuel
       - DialogueNode
-      - Leak
       - analysis
+      - Leak
   references:
     version: 2
     RefIds:
-    - rid: 197800360853635439
+    - rid: 197800386652537065
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 441c8574-9a64-4ba9-b5ae-81e9fd5e8e87
         <Name>k__BackingField: Fuel
         <Choices>k__BackingField:
-        - rid: 197800360853635443
+        - rid: 197800386652537069
         <GroupID>k__BackingField: b774968b-c12d-4f43-8213-8c086dc7c071
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1033, y: 678}
@@ -69,13 +69,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 197800360853635440
+    - rid: 197800386652537066
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: c2d71204-c2bc-4269-9783-44685147e77c
         <Name>k__BackingField: DialogueNode
         <Choices>k__BackingField:
-        - rid: 197800360853635444
+        - rid: 197800386652537070
         <GroupID>k__BackingField: b774968b-c12d-4f43-8213-8c086dc7c071
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1551, y: 709}
@@ -87,37 +87,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 197800360853635441
-      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <ID>k__BackingField: 6558b5cd-00d6-4d45-a830-e1c3a1332863
-        <Name>k__BackingField: Leak
-        <Choices>k__BackingField:
-        - rid: 197800360853635445
-        - rid: 197800360853635446
-        <GroupID>k__BackingField: b774968b-c12d-4f43-8213-8c086dc7c071
-        <NodeType>k__BackingField: 1
-        <Position>k__BackingField: {x: 1863, y: 714}
-        <DescriptionTask>k__BackingField: A leak in the engine is draining the ship
-          fuel. Actions are needed and quick.
-        <TaskStatus>k__BackingField: 0
-        <TaskType>k__BackingField: 2
-        <TaskIcon>k__BackingField: {fileID: 0}
-        <TimeLeft>k__BackingField: 0
-        <BaseDuration>k__BackingField: 0
-        <MandatorySlots>k__BackingField: 1
-        <OptionalSlots>k__BackingField: 0
-        <TaskHelpFactor>k__BackingField: 0.75
-        <Room>k__BackingField: 5
-        <Furniture>k__BackingField: 1
-        <IsTaskTutorial>k__BackingField: 0
-    - rid: 197800360853635442
+    - rid: 197800386652537067
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 762fec2c-71b4-45c9-9868-bfe65eb0b8a2
         <Name>k__BackingField: analysis
         <Choices>k__BackingField:
-        - rid: 197800360853635447
+        - rid: 197800386652537071
         <GroupID>k__BackingField: b774968b-c12d-4f43-8213-8c086dc7c071
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1289, y: 688}
@@ -129,25 +105,55 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 197800360853635443
+    - rid: 197800386652537068
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 6558b5cd-00d6-4d45-a830-e1c3a1332863
+        <Name>k__BackingField: Leak
+        <Choices>k__BackingField:
+        - rid: 197800386652537072
+        - rid: 197800386652537073
+        <GroupID>k__BackingField: b774968b-c12d-4f43-8213-8c086dc7c071
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 1863, y: 714}
+        <DescriptionTask>k__BackingField: A leak in the engine is draining the ship
+          fuel. Actions are needed and quick.
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 2
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+          type: 3}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 0
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 8
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 197800386652537069
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 762fec2c-71b4-45c9-9868-bfe65eb0b8a2
-    - rid: 197800360853635444
+    - rid: 197800386652537070
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 6558b5cd-00d6-4d45-a830-e1c3a1332863
-    - rid: 197800360853635445
+    - rid: 197800386652537071
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: c2d71204-c2bc-4269-9783-44685147e77c
+    - rid: 197800386652537072
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNodeID>k__BackingField: 
         <Condition>k__BackingField: {fileID: 11400000, guid: 62b8bd32649d7dc4ea8975145d412c4f,
           type: 2}
-        <PreviewOutcome>k__BackingField: Preview...
-    - rid: 197800360853635446
+        <PreviewOutcome>k__BackingField: will fix the leak.
+    - rid: 197800386652537073
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: SecondChoice
@@ -155,8 +161,3 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 877e6b37effb1f74f825c1d666074037,
           type: 2}
         <PreviewOutcome>k__BackingField: The leak will be fixed.
-    - rid: 197800360853635447
-      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <Text>k__BackingField: Next Node
-        <NextNodeID>k__BackingField: c2d71204-c2bc-4269-9783-44685147e77c

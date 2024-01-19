@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: TroughTheStorm
   <Choices>k__BackingField:
-  - rid: 197800360853635471
-  - rid: 197800360853635472
+  - rid: 197800386652537853
+  - rid: 197800386652537854
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: A cloud of particles is in the trajectory, as long
@@ -23,19 +23,20 @@ MonoBehaviour:
     will cost a lot of
   <TaskStatus>k__BackingField: 0
   <TaskType>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+    type: 3}
   <TimeLeft>k__BackingField: 15
   <Duration>k__BackingField: 4
   <MandatorySlots>k__BackingField: 1
   <OptionalSlots>k__BackingField: 0
   <TaskHelpFactor>k__BackingField: 0.75
-  <Room>k__BackingField: 5
+  <Room>k__BackingField: 1
   <Furniture>k__BackingField: 1
   <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 197800360853635471
+    - rid: 197800386652537853
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -43,7 +44,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: c0b060930e6440b4a9abed51a2b0c2e1,
           type: 2}
         <PreviewOutcome>k__BackingField: The ship will have to make a detour.
-    - rid: 197800360853635472
+    - rid: 197800386652537854
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice

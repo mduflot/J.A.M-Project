@@ -14,35 +14,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: Leak
   <Choices>k__BackingField:
-  - rid: 197800360853635436
-  - rid: 197800360853635437
+  - rid: 197800386652537063
+  - rid: 197800386652537064
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: A leak in the engine is draining the ship fuel. Actions
     are needed and quick.
   <TaskStatus>k__BackingField: 0
   <TaskType>k__BackingField: 2
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+    type: 3}
   <TimeLeft>k__BackingField: 0
   <Duration>k__BackingField: 0
   <MandatorySlots>k__BackingField: 1
   <OptionalSlots>k__BackingField: 0
   <TaskHelpFactor>k__BackingField: 0.75
-  <Room>k__BackingField: 5
+  <Room>k__BackingField: 8
   <Furniture>k__BackingField: 1
   <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 197800360853635436
+    - rid: 197800386652537063
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNode>k__BackingField: {fileID: 0}
         <Condition>k__BackingField: {fileID: 11400000, guid: 62b8bd32649d7dc4ea8975145d412c4f,
           type: 2}
-        <PreviewOutcome>k__BackingField: Preview...
-    - rid: 197800360853635437
+        <PreviewOutcome>k__BackingField: will fix the leak.
+    - rid: 197800386652537064
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice

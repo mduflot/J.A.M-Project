@@ -20,6 +20,7 @@ namespace Spaceship
 
         public void OnDrop(PointerEventData eventData)
         {
+            if (GameManager.Instance.SpaceshipManager.IsInTutorial) return;
             GameObject dropped = eventData.pointerDrag;
             var icon = dropped.GetComponent<CharacterIcon>();
             if (icon != null)
@@ -31,6 +32,7 @@ namespace Spaceship
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (GameManager.Instance.SpaceshipManager.IsInTutorial) return;
             clicked++;
             if (clicked == 1) clickTime = Time.time;
             if (clicked > 1 && Time.time - clickTime < clickDelay)

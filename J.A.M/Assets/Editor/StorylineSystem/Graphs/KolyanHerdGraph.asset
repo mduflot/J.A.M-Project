@@ -1,0 +1,890 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: KolyanHerdGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: KolyanHerd
+  <ID>k__BackingField: fd7ac585-ed05-4b5d-a8df-febdc09f5fe4
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
+  <IsTutorialToPlay>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: e77eeb64-d970-4dda-b8f1-dda8b277a8d4
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: Intro
+    <Position>k__BackingField: {x: 276.7998, y: 168}
+  - <ID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: KolyanCollision
+    <Position>k__BackingField: {x: 275.99902, y: 1016.7998}
+  <Nodes>k__BackingField:
+  - rid: 5750223035560624855
+  - rid: 5750223035560624856
+  - rid: 5750223035560624857
+  - rid: 5750223035560624858
+  - rid: 5750223035560624859
+  - rid: 5750223035560624860
+  - rid: 5750223035560624861
+  - rid: 5750223035560624862
+  - rid: 5750223035560624863
+  - rid: 5750223035560624864
+  - rid: 5750223035560624865
+  - rid: 5750223035560624866
+  - rid: 5750223035560624867
+  - rid: 5750223035560624868
+  - rid: 5750223035560624869
+  - rid: 5750223035560624870
+  - rid: 5750223035560624871
+  - rid: 5750223035560624872
+  - rid: 5750223035560624873
+  - rid: 5750223035560624874
+  - rid: 5750223035560624875
+  - rid: 5750223035560624876
+  - rid: 5750223035560624877
+  - rid: 5750223035560624878
+  - rid: 5750223035560624879
+  - rid: 5750223035560624880
+  - rid: 5750223035560624881
+  - rid: 5750223035560624882
+  - rid: 5750223035560624883
+  - rid: 5750223035560624884
+  <OldGroupNames>k__BackingField:
+  - Intro
+  - KolyanCollision
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: Intro
+      Value:
+      - 1
+      - 3
+      - 2
+      - 5
+      - 4
+      - TaskNode
+      - 6
+      - 7
+      - 8
+    - Key: KolyanCollision
+      Value:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 7
+      - 8
+      - 9
+      - TaskNode
+      - 5
+      - 6
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - HostileKolyans
+      - 16
+      - 17
+      - 18
+      - 19
+  references:
+    version: 2
+    RefIds:
+    - rid: 5750223035560624855
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 27d3cd19-77be-43f4-9e28-7aa265ece504
+        <Name>k__BackingField: 1
+        <Choices>k__BackingField:
+        - rid: 5750223035560624885
+        <GroupID>k__BackingField: e77eeb64-d970-4dda-b8f1-dda8b277a8d4
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 302.4, y: 270.40002}
+        <Text>k__BackingField: I'm detecting a lot of activity around this Nebula.
+          There's a Kolyan Herd up ahead.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 256
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624856
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ced219d6-7647-42d0-b64b-e17a6c1334e5
+        <Name>k__BackingField: 3
+        <Choices>k__BackingField:
+        - rid: 5750223035560624886
+        <GroupID>k__BackingField: e77eeb64-d970-4dda-b8f1-dda8b277a8d4
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1705.6, y: 270.40002}
+        <Text>k__BackingField: Obviously. The Kolyans and humans have been helping
+          humans transport goods for as long as we've left the Solar System.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 2048
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624857
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: b07e7cf5-1159-4788-a8c6-49f1346cf159
+        <Name>k__BackingField: 2
+        <Choices>k__BackingField:
+        - rid: 5750223035560624887
+        <GroupID>k__BackingField: e77eeb64-d970-4dda-b8f1-dda8b277a8d4
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1004.8, y: 270.40002}
+        <Text>k__BackingField: Kolyans are... the good kind of aliens, right?
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 4096
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624858
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 2487ee43-9b0c-46e7-b3e7-e6280fe82c0d
+        <Name>k__BackingField: 5
+        <Choices>k__BackingField:
+        - rid: 5750223035560624888
+        <GroupID>k__BackingField: e77eeb64-d970-4dda-b8f1-dda8b277a8d4
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3039.2, y: 270.40002}
+        <Text>k__BackingField: Certainly not. We have a mission to accomplish.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 512
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624859
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 6e546a2e-7d05-4468-a58c-a39e33f976c7
+        <Name>k__BackingField: 4
+        <Choices>k__BackingField:
+        - rid: 5750223035560624889
+        <GroupID>k__BackingField: e77eeb64-d970-4dda-b8f1-dda8b277a8d4
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2357.6, y: 270.40002}
+        <Text>k__BackingField: Look! I can see them... Huge, celestial creatures
+          floating through space... Could we make a little detour to approach them
+          closer?
+        <SpeakerType>k__BackingField: 24
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624860
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: f4415c9d-1f75-4bf3-8d9e-9e89f82b1f94
+        <Name>k__BackingField: TaskNode
+        <Choices>k__BackingField:
+        - rid: 5750223035560624890
+        - rid: 5750223035560624891
+        <GroupID>k__BackingField: e77eeb64-d970-4dda-b8f1-dda8b277a8d4
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 3732, y: 228}
+        <DescriptionTask>k__BackingField: Some people in the crew would love to see
+          the Kolyans from closer. Should we make the detour?
+        <TaskStatus>k__BackingField: 1
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 0}
+        <TimeLeft>k__BackingField: 10
+        <BaseDuration>k__BackingField: 8
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 1
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 1
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 5750223035560624861
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 80f71a1b-0039-45b5-a19c-b930a0496168
+        <Name>k__BackingField: 6
+        <Choices>k__BackingField:
+        - rid: 5750223035560624892
+        <GroupID>k__BackingField: e77eeb64-d970-4dda-b8f1-dda8b277a8d4
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4501.6, y: 228}
+        <Text>k__BackingField: They're... beautiful.
+        <SpeakerType>k__BackingField: 24
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624862
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 5d9bd8cb-9177-459b-893f-ecc0a214f576
+        <Name>k__BackingField: 7
+        <Choices>k__BackingField:
+        - rid: 5750223035560624893
+        <GroupID>k__BackingField: e77eeb64-d970-4dda-b8f1-dda8b277a8d4
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4821.6, y: 228}
+        <Text>k__BackingField: I... I gotta admit. I've never seen anything like
+          it.
+        <SpeakerType>k__BackingField: 26
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624863
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: b7ce692f-0f84-4e18-96c3-c40c27be8c46
+        <Name>k__BackingField: 8
+        <Choices>k__BackingField:
+        - rid: 5750223035560624894
+        <GroupID>k__BackingField: e77eeb64-d970-4dda-b8f1-dda8b277a8d4
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4501.6, y: 506.40002}
+        <Text>k__BackingField: Sorry, guys... Captain says we can't make the detour,
+          and the AI  seems to agree.
+        <SpeakerType>k__BackingField: 23
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624864
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 5f939a00-d9c8-4a8f-b94c-7ff784913c53
+        <Name>k__BackingField: 1
+        <Choices>k__BackingField:
+        - rid: 5750223035560624895
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 301.6, y: 1110.3999}
+        <Text>k__BackingField: That Kolyan has left the herd. It looks like it's
+          coming towards us.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624865
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 2e302d28-79b8-4e75-ae02-d50f9fbbb7d4
+        <Name>k__BackingField: 2
+        <Choices>k__BackingField:
+        - rid: 5750223035560624896
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 960.8, y: 1110.3999}
+        <Text>k__BackingField: Hey, erm... Don't wanna alarm you, but the Kolyan's
+          getting dangerously close.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 4
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624866
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 25e8becc-e149-4420-b84d-331711de52da
+        <Name>k__BackingField: 3
+        <Choices>k__BackingField:
+        - rid: 5750223035560624897
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1600, y: 1110.3999}
+        <Text>k__BackingField: Yeah it is... But maybe it's injured and wants us
+          to help. Come on guys, lil' bit of compassion here?
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 16
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624867
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: d7963950-75a8-439d-bbc2-1e0a14e9507d
+        <Name>k__BackingField: 4
+        <Choices>k__BackingField:
+        - rid: 5750223035560624898
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2830.4, y: 1090.3999}
+        <Text>k__BackingField: Let me see... Doesn't look injured to me...
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624868
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 548df8e2-b2c8-410a-8782-ee7444207e05
+        <Name>k__BackingField: 7
+        <Choices>k__BackingField:
+        - rid: 5750223035560624899
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2830.4, y: 1391.2}
+        <Text>k__BackingField: Let's continue our course and hope we won't collide
+          with that Kolyan...
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624869
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 579b95f6-bc9f-4530-aa3d-ec6276447cc8
+        <Name>k__BackingField: 8
+        <Choices>k__BackingField:
+        - rid: 5750223035560624900
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3505.6, y: 1391.2}
+        <Text>k__BackingField: It almost looks like the Kolyan is... chasing us?!
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624870
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 9fc6d780-c08b-44ac-8cbb-f7bda27ad087
+        <Name>k__BackingField: 9
+        <Choices>k__BackingField:
+        - rid: 5750223035560624901
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4840, y: 1278.3999}
+        <Text>k__BackingField: Could it be... Attacking us?!
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624871
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: e47f89ca-2145-4f04-8a8c-ee8fa39ec29c
+        <Name>k__BackingField: TaskNode
+        <Choices>k__BackingField:
+        - rid: 5750223035560624902
+        - rid: 5750223035560624903
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 2125.6, y: 1076.7999}
+        <DescriptionTask>k__BackingField: A Kolyan has broke free from the herd and
+          is tailing us. Should we stop to help it?
+        <TaskStatus>k__BackingField: 2
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 0}
+        <TimeLeft>k__BackingField: 6
+        <BaseDuration>k__BackingField: 0
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 12
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 5750223035560624872
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 64ed64e0-3817-467d-aec7-e5920261765d
+        <Name>k__BackingField: 5
+        <Choices>k__BackingField:
+        - rid: 5750223035560624904
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3505.6, y: 1090.3999}
+        <Text>k__BackingField: WOW!! What was that shock?!
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624873
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 48dde2b0-014a-45b0-9429-5b6d35bb59c1
+        <Name>k__BackingField: 6
+        <Choices>k__BackingField:
+        - rid: 5750223035560624905
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4153.6, y: 1090.3999}
+        <Text>k__BackingField: The Kolyan!... It went right through our ship!
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624874
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 46b88593-5d8c-46db-9db1-f7f797a040c2
+        <Name>k__BackingField: 10
+        <Choices>k__BackingField:
+        - rid: 5750223035560624906
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5523.2, y: 1278.3999}
+        <Text>k__BackingField: More of them are coming... We're in danger!
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624875
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 36b2b077-7fb0-4a63-94d5-9bb5956bb215
+        <Name>k__BackingField: 11
+        <Choices>k__BackingField:
+        - rid: 5750223035560624907
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6228, y: 1278.3999}
+        <Text>k__BackingField: Let's give'em hell!
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 1
+    - rid: 5750223035560624876
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 504931ca-602f-456e-b587-ba95b2033b41
+        <Name>k__BackingField: 12
+        <Choices>k__BackingField:
+        - rid: 5750223035560624908
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6524, y: 1278.3999}
+        <Text>k__BackingField: No! We should be cautious and try to evade by blending
+          in through the Herd.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 4
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624877
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: c4ecc643-2bd5-4285-ab78-997c108c3b69
+        <Name>k__BackingField: 13
+        <Choices>k__BackingField:
+        - rid: 5750223035560624909
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8128.8, y: 1151.2}
+        <Text>k__BackingField: There we go!! The shots discouraged them, but we used
+          some power.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624878
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 9a37366e-1d51-434e-8011-826a80091785
+        <Name>k__BackingField: 14
+        <Choices>k__BackingField:
+        - rid: 5750223035560624910
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8128.8, y: 1482.3999}
+        <Text>k__BackingField: There we go! We modified our trajectory, but we evaded
+          them.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624879
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 5043f2e3-25d6-45ee-b34a-ad79b8fe1a38
+        <Name>k__BackingField: 15
+        <Choices>k__BackingField:
+        - rid: 5750223035560624911
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8128.8, y: 1764.7999}
+        <Text>k__BackingField: We took some hits, but the Kolyans are far from us.
+        <SpeakerType>k__BackingField: 3
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624880
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: f6019ebf-d714-4ea7-bf73-67749e0bc329
+        <Name>k__BackingField: HostileKolyans
+        <Choices>k__BackingField:
+        - rid: 5750223035560624912
+        - rid: 5750223035560624913
+        - rid: 5750223035560624914
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 7398.4, y: 1113.6}
+        <DescriptionTask>k__BackingField: The Kolyans are becoming hostile! What
+          should we do?
+        <TaskStatus>k__BackingField: 2
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 0}
+        <TimeLeft>k__BackingField: 5
+        <BaseDuration>k__BackingField: 5
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 2
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 1
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 5750223035560624881
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 33b72e38-665c-46fa-a122-3debab82e702
+        <Name>k__BackingField: 16
+        <Choices>k__BackingField:
+        - rid: 5750223035560624915
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8891.2, y: 1430.3999}
+        <Text>k__BackingField: Dammit... The Kolyans... They must know about the
+          Artifact we stole.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 512
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624882
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 038a4865-fcad-412a-83a2-d79baf7dfd58
+        <Name>k__BackingField: 17
+        <Choices>k__BackingField:
+        - rid: 5750223035560624916
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 9586.4, y: 1430.3999}
+        <Text>k__BackingField: STOLE?! I thought you guys were on a retrieval mission?!
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 256
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624883
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 265bb341-371d-4273-b961-c1d1966410bf
+        <Name>k__BackingField: 18
+        <Choices>k__BackingField:
+        - rid: 5750223035560624917
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 10256.8, y: 1430.3999}
+        <Text>k__BackingField: We were. We retrieved the Artifact from those Ktetorians.
+          They never understood this tech anyways.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 8192
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624884
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 5ebe5d16-3aad-478e-93d0-c631d066f5a1
+        <Name>k__BackingField: 19
+        <Choices>k__BackingField:
+        - rid: 5750223035560624918
+        <GroupID>k__BackingField: 82a989fe-4722-4bcb-bf2d-e58c74c05b50
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 10959.2, y: 1430.3999}
+        <Text>k__BackingField: ...So now every species in the universe holds a grudge
+          against us?! Great jobs, army guys!
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 4096
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223035560624885
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: b07e7cf5-1159-4788-a8c6-49f1346cf159
+    - rid: 5750223035560624886
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 6e546a2e-7d05-4468-a58c-a39e33f976c7
+    - rid: 5750223035560624887
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: ced219d6-7647-42d0-b64b-e17a6c1334e5
+    - rid: 5750223035560624888
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: f4415c9d-1f75-4bf3-8d9e-9e89f82b1f94
+    - rid: 5750223035560624889
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 2487ee43-9b0c-46e7-b3e7-e6280fe82c0d
+    - rid: 5750223035560624890
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 80f71a1b-0039-45b5-a19c-b930a0496168
+        <Condition>k__BackingField: {fileID: 11400000, guid: 517948347839a4d44b2ac3d265d6c4da,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ' will make a detour so that we can see
+          the Kolyans from up close.'
+    - rid: 5750223035560624891
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNodeID>k__BackingField: b7ce692f-0f84-4e18-96c3-c40c27be8c46
+        <Condition>k__BackingField: {fileID: 11400000, guid: 77825ae5268c8d3449d5927510dd9d52,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No pilot will interfere with the ship's
+          trajectory.
+    - rid: 5750223035560624892
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 5d9bd8cb-9177-459b-893f-ecc0a214f576
+    - rid: 5750223035560624893
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750223035560624894
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750223035560624895
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 2e302d28-79b8-4e75-ae02-d50f9fbbb7d4
+    - rid: 5750223035560624896
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 25e8becc-e149-4420-b84d-331711de52da
+    - rid: 5750223035560624897
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: e47f89ca-2145-4f04-8a8c-ee8fa39ec29c
+    - rid: 5750223035560624898
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 64ed64e0-3817-467d-aec7-e5920261765d
+    - rid: 5750223035560624899
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 579b95f6-bc9f-4530-aa3d-ec6276447cc8
+    - rid: 5750223035560624900
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 9fc6d780-c08b-44ac-8cbb-f7bda27ad087
+    - rid: 5750223035560624901
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 46b88593-5d8c-46db-9db1-f7f797a040c2
+    - rid: 5750223035560624902
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: d7963950-75a8-439d-bbc2-1e0a14e9507d
+        <Condition>k__BackingField: {fileID: 11400000, guid: 598185df5fe57984f8c41325942951bf,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ' will try to understand the creature''s
+          problem as we approach it.'
+    - rid: 5750223035560624903
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNodeID>k__BackingField: 548df8e2-b2c8-410a-8782-ee7444207e05
+        <Condition>k__BackingField: {fileID: 11400000, guid: ea528bc14fe92b347a6f8036975e37ad,
+          type: 2}
+        <PreviewOutcome>k__BackingField: We'll get away from the Kolyan. It could
+          collide with us.
+    - rid: 5750223035560624904
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 48dde2b0-014a-45b0-9429-5b6d35bb59c1
+    - rid: 5750223035560624905
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 9fc6d780-c08b-44ac-8cbb-f7bda27ad087
+    - rid: 5750223035560624906
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 36b2b077-7fb0-4a63-94d5-9bb5956bb215
+    - rid: 5750223035560624907
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 504931ca-602f-456e-b587-ba95b2033b41
+    - rid: 5750223035560624908
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: f6019ebf-d714-4ea7-bf73-67749e0bc329
+    - rid: 5750223035560624909
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 33b72e38-665c-46fa-a122-3debab82e702
+    - rid: 5750223035560624910
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 33b72e38-665c-46fa-a122-3debab82e702
+    - rid: 5750223035560624911
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 33b72e38-665c-46fa-a122-3debab82e702
+    - rid: 5750223035560624912
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: c4ecc643-2bd5-4285-ab78-997c108c3b69
+        <Condition>k__BackingField: {fileID: 11400000, guid: fa0ad937ff2e17a48863796a816afb26,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ' will activate the ship''s defense system
+          and shoot the Kolyans down!'
+    - rid: 5750223035560624913
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNodeID>k__BackingField: 9a37366e-1d51-434e-8011-826a80091785
+        <Condition>k__BackingField: {fileID: 11400000, guid: e3c499d58458ad54f87d5fff19b935c2,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ' says we should try to be discreet. Let''s
+          blend in with the Kolyans!'
+    - rid: 5750223035560624914
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNodeID>k__BackingField: 5043f2e3-25d6-45ee-b34a-ad79b8fe1a38
+        <Condition>k__BackingField: {fileID: 11400000, guid: ac67557aa8e3b72418fc7228773ec56f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No one will do anything. We could get heavily
+          damaged.
+    - rid: 5750223035560624915
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 038a4865-fcad-412a-83a2-d79baf7dfd58
+    - rid: 5750223035560624916
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 265bb341-371d-4273-b961-c1d1966410bf
+    - rid: 5750223035560624917
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 5ebe5d16-3aad-478e-93d0-c631d066f5a1
+    - rid: 5750223035560624918
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 

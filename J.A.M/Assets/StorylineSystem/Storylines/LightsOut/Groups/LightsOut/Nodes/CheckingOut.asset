@@ -14,26 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: CheckingOut
   <Choices>k__BackingField:
-  - rid: 8851122716615377632
-  - rid: 8851122716615377633
-  - rid: 8851122716615377634
+  - rid: 197800386652537190
+  - rid: 197800386652537191
+  - rid: 197800386652537192
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: An entire area of the ship is in the dark.
   <TaskStatus>k__BackingField: 0
   <TaskType>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+    type: 3}
   <TimeLeft>k__BackingField: 2
   <Duration>k__BackingField: 3
   <MandatorySlots>k__BackingField: 1
   <OptionalSlots>k__BackingField: 0
   <TaskHelpFactor>k__BackingField: 0.75
-  <Room>k__BackingField: 5
+  <Room>k__BackingField: 9
   <Furniture>k__BackingField: 1
+  <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 8851122716615377632
+    - rid: 197800386652537190
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -41,9 +43,9 @@ MonoBehaviour:
           type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: 8e53ee8675577164fbe036035fa665f6,
           type: 2}
-        <PreviewOutcome>k__BackingField: The cargo bay will be inspected in the dark
-          to check the freight.
-    - rid: 8851122716615377633
+        <PreviewOutcome>k__BackingField: will inspect the cargo bay to check the
+          freight.
+    - rid: 197800386652537191
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
@@ -51,9 +53,9 @@ MonoBehaviour:
           type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: dc930bf742d395b448e4ed8925f975c1,
           type: 2}
-        <PreviewOutcome>k__BackingField: The cargo bay will be inspected carefully
-          to check the freight.
-    - rid: 8851122716615377634
+        <PreviewOutcome>k__BackingField: ', being cautious, will carefully inspect
+          the cargo bay to check the freight.'
+    - rid: 197800386652537192
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: ThirdChoice
