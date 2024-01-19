@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: TrajectoryTask
   <Choices>k__BackingField:
-  - rid: 5602516792382586886
-  - rid: 5602516792382586887
+  - rid: 1640970978887467010
+  - rid: 1640970978887467011
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 1
-  <Description>k__BackingField: Vents need to be cleaned regularly.
+  <Description>k__BackingField: Do the right calculations to optimize the course
+    of the Mobius.
   <TaskStatus>k__BackingField: 0
   <TaskType>k__BackingField: 0
   <Icon>k__BackingField: {fileID: 21300000, guid: f7fda6e306a63eb4888f8266b87acf8d,
@@ -30,10 +31,11 @@ MonoBehaviour:
   <TaskHelpFactor>k__BackingField: 0.75
   <Room>k__BackingField: 1
   <Furniture>k__BackingField: 0
+  <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 5602516792382586886
+    - rid: 1640970978887467010
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -41,7 +43,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 0130a702343d19f47a4304a8c46de9c7,
           type: 2}
         <PreviewOutcome>k__BackingField: 'will add :'
-    - rid: 5602516792382586887
+    - rid: 1640970978887467011
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: LastChoice
