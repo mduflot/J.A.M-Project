@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using SS;
 using SS.Enumerations;
-using Tasks;
 
 [System.Serializable]
 public class GameData
@@ -10,6 +9,7 @@ public class GameData
     public uint time;
 
     /*** SPACESHIP ***/
+    public bool isInTutorial;
     public SerializableDictionary<SystemType, float> gaugeValues;
     public SerializableDictionary<string, TraitsData.Traits> characterTraits;
     public SerializableDictionary<string, float> characterMoods;
@@ -41,8 +41,11 @@ public class GameData
         time = 0;
 
         /*** SPACESHIP ***/
+        isInTutorial = false;
         gaugeValues = new SerializableDictionary<SystemType, float>();
         characterTraits = new SerializableDictionary<string, TraitsData.Traits>();
+        characterMoods = new SerializableDictionary<string, float>();
+        characterVolitions = new SerializableDictionary<string, float>();
         spaceshipTraits = new TraitsData.SpaceshipTraits();
         hiddenSpaceshipTraits = new TraitsData.HiddenSpaceshipTraits();
 
@@ -51,7 +54,9 @@ public class GameData
         storylineStatus = new SerializableDictionary<string, SSStoryStatus>();
         timelineStatus = new SerializableDictionary<string, SSStoryStatus>();
         activeStorylines = new List<string>();
+        activeTimelines = new List<string>();
         currentNodes = new SerializableDictionary<string, string>();
+        currentTasks = new SerializableDictionary<string, TaskLog>();
         waitingTimesTimeline = new SerializableDictionary<string, uint>();
         dialogueTimelines = new SerializableDictionary<string, List<SerializableTuple<string, string>>>();
         charactersActiveTimelines = new SerializableDictionary<string, List<string>>();

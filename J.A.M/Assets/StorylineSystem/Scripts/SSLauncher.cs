@@ -76,7 +76,7 @@ namespace SS
                     if (!isCheatLauncher)
                     {
                         storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName,
-                            GameManager.Instance.UIManager.date.text);
+                            GameManager.Instance.UIManager.date.text, "");
                         Checker.Instance.allStorylineLogs.Add(storylineLog);
                     }
                 }
@@ -135,7 +135,7 @@ namespace SS
                     if (!isCheatLauncher)
                     {
                         storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName,
-                            GameManager.Instance.UIManager.date.text);
+                            GameManager.Instance.UIManager.date.text, "");
                         Checker.Instance.allStorylineLogs.Add(storylineLog);
                     }
                 }
@@ -989,7 +989,11 @@ namespace SS
             if (task != null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
             
             if (nodeSO.IsTutorialPopup) GameManager.Instance.UIManager.PopupTutorial.Initialize(nodeSO.Text);
-            else GameManager.Instance.UIManager.PopupStoryline.Initialize(nodeSO.Text, nodeContainer.FileName);
+            else
+            {
+                storylineLog.storylineEndLog = nodeSO.Text;
+                GameManager.Instance.UIManager.PopupStoryline.Initialize(nodeSO.Text, nodeContainer.FileName);
+            }
             switch (nodeSO.PopupUIType)
             {
                 case SSPopupUIType.None:
