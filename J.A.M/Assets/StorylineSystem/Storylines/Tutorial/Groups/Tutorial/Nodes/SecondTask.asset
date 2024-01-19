@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: SecondTask
   <Choices>k__BackingField:
-  - rid: 5750223035560624535
-  - rid: 5750223035560624536
+  - rid: 5750223035560624623
+  - rid: 5750223035560624624
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: Should we lose some trajectory precision to escape
@@ -34,7 +34,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5750223035560624535
+    - rid: 5750223035560624623
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -44,7 +44,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: ' will maneuver the ship, sacrificing some
           trajectory precision to escape the Ktetorian ship.'
-    - rid: 5750223035560624536
+    - rid: 5750223035560624624
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: New Choice
