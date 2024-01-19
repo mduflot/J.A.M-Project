@@ -210,8 +210,8 @@ namespace Tasks
                 for (int index = 0; index < notification.Task.Conditions.Count; index++)
                 {
                     bool condition = CheckTarget(notification.Task.Conditions[index].Item1);
-
-                    if ((!condition && notification.Task.TaskType == SSTaskType.Compute) || (characterSlots[0].icon == null && notification.Task.TaskType == SSTaskType.Untimed))
+                    
+                    if ((!condition && notification.Task.TaskType == SSTaskType.Compute))
                     {
                         previewOutcomeText.text = "Condition not met";
                         startButton.GetComponentInChildren<Button>().interactable = false;
@@ -221,6 +221,21 @@ namespace Tasks
                         previewOutcomeText.text = null;
                         startButton.GetComponentInChildren<Button>().interactable = true;
                     }
+
+                    if (notification.Task.TaskType != SSTaskType.Compute)
+                    {
+                        if (characterSlots[0].icon == null && notification.Task.TaskType == SSTaskType.Untimed)
+                        {
+                            previewOutcomeText.text = "Condition not met";
+                            startButton.GetComponentInChildren<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            previewOutcomeText.text = null;
+                            startButton.GetComponentInChildren<Button>().interactable = true;
+                        }
+                    }
+                    
 
                     if (condition)
                     {

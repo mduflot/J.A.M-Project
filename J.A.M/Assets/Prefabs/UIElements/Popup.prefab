@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 7351630854015912710}
   - component: {fileID: 7110405866739608443}
   m_Layer: 5
-  m_Name: Background (1)
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 3488750512049965929}
   - component: {fileID: 8827128301610165707}
   m_Layer: 5
-  m_Name: PreviewOutcome (1)
+  m_Name: PopupTextContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -539,7 +539,7 @@ GameObject:
   - component: {fileID: 1660898862834617341}
   - component: {fileID: 1941905702230756674}
   m_Layer: 5
-  m_Name: PopupHelp
+  m_Name: Popup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -582,6 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd5ca74fe434bf1b6ead940a6b2b790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popupTitle: {fileID: 0}
   popupText: {fileID: 7251666632536141971}
   continueButton: {fileID: 769685474826368829}
   passTutorialButton: {fileID: 4821872126638984269}
@@ -869,7 +870,7 @@ GameObject:
   - component: {fileID: 6165230418576791868}
   - component: {fileID: 7354657152378088186}
   m_Layer: 5
-  m_Name: Outline (1)
+  m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -944,7 +945,7 @@ GameObject:
   - component: {fileID: 4740376857973007769}
   - component: {fileID: 7251666632536141971}
   m_Layer: 5
-  m_Name: PopupTitle (1)
+  m_Name: PopupText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

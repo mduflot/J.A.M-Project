@@ -30,7 +30,7 @@ public class Checker : MonoBehaviour, IDataPersistence
     private SSCampaignSO ssCampaign;
 
     private List<Storyline> allStorylines;
-    private List<Storyline> principalStorylines;
+    [SerializeField] private List<Storyline> principalStorylines;
     private List<Storyline> secondaryStorylines;
 
     private List<Storyline> availableStoryLines = new();
@@ -85,17 +85,9 @@ public class Checker : MonoBehaviour, IDataPersistence
                 var gauge = GameManager.Instance.UIManager.GaugesMenu[index];
                 gauge.SetActive(false);
             }
-            TimeTickSystem.OnTick += GeneratePrincipalEventOnFirstDay;
+            ChooseNewStoryline(SSStoryType.Principal);
             DataPersistenceManager.Instance.IsNewGame = false;
         }
-    }
-    
-    private void GeneratePrincipalEventOnFirstDay(object sender, TimeTickSystem.OnTickEventArgs e)
-    {
-        if (e.tick % (TimeTickSystem.ticksPerHour * 1) != 0) return;
-
-        ChooseNewStoryline(SSStoryType.Principal);
-        TimeTickSystem.OnTick -= GeneratePrincipalEventOnFirstDay;
     }
 
     public void GenerateNewEvent()
@@ -187,6 +179,13 @@ public class Checker : MonoBehaviour, IDataPersistence
         if (availableStoryLines.Count == 0)
         {
             Debug.Log($"All {storyType} storylines are completed or don't have a valid condition.");
+            if (storyType == SSStoryType.Principal)
+            {
+                TimeTickSystem.ModifyTimeScale(0);
+                GameManager.Instance.UIManager.PopupEndGame.InitializeEndGame("Earth has been reached. You won the game!", "Victory!");
+                TimeTickSystem.OnTick -= WaitStorylinePrincipal;
+                TimeTickSystem.OnTick -= WaitStorylineSecondary;
+            } 
             return;
         }
 
