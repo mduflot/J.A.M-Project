@@ -10,6 +10,8 @@ public class DefaultGaugeUI : GaugeUI
     [SerializeField] private Sprite greenArrow;
     [SerializeField] private Sprite redArrow;
 
+    private Color colorOpaque = new(1.0f, 1.0f, 1.0f, 1.0f);
+    private Color colorTransparent = new(1.0f, 1.0f, 1.0f, 0.0f);
     private bool isHovered;
 
     public override void UpdateGauge(float value, float previewValue)
@@ -17,7 +19,7 @@ public class DefaultGaugeUI : GaugeUI
         gauge.fillAmount = value / 50;
         if (!IsPreviewing || (previewGauge.fillAmount > (value + previewValue) / 50))
             previewGauge.fillAmount = (value + previewValue) / 50;
-        arrow.sprite = previewValue > 0 ? greenArrow : redArrow;
+        arrow.sprite = previewValue > 0.0f ? greenArrow : redArrow;
     }
 
     public override void PreviewOutcomeGauge(float value)

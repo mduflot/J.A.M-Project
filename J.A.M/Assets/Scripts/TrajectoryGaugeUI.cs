@@ -8,6 +8,12 @@ public class TrajectoryGaugeUI : GaugeUI
     [SerializeField] private Image topPreviewGauge;
     [SerializeField] private Image bottomPreviewGauge;
     [SerializeField] private RectTransform shipTransform;
+    [SerializeField] private Image arrow;
+    [SerializeField] private Sprite greenArrow;
+    [SerializeField] private Sprite redArrow;
+    
+    private Color colorOpaque = new(1.0f, 1.0f, 1.0f, 1.0f);
+    private Color colorTransparent = new(1.0f, 1.0f, 1.0f, 0.0f);
     private bool isTop;
     private bool isDecreasing;
     private float maxAngle = 27.0f;
@@ -34,8 +40,8 @@ public class TrajectoryGaugeUI : GaugeUI
                 if (!IsPreviewing || bottomPreviewGauge.fillAmount > 1 - (value - previewValue) / 50) bottomPreviewGauge.fillAmount = 1 - (value - previewValue) / 50;
                 shipTransform.eulerAngles = new Vector3(0, 0, bottomGauge.fillAmount * maxAngle);
             }
-            
         }
+        arrow.sprite = previewValue > 0.0f ? greenArrow : redArrow;
     }
 
     public override void PreviewOutcomeGauge(float value)
