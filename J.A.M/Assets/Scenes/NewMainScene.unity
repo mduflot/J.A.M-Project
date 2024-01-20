@@ -516,10 +516,15 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 1061812510}
+  idleRooms:
+  - {fileID: 1061812510}
+  - {fileID: 643474960}
+  - {fileID: 1824253218}
+  - {fileID: 1495455724}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &75054010
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3545,10 +3550,13 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 417636992}
+  idleRooms:
+  - {fileID: 417636992}
+  - {fileID: 1495455724}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &880690035
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3988,10 +3996,14 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 417636992}
+  idleRooms:
+  - {fileID: 417636992}
+  - {fileID: 1347941773}
+  - {fileID: 1495455724}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &1031077738
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4472,10 +4484,14 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 535105148}
+  idleRooms:
+  - {fileID: 535105148}
+  - {fileID: 1824253218}
+  - {fileID: 1495455724}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &1079339700
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11506,10 +11522,15 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 1911275390}
+  idleRooms:
+  - {fileID: 1911275390}
+  - {fileID: 1851140931}
+  - {fileID: 1824253218}
+  - {fileID: 1495455724}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &1472942973
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13919,10 +13940,15 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 417636992}
+  idleRooms:
+  - {fileID: 417636992}
+  - {fileID: 1347941773}
+  - {fileID: 643474960}
+  - {fileID: 1495455724}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &2062025558
 SpriteRenderer:
   m_ObjectHideFlags: 0
