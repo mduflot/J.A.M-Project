@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShipControlManager : MonoBehaviour
 {
     [Header("Window")]
-    [SerializeField] private Button mobiusButton;
-    [SerializeField] private Button crewButton;
+    [SerializeField] private Image mobiusButton;
+    [SerializeField] private Image crewButton;
     [SerializeField] private GameObject mobiusContainer;
     [SerializeField] private GameObject crewContainer;
 
@@ -66,16 +65,16 @@ public class ShipControlManager : MonoBehaviour
     
     public void OpenMobius()
     {
-        mobiusButton.interactable = false;
-        crewButton.interactable = true;
+        mobiusButton.color = Color.white;
+        crewButton.color = Color.black;
         crewContainer.SetActive(false);
         mobiusContainer.SetActive(true);
     }
 
     public void OpenCrew()
     {
-        mobiusButton.interactable = true;
-        crewButton.interactable = false;
+        mobiusButton.color = Color.black;
+        crewButton.color = Color.white;
         mobiusContainer.SetActive(false);
         crewContainer.SetActive(true);
     }

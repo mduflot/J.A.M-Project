@@ -319,6 +319,10 @@ namespace Managers
                                     eatAmount -= SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.Restriction)
                                         ? (simEatAmount) / 10f
                                         : 0f;
+                                    eatAmount -= SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.Fertilization)
+                                        ? (simEatAmount) / 10f
+                                        : 0f;
+                                    
                                     systems[2].gaugeValue -= eatAmount;
                                 }
                                 simCharacter.tick = 0;

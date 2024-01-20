@@ -17,6 +17,7 @@ public class CharacterProfile : MonoBehaviour
     {
         characterData = data;
         characterImage.sprite = image;
+        characterImage.preserveAspect = true;
         nameText.text = name;
         this.shipControlManager = shipControlManager;
         characterButton.onClick.AddListener(() => this.shipControlManager.DisplayCharacterInfo(characterData));

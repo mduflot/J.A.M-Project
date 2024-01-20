@@ -221,6 +221,8 @@ namespace Tasks
 
                 durationText.text = TimeTickSystem.GetTicksAsTime((uint)(duration * TimeTickSystem.ticksPerHour));
                 var button = startButton.GetComponentInChildren<Button>();
+                var text = button.GetComponentInChildren<TextMeshProUGUI>();
+                var image = button.GetComponent<Image>();
                 button.Select();
 
                 for (int index = 0; index < notification.Task.Conditions.Count; index++)
@@ -230,12 +232,16 @@ namespace Tasks
                     if ((!condition && notification.Task.TaskType == SSTaskType.Compute))
                     {
                         previewOutcomeText.text = "Condition not met";
-                        startButton.GetComponentInChildren<Button>().interactable = false;
+                        button.interactable = false;
+                        text.text = "Task Locked";
+                        image.color = Color.black;
                     }
                     else
                     {
                         previewOutcomeText.text = null;
-                        startButton.GetComponentInChildren<Button>().interactable = true;
+                        button.interactable = true;
+                        text.text = "Start Task";
+                        image.color = Color.white;
                     }
 
                     if (notification.Task.TaskType != SSTaskType.Compute)
@@ -243,12 +249,16 @@ namespace Tasks
                         if ((!condition && notification.Task.TaskType == SSTaskType.Untimed) || (characterSlots[0].icon == null && notification.Task.TaskType == SSTaskType.Permanent))
                         {
                             previewOutcomeText.text = "Condition not met";
-                            startButton.GetComponentInChildren<Button>().interactable = false;
+                            button.interactable = false;
+                            text.text = "Task Locked";
+                            image.color = Color.black;
                         }
                         else
                         {
                             previewOutcomeText.text = null;
-                            startButton.GetComponentInChildren<Button>().interactable = true;
+                            button.interactable = true;
+                            text.text = "Start Task";
+                            image.color = Color.white;
                         }
                     }
                     
@@ -329,28 +339,32 @@ namespace Tasks
         private void DisplayPreview(Outcome outcome, string traits, List<GaugesOutcome> gaugeOutcomes)
         {
             var operation = "+";
+            var operationString = "green";
             switch (outcome.OutcomeType)
             {
                 case OutcomeData.OutcomeType.Gauge:
                     if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
+                    {
                         operation = "-";
+                        operationString = "red";
+                    }
                     switch (outcome.OutcomeTargetGauge)
                     {
                         case SystemType.Trajectory:
                             previewOutcomeText.text +=
-                                $"<color=lightblue>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <color={operationString}>{operation} {outcome.value}</color> <sprite=19>\n";
                             break;
                         case SystemType.Food:
                             previewOutcomeText.text +=
-                                $"<color=green>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <color={operationString}>{operation} {outcome.value}</color> <sprite=14>\n";
                             break;
                         case SystemType.Hull:
                             previewOutcomeText.text +=
-                                $"<color=red>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <color={operationString}>{operation} {outcome.value}</color> <sprite=9>\n";
                             break;
                         case SystemType.Power:
                             previewOutcomeText.text +=
-                                $"<color=yellow>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <color={operationString}>{operation} {outcome.value}</color> <sprite=4>\n";
                             break;
                     }
 
@@ -365,25 +379,28 @@ namespace Tasks
                 case OutcomeData.OutcomeType.GaugeVolition:
                     if (characterSlots[0].icon == null) break;
                     if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
+                    {
                         operation = "-";
+                        operationString = "red";
+                    }
                     var valueVolition = characterSlots[0].icon.character.GetBaseVolition();
                     switch (outcome.OutcomeTargetGauge)
                     {
                         case SystemType.Trajectory:
                             previewOutcomeText.text +=
-                                $"<color=lightblue>{traits} Efficiency: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <sprite=20> : <color={operationString}>{operation} {valueVolition.ToString("F2")} <sprite=19></color>\n";
                             break;
                         case SystemType.Food:
                             previewOutcomeText.text +=
-                                $"<color=green>{traits} Efficiency: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <sprite=20> : <color={operationString}>{operation} {valueVolition.ToString("F2")} <sprite=14></color>\n";
                             break;
                         case SystemType.Hull:
                             previewOutcomeText.text +=
-                                $"<color=red>{traits} Efficiency: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <sprite=20> : <color={operationString}>{operation} {valueVolition.ToString("F2")} <sprite=9></color>\n";
                             break;
                         case SystemType.Power:
                             previewOutcomeText.text +=
-                                $"<color=yellow>{traits} Efficiency: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <sprite=20> : <color={operationString}>{operation} {valueVolition.ToString("F2")} <sprite=4></color>\n";
                             break;
                     }
 
@@ -391,7 +408,7 @@ namespace Tasks
                     {
                         valueVolition /= 2;
                         previewOutcomeText.text +=
-                            $"<color=#ff00ffff>Bad Mood: - {valueVolition.ToString("F2")}</color>\n";
+                            $"<color=#ff00ffff><sprite=21> - {valueVolition.ToString("F2")}</color>\n";
                     }
 
                     var volition =
