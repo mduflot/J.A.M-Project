@@ -340,9 +340,10 @@ namespace Managers
                             break;
                         
                         case SimCharacter.SimStatus.Idle:
-                            if (simCharacter.tick >= simCharacter.ticksToNextIdle)
+                            if (!character.IsWorking() && simCharacter.tick >= simCharacter.ticksToNextIdle)
                             {
                                 simCharacter.tick = 0;
+                                simCharacter.ticksToNextIdle = (uint) Random.Range(1, 7) * TimeTickSystem.ticksPerHour;
                                 simCharacter.SendToIdleRoom();
                             }
                             break;
