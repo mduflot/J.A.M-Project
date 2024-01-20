@@ -699,6 +699,28 @@ namespace SS
 
                     break;
                 }
+                case SSSpeakerType.IncomingSignal:
+                    for (int index = 0; index < spaceshipManager.GetRoom(RoomType.Trajectory).roomObjects.Length; index++)
+                    {
+                        var furniture = spaceshipManager.GetRoom(RoomType.Trajectory).roomObjects[index];
+                        if (furniture.furnitureType == FurnitureType.ConsoleSide)
+                        {
+                            var signal = furniture.transform;
+                            if (signal.TryGetComponent(out Speaker speaker))
+                            {
+                                dialogues.Add(new SerializableTuple<string, string>("Incoming Signal", nodeSO.Text));
+                                StartCoroutine(DisplayDialogue(speaker, "Incoming Signal", nodeSO));
+                            }
+                            else
+                            {
+                                Debug.LogWarning("No speaker on the Incoming Signal");
+                            }
+
+                            break;
+                        }
+                    }
+                    
+                    break;
             }
         }
 
