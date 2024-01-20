@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: FixTheLeakage
   <Choices>k__BackingField:
-  - rid: 8851122716615376951
-  - rid: 8851122716615376952
+  - rid: 197800411224342675
+  - rid: 197800411224342676
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: The Artifact seems to emit some power leakage that
     is damaging other rooms!
   <TaskStatus>k__BackingField: 2
   <TaskType>k__BackingField: 0
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+    type: 3}
   <TimeLeft>k__BackingField: 0
   <Duration>k__BackingField: 10
   <MandatorySlots>k__BackingField: 1
@@ -30,10 +31,11 @@ MonoBehaviour:
   <TaskHelpFactor>k__BackingField: 0.75
   <Room>k__BackingField: 4
   <Furniture>k__BackingField: 9
+  <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 8851122716615376951
+    - rid: 197800411224342675
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -43,7 +45,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: ' will try and fix the power leakage from
           the Artifact Room.'
-    - rid: 8851122716615376952
+    - rid: 197800411224342676
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: New Choice
