@@ -54,6 +54,9 @@ namespace Managers
             for (int i = 0; i < gauges.Length; i++)
             {
                 gaugeReferences.Add(gauges[i].systemType, gauges[i]);
+                var gauge = gauges[i];
+                Debug.Log($"Initializing {gauge.systemType}");
+                gauge.InitializeGauge();
             }
 
             foreach (var character in GameManager.Instance.SpaceshipManager.characters)
