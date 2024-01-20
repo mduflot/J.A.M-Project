@@ -146,7 +146,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                     var storyline = principalStorylines[index];
                     if (storyline.Status == SSStoryStatus.Completed) continue;
                     if (storyline.StorylineContainer.Condition)
-                        if (RouteCondition(storyline.StorylineContainer.Condition))
+                        if (!RouteCondition(storyline.StorylineContainer.Condition))
                             continue;
                     if (activeLaunchers.Any(launcher => launcher.storyline == storyline)) continue;
                     if (storyline.StorylineContainer.IsFirstToPlay)
@@ -166,7 +166,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                     var storyline = secondaryStorylines[index];
                     if (storyline.Status == SSStoryStatus.Completed) continue;
                     if (storyline.StorylineContainer.Condition)
-                        if (RouteCondition(storyline.StorylineContainer.Condition))
+                        if (!RouteCondition(storyline.StorylineContainer.Condition))
                             continue;
                     if (activeLaunchers.Any(launcher => launcher.storyline == storyline)) continue;
                     availableStoryLines.Add(storyline);
@@ -217,7 +217,7 @@ public class Checker : MonoBehaviour, IDataPersistence
             }
 
             if (timeline.TimelineContainer.Condition)
-                if (RouteCondition(timeline.TimelineContainer.Condition))
+                if (!RouteCondition(timeline.TimelineContainer.Condition))
                     continue;
             availableTimelines.Add(timeline.TimelineContainer);
         }
