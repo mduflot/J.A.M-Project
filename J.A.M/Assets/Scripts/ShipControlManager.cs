@@ -30,6 +30,9 @@ public class ShipControlManager : MonoBehaviour
     [SerializeField] private GameObject characterTraitParent;
     private List<TraitHoverable> characterTraits = new();
     [SerializeField] private TraitsHoverMenu traitsHoverMenu;
+    
+    [Header("Layout Elements")]
+    [SerializeField] private GameObject descriptionParent;
 
     public void Initialize()
     {
@@ -147,5 +150,7 @@ public class ShipControlManager : MonoBehaviour
                 characterTraits.Add(traitHoverable);
             }
         }
+        
+        LayoutRebuilder.ForceRebuildLayoutImmediate(descriptionParent.GetComponent<RectTransform>());
     }
 }

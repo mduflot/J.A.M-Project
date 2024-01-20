@@ -3218,9 +3218,9 @@ MonoBehaviour:
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
+  m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
 --- !u!114 &3699200342885132078
 MonoBehaviour:
@@ -4281,6 +4281,7 @@ MonoBehaviour:
   shipTraitParent: {fileID: 846127540625461173}
   characterTraitParent: {fileID: 5300211191359611122}
   traitsHoverMenu: {fileID: 5669970218488185774}
+  descriptionParent: {fileID: 1306288756905437074}
 --- !u!1 &1955394552653722638
 GameObject:
   m_ObjectHideFlags: 0
@@ -8128,8 +8129,8 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -19195,6 +19196,11 @@ PrefabInstance:
       propertyPath: separator
       value: 
       objectReference: {fileID: 761615142378183705}
+    - target: {fileID: 8157393031258267372, guid: a49e492797bce29439ff82e1446f8797,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8157393031258267372, guid: a49e492797bce29439ff82e1446f8797,
         type: 3}
       propertyPath: m_AnchoredPosition.y
