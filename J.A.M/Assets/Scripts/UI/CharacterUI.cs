@@ -51,9 +51,9 @@ namespace UI
         public void UpdateIconDisplay()
         {
             moodGauge.fillAmount = character.GetMood() / character.GetMaxMood();
-            volitionGauge.value = character.GetVolition() / character.GetMaxMood();
+            volitionGauge.value = character.GetBaseVolition() / character.GetMaxMood();
             
-            moodIcon.sprite = character.GetMood() < character.GetVolition() ? sadIcon : happyIcon;
+            moodIcon.sprite = character.GetMood() < character.GetBaseVolition() ? sadIcon : happyIcon;
             moodArrow.sprite = character.IsMoodIncreasing() ? greenArrow : redArrow;
         }
 
