@@ -55,7 +55,6 @@ namespace Managers
             {
                 gaugeReferences.Add(gauges[i].systemType, gauges[i]);
                 var gauge = gauges[i];
-                Debug.Log($"Initializing {gauge.systemType}");
                 gauge.InitializeGauge();
             }
 
