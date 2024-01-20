@@ -10,40 +10,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
-  m_Name: PowerTask
+  m_Name: PrepareRations
   m_EditorClassIdentifier: 
-  <NodeName>k__BackingField: PowerTask
+  <NodeName>k__BackingField: PrepareRations
   <Choices>k__BackingField:
-  - rid: 1640970978887467014
-  - rid: 1640970978887467015
+  - rid: 5602516885609381892
+  - rid: 5602516885609381893
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 1
-  <Description>k__BackingField: "The atomic core of the vessel needs frequent intervention
-    to prevent it from overheat. Or worse...\r"
+  <Description>k__BackingField: "Prepare rations for the crew.\r"
   <TaskStatus>k__BackingField: 0
   <TaskType>k__BackingField: 0
-  <Icon>k__BackingField: {fileID: 21300000, guid: 85a24ccd89dd9e54f9c67bffe65d4776,
+  <Icon>k__BackingField: {fileID: 21300000, guid: efd495e7e7951104c9be808f109f77dd,
     type: 3}
   <TimeLeft>k__BackingField: 0
-  <Duration>k__BackingField: 15
+  <Duration>k__BackingField: 5
   <MandatorySlots>k__BackingField: 1
   <OptionalSlots>k__BackingField: 2
   <TaskHelpFactor>k__BackingField: 0.75
-  <Room>k__BackingField: 10
+  <Room>k__BackingField: 4
   <Furniture>k__BackingField: 0
   <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 1640970978887467014
+    - rid: 5602516885609381892
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
         <NextNode>k__BackingField: {fileID: 0}
-        <Condition>k__BackingField: {fileID: 11400000, guid: d7c97afebe496c340b41a82a5c828858,
+        <Condition>k__BackingField: {fileID: 11400000, guid: ac1e5ca885e6cff4082152a44cbfdafa,
           type: 2}
         <PreviewOutcome>k__BackingField: 'will add :'
-    - rid: 1640970978887467015
+    - rid: 5602516885609381893
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: LastChoice
