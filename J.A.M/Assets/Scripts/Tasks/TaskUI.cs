@@ -762,7 +762,7 @@ namespace Tasks
             bool bufferTag = false;
             text.text = tempText;
             text.enableAutoSizing = false;
-            text.fontSize = 42;
+            text.fontSize = 20;
 
             while (letterIndex < textToDisplay.Length)
             {

@@ -40,8 +40,6 @@ namespace SS
             TimeTickSystem.ModifyTimeScale(0);
             GameManager.Instance.taskOpened = true;
             gameObject.SetActive(true);
-            popupText.fontSize = 42;
-            popupText.enableAutoSizing = false;
             if (title != null && popupTitle != null) popupTitle.text = title;
             StartCoroutine(DisplayText(popupText, text, 0.02f));
             continueButtonPressed = false;
@@ -53,8 +51,6 @@ namespace SS
             TimeTickSystem.ModifyTimeScale(0);
             GameManager.Instance.taskOpened = true;
             gameObject.SetActive(true);
-            popupText.fontSize = 42;
-            popupText.enableAutoSizing = false;
             popupTitle.text = title;
             StartCoroutine(DisplayText(popupText, text, 0.02f));
             continueButton.onClick.AddListener(() => GameManager.Instance.MenuManager.LoadScene("MenuScene"));
@@ -67,6 +63,8 @@ namespace SS
             string tagBuffer = "";
             bool bufferTag = false;
             text.text = tempText;
+            text.fontSize = 20;
+            text.enableAutoSizing = false;
 
             while (letterIndex < textToDisplay.Length)
             {
