@@ -13,8 +13,8 @@ public class PointerArrow : MonoBehaviour
         target = t;
         flicker = f;
         if (f) GetComponent<SpriteRenderer>().color = Color.red;
-        boundW = transform.GetComponent<SpriteRenderer>().bounds.size.x * 1.5f;
-        boundH = transform.GetComponent<SpriteRenderer>().bounds.size.y * 1.5f;
+        boundW = transform.GetComponent<SpriteRenderer>().bounds.size.x * 5f;
+        boundH = transform.GetComponent<SpriteRenderer>().bounds.size.y * 5f;
     }
     
     private void Update()
@@ -39,7 +39,7 @@ public class PointerArrow : MonoBehaviour
         var dir = target.transform.position - transform.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle - 90.0f, Vector3.forward);
-        float scale = Mathf.Clamp(dir.magnitude / 100f, 6f, 18f);
+        float scale = Mathf.Clamp(dir.magnitude / 100f, 6f, 10f);
         transform.localScale = new Vector3(scale, scale * 1.5f, 1);
     }
 
