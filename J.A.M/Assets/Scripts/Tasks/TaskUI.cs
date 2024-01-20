@@ -524,14 +524,20 @@ namespace Tasks
                     break;
                 case OutcomeData.OutcomeType.CharacterStat:
                     previewOutcomeText.text += traits;
+                    string operationStat = "+";
                     string targetStat = "<sprite=20>";
                     string operationStringStat = "green";
-                    if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub) operationStringStat = "red";
+                    if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
+                    {
+                        operationStat = "-";
+                        operationStringStat = "red";
+                    }
                     if (outcome.OutcomeTargetStat == OutcomeData.OutcomeTargetStat.Mood)
                     {
                         targetStat = "<sprite=22>";
                         if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
                         {
+                            operationStat = "-";
                             targetStat = "<sprite=21>";
                             operationStringStat = "red";
                         }
@@ -540,11 +546,11 @@ namespace Tasks
                     {
                         case OutcomeData.OutcomeTarget.Crew:
                             previewOutcomeText.text +=
-                                $"<color={operationStringStat}>{outcome.OutcomeOperation} {outcome.value}</color> {targetStat} to Crew\n";
+                                $"<color={operationStringStat}>{operationStat} {outcome.value}</color> {targetStat} to Crew\n";
                             break;
                         case OutcomeData.OutcomeTarget.Leader:
                             previewOutcomeText.text +=
-                                $"<color={operationStringStat}>{outcome.OutcomeOperation} {outcome.value}</color> {targetStat} to {characterSlots[0].icon.character.GetCharacterData().firstName}\n";
+                                $"<color={operationStringStat}>{operationStat} {outcome.value}</color> {targetStat} to {characterSlots[0].icon.character.GetCharacterData().firstName}\n";
                             break;
                         case OutcomeData.OutcomeTarget.Assistant:
                             for (int i = 0; i < characterSlots.Count; i++)
@@ -553,7 +559,7 @@ namespace Tasks
                                 if (character.isMandatory) continue;
                                 if (character.icon == null) continue;
                                 previewOutcomeText.text +=
-                                    $"<color={operationStringStat}>{outcome.OutcomeOperation} {outcome.value}</color> {targetStat} to {character.icon.character.GetCharacterData().firstName}\n";
+                                    $"<color={operationStringStat}>{operationStat} {outcome.value}</color> {targetStat} to {character.icon.character.GetCharacterData().firstName}\n";
                             }
 
                             break;
