@@ -795,6 +795,8 @@ namespace Tasks
                 text.text = tempText;
                 letterIndex++;
             }
+
+            text.text += "\n\n";
         }
     }
 }
