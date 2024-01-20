@@ -516,10 +516,16 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 0}
+  idleRooms:
+  - {fileID: 1061812510}
+  - {fileID: 1347941773}
+  - {fileID: 1495455724}
+  - {fileID: 1824253218}
+  - {fileID: 643474960}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &75054010
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3545,10 +3551,16 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 0}
+  idleRooms:
+  - {fileID: 417636992}
+  - {fileID: 1495455724}
+  - {fileID: 1306395234}
+  - {fileID: 238753979}
+  - {fileID: 1847514749}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &880690035
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3988,10 +4000,14 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 0}
+  idleRooms:
+  - {fileID: 417636992}
+  - {fileID: 1347941773}
+  - {fileID: 1495455724}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &1031077738
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4472,10 +4488,14 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 0}
+  idleRooms:
+  - {fileID: 535105148}
+  - {fileID: 1495455724}
+  - {fileID: 1824253218}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &1079339700
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10424,6 +10444,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7751214115931913091, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7751214115931913091, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.0009370712
       objectReference: {fileID: 0}
@@ -11533,10 +11558,18 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 0}
+  idleRooms:
+  - {fileID: 1911275390}
+  - {fileID: 1306395234}
+  - {fileID: 238753979}
+  - {fileID: 1847514749}
+  - {fileID: 1495455724}
+  - {fileID: 1495455724}
+  - {fileID: 1495455724}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &1472942973
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13946,10 +13979,15 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 0}
+  idleRooms:
+  - {fileID: 417636992}
+  - {fileID: 1347941773}
+  - {fileID: 1495455724}
+  - {fileID: 643474960}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &2062025558
 SpriteRenderer:
   m_ObjectHideFlags: 0
