@@ -13,6 +13,7 @@ public class PointerArrow : MonoBehaviour
         target = t;
         flicker = f;
         if (f) GetComponent<SpriteRenderer>().color = Color.red;
+        else GetComponent<SpriteRenderer>().color = Color.white;
         boundW = transform.GetComponent<SpriteRenderer>().bounds.size.x * 5f;
         boundH = transform.GetComponent<SpriteRenderer>().bounds.size.y * 5f;
     }
@@ -45,10 +46,8 @@ public class PointerArrow : MonoBehaviour
 
     private void Flicker()
     {
-        if (!flicker) return;
-        
         var color = GetComponent<SpriteRenderer>().color;
-        color.a = Mathf.Cos(Time.time * 5f) + 1.25f;
+        color.a = Mathf.Cos(Time.time * 2.5f * (flicker ? 2f : 1f)) + 1.25f;
         GetComponent<SpriteRenderer>().color = color;
     }
 }
