@@ -57,16 +57,4 @@ public class DefaultGaugeUI : GaugeUI
     {
         previewGauge.fillAmount = 0;
     }
-
-    public override void OnHover(PointerEventData eventData)
-    {
-        isHovered = true;
-        base.OnHover(eventData);
-    }
-
-    public override void OnExit(PointerEventData eventData)
-    {
-        isHovered = false;
-        base.OnExit(eventData);
-    }
 }

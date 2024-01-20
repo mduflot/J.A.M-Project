@@ -307,7 +307,20 @@ namespace Managers
                                 else
                                     simCharacter.SendToIdleRoom();
 
-                                systems[2].gaugeValue -= simEatAmount;
+                                if (!IsInTutorial)
+                                {
+                                    float eatAmount = simEatAmount;
+                                    eatAmount += SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.Rot)
+                                        ? (simEatAmount * 3f) / 10f
+                                        : 0f;
+                                    eatAmount += SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedRations)
+                                        ? (simEatAmount * 3f) / 10f
+                                        : 0f;
+                                    eatAmount -= SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.Restriction)
+                                        ? (simEatAmount) / 10f
+                                        : 0f;
+                                    systems[2].gaugeValue -= eatAmount;
+                                }
                                 simCharacter.tick = 0;
                                 simCharacter.ticksToEat = (simHungerBaseThreshold
                                                            * (int)TimeTickSystem.ticksPerHour)

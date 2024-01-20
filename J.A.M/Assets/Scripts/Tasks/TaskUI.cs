@@ -240,7 +240,7 @@ namespace Tasks
 
                     if (notification.Task.TaskType != SSTaskType.Compute)
                     {
-                        if (!condition && notification.Task.TaskType == SSTaskType.Untimed)
+                        if ((!condition && notification.Task.TaskType == SSTaskType.Untimed) || (characterSlots[0].icon == null && notification.Task.TaskType == SSTaskType.Permanent))
                         {
                             previewOutcomeText.text = "Condition not met";
                             startButton.GetComponentInChildren<Button>().interactable = false;
@@ -259,7 +259,7 @@ namespace Tasks
                         {
                             if (characterSlots[0].icon != null)
                                 previewOutcomeText.text =
-                                    $"{characterSlots[0].icon.character.GetCharacterData().name} {notification.Task.Conditions[index].Item2}\n";
+                                    $"{characterSlots[0].icon.character.GetCharacterData().firstName} {notification.Task.Conditions[index].Item2}\n";
                         }
                         else previewOutcomeText.text = $"{notification.Task.Conditions[index].Item2}\n";
 
@@ -371,19 +371,19 @@ namespace Tasks
                     {
                         case SystemType.Trajectory:
                             previewOutcomeText.text +=
-                                $"<color=lightblue>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"<color=lightblue>{traits} Efficiency: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                             break;
                         case SystemType.Food:
                             previewOutcomeText.text +=
-                                $"<color=green>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"<color=green>{traits} Efficiency: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                             break;
                         case SystemType.Hull:
                             previewOutcomeText.text +=
-                                $"<color=red>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"<color=red>{traits} Efficiency: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                             break;
                         case SystemType.Power:
                             previewOutcomeText.text +=
-                                $"<color=yellow>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"<color=yellow>{traits} Efficiency: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
                             break;
                     }
 
@@ -695,7 +695,7 @@ namespace Tasks
             return false;
         }
 
-        private void Appear(bool state)
+        public void Appear(bool state)
         {
             animator.SetBool("Appear", state);
         }

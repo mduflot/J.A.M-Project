@@ -10,7 +10,9 @@ public class CharacterDataScriptable : ScriptableObject
     public Relationship[] relationships;
     public TraitsData.Traits traits;
     public Sprite characterIcon;
+    public Sprite characterBody;
     public string firstName, lastName;
+    [TextArea] public string description;
 
     [ContextMenu("Initialize GUID")]
     public void Initialize()
