@@ -2534,7 +2534,7 @@ MonoBehaviour:
   currentStoryline: {fileID: 0}
   nodeContainer: {fileID: 11400000, guid: e9fc39a357f8213438a2877d0b8e7472, type: 2}
   nodeGroup: {fileID: 11400000, guid: d92e5425b09c86c4ca7066512d5a2211, type: 2}
-  node: {fileID: 11400000, guid: 543ae8c418c40964e92334c23ac72312, type: 2}
+  node: {fileID: 11400000, guid: 809dcbc4a10f11344b8f615838894061, type: 2}
   groupedNodes: 1
   startingNodesOnly: 0
   selectedNodeGroupIndex: 2
@@ -2959,7 +2959,7 @@ MonoBehaviour:
   currentStoryline: {fileID: 0}
   nodeContainer: {fileID: 11400000, guid: e9fc39a357f8213438a2877d0b8e7472, type: 2}
   nodeGroup: {fileID: 11400000, guid: e128715715fb95c4eb7cb1e69e4b34f0, type: 2}
-  node: {fileID: 11400000, guid: 3c70a053cdd5f154a9764e4b44203ed1, type: 2}
+  node: {fileID: 11400000, guid: 8326e6cda3fe128408bdf16ef574836c, type: 2}
   groupedNodes: 1
   startingNodesOnly: 0
   selectedNodeGroupIndex: 1
@@ -5772,6 +5772,18 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1106205934544416057, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: node
+      value: 
+      objectReference: {fileID: 11400000, guid: 809dcbc4a10f11344b8f615838894061,
+        type: 2}
+    - target: {fileID: 1106205934544416057, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: nodeContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: e9fc39a357f8213438a2877d0b8e7472,
+        type: 2}
     - target: {fileID: 1142247804836717114, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -7459,6 +7471,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cargo3
       objectReference: {fileID: 0}
+    - target: {fileID: 2648280386488010575, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: node
+      value: 
+      objectReference: {fileID: 11400000, guid: 8326e6cda3fe128408bdf16ef574836c,
+        type: 2}
+    - target: {fileID: 2648280386488010575, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: nodeContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: e9fc39a357f8213438a2877d0b8e7472,
+        type: 2}
     - target: {fileID: 2758990000079447273, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -8907,13 +8931,19 @@ PrefabInstance:
         type: 3}
       propertyPath: node
       value: 
-      objectReference: {fileID: 11400000, guid: a1df3c642bf28eb4a8e07c2c6c943650,
+      objectReference: {fileID: 11400000, guid: 3f4581d9e22ae7f4fa8b17a56c1a2afe,
         type: 2}
     - target: {fileID: 5424884231031261431, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: nodeGroup
       value: 
       objectReference: {fileID: 11400000, guid: fd84bf01069070a4eb411efba7749aa5,
+        type: 2}
+    - target: {fileID: 5424884231031261431, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: nodeContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: e9fc39a357f8213438a2877d0b8e7472,
         type: 2}
     - target: {fileID: 5424884231031261431, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
@@ -9989,6 +10019,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -265
       objectReference: {fileID: 0}
+    - target: {fileID: 9000360621914125293, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: node
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d5d1778c8b307f499a7a6858dc5edb0,
+        type: 2}
+    - target: {fileID: 9000360621914125293, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: nodeContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: e9fc39a357f8213438a2877d0b8e7472,
+        type: 2}
     - target: {fileID: 9052463991925291914, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11164,7 +11206,7 @@ MonoBehaviour:
   currentStoryline: {fileID: 0}
   nodeContainer: {fileID: 11400000, guid: e9fc39a357f8213438a2877d0b8e7472, type: 2}
   nodeGroup: {fileID: 11400000, guid: fd84bf01069070a4eb411efba7749aa5, type: 2}
-  node: {fileID: 11400000, guid: a1df3c642bf28eb4a8e07c2c6c943650, type: 2}
+  node: {fileID: 11400000, guid: 3f4581d9e22ae7f4fa8b17a56c1a2afe, type: 2}
   groupedNodes: 1
   startingNodesOnly: 0
   selectedNodeGroupIndex: 0
@@ -12975,7 +13017,7 @@ MonoBehaviour:
   currentStoryline: {fileID: 0}
   nodeContainer: {fileID: 11400000, guid: e9fc39a357f8213438a2877d0b8e7472, type: 2}
   nodeGroup: {fileID: 11400000, guid: 4fe84ade17d55784f951e97bd290e9a9, type: 2}
-  node: {fileID: 11400000, guid: 4283acaeca1ab8a428a629dbf3f060fd, type: 2}
+  node: {fileID: 11400000, guid: 1d5d1778c8b307f499a7a6858dc5edb0, type: 2}
   groupedNodes: 1
   startingNodesOnly: 0
   selectedNodeGroupIndex: 3
