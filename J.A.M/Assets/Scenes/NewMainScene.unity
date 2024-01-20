@@ -516,15 +516,10 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRooms:
-  - {fileID: 1061812510}
-  - {fileID: 643474960}
-  - {fileID: 1824253218}
-  - {fileID: 1495455724}
+  idleRoom: {fileID: 0}
   simStatus: 0
   tick: 0
   ticksToEat: 0
-  ticksToNextIdle: 0
 --- !u!212 &75054010
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1921,6 +1916,12 @@ PrefabInstance:
       propertyPath: selectedNodeGroupIndex
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1720039437780469325, guid: df2f5bb929e55244bb3de8ad26e41793,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5ffcde70790a2d4db538cbb1442abac,
+        type: 3}
     - target: {fileID: 3515885202083428125, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_Material
@@ -1964,7 +1965,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -1974,7 +1975,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -2024,12 +2025,12 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -102.5
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -3544,13 +3545,10 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRooms:
-  - {fileID: 417636992}
-  - {fileID: 1495455724}
+  idleRoom: {fileID: 0}
   simStatus: 0
   tick: 0
   ticksToEat: 0
-  ticksToNextIdle: 0
 --- !u!212 &880690035
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3990,14 +3988,10 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRooms:
-  - {fileID: 417636992}
-  - {fileID: 1347941773}
-  - {fileID: 1495455724}
+  idleRoom: {fileID: 0}
   simStatus: 0
   tick: 0
   ticksToEat: 0
-  ticksToNextIdle: 0
 --- !u!212 &1031077738
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4478,14 +4472,10 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRooms:
-  - {fileID: 535105148}
-  - {fileID: 1824253218}
-  - {fileID: 1495455724}
+  idleRoom: {fileID: 0}
   simStatus: 0
   tick: 0
   ticksToEat: 0
-  ticksToNextIdle: 0
 --- !u!212 &1079339700
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4650,6 +4640,12 @@ PrefabInstance:
       propertyPath: selectedNodeGroupIndex
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1720039437780469325, guid: df2f5bb929e55244bb3de8ad26e41793,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5ffcde70790a2d4db538cbb1442abac,
+        type: 3}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_Pivot.x
@@ -4668,7 +4664,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -4678,7 +4674,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -4728,12 +4724,12 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -32.5
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -8075,6 +8071,11 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2797325971706414814, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2797491717032971899, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8465,6 +8466,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3679461117327306508, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5ffcde70790a2d4db538cbb1442abac,
+        type: 3}
     - target: {fileID: 3736239272412622268, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -9119,6 +9126,11 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4738839555584484472, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4777246072667748450, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -9468,6 +9480,33 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Corridor
+      objectReference: {fileID: 0}
+    - target: {fileID: 5353546010325285553, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: m_text
+      value: 'Computer Operations
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5353546010325285553, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.77647066
+      objectReference: {fileID: 0}
+    - target: {fileID: 5353546010325285553, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.81568635
+      objectReference: {fileID: 0}
+    - target: {fileID: 5353546010325285553, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.5176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 5353546010325285553, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4291219588
       objectReference: {fileID: 0}
     - target: {fileID: 5398677884735010123, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
@@ -11494,15 +11533,10 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRooms:
-  - {fileID: 1911275390}
-  - {fileID: 1851140931}
-  - {fileID: 1824253218}
-  - {fileID: 1495455724}
+  idleRoom: {fileID: 0}
   simStatus: 0
   tick: 0
   ticksToEat: 0
-  ticksToNextIdle: 0
 --- !u!212 &1472942973
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13305,6 +13339,12 @@ PrefabInstance:
       propertyPath: selectedNodeGroupIndex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1720039437780469325, guid: df2f5bb929e55244bb3de8ad26e41793,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5ffcde70790a2d4db538cbb1442abac,
+        type: 3}
     - target: {fileID: 4793249711591054566, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_fontColor.b
@@ -13343,7 +13383,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -13353,7 +13393,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -13403,12 +13443,12 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -172.5
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -13906,15 +13946,10 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRooms:
-  - {fileID: 417636992}
-  - {fileID: 1347941773}
-  - {fileID: 643474960}
-  - {fileID: 1495455724}
+  idleRoom: {fileID: 0}
   simStatus: 0
   tick: 0
   ticksToEat: 0
-  ticksToNextIdle: 0
 --- !u!212 &2062025558
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14008,6 +14043,12 @@ PrefabInstance:
       propertyPath: selectedNodeGroupIndex
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1720039437780469325, guid: df2f5bb929e55244bb3de8ad26e41793,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5ffcde70790a2d4db538cbb1442abac,
+        type: 3}
     - target: {fileID: 4793249711591054566, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_fontColor.b
@@ -14046,7 +14087,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -14056,7 +14097,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -14106,12 +14147,12 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -242.5
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
