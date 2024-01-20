@@ -13,8 +13,9 @@ public class PointerArrow : MonoBehaviour
         target = t;
         flicker = f;
         if (f) GetComponent<SpriteRenderer>().color = Color.red;
-        boundW = transform.GetComponent<SpriteRenderer>().bounds.size.x * 1.5f;
-        boundH = transform.GetComponent<SpriteRenderer>().bounds.size.y * 1.5f;
+        else GetComponent<SpriteRenderer>().color = Color.white;
+        boundW = transform.GetComponent<SpriteRenderer>().bounds.size.x * 5f;
+        boundH = transform.GetComponent<SpriteRenderer>().bounds.size.y * 5f;
     }
     
     private void Update()
@@ -39,14 +40,14 @@ public class PointerArrow : MonoBehaviour
         var dir = target.transform.position - transform.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle - 90.0f, Vector3.forward);
+        float scale = Mathf.Clamp(dir.magnitude / 100f, 6f, 10f);
+        transform.localScale = new Vector3(scale, scale * 1.5f, 1);
     }
 
     private void Flicker()
     {
-        if (!flicker) return;
-        
         var color = GetComponent<SpriteRenderer>().color;
-        color.a = 10 * Mathf.Cos(Time.time) + .25f;
+        color.a = Mathf.Cos(Time.time * 2.5f * (flicker ? 2f : 1f)) + 1.25f;
         GetComponent<SpriteRenderer>().color = color;
     }
 }

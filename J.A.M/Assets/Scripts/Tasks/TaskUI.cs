@@ -15,8 +15,7 @@ namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-        [Header("Task")]
-        [SerializeField] private TextMeshProUGUI titleText;
+        [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI timeLeftText;
         [SerializeField] private GameObject timeLeftObject;
         [SerializeField] private Transform startButtonObject;
@@ -32,11 +31,9 @@ namespace Tasks
         [SerializeField] private GameObject separator;
         [SerializeField] private GameObject popupHelp;
 
-        [Header("Dialogues")]
-        [SerializeField] private GameObject dialogueContainer;
+        [Header("Dialogues")] [SerializeField] private GameObject dialogueContainer;
 
-        [Header("Values")]
-        [SerializeField] private float timeLeft;
+        [Header("Values")] [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
 
         private Notification notification;
@@ -207,36 +204,64 @@ namespace Tasks
                 List<GaugesOutcome> gaugeOutcomes = new List<GaugesOutcome>();
                 List<CharacterOutcome> characterOutcomes = new List<CharacterOutcome>();
 
+                var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
+                foreach (var c in characterSlots)
+                {
+                    if (c.icon != null)
+                        characterOutcomes.Add(new CharacterOutcome(c.icon.character,
+                            -GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
+                }
+
+                GameManager.Instance.UIManager.CharacterPreviewGauges(charOutcome);
+                charOutcome = characterOutcomes;
+                duration = assistantCharacters > 0
+                    ? notification.Task.Duration /
+                      (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
+                    : notification.Task.Duration;
+
+                durationText.text = TimeTickSystem.GetTicksAsTime((uint)(duration * TimeTickSystem.ticksPerHour));
+                var button = startButton.GetComponentInChildren<Button>();
+                var text = button.GetComponentInChildren<TextMeshProUGUI>();
+                var image = button.GetComponent<Image>();
+                button.Select();
+
                 for (int index = 0; index < notification.Task.Conditions.Count; index++)
                 {
                     bool condition = CheckTarget(notification.Task.Conditions[index].Item1);
-                    
+
                     if ((!condition && notification.Task.TaskType == SSTaskType.Compute))
                     {
                         previewOutcomeText.text = "Condition not met";
-                        startButton.GetComponentInChildren<Button>().interactable = false;
+                        button.interactable = false;
+                        text.text = "Task Locked";
+                        image.color = Color.black;
                     }
                     else
                     {
                         previewOutcomeText.text = null;
-                        startButton.GetComponentInChildren<Button>().interactable = true;
+                        button.interactable = true;
+                        text.text = "Start Task";
+                        image.color = Color.white;
                     }
 
                     if (notification.Task.TaskType != SSTaskType.Compute)
                     {
-                        if (!condition && notification.Task.TaskType == SSTaskType.Untimed)
+                        if ((!condition && notification.Task.TaskType == SSTaskType.Untimed) || (characterSlots[0].icon == null && notification.Task.TaskType == SSTaskType.Permanent))
                         {
                             previewOutcomeText.text = "Condition not met";
-                            startButton.GetComponentInChildren<Button>().interactable = false;
+                            button.interactable = false;
+                            text.text = "Task Locked";
+                            image.color = Color.black;
                         }
                         else
                         {
                             previewOutcomeText.text = null;
-                            startButton.GetComponentInChildren<Button>().interactable = true;
+                            button.interactable = true;
+                            text.text = "Start Task";
+                            image.color = Color.white;
                         }
                     }
                     
-
                     if (condition)
                     {
                         previewOutcomeText.text = null;
@@ -244,7 +269,7 @@ namespace Tasks
                         {
                             if (characterSlots[0].icon != null)
                                 previewOutcomeText.text =
-                                    $"{characterSlots[0].icon.character.GetCharacterData().name} {notification.Task.Conditions[index].Item2}\n";
+                                    $"{characterSlots[0].icon.character.GetCharacterData().firstName} {notification.Task.Conditions[index].Item2}\n";
                         }
                         else previewOutcomeText.text = $"{notification.Task.Conditions[index].Item2}\n";
 
@@ -288,27 +313,8 @@ namespace Tasks
                     }
                 }
 
-                var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
                 gaugesOutcomes = gaugeOutcomes;
                 GameManager.Instance.UIManager.PreviewOutcomeGauges(gaugesOutcomes);
-                
-                foreach (var c in characterSlots)
-                {
-                    if (c.icon != null)
-                        characterOutcomes.Add(new CharacterOutcome(c.icon.character,
-                            -GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
-                }
-
-                GameManager.Instance.UIManager.CharacterPreviewGauges(charOutcome);
-                charOutcome = characterOutcomes;
-                duration = assistantCharacters > 0
-                    ? notification.Task.Duration /
-                      (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
-                    : notification.Task.Duration;
-
-                durationText.text = TimeTickSystem.GetTicksAsTime((uint)(duration * TimeTickSystem.ticksPerHour));
-                var button = startButton.GetComponentInChildren<Button>();
-                button.Select();
             }
         }
 
@@ -333,35 +339,39 @@ namespace Tasks
         private void DisplayPreview(Outcome outcome, string traits, List<GaugesOutcome> gaugeOutcomes)
         {
             var operation = "+";
+            var operationString = "green";
             switch (outcome.OutcomeType)
             {
                 case OutcomeData.OutcomeType.Gauge:
                     if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
+                    {
                         operation = "-";
+                        operationString = "red";
+                    }
                     switch (outcome.OutcomeTargetGauge)
                     {
                         case SystemType.Trajectory:
                             previewOutcomeText.text +=
-                                $"<color=lightblue>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <color={operationString}>{operation} {outcome.value}</color> <sprite=19>\n";
                             break;
                         case SystemType.Food:
                             previewOutcomeText.text +=
-                                $"<color=green>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <color={operationString}>{operation} {outcome.value}</color> <sprite=14>\n";
                             break;
                         case SystemType.Hull:
                             previewOutcomeText.text +=
-                                $"<color=red>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <color={operationString}>{operation} {outcome.value}</color> <sprite=9>\n";
                             break;
                         case SystemType.Power:
                             previewOutcomeText.text +=
-                                $"<color=yellow>{traits} {operation} {outcome.value} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <color={operationString}>{operation} {outcome.value}</color> <sprite=4>\n";
                             break;
                     }
 
                     var value = outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add
                         ? outcome.value
                         : -outcome.value;
-                    
+
                     gaugeOutcomes.Add(new GaugesOutcome(outcome.OutcomeTargetGauge,
                         value));
 
@@ -369,25 +379,28 @@ namespace Tasks
                 case OutcomeData.OutcomeType.GaugeVolition:
                     if (characterSlots[0].icon == null) break;
                     if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
+                    {
                         operation = "-";
+                        operationString = "red";
+                    }
                     var valueVolition = characterSlots[0].icon.character.GetBaseVolition();
                     switch (outcome.OutcomeTargetGauge)
                     {
                         case SystemType.Trajectory:
                             previewOutcomeText.text +=
-                                $"<color=lightblue>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <sprite=20> : <color={operationString}>{operation} {valueVolition.ToString("F2")} <sprite=19></color>\n";
                             break;
                         case SystemType.Food:
                             previewOutcomeText.text +=
-                                $"<color=green>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <sprite=20> : <color={operationString}>{operation} {valueVolition.ToString("F2")} <sprite=14></color>\n";
                             break;
                         case SystemType.Hull:
                             previewOutcomeText.text +=
-                                $"<color=red>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <sprite=20> : <color={operationString}>{operation} {valueVolition.ToString("F2")} <sprite=9></color>\n";
                             break;
                         case SystemType.Power:
                             previewOutcomeText.text +=
-                                $"<color=yellow>{traits} Volition: {operation} {valueVolition.ToString("F2")} {outcome.OutcomeTargetGauge}</color>\n";
+                                $"{traits} <sprite=20> : <color={operationString}>{operation} {valueVolition.ToString("F2")} <sprite=4></color>\n";
                             break;
                     }
 
@@ -395,12 +408,12 @@ namespace Tasks
                     {
                         valueVolition /= 2;
                         previewOutcomeText.text +=
-                            $"<color=#ff00ffff>Bad Mood: - {valueVolition.ToString("F2")}</color>\n";
+                            $"<color=#ff00ffff><sprite=21> - {valueVolition.ToString("F2")}</color>\n";
                     }
 
                     var volition =
                         outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Add ? valueVolition : -valueVolition;
-                    
+
                     if (notification.Task.TaskType == SSTaskType.Permanent)
                     {
                         for (int index = 0; index < GameManager.Instance.SpaceshipManager.systems.Length; index++)
@@ -408,7 +421,7 @@ namespace Tasks
                             var system = GameManager.Instance.SpaceshipManager.systems[index];
                             if (system.type == outcome.OutcomeTargetGauge)
                             {
-                                volition -= system.decreaseSpeed * notification.Task.Duration;
+                                volition -= system.decreaseSpeed * Mathf.FloorToInt(duration);
                                 break;
                             }
                         }
@@ -699,7 +712,7 @@ namespace Tasks
             return false;
         }
 
-        private void Appear(bool state)
+        public void Appear(bool state)
         {
             animator.SetBool("Appear", state);
         }

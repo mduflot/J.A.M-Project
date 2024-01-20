@@ -1,0 +1,514 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: SentinelTribeGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: SentinelTribe
+  <ID>k__BackingField: 5cc96cf3-1a6d-4985-857b-17b3b1f8259a
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
+  <IsTutorialToPlay>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: b8980941-f4d3-4d1a-a158-29c702c95074
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: Intro
+    <Position>k__BackingField: {x: 253, y: 176}
+  - <ID>k__BackingField: b61ecc72-c8d2-4797-a6b8-f2bf81dab9cc
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: EarthSiege
+    <Position>k__BackingField: {x: 2675, y: 1274}
+  <Nodes>k__BackingField:
+  - rid: 5750223053362823201
+  - rid: 5750223053362823202
+  - rid: 5750223053362823203
+  - rid: 5750223053362823204
+  - rid: 5750223053362823205
+  - rid: 5750223053362823206
+  - rid: 5750223053362823207
+  - rid: 5750223053362823208
+  - rid: 5750223053362823209
+  - rid: 5750223053362823210
+  - rid: 5750223053362823211
+  - rid: 5750223053362823212
+  - rid: 5750223053362823213
+  - rid: 5750223053362823214
+  - rid: 5750223053362823215
+  - rid: 5750223053362823216
+  - rid: 5750223053362823217
+  <OldGroupNames>k__BackingField:
+  - Intro
+  - EarthSiege
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: Intro
+      Value:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 9
+      - 7
+      - 8
+      - 10
+      - TaskNode
+    - Key: EarthSiege
+      Value:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+  references:
+    version: 2
+    RefIds:
+    - rid: 5750223053362823201
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: a8a94543-7b6e-43cf-8cb0-5d1959c95c53
+        <Name>k__BackingField: 1
+        <Choices>k__BackingField:
+        - rid: 5750223053362823218
+        <GroupID>k__BackingField: b8980941-f4d3-4d1a-a158-29c702c95074
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 278, y: 235}
+        <Text>k__BackingField: I'm picking up a transmission. Looks like some Ktetorians
+          are trying to contact us.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823202
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: b1adf9e1-5287-4367-b927-1e199d28e16e
+        <Name>k__BackingField: 2
+        <Choices>k__BackingField:
+        - rid: 5750223053362823219
+        <GroupID>k__BackingField: b8980941-f4d3-4d1a-a158-29c702c95074
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 944, y: 235}
+        <Text>k__BackingField: Why would the Sentinels wanna talk with us?! We took
+          their Artifact...
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823203
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 2f151be7-9da4-42d9-a050-c72016efcfab
+        <Name>k__BackingField: 3
+        <Choices>k__BackingField:
+        - rid: 5750223053362823220
+        <GroupID>k__BackingField: b8980941-f4d3-4d1a-a158-29c702c95074
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1617, y: 235}
+        <Text>k__BackingField: Human. Ship. Send. Member. Now. Important. Information.
+          War. Wrong.
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823204
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 11c872d4-e3e4-47b5-a65a-baa3c55222a0
+        <Name>k__BackingField: 4
+        <Choices>k__BackingField:
+        - rid: 5750223053362823221
+        <GroupID>k__BackingField: b8980941-f4d3-4d1a-a158-29c702c95074
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2303, y: 235}
+        <Text>k__BackingField: They want us to send someone to their tribe?!
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823205
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: fbe684b0-0415-4a95-b0cc-1dc266872f5f
+        <Name>k__BackingField: 5
+        <Choices>k__BackingField:
+        - rid: 5750223053362823222
+        <GroupID>k__BackingField: b8980941-f4d3-4d1a-a158-29c702c95074
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2969, y: 235}
+        <Text>k__BackingField: Don't listen to them. Those Sentinels will tell us
+          their pacifist bullshit and then lay us a trap for the Echtrians to come
+          and get us.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 1
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823206
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 17fb7924-1b3e-4c9f-9c9e-263f3f5e1f3e
+        <Name>k__BackingField: 6
+        <Choices>k__BackingField:
+        - rid: 5750223053362823223
+        <GroupID>k__BackingField: b8980941-f4d3-4d1a-a158-29c702c95074
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4314, y: 235}
+        <Text>k__BackingField: Well, I fear for my life, but if the information is
+          crucial... I'll do it.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823207
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 4047be06-6674-4ced-a96c-8aadbd4d90f2
+        <Name>k__BackingField: 9
+        <Choices>k__BackingField:
+        - rid: 5750223053362823224
+        <GroupID>k__BackingField: b8980941-f4d3-4d1a-a158-29c702c95074
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6308, y: 235}
+        <Text>k__BackingField: ...That the last time a species like Humans got their
+          hands on this Artifact, it was the greatest tragedy in the universe.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823208
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 8a6560a5-0afa-4b51-a9cc-477ba8c91416
+        <Name>k__BackingField: 7
+        <Choices>k__BackingField:
+        - rid: 5750223053362823225
+        <GroupID>k__BackingField: b8980941-f4d3-4d1a-a158-29c702c95074
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4989, y: 235}
+        <Text>k__BackingField: I'm back from the Ktetorians! They brought us food
+          as a tribute, delicious stuff, but...
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823209
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: bd6647c5-12e6-42b5-a329-b2a6b0386f7a
+        <Name>k__BackingField: 8
+        <Choices>k__BackingField:
+        - rid: 5750223053362823226
+        <GroupID>k__BackingField: b8980941-f4d3-4d1a-a158-29c702c95074
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5649, y: 235}
+        <Text>k__BackingField: They told me about the Artifact. I... Could be able
+          to use it if necessary. But they also said...
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823210
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: b1215527-acdf-4083-b86d-46aff83738d2
+        <Name>k__BackingField: 10
+        <Choices>k__BackingField:
+        - rid: 5750223053362823227
+        <GroupID>k__BackingField: b8980941-f4d3-4d1a-a158-29c702c95074
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4314, y: 506}
+        <Text>k__BackingField: This is surely a trap. Come on, let's not go right
+          into it.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 4
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823211
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 22c09b1b-3c83-4ce5-914a-7de10f05b7b2
+        <Name>k__BackingField: 1
+        <Choices>k__BackingField:
+        - rid: 5750223053362823228
+        <GroupID>k__BackingField: b61ecc72-c8d2-4797-a6b8-f2bf81dab9cc
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2700, y: 1333}
+        <Text>k__BackingField: Those Echtrians are odd fellas. Oh... I'm picking
+          a transmission from them again?
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823212
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: cb649b85-0735-4691-b7b5-40dd85631d8a
+        <Name>k__BackingField: 2
+        <Choices>k__BackingField:
+        - rid: 5750223053362823229
+        <GroupID>k__BackingField: b61ecc72-c8d2-4797-a6b8-f2bf81dab9cc
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3373, y: 1333}
+        <Text>k__BackingField: It's a picture. It looks like... The Earth?
+        <SpeakerType>k__BackingField: 3
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823213
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ca99602d-4a40-4af3-b1f0-0d7d0de1f649
+        <Name>k__BackingField: 3
+        <Choices>k__BackingField:
+        - rid: 5750223053362823230
+        <GroupID>k__BackingField: b61ecc72-c8d2-4797-a6b8-f2bf81dab9cc
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4035, y: 1333}
+        <Text>k__BackingField: Why is the earth covered in black dots? Are those...
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823214
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: d363a81f-97be-4dc8-b0f8-a9fc24cff057
+        <Name>k__BackingField: 4
+        <Choices>k__BackingField:
+        - rid: 5750223053362823231
+        <GroupID>k__BackingField: b61ecc72-c8d2-4797-a6b8-f2bf81dab9cc
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4691, y: 1333}
+        <Text>k__BackingField: ...Echtrians. Besiege. Earth.
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823215
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: b3136267-5751-4f10-8271-4d6c20f3539e
+        <Name>k__BackingField: 5
+        <Choices>k__BackingField:
+        - rid: 5750223053362823232
+        <GroupID>k__BackingField: b61ecc72-c8d2-4797-a6b8-f2bf81dab9cc
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5366, y: 1333}
+        <Text>k__BackingField: The Echtrians have reached Earth?! Wh... What are
+          we gonna do?!
+        <SpeakerType>k__BackingField: 3
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823216
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 87ea9111-e2c0-4424-9532-4c8b69c8eb17
+        <Name>k__BackingField: 6
+        <Choices>k__BackingField:
+        - rid: 5750223053362823233
+        <GroupID>k__BackingField: b61ecc72-c8d2-4797-a6b8-f2bf81dab9cc
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6040, y: 1333}
+        <Text>k__BackingField: No change in the plan. We deliver the Artifact. Now
+          faster than ever.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 512
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223053362823217
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: d7c36de7-fc63-4716-a261-6cdb84d50821
+        <Name>k__BackingField: TaskNode
+        <Choices>k__BackingField:
+        - rid: 5750223053362823234
+        - rid: 5750223053362823235
+        <GroupID>k__BackingField: b8980941-f4d3-4d1a-a158-29c702c95074
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 3641, y: 235}
+        <DescriptionTask>k__BackingField: The Ktetorian 'Sentinels' want us to send
+          someone over to their Tribe, saying they have important information for
+          us. Should we trust them or ignore them?
+        <TaskStatus>k__BackingField: 2
+        <TaskType>k__BackingField: 0
+        <TaskIcon>k__BackingField: {fileID: 0}
+        <TimeLeft>k__BackingField: 7
+        <BaseDuration>k__BackingField: 15
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 12
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 5750223053362823218
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: b1adf9e1-5287-4367-b927-1e199d28e16e
+    - rid: 5750223053362823219
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 2f151be7-9da4-42d9-a050-c72016efcfab
+    - rid: 5750223053362823220
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 11c872d4-e3e4-47b5-a65a-baa3c55222a0
+    - rid: 5750223053362823221
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: fbe684b0-0415-4a95-b0cc-1dc266872f5f
+    - rid: 5750223053362823222
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: d7c36de7-fc63-4716-a261-6cdb84d50821
+    - rid: 5750223053362823223
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 8a6560a5-0afa-4b51-a9cc-477ba8c91416
+    - rid: 5750223053362823224
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750223053362823225
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: bd6647c5-12e6-42b5-a329-b2a6b0386f7a
+    - rid: 5750223053362823226
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 4047be06-6674-4ced-a96c-8aadbd4d90f2
+    - rid: 5750223053362823227
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750223053362823228
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: cb649b85-0735-4691-b7b5-40dd85631d8a
+    - rid: 5750223053362823229
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: ca99602d-4a40-4af3-b1f0-0d7d0de1f649
+    - rid: 5750223053362823230
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: d363a81f-97be-4dc8-b0f8-a9fc24cff057
+    - rid: 5750223053362823231
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: b3136267-5751-4f10-8271-4d6c20f3539e
+    - rid: 5750223053362823232
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 87ea9111-e2c0-4424-9532-4c8b69c8eb17
+    - rid: 5750223053362823233
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750223053362823234
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 17fb7924-1b3e-4c9f-9c9e-263f3f5e1f3e
+        <Condition>k__BackingField: {fileID: 11400000, guid: 2bd2a339d113aa746b70e22393275d31,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will come forward to the Ktetorian Tribe
+          and listen to what they have to say.
+    - rid: 5750223053362823235
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNodeID>k__BackingField: b1215527-acdf-4083-b86d-46aff83738d2
+        <Condition>k__BackingField: {fileID: 11400000, guid: 15cfc01c84e864543acf52a324a27dcb,
+          type: 2}
+        <PreviewOutcome>k__BackingField: We'll ignore them.

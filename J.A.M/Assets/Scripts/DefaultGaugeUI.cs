@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ public class DefaultGaugeUI : GaugeUI
     [SerializeField] private Sprite greenArrow;
     [SerializeField] private Sprite redArrow;
 
+    private Color colorOpaque = new(1.0f, 1.0f, 1.0f, 1.0f);
+    private Color colorTransparent = new(1.0f, 1.0f, 1.0f, 0.0f);
     private bool isHovered;
 
     public override void UpdateGauge(float value, float previewValue)
@@ -17,7 +20,21 @@ public class DefaultGaugeUI : GaugeUI
         gauge.fillAmount = value / 50;
         if (!IsPreviewing || (previewGauge.fillAmount > (value + previewValue) / 50))
             previewGauge.fillAmount = (value + previewValue) / 50;
-        arrow.sprite = previewValue > 0 ? greenArrow : redArrow;
+        if (previewValue > 0.0f)
+        {
+            arrow.sprite = greenArrow;
+            arrow.color = colorOpaque;
+        }
+        else if (GameManager.Instance.SpaceshipManager.systems.Any(system => system.type == systemType && system.isBlocked))
+        {
+            arrow.sprite = null;
+            arrow.color = colorTransparent;
+        }
+        else
+        {
+            arrow.sprite = redArrow;
+            arrow.color = colorOpaque;
+        }
     }
 
     public override void PreviewOutcomeGauge(float value)
@@ -40,17 +57,4 @@ public class DefaultGaugeUI : GaugeUI
     {
         previewGauge.fillAmount = 0;
     }
-
-    public override void OnHover(PointerEventData eventData)
-    {
-        isHovered = true;
-        base.OnHover(eventData);
-    }
-
-    public override void OnExit(PointerEventData eventData)
-    {
-        isHovered = false;
-        base.OnExit(eventData);
-    }
-    
 }

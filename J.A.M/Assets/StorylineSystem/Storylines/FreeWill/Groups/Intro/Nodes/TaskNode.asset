@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: TaskNode
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: TaskNode
+  <Choices>k__BackingField:
+  - rid: 5750223053362823511
+  - rid: 5750223053362823512
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: There's something wrong in the docking bay's sensor
+    system. Someone should check that out! *wink*
+  <TaskStatus>k__BackingField: 1
+  <TaskType>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 0}
+  <TimeLeft>k__BackingField: 10
+  <Duration>k__BackingField: 5
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 2
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 12
+  <Furniture>k__BackingField: 1
+  <IsTaskTutorial>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 5750223053362823511
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 1a48b6c289d3e9546a3e4f4675a3f661,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 4929edff6a4ed0b4993b1a148431b553,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will check the docking bay's sensor systems,
+          *absolutely not* allowing you to get your free update.
+    - rid: 5750223053362823512
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: ea9b99b965aa93842a6789c5c7afe446,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: b840798b6b99a8340b44328537107a24,
+          type: 2}
+        <PreviewOutcome>k__BackingField: Come on, Shyrka. Send someone to take care
+          of this.

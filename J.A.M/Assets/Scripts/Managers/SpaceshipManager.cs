@@ -97,7 +97,7 @@ namespace Managers
 
             foreach (var system in systems)
             {
-                if (system.gaugeValue < 0) system.gaugeValue = 0;
+                if (system.gaugeValue <= 0) system.gaugeValue = 0;
                 else
                 {
                     float decreaseValue = system.decreaseSpeed;
@@ -307,7 +307,24 @@ namespace Managers
                                 else
                                     simCharacter.SendToIdleRoom();
 
-                                systems[2].gaugeValue -= simEatAmount;
+                                if (!IsInTutorial)
+                                {
+                                    float eatAmount = simEatAmount;
+                                    eatAmount += SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.Rot)
+                                        ? (simEatAmount * 3f) / 10f
+                                        : 0f;
+                                    eatAmount += SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedRations)
+                                        ? (simEatAmount * 3f) / 10f
+                                        : 0f;
+                                    eatAmount -= SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.Restriction)
+                                        ? (simEatAmount) / 10f
+                                        : 0f;
+                                    eatAmount -= SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.Fertilization)
+                                        ? (simEatAmount) / 10f
+                                        : 0f;
+                                    
+                                    systems[2].gaugeValue -= eatAmount;
+                                }
                                 simCharacter.tick = 0;
                                 simCharacter.ticksToEat = (simHungerBaseThreshold
                                                            * (int)TimeTickSystem.ticksPerHour)
@@ -350,7 +367,7 @@ namespace Managers
         public void LoadData(GameData gameData)
         {
             IsInTutorial = gameData.isInTutorial;
-            
+
             foreach (var system in systems)
             {
                 if (gameData.gaugeValues.TryGetValue(system.type, out float value))
@@ -366,7 +383,7 @@ namespace Managers
         public void SaveData(ref GameData gameData)
         {
             gameData.isInTutorial = this.IsInTutorial;
-            
+
             foreach (var system in systems)
             {
                 if (gameData.gaugeValues.TryAdd(system.type, system.gaugeValue)) continue;

@@ -596,9 +596,12 @@ namespace UI
             ResetCharacters();
             GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.RefreshCharacterIcons();
-            var notificationContainer = transform.parent.GetComponent<NotificationContainer>();
-            transform.parent = null;
-            notificationContainer.DisplayNotification();
+            if (transform.parent != null)
+            {
+                var notificationContainer = transform.parent.GetComponent<NotificationContainer>();
+                transform.parent = null;
+                notificationContainer.DisplayNotification();
+            }
             spaceshipManager.notificationPool.AddToPool(gameObject);
             spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             IsStarted = false;

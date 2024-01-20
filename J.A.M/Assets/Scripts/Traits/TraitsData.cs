@@ -32,7 +32,8 @@ public class TraitsData
         Cautious = 4,
         Curious = 8,
         Extroverted = 16,
-        CalmUnderPressure = 32
+        CalmUnderPressure = 32,
+        ArtifactKnowledge = 64
     };
 
     [Flags]
@@ -91,6 +92,7 @@ public class TraitsData
         DamagedBedrooms = 8388608,
         DamagedArtifactRoom = 16777216,
         DamagedCommodities = 33554432,
+        Fertilization = 67108864,
     }
     
     [Flags]
@@ -99,6 +101,10 @@ public class TraitsData
         None = 0,
         WreckedPirateShip = 1,
         ArtifactInstalled = 2,
+        FreeWill = 4,
+        Act1Over = 8,
+        Act2Over = 16,
+        Act3Over = 32,
     }
     
     public enum TraitOperator
