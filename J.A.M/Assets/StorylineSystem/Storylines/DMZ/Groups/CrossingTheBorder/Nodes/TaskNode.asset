@@ -14,16 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: TaskNode
   <Choices>k__BackingField:
-  - rid: 5750223035560625029
-  - rid: 5750223035560625030
-  - rid: 5750223035560625031
+  - rid: 197800411516633242
+  - rid: 197800411516633243
+  - rid: 197800411516633244
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: Border Controls ahead. The Echtrians, our enemies,
     must not find out about the Artifact. What should we do?
   <TaskStatus>k__BackingField: 2
   <TaskType>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+    type: 3}
   <TimeLeft>k__BackingField: 5
   <Duration>k__BackingField: 4
   <MandatorySlots>k__BackingField: 1
@@ -35,7 +36,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5750223035560625029
+    - rid: 197800411516633242
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -45,7 +46,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: ' says we could shoot down the Echtrians
           customs. No Echtrians, no border control!'
-    - rid: 5750223035560625030
+    - rid: 197800411516633243
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: New Choice
@@ -55,7 +56,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: ' says we could avoid the control by going
           along the border. It''ll take a long time.'
-    - rid: 5750223035560625031
+    - rid: 197800411516633244
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: New Choice

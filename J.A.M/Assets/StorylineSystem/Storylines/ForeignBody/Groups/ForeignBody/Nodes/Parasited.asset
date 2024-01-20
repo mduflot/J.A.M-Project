@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: Parasited
   <Choices>k__BackingField:
-  - rid: 8851122716615377559
-  - rid: 8851122716615377560
-  - rid: 8851122716615377561
+  - rid: 197800411516633550
+  - rid: 197800411516633551
+  - rid: 197800411516633552
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: The unknown presence seems to be some sort of parasite,
@@ -24,7 +24,8 @@ MonoBehaviour:
     it?
   <TaskStatus>k__BackingField: 1
   <TaskType>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+    type: 3}
   <TimeLeft>k__BackingField: 0
   <Duration>k__BackingField: 10
   <MandatorySlots>k__BackingField: 1
@@ -32,10 +33,11 @@ MonoBehaviour:
   <TaskHelpFactor>k__BackingField: 0.75
   <Room>k__BackingField: 6
   <Furniture>k__BackingField: 3
+  <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 8851122716615377559
+    - rid: 197800411516633550
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -45,7 +47,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: ' has notions in medicine. They should be
           able to cut the thing off. And the passenger''s arm alltogether.'
-    - rid: 8851122716615377560
+    - rid: 197800411516633551
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: New Choice
@@ -55,7 +57,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: ' says it should be better to take the infected
           member to quarantine until the situation is resolved.'
-    - rid: 8851122716615377561
+    - rid: 197800411516633552
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: New Choice

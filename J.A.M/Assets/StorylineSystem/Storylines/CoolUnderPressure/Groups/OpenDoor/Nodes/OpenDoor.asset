@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: OpenDoor
   <Choices>k__BackingField:
-  - rid: 197800386652537625
-  - rid: 197800386652537626
+  - rid: 197800411820720175
+  - rid: 197800411820720176
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
-  <Description>k__BackingField: A dysfunction in the power system has cause a problem
-    of pressurisation. The integrity of one the SAS is compromised and someone need
-    to go in this very dangerous conditions to fix it.
+  <Description>k__BackingField: A dysfunction in the power system has caused a problem
+    of pressurisation. The integrity of one of the SAS is compromised and someone
+    needs to go fix it, event if it's very dangerous.
   <TaskStatus>k__BackingField: 0
   <TaskType>k__BackingField: 1
   <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
@@ -36,7 +36,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 197800386652537625
+    - rid: 197800411820720175
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -47,7 +47,7 @@ MonoBehaviour:
         <PreviewOutcome>k__BackingField: will enter the dysfonctioning SAS and perform
           an emergency fixation. The procedure is simple but recquire a lot of precision
           in a very stressful environnement
-    - rid: 197800386652537626
+    - rid: 197800411820720176
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
