@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: EventHorizon
   <Choices>k__BackingField:
-  - rid: 197800386652537761
-  - rid: 197800386652537762
-  - rid: 197800386652537763
+  - rid: 1640970999455809685
+  - rid: 1640970999455809686
+  - rid: 1640970999455809687
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: The ship trajectory will cross the vicinity of a
@@ -37,7 +37,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 197800386652537761
+    - rid: 1640970999455809685
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -47,7 +47,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: will redirect the ship trajectory, without
           any competency.
-    - rid: 197800386652537762
+    - rid: 1640970999455809686
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
@@ -58,7 +58,7 @@ MonoBehaviour:
         <PreviewOutcome>k__BackingField: will try to drive the ship close enough
           the blackhole that it doesn't impact our trajectory without being affected
           the gravity pull.
-    - rid: 197800386652537763
+    - rid: 1640970999455809687
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: ThirdChoice
