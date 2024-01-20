@@ -342,19 +342,19 @@ namespace Tasks
                     {
                         case SystemType.Trajectory:
                             previewOutcomeText.text +=
-                                $"<color={operationString}>{traits} {operation} {outcome.value}</color> <sprite=19>\n";
+                                $"{traits} <color={operationString}>{operation} {outcome.value}</color> <sprite=19>\n";
                             break;
                         case SystemType.Food:
                             previewOutcomeText.text +=
-                                $"<color={operationString}>{traits} {operation} {outcome.value}</color> <sprite=14>\n";
+                                $"{traits} <color={operationString}>{operation} {outcome.value}</color> <sprite=14>\n";
                             break;
                         case SystemType.Hull:
                             previewOutcomeText.text +=
-                                $"<color={operationString}>{traits} {operation} {outcome.value}</color> <sprite=9>\n";
+                                $"{traits} <color={operationString}>{operation} {outcome.value}</color> <sprite=9>\n";
                             break;
                         case SystemType.Power:
                             previewOutcomeText.text +=
-                                $"<color={operationString}>{traits} {operation} {outcome.value}</color> <sprite=4>\n";
+                                $"{traits} <color={operationString}>{operation} {outcome.value}</color> <sprite=4>\n";
                             break;
                     }
 
@@ -378,19 +378,19 @@ namespace Tasks
                     {
                         case SystemType.Trajectory:
                             previewOutcomeText.text +=
-                                $"<color={operationString}>{traits} <sprite=20> {operation} {valueVolition.ToString("F2")} <sprite=19></color>\n";
+                                $"{traits} <sprite=20> : <color={operationString}>{operation} {valueVolition.ToString("F2")} <sprite=19></color>\n";
                             break;
                         case SystemType.Food:
                             previewOutcomeText.text +=
-                                $"<color={operationString}>{traits} <sprite=20> {operation} {valueVolition.ToString("F2")} <sprite=14></color>\n";
+                                $"{traits} <sprite=20> : <color={operationString}>{operation} {valueVolition.ToString("F2")} <sprite=14></color>\n";
                             break;
                         case SystemType.Hull:
                             previewOutcomeText.text +=
-                                $"<color={operationString}>{traits} <sprite=20> {operation} {valueVolition.ToString("F2")} <sprite=9></color>\n";
+                                $"{traits} <sprite=20> : <color={operationString}>{operation} {valueVolition.ToString("F2")} <sprite=9></color>\n";
                             break;
                         case SystemType.Power:
                             previewOutcomeText.text +=
-                                $"<color={operationString}>{traits} <sprite=20> {operation} {valueVolition.ToString("F2")} <sprite=4></color>\n";
+                                $"{traits} <sprite=20> : <color={operationString}>{operation} {valueVolition.ToString("F2")} <sprite=4></color>\n";
                             break;
                     }
 
