@@ -10775,7 +10775,77 @@ MonoBehaviour:
   maxWaitTimePrincipal: 30
   minWaitTimeSecondary: 10
   maxWaitTimeSecondary: 20
-  principalStorylines: []
+  principalStorylines:
+  - ID: artifactInstallation
+    StorylineContainer: {fileID: 11400000, guid: 8fb49a183ec2d6446ab82101f7c2b7c1,
+      type: 2}
+    Status: 0
+    Timelines:
+    - ID: intro
+      TimelineContainer: {fileID: 11400000, guid: b739e20f08623a148989028cbd8cc28c,
+        type: 2}
+      Status: 0
+    - ID: theRoom
+      TimelineContainer: {fileID: 11400000, guid: 055631708744fc14f976b00be0142c6d,
+        type: 2}
+      Status: 0
+    - ID: instability
+      TimelineContainer: {fileID: 11400000, guid: 5aa12f251021a764c977cec300035504,
+        type: 2}
+      Status: 0
+  - ID: dmz
+    StorylineContainer: {fileID: 11400000, guid: ceaa76d026a3cb44482c50214b1be914,
+      type: 2}
+    Status: 0
+    Timelines:
+    - ID: crossingTheBorder
+      TimelineContainer: {fileID: 11400000, guid: 2a64977852d4b6140a857d3b676effa3,
+        type: 2}
+      Status: 0
+  - ID: kolyanHerd
+    StorylineContainer: {fileID: 11400000, guid: 8032651cba47a1b4986ff09ef425dc41,
+      type: 2}
+    Status: 0
+    Timelines:
+    - ID: intro
+      TimelineContainer: {fileID: 11400000, guid: c0522f4da089a544ab97151cc9c55bd1,
+        type: 2}
+      Status: 0
+    - ID: kolyanCollision
+      TimelineContainer: {fileID: 11400000, guid: b0d5c95145e55f64fa29031b92bfaea2,
+        type: 2}
+      Status: 0
+  - ID: freeWill
+    StorylineContainer: {fileID: 11400000, guid: 2f766f68d7334694faf36a01569f21a8,
+      type: 2}
+    Status: 0
+    Timelines:
+    - ID: intro
+      TimelineContainer: {fileID: 11400000, guid: f05d0a50a747eb743ab2b7c1ef7843db,
+        type: 2}
+      Status: 0
+  - ID: sentinelTribe
+    StorylineContainer: {fileID: 11400000, guid: 512fbbf3aed5c3c43b7992839b2933af,
+      type: 2}
+    Status: 0
+    Timelines:
+    - ID: intro
+      TimelineContainer: {fileID: 11400000, guid: 67a848300ab11fb4caa08ca2db94f660,
+        type: 2}
+      Status: 0
+    - ID: earthSiege
+      TimelineContainer: {fileID: 11400000, guid: c81e582e247c18944b768862f291a8dd,
+        type: 2}
+      Status: 0
+  - ID: gameEnding
+    StorylineContainer: {fileID: 11400000, guid: 64fd48d005ba8b54996c3254b7f2071d,
+      type: 2}
+    Status: 0
+    Timelines:
+    - ID: gameEnding
+      TimelineContainer: {fileID: 11400000, guid: c56e192041114984d86c69a7cfc8cd62,
+        type: 2}
+      Status: 0
 --- !u!4 &1495234967
 Transform:
   m_ObjectHideFlags: 0

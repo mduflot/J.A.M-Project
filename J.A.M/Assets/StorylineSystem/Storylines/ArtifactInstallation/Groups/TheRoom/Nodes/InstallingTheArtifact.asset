@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: InstallingTheArtifact
   <Choices>k__BackingField:
-  - rid: 8851122716615376936
-  - rid: 8851122716615376937
-  - rid: 8851122716615376938
+  - rid: 5750223079225688866
+  - rid: 5750223079225688867
+  - rid: 5750223079225688868
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: Now that we have made room for the Artifact, a trained
@@ -32,10 +32,11 @@ MonoBehaviour:
   <TaskHelpFactor>k__BackingField: 0.75
   <Room>k__BackingField: 4
   <Furniture>k__BackingField: 9
+  <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 8851122716615376936
+    - rid: 5750223079225688866
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -44,7 +45,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: bf944faf4b3c4ee4bab1c413784376ce,
           type: 2}
         <PreviewOutcome>k__BackingField: ' will install the Artifact properly.'
-    - rid: 8851122716615376937
+    - rid: 5750223079225688867
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: New Choice
@@ -53,7 +54,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 1f655fa0f59871a47a4e13ebefa97d32,
           type: 2}
         <PreviewOutcome>k__BackingField: ' will try their best to install the Artifact.'
-    - rid: 8851122716615376938
+    - rid: 5750223079225688868
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: New Choice

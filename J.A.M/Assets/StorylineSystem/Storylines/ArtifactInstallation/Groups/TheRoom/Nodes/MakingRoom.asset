@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: MakingRoom
   <Choices>k__BackingField:
-  - rid: 8851122716615376932
-  - rid: 8851122716615376933
+  - rid: 5750223079225688862
+  - rid: 5750223079225688863
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: We should prepare and clean up the Artifact Room
@@ -30,10 +30,11 @@ MonoBehaviour:
   <TaskHelpFactor>k__BackingField: 0.75
   <Room>k__BackingField: 4
   <Furniture>k__BackingField: 9
+  <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 8851122716615376932
+    - rid: 5750223079225688862
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -43,7 +44,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: ' will clear the storage room for the Artifact
           and recycle whatever is left there.'
-    - rid: 8851122716615376933
+    - rid: 5750223079225688863
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: New Choice
