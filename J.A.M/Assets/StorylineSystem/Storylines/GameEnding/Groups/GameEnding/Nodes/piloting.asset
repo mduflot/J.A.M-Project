@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: piloting
   <Choices>k__BackingField:
-  - rid: 5750223079225688537
-  - rid: 5750223079225688538
-  - rid: 5750223079225688539
+  - rid: 5750223079225688689
+  - rid: 5750223079225688690
+  - rid: 5750223079225688691
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: Description
@@ -34,7 +34,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5750223079225688537
+    - rid: 5750223079225688689
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -45,7 +45,7 @@ MonoBehaviour:
         <PreviewOutcome>k__BackingField: will maneuver the ship around the Echtrian
           ships. It'll be extremely risky and we could fail the mission if our hull
           doesn't sustain the damage.
-    - rid: 5750223079225688538
+    - rid: 5750223079225688690
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: New Choice
@@ -55,7 +55,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The hull is in bad shape. We can't go against
           the Echtrians like that, or we'll be destroyed.
-    - rid: 5750223079225688539
+    - rid: 5750223079225688691
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: New Choice
