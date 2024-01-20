@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: piloting
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: piloting
+  <Choices>k__BackingField:
+  - rid: 5750223079225688537
+  - rid: 5750223079225688538
+  - rid: 5750223079225688539
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: Description
+  <TaskStatus>k__BackingField: 2
+  <TaskType>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 0}
+  <TimeLeft>k__BackingField: 0
+  <Duration>k__BackingField: 0
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 0
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 1
+  <Furniture>k__BackingField: 1
+  <IsTaskTutorial>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 5750223079225688537
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: cf70361a2b7ccf348b2f21bed13a0c35,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: ad0c1749413acbc42b495ea788e5c9e7,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will maneuver the ship around the Echtrian
+          ships. It'll be extremely risky and we could fail the mission if our hull
+          doesn't sustain the damage.
+    - rid: 5750223079225688538
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 711cd0ce29305d1459a6d2ec091f19af,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: fa2148c200bc85944bb71a44d360a98a,
+          type: 2}
+        <PreviewOutcome>k__BackingField: The hull is in bad shape. We can't go against
+          the Echtrians like that, or we'll be destroyed.
+    - rid: 5750223079225688539
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: f69fe9f50f1f8dc49914cffe9097a6f0,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 1762c964094dac14693dd7f6c8f6c2f9,
+          type: 2}
+        <PreviewOutcome>k__BackingField: We'll abandon the mission. The lives of
+          the crew aren't worth the risk. You will be shut down for this.
