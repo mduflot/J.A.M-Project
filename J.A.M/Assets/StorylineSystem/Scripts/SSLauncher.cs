@@ -209,7 +209,7 @@ namespace SS
                     }
                 }
 
-                if (nodeContainer.StoryType == SSStoryType.Principal) Checker.Instance.GenerateNewPrincipalEvent();
+                if (nodeContainer.StoryType == SSStoryType.Principal) Checker.Instance.GenerateNewPrincipalEvent(nodeContainer.IsTutorialToPlay);
                 Checker.Instance.launcherPool.AddToPool(this.gameObject);
                 Checker.Instance.activeLaunchers.Remove(this);
                 Debug.Log("No more timeline available / Storyline completed");

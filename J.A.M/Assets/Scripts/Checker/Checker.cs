@@ -22,6 +22,8 @@ public class Checker : MonoBehaviour, IDataPersistence
     [SerializeField] private TextMeshProUGUI presentationText;
 
     [SerializeField] private GameObject launcherPrefab;
+    [SerializeField] private uint waitTimeAfterTutorial = 3;
+    [SerializeField] private uint waitTimeTrajectory = 12;
     [SerializeField] private uint minWaitTimePrincipal = 20;
     [SerializeField] private uint maxWaitTimePrincipal = 30;
     [SerializeField] private uint minWaitTimeSecondary = 20;
@@ -30,14 +32,17 @@ public class Checker : MonoBehaviour, IDataPersistence
     private SSCampaignSO ssCampaign;
 
     private List<Storyline> allStorylines;
-    [SerializeField] private List<Storyline> principalStorylines;
+    private List<Storyline> principalStorylines;
     private List<Storyline> secondaryStorylines;
+    private List<Storyline> leakStorylines;
+    private List<Storyline> trajectoryStorylines;
 
     private List<Storyline> availableStoryLines = new();
     private List<SSNodeGroupSO> availableTimelines = new();
 
     private uint waitingTimePrincipal;
     private uint waitingTimeSecondary;
+    private uint waitingTimeTrajectory;
     private bool isAlreadyWaiting;
 
     private void Awake()
@@ -60,34 +65,46 @@ public class Checker : MonoBehaviour, IDataPersistence
         allStorylines = new List<Storyline>();
         principalStorylines = new();
         secondaryStorylines = new();
+        leakStorylines = new();
+        trajectoryStorylines = new();
         for (int i = 0; i < ssCampaign.Storylines.Count; i++)
         {
             var storyline = ssCampaign.Storylines[i];
-            if (storyline.StoryType == SSStoryType.Principal)
+            switch (storyline.StoryType)
             {
-                principalStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
-            }
-            else
-            {
-                secondaryStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
+                case SSStoryType.Principal:
+                    principalStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
+                    break;
+                case SSStoryType.Secondary:
+                    secondaryStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
+                    break;
+                case SSStoryType.Leak:
+                    leakStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
+                    break;
+                case SSStoryType.Trajectory:
+                    trajectoryStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
+                    break;
+                default:
+                    Debug.Log("Storyline type not found.");
+                    break;
             }
         }
 
         allStorylines.AddRange(principalStorylines);
         allStorylines.AddRange(secondaryStorylines);
+        allStorylines.AddRange(leakStorylines);
+        allStorylines.AddRange(trajectoryStorylines);
         isAlreadyWaiting = false;
-        if (DataPersistenceManager.Instance.IsNewGame)
+        if (!DataPersistenceManager.Instance.IsNewGame) return;
+        GameManager.Instance.UIManager.TasksMenu.SetActive(false);
+        GameManager.Instance.UIManager.SpaceshipMenu.SetActive(false);
+        for (int index = 0; index < GameManager.Instance.UIManager.GaugesMenu.Count; index++)
         {
-            GameManager.Instance.UIManager.TasksMenu.SetActive(false);
-            GameManager.Instance.UIManager.SpaceshipMenu.SetActive(false);
-            for (int index = 0; index < GameManager.Instance.UIManager.GaugesMenu.Count; index++)
-            {
-                var gauge = GameManager.Instance.UIManager.GaugesMenu[index];
-                gauge.SetActive(false);
-            }
-            ChooseNewStoryline(SSStoryType.Principal);
-            DataPersistenceManager.Instance.IsNewGame = false;
+            var gauge = GameManager.Instance.UIManager.GaugesMenu[index];
+            gauge.SetActive(false);
         }
+        ChooseNewStoryline(SSStoryType.Principal);
+        DataPersistenceManager.Instance.IsNewGame = false;
     }
 
     public void GenerateNewEvent()
@@ -96,9 +113,15 @@ public class Checker : MonoBehaviour, IDataPersistence
         ChooseNewStoryline(SSStoryType.Secondary);
     }
 
-    public void GenerateNewPrincipalEvent()
+    public void GenerateNewPrincipalEvent(bool isTutorial)
     {
-        waitingTimePrincipal = (uint)Random.Range(minWaitTimePrincipal, maxWaitTimePrincipal) * TimeTickSystem.ticksPerHour;
+        if (isTutorial)
+        {
+            waitingTimeTrajectory = waitTimeTrajectory * TimeTickSystem.ticksPerHour;
+            TimeTickSystem.OnTick += GenerateTrajectoryEvent;
+            waitingTimePrincipal = waitTimeAfterTutorial * TimeTickSystem.ticksPerHour;
+        }
+        else waitingTimePrincipal = (uint)Random.Range(minWaitTimePrincipal, maxWaitTimePrincipal) * TimeTickSystem.ticksPerHour;
         Debug.Log("Generating new principal event. Maybe nothing will happen.");
         TimeTickSystem.OnTick += WaitStorylinePrincipal;
     }
@@ -126,6 +149,18 @@ public class Checker : MonoBehaviour, IDataPersistence
         this.isAlreadyWaiting = false;
         TimeTickSystem.OnTick -= WaitStorylineSecondary;
         ChooseNewStoryline(SSStoryType.Secondary);
+    }
+    
+    private void GenerateTrajectoryEvent(object sender, TimeTickSystem.OnTickEventArgs e)
+    {
+        if (waitingTimeTrajectory > 0)
+        {
+            waitingTimeTrajectory -= TimeTickSystem.timePerTick;
+            return;
+        }
+
+        waitingTimeTrajectory = waitTimeTrajectory * TimeTickSystem.ticksPerHour;
+        ChooseNewStoryline(SSStoryType.Trajectory);
     }
 
     public void ChooseNewStoryline(SSStoryType storyType)
@@ -174,6 +209,30 @@ public class Checker : MonoBehaviour, IDataPersistence
 
                 break;
             }
+            case SSStoryType.Leak:
+                for (int index = 0; index < leakStorylines.Count; index++)
+                {
+                    var storyline = leakStorylines[index];
+                    if (storyline.Status == SSStoryStatus.Completed) continue;
+                    if (storyline.StorylineContainer.Condition)
+                        if (!RouteCondition(storyline.StorylineContainer.Condition))
+                            continue;
+                    if (activeLaunchers.Any(launcher => launcher.storyline == storyline)) continue;
+                    availableStoryLines.Add(storyline);
+                }
+                break;
+            case SSStoryType.Trajectory:
+                for (int index = 0; index < trajectoryStorylines.Count; index++)
+                {
+                    var storyline = trajectoryStorylines[index];
+                    if (storyline.Status == SSStoryStatus.Completed) continue;
+                    if (storyline.StorylineContainer.Condition)
+                        if (!RouteCondition(storyline.StorylineContainer.Condition))
+                            continue;
+                    if (activeLaunchers.Any(launcher => launcher.storyline == storyline)) continue;
+                    availableStoryLines.Add(storyline);
+                }
+                break;
         }
 
         if (availableStoryLines.Count == 0)
