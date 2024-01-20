@@ -23,6 +23,7 @@ public class Checker : MonoBehaviour, IDataPersistence
 
     [SerializeField] private GameObject launcherPrefab;
     [SerializeField] private uint waitTimeAfterTutorial = 3;
+    [SerializeField] private uint waitTimeTrajectory = 12;
     [SerializeField] private uint minWaitTimePrincipal = 20;
     [SerializeField] private uint maxWaitTimePrincipal = 30;
     [SerializeField] private uint minWaitTimeSecondary = 20;
@@ -41,6 +42,7 @@ public class Checker : MonoBehaviour, IDataPersistence
 
     private uint waitingTimePrincipal;
     private uint waitingTimeSecondary;
+    private uint waitingTimeTrajectory;
     private bool isAlreadyWaiting;
 
     private void Awake()
@@ -113,7 +115,12 @@ public class Checker : MonoBehaviour, IDataPersistence
 
     public void GenerateNewPrincipalEvent(bool isTutorial)
     {
-        if (isTutorial) waitingTimePrincipal = waitTimeAfterTutorial * TimeTickSystem.ticksPerHour;
+        if (isTutorial)
+        {
+            waitingTimeTrajectory = waitTimeTrajectory * TimeTickSystem.ticksPerHour;
+            TimeTickSystem.OnTick += GenerateTrajectoryEvent;
+            waitingTimePrincipal = waitTimeAfterTutorial * TimeTickSystem.ticksPerHour;
+        }
         else waitingTimePrincipal = (uint)Random.Range(minWaitTimePrincipal, maxWaitTimePrincipal) * TimeTickSystem.ticksPerHour;
         Debug.Log("Generating new principal event. Maybe nothing will happen.");
         TimeTickSystem.OnTick += WaitStorylinePrincipal;
@@ -142,6 +149,18 @@ public class Checker : MonoBehaviour, IDataPersistence
         this.isAlreadyWaiting = false;
         TimeTickSystem.OnTick -= WaitStorylineSecondary;
         ChooseNewStoryline(SSStoryType.Secondary);
+    }
+    
+    private void GenerateTrajectoryEvent(object sender, TimeTickSystem.OnTickEventArgs e)
+    {
+        if (waitingTimeTrajectory > 0)
+        {
+            waitingTimeTrajectory -= TimeTickSystem.timePerTick;
+            return;
+        }
+
+        waitingTimeTrajectory = waitTimeTrajectory * TimeTickSystem.ticksPerHour;
+        ChooseNewStoryline(SSStoryType.Trajectory);
     }
 
     public void ChooseNewStoryline(SSStoryType storyType)

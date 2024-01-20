@@ -40,6 +40,12 @@ namespace Managers
 
         public bool IsInTutorial;
 
+        [Header("Leak")] 
+        [SerializeField] private uint baseTimeToWaitLeak;
+        private uint timeToWaitLeak;
+        private uint waitingTimeLeak;
+        private bool isLeaked;
+
         private void Start()
         {
             if (DataPersistenceManager.Instance.IsNewGame) IsInTutorial = true;
@@ -60,6 +66,7 @@ namespace Managers
 
         private void Initialize()
         {
+            timeToWaitLeak = baseTimeToWaitLeak * TimeTickSystem.ticksPerHour;
             TimeTickSystem.OnTick += UpdateSystems;
             TimeTickSystem.OnTick += UpdateTasks;
             TimeTickSystem.OnTick += UpdateCharacters;
@@ -80,6 +87,26 @@ namespace Managers
             }
         }
 
+        private void GenerateLeakEvent()
+        {
+            isLeaked = true;
+            Checker.Instance.ChooseNewStoryline(SSStoryType.Leak);
+            TimeTickSystem.OnTick += WaitingLeakEvent;
+        }
+
+        private void WaitingLeakEvent(object sender, TimeTickSystem.OnTickEventArgs e)
+        {
+            if (waitingTimeLeak < timeToWaitLeak)
+            {
+                waitingTimeLeak += TimeTickSystem.timePerTick;
+                return;
+            }
+
+            isLeaked = false;
+            waitingTimeLeak = 0;
+            TimeTickSystem.OnTick -= WaitingLeakEvent;
+        }
+
         private void UpdateSystems(object sender, TimeTickSystem.OnTickEventArgs e)
         {
             if (systems.All(system => system.gaugeValue <= 0))
@@ -96,6 +123,16 @@ namespace Managers
 
             foreach (var system in systems)
             {
+                if (system.type == SystemType.Hull)
+                {
+                    if (!isLeaked)
+                    {
+                        if (system.gaugeValue < 10)
+                        {
+                            GenerateLeakEvent();
+                        }
+                    }
+                }
                 if (system.gaugeValue <= 0) system.gaugeValue = 0;
                 else
                 {
