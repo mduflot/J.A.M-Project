@@ -13,6 +13,8 @@ public class TimeButton : MonoBehaviour
     [SerializeField] private Image backgroundImage;
     [SerializeField] private Image iconImage;
 
+    [SerializeField] private AudioClip clickSound;
+
     public void SelectButton()
     {
         iconImage.sprite = selectedIconSprite;
@@ -23,6 +25,11 @@ public class TimeButton : MonoBehaviour
     {
         iconImage.sprite = defaultIconSprite;
         backgroundImage.sprite = defaultSprite;
+    }
+
+    public void OnClick()
+    {
+        SoundManager.Instance.PlaySound(clickSound);
     }
     
     

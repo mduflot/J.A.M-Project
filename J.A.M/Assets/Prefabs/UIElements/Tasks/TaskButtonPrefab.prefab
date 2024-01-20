@@ -561,6 +561,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3031392206851881039}
+        m_TargetAssemblyTypeName: TaskButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1331742147235379725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,14 +588,20 @@ MonoBehaviour:
   IsCancelled: 0
   CanIgnoreDialogueTask: 0
   currentStoryline: {fileID: 0}
-  spaceshipManager: {fileID: 0}
   nodeContainer: {fileID: 11400000, guid: e9fc39a357f8213438a2877d0b8e7472, type: 2}
   nodeGroup: {fileID: 11400000, guid: d92e5425b09c86c4ca7066512d5a2211, type: 2}
-  node: {fileID: 11400000, guid: 543ae8c418c40964e92334c23ac72312, type: 2}
+  node: {fileID: 11400000, guid: 809dcbc4a10f11344b8f615838894061, type: 2}
   groupedNodes: 1
   startingNodesOnly: 0
   selectedNodeGroupIndex: 2
   selectedNodeIndex: 0
+  storylineLog:
+    storylineID: 
+    storylineName: 
+    storylineDate: 
+    storylineEndLog: 
+    timelineLogs: []
+  isCheatLauncher: 0
 --- !u!114 &3031392206851881039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,6 +619,8 @@ MonoBehaviour:
   taskDuration: {fileID: 3167198978467049389}
   taskIcon: {fileID: 1720039437780469325}
   taskShortDescription: 
+  hoverSound: {fileID: 8300000, guid: 763851b382e8e3f4fafef95aacf8e060, type: 3}
+  clickSound: {fileID: 8300000, guid: eb9d643e1be1e164aa8c0e83c01e7502, type: 3}
 --- !u!1 &8629016754825204516
 GameObject:
   m_ObjectHideFlags: 0

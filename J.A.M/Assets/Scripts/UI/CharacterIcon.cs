@@ -18,6 +18,7 @@ namespace UI
         [SerializeField] private Image currentTaskImage;
         [SerializeField] private TextMeshProUGUI characterName;
         [NonSerialized] public CharacterBehaviour character;
+        [SerializeField] private AudioClip hoverSound;
 
 
         private Animator animator;
@@ -127,6 +128,7 @@ namespace UI
         public void OnPointerEnter(PointerEventData eventData)
         {
             GameManager.Instance.UIManager.characterInfoUI.SetupCharacterInfo(character.GetCharacterData());
+            SoundManager.Instance.PlaySound(hoverSound);
         }
 
         public void OnPointerExit(PointerEventData eventData)

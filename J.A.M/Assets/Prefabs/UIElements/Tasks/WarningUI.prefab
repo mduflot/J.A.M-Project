@@ -380,8 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a2582f56a31584292872f8576e5564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
-  characterIcon: {fileID: 639917331528341220}
+  characters: []
   warningDescription: {fileID: 378511075223908977}
   characterWarningDescription: {fileID: 841421329953376674}
   warning: {fileID: 4586288249918045690}
@@ -642,6 +641,7 @@ GameObject:
   - component: {fileID: 628216419627250601}
   - component: {fileID: 8320383237043245034}
   - component: {fileID: 5816520333795581363}
+  - component: {fileID: 6476677147006357260}
   m_Layer: 5
   m_Name: CloseWarning
   m_TagString: Untagged
@@ -763,6 +763,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6476677147006357260}
+        m_TargetAssemblyTypeName: MainMenuButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6476677147006357260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6151781648235260663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c1d58454068d044afeda7cb98026f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverMenu: {fileID: 0}
+  menuButtonHover: {fileID: 8300000, guid: 44f27079f6927634a83ba8d2ea1e846f, type: 3}
+  menuButtonClick: {fileID: 8300000, guid: 763851b382e8e3f4fafef95aacf8e060, type: 3}
 --- !u!1 &6278540914529222271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,6 +1207,7 @@ GameObject:
   - component: {fileID: 5506461089095303928}
   - component: {fileID: 3593015991652135890}
   - component: {fileID: 331009628429146995}
+  - component: {fileID: 2115330795300853467}
   m_Layer: 5
   m_Name: CancelTaskButton
   m_TagString: Untagged
@@ -1301,3 +1329,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2115330795300853467}
+        m_TargetAssemblyTypeName: MainMenuButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2115330795300853467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8156245273799432771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c1d58454068d044afeda7cb98026f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverMenu: {fileID: 0}
+  menuButtonHover: {fileID: 8300000, guid: 44f27079f6927634a83ba8d2ea1e846f, type: 3}
+  menuButtonClick: {fileID: 8300000, guid: 763851b382e8e3f4fafef95aacf8e060, type: 3}

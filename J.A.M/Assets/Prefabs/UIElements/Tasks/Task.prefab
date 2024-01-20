@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 3568825986124569134}
   - component: {fileID: 4955707540531294795}
   - component: {fileID: 7330600179057513141}
+  - component: {fileID: 4528666636118263778}
   m_Layer: 5
   m_Name: CancelTaskButton
   m_TagString: Untagged
@@ -169,6 +170,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4528666636118263778}
+        m_TargetAssemblyTypeName: MainMenuButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4528666636118263778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457594629257838064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c1d58454068d044afeda7cb98026f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverMenu: {fileID: 0}
+  menuButtonHover: {fileID: 8300000, guid: 44f27079f6927634a83ba8d2ea1e846f, type: 3}
+  menuButtonClick: {fileID: 8300000, guid: dc334aee71332594fa51f61da1a830f7, type: 3}
 --- !u!1 &712973976591963364
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,6 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskUI: {fileID: 7950596912903946892}
+  taskCloseSound: {fileID: 8300000, guid: d983870e1f4372644ae035f1431bcd08, type: 3}
 --- !u!1 &1050638585766249423
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +768,7 @@ GameObject:
   - component: {fileID: 899943334430207263}
   - component: {fileID: 3792246660110295234}
   - component: {fileID: 1385023778232543908}
+  - component: {fileID: 1940145002286330805}
   m_Layer: 5
   m_Name: DialogueLogButton
   m_TagString: Untagged
@@ -862,6 +892,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1940145002286330805}
+        m_TargetAssemblyTypeName: MainMenuButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1940145002286330805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376496434407391214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c1d58454068d044afeda7cb98026f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverMenu: {fileID: 0}
+  menuButtonHover: {fileID: 8300000, guid: 44f27079f6927634a83ba8d2ea1e846f, type: 3}
+  menuButtonClick: {fileID: 8300000, guid: 3f56e91f91705c54b808148abddfb6cf, type: 3}
 --- !u!1 &1874985365637477740
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,6 +1014,7 @@ GameObject:
   - component: {fileID: 2351085737274633616}
   - component: {fileID: 2619856305189122101}
   - component: {fileID: 8374653030187408629}
+  - component: {fileID: 2488834662332758584}
   m_Layer: 5
   m_Name: CloseTask
   m_TagString: Untagged
@@ -1090,6 +1148,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2488834662332758584}
+        m_TargetAssemblyTypeName: MainMenuButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2488834662332758584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975034023318630039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c1d58454068d044afeda7cb98026f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverMenu: {fileID: 0}
+  menuButtonHover: {fileID: 8300000, guid: eb9d643e1be1e164aa8c0e83c01e7502, type: 3}
+  menuButtonClick: {fileID: 8300000, guid: 763851b382e8e3f4fafef95aacf8e060, type: 3}
 --- !u!1 &2130327719625782937
 GameObject:
   m_ObjectHideFlags: 0
@@ -2119,8 +2204,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Grande Description
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bdabbab8320981c48957fa674912354c, type: 2}
-  m_sharedMaterial: {fileID: -3970661156861175649, guid: bdabbab8320981c48957fa674912354c,
+  m_fontAsset: {fileID: 11400000, guid: 068434346e79e4640a00daa905d36d2e, type: 2}
+  m_sharedMaterial: {fileID: -734360374541532602, guid: 068434346e79e4640a00daa905d36d2e,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2618,7 +2703,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4315157343108697334}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3010,13 +3095,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4614296477043808290}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8048701283022386115}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 19.4, y: 0}
@@ -3468,8 +3553,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Preview Description
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bdabbab8320981c48957fa674912354c, type: 2}
-  m_sharedMaterial: {fileID: -3970661156861175649, guid: bdabbab8320981c48957fa674912354c,
+  m_fontAsset: {fileID: 11400000, guid: 068434346e79e4640a00daa905d36d2e, type: 2}
+  m_sharedMaterial: {fileID: -734360374541532602, guid: 068434346e79e4640a00daa905d36d2e,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -4613,6 +4698,7 @@ GameObject:
   - component: {fileID: 3248489268079888752}
   - component: {fileID: 4588286678286567503}
   - component: {fileID: 1796332751382939898}
+  - component: {fileID: 117854565075373730}
   m_Layer: 5
   m_Name: StartTaskButton
   m_TagString: Untagged
@@ -4734,6 +4820,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 117854565075373730}
+        m_TargetAssemblyTypeName: MainMenuButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &117854565075373730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8254439152401575025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c1d58454068d044afeda7cb98026f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverMenu: {fileID: 0}
+  menuButtonHover: {fileID: 8300000, guid: eb9d643e1be1e164aa8c0e83c01e7502, type: 3}
+  menuButtonClick: {fileID: 8300000, guid: d983870e1f4372644ae035f1431bcd08, type: 3}
 --- !u!1 &8547837394349023143
 GameObject:
   m_ObjectHideFlags: 0

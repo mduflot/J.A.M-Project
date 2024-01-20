@@ -9,6 +9,7 @@ public abstract class GaugeUI : HoverableObject, IPointerDownHandler
     public bool IsPreviewing;
     public GameObject parentGauge;
     public SSLauncher launcher;
+    [SerializeField] private AudioClip hoverSound;
 
     public void InitializeGauge()
     {
@@ -33,5 +34,11 @@ public abstract class GaugeUI : HoverableObject, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         launcher.StartTimeline();
+    }
+
+    public override void OnHover(PointerEventData eventData)
+    {
+        base.OnHover(eventData);
+        SoundManager.Instance.PlaySound(hoverSound);
     }
 }
