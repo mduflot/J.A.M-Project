@@ -221,6 +221,8 @@ namespace Tasks
 
                 durationText.text = TimeTickSystem.GetTicksAsTime((uint)(duration * TimeTickSystem.ticksPerHour));
                 var button = startButton.GetComponentInChildren<Button>();
+                var text = button.GetComponentInChildren<TextMeshProUGUI>();
+                var image = button.GetComponent<Image>();
                 button.Select();
 
                 for (int index = 0; index < notification.Task.Conditions.Count; index++)
@@ -230,12 +232,16 @@ namespace Tasks
                     if ((!condition && notification.Task.TaskType == SSTaskType.Compute))
                     {
                         previewOutcomeText.text = "Condition not met";
-                        startButton.GetComponentInChildren<Button>().interactable = false;
+                        button.interactable = false;
+                        text.text = "Task Locked";
+                        image.color = Color.black;
                     }
                     else
                     {
                         previewOutcomeText.text = null;
-                        startButton.GetComponentInChildren<Button>().interactable = true;
+                        button.interactable = true;
+                        text.text = "Start Task";
+                        image.color = Color.white;
                     }
 
                     if (notification.Task.TaskType != SSTaskType.Compute)
@@ -243,12 +249,16 @@ namespace Tasks
                         if ((!condition && notification.Task.TaskType == SSTaskType.Untimed) || (characterSlots[0].icon == null && notification.Task.TaskType == SSTaskType.Permanent))
                         {
                             previewOutcomeText.text = "Condition not met";
-                            startButton.GetComponentInChildren<Button>().interactable = false;
+                            button.interactable = false;
+                            text.text = "Task Locked";
+                            image.color = Color.black;
                         }
                         else
                         {
                             previewOutcomeText.text = null;
-                            startButton.GetComponentInChildren<Button>().interactable = true;
+                            button.interactable = true;
+                            text.text = "Start Task";
+                            image.color = Color.white;
                         }
                     }
                     
