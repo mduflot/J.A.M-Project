@@ -27,6 +27,7 @@ public class SimCharacter : MonoBehaviour
     private void Start()
     {
         currentRoom = idleRooms[0];
+        currentRoom.presentCharacters.Add(this);
         currentRoomDoor = currentRoom.roomDoors[0].doorID;
         ticksToNextIdle = (uint) Random.Range(1, 7) * TimeTickSystem.ticksPerHour;
         ticksToEat = (GameManager.Instance.SpaceshipManager.simHungerBaseThreshold 
