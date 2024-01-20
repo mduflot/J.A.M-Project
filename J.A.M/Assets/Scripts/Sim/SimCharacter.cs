@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Managers;
 using UnityEditor.AddressableAssets.Build.BuildPipelineTasks;
@@ -14,18 +15,20 @@ public class SimCharacter : MonoBehaviour
 
     [HideInInspector] public SimRoom currentRoom;
     [HideInInspector] public SimRoom taskRoom;
-    public SimRoom idleRoom;
+    public SimRoom[] idleRooms;
 
     public SimStatus simStatus;
     public int tick;
     public int ticksToEat;
+    public uint ticksToNextIdle;
     
     private GameObject taskFurniture;
     
     private void Start()
     {
-        currentRoom = idleRoom;
+        currentRoom = idleRooms[0];
         currentRoomDoor = currentRoom.roomDoors[0].doorID;
+        ticksToNextIdle = (uint) Random.Range(1, 7) * TimeTickSystem.ticksPerHour;
         ticksToEat = (GameManager.Instance.SpaceshipManager.simHungerBaseThreshold 
                       * (int) TimeTickSystem.ticksPerHour) 
                      + Random.Range(
@@ -86,7 +89,7 @@ public class SimCharacter : MonoBehaviour
             switch (simStatus)
             {
                 case SimStatus.GoToIdle:
-                    if (currentRoom == idleRoom)
+                    if (idleRooms.Contains(currentRoom))
                     {
                         doorPath.Clear();
                         return;
@@ -111,7 +114,7 @@ public class SimCharacter : MonoBehaviour
     {
         if (currentRoom == null) return;
         
-        if(taskRoom == null && simStatus != SimStatus.IdleEat && currentRoom != idleRoom)
+        if(taskRoom == null && simStatus != SimStatus.IdleEat && currentRoom != idleRooms[0])
             SendToIdleRoom();
         
         
@@ -147,7 +150,15 @@ public class SimCharacter : MonoBehaviour
 
     public void SendToIdleRoom()
     {
-        SendToRoom(idleRoom.roomType);
+        var randRoom = Random.Range(0f, 1f);
+        
+        if (idleRooms.Length < 2)
+            randRoom = 0f;
+        
+        if(randRoom <= .5f)
+            SendToRoom(idleRooms[0].roomType);
+        else
+            SendToRoom(idleRooms[Random.Range(1, idleRooms.Length)].roomType);
         simStatus = SimStatus.GoToIdle;
     }
 

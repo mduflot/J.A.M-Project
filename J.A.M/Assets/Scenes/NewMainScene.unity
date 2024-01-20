@@ -516,10 +516,12 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 1061812510}
+  idleRooms:
+  - {fileID: 1061812510}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &75054010
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1938,7 +1940,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -1948,7 +1950,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -1998,12 +2000,12 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -102.5
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -3248,10 +3250,12 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 417636992}
+  idleRooms:
+  - {fileID: 417636992}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &880690035
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3691,10 +3695,12 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 417636992}
+  idleRooms:
+  - {fileID: 417636992}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &1031077738
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4098,10 +4104,12 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 535105148}
+  idleRooms:
+  - {fileID: 535105148}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &1079339700
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4284,7 +4292,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -4294,7 +4302,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -4344,12 +4352,12 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -32.5
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -10995,10 +11003,12 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 1911275390}
+  idleRooms:
+  - {fileID: 1911275390}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &1472942973
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12769,7 +12779,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -12779,7 +12789,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -12829,12 +12839,12 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -172.5
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -13332,10 +13342,12 @@ MonoBehaviour:
   currentRoomDoor: 0
   currentRoom: {fileID: 0}
   taskRoom: {fileID: 0}
-  idleRoom: {fileID: 417636992}
+  idleRooms:
+  - {fileID: 417636992}
   simStatus: 0
   tick: 0
   ticksToEat: 0
+  ticksToNextIdle: 0
 --- !u!212 &2062025558
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13467,7 +13479,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -13477,7 +13489,7 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
@@ -13527,12 +13539,12 @@ PrefabInstance:
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -242.5
       objectReference: {fileID: 0}
     - target: {fileID: 6659441996862034523, guid: df2f5bb929e55244bb3de8ad26e41793,
         type: 3}
