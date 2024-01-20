@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: TaskNode
   <Choices>k__BackingField:
-  - rid: 197800360853635224
-  - rid: 197800360853635225
+  - rid: 197800411516633334
+  - rid: 197800411516633335
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 1
   <Description>k__BackingField: A crew member has been spotted staring through the
@@ -23,7 +23,8 @@ MonoBehaviour:
     out ?
   <TaskStatus>k__BackingField: 0
   <TaskType>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+    type: 3}
   <TimeLeft>k__BackingField: 10
   <Duration>k__BackingField: 2
   <MandatorySlots>k__BackingField: 1
@@ -35,7 +36,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 197800360853635224
+    - rid: 197800411516633334
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -45,7 +46,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The crew member will try to interact with
           the star gazer to obtain a reaction.
-    - rid: 197800360853635225
+    - rid: 197800411516633335
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChioce

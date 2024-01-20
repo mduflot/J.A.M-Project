@@ -524,15 +524,27 @@ namespace Tasks
                     break;
                 case OutcomeData.OutcomeType.CharacterStat:
                     previewOutcomeText.text += traits;
+                    string targetStat = "<sprite=20>";
+                    string operationStringStat = "green";
+                    if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub) operationStringStat = "red";
+                    if (outcome.OutcomeTargetStat == OutcomeData.OutcomeTargetStat.Mood)
+                    {
+                        targetStat = "<sprite=22>";
+                        if (outcome.OutcomeOperation == OutcomeData.OutcomeOperation.Sub)
+                        {
+                            targetStat = "<sprite=21>";
+                            operationStringStat = "red";
+                        }
+                    }
                     switch (outcome.OutcomeTarget)
                     {
                         case OutcomeData.OutcomeTarget.Crew:
                             previewOutcomeText.text +=
-                                $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat} to Crew\n";
+                                $"<color={operationStringStat}>{outcome.OutcomeOperation} {outcome.value}</color> {targetStat} to Crew\n";
                             break;
                         case OutcomeData.OutcomeTarget.Leader:
                             previewOutcomeText.text +=
-                                $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat} to {characterSlots[0].icon.character.GetCharacterData().firstName}\n";
+                                $"<color={operationStringStat}>{outcome.OutcomeOperation} {outcome.value}</color> {targetStat} to {characterSlots[0].icon.character.GetCharacterData().firstName}\n";
                             break;
                         case OutcomeData.OutcomeTarget.Assistant:
                             for (int i = 0; i < characterSlots.Count; i++)
@@ -541,7 +553,7 @@ namespace Tasks
                                 if (character.isMandatory) continue;
                                 if (character.icon == null) continue;
                                 previewOutcomeText.text +=
-                                    $"{outcome.OutcomeOperation} {outcome.value} {outcome.OutcomeTargetStat} to {character.icon.character.GetCharacterData().firstName}\n";
+                                    $"<color={operationStringStat}>{outcome.OutcomeOperation} {outcome.value}</color> {targetStat} to {character.icon.character.GetCharacterData().firstName}\n";
                             }
 
                             break;
@@ -743,9 +755,13 @@ namespace Tasks
             string tagBuffer = "";
             bool bufferTag = false;
             text.text = tempText;
+            text.enableAutoSizing = false;
+            text.fontSize = 42;
 
             while (letterIndex < textToDisplay.Length)
             {
+                if (text.isTextOverflowing) text.enableAutoSizing = true;
+                
                 //If tag-beginning character is parsed, start buffering the tag
                 if (textToDisplay[letterIndex] == '<')
                     bufferTag = true;

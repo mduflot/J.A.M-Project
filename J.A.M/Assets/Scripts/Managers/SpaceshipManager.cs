@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using CharacterSystem;
@@ -338,7 +337,20 @@ namespace Managers
                         case SimCharacter.SimStatus.GoToEat:
                             simCharacter.tick = 0;
                             break;
-
+                        
+                        case SimCharacter.SimStatus.GoToIdle:
+                            simCharacter.tick = 0;
+                            break;
+                        
+                        case SimCharacter.SimStatus.Idle:
+                            if (!character.IsWorking() && simCharacter.tick >= simCharacter.ticksToNextIdle)
+                            {
+                                simCharacter.tick = 0;
+                                simCharacter.ticksToNextIdle = (uint) Random.Range(1, 7) * TimeTickSystem.ticksPerHour;
+                                simCharacter.SendToIdleRoom();
+                            }
+                            break;
+                        
                         default:
                             if (simCharacter.tick >= simCharacter.ticksToEat)
                             {

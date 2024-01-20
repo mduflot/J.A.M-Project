@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: Silhouette
   <Choices>k__BackingField:
-  - rid: 197800360853635244
-  - rid: 197800360853635245
-  - rid: 197800360853635246
+  - rid: 197800411516633341
+  - rid: 197800411516633342
+  - rid: 197800411516633343
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: A crew member swears having seen a strange figure
@@ -24,7 +24,8 @@ MonoBehaviour:
     ?
   <TaskStatus>k__BackingField: 0
   <TaskType>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+    type: 3}
   <TimeLeft>k__BackingField: 10
   <Duration>k__BackingField: 3
   <MandatorySlots>k__BackingField: 1
@@ -36,7 +37,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 197800360853635244
+    - rid: 197800411516633341
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -45,7 +46,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 660ad7704b114c74cb9e898af764183a,
           type: 2}
         <PreviewOutcome>k__BackingField: Somebody will be sent to inspect the exterior.
-    - rid: 197800360853635245
+    - rid: 197800411516633342
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
@@ -54,7 +55,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: f48b3866e3d0cb245a11cc27b28e7aea,
           type: 2}
         <PreviewOutcome>k__BackingField: Somebody will be sent to inspect the exterior.
-    - rid: 197800360853635246
+    - rid: 197800411516633343
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: ThirdChoice

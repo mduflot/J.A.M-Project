@@ -14,16 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: Tension
   <Choices>k__BackingField:
-  - rid: 197800365375881339
-  - rid: 197800365375881340
-  - rid: 197800365375881341
+  - rid: 197800411820720258
+  - rid: 197800411820720259
+  - rid: 197800411820720260
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: The civilians need to make a stop to release tension,
-    but the military sergeant insist that the ship maintain its trajectory.
+    but the sergeant insists that the ship maintains its trajectory.
   <TaskStatus>k__BackingField: 0
   <TaskType>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+    type: 3}
   <TimeLeft>k__BackingField: 10
   <Duration>k__BackingField: 2
   <MandatorySlots>k__BackingField: 1
@@ -35,7 +36,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 197800365375881339
+    - rid: 197800411820720258
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -45,7 +46,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The ship will maintain its original course,
           in spite of the desires of the crew.
-    - rid: 197800365375881340
+    - rid: 197800411820720259
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
@@ -55,7 +56,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: As planned by the civilians the ship will
           make a stop and enjoy a walk. We will loose some precious time and fuel.
-    - rid: 197800365375881341
+    - rid: 197800411820720260
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: ThirdChoice

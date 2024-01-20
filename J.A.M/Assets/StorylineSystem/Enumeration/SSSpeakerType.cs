@@ -30,6 +30,7 @@ namespace SS.Enumerations
         CharacterTraits3,
         CharacterTraits4,
         CharacterTraits5,
-        CharacterTraits6
+        CharacterTraits6,
+        IncomingSignal
     }
 }

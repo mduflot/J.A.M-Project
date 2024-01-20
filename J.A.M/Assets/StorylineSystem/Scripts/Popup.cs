@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,13 +29,19 @@ namespace SS
         
         private void OnDisable()
         {
+            TimeTickSystem.ModifyTimeScale(TimeTickSystem.lastActiveTimeScale);
+            GameManager.Instance.taskOpened = false;
             continueButton.onClick.RemoveAllListeners();
             if (passTutorialButton != null) passTutorialButton.onClick.RemoveAllListeners();
         }
 
         public void Initialize(string text, string title = null)
         {
+            TimeTickSystem.ModifyTimeScale(0);
+            GameManager.Instance.taskOpened = true;
             gameObject.SetActive(true);
+            popupText.fontSize = 42;
+            popupText.enableAutoSizing = false;
             if (title != null && popupTitle != null) popupTitle.text = title;
             StartCoroutine(DisplayText(popupText, text, 0.02f));
             continueButtonPressed = false;
@@ -43,7 +50,11 @@ namespace SS
 
         public void InitializeEndGame(string text, string title)
         {
+            TimeTickSystem.ModifyTimeScale(0);
+            GameManager.Instance.taskOpened = true;
             gameObject.SetActive(true);
+            popupText.fontSize = 42;
+            popupText.enableAutoSizing = false;
             popupTitle.text = title;
             StartCoroutine(DisplayText(popupText, text, 0.02f));
             continueButton.onClick.AddListener(() => GameManager.Instance.MenuManager.LoadScene("MenuScene"));
@@ -59,6 +70,8 @@ namespace SS
 
             while (letterIndex < textToDisplay.Length)
             {
+                if (text.isTextOverflowing) text.enableAutoSizing = true;
+                
                 //If tag-beginning character is parsed, start buffering the tag
                 if (textToDisplay[letterIndex] == '<')
                     bufferTag = true;
