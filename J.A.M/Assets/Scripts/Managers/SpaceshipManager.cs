@@ -338,6 +338,10 @@ namespace Managers
                             simCharacter.tick = 0;
                             break;
                         
+                        case SimCharacter.SimStatus.GoToIdle:
+                            simCharacter.tick = 0;
+                            break;
+                        
                         case SimCharacter.SimStatus.Idle:
                             if (!character.IsWorking() && simCharacter.tick >= simCharacter.ticksToNextIdle)
                             {
