@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: MakingRoom
   <Choices>k__BackingField:
-  - rid: 5602516908545671204
-  - rid: 5602516908545671205
+  - rid: 197800434780340274
+  - rid: 197800434780340275
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: We should prepare and clean up the Artifact Room
     to install it properly. Someone that knows the ship would be better suited.
   <TaskStatus>k__BackingField: 2
   <TaskType>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 674067cf15d4f3448b518b294ca7432e,
+    type: 3}
   <TimeLeft>k__BackingField: 10
   <Duration>k__BackingField: 10
   <MandatorySlots>k__BackingField: 1
@@ -34,7 +35,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5602516908545671204
+    - rid: 197800434780340274
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -44,7 +45,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: ' will clear the storage room for the Artifact
           and recycle whatever is left there.'
-    - rid: 5602516908545671205
+    - rid: 197800434780340275
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: New Choice

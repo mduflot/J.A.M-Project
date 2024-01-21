@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: shuttle
   <Choices>k__BackingField:
-  - rid: 5750223079225688705
-  - rid: 5750223079225688706
+  - rid: 197800434780340562
+  - rid: 197800434780340563
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: We could use the shuttle to deliver the Artifact,
     but the rest of the crew will likely lose their life.
   <TaskStatus>k__BackingField: 2
   <TaskType>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 674067cf15d4f3448b518b294ca7432e,
+    type: 3}
   <TimeLeft>k__BackingField: 10
   <Duration>k__BackingField: 5
   <MandatorySlots>k__BackingField: 3
@@ -34,7 +35,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5750223079225688705
+    - rid: 197800434780340562
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -44,7 +45,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: will go inside the shuttle with the Artifact.
           The rest of the crew will likely die but the mission will succeed.
-    - rid: 5750223079225688706
+    - rid: 197800434780340563
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: New Choice

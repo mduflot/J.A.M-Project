@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: MissionBriefing
   <Choices>k__BackingField:
-  - rid: 5602516908545671199
-  - rid: 5602516908545671200
+  - rid: 197800434780340272
+  - rid: 197800434780340273
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: 'It could be time for the civilians of the crew to
@@ -23,7 +23,8 @@ MonoBehaviour:
     to Earth. Or, we could avoid sharing too much information with them.'
   <TaskStatus>k__BackingField: 2
   <TaskType>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 674067cf15d4f3448b518b294ca7432e,
+    type: 3}
   <TimeLeft>k__BackingField: 10
   <Duration>k__BackingField: 10
   <MandatorySlots>k__BackingField: 1
@@ -35,7 +36,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5602516908545671199
+    - rid: 197800434780340272
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -45,7 +46,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: ' will brief the civilians about the Artifact
           and the mission.'
-    - rid: 5602516908545671200
+    - rid: 197800434780340273
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: New Choice
