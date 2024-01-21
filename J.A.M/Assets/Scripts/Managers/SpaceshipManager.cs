@@ -416,7 +416,10 @@ namespace Managers
         public void DisplayRooms(bool state)
         {
             roomsDisplay.SetActive(state);
-            DisplayShipOutside(!state);
+            if (Camera.main.transform.position.z < -2000)
+            {
+                DisplayShipOutside(!state);
+            }
         }
 
         public void DisplayShipOutside(bool state)
