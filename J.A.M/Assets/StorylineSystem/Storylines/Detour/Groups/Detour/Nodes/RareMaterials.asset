@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: RareMaterials
   <Choices>k__BackingField:
-  - rid: 8851122967584440362
-  - rid: 8851122967584440363
-  - rid: 8851122967584440364
+  - rid: 1640971021839761411
+  - rid: 1640971021839761412
+  - rid: 1640971021839761413
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: The hull needs rare metal alloy to be fixed, we can
@@ -36,7 +36,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 8851122967584440362
+    - rid: 1640971021839761411
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -45,7 +45,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: will ask to lead the mission on the station,
           maybe they will be able to make a good deal.
-    - rid: 8851122967584440363
+    - rid: 1640971021839761412
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
@@ -54,11 +54,11 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: will pilot and lead the negotiation. The
           ship will have to make a detour.
-    - rid: 8851122967584440364
+    - rid: 1640971021839761413
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: ThirdChoice
-        <NextNode>k__BackingField: {fileID: 11400000, guid: 6ca01c9cfcd86ac4990353818b9fb7be,
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 88edc4b34962fcd478f81e0b996f8e29,
           type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: 2ed6d48c7a1871644836fc957ad0bd24,
           type: 2}

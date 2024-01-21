@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
-  m_Name: lose
+  m_Name: disintegrating
   m_EditorClassIdentifier: 
-  <NodeName>k__BackingField: lose
+  <NodeName>k__BackingField: disintegrating
   <Choices>k__BackingField:
-  - rid: 1640971021839761410
+  - rid: 1640971021839761415
   <NodeType>k__BackingField: 0
   <IsStartingNode>k__BackingField: 0
-  <Text>k__BackingField: And lose more time before we can go home ?
+  <Text>k__BackingField: Are we gonna ignore the fact that our ship is literally
+    disintegrating right now ?
   <SpeakerType>k__BackingField: 0
   <Duration>k__BackingField: 0.5
   <IsDialogueTask>k__BackingField: 0
@@ -29,9 +30,9 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1640971021839761410
+    - rid: 1640971021839761415
       type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Next Node
-        <NextNode>k__BackingField: {fileID: 11400000, guid: d28eda47ba38c4d46ab2dd73e3906d25,
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 6d135d8283fde69498cd30c4679fb042,
           type: 2}

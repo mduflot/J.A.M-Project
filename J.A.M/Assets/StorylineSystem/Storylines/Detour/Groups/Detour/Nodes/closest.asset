@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
-  m_Name: lose
+  m_Name: closest
   m_EditorClassIdentifier: 
-  <NodeName>k__BackingField: lose
+  <NodeName>k__BackingField: closest
   <Choices>k__BackingField:
-  - rid: 1640971021839761410
+  - rid: 1640971021839761425
   <NodeType>k__BackingField: 0
   <IsStartingNode>k__BackingField: 0
-  <Text>k__BackingField: And lose more time before we can go home ?
-  <SpeakerType>k__BackingField: 0
+  <Text>k__BackingField: We have passed the closest station a long time ago, if we
+    go back we won't have enough fuel to continue
+  <SpeakerType>k__BackingField: 16
   <Duration>k__BackingField: 0.5
   <IsDialogueTask>k__BackingField: 0
   <PercentageTask>k__BackingField: 50
@@ -29,9 +30,9 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1640971021839761410
+    - rid: 1640971021839761425
       type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Next Node
-        <NextNode>k__BackingField: {fileID: 11400000, guid: d28eda47ba38c4d46ab2dd73e3906d25,
+        <NextNode>k__BackingField: {fileID: 11400000, guid: f3e1fd8cb8af21a4abbbb876702ade1f,
           type: 2}
