@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: Tension
   <Choices>k__BackingField:
-  - rid: 1640970999455809599
-  - rid: 1640970999455809600
-  - rid: 1640970999455809601
+  - rid: 197800432149200909
+  - rid: 197800432149200910
+  - rid: 197800432149200911
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: The civilians need to make a stop to release tension,
@@ -36,7 +36,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1640970999455809599
+    - rid: 197800432149200909
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -44,9 +44,9 @@ MonoBehaviour:
           type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: 5bca680cb225121418788d3b0c8a892b,
           type: 2}
-        <PreviewOutcome>k__BackingField: The ship will maintain its original course,
-          in spite of the desires of the crew.
-    - rid: 1640970999455809600
+        <PreviewOutcome>k__BackingField: As planned by the civilians the ship will
+          make a stop and enjoy a walk. We will loose some precious time and fuel.
+    - rid: 197800432149200910
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
@@ -54,9 +54,9 @@ MonoBehaviour:
           type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: 05e71464fac6fcb40861912d3e5c9963,
           type: 2}
-        <PreviewOutcome>k__BackingField: As planned by the civilians the ship will
-          make a stop and enjoy a walk. We will loose some precious time and fuel.
-    - rid: 1640970999455809601
+        <PreviewOutcome>k__BackingField: The ship will maintain its original course,
+          in spite of the desires of the crew.
+    - rid: 197800432149200911
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: ThirdChoice
