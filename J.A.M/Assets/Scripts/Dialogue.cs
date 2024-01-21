@@ -70,7 +70,12 @@ public class Dialogue : MonoBehaviour
 
         while (letterIndex < textToDisplay.Length)
         {
-            if (text.isTextOverflowing) text.enableAutoSizing = true;
+            if (text.isTextOverflowing)
+            {
+                text.enableAutoSizing = true;
+                text.fontSizeMin = 6;
+                text.fontSizeMax = 72;
+            }
 
             //If tag-beginning character is parsed, start buffering the tag
             if (textToDisplay[letterIndex] == '<')
