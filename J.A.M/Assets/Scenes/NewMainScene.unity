@@ -1679,8 +1679,13 @@ PrefabInstance:
       objectReference: {fileID: 1761260809}
     - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
+      propertyPath: systems.Array.data[1].isBlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
       propertyPath: systems.Array.data[3].decreaseSpeed
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2398093306607282585, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
