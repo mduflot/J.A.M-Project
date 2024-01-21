@@ -95,6 +95,7 @@ namespace SS
             IsCancelled = false;
             CanIgnoreDialogueTask = false;
             task = null;
+            SoundManager.Instance.PlaySound(SoundManager.Instance.notificationChime);
             CheckNodeType(node);
         }
 
