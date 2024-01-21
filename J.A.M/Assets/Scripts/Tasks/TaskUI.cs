@@ -162,7 +162,7 @@ namespace Tasks
             StartCoroutine(DisplayText(descriptionText, notification.Task.Description, 0.02f));
             StartCoroutine(DisplayText(previewOutcomeText, notification.Task.previewText, 0.02f));
             duration = notification.Task.Duration;
-            durationText.SetText(TimeTickSystem.GetTicksAsTime((uint)duration));
+            durationText.SetText(TimeTickSystem.GetTicksAsTime((uint) duration));
 
             for (int i = 0; i < notification.Task.leaderCharacters.Count; i++)
             {
@@ -219,7 +219,7 @@ namespace Tasks
                       (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
                     : notification.Task.Duration;
 
-                durationText.text = TimeTickSystem.GetTicksAsTime((uint)(duration * TimeTickSystem.ticksPerHour));
+                durationText.text = TimeTickSystem.GetTicksAsTime((uint) (duration * TimeTickSystem.ticksPerHour));
                 var button = startButton.GetComponentInChildren<Button>();
                 var text = button.GetComponentInChildren<TextMeshProUGUI>();
                 var image = button.GetComponent<Image>();
@@ -246,7 +246,8 @@ namespace Tasks
 
                     if (notification.Task.TaskType != SSTaskType.Compute)
                     {
-                        if ((!condition && notification.Task.TaskType == SSTaskType.Untimed) || (characterSlots[0].icon == null && notification.Task.TaskType == SSTaskType.Permanent))
+                        if ((!condition && notification.Task.TaskType == SSTaskType.Untimed) ||
+                            (characterSlots[0].icon == null && notification.Task.TaskType == SSTaskType.Permanent))
                         {
                             previewOutcomeText.text = "Condition not met";
                             button.interactable = false;
@@ -261,7 +262,7 @@ namespace Tasks
                             image.color = Color.white;
                         }
                     }
-                    
+
                     if (condition)
                     {
                         previewOutcomeText.text = null;
@@ -302,8 +303,17 @@ namespace Tasks
                                     var outcome = notification.Task.Conditions[index].Item1
                                         .additionnalConditions[jindex].outcomes.Outcomes[j];
                                     DisplayPreview(outcome, traits, gaugeOutcomes);
+                                    foreach (var trait in GameManager.Instance.UIManager.characterInfoUI.characterTraits)
+                                    {
+                                        if (traits.ToLower().Contains(trait.GetName().ToLower()))
+                                        {
+                                            trait.ChangeColor(notification.Task.Conditions[index].Item1
+                                                    .additionnalConditions[jindex].outcomes.Outcomes[j]
+                                                    .OutcomeOperation == OutcomeData.OutcomeOperation.Add);
+                                        }
+                                    }
                                 }
-
+                                
                                 //break;
                             }
                         }
@@ -348,6 +358,7 @@ namespace Tasks
                         operation = "-";
                         operationString = "red";
                     }
+
                     switch (outcome.OutcomeTargetGauge)
                     {
                         case SystemType.Trajectory:
@@ -383,6 +394,7 @@ namespace Tasks
                         operation = "-";
                         operationString = "red";
                     }
+
                     var valueVolition = characterSlots[0].icon.character.GetBaseVolition();
                     switch (outcome.OutcomeTargetGauge)
                     {
@@ -532,6 +544,7 @@ namespace Tasks
                         operationStat = "-";
                         operationStringStat = "red";
                     }
+
                     if (outcome.OutcomeTargetStat == OutcomeData.OutcomeTargetStat.Mood)
                     {
                         targetStat = "<sprite=22>";
@@ -542,6 +555,7 @@ namespace Tasks
                             operationStringStat = "red";
                         }
                     }
+
                     switch (outcome.OutcomeTarget)
                     {
                         case OutcomeData.OutcomeTarget.Crew:
@@ -767,7 +781,7 @@ namespace Tasks
             while (letterIndex < textToDisplay.Length)
             {
                 if (text.isTextOverflowing) text.enableAutoSizing = true;
-                
+
                 //If tag-beginning character is parsed, start buffering the tag
                 if (textToDisplay[letterIndex] == '<')
                     bufferTag = true;

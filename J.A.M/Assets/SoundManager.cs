@@ -7,7 +7,6 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
-    public AudioListener listener;
     public AudioSource audioSource;
     public AudioClip notificationChime;
 

@@ -13,7 +13,7 @@ public class CharacterInfoUI : MonoBehaviour
     [SerializeField] private Transform traitsParent;
 
     [SerializeField] private TraitHoverable traitPrefab;
-    private List<TraitHoverable> characterTraits = new();
+    public List<TraitHoverable> characterTraits = new();
 
 
     private void Start()

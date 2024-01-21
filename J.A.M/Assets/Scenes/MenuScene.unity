@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414738, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1104,7 +1104,6 @@ GameObject:
   - component: {fileID: 1834925919}
   - component: {fileID: 1834925918}
   - component: {fileID: 1834925917}
-  - component: {fileID: 1834925916}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -1112,14 +1111,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1834925916
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834925915}
-  m_Enabled: 1
 --- !u!82 &1834925917
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1228,7 +1219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f1be9cc2314bf04a829ebb367d24234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listener: {fileID: 1834925916}
+  listener: {fileID: 0}
   audioSource: {fileID: 1834925917}
   notificationChime: {fileID: 8300000, guid: d983870e1f4372644ae035f1431bcd08, type: 3}
 --- !u!4 &1834925919
