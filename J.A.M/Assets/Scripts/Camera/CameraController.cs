@@ -1,3 +1,4 @@
+using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -58,6 +59,16 @@ public class CameraController : MonoBehaviour
     {
         if (cheatContainer) cheatContainer.SetActive(!cheatContainer.activeSelf);
     }
+    
+    private void OnSpacePerformed(InputAction.CallbackContext obj)
+    {
+        if (TimeTickSystem.timeScale == 0)
+        {
+            TimeTickSystem.ModifyTimeScale(1);
+            return;
+        }
+        TimeTickSystem.ModifyTimeScale(0);
+    }
 
     private void OnDrag(InputAction.CallbackContext ctx)
     {
@@ -113,6 +124,7 @@ public class CameraController : MonoBehaviour
         cameraMovement.Drag.started += OnDrag;
         cameraMovement.Drag.performed += OnDrag;
         cameraMovement.Drag.canceled += OnDrag;
+        cameraMovement.Space.performed += OnSpacePerformed;
     }
 
     private void OnDisable()
@@ -127,6 +139,7 @@ public class CameraController : MonoBehaviour
         cameraMovement.Drag.started -= OnDrag;
         cameraMovement.Drag.performed -= OnDrag;
         cameraMovement.Drag.canceled -= OnDrag;
+        cameraMovement.Space.performed -= OnSpacePerformed;
     }
     
     private Vector2 GetMousePosition => camera.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, -500));

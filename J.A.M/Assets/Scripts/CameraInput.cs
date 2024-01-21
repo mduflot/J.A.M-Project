@@ -73,6 +73,15 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Space"",
+                    ""type"": ""Button"",
+                    ""id"": ""22ae1be7-2792-458d-a15b-55efaa337c3d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -251,6 +260,17 @@ namespace UnityEngine.InputSystem
                     ""action"": ""Drag"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""effbb312-7087-4199-8114-c1f1c9d987ea"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Space"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -325,6 +345,7 @@ namespace UnityEngine.InputSystem
             m_Camera_Escape = m_Camera.FindAction("Escape", throwIfNotFound: true);
             m_Camera_Cheat = m_Camera.FindAction("Cheat", throwIfNotFound: true);
             m_Camera_Drag = m_Camera.FindAction("Drag", throwIfNotFound: true);
+            m_Camera_Space = m_Camera.FindAction("Space", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -391,6 +412,7 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Camera_Escape;
         private readonly InputAction m_Camera_Cheat;
         private readonly InputAction m_Camera_Drag;
+        private readonly InputAction m_Camera_Space;
         public struct CameraActions
         {
             private @CameraInput m_Wrapper;
@@ -400,6 +422,7 @@ namespace UnityEngine.InputSystem
             public InputAction @Escape => m_Wrapper.m_Camera_Escape;
             public InputAction @Cheat => m_Wrapper.m_Camera_Cheat;
             public InputAction @Drag => m_Wrapper.m_Camera_Drag;
+            public InputAction @Space => m_Wrapper.m_Camera_Space;
             public InputActionMap Get() { return m_Wrapper.m_Camera; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -424,6 +447,9 @@ namespace UnityEngine.InputSystem
                 @Drag.started += instance.OnDrag;
                 @Drag.performed += instance.OnDrag;
                 @Drag.canceled += instance.OnDrag;
+                @Space.started += instance.OnSpace;
+                @Space.performed += instance.OnSpace;
+                @Space.canceled += instance.OnSpace;
             }
 
             private void UnregisterCallbacks(ICameraActions instance)
@@ -443,6 +469,9 @@ namespace UnityEngine.InputSystem
                 @Drag.started -= instance.OnDrag;
                 @Drag.performed -= instance.OnDrag;
                 @Drag.canceled -= instance.OnDrag;
+                @Space.started -= instance.OnSpace;
+                @Space.performed -= instance.OnSpace;
+                @Space.canceled -= instance.OnSpace;
             }
 
             public void RemoveCallbacks(ICameraActions instance)
@@ -512,6 +541,7 @@ namespace UnityEngine.InputSystem
             void OnEscape(InputAction.CallbackContext context);
             void OnCheat(InputAction.CallbackContext context);
             void OnDrag(InputAction.CallbackContext context);
+            void OnSpace(InputAction.CallbackContext context);
         }
     }
 }
