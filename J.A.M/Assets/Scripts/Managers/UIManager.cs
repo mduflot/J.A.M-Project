@@ -35,6 +35,7 @@ namespace Managers
         public GameObject SpaceshipMenu;
         public ShipControlManager shipControlManager;
         public TextMeshProUGUI mainStorylineText;
+        public DialogueManager dialogueManager;
 
         [Serializable]
         public struct Gauges
