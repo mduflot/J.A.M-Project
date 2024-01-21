@@ -595,6 +595,8 @@ public class Checker : MonoBehaviour, IDataPersistence
                 }
             }
         }
+        
+        TimeTickSystem.OnTick += GenerateTrajectoryEvent;
     }
 
     public void SaveData(ref GameData gameData)
