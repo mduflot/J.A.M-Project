@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Managers;
 using SS.ScriptableObjects;
@@ -17,8 +18,15 @@ namespace CharacterSystem
         [SerializeField] private Sprite expert;
         [SerializeField] private Sprite incomingSignal;
 
+        public Queue<Dialogue> dialogueQueue = new();
+        
         public void AddDialogue(Task task, SSDialogueNodeSO node, string characterName)
         {
+            if (dialogueQueue.Count + 1 > 3)
+            {
+                var dialogue = dialogueQueue.Dequeue();
+                StartCoroutine(dialogue.GetComponent<Dialogue>().Fade());
+            }
             StartCoroutine(InitializeDialogue(task, node, characterName));
         }
 
@@ -29,23 +37,24 @@ namespace CharacterSystem
             var duration = node.Duration * TimeTickSystem.ticksPerHour;
             var dialogueContainer = Instantiate(dialoguePrefab, dialogueParent);
             var dialogueComponent = dialogueContainer.GetComponent<Dialogue>();
+            dialogueQueue.Enqueue(dialogueComponent);
             switch (characterName)
             {
                 case "Sensor":
-                    dialogueComponent.DisplayDialogue(sensor, characterName, node, duration);
+                    dialogueComponent.DisplayDialogue(sensor, characterName, node, this);
                     break;
                 case "Expert":
-                    dialogueComponent.DisplayDialogue(expert, characterName, node, duration);
+                    dialogueComponent.DisplayDialogue(expert, characterName, node, this);
                     break;
                 case "Incoming Signal":
-                    dialogueComponent.DisplayDialogue(incomingSignal, characterName, node, duration);
+                    dialogueComponent.DisplayDialogue(incomingSignal, characterName, node, this);
                     break;
                 default:
                     dialogueComponent.DisplayDialogue(
                         GameManager.Instance.SpaceshipManager.characters
                             .First(character => character.GetCharacterData().firstName == characterName).GetCharacterData()
                             .characterIcon,
-                        characterName, node, duration);
+                        characterName, node, this);
                     break;
             }
         }
