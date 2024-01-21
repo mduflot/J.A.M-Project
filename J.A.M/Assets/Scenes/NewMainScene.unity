@@ -564,6 +564,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 492d9394a84d71d40a3b95791f82cb08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &847799054 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 572313680695614468, guid: f4b0ad034b47349458511baeb5fff145,
+    type: 3}
+  m_PrefabInstance: {fileID: 1360174037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &847799055 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3551464945084877324, guid: f4b0ad034b47349458511baeb5fff145,
+    type: 3}
+  m_PrefabInstance: {fileID: 1360174037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &847799056 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6284031504104499001, guid: f4b0ad034b47349458511baeb5fff145,
+    type: 3}
+  m_PrefabInstance: {fileID: 1360174037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &847799057 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9052463991925291914, guid: f4b0ad034b47349458511baeb5fff145,
+    type: 3}
+  m_PrefabInstance: {fileID: 1360174037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &847799058 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1882144128509051305, guid: f4b0ad034b47349458511baeb5fff145,
+    type: 3}
+  m_PrefabInstance: {fileID: 1360174037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &847799059 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4373780269033302384, guid: f4b0ad034b47349458511baeb5fff145,
+    type: 3}
+  m_PrefabInstance: {fileID: 1360174037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &847799060 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 921463265239112962, guid: f4b0ad034b47349458511baeb5fff145,
+    type: 3}
+  m_PrefabInstance: {fileID: 1360174037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &880690032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,6 +1799,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
+      propertyPath: rooms.Array.size
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
       propertyPath: characters.Array.data[0]
       value: 
       objectReference: {fileID: 1407804386}
@@ -1787,6 +1834,16 @@ PrefabInstance:
       objectReference: {fileID: 1761260809}
     - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
+      propertyPath: rooms.Array.data[17].type
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: rooms.Array.data[17].transform
+      value: 
+      objectReference: {fileID: 847799055}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
       propertyPath: systems.Array.data[1].isBlocked
       value: 1
       objectReference: {fileID: 0}
@@ -1794,6 +1851,71 @@ PrefabInstance:
         type: 3}
       propertyPath: systems.Array.data[3].decreaseSpeed
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: rooms.Array.data[17].roomObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: rooms.Array.data[17].roomObjects.Array.data[0].transform
+      value: 
+      objectReference: {fileID: 847799054}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: rooms.Array.data[17].roomObjects.Array.data[1].transform
+      value: 
+      objectReference: {fileID: 847799060}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: rooms.Array.data[17].roomObjects.Array.data[2].transform
+      value: 
+      objectReference: {fileID: 847799059}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: rooms.Array.data[17].roomObjects.Array.data[3].transform
+      value: 
+      objectReference: {fileID: 847799058}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: rooms.Array.data[17].roomObjects.Array.data[4].transform
+      value: 
+      objectReference: {fileID: 847799057}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: rooms.Array.data[17].roomObjects.Array.data[5].transform
+      value: 
+      objectReference: {fileID: 847799056}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: rooms.Array.data[17].roomObjects.Array.data[0].furnitureType
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: rooms.Array.data[17].roomObjects.Array.data[1].furnitureType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: rooms.Array.data[17].roomObjects.Array.data[2].furnitureType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: rooms.Array.data[17].roomObjects.Array.data[3].furnitureType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: rooms.Array.data[17].roomObjects.Array.data[4].furnitureType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253770339199655299, guid: f4b0ad034b47349458511baeb5fff145,
+        type: 3}
+      propertyPath: rooms.Array.data[17].roomObjects.Array.data[5].furnitureType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2398093306607282585, guid: f4b0ad034b47349458511baeb5fff145,
         type: 3}
