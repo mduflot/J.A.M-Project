@@ -640,6 +640,7 @@ namespace UI
                 IsStarted = false;
                 launcher.RunTimedNodeCancel(this, Task, taskNode);
                 spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
+                ResetCharacters();
             }
             else if (Task.TaskType.Equals(SSTaskType.Untimed))
             {
@@ -647,6 +648,7 @@ namespace UI
                 IsStarted = false;
                 launcher.RunUntimedNodeCancel(this, Task, taskNode);
                 spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
+                ResetCharacters();
             }
 
             if (LeaderCharacters.Count == 0) return;
