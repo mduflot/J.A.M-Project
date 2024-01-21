@@ -25,6 +25,7 @@ namespace CharacterSystem
             if (dialogueQueue.Count + 1 > 3)
             {
                 var dialogue = dialogueQueue.Dequeue();
+                dialogue.StopAllCoroutines();
                 StartCoroutine(dialogue.GetComponent<Dialogue>().Fade());
             }
             StartCoroutine(InitializeDialogue(task, node, characterName));
