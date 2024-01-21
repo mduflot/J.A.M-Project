@@ -132,7 +132,11 @@ public class SimCharacter : MonoBehaviour
 
     public void SendToRoom(RoomType roomType)
     {
-        if (roomType == currentRoom.roomType) return;
+        if (roomType == currentRoom.roomType)
+        {
+            simStatus = SimStatus.Idle;
+            return;
+        }
         
         //cancel last path
         doorPath.Clear();
@@ -148,6 +152,7 @@ public class SimCharacter : MonoBehaviour
 
     public void SendToIdleRoom()
     {
+        simStatus = SimStatus.GoToIdle;
         var randRoom = Random.Range(0f, 1f);
         
         if (idleRooms.Length < 2)
@@ -157,7 +162,6 @@ public class SimCharacter : MonoBehaviour
             SendToRoom(idleRooms[0].roomType);
         else
             SendToRoom(idleRooms[Random.Range(1, idleRooms.Length)].roomType);
-        simStatus = SimStatus.GoToIdle;
     }
 
     public bool IsBusy()
