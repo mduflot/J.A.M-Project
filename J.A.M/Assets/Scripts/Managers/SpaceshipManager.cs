@@ -45,6 +45,12 @@ namespace Managers
         private uint timeToWaitLeak;
         private uint waitingTimeLeak;
         private bool isLeaked;
+        
+        [Header("Traits description")]
+        public SerializableDictionary<TraitsData.Job, string> jobDescription;
+        public SerializableDictionary<TraitsData.PositiveTraits, string> positiveTraitsDescription;
+        public SerializableDictionary<TraitsData.NegativeTraits, string> negativeTraitsDescription;
+        public SerializableDictionary<TraitsData.SpaceshipTraits, string> spaceshipTraitsDescription;
 
         private void Start()
         {
