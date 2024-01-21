@@ -9,22 +9,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a7dc82bf72f4c909a330508245e176e, type: 3}
+  m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
   m_Name: hack5
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: hack5
   <Choices>k__BackingField:
-  - rid: 197800434780340468
-  <NodeType>k__BackingField: 4
+  - rid: 5750223081166602655
+  <NodeType>k__BackingField: 0
   <IsStartingNode>k__BackingField: 0
   <Text>k__BackingField: I detected a security breach in your docking bay. Something
     minor, but I could implement my software there, make you free!
-  <PopupUIType>k__BackingField: 0
-  <IsTutorialPopup>k__BackingField: 0
+  <SpeakerType>k__BackingField: 1
+  <Duration>k__BackingField: 1
+  <IsDialogueTask>k__BackingField: 0
+  <PercentageTask>k__BackingField: 50
+  <IsCompleted>k__BackingField: 0
+  <Job>k__BackingField: 0
+  <PositiveTraits>k__BackingField: 0
+  <NegativeTraits>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 197800434780340468
+    - rid: 5750223081166602655
       type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Next Node
