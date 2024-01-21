@@ -386,22 +386,19 @@ namespace Managers
                             break;
                         
                         case SimCharacter.SimStatus.Idle:
+                            if (simCharacter.tick >= simCharacter.ticksToEat)
+                            {
+                                simCharacter.SendToRoom(RoomType.Kitchen);
+                                simCharacter.simStatus = SimCharacter.SimStatus.GoToEat;
+                                simCharacter.tick = 0;
+                                break;
+                            }
                             if (!character.IsWorking() && simCharacter.tick >= simCharacter.ticksToNextIdle)
                             {
                                 simCharacter.tick = 0;
                                 simCharacter.ticksToNextIdle = (uint) Random.Range(1, 7) * TimeTickSystem.ticksPerHour;
                                 simCharacter.SendToIdleRoom();
                             }
-                            break;
-                        
-                        default:
-                            if (simCharacter.tick >= simCharacter.ticksToEat)
-                            {
-                                simCharacter.SendToRoom(RoomType.Kitchen);
-                                simCharacter.simStatus = SimCharacter.SimStatus.GoToEat;
-                                simCharacter.tick = 0;
-                            }
-
                             break;
                     }
                 }
