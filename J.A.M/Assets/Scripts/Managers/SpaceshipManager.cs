@@ -382,7 +382,7 @@ namespace Managers
                             break;
                         
                         case SimCharacter.SimStatus.GoToIdle:
-                            simCharacter.tick = 0;
+                            simCharacter.tick--;
                             break;
                         
                         case SimCharacter.SimStatus.Idle:
