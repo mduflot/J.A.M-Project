@@ -47,7 +47,7 @@ public class ShipControlManager : MonoBehaviour
                 traitHoverable.data = new HoverMenuData
                 {
                     text1 = trait.ToString(),
-                    text2 = GameManager.Instance.SpaceshipManager.spaceshipTraitsDescription[trait],
+                    text2 = GameManager.Instance.SpaceshipManager.spaceshipTraitsDescription.ContainsKey(trait) ? GameManager.Instance.SpaceshipManager.spaceshipTraitsDescription[trait] : "",
                     baseParent = transform.parent,
                     parent = transform
                 };
@@ -105,7 +105,7 @@ public class ShipControlManager : MonoBehaviour
                 traitHoverable.data = new HoverMenuData
                 {
                     text1 = trait.ToString(),
-                    text2 = GameManager.Instance.SpaceshipManager.jobDescription[trait],
+                    text2 = GameManager.Instance.SpaceshipManager.jobDescription.ContainsKey(trait) ? GameManager.Instance.SpaceshipManager.jobDescription[trait] : "",
                     baseParent = transform.parent,
                     parent = transform
                 };
@@ -124,7 +124,7 @@ public class ShipControlManager : MonoBehaviour
                 traitHoverable.data = new HoverMenuData
                 {
                     text1 = trait.ToString(),
-                    text2 = GameManager.Instance.SpaceshipManager.positiveTraitsDescription[trait],
+                    text2 = GameManager.Instance.SpaceshipManager.positiveTraitsDescription.ContainsKey(trait) ? GameManager.Instance.SpaceshipManager.positiveTraitsDescription[trait] : "",
                     baseParent = transform.parent,
                     parent = transform
                 };
@@ -143,7 +143,7 @@ public class ShipControlManager : MonoBehaviour
                 traitHoverable.data = new HoverMenuData
                 {
                     text1 = trait.ToString(),
-                    text2 = GameManager.Instance.SpaceshipManager.negativeTraitsDescription[trait],
+                    text2 = GameManager.Instance.SpaceshipManager.negativeTraitsDescription.ContainsKey(trait) ? GameManager.Instance.SpaceshipManager.negativeTraitsDescription[trait] : "",
                     baseParent = transform.parent,
                     parent = transform
                 };
