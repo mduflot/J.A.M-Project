@@ -159,6 +159,7 @@ public class Checker : MonoBehaviour, IDataPersistence
             return;
         }
 
+        TimeTickSystem.OnTick -= GenerateTrajectoryEvent;
         waitingTimeTrajectory = waitTimeTrajectory * TimeTickSystem.ticksPerHour;
         ChooseNewStoryline(SSStoryType.Trajectory);
     }
@@ -306,6 +307,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         List<string> assignedCharacters = null, List<string> notAssignedCharacters = null,
         List<string> traitsCharacters = null, uint waitingTime = 0, TaskLog taskLog = null)
     {
+        if (storyline.StorylineContainer.StoryType == SSStoryType.Trajectory) TimeTickSystem.OnTick += GenerateTrajectoryEvent;
         presentationContainer.SetActive(true);
         presentationText.text = "New Storyline : " + storyline.StorylineContainer.FileName;
         StartCoroutine(DisablePresentation());
