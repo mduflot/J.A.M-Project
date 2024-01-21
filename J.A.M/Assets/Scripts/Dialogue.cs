@@ -55,6 +55,8 @@ public class Dialogue : MonoBehaviour
         }
 
         TimeTickSystem.OnTick -= DestroyDialogue;
+        if (!dialogueManager.dialogueQueue.Contains(this)) return;
+        dialogueManager.dialogueQueue = new Queue<Dialogue>(dialogueManager.dialogueQueue.Where(dialogue => dialogue != this));
         StartCoroutine(Fade());
     }
 
