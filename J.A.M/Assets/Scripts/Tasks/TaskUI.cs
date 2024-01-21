@@ -233,7 +233,7 @@ namespace Tasks
                     {
                         previewOutcomeText.text = "Condition not met";
                         button.interactable = false;
-                        text.text = "Task Locked";
+                        text.text = "Bad combination";
                         image.color = Color.black;
                     }
                     else
@@ -250,7 +250,7 @@ namespace Tasks
                         {
                             previewOutcomeText.text = "Condition not met";
                             button.interactable = false;
-                            text.text = "Task Locked";
+                            text.text = "Bad combination";
                             image.color = Color.black;
                         }
                         else
