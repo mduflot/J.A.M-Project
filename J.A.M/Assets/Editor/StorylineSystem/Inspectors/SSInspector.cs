@@ -9,9 +9,6 @@ namespace SS.Inspectors
     [CustomEditor(typeof(SSLauncher))]
     public class SSInspector : Editor
     {
-        /* UI GameObjects */
-        private SerializedProperty currentStorylineProperty;
-
         /* Node Scriptable Objects */
         private SerializedProperty nodeContainerProperty;
         private SerializedProperty nodeGroupProperty;
@@ -29,8 +26,6 @@ namespace SS.Inspectors
 
         private void OnEnable()
         {
-            currentStorylineProperty = serializedObject.FindProperty("currentStoryline");
-            
             nodeContainerProperty = serializedObject.FindProperty("nodeContainer");
             nodeGroupProperty = serializedObject.FindProperty("nodeGroup");
             nodeProperty = serializedObject.FindProperty("node");
@@ -48,7 +43,6 @@ namespace SS.Inspectors
         {
             serializedObject.Update();
 
-            currentStorylineProperty.DrawPropertyField();
             isCheatLauncherProperty.DrawPropertyField();
 
             DrawNodeContainerArea();
