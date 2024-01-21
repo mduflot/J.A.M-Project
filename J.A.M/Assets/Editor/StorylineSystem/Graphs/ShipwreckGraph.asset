@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: ShipwreckGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: Shipwreck
+  <ID>k__BackingField: 3a52af2f-18be-40fa-acab-8be1e98e022e
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
+  <IsTutorialToPlay>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: 48d39579-67aa-4c62-93fd-9a637beacfc4
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: Shipwreck
+    <Position>k__BackingField: {x: 286.00006, y: 115.000015}
+  <Nodes>k__BackingField:
+  - rid: 197800430468857903
+  - rid: 197800430468857904
+  - rid: 197800430468857905
+  - rid: 197800430468857906
+  <OldGroupNames>k__BackingField:
+  - Shipwreck
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: Shipwreck
+      Value:
+      - ahead
+      - hull
+      - avoid
+      - Shipwreck
+  references:
+    version: 2
+    RefIds:
+    - rid: 197800430468857903
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: e998567d-ceef-47bd-866c-087cb45eb50c
+        <Name>k__BackingField: ahead
+        <Choices>k__BackingField:
+        - rid: 197800430468857907
+        <GroupID>k__BackingField: 48d39579-67aa-4c62-93fd-9a637beacfc4
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 311, y: 185}
+        <Text>k__BackingField: Shipwreck ahead !
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800430468857904
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: f5df26d1-df1d-4dc8-bb64-eae2e128acc6
+        <Name>k__BackingField: hull
+        <Choices>k__BackingField:
+        - rid: 197800430468857908
+        <GroupID>k__BackingField: 48d39579-67aa-4c62-93fd-9a637beacfc4
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 612, y: 204}
+        <Text>k__BackingField: The name on the hull reads 'The Odysseus'
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800430468857905
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 6ca9a495-61b9-4ac1-897c-748ea77ba049
+        <Name>k__BackingField: avoid
+        <Choices>k__BackingField:
+        - rid: 197800430468857909
+        <GroupID>k__BackingField: 48d39579-67aa-4c62-93fd-9a637beacfc4
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1273, y: 219}
+        <Text>k__BackingField: I think we should avoid it
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800430468857906
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: cc3e03cb-69d9-48b3-b54a-eebf2ef36426
+        <Name>k__BackingField: Shipwreck
+        <Choices>k__BackingField:
+        - rid: 197800430468857910
+        - rid: 197800430468857911
+        <GroupID>k__BackingField: 48d39579-67aa-4c62-93fd-9a637beacfc4
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 1983, y: 174}
+        <DescriptionTask>k__BackingField: We encounter the remains of another spaceship.
+          It is gigantic and partially detroyed so we need to be careful by navigating
+          around it, the many fragments may damage the hull.
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+          type: 3}
+        <TimeLeft>k__BackingField: 10
+        <BaseDuration>k__BackingField: 3
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 1
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 197800430468857907
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: f5df26d1-df1d-4dc8-bb64-eae2e128acc6
+    - rid: 197800430468857908
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 6ca9a495-61b9-4ac1-897c-748ea77ba049
+    - rid: 197800430468857909
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: cc3e03cb-69d9-48b3-b54a-eebf2ef36426
+    - rid: 197800430468857910
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 4167f5b914369ac499d20706bd9b4b78,
+          type: 2}
+        <PreviewOutcome>k__BackingField: The assigned crew member will maneuvre the
+          ship around the wreck.
+    - rid: 197800430468857911
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 0a5a2079ede952f40b532677e8cc040d,
+          type: 2}
+        <PreviewOutcome>k__BackingField: We will pass by the wreck and hopefully
+          don't damage our own ship too much in the process.

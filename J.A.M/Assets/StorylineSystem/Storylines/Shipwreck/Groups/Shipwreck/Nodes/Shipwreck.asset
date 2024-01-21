@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: Shipwreck
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: Shipwreck
+  <Choices>k__BackingField:
+  - rid: 197800430468857901
+  - rid: 197800430468857902
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: We encounter the remains of another spaceship. It
+    is gigantic and partially detroyed so we need to be careful by navigating around
+    it, the many fragments may damage the hull.
+  <TaskStatus>k__BackingField: 0
+  <TaskType>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+    type: 3}
+  <TimeLeft>k__BackingField: 10
+  <Duration>k__BackingField: 3
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 0
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 1
+  <Furniture>k__BackingField: 1
+  <IsTaskTutorial>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 197800430468857901
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNode>k__BackingField: {fileID: 0}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 4167f5b914369ac499d20706bd9b4b78,
+          type: 2}
+        <PreviewOutcome>k__BackingField: The assigned crew member will maneuvre the
+          ship around the wreck.
+    - rid: 197800430468857902
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNode>k__BackingField: {fileID: 0}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 0a5a2079ede952f40b532677e8cc040d,
+          type: 2}
+        <PreviewOutcome>k__BackingField: We will pass by the wreck and hopefully
+          don't damage our own ship too much in the process.
