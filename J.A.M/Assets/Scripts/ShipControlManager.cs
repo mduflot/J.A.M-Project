@@ -97,6 +97,12 @@ public class ShipControlManager : MonoBehaviour
         foreach (TraitsData.Job trait in Enum.GetValues(typeof(TraitsData.Job)))
         {
             if (trait == TraitsData.Job.None) continue;
+            if (trait == TraitsData.Job.Lammy) continue;
+            if (trait == TraitsData.Job.Elrenda) continue;
+            if (trait == TraitsData.Job.Leisin) continue;
+            if (trait == TraitsData.Job.Malda) continue;
+            if (trait == TraitsData.Job.Seltis) continue;
+            if (trait == TraitsData.Job.Varus) continue;
             if (character.traits.GetJob().HasFlag(trait))
             {
                 var traitHoverable = Instantiate(traitPrefab, characterTraitParent.transform);
