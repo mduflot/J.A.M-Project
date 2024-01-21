@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: RoadblockGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: Roadblock
+  <ID>k__BackingField: fd57c793-6835-4892-a702-da8e32441d2b
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 4
+  <IsTutorialToPlay>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: e9b94c52-641d-47f2-9cb8-60d88fbfc8b8
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: Roadblock
+    <Position>k__BackingField: {x: 1552, y: 224}
+  <Nodes>k__BackingField:
+  - rid: 8851122967584440339
+  - rid: 8851122967584440340
+  - rid: 8851122967584440341
+  - rid: 8851122967584440342
+  <OldGroupNames>k__BackingField:
+  - Roadblock
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: Roadblock
+      Value:
+      - course
+      - exchange
+      - avoid
+      - Roadblock
+  references:
+    version: 2
+    RefIds:
+    - rid: 8851122967584440339
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: bc4891df-bd04-431f-8b67-88b10613e954
+        <Name>k__BackingField: course
+        <Choices>k__BackingField:
+        - rid: 8851122967584440343
+        <GroupID>k__BackingField: e9b94c52-641d-47f2-9cb8-60d88fbfc8b8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1577, y: 283}
+        <Text>k__BackingField: There is a roadblock on our course
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 8851122967584440340
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 4dbc6b19-b526-4545-b676-7fd6b7da64ce
+        <Name>k__BackingField: exchange
+        <Choices>k__BackingField:
+        - rid: 8851122967584440344
+        <GroupID>k__BackingField: e9b94c52-641d-47f2-9cb8-60d88fbfc8b8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2264, y: 322}
+        <Text>k__BackingField: Maybe we can exchange some of our ration to pass safely
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 8851122967584440341
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: d7b67b96-74fd-4ce1-b9b8-9464618313fa
+        <Name>k__BackingField: avoid
+        <Choices>k__BackingField:
+        - rid: 8851122967584440345
+        <GroupID>k__BackingField: e9b94c52-641d-47f2-9cb8-60d88fbfc8b8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2943, y: 359}
+        <Text>k__BackingField: Or we could try to avoid it
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 8851122967584440342
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: eecdf247-0e73-45e5-aaa6-3f355d9c39e7
+        <Name>k__BackingField: Roadblock
+        <Choices>k__BackingField:
+        - rid: 8851122967584440346
+        - rid: 8851122967584440347
+        <GroupID>k__BackingField: e9b94c52-641d-47f2-9cb8-60d88fbfc8b8
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 3678, y: 352}
+        <DescriptionTask>k__BackingField: A military Roadblock is requisiting some
+          rations from the ship to allow safe passage. We could also try an other
+          route.
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+          type: 3}
+        <TimeLeft>k__BackingField: 10
+        <BaseDuration>k__BackingField: 3
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 1
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 8851122967584440343
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 4dbc6b19-b526-4545-b676-7fd6b7da64ce
+    - rid: 8851122967584440344
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: d7b67b96-74fd-4ce1-b9b8-9464618313fa
+    - rid: 8851122967584440345
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: eecdf247-0e73-45e5-aaa6-3f355d9c39e7
+    - rid: 8851122967584440346
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 87c714a7ccefa8f4db29a82279c5b2dc,
+          type: 2}
+        <PreviewOutcome>k__BackingField: The assigned crew member will redirect the
+          ship course to avoid the roadblock.
+    - rid: 8851122967584440347
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 3f619757cf877044b9296274fbce68ad,
+          type: 2}
+        <PreviewOutcome>k__BackingField: We will give some of our food to guarantee
+          a safe passage.
