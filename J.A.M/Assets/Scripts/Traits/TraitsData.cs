@@ -46,7 +46,7 @@ public class TraitsData
         HighOnFumes = 8,
         Hallucinating = 16,
         Distrustful = 32,
-        Crippled = 34,
+        Crippled = 64,
         Parasited = 128,
         LockedUp = 256,
         Scarred = 512,
