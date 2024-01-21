@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: Roadblock
   <Choices>k__BackingField:
-  - rid: 197800430468857887
-  - rid: 197800430468857888
+  - rid: 8851122967584440337
+  - rid: 8851122967584440338
   <NodeType>k__BackingField: 1
-  <IsStartingNode>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: A military Roadblock is requisiting some rations
     from the ship to allow safe passage. We could also try an other route.
   <TaskStatus>k__BackingField: 0
@@ -35,7 +35,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 197800430468857887
+    - rid: 8851122967584440337
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -44,7 +44,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The assigned crew member will redirect the
           ship course to avoid the roadblock.
-    - rid: 197800430468857888
+    - rid: 8851122967584440338
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice

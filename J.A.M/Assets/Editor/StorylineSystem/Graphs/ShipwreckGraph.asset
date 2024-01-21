@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ShipwreckGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: Shipwreck
-  <ID>k__BackingField: 3a52af2f-18be-40fa-acab-8be1e98e022e
+  <ID>k__BackingField: bcf8e1f9-49af-41bb-967f-548564a17675
   <StoryStatus>k__BackingField: 0
-  <StoryType>k__BackingField: 0
+  <StoryType>k__BackingField: 4
   <IsTutorialToPlay>k__BackingField: 0
   <IsFirstToPlay>k__BackingField: 0
   <IsReplayable>k__BackingField: 0
@@ -30,12 +30,12 @@ MonoBehaviour:
     <overrideWaitTime>k__BackingField: 10
     <Condition>k__BackingField: {fileID: 0}
     <Name>k__BackingField: Shipwreck
-    <Position>k__BackingField: {x: 286.00006, y: 115.000015}
+    <Position>k__BackingField: {x: 286, y: 115}
   <Nodes>k__BackingField:
-  - rid: 197800430468857903
-  - rid: 197800430468857904
-  - rid: 197800430468857905
-  - rid: 197800430468857906
+  - rid: 8851122967584440325
+  - rid: 8851122967584440326
+  - rid: 8851122967584440327
+  - rid: 8851122967584440328
   <OldGroupNames>k__BackingField:
   - Shipwreck
   <OldUngroupedNodeNames>k__BackingField: []
@@ -50,13 +50,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 197800430468857903
+    - rid: 8851122967584440325
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: e998567d-ceef-47bd-866c-087cb45eb50c
         <Name>k__BackingField: ahead
         <Choices>k__BackingField:
-        - rid: 197800430468857907
+        - rid: 8851122967584440329
         <GroupID>k__BackingField: 48d39579-67aa-4c62-93fd-9a637beacfc4
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 311, y: 185}
@@ -68,13 +68,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 197800430468857904
+    - rid: 8851122967584440326
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: f5df26d1-df1d-4dc8-bb64-eae2e128acc6
         <Name>k__BackingField: hull
         <Choices>k__BackingField:
-        - rid: 197800430468857908
+        - rid: 8851122967584440330
         <GroupID>k__BackingField: 48d39579-67aa-4c62-93fd-9a637beacfc4
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 612, y: 204}
@@ -86,13 +86,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 197800430468857905
+    - rid: 8851122967584440327
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 6ca9a495-61b9-4ac1-897c-748ea77ba049
         <Name>k__BackingField: avoid
         <Choices>k__BackingField:
-        - rid: 197800430468857909
+        - rid: 8851122967584440331
         <GroupID>k__BackingField: 48d39579-67aa-4c62-93fd-9a637beacfc4
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 1273, y: 219}
@@ -104,14 +104,14 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 197800430468857906
+    - rid: 8851122967584440328
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: cc3e03cb-69d9-48b3-b54a-eebf2ef36426
         <Name>k__BackingField: Shipwreck
         <Choices>k__BackingField:
-        - rid: 197800430468857910
-        - rid: 197800430468857911
+        - rid: 8851122967584440332
+        - rid: 8851122967584440333
         <GroupID>k__BackingField: 48d39579-67aa-4c62-93fd-9a637beacfc4
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 1983, y: 174}
@@ -130,22 +130,22 @@ MonoBehaviour:
         <Room>k__BackingField: 1
         <Furniture>k__BackingField: 1
         <IsTaskTutorial>k__BackingField: 0
-    - rid: 197800430468857907
+    - rid: 8851122967584440329
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: f5df26d1-df1d-4dc8-bb64-eae2e128acc6
-    - rid: 197800430468857908
+    - rid: 8851122967584440330
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 6ca9a495-61b9-4ac1-897c-748ea77ba049
-    - rid: 197800430468857909
+    - rid: 8851122967584440331
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: cc3e03cb-69d9-48b3-b54a-eebf2ef36426
-    - rid: 197800430468857910
+    - rid: 8851122967584440332
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -154,7 +154,7 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The assigned crew member will maneuvre the
           ship around the wreck.
-    - rid: 197800430468857911
+    - rid: 8851122967584440333
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: SecondChoice
