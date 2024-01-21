@@ -12,7 +12,7 @@ public class CharacterDataScriptable : ScriptableObject
     public Sprite characterIcon;
     public Sprite characterBody;
     public string firstName, lastName;
-    [TextArea] public string description;
+    [TextArea(5, 10)] public string description;
 
     [ContextMenu("Initialize GUID")]
     public void Initialize()

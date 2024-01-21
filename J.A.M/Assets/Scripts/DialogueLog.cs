@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class DialogueLog : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class DialogueLog : MonoBehaviour
                 if (character.GetCharacterData().ID == dialogue.Item1)
                 {
                     line.DisplayDialogueLine(character.GetCharacterData().characterIcon, dialogue.Item2);
+                    line.transform.localScale = Vector3.one;
+                    LayoutRebuilder.ForceRebuildLayoutImmediate(dialogueLogContent.GetComponent<RectTransform>());
                 }
             }
         }
