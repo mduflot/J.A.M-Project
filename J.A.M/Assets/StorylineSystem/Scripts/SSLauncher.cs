@@ -37,9 +37,6 @@ namespace SS
         public List<CharacterBehaviour> traitsCharacters { get; set; }
         public SpaceshipManager spaceshipManager { get; set; }
 
-        /* UI GameObjects */
-        [SerializeField] private TextMeshProUGUI currentStoryline;
-
         /* Node Scriptable Objects */
         [SerializeField] public SSNodeContainerSO nodeContainer;
         [SerializeField] public SSNodeGroupSO nodeGroup;
@@ -88,7 +85,7 @@ namespace SS
                 }
             }
 
-            if (currentStoryline) currentStoryline.text = nodeContainer.name;
+            if (nodeContainer.StoryType == SSStoryType.Principal) GameManager.Instance.UIManager.mainStorylineText.text = nodeContainer.name;
             spaceshipManager = GameManager.Instance.SpaceshipManager;
             if (dialogues == null) dialogues = new();
             if (characters == null) characters = new();
@@ -104,7 +101,7 @@ namespace SS
 
         public void StartTimelineOnDrop(CharacterIcon icon)
         {
-            if (currentStoryline) currentStoryline.text = nodeContainer.name;
+            if (nodeContainer.StoryType == SSStoryType.Principal) GameManager.Instance.UIManager.mainStorylineText.text = nodeContainer.name;
             spaceshipManager = GameManager.Instance.SpaceshipManager;
             dialogues = new();
             characters = new();
@@ -147,7 +144,7 @@ namespace SS
                 }
             }
 
-            if (currentStoryline) currentStoryline.text = nodeContainer.name;
+            if (nodeContainer.StoryType == SSStoryType.Principal) GameManager.Instance.UIManager.mainStorylineText.text = nodeContainer.name;
             spaceshipManager = GameManager.Instance.SpaceshipManager;
             dialogues = new();
             characters = new();
@@ -164,7 +161,7 @@ namespace SS
 
         private void ResetTimeline()
         {
-            if (currentStoryline) currentStoryline.text = "No timeline";
+            if (nodeContainer.StoryType == SSStoryType.Principal) GameManager.Instance.UIManager.mainStorylineText.text = "No Storyline";
         }
 
         private bool IsFinish()
