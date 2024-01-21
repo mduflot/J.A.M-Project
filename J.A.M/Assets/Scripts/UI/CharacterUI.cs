@@ -1,6 +1,7 @@
 using CharacterSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
@@ -29,12 +30,9 @@ namespace UI
         [SerializeField] private Sprite happyIcon;
         [SerializeField] private Sprite sadIcon;
 
-        [SerializeField] private Speaker speaker;
-
         public void Initialize(CharacterBehaviour c)
         {
             character = c;
-            c.speaker = speaker;
             icon.Initialize(character, this);
         }
 

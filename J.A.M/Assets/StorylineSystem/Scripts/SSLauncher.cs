@@ -314,51 +314,15 @@ namespace SS
                 }
                 case SSSpeakerType.Sensor:
                 {
-                    for (int index = 0; index < spaceshipManager.GetRoom(RoomType.AI).roomObjects.Length; index++)
-                    {
-                        var furniture = spaceshipManager.GetRoom(RoomType.AI).roomObjects[index];
-                        if (furniture.furnitureType == FurnitureType.ConsoleSide)
-                        {
-                            var sensor = furniture.transform;
-                            if (sensor.TryGetComponent(out Speaker speaker))
-                            {
-                                dialogues.Add(new SerializableTuple<string, string>("Sensor", nodeSO.Text));
-                                StartCoroutine(DisplayDialogue(speaker, "Sensor", nodeSO));
-                            }
-                            else
-                            {
-                                Debug.LogWarning("No speaker on the sensor");
-                            }
-
-                            break;
-                        }
-                    }
+                    dialogues.Add(new SerializableTuple<string, string>("Sensor", nodeSO.Text));
+                    StartCoroutine(DisplayDialogue("Sensor", nodeSO));
 
                     break;
                 }
                 case SSSpeakerType.Expert:
                 {
-                    for (int index = 0;
-                         index < spaceshipManager.GetRoom(RoomType.DockingBay).roomObjects.Length;
-                         index++)
-                    {
-                        var furniture = spaceshipManager.GetRoom(RoomType.DockingBay).roomObjects[index];
-                        if (furniture.furnitureType == FurnitureType.PortHole)
-                        {
-                            var sensor = furniture.transform;
-                            if (sensor.TryGetComponent(out Speaker speaker))
-                            {
-                                dialogues.Add(new SerializableTuple<string, string>("Expert", nodeSO.Text));
-                                StartCoroutine(DisplayDialogue(speaker, "Expert", nodeSO));
-                            }
-                            else
-                            {
-                                Debug.LogWarning("No speaker on the expert");
-                            }
-
-                            break;
-                        }
-                    }
+                    dialogues.Add(new SerializableTuple<string, string>("Expert", nodeSO.Text));
+                    StartCoroutine(DisplayDialogue("Expert", nodeSO));
 
                     break;
                 }
@@ -629,8 +593,7 @@ namespace SS
                     actualSpeaker = tempCharacters[Random.Range(0, tempCharacters.Count)];
                     dialogues.Add(
                         new SerializableTuple<string, string>(actualSpeaker.GetCharacterData().ID, nodeSO.Text));
-                    StartCoroutine(DisplayDialogue(actualSpeaker.speaker, actualSpeaker.GetCharacterData().firstName,
-                        nodeSO));
+                    StartCoroutine(DisplayDialogue(actualSpeaker.GetCharacterData().firstName, nodeSO));
                     traitsCharacters.Add(actualSpeaker);
 
                     break;
@@ -702,10 +665,10 @@ namespace SS
                         if (furniture.furnitureType == FurnitureType.ConsoleSide)
                         {
                             var signal = furniture.transform;
-                            if (signal.TryGetComponent(out Speaker speaker))
+                            if (signal.TryGetComponent(out DialogueManager speaker))
                             {
                                 dialogues.Add(new SerializableTuple<string, string>("Incoming Signal", nodeSO.Text));
-                                StartCoroutine(DisplayDialogue(speaker, "Incoming Signal", nodeSO));
+                                StartCoroutine(DisplayDialogue("Incoming Signal", nodeSO));
                             }
                             else
                             {
@@ -723,11 +686,10 @@ namespace SS
         private void SetDialogue(CharacterBehaviour character, SSDialogueNodeSO nodeSO)
         {
             dialogues.Add(new SerializableTuple<string, string>(character.GetCharacterData().ID, nodeSO.Text));
-            StartCoroutine(DisplayDialogue(character.speaker,
-                character.GetCharacterData().firstName, nodeSO));
+            StartCoroutine(DisplayDialogue(character.GetCharacterData().firstName, nodeSO));
         }
 
-        private IEnumerator DisplayDialogue(Speaker speaker, string characterName, SSDialogueNodeSO nodeSO)
+        private IEnumerator DisplayDialogue(string characterName, SSDialogueNodeSO nodeSO)
         {
             nodeSO.IsCompleted = false;
             if (CanIgnoreDialogueTask && nodeSO.IsDialogueTask)
@@ -765,7 +727,7 @@ namespace SS
                 yield break;
             }
 
-            speaker.AddDialogue(task, nodeSO, characterName);
+            GameManager.Instance.UIManager.dialogueManager.AddDialogue(task, nodeSO, characterName);
 
             yield return new WaitUntil(() => nodeSO.IsCompleted);
 

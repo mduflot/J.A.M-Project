@@ -4,13 +4,12 @@ using Managers;
 using Tasks;
 using UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CharacterSystem
 {
     public class CharacterBehaviour : MonoBehaviour, IDataPersistence
     {
-        public Speaker speaker;
-
         [SerializeField] private CharacterDataScriptable data;
         [SerializeField] private float moveSpeed;
 
