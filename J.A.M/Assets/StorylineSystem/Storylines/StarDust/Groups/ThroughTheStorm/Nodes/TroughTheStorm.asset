@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: TroughTheStorm
   <Choices>k__BackingField:
-  - rid: 1640970999455809640
-  - rid: 1640970999455809641
+  - rid: 197800430871249075
+  - rid: 197800430871249076
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
-  <Description>k__BackingField: A cloud of particles is in the trajectory, as long
-    as we are in it we will suffer great damage to the hull but trying to avoid it
-    will cost a lot of
+  <Description>k__BackingField: A cloud of particles is in the way, as long as we
+    are in it we will suffer great damage to the hull but trying to avoid it will
+    cost a lot of
   <TaskStatus>k__BackingField: 0
   <TaskType>k__BackingField: 1
   <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
@@ -36,7 +36,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1640970999455809640
+    - rid: 197800430871249075
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -44,7 +44,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: c0b060930e6440b4a9abed51a2b0c2e1,
           type: 2}
         <PreviewOutcome>k__BackingField: The ship will have to make a detour.
-    - rid: 1640970999455809641
+    - rid: 197800430871249076
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice

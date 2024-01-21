@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StarDustGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: StarDust
-  <ID>k__BackingField: be16d230-f4f8-4817-9076-a9a0ae890066
+  <ID>k__BackingField: b15652ca-032c-4cb6-afa6-2335fb0ce619
   <StoryStatus>k__BackingField: 0
   <StoryType>k__BackingField: 4
   <IsTutorialToPlay>k__BackingField: 0
@@ -30,16 +30,16 @@ MonoBehaviour:
     <overrideWaitTime>k__BackingField: 10
     <Condition>k__BackingField: {fileID: 0}
     <Name>k__BackingField: ThroughTheStorm
-    <Position>k__BackingField: {x: 1614.6667, y: 2}
+    <Position>k__BackingField: {x: 1615, y: 2}
   <Nodes>k__BackingField:
-  - rid: 1640970999455809642
-  - rid: 1640970999455809643
-  - rid: 1640970999455809644
-  - rid: 1640970999455809645
-  - rid: 1640970999455809646
-  - rid: 1640970999455809647
-  - rid: 1640970999455809648
-  - rid: 1640970999455809649
+  - rid: 197800430871249079
+  - rid: 197800430871249080
+  - rid: 197800430871249081
+  - rid: 197800430871249082
+  - rid: 197800430871249083
+  - rid: 197800430871249084
+  - rid: 197800430871249085
+  - rid: 197800430871249086
   <OldGroupNames>k__BackingField:
   - ThroughTheStorm
   <OldUngroupedNodeNames>k__BackingField: []
@@ -47,47 +47,28 @@ MonoBehaviour:
     list:
     - Key: ThroughTheStorm
       Value:
-      - Particule
       - news
       - why
-      - integrity
       - around
       - trajectory
       - TimeNode
       - TroughTheStorm
+      - Particule
+      - integrity
   references:
     version: 2
     RefIds:
-    - rid: 1640970999455809642
-      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <ID>k__BackingField: cf2e1b4c-d673-43ae-8787-eb9fcd79611d
-        <Name>k__BackingField: Particule
-        <Choices>k__BackingField:
-        - rid: 1640970999455809650
-        <GroupID>k__BackingField: 2bffec17-f09d-4b6b-beeb-ad727c0548dc
-        <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 1640, y: 60.666664}
-        <Text>k__BackingField: The ship trajectory will pass through a particule
-          cloud
-        <SpeakerType>k__BackingField: 1
-        <Duration>k__BackingField: 1
-        <IsDialogueTask>k__BackingField: 0
-        <PercentageTask>k__BackingField: 50
-        <Job>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
-    - rid: 1640970999455809643
+    - rid: 197800430871249079
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 32d67649-5404-4131-bc48-b076e0028b97
         <Name>k__BackingField: news
         <Choices>k__BackingField:
-        - rid: 1640970999455809651
+        - rid: 197800430871249087
         <GroupID>k__BackingField: 2bffec17-f09d-4b6b-beeb-ad727c0548dc
         <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 1937.3334, y: 72}
-        <Text>k__BackingField: That's not good new for us
+        <Position>k__BackingField: {x: 1937, y: 72}
+        <Text>k__BackingField: That's not good news for us
         <SpeakerType>k__BackingField: 0
         <Duration>k__BackingField: 0.5
         <IsDialogueTask>k__BackingField: 0
@@ -95,13 +76,13 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 1640970999455809644
+    - rid: 197800430871249080
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: a919be95-8fc3-4ec8-990a-aa75abe6b43d
         <Name>k__BackingField: why
         <Choices>k__BackingField:
-        - rid: 1640970999455809652
+        - rid: 197800430871249088
         <GroupID>k__BackingField: 2bffec17-f09d-4b6b-beeb-ad727c0548dc
         <NodeType>k__BackingField: 0
         <Position>k__BackingField: {x: 2206, y: 82}
@@ -113,35 +94,16 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 1640970999455809645
-      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <ID>k__BackingField: f811d37c-9a4f-4c24-9637-0791c2958f92
-        <Name>k__BackingField: integrity
-        <Choices>k__BackingField:
-        - rid: 1640970999455809653
-        <GroupID>k__BackingField: 2bffec17-f09d-4b6b-beeb-ad727c0548dc
-        <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 2470, y: 90.666664}
-        <Text>k__BackingField: Are ship is gonna suffer from friction, it might severly
-          endanger the hull integrity
-        <SpeakerType>k__BackingField: 3
-        <Duration>k__BackingField: 0.5
-        <IsDialogueTask>k__BackingField: 0
-        <PercentageTask>k__BackingField: 50
-        <Job>k__BackingField: 0
-        <PositiveTraits>k__BackingField: 0
-        <NegativeTraits>k__BackingField: 0
-    - rid: 1640970999455809646
+    - rid: 197800430871249081
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 50f5098c-b092-4da0-8cd7-590174a24523
         <Name>k__BackingField: around
         <Choices>k__BackingField:
-        - rid: 1640970999455809654
+        - rid: 197800430871249089
         <GroupID>k__BackingField: 2bffec17-f09d-4b6b-beeb-ad727c0548dc
         <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 2761.3333, y: 100}
+        <Position>k__BackingField: {x: 2761, y: 100}
         <Text>k__BackingField: Maybe we should get around it, is it possible
         <SpeakerType>k__BackingField: 4
         <Duration>k__BackingField: 0.5
@@ -150,16 +112,16 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 1640970999455809647
+    - rid: 197800430871249082
       type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: fe1e6d86-ae58-4de5-a18d-b78bccaf1c93
         <Name>k__BackingField: trajectory
         <Choices>k__BackingField:
-        - rid: 1640970999455809655
+        - rid: 197800430871249090
         <GroupID>k__BackingField: 2bffec17-f09d-4b6b-beeb-ad727c0548dc
         <NodeType>k__BackingField: 0
-        <Position>k__BackingField: {x: 3049.3333, y: 130}
+        <Position>k__BackingField: {x: 3049, y: 130}
         <Text>k__BackingField: Yes but this kind of cloud are usually gigantic, we'll
           need do make a huge deviation from our trajectory
         <SpeakerType>k__BackingField: 3
@@ -169,30 +131,30 @@ MonoBehaviour:
         <Job>k__BackingField: 0
         <PositiveTraits>k__BackingField: 0
         <NegativeTraits>k__BackingField: 0
-    - rid: 1640970999455809648
+    - rid: 197800430871249083
       type: {class: SSTimeNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: a3bf1ff3-3c4a-4e73-b0f0-5760025828a3
         <Name>k__BackingField: TimeNode
         <Choices>k__BackingField:
-        - rid: 1640970999455809656
+        - rid: 197800430871249091
         <GroupID>k__BackingField: 2bffec17-f09d-4b6b-beeb-ad727c0548dc
         <NodeType>k__BackingField: 2
         <Position>k__BackingField: {x: 4232, y: 556}
         <TimeToWait>k__BackingField: 6
-    - rid: 1640970999455809649
+    - rid: 197800430871249084
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: 5585043e-af5c-49a6-a283-be9ffe24a07f
         <Name>k__BackingField: TroughTheStorm
         <Choices>k__BackingField:
-        - rid: 1640970999455809657
-        - rid: 1640970999455809658
+        - rid: 197800430871249092
+        - rid: 197800430871249093
         <GroupID>k__BackingField: 2bffec17-f09d-4b6b-beeb-ad727c0548dc
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 3400, y: 132}
-        <DescriptionTask>k__BackingField: A cloud of particles is in the trajectory,
-          as long as we are in it we will suffer great damage to the hull but trying
+        <DescriptionTask>k__BackingField: A cloud of particles is in the way, as
+          long as we are in it we will suffer great damage to the hull but trying
           to avoid it will cost a lot of
         <TaskStatus>k__BackingField: 0
         <TaskType>k__BackingField: 1
@@ -206,42 +168,70 @@ MonoBehaviour:
         <Room>k__BackingField: 1
         <Furniture>k__BackingField: 1
         <IsTaskTutorial>k__BackingField: 0
-    - rid: 1640970999455809650
-      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+    - rid: 197800430871249085
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
-        <Text>k__BackingField: Next Node
-        <NextNodeID>k__BackingField: 32d67649-5404-4131-bc48-b076e0028b97
-    - rid: 1640970999455809651
+        <ID>k__BackingField: cf2e1b4c-d673-43ae-8787-eb9fcd79611d
+        <Name>k__BackingField: Particule
+        <Choices>k__BackingField:
+        - rid: 197800430871249094
+        <GroupID>k__BackingField: 2bffec17-f09d-4b6b-beeb-ad727c0548dc
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1640, y: 61}
+        <Text>k__BackingField: The ship trajectory will have us pass through a particule
+          cloud
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800430871249086
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: f811d37c-9a4f-4c24-9637-0791c2958f92
+        <Name>k__BackingField: integrity
+        <Choices>k__BackingField:
+        - rid: 197800430871249095
+        <GroupID>k__BackingField: 2bffec17-f09d-4b6b-beeb-ad727c0548dc
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2471, y: 91}
+        <Text>k__BackingField: Our ship is gonna suffer from friction, it might severly
+          endanger the hull integrity
+        <SpeakerType>k__BackingField: 3
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800430871249087
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: a919be95-8fc3-4ec8-990a-aa75abe6b43d
-    - rid: 1640970999455809652
+    - rid: 197800430871249088
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: f811d37c-9a4f-4c24-9637-0791c2958f92
-    - rid: 1640970999455809653
-      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
-      data:
-        <Text>k__BackingField: Next Node
-        <NextNodeID>k__BackingField: 50f5098c-b092-4da0-8cd7-590174a24523
-    - rid: 1640970999455809654
+    - rid: 197800430871249089
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: fe1e6d86-ae58-4de5-a18d-b78bccaf1c93
-    - rid: 1640970999455809655
+    - rid: 197800430871249090
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 5585043e-af5c-49a6-a283-be9ffe24a07f
-    - rid: 1640970999455809656
+    - rid: 197800430871249091
       type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: Next Node
         <NextNodeID>k__BackingField: 
-    - rid: 1640970999455809657
+    - rid: 197800430871249092
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
@@ -249,7 +239,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: c0b060930e6440b4a9abed51a2b0c2e1,
           type: 2}
         <PreviewOutcome>k__BackingField: The ship will have to make a detour.
-    - rid: 1640970999455809658
+    - rid: 197800430871249093
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: SecondChoice
@@ -258,3 +248,13 @@ MonoBehaviour:
           type: 2}
         <PreviewOutcome>k__BackingField: The ship will keep its trajectory but the
           problem may get worse.
+    - rid: 197800430871249094
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 32d67649-5404-4131-bc48-b076e0028b97
+    - rid: 197800430871249095
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 50f5098c-b092-4da0-8cd7-590174a24523
