@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SS.Enumerations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,8 @@ public class ShipControlManager : MonoBehaviour
 
     [Header("Mobius")]
     [SerializeField] private GameObject shipTraitsContainer;
+
+    [SerializeField] private Slider progressBar;
     
     [Header("Crew")]
     [SerializeField] private GameObject characterProfilePrefab;
@@ -70,6 +73,15 @@ public class ShipControlManager : MonoBehaviour
     {
         mobiusButton.color = Color.white;
         crewButton.color = Color.black;
+        var completedStorylines = 0;
+        foreach (var storyline in Checker.Instance.principalStorylines)
+        {
+            if (storyline.Status == SSStoryStatus.Completed)
+            {
+                completedStorylines++;
+            }
+        }
+        if (completedStorylines != 0) progressBar.value = (float)completedStorylines / Checker.Instance.principalStorylines.Count;
         crewContainer.SetActive(false);
         mobiusContainer.SetActive(true);
     }

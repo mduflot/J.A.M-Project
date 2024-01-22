@@ -32,7 +32,7 @@ public class Checker : MonoBehaviour, IDataPersistence
     private SSCampaignSO ssCampaign;
 
     private List<Storyline> allStorylines;
-    private List<Storyline> principalStorylines;
+    public List<Storyline> principalStorylines;
     private List<Storyline> secondaryStorylines;
     private List<Storyline> leakStorylines;
     private List<Storyline> trajectoryStorylines;
