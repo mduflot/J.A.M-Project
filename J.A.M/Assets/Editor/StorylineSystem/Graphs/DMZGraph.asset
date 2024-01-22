@@ -1,0 +1,501 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: DMZGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: DMZ
+  <ID>k__BackingField: 7c4b567c-7f61-48d1-94cd-5f01177e6f1f
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
+  <IsTutorialToPlay>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: CrossingTheBorder
+    <Position>k__BackingField: {x: 120.99981, y: 349}
+  <Nodes>k__BackingField:
+  - rid: 197800434780340837
+  - rid: 197800434780340838
+  - rid: 197800434780340839
+  - rid: 197800434780340840
+  - rid: 197800434780340841
+  - rid: 197800434780340842
+  - rid: 197800434780340843
+  - rid: 197800434780340844
+  - rid: 197800434780340845
+  - rid: 197800434780340846
+  - rid: 197800434780340847
+  - rid: 197800434780340848
+  - rid: 197800434780340849
+  - rid: 197800434780340850
+  - rid: 197800434780340851
+  - rid: 197800434780340852
+  <OldGroupNames>k__BackingField:
+  - CrossingTheBorder
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: CrossingTheBorder
+      Value:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 7
+      - 8
+      - 6
+      - 9
+      - 10
+      - 11
+      - 12
+      - 14
+      - 13
+      - GoAlongBorder
+      - TaskNode
+  references:
+    version: 2
+    RefIds:
+    - rid: 197800434780340837
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: a3d9b947-eb04-4604-bfbb-f2e51885c227
+        <Name>k__BackingField: 1
+        <Choices>k__BackingField:
+        - rid: 197800434780340853
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 146, y: 408}
+        <Text>k__BackingField: Just so you know... We're gonna have to cross a De-Militarized
+          Zone in Echtrian Territory.
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 16
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800434780340838
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: de1012bd-6a3c-40d6-b7d6-9becb8fc6e3b
+        <Name>k__BackingField: 2
+        <Choices>k__BackingField:
+        - rid: 197800434780340854
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 795, y: 409}
+        <Text>k__BackingField: Shit. DMZ means border controls, right? If the Ecthrians
+          find out about the Artifact...
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 1
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800434780340839
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ba08c263-7b41-4c98-a65b-46ccaf5b1edd
+        <Name>k__BackingField: 3
+        <Choices>k__BackingField:
+        - rid: 197800434780340855
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1446, y: 409}
+        <Text>k__BackingField: ...Then we'll charge the ship's defense system and
+          be done with that!
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 1
+    - rid: 197800434780340840
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: a85d1e9e-fc5b-4552-8d30-bcc87ff56d53
+        <Name>k__BackingField: 4
+        <Choices>k__BackingField:
+        - rid: 197800434780340856
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2107, y: 409}
+        <Text>k__BackingField: Hey, calm down, let's be reasonable. We could try
+          making a detour to avoid border controls! It would take awfully long, but...
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 2
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800434780340841
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: d9b066bd-f4ff-40a7-90ae-f5b7f05e88e6
+        <Name>k__BackingField: 5
+        <Choices>k__BackingField:
+        - rid: 197800434780340857
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3476, y: 409}
+        <Text>k__BackingField: Charging weapons...
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 0
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800434780340842
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 975ed107-ebf0-4d56-bf35-63b73177b85f
+        <Name>k__BackingField: 7
+        <Choices>k__BackingField:
+        - rid: 197800434780340858
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4015, y: 409}
+        <Text>k__BackingField: ...Shit, we took a hit from the Echtrians customs!
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 66
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800434780340843
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 5ce58bc0-00b5-4520-a5ef-b4440b3d6773
+        <Name>k__BackingField: 8
+        <Choices>k__BackingField:
+        - rid: 197800434780340859
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4663, y: 409}
+        <Text>k__BackingField: ...There we go. Their ship is damaged. We lost some
+          power, but avoided some trouble.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 86
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800434780340844
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 433c3505-29a8-4ef0-92ab-3c9b7f2167c3
+        <Name>k__BackingField: 6
+        <Choices>k__BackingField:
+        - rid: 197800434780340860
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3754, y: 409}
+        <Text>k__BackingField: ...FIRE!!
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800434780340845
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 63a5522f-db63-4e0f-b1b7-8bd630ca6ac1
+        <Name>k__BackingField: 9
+        <Choices>k__BackingField:
+        - rid: 197800434780340861
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3476, y: 723}
+        <Text>k__BackingField: We'll have to change our trajectory to avoid border
+          controls. Pilot?
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800434780340846
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 3363dcea-be9f-4e38-a16e-bda91082e1ec
+        <Name>k__BackingField: 10
+        <Choices>k__BackingField:
+        - rid: 197800434780340862
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4864, y: 723}
+        <Text>k__BackingField: ...on it.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 5
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800434780340847
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 0e1f069f-7d4d-43fc-91be-a75debf02a90
+        <Name>k__BackingField: 11
+        <Choices>k__BackingField:
+        - rid: 197800434780340863
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5115, y: 723}
+        <Text>k__BackingField: ...There we go. We've avoided the DMZ and border controls
+          alltogether, but our trajectory has taken a hit.
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 94
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800434780340848
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: fa40bad2-b9eb-4488-931e-68b1cf45bf14
+        <Name>k__BackingField: 12
+        <Choices>k__BackingField:
+        - rid: 197800434780340864
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3459, y: 1304}
+        <Text>k__BackingField: There's the border controls.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 5
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800434780340849
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 807bb687-15d4-48e7-95a6-0c045dba9af4
+        <Name>k__BackingField: 14
+        <Choices>k__BackingField:
+        - rid: 197800434780340865
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4864, y: 1304}
+        <Text>k__BackingField: ...We took some nasty hits by the Echtrian Customs...
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 90
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800434780340850
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 4ebe2db8-605f-4628-8809-599290514129
+        <Name>k__BackingField: 13
+        <Choices>k__BackingField:
+        - rid: 197800434780340866
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4180, y: 1304}
+        <Text>k__BackingField: ...Shit! They detected the Artifact! Boost the engines,quickly!
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800434780340851
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 2823afb2-b92e-4f03-adad-7bc75cc74b06
+        <Name>k__BackingField: GoAlongBorder
+        <Choices>k__BackingField:
+        - rid: 197800434780340867
+        - rid: 197800434780340868
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 4180, y: 723}
+        <DescriptionTask>k__BackingField: Assign a pilot to go along the border or
+          we'll have to face Echtrian customs!
+        <TaskStatus>k__BackingField: 2
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+          type: 3}
+        <TimeLeft>k__BackingField: 4
+        <BaseDuration>k__BackingField: 25
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 2
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 1
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 197800434780340852
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 474d8adc-7a45-43c9-b312-fae3856cce15
+        <Name>k__BackingField: TaskNode
+        <Choices>k__BackingField:
+        - rid: 197800434780340869
+        - rid: 197800434780340870
+        - rid: 197800434780340871
+        <GroupID>k__BackingField: d2b45094-168c-4f73-8c02-86dc56a58ceb
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 2803, y: 409}
+        <DescriptionTask>k__BackingField: Border Controls ahead. The Echtrians, our
+          enemies, must not find out about the Artifact. What should we do?
+        <TaskStatus>k__BackingField: 2
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 674067cf15d4f3448b518b294ca7432e,
+          type: 3}
+        <TimeLeft>k__BackingField: 5
+        <BaseDuration>k__BackingField: 4
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 2
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 1
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 197800434780340853
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: de1012bd-6a3c-40d6-b7d6-9becb8fc6e3b
+    - rid: 197800434780340854
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: ba08c263-7b41-4c98-a65b-46ccaf5b1edd
+    - rid: 197800434780340855
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: a85d1e9e-fc5b-4552-8d30-bcc87ff56d53
+    - rid: 197800434780340856
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 474d8adc-7a45-43c9-b312-fae3856cce15
+    - rid: 197800434780340857
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 433c3505-29a8-4ef0-92ab-3c9b7f2167c3
+    - rid: 197800434780340858
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 5ce58bc0-00b5-4520-a5ef-b4440b3d6773
+    - rid: 197800434780340859
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 197800434780340860
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 975ed107-ebf0-4d56-bf35-63b73177b85f
+    - rid: 197800434780340861
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 2823afb2-b92e-4f03-adad-7bc75cc74b06
+    - rid: 197800434780340862
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 0e1f069f-7d4d-43fc-91be-a75debf02a90
+    - rid: 197800434780340863
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 197800434780340864
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 4ebe2db8-605f-4628-8809-599290514129
+    - rid: 197800434780340865
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 197800434780340866
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 807bb687-15d4-48e7-95a6-0c045dba9af4
+    - rid: 197800434780340867
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 3363dcea-be9f-4e38-a16e-bda91082e1ec
+        <Condition>k__BackingField: {fileID: 11400000, guid: 271982c97d21a674e88c37c0fe63b52d,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ' will maneuver the ship to avoid border
+          controls.'
+    - rid: 197800434780340868
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 2be1446174d4d664ea9f8d5615665361,
+          type: 2}
+        <PreviewOutcome>k__BackingField: We'll go to border controls and hope the
+          Echtrians won't notice the Artifact.
+    - rid: 197800434780340869
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: d9b066bd-f4ff-40a7-90ae-f5b7f05e88e6
+        <Condition>k__BackingField: {fileID: 11400000, guid: 4b4c1c459ab6bd04ca9dcd7e1a05979e,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ' says we could shoot down the Echtrians
+          customs. No Echtrians, no border control!'
+    - rid: 197800434780340870
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNodeID>k__BackingField: 63a5522f-db63-4e0f-b1b7-8bd630ca6ac1
+        <Condition>k__BackingField: {fileID: 11400000, guid: 961d978a15e016f4ead602a0afed8cec,
+          type: 2}
+        <PreviewOutcome>k__BackingField: ' says we could avoid the control by going
+          along the border. It''ll take a long time.'
+    - rid: 197800434780340871
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNodeID>k__BackingField: fa40bad2-b9eb-4488-931e-68b1cf45bf14
+        <Condition>k__BackingField: {fileID: 11400000, guid: 2be1446174d4d664ea9f8d5615665361,
+          type: 2}
+        <PreviewOutcome>k__BackingField: We'll go to border controls and hope the
+          Echtrians won't notice the Artifact.

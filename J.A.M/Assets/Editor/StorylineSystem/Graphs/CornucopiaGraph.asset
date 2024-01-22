@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: CornucopiaGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: Cornucopia
+  <ID>k__BackingField: 326244c6-b611-4499-adf0-571e0a0947b1
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 1
+  <IsTutorialToPlay>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 11400000, guid: 2a040fbcc9498c9489db9102a1faaf0d,
+    type: 2}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: 5b79b9f9-f636-4882-b675-7041fefb6e4f
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: Cornucopia
+    <Position>k__BackingField: {x: 449, y: 255}
+  <Nodes>k__BackingField:
+  - rid: 197800411516633094
+  - rid: 197800411516633095
+  - rid: 197800411516633096
+  <OldGroupNames>k__BackingField:
+  - Cornucopia
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: Cornucopia
+      Value:
+      - produced
+      - TimeNode
+      - Abundance
+  references:
+    version: 2
+    RefIds:
+    - rid: 197800411516633094
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ca6940c7-0ea5-4b59-9841-5ae7586b9525
+        <Name>k__BackingField: produced
+        <Choices>k__BackingField:
+        - rid: 197800411516633097
+        <GroupID>k__BackingField: 5b79b9f9-f636-4882-b675-7041fefb6e4f
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 474, y: 314}
+        <Text>k__BackingField: We have produced a lot of food lately, we should use
+          it before it rots away
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800411516633095
+      type: {class: SSTimeNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 0daebe41-0e2f-48da-9063-8bb757b6256a
+        <Name>k__BackingField: TimeNode
+        <Choices>k__BackingField:
+        - rid: 197800411516633098
+        <GroupID>k__BackingField: 5b79b9f9-f636-4882-b675-7041fefb6e4f
+        <NodeType>k__BackingField: 2
+        <Position>k__BackingField: {x: 1491, y: 466}
+        <TimeToWait>k__BackingField: 15
+    - rid: 197800411516633096
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 6dfc459c-3587-4c00-983c-b471cd2c3edd
+        <Name>k__BackingField: Abundance
+        <Choices>k__BackingField:
+        - rid: 197800411516633099
+        - rid: 197800411516633100
+        - rid: 197800411516633101
+        - rid: 197800411516633102
+        <GroupID>k__BackingField: 5b79b9f9-f636-4882-b675-7041fefb6e4f
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 1136, y: 314}
+        <DescriptionTask>k__BackingField: The excess of food could be converted into
+          biomass. What should we use it for ?
+        <TaskStatus>k__BackingField: 1
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+          type: 3}
+        <TimeLeft>k__BackingField: 10
+        <BaseDuration>k__BackingField: 3
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 4
+        <Furniture>k__BackingField: 3
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 197800411516633097
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 6dfc459c-3587-4c00-983c-b471cd2c3edd
+    - rid: 197800411516633098
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 197800411516633099
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 7dc76591a37ad6149adebea5b2325523,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will be turned food excess into biomass
+          to permanently fertilize the soil.
+    - rid: 197800411516633100
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: ff24fd0e6283d50409da2b7b693e3ba6,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will be turned food excess into biomass
+          to produce power and permanently fertilize the soil.
+    - rid: 197800411516633101
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: ThirdChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: c2b350dcd8e56a74f8fc7efa1c76e0b1,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will be turned food excess into biomass
+          to produce fuel and permanently fertilize the soil.
+    - rid: 197800411516633102
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FourthChoice
+        <NextNodeID>k__BackingField: 0daebe41-0e2f-48da-9063-8bb757b6256a
+        <Condition>k__BackingField: {fileID: 11400000, guid: e586c2b6703cb7e49b8b97d911880dbd,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No one will touch the food supply and the
+          excess will likely rot.

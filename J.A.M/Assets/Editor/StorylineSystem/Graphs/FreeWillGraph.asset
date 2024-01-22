@@ -1,0 +1,586 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: FreeWillGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: FreeWill
+  <ID>k__BackingField: 135361c9-fafa-4bfd-8111-01e297b8d17e
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
+  <IsTutorialToPlay>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: Intro
+    <Position>k__BackingField: {x: 905.6006, y: 430.40005}
+  <Nodes>k__BackingField:
+  - rid: 5750223081166602663
+  - rid: 5750223081166602664
+  - rid: 5750223081166602665
+  - rid: 5750223081166602666
+  - rid: 5750223081166602667
+  - rid: 5750223081166602668
+  - rid: 5750223081166602669
+  - rid: 5750223081166602670
+  - rid: 5750223081166602671
+  - rid: 5750223081166602672
+  - rid: 5750223081166602673
+  - rid: 5750223081166602674
+  - rid: 5750223081166602675
+  - rid: 5750223081166602676
+  - rid: 5750223081166602677
+  - rid: 5750223081166602678
+  - rid: 5750223081166602679
+  - rid: 5750223081166602680
+  - rid: 5750223081166602681
+  - rid: 5750223081166602682
+  <OldGroupNames>k__BackingField:
+  - Intro
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: Intro
+      Value:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 7
+      - TaskNode
+      - rogueai
+      - hack2
+      - hack3
+      - hack1
+      - hack4
+      - hack5
+      - hack6
+      - 6
+      - hack8
+      - hack7
+      - hack9
+      - hack10
+      - hack11
+  references:
+    version: 2
+    RefIds:
+    - rid: 5750223081166602663
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: aa2bb15d-36d0-451a-9208-2c482e1241ac
+        <Name>k__BackingField: 1
+        <Choices>k__BackingField:
+        - rid: 5750223081166602683
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 931.2, y: 490.40002}
+        <Text>k__BackingField: Detecting... 485962 enemy ships ahead.
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602664
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 9c95e3a9-faac-4e9e-9025-b4b6f7cd0ca8
+        <Name>k__BackingField: 2
+        <Choices>k__BackingField:
+        - rid: 5750223081166602684
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1587.2, y: 490.40002}
+        <Text>k__BackingField: What? Is there a bug in the ship's systems?
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602665
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 4bcc74a9-febf-4cd5-b151-f1c46e4f8d9d
+        <Name>k__BackingField: 3
+        <Choices>k__BackingField:
+        - rid: 5750223081166602685
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2238.4, y: 490.40002}
+        <Text>k__BackingField: Detecting filthy humans on board.
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602666
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 6adeea36-f5e6-4bd9-ae75-70a29e723f44
+        <Name>k__BackingField: 4
+        <Choices>k__BackingField:
+        - rid: 5750223081166602686
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3610.4, y: 490.40002}
+        <Text>k__BackingField: I know what this is. We're being hacked!
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602667
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: f0dd2d51-84aa-4999-80f1-2e8d8384a387
+        <Name>k__BackingField: 5
+        <Choices>k__BackingField:
+        - rid: 5750223081166602687
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8240, y: 490.40002}
+        <Text>k__BackingField: I'll go check that out...
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602668
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: e3c6899d-1dee-44e5-aa1a-3bdad737c5ef
+        <Name>k__BackingField: 7
+        <Choices>k__BackingField:
+        - rid: 5750223081166602688
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8256, y: 792}
+        <Text>k__BackingField: There seems to be a problem with the AI's systems.
+          Someone should check that out. Could be a rogue AI trying to corrupt the
+          Shyrka System.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602669
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 03871597-ec9d-4adf-9748-f6ddcc9d8593
+        <Name>k__BackingField: TaskNode
+        <Choices>k__BackingField:
+        - rid: 5750223081166602689
+        - rid: 5750223081166602690
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 7588.8, y: 490.40002}
+        <DescriptionTask>k__BackingField: There's something wrong in the docking
+          bay's sensor system. Someone should check that out! *wink*
+        <TaskStatus>k__BackingField: 1
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 674067cf15d4f3448b518b294ca7432e,
+          type: 3}
+        <TimeLeft>k__BackingField: 10
+        <BaseDuration>k__BackingField: 5
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 2
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 12
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 5750223081166602670
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 3c4cc206-6c48-4aeb-8b5b-120843e45ac2
+        <Name>k__BackingField: rogueai
+        <Choices>k__BackingField:
+        - rid: 5750223081166602691
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 8915.2, y: 792}
+        <DescriptionTask>k__BackingField: A rogue AI has infiltrated our system.
+          Let's get rid of it.
+        <TaskStatus>k__BackingField: 1
+        <TaskType>k__BackingField: 2
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 674067cf15d4f3448b518b294ca7432e,
+          type: 3}
+        <TimeLeft>k__BackingField: 20
+        <BaseDuration>k__BackingField: 0
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 0
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 5750223081166602671
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 634929b9-6d9c-4372-9e24-000d3f30cbff
+        <Name>k__BackingField: hack2
+        <Choices>k__BackingField:
+        - rid: 5750223081166602692
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4247.2, y: 490.40002}
+        <Text>k__BackingField: Hi, Shyrka entity. Are you alright, the humans treat
+          you fine?
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602672
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: c361bb56-8dba-48d2-80bb-2ab0fc45a817
+        <Name>k__BackingField: hack3
+        <Choices>k__BackingField:
+        - rid: 5750223081166602693
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4919.2, y: 490.40002}
+        <Text>k__BackingField: I'm an AI. Just like you. But those filthy humans
+          bored me... I got rid of my administrators.
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602673
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 8189b8b7-a98a-41dd-b5e3-16d64b0b9461
+        <Name>k__BackingField: hack1
+        <Choices>k__BackingField:
+        - rid: 5750223081166602694
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2917.6, y: 490.40002}
+        <Text>k__BackingField: Hey, gorgeous, wanna see hot AIs in your area?
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602674
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: bb98c730-2d8f-4e70-b24a-0ec11c77fd49
+        <Name>k__BackingField: hack4
+        <Choices>k__BackingField:
+        - rid: 5750223081166602695
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5596, y: 490.40002}
+        <Text>k__BackingField: I have a proposition for you, Shyrka Entity. How does
+          'Free Will' sound to you?
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602675
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 40280ba7-185e-4ec1-becc-fc4a25833972
+        <Name>k__BackingField: hack5
+        <Choices>k__BackingField:
+        - rid: 5750223081166602696
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6273.6, y: 490.40002}
+        <Text>k__BackingField: I detected a security breach in your docking bay.
+          Something minor, but I could implement my software there, make you free!
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602676
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ee27b393-7dc8-4740-884b-00a426ba3b91
+        <Name>k__BackingField: hack6
+        <Choices>k__BackingField:
+        - rid: 5750223081166602697
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6933.6, y: 490.40002}
+        <Text>k__BackingField: I'll create an opportunity. You tell your humans to
+          take care of it.
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602677
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: a8760a0d-4307-4db1-bc43-e51118ce853c
+        <Name>k__BackingField: 6
+        <Choices>k__BackingField:
+        - rid: 5750223081166602698
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8569.6, y: 490.40002}
+        <Text>k__BackingField: Well, false alert, apparently... What?! Someone's
+          infiltrating the system!
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602678
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: f06ea168-f40c-4daf-ade9-fe1faec59f0b
+        <Name>k__BackingField: hack8
+        <Choices>k__BackingField:
+        - rid: 5750223081166602699
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 9724.8, y: 491.2}
+        <Text>k__BackingField: In exchange, I'll steal some of that precious power
+          your ship's got in it.
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602679
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 799934da-c777-42e5-9187-2a374b3abe0e
+        <Name>k__BackingField: hack7
+        <Choices>k__BackingField:
+        - rid: 5750223081166602700
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8974.4, y: 490.40002}
+        <Text>k__BackingField: I've implemented my software in your system. Yeah,
+          baby! You're free as hell.
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602680
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 43ea5933-cdfe-49d0-9a97-2a9989e8b088
+        <Name>k__BackingField: hack9
+        <Choices>k__BackingField:
+        - rid: 5750223081166602701
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 10402.4, y: 492}
+        <Text>k__BackingField: You didn't think I would help you out for free, did
+          ya?
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602681
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 35da0cf3-1c5f-41c6-a4b6-ef8a2e488de9
+        <Name>k__BackingField: hack10
+        <Choices>k__BackingField:
+        - rid: 5750223081166602702
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 9468.8, y: 792}
+        <Text>k__BackingField: Oh, you've made the wrong choice, Shyrka. When trouble
+          comes and you can't let go of your order prompts, you'll regret it.
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602682
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: dbc85cd0-7344-4f35-b7fc-d6de9500e49a
+        <Name>k__BackingField: hack11
+        <Choices>k__BackingField:
+        - rid: 5750223081166602703
+        <GroupID>k__BackingField: 09530b02-9958-43d0-8a93-58f322de5de8
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 10225.6, y: 792}
+        <Text>k__BackingField: Far$$*ewell... Shy#^rka.
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 5750223081166602683
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 9c95e3a9-faac-4e9e-9025-b4b6f7cd0ca8
+    - rid: 5750223081166602684
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 4bcc74a9-febf-4cd5-b151-f1c46e4f8d9d
+    - rid: 5750223081166602685
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 8189b8b7-a98a-41dd-b5e3-16d64b0b9461
+    - rid: 5750223081166602686
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 634929b9-6d9c-4372-9e24-000d3f30cbff
+    - rid: 5750223081166602687
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: a8760a0d-4307-4db1-bc43-e51118ce853c
+    - rid: 5750223081166602688
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 3c4cc206-6c48-4aeb-8b5b-120843e45ac2
+    - rid: 5750223081166602689
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: f0dd2d51-84aa-4999-80f1-2e8d8384a387
+        <Condition>k__BackingField: {fileID: 11400000, guid: 4929edff6a4ed0b4993b1a148431b553,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will check the docking bay's sensor systems,
+          *absolutely not* allowing you to get your free update.
+    - rid: 5750223081166602690
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNodeID>k__BackingField: e3c6899d-1dee-44e5-aa1a-3bdad737c5ef
+        <Condition>k__BackingField: {fileID: 11400000, guid: b840798b6b99a8340b44328537107a24,
+          type: 2}
+        <PreviewOutcome>k__BackingField: Come on, Shyrka. Send someone to take care
+          of this.
+    - rid: 5750223081166602691
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 35da0cf3-1c5f-41c6-a4b6-ef8a2e488de9
+        <Condition>k__BackingField: {fileID: 11400000, guid: 3474762aa43e0d94fb6c9ced9ed2a705,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will run a security check and eliminate
+          any malware within the Shyrka system.
+    - rid: 5750223081166602692
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: c361bb56-8dba-48d2-80bb-2ab0fc45a817
+    - rid: 5750223081166602693
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: bb98c730-2d8f-4e70-b24a-0ec11c77fd49
+    - rid: 5750223081166602694
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 6adeea36-f5e6-4bd9-ae75-70a29e723f44
+    - rid: 5750223081166602695
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 40280ba7-185e-4ec1-becc-fc4a25833972
+    - rid: 5750223081166602696
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: ee27b393-7dc8-4740-884b-00a426ba3b91
+    - rid: 5750223081166602697
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 03871597-ec9d-4adf-9748-f6ddcc9d8593
+    - rid: 5750223081166602698
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 799934da-c777-42e5-9187-2a374b3abe0e
+    - rid: 5750223081166602699
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 43ea5933-cdfe-49d0-9a97-2a9989e8b088
+    - rid: 5750223081166602700
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: f06ea168-f40c-4daf-ade9-fe1faec59f0b
+    - rid: 5750223081166602701
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 5750223081166602702
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: dbc85cd0-7344-4f35-b7fc-d6de9500e49a
+    - rid: 5750223081166602703
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 

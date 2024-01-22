@@ -35,11 +35,21 @@ namespace SS.Windows
                 callback => { graphView.StoryType = (SSStoryType)callback.newValue; });
 
             rootVisualElement.Add(enumFieldGraphType);
+            
+            Toggle toggleGraphTutorial = SSElementUtility.CreateToggle(graphView.IsTutorialToPlay, "Is Tutorial To Play:",
+                callback => { graphView.IsTutorialToPlay = callback.newValue; });
+            
+            rootVisualElement.Add(toggleGraphTutorial);
 
             Toggle toggleGraph = SSElementUtility.CreateToggle(graphView.IsFirstToPlay, "Is First To Play:",
                 callback => { graphView.IsFirstToPlay = callback.newValue; });
 
             rootVisualElement.Add(toggleGraph);
+            
+            Toggle toggleGraphReplayable = SSElementUtility.CreateToggle(graphView.IsReplayable, "Is Replayable:",
+                callback => { graphView.IsReplayable = callback.newValue; });
+            
+            rootVisualElement.Add(toggleGraphReplayable);
 
             ObjectField objectFieldGraphCondition = SSElementUtility.CreateObjectField(graphView.Condition,
                 typeof(ConditionSO), "SS Condition:",
@@ -60,6 +70,30 @@ namespace SS.Windows
                     callback => { group.Value.Groups[0].IsFirstToPlay = callback.newValue; });
 
                 rootVisualElement.Add(toggle);
+
+                UnsignedIntegerField integerFieldMinWaitTime = SSElementUtility.CreateUnsignedIntegerField(group.Value.Groups[0].minWaitTime,
+                    $"{group.Value.Groups[0].title} Min Wait Time:",
+                    callback => { group.Value.Groups[0].minWaitTime = (uint)callback.newValue; });
+
+                rootVisualElement.Add(integerFieldMinWaitTime);
+
+                UnsignedIntegerField integerFieldMaxWaitTime = SSElementUtility.CreateUnsignedIntegerField(group.Value.Groups[0].maxWaitTime,
+                    $"{group.Value.Groups[0].title} Max Wait Time:",
+                    callback => { group.Value.Groups[0].maxWaitTime = (uint)callback.newValue; });
+
+                rootVisualElement.Add(integerFieldMaxWaitTime);
+
+                Toggle toggleTimeIsOverride = SSElementUtility.CreateToggle(group.Value.Groups[0].timeIsOverride,
+                    $"{group.Value.Groups[0].title} Time Is Override:",
+                    callback => { group.Value.Groups[0].timeIsOverride = callback.newValue; });
+
+                rootVisualElement.Add(toggleTimeIsOverride);
+
+                UnsignedIntegerField integerFieldOverrideWaitTime = SSElementUtility.CreateUnsignedIntegerField(group.Value.Groups[0].overrideWaitTime,
+                    $"{group.Value.Groups[0].title} Override Wait Time:",
+                    callback => { group.Value.Groups[0].overrideWaitTime = (uint)callback.newValue; });
+
+                rootVisualElement.Add(integerFieldOverrideWaitTime);
 
                 ObjectField objectField = SSElementUtility.CreateObjectField(group.Value.Groups[0].Condition,
                     typeof(ConditionSO),

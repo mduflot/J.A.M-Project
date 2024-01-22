@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3a298838b420346a8b6588d8248e9c, type: 3}
   m_Name: ConditionPower
   m_EditorClassIdentifier: 
-  target: 1
-  targetGauge: 0
   BaseCondition:
+    target: 0
     Traits:
       traits:
         Item1: 0
@@ -23,7 +22,15 @@ MonoBehaviour:
     SpaceshipTraits: 0
     HiddenSpaceshipTraits: 0
     GaugeValue: 0
+  targetStat: 0
+  statComparison: 0
+  statThreshold: 0
+  targetGauge: 0
   supplementaryConditions:
     list: []
-  additionnalConditions: []
+  additionnalConditions:
+  - {fileID: 11400000, guid: 7eb77fcc0d396b44faac57b34a221a45, type: 2}
+  - {fileID: 11400000, guid: 8747efeeaeb7b7a4e8077ea4a94a73c8, type: 2}
+  - {fileID: 11400000, guid: a8a57cb8bcc1d1c4da4d38bdbff961d6, type: 2}
+  - {fileID: 11400000, guid: e82e631d4296eac42870bc167895bf9a, type: 2}
   outcomes: {fileID: 11400000, guid: 6983fe35bf139b34da53ca574bea8ff7, type: 2}

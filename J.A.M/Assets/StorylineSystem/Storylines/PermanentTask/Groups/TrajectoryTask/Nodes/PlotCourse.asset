@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: PlotCourse
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: PlotCourse
+  <Choices>k__BackingField:
+  - rid: 1640970997723824134
+  - rid: 1640970997723824135
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 1
+  <Description>k__BackingField: Do the right calculations to optimize the course
+    of the Mobius.
+  <TaskStatus>k__BackingField: 0
+  <TaskType>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7c1c751ba84aea14f89101da1e8dfe14,
+    type: 3}
+  <TimeLeft>k__BackingField: 0
+  <Duration>k__BackingField: 10
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 2
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 1
+  <Furniture>k__BackingField: 0
+  <IsTaskTutorial>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 1640970997723824134
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNode>k__BackingField: {fileID: 0}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 0130a702343d19f47a4304a8c46de9c7,
+          type: 2}
+        <PreviewOutcome>k__BackingField: 'will add :'
+    - rid: 1640970997723824135
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: LastChoice
+        <NextNode>k__BackingField: {fileID: 0}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 51a265ec0700b8d429140d8cc71735f2,
+          type: 2}
+        <PreviewOutcome>k__BackingField: 

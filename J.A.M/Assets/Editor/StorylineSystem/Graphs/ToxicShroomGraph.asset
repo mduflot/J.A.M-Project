@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: ToxicShroomGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: ToxicShroom
+  <ID>k__BackingField: fdfbbb72-fd22-47f3-b0cf-5e8187feb34e
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField: []
+  <Nodes>k__BackingField:
+  - rid: 8851122716649979956
+  - rid: 8851122716649979957
+  - rid: 8851122716649979958
+  - rid: 8851122716649979959
+  <OldGroupNames>k__BackingField: []
+  <OldUngroupedNodeNames>k__BackingField:
+  - ToxicShroom1
+  - ToxicShroom3
+  - ToxicShroom2
+  - LastChanceToEscape
+  <OldGroupedNodeNames>k__BackingField:
+    list: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 8851122716649979956
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 32e8a6e6-0538-4ec8-ace7-a79777d7a722
+        <Name>k__BackingField: ToxicShroom1
+        <Choices>k__BackingField:
+        - rid: 8851122716649979960
+        <GroupID>k__BackingField: 
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 7884, y: -1107}
+        <Text>k__BackingField: Don't touch me or I'll punch you!
+        <SpeakerType>k__BackingField: 3
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 8851122716649979957
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 0ced7028-2a41-4cd4-812e-8c063e306165
+        <Name>k__BackingField: ToxicShroom3
+        <Choices>k__BackingField:
+        - rid: 8851122716649979961
+        <GroupID>k__BackingField: 
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 9237, y: -1107}
+        <Text>k__BackingField: Calm down buddy, I just want to help... Ouch! Somebody
+          help me!
+        <SpeakerType>k__BackingField: 4
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 8851122716649979958
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: eaaaf73d-596e-49f6-a324-0da46ae3f4a6
+        <Name>k__BackingField: ToxicShroom2
+        <Choices>k__BackingField:
+        - rid: 8851122716649979962
+        <GroupID>k__BackingField: 
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 8577, y: -1107}
+        <Text>k__BackingField: Get him down the table, they're gonna hurt themselves!
+        <SpeakerType>k__BackingField: 4
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 8851122716649979959
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 302ec7f6-476f-4e82-984a-c94f475fe5a6
+        <Name>k__BackingField: LastChanceToEscape
+        <Choices>k__BackingField:
+        - rid: 8851122716649979963
+        - rid: 8851122716649979964
+        - rid: 8851122716649979965
+        <GroupID>k__BackingField: 
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 9934, y: -1158}
+        <DescriptionTask>k__BackingField: 
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 2
+        <TaskIcon>k__BackingField: {fileID: 0}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 0
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 5
+        <Furniture>k__BackingField: 1
+    - rid: 8851122716649979960
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: eaaaf73d-596e-49f6-a324-0da46ae3f4a6
+    - rid: 8851122716649979961
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 302ec7f6-476f-4e82-984a-c94f475fe5a6
+    - rid: 8851122716649979962
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 0ced7028-2a41-4cd4-812e-8c063e306165
+    - rid: 8851122716649979963
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Choice1
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 0}
+        <PreviewOutcome>k__BackingField: will take care of the hostile crew member
+          and perform a psychiatric test.
+    - rid: 8851122716649979964
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Choice2
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 0}
+        <PreviewOutcome>k__BackingField: will lock the hostile crew member up to
+          avoid further harm.
+    - rid: 8851122716649979965
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Choice3
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 0}
+        <PreviewOutcome>k__BackingField: 

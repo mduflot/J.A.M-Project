@@ -1,47 +1,95 @@
+using System.Collections.Generic;
 using CharacterSystem;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class WarningUI : MonoBehaviour
 {
-    public CharacterBehaviour character;
-    public Image characterIcon;
+    public List<CharacterBehaviour> characters;
     public TextMeshProUGUI warningDescription;
+    public TextMeshProUGUI characterWarningDescription;
+
+    [SerializeField] private GameObject warning;
+    [SerializeField] private GameObject characterWarning;
+
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public void CloseWarning()
     {
-        gameObject.SetActive(false);
+        Appear(false);
     }
 
-    public void Init(CharacterBehaviour c)
+    public void CharacterWarning(List<CharacterBehaviour> c)
     {
-        character = c;
-        characterIcon.sprite = c.GetCharacterData().characterIcon;
-        if (c.IsTaskLeader())
+        characters = c;
+        warning.SetActive(false);
+        characterWarning.SetActive(true);
+        characterWarningDescription.text = "";
+        for (int i = 0; i < c.Count; i++)
         {
-            warningDescription.text = character.GetCharacterData().firstName + " is already assigned to " +
-                                      character.GetTask().Name +
-                                      ". Assigning him here will cancel his current Task. Do you want to proceed?";
+            var character = c[i];
+            if (character.IsTaskLeader())
+            {
+                characterWarningDescription.text = character.GetCharacterData().firstName + " is already assigned to " +
+                                                   character.GetTask().Name +
+                                                   ". Assigning him here will cancel his current Task. Do you want to proceed?";
+            }
+            else
+            {
+                characterWarningDescription.text += character.GetCharacterData().firstName + " is already assigned to " +
+                                                   character.GetTask().Name +
+                                                   ". Assigning him here will slow down his current Task. Do you want to proceed?";
+            }
         }
-        else
-        {
-            warningDescription.text = character.GetCharacterData().firstName + " is already assigned to " +
-                                      character.GetTask().Name +
-                                      ". Assigning him here will slow down his current Task. Do you want to proceed?";
-        }
+
+        Appear(true);
     }
+
+    public void Warning()
+    {
+        warning.SetActive(true);
+        characterWarning.SetActive(false);
+        warningDescription.SetText("Are you sure you want to cancel this task?");
+        Appear(true);
+    }
+
     public void CancelTask()
     {
-        if (character.IsTaskLeader())
+        if (characterWarning.activeSelf)
         {
-            GameManager.Instance.SpaceshipManager.CancelTask(character.GetTask());
+            for (int i = 0; i < characters.Count; i++)
+            {
+                var character = characters[i];
+                var spaceship = GameManager.Instance.SpaceshipManager; 
+                if (character.IsTaskLeader())
+                {
+                    character.IncreaseMood(-spaceship.moodLossOnCancelTask);
+                    spaceship.CancelTask(character.GetTask());
+                }
+                else
+                {
+                    character.IncreaseMood(-spaceship.moodLossOnCancelTask);
+                    character.StopTask();
+                }
+            }
+
+            GameManager.Instance.RefreshCharacterIcons();
         }
         else
         {
-            character.StopTask();
+            GameManager.Instance.UIManager.taskUI.CancelTask();
         }
-        GameManager.Instance.RefreshCharacterIcons();
-        gameObject.SetActive(false);
+
+        Appear(false);
+    }
+
+    private void Appear(bool state)
+    {
+        animator.SetBool("Appear", state);
     }
 }

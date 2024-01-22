@@ -9,10 +9,6 @@ namespace SS.Inspectors
     [CustomEditor(typeof(SSLauncher))]
     public class SSInspector : Editor
     {
-        /* UI GameObjects */
-        private SerializedProperty currentStorylineProperty;
-        private SerializedProperty spaceshipManagerProperty;
-
         /* Node Scriptable Objects */
         private SerializedProperty nodeContainerProperty;
         private SerializedProperty nodeGroupProperty;
@@ -26,11 +22,10 @@ namespace SS.Inspectors
         private SerializedProperty selectedNodeGroupIndexProperty;
         private SerializedProperty selectedNodeIndexProperty;
 
+        private SerializedProperty isCheatLauncherProperty;
+
         private void OnEnable()
         {
-            currentStorylineProperty = serializedObject.FindProperty("currentStoryline");
-            spaceshipManagerProperty = serializedObject.FindProperty("spaceshipManager");
-            
             nodeContainerProperty = serializedObject.FindProperty("nodeContainer");
             nodeGroupProperty = serializedObject.FindProperty("nodeGroup");
             nodeProperty = serializedObject.FindProperty("node");
@@ -40,14 +35,15 @@ namespace SS.Inspectors
 
             selectedNodeGroupIndexProperty = serializedObject.FindProperty("selectedNodeGroupIndex");
             selectedNodeIndexProperty = serializedObject.FindProperty("selectedNodeIndex");
+            
+            isCheatLauncherProperty = serializedObject.FindProperty("isCheatLauncher");
         }
 
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
 
-            currentStorylineProperty.DrawPropertyField();
-            spaceshipManagerProperty.DrawPropertyField();
+            isCheatLauncherProperty.DrawPropertyField();
 
             DrawNodeContainerArea();
 

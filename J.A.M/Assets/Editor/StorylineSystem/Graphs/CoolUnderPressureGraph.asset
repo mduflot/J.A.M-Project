@@ -1,0 +1,347 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: CoolUnderPressureGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: CoolUnderPressure
+  <ID>k__BackingField: a2481612-e20a-4aee-ab6e-049667d0bb0d
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 1
+  <IsTutorialToPlay>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: f94ddf84-ae2d-47e9-a45a-f3845561fe8a
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: OpenDoor
+    <Position>k__BackingField: {x: 1431, y: 676}
+  <Nodes>k__BackingField:
+  - rid: 197800411820720177
+  - rid: 197800411820720178
+  - rid: 197800411820720179
+  - rid: 197800411820720180
+  - rid: 197800411820720181
+  - rid: 197800411820720182
+  - rid: 197800411820720183
+  - rid: 197800411820720184
+  - rid: 197800411820720185
+  - rid: 197800411820720186
+  - rid: 197800411820720187
+  <OldGroupNames>k__BackingField:
+  - OpenDoor
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: OpenDoor
+      Value:
+      - pressurisation
+      - mean
+      - routine
+      - closed
+      - SAS
+      - okay
+      - breathe
+      - clear
+      - what
+      - easy
+      - OpenDoor
+  references:
+    version: 2
+    RefIds:
+    - rid: 197800411820720177
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ef863be7-0ae6-4bd7-be4d-cd01ad21dd93
+        <Name>k__BackingField: pressurisation
+        <Choices>k__BackingField:
+        - rid: 197800411820720188
+        <GroupID>k__BackingField: f94ddf84-ae2d-47e9-a45a-f3845561fe8a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1456, y: 735}
+        <Text>k__BackingField: SAS pressurisation compromised
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800411820720178
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 1f8aa605-11f5-47ce-a3b0-b21c2498c477
+        <Name>k__BackingField: mean
+        <Choices>k__BackingField:
+        - rid: 197800411820720189
+        <GroupID>k__BackingField: f94ddf84-ae2d-47e9-a45a-f3845561fe8a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2128, y: 737}
+        <Text>k__BackingField: What does this mean ?
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800411820720179
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 95cd6265-2790-41a9-a9d4-a0bae65bbd2c
+        <Name>k__BackingField: routine
+        <Choices>k__BackingField:
+        - rid: 197800411820720190
+        <GroupID>k__BackingField: f94ddf84-ae2d-47e9-a45a-f3845561fe8a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2377, y: 744}
+        <Text>k__BackingField: Its in the hallway to the docking bay, I was going
+          there for routine and it suddenly went red
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800411820720180
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 1875b2d7-1aea-4c7d-a205-9768604ba1bb
+        <Name>k__BackingField: closed
+        <Choices>k__BackingField:
+        - rid: 197800411820720191
+        <GroupID>k__BackingField: f94ddf84-ae2d-47e9-a45a-f3845561fe8a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3050, y: 747}
+        <Text>k__BackingField: I saw the door close suddenly and someone jump out
+          right before they were trapped, I'll launch an emergency immediatly
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800411820720181
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: c1774f6c-f47d-4f5a-86a5-3d7b016adc9a
+        <Name>k__BackingField: SAS
+        <Choices>k__BackingField:
+        - rid: 197800411820720192
+        <GroupID>k__BackingField: f94ddf84-ae2d-47e9-a45a-f3845561fe8a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3714, y: 752}
+        <Text>k__BackingField: It was me who got out in time, I already saw this
+          happening, I think the power is so low that it won't be able to keep all
+          the SAS pressurised
+        <SpeakerType>k__BackingField: 4
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800411820720182
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 291bda3e-e713-4225-bc69-880d13134fc0
+        <Name>k__BackingField: okay
+        <Choices>k__BackingField:
+        - rid: 197800411820720193
+        <GroupID>k__BackingField: f94ddf84-ae2d-47e9-a45a-f3845561fe8a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4881, y: 760}
+        <Text>k__BackingField: Its okay... Oh my... I got it
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 10
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800411820720183
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 3bcf6ed9-e832-4396-8805-4074442ea1f3
+        <Name>k__BackingField: breathe
+        <Choices>k__BackingField:
+        - rid: 197800411820720194
+        <GroupID>k__BackingField: f94ddf84-ae2d-47e9-a45a-f3845561fe8a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5576, y: 765}
+        <Text>k__BackingField: Just breathe and try to focus only on the task, it
+          will require a lot of attention so it shouldn't be too difficult
+        <SpeakerType>k__BackingField: 15
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 20
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800411820720184
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: b01c0532-221a-4641-bcc7-73261af35d4c
+        <Name>k__BackingField: clear
+        <Choices>k__BackingField:
+        - rid: 197800411820720195
+        <GroupID>k__BackingField: f94ddf84-ae2d-47e9-a45a-f3845561fe8a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6323, y: 768}
+        <Text>k__BackingField: I did it, I don't know what happened there, but I
+          was stressing out and suddenly everything become so clear
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 60
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800411820720185
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 8dc6e4cb-2f88-4aad-be03-3093668dd761
+        <Name>k__BackingField: what
+        <Choices>k__BackingField:
+        - rid: 197800411820720196
+        <GroupID>k__BackingField: f94ddf84-ae2d-47e9-a45a-f3845561fe8a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 7000, y: 767}
+        <Text>k__BackingField: What do you mean ?
+        <SpeakerType>k__BackingField: 16
+        <Duration>k__BackingField: 0.5
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 71
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800411820720186
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: e2347211-1615-43e0-ae7a-a2a922c0867e
+        <Name>k__BackingField: easy
+        <Choices>k__BackingField:
+        - rid: 197800411820720197
+        <GroupID>k__BackingField: f94ddf84-ae2d-47e9-a45a-f3845561fe8a
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 7282, y: 773}
+        <Text>k__BackingField: I can't tell, I think I just figured this out, you
+          know, how to stay calm. Compared to this everything seems easy now
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 80
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800411820720187
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ea74de3f-ba89-4270-8d25-e8d15f7ceb4c
+        <Name>k__BackingField: OpenDoor
+        <Choices>k__BackingField:
+        - rid: 197800411820720198
+        - rid: 197800411820720199
+        <GroupID>k__BackingField: f94ddf84-ae2d-47e9-a45a-f3845561fe8a
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 4377, y: 754}
+        <DescriptionTask>k__BackingField: A dysfunction in the power system has caused
+          a problem of pressurisation. The integrity of one of the SAS is compromised
+          and someone needs to go fix it, event if it's very dangerous.
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+          type: 3}
+        <TimeLeft>k__BackingField: 15
+        <BaseDuration>k__BackingField: 4
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 11
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 197800411820720188
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 1f8aa605-11f5-47ce-a3b0-b21c2498c477
+    - rid: 197800411820720189
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 95cd6265-2790-41a9-a9d4-a0bae65bbd2c
+    - rid: 197800411820720190
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 1875b2d7-1aea-4c7d-a205-9768604ba1bb
+    - rid: 197800411820720191
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: c1774f6c-f47d-4f5a-86a5-3d7b016adc9a
+    - rid: 197800411820720192
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: ea74de3f-ba89-4270-8d25-e8d15f7ceb4c
+    - rid: 197800411820720193
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 3bcf6ed9-e832-4396-8805-4074442ea1f3
+    - rid: 197800411820720194
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: b01c0532-221a-4641-bcc7-73261af35d4c
+    - rid: 197800411820720195
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 8dc6e4cb-2f88-4aad-be03-3093668dd761
+    - rid: 197800411820720196
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: e2347211-1615-43e0-ae7a-a2a922c0867e
+    - rid: 197800411820720197
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 197800411820720198
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 291bda3e-e713-4225-bc69-880d13134fc0
+        <Condition>k__BackingField: {fileID: 11400000, guid: c2d411fc28e7ae24f8b816e79731e14c,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will enter the dysfonctioning SAS and perform
+          an emergency fixation. The procedure is simple but recquire a lot of precision
+          in a very stressful environnement
+    - rid: 197800411820720199
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 0d53a7b0e8432c54fa3a7fbe4cc48efe,
+          type: 2}
+        <PreviewOutcome>k__BackingField: 

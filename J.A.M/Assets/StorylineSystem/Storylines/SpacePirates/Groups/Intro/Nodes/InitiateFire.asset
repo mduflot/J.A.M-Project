@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: InitiateFire
   <Choices>k__BackingField:
-  - rid: 8412203090294341882
-  - rid: 8412203090294341883
+  - rid: 197800411516633895
+  - rid: 197800411516633896
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: The small spaceship is getting closer by the minute.
     It looks like a recon unit, but it's charging a weapon. Time to fight back!
   <TaskStatus>k__BackingField: 2
   <TaskType>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 21300000, guid: 1d8c6b9704e0a014a82461b6c1d65d4c,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
     type: 3}
   <TimeLeft>k__BackingField: 10
   <Duration>k__BackingField: 2
@@ -30,10 +30,12 @@ MonoBehaviour:
   <OptionalSlots>k__BackingField: 0
   <TaskHelpFactor>k__BackingField: 0.75
   <Room>k__BackingField: 4
+  <Furniture>k__BackingField: 0
+  <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 8412203090294341882
+    - rid: 197800411516633895
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -41,9 +43,9 @@ MonoBehaviour:
           type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: af93c6320ae4d9f498d954e944b29473,
           type: 2}
-        <PreviewOutcome>k__BackingField: Our weapons systems are ready. ASSIGNED
-          will aim and shoot!
-    - rid: 8412203090294341883
+        <PreviewOutcome>k__BackingField: 'will aim and shoot! Our weapons systems
+          are ready.  '
+    - rid: 197800411516633896
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: LastChoice

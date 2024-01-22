@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: SpilledChemicals
   <Choices>k__BackingField:
-  - rid: 8412203090294341784
-  - rid: 8412203090294341785
-  - rid: 8412203090294341786
+  - rid: 197800411224342881
+  - rid: 197800411224342882
+  - rid: 197800411224342883
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: The most part of the fire's been taken care of, but
@@ -24,7 +24,7 @@ MonoBehaviour:
     be useful...
   <TaskStatus>k__BackingField: 2
   <TaskType>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 21300000, guid: 1d8c6b9704e0a014a82461b6c1d65d4c,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
     type: 3}
   <TimeLeft>k__BackingField: 10
   <Duration>k__BackingField: 2
@@ -32,10 +32,12 @@ MonoBehaviour:
   <OptionalSlots>k__BackingField: 0
   <TaskHelpFactor>k__BackingField: 0.75
   <Room>k__BackingField: 8
+  <Furniture>k__BackingField: 0
+  <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 8412203090294341784
+    - rid: 197800411224342881
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -43,9 +45,9 @@ MonoBehaviour:
           type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: a88c4db57cc45574c9c7f07b407de04f,
           type: 2}
-        <PreviewOutcome>k__BackingField: ASSIGNED knows their vials and will try
-          to contain the spills, even though the fumes make it extra dangerous.
-    - rid: 8412203090294341785
+        <PreviewOutcome>k__BackingField: knows their vials and will try to contain
+          the spills, even though the fumes make it extra dangerous.
+    - rid: 197800411224342882
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: MiddleChoice
@@ -53,9 +55,9 @@ MonoBehaviour:
           type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: 802185ec75318d2488eb93be50d24ae8,
           type: 2}
-        <PreviewOutcome>k__BackingField: ASSIGNED doesn't know anything about these
-          things but will try their best to not make everyone die from the fumes.
-    - rid: 8412203090294341786
+        <PreviewOutcome>k__BackingField: doesn't know anything about these things
+          but will try their best to not make everyone die from the fumes.
+    - rid: 197800411224342883
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: LastChoice

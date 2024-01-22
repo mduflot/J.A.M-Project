@@ -1,4 +1,3 @@
-using SS.Utilities;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -8,6 +7,7 @@ namespace SS.Elements
 {
     using Data.Save;
     using Enumerations;
+    using Utilities;
     using Windows;
 
     public class SSTaskNode : SSNode
@@ -22,6 +22,8 @@ namespace SS.Elements
         public int OptionalSlots { get; set; }
         public float TaskHelpFactor { get; set; }
         public RoomType Room { get; set; }
+        public FurnitureType Furniture { get; set; }
+        public bool IsTaskTutorial { get; set; }
 
         private VisualElement customDataContainer = new();
 
@@ -37,7 +39,9 @@ namespace SS.Elements
             MandatorySlots = 1;
             OptionalSlots = 0;
             TaskHelpFactor = 0.75f;
-            Room = RoomType.Flight;
+            Room = RoomType.Trajectory;
+            Furniture = FurnitureType.Console;
+            IsTaskTutorial = false;
 
             SSChoiceTaskSaveData firstChoiceData = new SSChoiceTaskSaveData()
             {
@@ -132,7 +136,8 @@ namespace SS.Elements
 
             customDataContainer.Add(optionalSlotsIntegerField);
 
-            FloatField taskHelpFactorFloatField = SSElementUtility.CreateFloatField(TaskHelpFactor, "Task Help Factor :",
+            FloatField taskHelpFactorFloatField = SSElementUtility.CreateFloatField(TaskHelpFactor,
+                "Task Help Factor :",
                 callback => { TaskHelpFactor = callback.newValue; });
 
             customDataContainer.Add(taskHelpFactorFloatField);
@@ -141,6 +146,16 @@ namespace SS.Elements
                 callback => { Room = (RoomType)callback.newValue; });
 
             customDataContainer.Add(roomEnumField);
+
+            EnumField furnitureEnumField = SSElementUtility.CreateEnumField(Furniture, "Furniture :",
+                callback => { Furniture = (FurnitureType)callback.newValue; });
+
+            customDataContainer.Add(furnitureEnumField);
+
+            Toggle isTaskTutorialToggle = SSElementUtility.CreateToggle(IsTaskTutorial, "Is Task Tutorial :",
+                callback => { IsTaskTutorial = callback.newValue; });
+
+            customDataContainer.Add(isTaskTutorialToggle);
 
             extensionContainer.Add(customDataContainer);
 

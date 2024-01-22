@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 public class BackgroundDefilement : MonoBehaviour
@@ -9,30 +8,23 @@ public class BackgroundDefilement : MonoBehaviour
     [SerializeField] private float defilementSpeed;
 
     private Transform leftBackground;
-    
-    // Start is called before the first frame update
-    void Start()
+    private float initialPos;
+
+    void Awake()
     {
         leftBackground = background1;
+        initialPos = background1.transform.position.z;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        background1.Translate(Vector3.left*defilementSpeed);
-        background2.Translate(Vector3.left*defilementSpeed);
+        background1.Translate(defilementSpeed * TimeTickSystem.timeScale * Vector3.left);
+        background2.Translate(defilementSpeed * TimeTickSystem.timeScale * Vector3.left);
         if (leftBackground.position.x < -4000)
         {
-            Vector3 resetPos = new Vector3(4000, 0, 500);
+            Vector3 resetPos = new Vector3(4000, 0, initialPos);
             leftBackground.position = resetPos;
-            if (leftBackground == background1)
-            {
-                leftBackground = background2;
-            }
-            else
-            {
-                leftBackground = background1;
-            }
+            leftBackground = (leftBackground == background1) ? background2 : background1;
         }
     }
 }

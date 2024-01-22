@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
+  m_Name: 6
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: 6
+  <Choices>k__BackingField:
+  - rid: 197800434780340225
+  <NodeType>k__BackingField: 0
+  <IsStartingNode>k__BackingField: 0
+  <Text>k__BackingField: We are transporting a unique Artifact of the Ktetorian Civilization,
+    that we have secured during a very secret mission.
+  <SpeakerType>k__BackingField: 9
+  <Duration>k__BackingField: 1
+  <IsDialogueTask>k__BackingField: 1
+  <PercentageTask>k__BackingField: 20
+  <IsCompleted>k__BackingField: 0
+  <Job>k__BackingField: 0
+  <PositiveTraits>k__BackingField: 0
+  <NegativeTraits>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 197800434780340225
+      type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNode>k__BackingField: {fileID: 11400000, guid: d9b7bef9497d1d24da5b5e6fadfbd2e0,
+          type: 2}

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using CharacterSystem;
+using SS;
 using Tasks;
 using TMPro;
 using UI;
@@ -11,25 +13,39 @@ namespace Managers
 {
     public class UIManager : MonoBehaviour
     {
-        public Gauges[] gauges;
-        private Dictionary<SystemType, Image> gaugeReferences = new();
+        public GaugeUI[] gauges;
+        private Dictionary<SystemType, GaugeUI> gaugeReferences = new();
         public Transform charactersUIParent;
         public List<CharacterUI> charactersUI;
-        private List<CharacterIcon> characterIcons = new();
+        public List<CharacterIcon> characterIcons = new();
         public CharacterUI characterUIPrefab;
         public Transform taskNotificationParent;
         public Transform taskParent;
         public TaskUI taskUI;
         public Canvas canvas;
         public TextMeshProUGUI date;
-    
-        [Serializable] 
+        [SerializeField] private Sprite redArrow;
+        [SerializeField] private Sprite greenArrow;
+        public CharacterInfoUI characterInfoUI;
+        public Popup PopupTutorial;
+        public Popup PopupStoryline;
+        public Popup PopupEndGame;
+        public GameObject TasksMenu;
+        public List<GameObject> GaugesMenu;
+        public GameObject SpaceshipMenu;
+        public ShipControlManager shipControlManager;
+        public TextMeshProUGUI mainStorylineText;
+        public DialogueManager dialogueManager;
+
+        [Serializable]
         public struct Gauges
         {
             [FormerlySerializedAs("system")] public SystemType systemType;
             public Image gauge;
+            public Image previewGauge;
+            public Image arrow;
         }
-    
+
         private void Start()
         {
             Initialize();
@@ -39,7 +55,9 @@ namespace Managers
         {
             for (int i = 0; i < gauges.Length; i++)
             {
-                gaugeReferences.Add(gauges[i].systemType, gauges[i].gauge);
+                gaugeReferences.Add(gauges[i].systemType, gauges[i]);
+                var gauge = gauges[i];
+                gauge.InitializeGauge();
             }
 
             foreach (var character in GameManager.Instance.SpaceshipManager.characters)
@@ -49,11 +67,13 @@ namespace Managers
                 charactersUI.Add(ui);
                 characterIcons.Add(ui.icon);
             }
+
+            shipControlManager.Initialize();
         }
 
-        public void UpdateGauges(SystemType systemType, float value)
+        public void UpdateGauges(SystemType systemType, float value, float previewValue)
         {
-            gaugeReferences[systemType].fillAmount = value/20;
+            gaugeReferences[systemType].UpdateGauge(value, previewValue);
         }
 
         public void UpdateInGameDate(string newDate)
@@ -69,13 +89,68 @@ namespace Managers
             }
         }
 
+        public void PreviewOutcomeGauges(List<TaskUI.GaugesOutcome> gaugesOutcomes)
+        {
+            foreach (var gauge in gauges)
+            {
+                var valueToAdd = 0.0f;
+                foreach (var outcome in gaugesOutcomes)
+                {
+                    if (outcome.gauge == gauge.systemType) valueToAdd += outcome.value;
+                }
+
+                gauge.PreviewOutcomeGauge(valueToAdd);
+            }
+        }
+
+        public void ResetPreviewGauges()
+        {
+            foreach (var gauge in gauges)
+            {
+                gauge.ResetPreviewGauge();
+            }
+        }
+
         public void UpdateCharacterGauges()
         {
             foreach (var charUi in charactersUI)
             {
-                charUi.moodGauge.fillAmount = charUi.character.GetMood() / charUi.character.GetMaxMood();
-                charUi.volitionGauge.fillAmount = charUi.character.GetVolition() / charUi.character.GetMaxMood();
+                charUi.UpdateIconDisplay();
             }
+        }
+
+
+        //TODO : Modifier une fois qu'on aura les traits et des bonus de Mood
+        public void CharacterPreviewGauges(List<TaskUI.CharacterOutcome> characters)
+        {
+            foreach (var c in charactersUI)
+            {
+                var value = 0f;
+                foreach (var character in characters)
+                {
+                    if (c.character == character.character) value += character.value;
+                }
+
+                c.PreviewMoodGauge(value);
+            }
+        }
+
+        public void ResetCharactersPreviewGauges()
+        {
+            foreach (var charUI in charactersUI)
+            {
+                charUI.previewMoodGauge.fillAmount = 0;
+            }
+        }
+
+        public CharacterUI GetCharacterUI(CharacterBehaviour c)
+        {
+            foreach (var charUI in charactersUI)
+            {
+                if (charUI.character == c) return charUI;
+            }
+
+            return null;
         }
     }
 }

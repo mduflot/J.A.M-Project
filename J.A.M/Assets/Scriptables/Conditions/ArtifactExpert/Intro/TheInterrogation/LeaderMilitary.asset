@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3a298838b420346a8b6588d8248e9c, type: 3}
   m_Name: LeaderMilitary
   m_EditorClassIdentifier: 
-  target: 1
-  targetGauge: 0
   BaseCondition:
+    target: 1
     Traits:
       traits:
         Item1: 1
@@ -23,6 +22,10 @@ MonoBehaviour:
     SpaceshipTraits: 0
     HiddenSpaceshipTraits: 0
     GaugeValue: 0
+  targetStat: 0
+  statComparison: 0
+  statThreshold: 0
+  targetGauge: 0
   supplementaryConditions:
     list: []
   additionnalConditions:

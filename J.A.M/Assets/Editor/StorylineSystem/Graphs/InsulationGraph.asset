@@ -1,0 +1,213 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: InsulationGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: Insulation
+  <ID>k__BackingField: 7bcf3572-2e23-496b-a766-cb8812aa8d2f
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 3
+  <IsTutorialToPlay>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 11400000, guid: 44b3ac6390b9e3f4eb25df30768ab593,
+    type: 2}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: f4653cc4-a47d-490f-9d6a-d2a2b8234c98
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: Insulation
+    <Position>k__BackingField: {x: 1932, y: 514}
+  <Nodes>k__BackingField:
+  - rid: 197800430871248931
+  - rid: 197800430871248932
+  - rid: 197800430871248933
+  - rid: 197800430871248934
+  - rid: 197800430871248935
+  - rid: 197800430871248936
+  <OldGroupNames>k__BackingField:
+  - Insulation
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: Insulation
+      Value:
+      - Cough
+      - getting
+      - Temperatures
+      - machine
+      - problem
+      - Insulation
+  references:
+    version: 2
+    RefIds:
+    - rid: 197800430871248931
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: c251dca6-eb04-41d2-8de1-49c7d6904d72
+        <Name>k__BackingField: Cough
+        <Choices>k__BackingField:
+        - rid: 197800430871248937
+        <GroupID>k__BackingField: f4653cc4-a47d-490f-9d6a-d2a2b8234c98
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1957, y: 573}
+        <Text>k__BackingField: Cough... cough
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 0.75
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800430871248932
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 909331cb-5fa0-4957-80a0-51df8a217f3c
+        <Name>k__BackingField: getting
+        <Choices>k__BackingField:
+        - rid: 197800430871248938
+        <GroupID>k__BackingField: f4653cc4-a47d-490f-9d6a-d2a2b8234c98
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2216, y: 575}
+        <Text>k__BackingField: It is getting cold here, isn't it ?
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800430871248933
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 6bc4e530-7445-4cb7-8f93-9592313e6a9d
+        <Name>k__BackingField: Temperatures
+        <Choices>k__BackingField:
+        - rid: 197800430871248939
+        <GroupID>k__BackingField: f4653cc4-a47d-490f-9d6a-d2a2b8234c98
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2477, y: 582}
+        <Text>k__BackingField: WARNING ! Temperatures are getting alarmingly low
+        <SpeakerType>k__BackingField: 1
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800430871248934
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 68389682-7612-454e-b39d-d92aa602a839
+        <Name>k__BackingField: machine
+        <Choices>k__BackingField:
+        - rid: 197800430871248940
+        <GroupID>k__BackingField: f4653cc4-a47d-490f-9d6a-d2a2b8234c98
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2747, y: 586}
+        <Text>k__BackingField: See ! Even the machine agrees with me !
+        <SpeakerType>k__BackingField: 4
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800430871248935
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: efddad07-4efa-46ce-9653-6a88c035eebd
+        <Name>k__BackingField: problem
+        <Choices>k__BackingField:
+        - rid: 197800430871248941
+        <GroupID>k__BackingField: f4653cc4-a47d-490f-9d6a-d2a2b8234c98
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 3060, y: 591}
+        <Text>k__BackingField: Yes it's a real problem I'm on it
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800430871248936
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: af29af87-73ff-4814-a36d-02eda1ae0208
+        <Name>k__BackingField: Insulation
+        <Choices>k__BackingField:
+        - rid: 197800430871248942
+        - rid: 197800430871248943
+        <GroupID>k__BackingField: f4653cc4-a47d-490f-9d6a-d2a2b8234c98
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 3354, y: 601}
+        <DescriptionTask>k__BackingField: A breach in the insulation system exposes
+          us the cold of space. It increases the power needed to keep the ship warm.
+        <TaskStatus>k__BackingField: 1
+        <TaskType>k__BackingField: 2
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+          type: 3}
+        <TimeLeft>k__BackingField: 0
+        <BaseDuration>k__BackingField: 5
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 10
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 197800430871248937
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 909331cb-5fa0-4957-80a0-51df8a217f3c
+    - rid: 197800430871248938
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 6bc4e530-7445-4cb7-8f93-9592313e6a9d
+    - rid: 197800430871248939
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 68389682-7612-454e-b39d-d92aa602a839
+    - rid: 197800430871248940
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: efddad07-4efa-46ce-9653-6a88c035eebd
+    - rid: 197800430871248941
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: af29af87-73ff-4814-a36d-02eda1ae0208
+    - rid: 197800430871248942
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: 368a32fe360d2364d9596171d661825e,
+          type: 2}
+        <PreviewOutcome>k__BackingField: The breach will be fixed.
+    - rid: 197800430871248943
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNodeID>k__BackingField: 
+        <Condition>k__BackingField: {fileID: 11400000, guid: eebfb35637cd4694d9b07b04fb88d541,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will fix the breach.

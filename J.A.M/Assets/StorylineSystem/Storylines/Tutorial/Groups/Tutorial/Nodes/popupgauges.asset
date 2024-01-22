@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7dc82bf72f4c909a330508245e176e, type: 3}
+  m_Name: popupgauges
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: popupgauges
+  <Choices>k__BackingField:
+  - rid: 5750223081166602802
+  <NodeType>k__BackingField: 4
+  <IsStartingNode>k__BackingField: 0
+  <Text>k__BackingField: If the ship's gauges drop to zero, your crew member's mood
+    will go down and they'll be less efficient!
+  <PopupUIType>k__BackingField: 0
+  <IsTutorialPopup>k__BackingField: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 5750223081166602802
+      type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 71c00908cb493534fb4ed2a4c464ccf7,
+          type: 2}

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: TaskNode
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: TaskNode
+  <Choices>k__BackingField:
+  - rid: 197800434780340781
+  - rid: 197800434780340782
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: The Ktetorian 'Sentinels' want us to send someone
+    over to their Tribe, saying they have important information for us. Should we
+    trust them or ignore them?
+  <TaskStatus>k__BackingField: 2
+  <TaskType>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: 674067cf15d4f3448b518b294ca7432e,
+    type: 3}
+  <TimeLeft>k__BackingField: 7
+  <Duration>k__BackingField: 15
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 0
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 12
+  <Furniture>k__BackingField: 1
+  <IsTaskTutorial>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 197800434780340781
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 8ddfb13afa0fc0f4597934a713320213,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 2bd2a339d113aa746b70e22393275d31,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will come forward to the Ktetorian Tribe
+          and listen to what they have to say.
+    - rid: 197800434780340782
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: New Choice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: c505ee47c3d262842812c0f870837746,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 15cfc01c84e864543acf52a324a27dcb,
+          type: 2}
+        <PreviewOutcome>k__BackingField: We'll ignore them.

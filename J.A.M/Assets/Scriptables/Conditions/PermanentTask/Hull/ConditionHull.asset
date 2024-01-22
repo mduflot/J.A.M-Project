@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3a298838b420346a8b6588d8248e9c, type: 3}
   m_Name: ConditionHull
   m_EditorClassIdentifier: 
-  target: 0
-  targetGauge: 0
   BaseCondition:
+    target: 0
     Traits:
       traits:
         Item1: 0
@@ -23,13 +22,13 @@ MonoBehaviour:
     SpaceshipTraits: 0
     HiddenSpaceshipTraits: 0
     GaugeValue: 0
+  targetStat: 0
+  statComparison: 0
+  statThreshold: 0
+  targetGauge: 0
   supplementaryConditions:
     list: []
   additionnalConditions:
   - {fileID: 11400000, guid: 84c67aced9456c34c93c08cf7e0069f3, type: 2}
-  - {fileID: 11400000, guid: 28f8bad75b5cb48459e9c51d39a59f82, type: 2}
-  - {fileID: 11400000, guid: bf290b8792e14904d8d941ed844b0d73, type: 2}
-  - {fileID: 11400000, guid: 0049d97cdabb0d6468a3af61b455829c, type: 2}
-  - {fileID: 11400000, guid: ac754c5d36e26c54c970b5c0b28dec0a, type: 2}
   - {fileID: 11400000, guid: 5a3a13f92e1c8a7469dabcb6df3cb02b, type: 2}
   outcomes: {fileID: 11400000, guid: f3b11a28940f5604994cd52c0964b499, type: 2}

@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: Abundance
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: Abundance
+  <Choices>k__BackingField:
+  - rid: 197800411516633090
+  - rid: 197800411516633091
+  - rid: 197800411516633092
+  - rid: 197800411516633093
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: The excess of food could be converted into biomass.
+    What should we use it for ?
+  <TaskStatus>k__BackingField: 1
+  <TaskType>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+    type: 3}
+  <TimeLeft>k__BackingField: 10
+  <Duration>k__BackingField: 3
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 0
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 4
+  <Furniture>k__BackingField: 3
+  <IsTaskTutorial>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 197800411516633090
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNode>k__BackingField: {fileID: 0}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 7dc76591a37ad6149adebea5b2325523,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will be turned food excess into biomass
+          to permanently fertilize the soil.
+    - rid: 197800411516633091
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNode>k__BackingField: {fileID: 0}
+        <Condition>k__BackingField: {fileID: 11400000, guid: ff24fd0e6283d50409da2b7b693e3ba6,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will be turned food excess into biomass
+          to produce power and permanently fertilize the soil.
+    - rid: 197800411516633092
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: ThirdChoice
+        <NextNode>k__BackingField: {fileID: 0}
+        <Condition>k__BackingField: {fileID: 11400000, guid: c2b350dcd8e56a74f8fc7efa1c76e0b1,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will be turned food excess into biomass
+          to produce fuel and permanently fertilize the soil.
+    - rid: 197800411516633093
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: FourthChoice
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 3e79d3c127f76f74ab456ec9f87cf4ab,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: e586c2b6703cb7e49b8b97d911880dbd,
+          type: 2}
+        <PreviewOutcome>k__BackingField: No one will touch the food supply and the
+          excess will likely rot.

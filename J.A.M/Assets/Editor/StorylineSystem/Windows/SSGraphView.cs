@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using SS.Utilities;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -11,12 +10,16 @@ namespace SS.Windows
     using Data.Save;
     using Elements;
     using Enumerations;
+    using Utilities;
 
     public class SSGraphView : GraphView
     {
+        public string ID;
         public SSStoryStatus StoryStatus;
         public SSStoryType StoryType;
+        public bool IsTutorialToPlay;
         public bool IsFirstToPlay;
+        public bool IsReplayable;
         public ConditionSO Condition;
         public SerializableDictionary<string, SSGroupErrorData> Groups;
 
@@ -54,9 +57,12 @@ namespace SS.Windows
         {
             editorWindow = ssEditorWindow;
 
+            ID = Guid.NewGuid().ToString();
             StoryStatus = SSStoryStatus.Enabled;
             StoryType = SSStoryType.Principal;
+            IsTutorialToPlay = false;
             IsFirstToPlay = false;
+            IsReplayable = false;
 
             ungroupedNodes = new SerializableDictionary<string, SSNodeErrorData>();
             Groups = new SerializableDictionary<string, SSGroupErrorData>();
@@ -121,6 +127,7 @@ namespace SS.Windows
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Dialogue)", SSNodeType.Dialogue));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Task)", SSNodeType.Task));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Time)", SSNodeType.Time));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Popup)", SSNodeType.Popup));
 
             this.AddManipulator(CreateGroupContextualMenu());
         }

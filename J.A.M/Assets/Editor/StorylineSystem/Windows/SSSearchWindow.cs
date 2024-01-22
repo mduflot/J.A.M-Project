@@ -42,6 +42,11 @@ namespace SS.Windows
                     level = 2,
                     userData = SSNodeType.Time
                 },
+                new SearchTreeEntry(new GUIContent("Popup", indentationIcon))
+                {
+                    level = 2,
+                    userData = SSNodeType.Popup
+                },
                 new SearchTreeGroupEntry(new GUIContent("Node Group"), 1),
                 new SearchTreeEntry(new GUIContent("Single Group", indentationIcon))
                 {
@@ -84,6 +89,16 @@ namespace SS.Windows
                         (SSTimeNode)graphView.CreateNode("TimeName", SSNodeType.Time, localMousePosition);
 
                     graphView.AddElement(timeNode);
+
+                    return true;
+                }
+                
+                case SSNodeType.Popup:
+                {
+                    SSPopupNode popupNode =
+                        (SSPopupNode)graphView.CreateNode("PopupNode", SSNodeType.Popup, localMousePosition);
+
+                    graphView.AddElement(popupNode);
 
                     return true;
                 }

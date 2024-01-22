@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: Concessions
   <Choices>k__BackingField:
-  - rid: 8412203090294341884
-  - rid: 8412203090294341885
-  - rid: 8412203090294341886
+  - rid: 197800411516633892
+  - rid: 197800411516633893
+  - rid: 197800411516633894
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 0
   <Description>k__BackingField: It's a small high-speed ship that's chasing us. We
     can't outrun them if we don't let go of some weight!
   <TaskStatus>k__BackingField: 2
   <TaskType>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 21300000, guid: 1d8c6b9704e0a014a82461b6c1d65d4c,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
     type: 3}
   <TimeLeft>k__BackingField: 10
   <Duration>k__BackingField: 2
@@ -31,10 +31,12 @@ MonoBehaviour:
   <OptionalSlots>k__BackingField: 0
   <TaskHelpFactor>k__BackingField: 0.75
   <Room>k__BackingField: 4
+  <Furniture>k__BackingField: 0
+  <IsTaskTutorial>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 8412203090294341884
+    - rid: 197800411516633892
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -45,7 +47,7 @@ MonoBehaviour:
         <PreviewOutcome>k__BackingField: They're fast and light, but we are too,
           considering we don't have a cargo anymore. We should be able to outrun
           them.
-    - rid: 8412203090294341885
+    - rid: 197800411516633893
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: SecondChoice
@@ -53,9 +55,9 @@ MonoBehaviour:
           type: 2}
         <Condition>k__BackingField: {fileID: 11400000, guid: 955c5e12dc528c649a2e6b4681ebfbc0,
           type: 2}
-        <PreviewOutcome>k__BackingField: ASSIGNED will unload the cargo to lose some
-          weight. We should be able to outrun them!
-    - rid: 8412203090294341886
+        <PreviewOutcome>k__BackingField: will unload the cargo to lose some weight.
+          We should be able to outrun them!
+    - rid: 197800411516633894
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: LastChoice

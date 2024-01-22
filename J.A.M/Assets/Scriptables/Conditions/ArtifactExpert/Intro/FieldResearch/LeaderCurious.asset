@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3a298838b420346a8b6588d8248e9c, type: 3}
   m_Name: LeaderCurious
   m_EditorClassIdentifier: 
-  target: 1
-  targetGauge: 0
   BaseCondition:
+    target: 1
     Traits:
       traits:
         Item1: 0
@@ -23,8 +22,12 @@ MonoBehaviour:
     SpaceshipTraits: 0
     HiddenSpaceshipTraits: 0
     GaugeValue: 0
+  targetStat: 0
+  statComparison: 0
+  statThreshold: 0
+  targetGauge: 0
   supplementaryConditions:
     list: []
   additionnalConditions:
   - {fileID: 11400000, guid: 71d1c0321ab4f9142acf86a55d00ff51, type: 2}
-  outcomes: {fileID: 0}
+  outcomes: {fileID: 11400000, guid: 3fc7508fbca3f1340bb1f2ea4019d8f2, type: 2}

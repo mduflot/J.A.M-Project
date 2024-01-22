@@ -4,6 +4,8 @@ namespace SS.Enumerations
     {
         Dialogue,
         Task,
-        Time
+        Time,
+        Sound,
+        Popup
     }
 }

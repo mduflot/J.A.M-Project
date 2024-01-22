@@ -1,0 +1,433 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: ArgumentGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: Argument
+  <ID>k__BackingField: 4bb9bcb1-082e-451a-be3f-80e42591a2dc
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 4
+  <IsTutorialToPlay>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: 0eff984a-93ff-4609-8f1c-d0a367852663
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: Tension
+    <Position>k__BackingField: {x: 402.00027, y: 130}
+  <Nodes>k__BackingField:
+  - rid: 197800432149200912
+  - rid: 197800432149200913
+  - rid: 197800432149200914
+  - rid: 197800432149200915
+  - rid: 197800432149200916
+  - rid: 197800432149200917
+  - rid: 197800432149200918
+  - rid: 197800432149200919
+  - rid: 197800432149200920
+  - rid: 197800432149200921
+  - rid: 197800432149200922
+  - rid: 197800432149200923
+  - rid: 197800432149200924
+  - rid: 197800432149200925
+  <OldGroupNames>k__BackingField:
+  - Tension
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: Tension
+      Value:
+      - liveable
+      - cruising
+      - operating
+      - right
+      - vacation
+      - fair
+      - beach
+      - composition
+      - priority
+      - comply
+      - obey
+      - tyrannical
+      - weapons
+      - Tension
+  references:
+    version: 2
+    RefIds:
+    - rid: 197800432149200912
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 9a3dacf8-4a88-4ad9-8a39-7ffd3d2df9db
+        <Name>k__BackingField: liveable
+        <Choices>k__BackingField:
+        - rid: 197800432149200926
+        <GroupID>k__BackingField: 0eff984a-93ff-4609-8f1c-d0a367852663
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 427, y: 208}
+        <Text>k__BackingField: There is a liveable moon in this solar system, I suggest
+          that we stop there, I'm craving for some fresh air
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 128
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800432149200913
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 9bd086e8-7571-48ab-88b9-ede8197cecfb
+        <Name>k__BackingField: cruising
+        <Choices>k__BackingField:
+        - rid: 197800432149200927
+        <GroupID>k__BackingField: 0eff984a-93ff-4609-8f1c-d0a367852663
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1113, y: 226}
+        <Text>k__BackingField: 'No we need to maintain this pace, we''re not a cruising
+          line  : we have a mission to accomplish'
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 1
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800432149200914
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 8c90a055-e8a9-4061-a51b-f347914907a6
+        <Name>k__BackingField: operating
+        <Choices>k__BackingField:
+        - rid: 197800432149200928
+        <GroupID>k__BackingField: 0eff984a-93ff-4609-8f1c-d0a367852663
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 1824, y: 248}
+        <Text>k__BackingField: It is not for you to decide how we're operating this
+          ship
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 256
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800432149200915
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ffed2ef1-9b9e-45c4-815a-e6592e6e5008
+        <Name>k__BackingField: right
+        <Choices>k__BackingField:
+        - rid: 197800432149200929
+        <GroupID>k__BackingField: 0eff984a-93ff-4609-8f1c-d0a367852663
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2528, y: 270}
+        <Text>k__BackingField: You know what, you'r right, let the IA take this decision
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 1
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800432149200916
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 69d90a31-5681-4fff-97a6-ecab589ed878
+        <Name>k__BackingField: vacation
+        <Choices>k__BackingField:
+        - rid: 197800432149200930
+        <GroupID>k__BackingField: 0eff984a-93ff-4609-8f1c-d0a367852663
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4038, y: 189}
+        <Text>k__BackingField: Yes ! We're going on a vacation
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800432149200917
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: f1c16029-1a37-4cf8-94f2-f4f34cd062ed
+        <Name>k__BackingField: fair
+        <Choices>k__BackingField:
+        - rid: 197800432149200931
+        <GroupID>k__BackingField: 0eff984a-93ff-4609-8f1c-d0a367852663
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4781, y: 195}
+        <Text>k__BackingField: To be fair it might do some good for our moral, but
+          we won't stop for too long
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800432149200918
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 27e223c1-0e29-48e3-a385-38958b476b29
+        <Name>k__BackingField: beach
+        <Choices>k__BackingField:
+        - rid: 197800432149200932
+        <GroupID>k__BackingField: 0eff984a-93ff-4609-8f1c-d0a367852663
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5495, y: 211}
+        <Text>k__BackingField: Yeah, yeah of course... Look at that their is some
+          ocean on this moon, we could go to the beach !
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 128
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800432149200919
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: e39e34fd-6ee8-4156-a608-7e1d096e6401
+        <Name>k__BackingField: composition
+        <Choices>k__BackingField:
+        - rid: 197800432149200933
+        <GroupID>k__BackingField: 0eff984a-93ff-4609-8f1c-d0a367852663
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6226, y: 240}
+        <Text>k__BackingField: Looking at the water composition, we'd rather not.
+          Let's limit that at a leisure walk
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 128
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800432149200920
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: a5f6bdbc-aa14-4cce-ad18-ffc50af9ed33
+        <Name>k__BackingField: priority
+        <Choices>k__BackingField:
+        - rid: 197800432149200934
+        <GroupID>k__BackingField: 0eff984a-93ff-4609-8f1c-d0a367852663
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4067, y: 473}
+        <Text>k__BackingField: The mission is still a priority, we will do as the
+          IA command and continue our journey without interruption
+        <SpeakerType>k__BackingField: 9
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800432149200921
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 0a110d25-975e-401b-b1a0-aa86fb38559e
+        <Name>k__BackingField: comply
+        <Choices>k__BackingField:
+        - rid: 197800432149200935
+        <GroupID>k__BackingField: 0eff984a-93ff-4609-8f1c-d0a367852663
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 4756, y: 522}
+        <Text>k__BackingField: And if we don't comply ?
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 0.75
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 128
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800432149200922
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 14db4451-a79b-4d93-adbb-e43217f992e2
+        <Name>k__BackingField: obey
+        <Choices>k__BackingField:
+        - rid: 197800432149200936
+        <GroupID>k__BackingField: 0eff984a-93ff-4609-8f1c-d0a367852663
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 5461, y: 561}
+        <Text>k__BackingField: Then we'd have to use force to make you obey
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 1
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800432149200923
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: d4447583-82c9-4569-89a9-00ba32f460c1
+        <Name>k__BackingField: tyrannical
+        <Choices>k__BackingField:
+        - rid: 197800432149200937
+        <GroupID>k__BackingField: 0eff984a-93ff-4609-8f1c-d0a367852663
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6163, y: 587}
+        <Text>k__BackingField: This is tyrannical, it's not correct to intimidate
+          us with your weapons they're supposed to protect us, not coerce us !
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1.5
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 128
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800432149200924
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 65379d1d-0260-4d3f-bf1c-6ae55f85cfc2
+        <Name>k__BackingField: weapons
+        <Choices>k__BackingField:
+        - rid: 197800432149200938
+        <GroupID>k__BackingField: 0eff984a-93ff-4609-8f1c-d0a367852663
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 6830, y: 649}
+        <Text>k__BackingField: If only we could have these weapons, these soldiers
+          would stop acting so cocky, believe that
+        <SpeakerType>k__BackingField: 22
+        <Duration>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 128
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 197800432149200925
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 151aca30-6814-4cd3-8ffe-97497ceb83c1
+        <Name>k__BackingField: Tension
+        <Choices>k__BackingField:
+        - rid: 197800432149200939
+        - rid: 197800432149200940
+        - rid: 197800432149200941
+        <GroupID>k__BackingField: 0eff984a-93ff-4609-8f1c-d0a367852663
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 3240, y: 272}
+        <DescriptionTask>k__BackingField: The civilians need to make a stop to release
+          tension, but the sergeant insists that the ship maintains its trajectory.
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 7590877773093ff4bb0f7c6e24e547f5,
+          type: 3}
+        <TimeLeft>k__BackingField: 10
+        <BaseDuration>k__BackingField: 2
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 1
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 197800432149200926
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 9bd086e8-7571-48ab-88b9-ede8197cecfb
+    - rid: 197800432149200927
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 8c90a055-e8a9-4061-a51b-f347914907a6
+    - rid: 197800432149200928
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: ffed2ef1-9b9e-45c4-815a-e6592e6e5008
+    - rid: 197800432149200929
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 151aca30-6814-4cd3-8ffe-97497ceb83c1
+    - rid: 197800432149200930
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: f1c16029-1a37-4cf8-94f2-f4f34cd062ed
+    - rid: 197800432149200931
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 27e223c1-0e29-48e3-a385-38958b476b29
+    - rid: 197800432149200932
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: e39e34fd-6ee8-4156-a608-7e1d096e6401
+    - rid: 197800432149200933
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 197800432149200934
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 0a110d25-975e-401b-b1a0-aa86fb38559e
+    - rid: 197800432149200935
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 14db4451-a79b-4d93-adbb-e43217f992e2
+    - rid: 197800432149200936
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: d4447583-82c9-4569-89a9-00ba32f460c1
+    - rid: 197800432149200937
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 65379d1d-0260-4d3f-bf1c-6ae55f85cfc2
+    - rid: 197800432149200938
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 197800432149200939
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 69d90a31-5681-4fff-97a6-ecab589ed878
+        <Condition>k__BackingField: {fileID: 11400000, guid: 5bca680cb225121418788d3b0c8a892b,
+          type: 2}
+        <PreviewOutcome>k__BackingField: As planned by the civilians the ship will
+          make a stop and enjoy a walk. We will loose some precious time and fuel.
+    - rid: 197800432149200940
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: SecondChoice
+        <NextNodeID>k__BackingField: a5f6bdbc-aa14-4cce-ad18-ffc50af9ed33
+        <Condition>k__BackingField: {fileID: 11400000, guid: 05e71464fac6fcb40861912d3e5c9963,
+          type: 2}
+        <PreviewOutcome>k__BackingField: The ship will maintain its original course,
+          in spite of the desires of the crew.
+    - rid: 197800432149200941
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: ThirdChoice
+        <NextNodeID>k__BackingField: 69d90a31-5681-4fff-97a6-ecab589ed878
+        <Condition>k__BackingField: {fileID: 11400000, guid: b5985db0e6480ec43a9677d288a5ac4f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: By default, we'd assume that the mission
+          comes first and continue our journey without stopping.

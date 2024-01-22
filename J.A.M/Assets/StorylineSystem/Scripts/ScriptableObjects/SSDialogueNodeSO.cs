@@ -8,16 +8,21 @@ namespace SS.ScriptableObjects
 
     public class SSDialogueNodeSO : SSNodeSO
     {
-        [field: SerializeField] [field: TextArea()] public string Text { get; set; }
-
+        [field: SerializeField]
+        [field: TextArea()]
+        public string Text { get; set; }
         [field: SerializeField] public SSSpeakerType SpeakerType { get; set; }
-        [field: SerializeField] public uint Duration { get; set; }
+        [field: SerializeField] public float Duration { get; set; }
         [field: SerializeField] public bool IsDialogueTask { get; set; }
         [field: SerializeField] public int PercentageTask { get; set; }
-        [field: SerializeField] public bool isCompleted { get; set; }
+        [field: SerializeField] public bool IsCompleted { get; set; }
+        [field: SerializeField] public TraitsData.Job Job { get; set; }
+        [field: SerializeField] public TraitsData.PositiveTraits PositiveTraits { get; set; }
+        [field: SerializeField] public TraitsData.NegativeTraits NegativeTraits { get; set; }
 
         public void Initialize(string nodeName, string text, List<SSNodeChoiceData> choices, SSNodeType nodeType,
-            bool isStartingNode, SSSpeakerType speakerType, uint duration, bool isDialogueTask, int percentageTask)
+            bool isStartingNode, SSSpeakerType speakerType, float duration, bool isDialogueTask, int percentageTask,
+            TraitsData.Job job, TraitsData.PositiveTraits positiveTraits, TraitsData.NegativeTraits negativeTraits)
         {
             NodeName = nodeName;
             Text = text;
@@ -28,7 +33,10 @@ namespace SS.ScriptableObjects
             Duration = duration;
             IsDialogueTask = isDialogueTask;
             PercentageTask = percentageTask;
-            isCompleted = false;
+            IsCompleted = false;
+            Job = job;
+            PositiveTraits = positiveTraits;
+            NegativeTraits = negativeTraits;
         }
     }
 }

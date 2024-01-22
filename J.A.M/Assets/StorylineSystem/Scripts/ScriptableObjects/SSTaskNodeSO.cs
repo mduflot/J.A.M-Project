@@ -18,10 +18,12 @@ namespace SS.ScriptableObjects
         [field: SerializeField] public int OptionalSlots { get; set; }
         [field: SerializeField] public float TaskHelpFactor { get; set; }
         [field: SerializeField] public RoomType Room { get; set; }
+        [field: SerializeField] public FurnitureType Furniture { get; set; }
+        [field: SerializeField] public bool IsTaskTutorial { get; set; }
 
         public void Initialize(string nodeName, List<SSNodeChoiceData> choices, SSNodeType nodeType,
             bool isStartingNode, string descriptionTask, SSTaskStatus taskStatus, SSTaskType taskType, Sprite taskIcon, float timeLeft, float duration,
-            int mandatorySlots, int optionalSlots, float taskHelpFactor, RoomType room)
+            int mandatorySlots, int optionalSlots, float taskHelpFactor, RoomType room, FurnitureType furniture, bool isTaskTutorial)
         {
             NodeName = nodeName;
             Choices = choices;
@@ -37,6 +39,8 @@ namespace SS.ScriptableObjects
             OptionalSlots = optionalSlots;
             TaskHelpFactor = taskHelpFactor;
             Room = room;
+            Furniture = furniture;
+            IsTaskTutorial = isTaskTutorial;
         }
     }
 }

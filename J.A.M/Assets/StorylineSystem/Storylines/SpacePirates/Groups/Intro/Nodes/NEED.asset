@@ -14,20 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: NEED
   <Choices>k__BackingField:
-  - rid: 8412203090294341857
+  - rid: 197800411516633883
   <NodeType>k__BackingField: 0
   <IsStartingNode>k__BackingField: 0
-  <Text>k__BackingField: NEED DIALOGUE HERE !
+  <Text>k__BackingField: Hey, hum. Don't we need to do something about the incoming
+    spaceship?
   <SpeakerType>k__BackingField: 0
-  <Duration>k__BackingField: 4
+  <Duration>k__BackingField: 0.5
   <IsDialogueTask>k__BackingField: 1
   <PercentageTask>k__BackingField: 0
-  <isCompleted>k__BackingField: 0
+  <IsCompleted>k__BackingField: 0
+  <Job>k__BackingField: 0
+  <PositiveTraits>k__BackingField: 0
+  <NegativeTraits>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 8412203090294341857
+    - rid: 197800411516633883
       type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: Next Node
-        <NextNode>k__BackingField: {fileID: 0}
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 9ee4fb8295ac8b24b867becf2df26dc0,
+          type: 2}
