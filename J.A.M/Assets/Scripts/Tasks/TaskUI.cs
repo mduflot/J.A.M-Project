@@ -15,7 +15,8 @@ namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-        [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
+        [Header("Task")]
+        [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI timeLeftText;
         [SerializeField] private GameObject timeLeftObject;
         [SerializeField] private Transform startButtonObject;
@@ -31,9 +32,11 @@ namespace Tasks
         [SerializeField] private GameObject separator;
         [SerializeField] private GameObject popupHelp;
 
-        [Header("Dialogues")] [SerializeField] private GameObject dialogueContainer;
+        [Header("Dialogues")]
+        [SerializeField] private GameObject dialogueContainer;
 
-        [Header("Values")] [SerializeField] private float timeLeft;
+        [Header("Values")]
+        [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
 
         private Notification notification;
