@@ -309,6 +309,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3717132683508314684}
+  - {fileID: 1499213977684483361}
   - {fileID: 7678359276091043669}
   - {fileID: 2934666834572482362}
   - {fileID: 4776302044491412282}
@@ -809,6 +810,90 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1280429701206878629
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1499213977684483361}
+  - component: {fileID: 6869094286281175061}
+  m_Layer: 0
+  m_Name: ShipOutside
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1499213977684483361
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280429701206878629}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 12.5, y: 12.5, z: 12.5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4697391577766829553}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &6869094286281175061
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280429701206878629}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
+  m_Sprite: {fileID: 21300000, guid: 19930aebac50ed142908c7fe06fbd8e2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 19.2, y: 10.8}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1361991867404926959
 GameObject:
   m_ObjectHideFlags: 0
@@ -6377,6 +6462,12 @@ MonoBehaviour:
       transform: {fileID: 5018549635612750088}
     - furnitureType: 1
       transform: {fileID: 8012173254567833019}
+  - type: 5
+    transform: {fileID: 670190584600510606}
+    doorPosition: {fileID: 0}
+    roomObjects:
+    - furnitureType: 8
+      transform: {fileID: 4608567831889499782}
   systems:
   - type: 1
     systemObject: {fileID: 9203435017712485670}
@@ -6416,6 +6507,7 @@ MonoBehaviour:
   SpaceshipTraits: 0
   HiddenSpaceshipTraits: 0
   roomsDisplay: {fileID: 7635368641717078680}
+  shipOutside: {fileID: 1280429701206878629}
   activeTasks: []
   taskNotificationPrefab: {fileID: 6265730595941581578, guid: a31d5117ac421284586e48efdec9f5d9,
     type: 3}
@@ -6423,7 +6515,7 @@ MonoBehaviour:
   hourlyMoodGain: 1
   hourlyMoodLossGaugeEmpty: 0.75
   moodLossOnCancelTask: 10
-  simMoveSpeed: 0.15
+  simMoveSpeed: 0.4
   simHungerBaseThreshold: 12
   simHungerNoise: 6
   simEatThreshold: 3
@@ -6433,79 +6525,79 @@ MonoBehaviour:
   jobDescription:
     list:
     - Key: 128
-      Value: 'This crewmember is a civilian. '
+      Value: 'This crew member is a civilian. '
     - Key: 4
-      Value: The crewmember has been formed as a cook. Or just knows his way around
-        a kitchen. Whatever the reason is, it comes with a bonus of  +7 when preparing
+      Value: The crew member has been formed as a cook. Or just knows his way around
+        a kitchen. Whatever the reason is, it comes with a bonus of +7 when preparing
         rations
     - Key: 2
-      Value: The crewmember is a trained electrical operator. He knows how to tune
+      Value: The crew member is a trained electrical operator. They know how to tune
         a generator, resulting in a +9 bonus while doing so.
     - Key: 8
-      Value: In the army, this crewmember was a field engineer. Among other usefull
+      Value: In the army, this crew member was a field engineer. Among other usefull
         things, they know how to properly use a blowtorch, and thus have a bonus
-        of +2 for repairing the hull. In addition to some basic electrical knowlege,
+        of +2 for repairing the hull, in addition to some basic electrical knowlege,
         resulting in a +1 bonus while tuning the generator.
     - Key: 64
-      Value: This crewmember have been fixing all sorts of maintenance problem on
-        spaceships over their long career. Among other usefull things, they have
-        a bonus of +5 while repairing hull.
+      Value: This crewmember has been fixing all sorts of maintenance problems on
+        spaceships over their long career. Among other useful things, they have a
+        bonus of +5 while repairing the hull.
     - Key: 1
       Value: A proud member of the Network's armed branch. They are known to lack
         the necessary concentration to tune the generator (-2 malus when doing so),
         but know their share about how to properly cook, resulting in a +3 bonus
         when preparing rations.
     - Key: 32
-      Value: This crewmember knows the ways of science. Might come in handy someday.
+      Value: This crew member knows the ways of science. Might come in handy someday.
     - Key: 16
-      Value: Piloting a spaceship isn't as easy as it seems. In fact it doesn't even
-        seem easy. But this one individual knows how to properly do it, resulting
+      Value: Piloting a spaceship isn't as easy as it seems. Actually, it doesn't
+        even seem easy. But this one individual knows how to properly do it, resulting
         among other things in a +5 bonus while plotting course.
   positiveTraitsDescription:
     list:
     - Key: 32
-      Value: The crewmember knows how to stay calm under pressure and suffers less
+      Value: This crew member knows how to stay calm under pressure and suffers less
         of bad mood.
     - Key: 64
-      Value: The crewmember knows how to use the artifact. Might become handy somehow.
+      Value: The crew member knows how to use the Artefact. Might become handy somehow.
     - Key: 4
-      Value: The many experiences of this crewmember drove him into being very cautious.
-        Grants some bonuses, like a +2 increase while tuning the generator.
+      Value: The many experiences of this crew member drove them into being very
+        cautious. Grants some bonuses, like a +2 increase while tuning the generator.
     - Key: 8
       Value: Curiosity is often a rewarding quality when exploring the vastness of
-        space. The crewmember has a +1 bonus while plotting course.
+        space. This crew member has a +1 bonus while plotting course.
     - Key: 16
-      Value: The crewmember is encline to share his experiences with others. Might
-        come handy someday.
+      Value: This crew member is enclined to share their experiences with others.
+        Might come in handy someday.
     - Key: 1
       Value: A beacon of authority among the crew. Could lead to some tensions if
         shared by more than one person on board.
     - Key: 2
-      Value: The Character is calm, and knows his way around calculations. This results
-        in a +1 bonus when plotting course.
+      Value: This crew member is calm, and knows their way around calculations. This
+        results in a +1 bonus when plotting course.
   negativeTraitsDescription:
     list:
     - Key: 16
-      Value: The crewmember is experiencing visions due to substance consumption.
+      Value: The crew member is experiencing visions due to substance consumption.
         No effect yet.
     - Key: 32
-      Value: The crewmember have a stron gdislike for authority. Mood malus when
-        working with military crewmembers.
+      Value: This crew member has a strong dislike for the army. Mood malus when
+        working with military crew members.
     - Key: 64
-      Value: The crewmember experienced improvised surgery. In order to survive he
-        had to sacrifice an arm, and now comes with a malus of <sprite =  20>
+      Value: This crew member experienced improvised surgery. In order to survive
+        they had to sacrifice an arm, and now come with a malus of <sprite =  20>
     - Key: 128
-      Value: This strange cat thing has taken residence in this crewmember's arm.
-        No effects yet.
+      Value: This strange cat-looking thing has taken residence in this crew member's
+        arm. No effects yet.
     - Key: 512
-      Value: The crew members has been infected by an alien parasite. The symptoms
-        are benign, but their body will bear its mark for a long time, and he suffers
+      Value: This crew member has been infected by an alien parasite. The symptoms
+        are benign, but their body will bear its mark for a long time, and they suffer
         from -1  <sprite =  20>
     - Key: 1
-      Value: Act first, think later. Can be a quality in certain situations.
+      Value: Shoot first, think later. Can be a quality in certain situations.
     - Key: 2
-      Value: The passing time claimed its toll on this person. What his body lost
-        in strenght, his mind gained in wisdom.
+      Value: The passing time claimed its toll on this person. What their body lost
+        in strenght, their mind gained in wisdom.
     - Key: 4
       Value: 'Too many battlefields left their mark of this soldier''s soul. Might
         have consequences. '
@@ -6515,20 +6607,20 @@ MonoBehaviour:
       Value: The ship's cargo has been jetisonned in order to gain some speed. Might
         be a problem someday.
     - Key: 256
-      Value: Limited rations were set up resulting in crewmembers consuming 10% less
-        food. Civilian crew members complained about unbalanced distribution, military
-        crew members have argued that they needed more nutrients.
+      Value: Limited rations were set up resulting in crew members consuming 10%
+        less food. Civilian crew members complained about unbalanced distribution,
+        military crew members have argued that they needed more nutrients.
     - Key: 512
-      Value: A a lot of slime is obstructing the ventilation system, devreasing everyone's
+      Value: A a lot of slime is obstructing the ventilation system, decreasing everyone's
         mood by 4.
     - Key: 1024
-      Value: Due to some rations being rotten, the crewmembers consume 30% more food
-        while disposing of the rotten ones.
+      Value: Due to some rations being rotten, the crew members consume 30% more
+        food while disposing of the rotten ones.
     - Key: 2048
       Value: A power malfunction causes an entire area of the ship to be in the dark.
         This decreases the mood of the whole crew by 4.
     - Key: 32768
-      Value: Due to some rations being damaged, the crewmembers must take 30% more
+      Value: Due to some rations being damaged, the crew members must take 30% more
         food in order to throw some away.
     - Key: 4096
       Value: The bad insulation of certain room causes the life sustenance algorithms
@@ -6540,37 +6632,37 @@ MonoBehaviour:
       Value: Due to the use of bad alloys during repairs, the ship's hull is more
         sensitive to friction with ouside elements. It deteriorates 30% faster.
     - Key: 131072
-      Value: The bad conditions in the Docking bay causes all human interventions
+      Value: The bad conditions in the Docking bay cause all human interventions
         in this room to work 100% slower.
     - Key: 262144
-      Value: The bad conditions in the Cargo bays causes all human interventions
-        in this room to work 100% slower.
+      Value: The bad conditions in the Cargo bays cause all human interventions in
+        this room to work 100% slower.
     - Key: 128
-      Value: The bad conditions in the Medical Bay causes all human interventions
+      Value: The bad conditions in the Medical Bay cause all human interventions
         in this room to work 100% slower.
     - Key: 65536
-      Value: The bad conditions in the Electrical Room causes all human interventions
+      Value: The bad conditions in the Electrical Room cause all human interventions
         in this room to work 100% slower.
     - Key: 1048576
-      Value: The bad conditions in the Bridge causes all human interventions in this
+      Value: The bad conditions in the Bridge cause all human interventions in this
         room to work 100% slower.
     - Key: 2097152
-      Value: The bad conditions in the AI Room causes all human interventions in
-        this room to work 100% slower.
+      Value: The bad conditions in the AI Room cause all human interventions in this
+        room to work 100% slower.
     - Key: 4194304
-      Value: The bad conditions in the Common Rooms causes all human interventions
+      Value: The bad conditions in the Common Rooms cause all human interventions
         in this room to work 100% slower.
     - Key: 8388608
-      Value: 'The bad conditions in the Bedrooms causes all human interventions in
+      Value: 'The bad conditions in the Bedrooms cause all human interventions in
         this room to work 100% slower. '
     - Key: 16777216
-      Value: The bad conditions in the Artifact Room causes all human interventions
+      Value: The bad conditions in the Artifact Room cause all human interventions
         in this room to work 100% slower.
     - Key: 524288
-      Value: The bad conditions in the Artifact Room causes all human interventions
+      Value: The bad conditions in the Artifact Room cause all human interventions
         in this room to work 100% slower.
     - Key: 33554432
-      Value: The bad conditions in the Camp causes all human interventions in this
+      Value: The bad conditions in the Camp cause all human interventions in this
         room to work 100% slower.
     - Key: 67108864
       Value: The ship is fertilized and the food consumption is 10% slower.

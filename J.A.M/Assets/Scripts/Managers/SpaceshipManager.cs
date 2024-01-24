@@ -18,6 +18,7 @@ namespace Managers
         public TraitsData.SpaceshipTraits SpaceshipTraits = TraitsData.SpaceshipTraits.None;
         public TraitsData.HiddenSpaceshipTraits HiddenSpaceshipTraits = TraitsData.HiddenSpaceshipTraits.None;
         [SerializeField] private GameObject roomsDisplay;
+        [SerializeField] private GameObject shipOutside;
 
         [SerializeField] private List<Notification> activeTasks = new();
         [SerializeField] private GameObject taskNotificationPrefab;
@@ -40,14 +41,12 @@ namespace Managers
 
         public bool IsInTutorial;
 
-        [Header("Leak")] 
-        [SerializeField] private uint baseTimeToWaitLeak;
+        [Header("Leak")] [SerializeField] private uint baseTimeToWaitLeak;
         private uint timeToWaitLeak;
         private uint waitingTimeLeak;
         private bool isLeaked;
-        
-        [Header("Traits description")]
-        public SerializableDictionary<TraitsData.Job, string> jobDescription;
+
+        [Header("Traits description")] public SerializableDictionary<TraitsData.Job, string> jobDescription;
         public SerializableDictionary<TraitsData.PositiveTraits, string> positiveTraitsDescription;
         public SerializableDictionary<TraitsData.NegativeTraits, string> negativeTraitsDescription;
         public SerializableDictionary<TraitsData.SpaceshipTraits, string> spaceshipTraitsDescription;
@@ -139,6 +138,7 @@ namespace Managers
                         }
                     }
                 }
+
                 if (system.gaugeValue <= 0) system.gaugeValue = 0;
                 else
                 {
@@ -364,15 +364,16 @@ namespace Managers
                                     eatAmount -= SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.Fertilization)
                                         ? (simEatAmount) / 10f
                                         : 0f;
-                                    
+
                                     systems[2].gaugeValue -= eatAmount;
                                 }
+
                                 simCharacter.tick = 0;
                                 simCharacter.ticksToEat = (simHungerBaseThreshold
-                                                           * (int)TimeTickSystem.ticksPerHour)
+                                                           * (int) TimeTickSystem.ticksPerHour)
                                                           + Random.Range(
-                                                              (int)-TimeTickSystem.ticksPerHour * simHungerNoise,
-                                                              (int)TimeTickSystem.ticksPerHour * simHungerNoise);
+                                                              (int) -TimeTickSystem.ticksPerHour * simHungerNoise,
+                                                              (int) TimeTickSystem.ticksPerHour * simHungerNoise);
                             }
 
                             break;
@@ -380,11 +381,11 @@ namespace Managers
                         case SimCharacter.SimStatus.GoToEat:
                             simCharacter.tick = 0;
                             break;
-                        
+
                         case SimCharacter.SimStatus.GoToIdle:
                             simCharacter.tick--;
                             break;
-                        
+
                         case SimCharacter.SimStatus.Idle:
                             if (simCharacter.tick >= simCharacter.ticksToEat)
                             {
@@ -394,11 +395,14 @@ namespace Managers
                                 simCharacter.tick = 0;
                                 break;
                             }
+
                             if (!character.IsWorking() && simCharacter.tick >= simCharacter.ticksToNextIdle)
                             {
-                                simCharacter.ticksToNextIdle = (uint) Random.Range(1, 7) * TimeTickSystem.ticksPerHour + (uint) simCharacter.tick;
+                                simCharacter.ticksToNextIdle = (uint) Random.Range(1, 7) * TimeTickSystem.ticksPerHour +
+                                                               (uint) simCharacter.tick;
                                 simCharacter.SendToIdleRoom();
                             }
+
                             break;
                     }
                 }
@@ -412,6 +416,15 @@ namespace Managers
         public void DisplayRooms(bool state)
         {
             roomsDisplay.SetActive(state);
+            if (Camera.main.transform.position.z < -2000)
+            {
+                DisplayShipOutside(!state);
+            }
+        }
+
+        public void DisplayShipOutside(bool state)
+        {
+            shipOutside.SetActive(state);
         }
 
         #region Save&Load

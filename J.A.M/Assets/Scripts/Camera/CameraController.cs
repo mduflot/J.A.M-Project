@@ -43,6 +43,7 @@ public class CameraController : MonoBehaviour
     private void OnZoomPerformed(InputAction.CallbackContext c)
     {
         zoomVector = c.ReadValue<Vector2>();
+        GameManager.Instance.SpaceshipManager.DisplayShipOutside(transform.position.z < -2000);
     }
 
     private void OnZoomCancelled(InputAction.CallbackContext c)
