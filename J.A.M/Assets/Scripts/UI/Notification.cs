@@ -33,7 +33,6 @@ namespace UI
         [SerializeField] private GameObject popupHelp;
         [SerializeField] private GameObject pointerArrow;
         
-        private Camera camera;
         private SpaceshipManager spaceshipManager;
         private ConditionSO taskCondition;
         private OutcomeSystem.OutcomeEvent[] outcomeEvents;
@@ -48,7 +47,6 @@ namespace UI
 
         private void Start()
         {
-            camera = Camera.main;
             data = new HoverMenuData();
             data.parent = transform;
             data.baseParent = transform;

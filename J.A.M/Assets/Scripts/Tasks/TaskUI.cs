@@ -32,9 +32,6 @@ namespace Tasks
         [SerializeField] private GameObject separator;
         [SerializeField] private GameObject popupHelp;
 
-        [Header("Dialogues")]
-        [SerializeField] private GameObject dialogueContainer;
-
         [Header("Values")]
         [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
