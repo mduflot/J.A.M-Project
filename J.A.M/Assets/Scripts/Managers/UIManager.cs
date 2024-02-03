@@ -19,8 +19,6 @@ namespace Managers
         public List<CharacterUI> charactersUI;
         public List<CharacterIcon> characterIcons = new();
         public CharacterUI characterUIPrefab;
-        public Transform taskNotificationParent;
-        public Transform taskParent;
         public TaskUI taskUI;
         public Canvas canvas;
         public TextMeshProUGUI date;
@@ -36,6 +34,7 @@ namespace Managers
         public ShipControlManager shipControlManager;
         public TextMeshProUGUI mainStorylineText;
         public DialogueManager dialogueManager;
+        public CheatManager cheatManager;
 
         [Serializable]
         public struct Gauges
@@ -69,6 +68,7 @@ namespace Managers
             }
 
             shipControlManager.Initialize();
+            cheatManager.Initialize();
         }
 
         public void UpdateGauges(SystemType systemType, float value, float previewValue)

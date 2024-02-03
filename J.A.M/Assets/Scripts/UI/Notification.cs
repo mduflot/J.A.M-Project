@@ -28,15 +28,11 @@ namespace UI
         [SerializeField] private SpriteRenderer timerSprite;
         [SerializeField] private SpriteRenderer timeLeftSprite;
         [SerializeField] private Animator animator;
-
         [SerializeField] private Sprite hoveredSprite;
         [SerializeField] private Sprite defaultSprite;
-
         [SerializeField] private GameObject popupHelp;
-
         [SerializeField] private GameObject pointerArrow;
         
-        private Camera camera;
         private SpaceshipManager spaceshipManager;
         private ConditionSO taskCondition;
         private OutcomeSystem.OutcomeEvent[] outcomeEvents;
@@ -51,7 +47,6 @@ namespace UI
 
         private void Start()
         {
-            camera = Camera.main;
             data = new HoverMenuData();
             data.parent = transform;
             data.baseParent = transform;
@@ -61,11 +56,6 @@ namespace UI
         {
             TimeTickSystem.OnTick -= AddOutcomeOnTick;
             popupHelp.SetActive(false);
-        }
-
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            Display();
         }
 
         public void Initialize(Task task, SSTaskNodeSO ssTaskNode, SpaceshipManager spaceshipManager,
@@ -674,6 +664,11 @@ namespace UI
             {
                 character.StopTask();
             }
+        }
+        
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            Display();
         }
 
         public override void OnHover(PointerEventData eventData)

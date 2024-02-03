@@ -41,7 +41,7 @@ namespace Managers
 
         public bool IsInTutorial;
 
-        [Header("Leak")] [SerializeField] private uint baseTimeToWaitLeak;
+        [Header("Leak")] [SerializeField] private uint baseTimeToWaitLeak = 12;
         private uint timeToWaitLeak;
         private uint waitingTimeLeak;
         private bool isLeaked;

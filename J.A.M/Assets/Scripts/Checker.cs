@@ -31,7 +31,7 @@ public class Checker : MonoBehaviour, IDataPersistence
 
     private SSCampaignSO ssCampaign;
 
-    private List<Storyline> allStorylines;
+    public List<Storyline> allStorylines;
     public List<Storyline> principalStorylines;
     private List<Storyline> secondaryStorylines;
     private List<Storyline> leakStorylines;
@@ -44,6 +44,8 @@ public class Checker : MonoBehaviour, IDataPersistence
     private uint waitingTimeSecondary;
     private uint waitingTimeTrajectory;
     private bool isAlreadyWaiting;
+
+    public bool IsStopChecker;
 
     private void Awake()
     {
@@ -164,8 +166,27 @@ public class Checker : MonoBehaviour, IDataPersistence
         ChooseNewStoryline(SSStoryType.Trajectory);
     }
 
-    public void ChooseNewStoryline(SSStoryType storyType)
-    {
+    public void ChooseNewStoryline(SSStoryType storyType) {
+        if (IsStopChecker) {
+            Debug.Log("Checker is stopped.");
+            switch (storyType) {
+                case SSStoryType.Principal:
+                    waitingTimePrincipal = (uint)Random.Range(minWaitTimePrincipal, maxWaitTimePrincipal) *
+                                           TimeTickSystem.ticksPerHour;
+                    TimeTickSystem.OnTick += WaitStorylinePrincipal;
+                    break;
+                case SSStoryType.Secondary:
+                    isAlreadyWaiting = true;
+                    waitingTimeSecondary = (uint)Random.Range(minWaitTimeSecondary, maxWaitTimeSecondary) *
+                                                TimeTickSystem.ticksPerHour;
+                    TimeTickSystem.OnTick += WaitStorylineSecondary;
+                    break;
+                case SSStoryType.Trajectory:
+                    TimeTickSystem.OnTick += GenerateTrajectoryEvent;
+                    break;
+            }
+            return;
+        } 
         availableStoryLines.Clear();
         switch (storyType)
         {
@@ -302,7 +323,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         }
     }
 
-    private void StartTimeline(Storyline storyline, SSNodeGroupSO timeline, SSNodeSO node = null,
+    public void StartTimeline(Storyline storyline, SSNodeGroupSO timeline, SSNodeSO node = null,
         List<SerializableTuple<string, string>> dialogues = null, List<string> characters = null,
         List<string> assignedCharacters = null, List<string> notAssignedCharacters = null,
         List<string> traitsCharacters = null, uint waitingTime = 0, TaskLog taskLog = null)
