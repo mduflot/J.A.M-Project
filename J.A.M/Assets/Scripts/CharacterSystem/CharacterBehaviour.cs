@@ -145,8 +145,7 @@ namespace CharacterSystem
 
         public float GetMood()
         {
-            float finalMood = mood;
-            return finalMood;
+            return mood;
         }
 
         public float GetMaxMood()

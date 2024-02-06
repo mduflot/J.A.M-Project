@@ -127,7 +127,6 @@ namespace UI
                     {
                         Task.leaderCharacters.Add(character.icon.character);
                         LeaderCharacters.Add(character.icon.character);
-                        character.icon.character.AssignTask(this, true);
                     }
                 }
                 else
@@ -136,7 +135,6 @@ namespace UI
                     {
                         Task.assistantCharacters.Add(character.icon.character);
                         AssistantCharacters.Add(character.icon.character);
-                        character.icon.character.AssignTask(this);
                     }
                 }
             }
@@ -186,6 +184,14 @@ namespace UI
                         break;
                     }
                 }
+            }
+
+            foreach (var leader in LeaderCharacters) {
+                leader.AssignTask(this, true);
+            }
+
+            foreach (var assistant in AssistantCharacters) {
+                assistant.AssignTask(this);
             }
         }
 
@@ -665,6 +671,8 @@ namespace UI
             }
         }
         
+        #region Utilities
+        
         public void OnPointerDown(PointerEventData eventData)
         {
             Display();
@@ -688,5 +696,7 @@ namespace UI
             animator.SetBool("Selected", false);
             base.OnExit(eventData);
         }
+        
+        #endregion
     }
 }
