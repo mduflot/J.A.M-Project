@@ -342,7 +342,7 @@ namespace Managers
                         case SimCharacter.SimStatus.IdleEat:
                             if (simCharacter.tick >= simEatThreshold * TimeTickSystem.ticksPerHour)
                             {
-                                if (character.IsWorking() || simCharacter.taskRoom != null)
+                                if (character.IsWorking() && simCharacter.taskRoom != null)
                                 {
                                     simCharacter.SendToRoom(simCharacter.taskRoom.roomType);
                                 }

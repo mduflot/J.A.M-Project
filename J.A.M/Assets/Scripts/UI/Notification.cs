@@ -472,42 +472,7 @@ namespace UI
             if (Task.TaskType == SSTaskType.Permanent) TimeTickSystem.OnTick += AddOutcomeOnTick;
         }
 
-        //todo: remove this 
-        /*
-        private bool RouteCondition(OutcomeData.OutcomeTarget target)
-        {
-            bool validateCondition = false;
-            switch (target)
-            {
-                case OutcomeData.OutcomeTarget.Leader:
-                    validateCondition =
-                        ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.Assistant:
-                    if (AssistantCharacters.Count >= 1)
-                        validateCondition =
-                            ConditionSystem.CheckCharacterCondition(AssistantCharacters[0], taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.Gauge:
-                    validateCondition = ConditionSystem.CheckGaugeCondition(taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.GaugeValue:
-                    validateCondition = ConditionSystem.CheckGaugeValueCondition(taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.Crew:
-                    validateCondition = ConditionSystem.CheckCrewCondition(taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.Ship:
-                    validateCondition = ConditionSystem.CheckSpaceshipCondition(taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.None:
-                    validateCondition = true;
-                    break;
-            }
-
-            return validateCondition;
-        }
-        */
+        
         
         private void AddOutcomeOnTick(object sender, TimeTickSystem.OnTickEventArgs e)
         {
