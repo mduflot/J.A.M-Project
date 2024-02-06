@@ -882,7 +882,7 @@ namespace SS
 
                 if (taskToPlay != null)
                 {
-                    task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
+                    task = new Task(nodeSO.name, nodeSO.Description, storyline != null ? storyline.StorylineContainer.FileName : "", nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
                         taskToPlay.TimeLeft, taskToPlay.Duration,
                         nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
                         nodeSO.IsTaskTutorial,
@@ -891,7 +891,7 @@ namespace SS
                 }
                 else
                 {
-                    task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
+                    task = new Task(nodeSO.name, nodeSO.Description, storyline != null ? storyline.StorylineContainer.FileName : "", nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
                         nodeSO.TimeLeft, nodeSO.Duration,
                         nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
                         nodeSO.IsTaskTutorial,

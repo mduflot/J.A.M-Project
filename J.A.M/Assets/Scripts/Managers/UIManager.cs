@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using CharacterSystem;
 using SS;
 using Tasks;
@@ -99,7 +100,7 @@ namespace Managers
                     if (outcome.gauge == gauge.systemType) valueToAdd += outcome.value;
                 }
 
-                gauge.PreviewOutcomeGauge(valueToAdd);
+                if (valueToAdd != 0.0f) gauge.AddPreviewGauge(valueToAdd);
             }
         }
 

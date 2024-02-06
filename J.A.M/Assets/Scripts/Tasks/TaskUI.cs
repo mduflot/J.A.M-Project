@@ -77,7 +77,7 @@ namespace Tasks
         {
             notification = n;
             if (notification.Task.IsTaskTutorial) popupHelp.SetActive(true);
-            titleText.text = notification.Task.Name;
+            titleText.text = $"{notification.Task.Name} / {notification.Task.NameStoryline}";
             StartCoroutine(DisplayText(descriptionText, notification.Task.Description, 0.02f));
             timeLeft = notification.Task.TimeLeft;
             if (taskLog != null) timeLeft = taskLog.Duration;
@@ -324,6 +324,7 @@ namespace Tasks
             }
 
             gaugesOutcomes = gaugeOutcomes;
+            GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.UIManager.PreviewOutcomeGauges(gaugesOutcomes);
         }
 
@@ -432,7 +433,7 @@ namespace Tasks
                             var system = GameManager.Instance.SpaceshipManager.systems[index];
                             if (system.type == outcome.OutcomeTargetGauge)
                             {
-                                volition -= system.decreaseSpeed * Mathf.FloorToInt(duration);
+                                volition -= system.decreaseValues[0] * Mathf.FloorToInt(duration);
                                 break;
                             }
                         }
@@ -715,7 +716,7 @@ namespace Tasks
             notification.IsCancelled = true;
             previewOutcomeText.text = null;
             characterSlots.Clear();
-            GameManager.Instance.UIManager.ResetPreviewGauges();
+            // TODO - Remove preview gauges
             GameManager.Instance.RefreshCharacterIcons();
             GameManager.Instance.taskOpened = false;
             separator.SetActive(false);

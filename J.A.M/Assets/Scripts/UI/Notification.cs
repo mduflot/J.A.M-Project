@@ -128,7 +128,6 @@ namespace UI
                     {
                         Task.leaderCharacters.Add(character.icon.character);
                         LeaderCharacters.Add(character.icon.character);
-                        character.icon.character.AssignTask(this, true);
                     }
                 }
                 else
@@ -137,7 +136,6 @@ namespace UI
                     {
                         Task.assistantCharacters.Add(character.icon.character);
                         AssistantCharacters.Add(character.icon.character);
-                        character.icon.character.AssignTask(this);
                     }
                 }
             }
@@ -187,6 +185,14 @@ namespace UI
                         break;
                     }
                 }
+            }
+
+            foreach (var leader in LeaderCharacters) {
+                leader.AssignTask(this, true);
+            }
+
+            foreach (var assistant in AssistantCharacters) {
+                assistant.AssignTask(this);
             }
         }
 
@@ -548,7 +554,6 @@ namespace UI
 
             IsCompleted = true;
             ResetCharacters();
-            GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.RefreshCharacterIcons();
             if (transform.parent != null)
             {
@@ -557,7 +562,6 @@ namespace UI
                 notificationContainer.DisplayNotification();
             }
             spaceshipManager.notificationPool.AddToPool(gameObject);
-            spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             IsStarted = false;
 
             if (LeaderCharacters.Count == 0) return;
@@ -593,7 +597,6 @@ namespace UI
                 launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunTimedNodeCancel(this, Task, taskNode);
-                spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
                 ResetCharacters();
             }
             else if (Task.TaskType.Equals(SSTaskType.Untimed))
@@ -601,7 +604,6 @@ namespace UI
                 launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunUntimedNodeCancel(this, Task, taskNode);
-                spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
                 ResetCharacters();
             }
 
@@ -630,6 +632,8 @@ namespace UI
             }
         }
         
+        #region Utilities
+        
         public void OnPointerDown(PointerEventData eventData)
         {
             Display();
@@ -653,5 +657,7 @@ namespace UI
             animator.SetBool("Selected", false);
             base.OnExit(eventData);
         }
+        
+        #endregion
     }
 }

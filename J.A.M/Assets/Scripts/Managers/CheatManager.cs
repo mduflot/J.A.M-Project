@@ -33,6 +33,7 @@ public class CheatManager : MonoBehaviour {
             var storyline = storylines[index];
             storylinesDropdown.options.Add(new TMP_Dropdown.OptionData(storyline.StorylineContainer.FileName));
         }
+        storylinesDropdown.RefreshShownValue();
 
         storylinesDropdown.onValueChanged.AddListener(OnStorylineSelected);
         storylinesButton.onClick.AddListener(LaunchStoryline);
@@ -47,6 +48,7 @@ public class CheatManager : MonoBehaviour {
             var timeline = storyline.StorylineContainer.NodeGroups.Keys.ElementAt(i);
             timelinesDropdown.options.Add(new TMP_Dropdown.OptionData(timeline.GroupName));
         }
+        timelinesDropdown.RefreshShownValue();
     }
 
     private void LaunchStoryline() {

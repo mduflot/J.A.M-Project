@@ -44,5 +44,10 @@ namespace UI
             icon.transform.localScale = transform.localScale;
             if (taskUI.isActiveAndEnabled) taskUI.UpdatePreview();
         }
+
+        public override void ClearCharacter() {
+            base.ClearCharacter();
+            if (taskUI.isActiveAndEnabled) taskUI.UpdatePreview();
+        }
     }
 }
