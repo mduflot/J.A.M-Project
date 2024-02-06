@@ -1,6 +1,5 @@
 using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class DefaultGaugeUI : GaugeUI
@@ -37,7 +36,7 @@ public class DefaultGaugeUI : GaugeUI
         }
     }
 
-    public override void PreviewOutcomeGauge(float value)
+    public override void AddPreviewGauge(float value)
     {
         if (value > 0)
         {
@@ -51,10 +50,5 @@ public class DefaultGaugeUI : GaugeUI
             gauge.fillAmount = (GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) + value) / 50;
             arrow.sprite = redArrow;
         }
-    }
-
-    public override void ResetPreviewGauge()
-    {
-        previewGauge.fillAmount = 0;
     }
 }

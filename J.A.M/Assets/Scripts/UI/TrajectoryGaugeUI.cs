@@ -64,7 +64,7 @@ public class TrajectoryGaugeUI : GaugeUI
         }
     }
 
-    public override void PreviewOutcomeGauge(float value)
+    public override void AddPreviewGauge(float value)
     {
         var gauge = isTop ? topGauge : bottomGauge;
         var previewGauge = isTop ? topPreviewGauge : bottomPreviewGauge;
@@ -82,11 +82,5 @@ public class TrajectoryGaugeUI : GaugeUI
             previewGauge.fillAmount = 1 - GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) / 50;
             gauge.fillAmount = 1 - (GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) + value) / 50;
         }
-    }
-
-    public override void ResetPreviewGauge()
-    {
-        if (isTop) topPreviewGauge.fillAmount = 0;
-        else bottomGauge.fillAmount = 0;
     }
 }

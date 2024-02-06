@@ -584,7 +584,7 @@ namespace UI
 
             IsCompleted = true;
             ResetCharacters();
-            GameManager.Instance.UIManager.ResetPreviewGauges();
+            // TODO - Remove preview gauge
             GameManager.Instance.RefreshCharacterIcons();
             if (transform.parent != null)
             {

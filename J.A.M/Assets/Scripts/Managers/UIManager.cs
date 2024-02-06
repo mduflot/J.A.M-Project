@@ -99,15 +99,7 @@ namespace Managers
                     if (outcome.gauge == gauge.systemType) valueToAdd += outcome.value;
                 }
 
-                gauge.PreviewOutcomeGauge(valueToAdd);
-            }
-        }
-
-        public void ResetPreviewGauges()
-        {
-            foreach (var gauge in gauges)
-            {
-                gauge.ResetPreviewGauge();
+                gauge.AddPreviewGauge(valueToAdd);
             }
         }
 

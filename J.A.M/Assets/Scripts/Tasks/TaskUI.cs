@@ -432,7 +432,7 @@ namespace Tasks
                             var system = GameManager.Instance.SpaceshipManager.systems[index];
                             if (system.type == outcome.OutcomeTargetGauge)
                             {
-                                volition -= system.decreaseSpeed * Mathf.FloorToInt(duration);
+                                volition -= system.decreaseValues[0] * Mathf.FloorToInt(duration);
                                 break;
                             }
                         }
@@ -715,7 +715,7 @@ namespace Tasks
             notification.IsCancelled = true;
             previewOutcomeText.text = null;
             characterSlots.Clear();
-            GameManager.Instance.UIManager.ResetPreviewGauges();
+            // TODO - Remove preview gauges
             GameManager.Instance.RefreshCharacterIcons();
             GameManager.Instance.taskOpened = false;
             separator.SetActive(false);
