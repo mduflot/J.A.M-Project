@@ -145,6 +145,8 @@ public class SimCharacter : MonoBehaviour
         
         isIdle = false;
         SimPathing.CreatePath(this, nextRoom);
+        if (doorPath.Count < 1) nextRoom = idleRooms[0]; //If CreatePath fails to find a path, return to idle room
+        
         simStatus = SimStatus.GoToRoom;
         currentRoom.presentCharacters.Remove(this);
         nextRoom.presentCharacters.Add(this);
