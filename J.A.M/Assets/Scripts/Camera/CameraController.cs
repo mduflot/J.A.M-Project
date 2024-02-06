@@ -55,12 +55,12 @@ public class CameraController : MonoBehaviour
     {
         if (menuContainer) menuContainer.SetActive(!menuContainer.activeSelf);
     }
-    
-    private void OnCheatPerformed(InputAction.CallbackContext obj)
-    {
+
+    private void OnCheatPerformed(InputAction.CallbackContext obj) {
+        if (!Debug.isDebugBuild) return;
         if (cheatContainer) cheatContainer.SetActive(!cheatContainer.activeSelf);
     }
-    
+
     private void OnSpacePerformed(InputAction.CallbackContext obj)
     {
         if (TimeTickSystem.timeScale == 0)
