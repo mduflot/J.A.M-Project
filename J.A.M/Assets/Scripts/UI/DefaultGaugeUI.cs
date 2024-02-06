@@ -22,8 +22,7 @@ public class DefaultGaugeUI : GaugeUI {
         }
         else {
             gauge.fillAmount = value / 50;
-            if (!IsPreviewing || (previewGauge.fillAmount > (value + previewValue) / 50))
-                previewGauge.fillAmount = (value + previewValue) / 50;
+            previewGauge.fillAmount = (value + previewValue) / 50;
             arrow.sprite = greenArrow;
             arrow.color = colorOpaque;
         }

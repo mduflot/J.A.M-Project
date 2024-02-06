@@ -24,8 +24,7 @@ public class TrajectoryGaugeUI : GaugeUI {
         }
         else {
             bottomGauge.fillAmount = 1 - value / 50;
-            if (!IsPreviewing || bottomPreviewGauge.fillAmount > 1 - (value - previewValue) / 50)
-                bottomPreviewGauge.fillAmount = 1 - (value - previewValue) / 50;
+            bottomPreviewGauge.fillAmount = 1 - (value - previewValue) / 50;
             shipTransform.eulerAngles = new Vector3(0, 0, bottomGauge.fillAmount * maxAngle);
             arrow.sprite = greenArrow;
             arrow.color = colorOpaque;
@@ -51,7 +50,7 @@ public class TrajectoryGaugeUI : GaugeUI {
     }
 
     public override void ResetPreviewGauge() {
-        bottomGauge.fillAmount = GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) / 50;
-        bottomPreviewGauge.fillAmount = GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) / 50;
+        bottomGauge.fillAmount = 1 - GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) / 50;
+        bottomPreviewGauge.fillAmount = 1 - GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) / 50;
     }
 }
