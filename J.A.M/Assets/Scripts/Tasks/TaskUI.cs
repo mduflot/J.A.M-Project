@@ -77,7 +77,7 @@ namespace Tasks
         {
             notification = n;
             if (notification.Task.IsTaskTutorial) popupHelp.SetActive(true);
-            titleText.text = notification.Task.Name;
+            titleText.text = $"{notification.Task.Name} / {notification.Task.NameStoryline}";
             StartCoroutine(DisplayText(descriptionText, notification.Task.Description, 0.02f));
             timeLeft = notification.Task.TimeLeft;
             if (taskLog != null) timeLeft = taskLog.Duration;

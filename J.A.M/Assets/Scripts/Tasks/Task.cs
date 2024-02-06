@@ -10,6 +10,7 @@ namespace Tasks
     {
         public string Name;
         public string Description;
+        public string NameStoryline;
         public SSTaskStatus TaskStatus;
         public SSTaskType TaskType;
         public Sprite Icon;
@@ -28,12 +29,13 @@ namespace Tasks
         public string previewText;
         public bool IsStarted;
 
-        public Task(string name, string description, SSTaskStatus taskStatus, SSTaskType taskType, Sprite icon,
+        public Task(string name, string description, string nameStoryline, SSTaskStatus taskStatus, SSTaskType taskType, Sprite icon,
             float timeLeft, float duration, int mandatorySlots,
             int optionalSlots, float helpFactor, RoomType room, bool isTaskTutorial, List<Tuple<ConditionSO, string>> conditions, bool isStarted = false)
         {
             Name = name;
             Description = description;
+            NameStoryline = nameStoryline;
             TaskStatus = taskStatus;
             TaskType = taskType;
             Icon = icon;
