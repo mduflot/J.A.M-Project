@@ -51,6 +51,7 @@ public class TrajectoryGaugeUI : GaugeUI {
     }
 
     public override void ResetPreviewGauge() {
-        bottomPreviewGauge.fillAmount = bottomGauge.fillAmount;
+        bottomGauge.fillAmount = GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) / 50;
+        bottomPreviewGauge.fillAmount = GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) / 50;
     }
 }
