@@ -598,7 +598,6 @@ namespace UI
                 notificationContainer.DisplayNotification();
             }
             spaceshipManager.notificationPool.AddToPool(gameObject);
-            spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             IsStarted = false;
 
             if (LeaderCharacters.Count == 0) return;
@@ -634,7 +633,6 @@ namespace UI
                 launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunTimedNodeCancel(this, Task, taskNode);
-                spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
                 ResetCharacters();
             }
             else if (Task.TaskType.Equals(SSTaskType.Untimed))
@@ -642,7 +640,6 @@ namespace UI
                 launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunUntimedNodeCancel(this, Task, taskNode);
-                spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
                 ResetCharacters();
             }
 

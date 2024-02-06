@@ -171,21 +171,6 @@ namespace Managers
             }
         }
 
-        public void RemoveGaugeOutcomes(List<TaskUI.GaugesOutcome> outcomes)
-        {
-            foreach (var system in systems)
-            {
-                var valueToAdd = 0f;
-                foreach (var outcome in outcomes)
-                {
-                    if (outcome.gauge == system.type) valueToAdd -= outcome.value;
-                }
-
-                if (system.type == SystemType.Trajectory) system.previewGaugeValue -= valueToAdd;
-                else system.previewGaugeValue += valueToAdd;
-            }
-        }
-
         public float GetGaugeValue(SystemType systemType)
         {
             return systemsDictionary[systemType].gaugeValue;
@@ -205,7 +190,8 @@ namespace Managers
                 gaugeValue = 0;
             }
 
-            systemsDictionary[systemType].previewGaugeValue -= value;
+            if (systemType == SystemType.Trajectory) systemsDictionary[systemType].previewGaugeValue += value;
+            else systemsDictionary[systemType].previewGaugeValue -= value;
             systemsDictionary[systemType].gaugeValue = gaugeValue;
         }
 

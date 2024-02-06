@@ -15,14 +15,15 @@ public class DefaultGaugeUI : GaugeUI {
 
     public override void UpdateGauge(float value, float previewValue) {
         if (previewValue < 0.0f) {
-            previewGauge.fillAmount = (value + previewValue) / 50;
-            gauge.fillAmount = value / 50;
+            gauge.fillAmount = (value + previewValue) / 50;
+            previewGauge.fillAmount = value / 50;
             arrow.sprite = redArrow;
             arrow.color = colorOpaque;
         }
         else {
             gauge.fillAmount = value / 50;
-            previewGauge.fillAmount = (value + previewValue) / 50;
+            if (!IsPreviewing || (previewGauge.fillAmount > (value + previewValue) / 50))
+                previewGauge.fillAmount = (value + previewValue) / 50;
             arrow.sprite = greenArrow;
             arrow.color = colorOpaque;
         }
@@ -45,5 +46,10 @@ public class DefaultGaugeUI : GaugeUI {
             gauge.fillAmount = (GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) + value) / 50;
             arrow.sprite = redArrow;
         }
+    }
+
+    public override void ResetPreviewGauge() {
+        gauge.fillAmount = GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) / 50;
+        previewGauge.fillAmount = GameManager.Instance.SpaceshipManager.GetGaugeValue(systemType) / 50;
     }
 }

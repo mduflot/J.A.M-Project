@@ -29,6 +29,8 @@ public abstract class GaugeUI : HoverableObject, IPointerDownHandler
 
     public abstract void AddPreviewGauge(float value);
 
+    public abstract void ResetPreviewGauge();
+
     public void OnPointerDown(PointerEventData eventData)
     {
         launcher.StartTimeline();

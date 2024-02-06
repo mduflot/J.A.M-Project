@@ -324,6 +324,7 @@ namespace Tasks
             }
 
             gaugesOutcomes = gaugeOutcomes;
+            GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.UIManager.PreviewOutcomeGauges(gaugesOutcomes);
         }
 
