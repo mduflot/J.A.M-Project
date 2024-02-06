@@ -1,108 +1,45 @@
 using System.Linq;
 using CharacterSystem;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class ConditionSystem
 {
     // Call if Target is Leader or Assistant
-    //TODO : GIGA FIX THIS FUNCTION
-    public static bool CheckCharacterCondition(CharacterBehaviour leaderCharacter,
-        CharacterBehaviour[] assistantCharacters, ConditionSO taskCondition)
+    public static bool CheckCharacterCondition(CharacterBehaviour leaderCharacter, ConditionSO condition)
     {
-        if (taskCondition.BaseCondition.target == OutcomeData.OutcomeTarget.None) return true;
+        if (condition.BaseCondition.target == OutcomeData.OutcomeTarget.None) return true;
         if (leaderCharacter == null) return false;
 
         var ssTraits = GameManager.Instance.SpaceshipManager.SpaceshipTraits;
         var hssTraits = GameManager.Instance.SpaceshipManager.HiddenSpaceshipTraits;
-        bool validateCondition = true;
-
-        if (!CheckSpaceshipTraits(ssTraits, hssTraits, taskCondition.BaseCondition.SpaceshipTraits,
-                taskCondition.BaseCondition.HiddenSpaceshipTraits))
-            return false;
+        
+        bool validateCondition;
 
         /*Base Condition Check*/
 
         var characterTraits = leaderCharacter.GetTraits();
 
-        if (taskCondition.targetStat != OutcomeData.OutcomeTargetStat.None)
+        if (condition.targetStat != OutcomeData.OutcomeTargetStat.None)
         {
-            validateCondition = leaderCharacter.CheckStat(taskCondition.statThreshold, taskCondition.targetStat,
-                taskCondition.statComparison);
+            validateCondition = leaderCharacter.CheckStat(condition.statThreshold, condition.targetStat,
+                condition.statComparison);
+
+            if (!validateCondition) return false;
         }
 
-        if (!CheckJob(characterTraits.GetJob(), taskCondition.BaseCondition.Traits.GetJob()))
-            validateCondition = false;
+        validateCondition = CheckJob(characterTraits.GetJob(), condition.BaseCondition.Traits.GetJob())
+                            && CheckPositiveTraits(characterTraits.GetPositiveTraits(),
+                                condition.BaseCondition.Traits.GetPositiveTraits())
+                            && CheckNegativeTraits(characterTraits.GetNegativeTraits(),
+                                condition.BaseCondition.Traits.GetNegativeTraits())
+                            && CheckSpaceshipTraits(ssTraits, hssTraits, condition.BaseCondition.SpaceshipTraits,
+                                condition.BaseCondition.HiddenSpaceshipTraits);
 
-        if (!CheckPositiveTraits(characterTraits.GetPositiveTraits(),
-                taskCondition.BaseCondition.Traits.GetPositiveTraits()))
-            validateCondition = false;
-
-        if (!CheckNegativeTraits(characterTraits.GetNegativeTraits(),
-                taskCondition.BaseCondition.Traits.GetNegativeTraits()))
-            validateCondition = false;
-
-        if (taskCondition.supplementaryConditions.Count < 1)
+        if (condition.supplementaryConditions.Count < 1)
             return validateCondition;
 
-        /*Additionnal Condition Check*/
-
-        bool supplementaryCondition = true;
-
-        for (int i = 0; i < taskCondition.supplementaryConditions.Count; i++)
-        {
-            var cond = taskCondition.supplementaryConditions.ElementAt(i);
-            switch (cond.Value.BaseCondition.target)
-            {
-                case OutcomeData.OutcomeTarget.Leader:
-                    supplementaryCondition = CheckCharacterCondition(leaderCharacter, assistantCharacters, cond.Value);
-                    break;
-
-                case OutcomeData.OutcomeTarget.Assistant:
-                    supplementaryCondition = CheckCharacterCondition(leaderCharacter, assistantCharacters, cond.Value);
-                    break;
-
-                case OutcomeData.OutcomeTarget.Crew:
-                    supplementaryCondition = CheckCrewCondition(cond.Value);
-                    break;
-
-                case OutcomeData.OutcomeTarget.Ship:
-                    supplementaryCondition = CheckSpaceshipCondition(cond.Value);
-                    break;
-
-                case OutcomeData.OutcomeTarget.Gauge:
-                    supplementaryCondition = CheckGaugeCondition(cond.Value);
-                    break;
-
-                case OutcomeData.OutcomeTarget.GaugeValue:
-                    supplementaryCondition = CheckGaugeValueCondition(cond.Value);
-                    break;
-
-                case OutcomeData.OutcomeTarget.None:
-                    break;
-            }
-
-            //Apply logical operator
-            switch (cond.Key)
-            {
-                case TraitsData.TraitOperator.OR:
-                    validateCondition |= supplementaryCondition;
-                    break;
-                case TraitsData.TraitOperator.AND:
-                    validateCondition &= supplementaryCondition;
-                    break;
-                case TraitsData.TraitOperator.XOR:
-                    validateCondition ^= supplementaryCondition;
-                    break;
-                case TraitsData.TraitOperator.NAND:
-                    validateCondition = !(validateCondition && supplementaryCondition);
-                    break;
-                case TraitsData.TraitOperator.NOT:
-                    validateCondition = (validateCondition & !supplementaryCondition);
-                    break;
-            }
-        }
-
-        return validateCondition;
+        return CheckSupplementaryCondition(condition, leaderCharacter, validateCondition);
     }
 
     //Call if target is Crew
@@ -110,20 +47,16 @@ public class ConditionSystem
     {
         if (condition.BaseCondition.target == OutcomeData.OutcomeTarget.None) return true;
 
-        var crew = GameManager.Instance.SpaceshipManager.characters;
         var ssTraits = GameManager.Instance.SpaceshipManager.SpaceshipTraits;
         var hssTraits = GameManager.Instance.SpaceshipManager.HiddenSpaceshipTraits;
 
-        bool validateCondition = CheckSpaceshipTraits(ssTraits, hssTraits,
-            condition.BaseCondition.SpaceshipTraits,
-            condition.BaseCondition.HiddenSpaceshipTraits);
-
-        if (!validateCondition)
+        if (!CheckSpaceshipTraits(ssTraits, hssTraits,
+                condition.BaseCondition.SpaceshipTraits,
+                condition.BaseCondition.HiddenSpaceshipTraits))
             return false;
 
-        //Assume next conditions will be false
-        validateCondition = false;
-
+        var crew = GameManager.Instance.SpaceshipManager.characters;
+        
         for (int i = 0; i < crew.Length; i++)
         {
             //If conditions are false, skip to next character
@@ -138,68 +71,9 @@ public class ConditionSystem
             if (condition.supplementaryConditions.Count < 1)
                 return true;
 
-            validateCondition = true;
-
-            bool supplementaryCondition = true;
-
-            for (int i2 = 0; i2 < condition.supplementaryConditions.Count; i2++)
-            {
-                var cond = condition.supplementaryConditions.ElementAt(i2);
-                switch (cond.Value.BaseCondition.target)
-                {
-                    case OutcomeData.OutcomeTarget.Leader:
-                        //supplementaryCondition = CheckCharacterCondition()
-                        break;
-
-                    case OutcomeData.OutcomeTarget.Assistant:
-                        //supplementaryCondition = CheckCharacterCondition()
-                        break;
-
-                    case OutcomeData.OutcomeTarget.Crew:
-                        supplementaryCondition = CheckCrewCondition(cond.Value);
-                        break;
-
-                    case OutcomeData.OutcomeTarget.Ship:
-                        supplementaryCondition = CheckSpaceshipCondition(cond.Value);
-                        break;
-
-                    case OutcomeData.OutcomeTarget.Gauge:
-                        supplementaryCondition = CheckGaugeCondition(cond.Value);
-                        break;
-
-                    case OutcomeData.OutcomeTarget.GaugeValue:
-                        supplementaryCondition = CheckGaugeValueCondition(cond.Value);
-                        break;
-
-                    case OutcomeData.OutcomeTarget.None:
-                        break;
-                }
-
-                //Apply logical operator
-                switch (cond.Key)
-                {
-                    case TraitsData.TraitOperator.OR:
-                        validateCondition |= supplementaryCondition;
-                        break;
-                    case TraitsData.TraitOperator.AND:
-                        validateCondition &= supplementaryCondition;
-                        break;
-                    case TraitsData.TraitOperator.XOR:
-                        validateCondition ^= supplementaryCondition;
-                        break;
-                    case TraitsData.TraitOperator.NAND:
-                        validateCondition = !(validateCondition && supplementaryCondition);
-                        break;
-                    case TraitsData.TraitOperator.NOT:
-                        validateCondition = (validateCondition & !supplementaryCondition);
-                        break;
-                }
-            }
-
-            if (validateCondition)
+            if (CheckSupplementaryCondition(condition, crew[i], true))
                 return true;
         }
-
         return false;
     }
 
@@ -208,8 +82,8 @@ public class ConditionSystem
     {
         if (condition.BaseCondition.target == OutcomeData.OutcomeTarget.None) return true;
 
-        var ssTraits = TraitsData.SpaceshipTraits.None;
-        var hssTraits = TraitsData.HiddenSpaceshipTraits.None;
+        var ssTraits = GameManager.Instance.SpaceshipManager.SpaceshipTraits;
+        var hssTraits = GameManager.Instance.SpaceshipManager.HiddenSpaceshipTraits;
 
         bool validateCondition = CheckSpaceshipTraits(ssTraits, hssTraits, condition.BaseCondition.SpaceshipTraits,
             condition.BaseCondition.HiddenSpaceshipTraits);
@@ -217,64 +91,7 @@ public class ConditionSystem
         if (condition.supplementaryConditions.Count < 1)
             return validateCondition;
 
-        bool supplementaryCondition = true;
-
-        for (int i = 0; i < condition.supplementaryConditions.Count; i++)
-        {
-            var cond = condition.supplementaryConditions.ElementAt(i);
-
-            switch (cond.Value.BaseCondition.target)
-            {
-                case OutcomeData.OutcomeTarget.Leader:
-                    //supplementaryCondition = CheckCharacterCondition()
-                    break;
-
-                case OutcomeData.OutcomeTarget.Assistant:
-                    //supplementaryCondition = CheckCharacterCondition()
-                    break;
-
-                case OutcomeData.OutcomeTarget.Crew:
-                    supplementaryCondition = CheckCrewCondition(cond.Value);
-                    break;
-
-                case OutcomeData.OutcomeTarget.Ship:
-                    supplementaryCondition = CheckSpaceshipCondition(cond.Value);
-                    break;
-
-                case OutcomeData.OutcomeTarget.Gauge:
-                    supplementaryCondition = CheckGaugeCondition(cond.Value);
-                    break;
-
-                case OutcomeData.OutcomeTarget.GaugeValue:
-                    supplementaryCondition = CheckGaugeValueCondition(cond.Value);
-                    break;
-
-                case OutcomeData.OutcomeTarget.None:
-                    break;
-            }
-
-            //Apply logical operator
-            switch (cond.Key)
-            {
-                case TraitsData.TraitOperator.OR:
-                    validateCondition |= supplementaryCondition;
-                    break;
-                case TraitsData.TraitOperator.AND:
-                    validateCondition &= supplementaryCondition;
-                    break;
-                case TraitsData.TraitOperator.XOR:
-                    validateCondition ^= supplementaryCondition;
-                    break;
-                case TraitsData.TraitOperator.NAND:
-                    validateCondition = !(validateCondition && supplementaryCondition);
-                    break;
-                case TraitsData.TraitOperator.NOT:
-                    validateCondition = (validateCondition & !supplementaryCondition);
-                    break;
-            }
-        }
-
-        return validateCondition;
+        return CheckSupplementaryCondition(condition, null, validateCondition);
     }
 
     //Call if target is Gauge
@@ -282,8 +99,8 @@ public class ConditionSystem
     {
         if (condition.BaseCondition.target == OutcomeData.OutcomeTarget.None) return true;
 
-        var ssTraits = TraitsData.SpaceshipTraits.None;
-        var hssTraits = TraitsData.HiddenSpaceshipTraits.None;
+        var ssTraits = GameManager.Instance.SpaceshipManager.SpaceshipTraits;
+        var hssTraits = GameManager.Instance.SpaceshipManager.HiddenSpaceshipTraits;
 
         bool validateCondition = CheckSpaceshipTraits(ssTraits, hssTraits, condition.BaseCondition.SpaceshipTraits,
             condition.BaseCondition.HiddenSpaceshipTraits);
@@ -293,63 +110,7 @@ public class ConditionSystem
         if (condition.supplementaryConditions.Count < 1)
             return validateCondition;
 
-        bool supplementaryCondition = true;
-
-        for (int i = 0; i < condition.supplementaryConditions.Count(); i++)
-        {
-            var cond = condition.supplementaryConditions.ElementAt(i);
-            switch (cond.Value.BaseCondition.target)
-            {
-                case OutcomeData.OutcomeTarget.Leader:
-                    //supplementaryCondition = CheckCharacterCondition()
-                    break;
-
-                case OutcomeData.OutcomeTarget.Assistant:
-                    //supplementaryCondition = CheckCharacterCondition()
-                    break;
-
-                case OutcomeData.OutcomeTarget.Crew:
-                    supplementaryCondition = CheckCrewCondition(cond.Value);
-                    break;
-
-                case OutcomeData.OutcomeTarget.Ship:
-                    supplementaryCondition = CheckSpaceshipCondition(cond.Value);
-                    break;
-
-                case OutcomeData.OutcomeTarget.Gauge:
-                    supplementaryCondition = CheckGaugeCondition(cond.Value);
-                    break;
-
-                case OutcomeData.OutcomeTarget.GaugeValue:
-                    supplementaryCondition = CheckGaugeValueCondition(cond.Value);
-                    break;
-
-                case OutcomeData.OutcomeTarget.None:
-                    break;
-            }
-
-            //Apply logical operator
-            switch (cond.Key)
-            {
-                case TraitsData.TraitOperator.OR:
-                    validateCondition |= supplementaryCondition;
-                    break;
-                case TraitsData.TraitOperator.AND:
-                    validateCondition &= supplementaryCondition;
-                    break;
-                case TraitsData.TraitOperator.XOR:
-                    validateCondition ^= supplementaryCondition;
-                    break;
-                case TraitsData.TraitOperator.NAND:
-                    validateCondition = !(validateCondition && supplementaryCondition);
-                    break;
-                case TraitsData.TraitOperator.NOT:
-                    validateCondition = (validateCondition & !supplementaryCondition);
-                    break;
-            }
-        }
-
-        return validateCondition;
+        return CheckSupplementaryCondition(condition, null, validateCondition);
     }
 
     public static bool CheckGaugeValueCondition(ConditionSO condition)
@@ -368,19 +129,24 @@ public class ConditionSystem
         if (condition.supplementaryConditions.Count < 1)
             return validateCondition;
 
+        return CheckSupplementaryCondition(condition, null, validateCondition);
+    }
+
+    private static bool CheckSupplementaryCondition(ConditionSO taskCondition,CharacterBehaviour leaderCharacter, bool validateCondition)
+    {
         bool supplementaryCondition = true;
 
-        for (int i = 0; i < condition.supplementaryConditions.Count(); i++)
+        for (int i = 0; i < taskCondition.supplementaryConditions.Count; i++)
         {
-            var cond = condition.supplementaryConditions.ElementAt(i);
+            var cond = taskCondition.supplementaryConditions.ElementAt(i);
             switch (cond.Value.BaseCondition.target)
             {
                 case OutcomeData.OutcomeTarget.Leader:
-                    //supplementaryCondition = CheckCharacterCondition()
+                    supplementaryCondition = CheckCharacterCondition(leaderCharacter, cond.Value);
                     break;
 
                 case OutcomeData.OutcomeTarget.Assistant:
-                    //supplementaryCondition = CheckCharacterCondition()
+                    supplementaryCondition = CheckCharacterCondition(leaderCharacter, cond.Value);
                     break;
 
                 case OutcomeData.OutcomeTarget.Crew:
@@ -426,35 +192,39 @@ public class ConditionSystem
 
         return validateCondition;
     }
-
-    public static bool CheckAdditionnalConditions(CharacterBehaviour leaderCharacter,
-        CharacterBehaviour[] assistantCharacters, ConditionSO condition, int additionnalConditionIndex)
+    
+    public static bool RouteCondition(OutcomeData.OutcomeTarget target, UI.Notification notification)
     {
-        if (condition.BaseCondition.target == OutcomeData.OutcomeTarget.None) return true;
-        switch (condition.additionnalConditions[additionnalConditionIndex].BaseCondition.target)
+        bool validateCondition = false;
+        switch (target)
         {
             case OutcomeData.OutcomeTarget.Leader:
-                return CheckCharacterCondition(leaderCharacter, assistantCharacters, condition);
-
+                validateCondition =
+                    CheckCharacterCondition(notification.LeaderCharacters[0], notification.taskCondition);
+                break;
             case OutcomeData.OutcomeTarget.Assistant:
-                return CheckCharacterCondition(leaderCharacter, assistantCharacters, condition);
-
-            case OutcomeData.OutcomeTarget.Crew:
-                return CheckCrewCondition(condition);
-
-            case OutcomeData.OutcomeTarget.Ship:
-                return CheckSpaceshipCondition(condition);
-
+                if (notification.AssistantCharacters.Count >= 1)
+                    validateCondition =
+                        CheckCharacterCondition(notification.AssistantCharacters[0], notification.taskCondition);
+                break;
             case OutcomeData.OutcomeTarget.Gauge:
-                return CheckGaugeCondition(condition);
-
+                validateCondition = CheckGaugeCondition(notification.taskCondition);
+                break;
             case OutcomeData.OutcomeTarget.GaugeValue:
-                return CheckGaugeValueCondition(condition);
-
-            default:
-                Debug.LogError("Target mismatch ! Condition cannot be verified.");
-                return false;
+                validateCondition = CheckGaugeValueCondition(notification.taskCondition);
+                break;
+            case OutcomeData.OutcomeTarget.Crew:
+                validateCondition = CheckCrewCondition(notification.taskCondition);
+                break;
+            case OutcomeData.OutcomeTarget.Ship:
+                validateCondition = CheckSpaceshipCondition(notification.taskCondition);
+                break;
+            case OutcomeData.OutcomeTarget.None:
+                validateCondition = true;
+                break;
         }
+
+        return validateCondition;
     }
 
     private static bool CheckJob(TraitsData.Job job, TraitsData.Job conditionJob)

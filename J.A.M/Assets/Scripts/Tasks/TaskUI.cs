@@ -598,11 +598,11 @@ namespace Tasks
             switch (conditionSO.BaseCondition.target)
             {
                 case OutcomeData.OutcomeTarget.Leader:
-                    condition = ConditionSystem.CheckCharacterCondition(leader, assistants.ToArray(), conditionSO);
+                    condition = ConditionSystem.CheckCharacterCondition(leader, conditionSO);
                     break;
 
                 case OutcomeData.OutcomeTarget.Assistant:
-                    condition = ConditionSystem.CheckCharacterCondition(leader, assistants.ToArray(), conditionSO);
+                    condition = ConditionSystem.CheckCharacterCondition(leader, conditionSO);
 
                     break;
 
