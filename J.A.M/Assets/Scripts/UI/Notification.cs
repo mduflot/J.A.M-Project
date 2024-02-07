@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using SS.Enumerations;
 using CharacterSystem;
@@ -9,6 +10,7 @@ using Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace UI {
     public class Notification : HoverableObject, IPointerDownHandler {
@@ -30,6 +32,13 @@ namespace UI {
         [SerializeField] private Sprite defaultSprite;
         [SerializeField] private GameObject popupHelp;
         [SerializeField] private GameObject pointerArrow;
+        
+        [Header("Dialogue")]
+        [SerializeField] private GameObject dialogueMenu;
+        [SerializeField] private Image characterImage;
+        [SerializeField] private TextMeshProUGUI characterNameText;
+        [SerializeField] private TextMeshProUGUI dialogueText;
+        [SerializeField] private float dialogueSpontaneousDuration = 5.0f;
 
         [HideInInspector] public ConditionSO taskCondition;
 
@@ -436,7 +445,6 @@ namespace UI {
             if (Task.TaskType == SSTaskType.Permanent) TimeTickSystem.OnTick += AddOutcomeOnTick;
         }
 
-
         private void AddOutcomeOnTick(object sender, TimeTickSystem.OnTickEventArgs e) {
             for (uint i = 0; i < outcomeEvents.Length; i++) {
                 outcomeEvents[i].Invoke(outcomeEventArgs[i]);
@@ -561,6 +569,20 @@ namespace UI {
             foreach (var character in AssistantCharacters) {
                 character.StopTask();
             }
+        }
+
+        public void DisplayDialogue(Sprite characterSprite, string characterName, string dialogue) {
+            StopCoroutine(HideDialogue());
+            dialogueMenu.SetActive(true);
+            characterImage.sprite = characterSprite;
+            characterNameText.text = characterName;
+            dialogueText.text = dialogue;
+            StartCoroutine(HideDialogue());
+        }
+        
+        private IEnumerator HideDialogue() {
+            yield return new WaitForSeconds(dialogueSpontaneousDuration);
+            dialogueMenu.SetActive(false);
         }
 
         #region Utilities

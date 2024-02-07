@@ -13,6 +13,7 @@ namespace SS.ScriptableObjects
         public string Text { get; set; }
         [field: SerializeField] public SSSpeakerType SpeakerType { get; set; }
         [field: SerializeField] public float Duration { get; set; }
+        [field: SerializeField] public SSBarkType BarkType { get; set; }
         [field: SerializeField] public bool IsDialogueTask { get; set; }
         [field: SerializeField] public int PercentageTask { get; set; }
         [field: SerializeField] public bool IsCompleted { get; set; }
@@ -21,7 +22,7 @@ namespace SS.ScriptableObjects
         [field: SerializeField] public TraitsData.NegativeTraits NegativeTraits { get; set; }
 
         public void Initialize(string nodeName, string text, List<SSNodeChoiceData> choices, SSNodeType nodeType,
-            bool isStartingNode, SSSpeakerType speakerType, float duration, bool isDialogueTask, int percentageTask,
+            bool isStartingNode, SSSpeakerType speakerType, float duration, SSBarkType barkType, bool isDialogueTask, int percentageTask,
             TraitsData.Job job, TraitsData.PositiveTraits positiveTraits, TraitsData.NegativeTraits negativeTraits)
         {
             NodeName = nodeName;
@@ -31,6 +32,7 @@ namespace SS.ScriptableObjects
             IsStartingNode = isStartingNode;
             SpeakerType = speakerType;
             Duration = duration;
+            BarkType = barkType;
             IsDialogueTask = isDialogueTask;
             PercentageTask = percentageTask;
             IsCompleted = false;
