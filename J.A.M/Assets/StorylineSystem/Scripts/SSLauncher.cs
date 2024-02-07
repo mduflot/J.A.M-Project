@@ -693,6 +693,7 @@ namespace SS
         private IEnumerator DisplayDialogue(string characterName, SSDialogueNodeSO nodeSO)
         {
             nodeSO.IsCompleted = false;
+            GameManager.Instance.UIManager.dialogueManager.InitializeMenu();
             if (CanIgnoreDialogueTask && nodeSO.IsDialogueTask)
             {
                 if (nodeSO.Choices.First().NextNode == null)
@@ -728,12 +729,13 @@ namespace SS
                 yield break;
             }
 
-            GameManager.Instance.UIManager.dialogueManager.AddDialogue(task, nodeSO, characterName);
+            GameManager.Instance.UIManager.dialogueManager.AddDialogue(nodeSO, characterName);
 
             yield return new WaitUntil(() => nodeSO.IsCompleted);
 
             if (nodeSO.Choices.First().NextNode == null)
             {
+                GameManager.Instance.UIManager.dialogueManager.ActivateButton();
                 IsRunning = false;
                 ResetTimeline();
                 if (nodeContainer.StoryType != SSStoryType.Tasks)
@@ -792,6 +794,7 @@ namespace SS
 
         private void RunNode(SSTimeNodeSO nodeSO)
         {
+            GameManager.Instance.UIManager.dialogueManager.ActivateButton();
             timeNode = nodeSO;
             durationTimeNode = nodeSO.TimeToWait * TimeTickSystem.ticksPerHour;
             TimeTickSystem.OnTick += WaitingTime;
@@ -843,6 +846,7 @@ namespace SS
 
         private IEnumerator RunNode(SSTaskNodeSO nodeSO, CharacterIcon icon = null, TaskLog taskToPlay = null)
         {
+            GameManager.Instance.UIManager.dialogueManager.ActivateButton();
             if (nodeSO.TaskType.Equals(SSTaskType.Permanent))
             {
                 if (spaceshipManager.IsTaskActive(nodeSO.name))
@@ -959,6 +963,7 @@ namespace SS
 
         private void RunNode(SSPopupNodeSO nodeSO)
         {
+            GameManager.Instance.UIManager.dialogueManager.ActivateButton();
             StartCoroutine(WaitingPopup(nodeSO));
         }
 

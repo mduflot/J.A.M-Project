@@ -3,7 +3,7 @@
     public enum SSStoryType
     {
         Principal,
-        Secondary,
+        Spontaneous,
         Tasks,
         Leak,
         Trajectory
