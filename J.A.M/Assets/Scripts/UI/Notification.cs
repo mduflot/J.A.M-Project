@@ -28,17 +28,14 @@ namespace UI
         [SerializeField] private SpriteRenderer timerSprite;
         [SerializeField] private SpriteRenderer timeLeftSprite;
         [SerializeField] private Animator animator;
-
         [SerializeField] private Sprite hoveredSprite;
         [SerializeField] private Sprite defaultSprite;
-
         [SerializeField] private GameObject popupHelp;
-
         [SerializeField] private GameObject pointerArrow;
         
-        private Camera camera;
+        [HideInInspector] public ConditionSO taskCondition;
+        
         private SpaceshipManager spaceshipManager;
-        private ConditionSO taskCondition;
         private OutcomeSystem.OutcomeEvent[] outcomeEvents;
         private OutcomeSystem.OutcomeEventArgs[] outcomeEventArgs;
         private SSLauncher launcher;
@@ -51,7 +48,6 @@ namespace UI
 
         private void Start()
         {
-            camera = Camera.main;
             data = new HoverMenuData();
             data.parent = transform;
             data.baseParent = transform;
@@ -61,11 +57,6 @@ namespace UI
         {
             TimeTickSystem.OnTick -= AddOutcomeOnTick;
             popupHelp.SetActive(false);
-        }
-
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            Display();
         }
 
         public void Initialize(Task task, SSTaskNodeSO ssTaskNode, SpaceshipManager spaceshipManager,
@@ -137,7 +128,6 @@ namespace UI
                     {
                         Task.leaderCharacters.Add(character.icon.character);
                         LeaderCharacters.Add(character.icon.character);
-                        character.icon.character.AssignTask(this, true);
                     }
                 }
                 else
@@ -146,7 +136,6 @@ namespace UI
                     {
                         Task.assistantCharacters.Add(character.icon.character);
                         AssistantCharacters.Add(character.icon.character);
-                        character.icon.character.AssignTask(this);
                     }
                 }
             }
@@ -166,7 +155,7 @@ namespace UI
                 for (int i = 0; i < Task.Conditions.Count; i++)
                 {
                     taskCondition = Task.Conditions[i].Item1;
-                    validatedCondition = RouteCondition(taskCondition.BaseCondition.target);
+                    validatedCondition = ConditionSystem.RouteCondition(taskCondition.BaseCondition.target, this);
                     if (validatedCondition)
                     {
                         Task.conditionIndex = i;
@@ -196,6 +185,14 @@ namespace UI
                         break;
                     }
                 }
+            }
+
+            foreach (var leader in LeaderCharacters) {
+                leader.AssignTask(this, true);
+            }
+
+            foreach (var assistant in AssistantCharacters) {
+                assistant.AssignTask(this);
             }
         }
 
@@ -312,8 +309,7 @@ namespace UI
                     switch (cond.BaseCondition.target)
                     {
                         case OutcomeData.OutcomeTarget.Leader:
-                            if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0],
-                                    AssistantCharacters.ToArray(), cond))
+                            if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], cond))
                                 continue;
                             break;
 
@@ -322,9 +318,7 @@ namespace UI
                             for (int j = 0; j < AssistantCharacters.Count; j++)
                             {
                                 if (AssistantCharacters[j] == null)
-                                    if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0],
-                                            AssistantCharacters.ToArray(),
-                                            cond))
+                                    if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], cond))
                                         condition = true;
                                     else
                                     {
@@ -484,42 +478,8 @@ namespace UI
             if (Task.TaskType == SSTaskType.Permanent) TimeTickSystem.OnTick += AddOutcomeOnTick;
         }
 
-        private bool RouteCondition(OutcomeData.OutcomeTarget target)
-        {
-            bool validateCondition = false;
-            switch (target)
-            {
-                case OutcomeData.OutcomeTarget.Leader:
-                    validateCondition =
-                        ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], AssistantCharacters.ToArray(),
-                            taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.Assistant:
-                    if (AssistantCharacters.Count >= 1)
-                        validateCondition =
-                            ConditionSystem.CheckCharacterCondition(AssistantCharacters[0],
-                                AssistantCharacters.ToArray(), taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.Gauge:
-                    validateCondition = ConditionSystem.CheckGaugeCondition(taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.GaugeValue:
-                    validateCondition = ConditionSystem.CheckGaugeValueCondition(taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.Crew:
-                    validateCondition = ConditionSystem.CheckCrewCondition(taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.Ship:
-                    validateCondition = ConditionSystem.CheckSpaceshipCondition(taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.None:
-                    validateCondition = true;
-                    break;
-            }
-
-            return validateCondition;
-        }
-
+        
+        
         private void AddOutcomeOnTick(object sender, TimeTickSystem.OnTickEventArgs e)
         {
             for (uint i = 0; i < outcomeEvents.Length; i++)
@@ -594,7 +554,6 @@ namespace UI
 
             IsCompleted = true;
             ResetCharacters();
-            GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.RefreshCharacterIcons();
             if (transform.parent != null)
             {
@@ -603,7 +562,6 @@ namespace UI
                 notificationContainer.DisplayNotification();
             }
             spaceshipManager.notificationPool.AddToPool(gameObject);
-            spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
             IsStarted = false;
 
             if (LeaderCharacters.Count == 0) return;
@@ -639,7 +597,6 @@ namespace UI
                 launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunTimedNodeCancel(this, Task, taskNode);
-                spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
                 ResetCharacters();
             }
             else if (Task.TaskType.Equals(SSTaskType.Untimed))
@@ -647,7 +604,6 @@ namespace UI
                 launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunUntimedNodeCancel(this, Task, taskNode);
-                spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
                 ResetCharacters();
             }
 
@@ -675,6 +631,13 @@ namespace UI
                 character.StopTask();
             }
         }
+        
+        #region Utilities
+        
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            Display();
+        }
 
         public override void OnHover(PointerEventData eventData)
         {
@@ -694,5 +657,7 @@ namespace UI
             animator.SetBool("Selected", false);
             base.OnExit(eventData);
         }
+        
+        #endregion
     }
 }

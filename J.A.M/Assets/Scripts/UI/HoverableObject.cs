@@ -18,7 +18,7 @@ public class HoverableObject : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public virtual void OnHover(PointerEventData eventData)
     {
-        hoverMenu.Initialize(data);
+        hoverMenu?.Initialize(data);
     }
 
     public virtual void OnExit(PointerEventData eventData)

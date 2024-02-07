@@ -36,7 +36,7 @@ namespace UI
             icon.Initialize(character, this);
         }
 
-        public void ClearCharacter()
+        public virtual void ClearCharacter()
         {
             icon = null;
         }

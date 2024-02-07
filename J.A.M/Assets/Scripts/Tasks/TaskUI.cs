@@ -15,7 +15,8 @@ namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-        [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
+        [Header("Task")]
+        [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI timeLeftText;
         [SerializeField] private GameObject timeLeftObject;
         [SerializeField] private Transform startButtonObject;
@@ -31,9 +32,8 @@ namespace Tasks
         [SerializeField] private GameObject separator;
         [SerializeField] private GameObject popupHelp;
 
-        [Header("Dialogues")] [SerializeField] private GameObject dialogueContainer;
-
-        [Header("Values")] [SerializeField] private float timeLeft;
+        [Header("Values")]
+        [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
 
         private Notification notification;
@@ -77,7 +77,7 @@ namespace Tasks
         {
             notification = n;
             if (notification.Task.IsTaskTutorial) popupHelp.SetActive(true);
-            titleText.text = notification.Task.Name;
+            titleText.text = $"{notification.Task.Name} / {notification.Task.NameStoryline}";
             StartCoroutine(DisplayText(descriptionText, notification.Task.Description, 0.02f));
             timeLeft = notification.Task.TimeLeft;
             if (taskLog != null) timeLeft = taskLog.Duration;
@@ -152,6 +152,8 @@ namespace Tasks
                 Appear(true);
                 GameManager.Instance.taskOpened = true;
             }
+            
+            UpdatePreview();
         }
 
         public void DisplayTaskInfo(Notification n)
@@ -194,42 +196,60 @@ namespace Tasks
             separator.SetActive(true);
             GameManager.Instance.taskOpened = true;
             Appear(true);
+            UpdatePreview();
         }
 
-        public void Update()
+        public void UpdatePreview()
         {
             if (!animator.GetBool("Appear")) return;
-            if (!taskStarted)
-            {
-                List<GaugesOutcome> gaugeOutcomes = new List<GaugesOutcome>();
-                List<CharacterOutcome> characterOutcomes = new List<CharacterOutcome>();
+            if (taskStarted) return;
+            List<GaugesOutcome> gaugeOutcomes = new List<GaugesOutcome>();
+            List<CharacterOutcome> characterOutcomes = new List<CharacterOutcome>();
 
-                var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
-                foreach (var c in characterSlots)
+            var assistantCharacters = characterSlots.Count(slot => !slot.isMandatory && slot.icon != null);
+            foreach (var c in characterSlots)
+            {
+                if (c.icon != null)
+                    characterOutcomes.Add(new CharacterOutcome(c.icon.character,
+                        -GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
+            }
+
+            GameManager.Instance.UIManager.CharacterPreviewGauges(charOutcome);
+            charOutcome = characterOutcomes;
+            duration = assistantCharacters > 0
+                ? notification.Task.Duration /
+                  (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
+                : notification.Task.Duration;
+
+            durationText.text = TimeTickSystem.GetTicksAsTime((uint) (duration * TimeTickSystem.ticksPerHour));
+            var button = startButton.GetComponentInChildren<Button>();
+            var text = button.GetComponentInChildren<TextMeshProUGUI>();
+            var image = button.GetComponent<Image>();
+            button.Select();
+
+            for (int index = 0; index < notification.Task.Conditions.Count; index++)
+            {
+                bool condition = CheckTarget(notification.Task.Conditions[index].Item1);
+
+                if ((!condition && notification.Task.TaskType == SSTaskType.Compute))
                 {
-                    if (c.icon != null)
-                        characterOutcomes.Add(new CharacterOutcome(c.icon.character,
-                            -GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
+                    previewOutcomeText.text = "Condition not met";
+                    button.interactable = false;
+                    text.text = "Bad combination";
+                    image.color = Color.black;
+                }
+                else
+                {
+                    previewOutcomeText.text = null;
+                    button.interactable = true;
+                    text.text = "Start Task";
+                    image.color = Color.white;
                 }
 
-                GameManager.Instance.UIManager.CharacterPreviewGauges(charOutcome);
-                charOutcome = characterOutcomes;
-                duration = assistantCharacters > 0
-                    ? notification.Task.Duration /
-                      (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
-                    : notification.Task.Duration;
-
-                durationText.text = TimeTickSystem.GetTicksAsTime((uint) (duration * TimeTickSystem.ticksPerHour));
-                var button = startButton.GetComponentInChildren<Button>();
-                var text = button.GetComponentInChildren<TextMeshProUGUI>();
-                var image = button.GetComponent<Image>();
-                button.Select();
-
-                for (int index = 0; index < notification.Task.Conditions.Count; index++)
+                if (notification.Task.TaskType != SSTaskType.Compute)
                 {
-                    bool condition = CheckTarget(notification.Task.Conditions[index].Item1);
-
-                    if ((!condition && notification.Task.TaskType == SSTaskType.Compute))
+                    if ((!condition && notification.Task.TaskType == SSTaskType.Untimed) ||
+                        (characterSlots[0].icon == null && notification.Task.TaskType == SSTaskType.Permanent))
                     {
                         previewOutcomeText.text = "Condition not met";
                         button.interactable = false;
@@ -243,89 +263,69 @@ namespace Tasks
                         text.text = "Start Task";
                         image.color = Color.white;
                     }
-
-                    if (notification.Task.TaskType != SSTaskType.Compute)
-                    {
-                        if ((!condition && notification.Task.TaskType == SSTaskType.Untimed) ||
-                            (characterSlots[0].icon == null && notification.Task.TaskType == SSTaskType.Permanent))
-                        {
-                            previewOutcomeText.text = "Condition not met";
-                            button.interactable = false;
-                            text.text = "Bad combination";
-                            image.color = Color.black;
-                        }
-                        else
-                        {
-                            previewOutcomeText.text = null;
-                            button.interactable = true;
-                            text.text = "Start Task";
-                            image.color = Color.white;
-                        }
-                    }
-
-                    if (condition)
-                    {
-                        previewOutcomeText.text = null;
-                        if (notification.Task.TaskType != SSTaskType.Compute)
-                        {
-                            if (characterSlots[0].icon != null)
-                                previewOutcomeText.text =
-                                    $"{characterSlots[0].icon.character.GetCharacterData().firstName} {notification.Task.Conditions[index].Item2}\n";
-                        }
-                        else previewOutcomeText.text = $"{notification.Task.Conditions[index].Item2}\n";
-
-                        var traits = DisplayTraits(notification.Task.Conditions[index].Item1);
-
-                        for (int j = 0; j < notification.Task.Conditions[index].Item1.outcomes.Outcomes.Length; j++)
-                        {
-                            var outcome = notification.Task.Conditions[index].Item1.outcomes.Outcomes[j];
-                            DisplayPreview(outcome, traits, gaugeOutcomes);
-                        }
-
-                        notification.Task.conditionIndex = index;
-
-                        for (int jindex = 0;
-                             jindex < notification.Task.Conditions[index].Item1.additionnalConditions.Length;
-                             jindex++)
-                        {
-                            condition = CheckTarget(notification.Task.Conditions[index].Item1
-                                .additionnalConditions[jindex]);
-
-                            if (condition)
-                            {
-                                traits = DisplayTraits(notification.Task.Conditions[index].Item1
-                                    .additionnalConditions[jindex]);
-                                for (int j = 0;
-                                     j < notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
-                                         .outcomes.Outcomes.Length;
-                                     j++)
-                                {
-                                    var outcome = notification.Task.Conditions[index].Item1
-                                        .additionnalConditions[jindex].outcomes.Outcomes[j];
-                                    DisplayPreview(outcome, traits, gaugeOutcomes);
-                                    foreach (var trait in GameManager.Instance.UIManager.characterInfoUI.characterTraits)
-                                    {
-                                        if (traits.ToLower().Contains(trait.GetName().ToLower()))
-                                        {
-                                            trait.ChangeColor(notification.Task.Conditions[index].Item1
-                                                    .additionnalConditions[jindex].outcomes.Outcomes[j]
-                                                    .OutcomeOperation == OutcomeData.OutcomeOperation.Add);
-                                        }
-                                    }
-                                }
-                                
-                                //break;
-                            }
-                        }
-
-                        notification.Task.previewText = previewOutcomeText.text;
-                        break;
-                    }
                 }
 
-                gaugesOutcomes = gaugeOutcomes;
-                GameManager.Instance.UIManager.PreviewOutcomeGauges(gaugesOutcomes);
+                if (condition)
+                {
+                    previewOutcomeText.text = null;
+                    if (notification.Task.TaskType != SSTaskType.Compute)
+                    {
+                        if (characterSlots[0].icon != null)
+                            previewOutcomeText.text =
+                                $"{characterSlots[0].icon.character.GetCharacterData().firstName} {notification.Task.Conditions[index].Item2}\n";
+                    }
+                    else previewOutcomeText.text = $"{notification.Task.Conditions[index].Item2}\n";
+
+                    var traits = DisplayTraits(notification.Task.Conditions[index].Item1);
+
+                    for (int j = 0; j < notification.Task.Conditions[index].Item1.outcomes.Outcomes.Length; j++)
+                    {
+                        var outcome = notification.Task.Conditions[index].Item1.outcomes.Outcomes[j];
+                        DisplayPreview(outcome, traits, gaugeOutcomes);
+                    }
+
+                    notification.Task.conditionIndex = index;
+
+                    for (int jindex = 0;
+                         jindex < notification.Task.Conditions[index].Item1.additionnalConditions.Length;
+                         jindex++)
+                    {
+                        condition = CheckTarget(notification.Task.Conditions[index].Item1
+                            .additionnalConditions[jindex]);
+
+                        if (condition)
+                        {
+                            traits = DisplayTraits(notification.Task.Conditions[index].Item1
+                                .additionnalConditions[jindex]);
+                            for (int j = 0;
+                                 j < notification.Task.Conditions[index].Item1.additionnalConditions[jindex]
+                                     .outcomes.Outcomes.Length;
+                                 j++)
+                            {
+                                var outcome = notification.Task.Conditions[index].Item1
+                                    .additionnalConditions[jindex].outcomes.Outcomes[j];
+                                DisplayPreview(outcome, traits, gaugeOutcomes);
+                                foreach (var trait in GameManager.Instance.UIManager.characterInfoUI.characterTraits)
+                                {
+                                    if (traits.ToLower().Contains(trait.GetName().ToLower()))
+                                    {
+                                        trait.ChangeColor(notification.Task.Conditions[index].Item1
+                                            .additionnalConditions[jindex].outcomes.Outcomes[j]
+                                            .OutcomeOperation == OutcomeData.OutcomeOperation.Add);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    notification.Task.previewText = previewOutcomeText.text;
+                    break;
+                }
             }
+
+            gaugesOutcomes = gaugeOutcomes;
+            GameManager.Instance.UIManager.ResetPreviewGauges();
+            GameManager.Instance.UIManager.PreviewOutcomeGauges(gaugesOutcomes);
         }
 
         private string DisplayTraits(ConditionSO conditionSO)
@@ -433,7 +433,7 @@ namespace Tasks
                             var system = GameManager.Instance.SpaceshipManager.systems[index];
                             if (system.type == outcome.OutcomeTargetGauge)
                             {
-                                volition -= system.decreaseSpeed * Mathf.FloorToInt(duration);
+                                volition -= system.decreaseValues[0] * Mathf.FloorToInt(duration);
                                 break;
                             }
                         }
@@ -599,11 +599,11 @@ namespace Tasks
             switch (conditionSO.BaseCondition.target)
             {
                 case OutcomeData.OutcomeTarget.Leader:
-                    condition = ConditionSystem.CheckCharacterCondition(leader, assistants.ToArray(), conditionSO);
+                    condition = ConditionSystem.CheckCharacterCondition(leader, conditionSO);
                     break;
 
                 case OutcomeData.OutcomeTarget.Assistant:
-                    condition = ConditionSystem.CheckCharacterCondition(leader, assistants.ToArray(), conditionSO);
+                    condition = ConditionSystem.CheckCharacterCondition(leader, conditionSO);
 
                     break;
 
@@ -716,7 +716,7 @@ namespace Tasks
             notification.IsCancelled = true;
             previewOutcomeText.text = null;
             characterSlots.Clear();
-            GameManager.Instance.UIManager.ResetPreviewGauges();
+            // TODO - Remove preview gauges
             GameManager.Instance.RefreshCharacterIcons();
             GameManager.Instance.taskOpened = false;
             separator.SetActive(false);
