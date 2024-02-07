@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour {
     [SerializeField] private Image characterImage;
-    [SerializeField] private Image background;
     [SerializeField] private TextMeshProUGUI characterNameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private float durationToDisplay = 5.0f;

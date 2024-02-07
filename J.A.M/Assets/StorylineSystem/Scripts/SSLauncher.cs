@@ -693,7 +693,8 @@ namespace SS
         private IEnumerator DisplayDialogue(string characterName, SSDialogueNodeSO nodeSO)
         {
             nodeSO.IsCompleted = false;
-            GameManager.Instance.UIManager.dialogueManager.InitializeMenu();
+            // TODO - Need to rework with spontaneous
+            GameManager.Instance.UIManager.dialogueManager.InitializeMenu(storyline.StorylineContainer.name);
             if (CanIgnoreDialogueTask && nodeSO.IsDialogueTask)
             {
                 if (nodeSO.Choices.First().NextNode == null)

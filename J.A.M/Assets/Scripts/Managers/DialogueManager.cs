@@ -17,8 +17,9 @@ public class DialogueManager : MonoBehaviour {
     [SerializeField] private Sprite sensor;
     [SerializeField] private Sprite expert;
     [SerializeField] private Sprite incomingSignal;
-    
-    [Header("Button")]
+
+    [Header("Menu")]
+    [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private Button button;
     [SerializeField] private TextMeshProUGUI buttonText;
 
@@ -26,10 +27,11 @@ public class DialogueManager : MonoBehaviour {
         dialoguesPool = new Pool<GameObject>(dialoguePrefab, 5);
     }
 
-    public void InitializeMenu() {
+    public void InitializeMenu(string title) {
         TimeTickSystem.ModifyTimeScale(0);
         gameObject.SetActive(true);
         button.interactable = false;
+        titleText.text = $"{title}";
         buttonText.text = "...";
     }
 
