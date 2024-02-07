@@ -43,6 +43,8 @@ namespace Tasks
         private List<GaugesOutcome> gaugesOutcomes = new();
         private List<CharacterOutcome> charOutcome = new();
 
+        private bool isConditionMet;
+
         public struct GaugesOutcome
         {
             public SystemType gauge;
@@ -203,6 +205,7 @@ namespace Tasks
         {
             if (!animator.GetBool("Appear")) return;
             if (taskStarted) return;
+            isConditionMet = false;
             List<GaugesOutcome> gaugeOutcomes = new List<GaugesOutcome>();
             List<CharacterOutcome> characterOutcomes = new List<CharacterOutcome>();
 
@@ -229,7 +232,11 @@ namespace Tasks
 
             for (int index = 0; index < notification.Task.Conditions.Count; index++)
             {
-                bool condition = CheckTarget(notification.Task.Conditions[index].Item1);
+                bool condition = CheckTarget(notification.Task.Conditions[index].Item1) || (!isConditionMet && index == notification.Task.Conditions.Count - 1);
+                if (characterSlots[0].icon == null && notification.Task.TaskType != SSTaskType.Untimed) {
+                    index = notification.Task.Conditions.Count - 1;
+                    condition = true;
+                }
 
                 if ((!condition && notification.Task.TaskType == SSTaskType.Compute))
                 {
@@ -267,6 +274,7 @@ namespace Tasks
 
                 if (condition)
                 {
+                    isConditionMet = condition;
                     previewOutcomeText.text = null;
                     if (notification.Task.TaskType != SSTaskType.Compute)
                     {

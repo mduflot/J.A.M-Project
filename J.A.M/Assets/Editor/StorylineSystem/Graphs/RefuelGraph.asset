@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RefuelGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: Refuel
-  <ID>k__BackingField: 88dbace6-169d-4d41-84ce-24723b03439f
+  <ID>k__BackingField: 919dcf13-d5c2-44db-93e5-d790f128fd07
   <StoryStatus>k__BackingField: 0
   <StoryType>k__BackingField: 1
   <IsTutorialToPlay>k__BackingField: 0
@@ -32,7 +32,11 @@ MonoBehaviour:
     <Name>k__BackingField: Refuel
     <Position>k__BackingField: {x: 2075.2, y: -739.2}
   <Nodes>k__BackingField:
-  - rid: 3212036479956811808
+  - rid: 3212036479956811837
+  - rid: 3212036479956811838
+  - rid: 3212036479956811839
+  - rid: 3212036479956811840
+  - rid: 3212036479956811841
   <OldGroupNames>k__BackingField:
   - Refuel
   <OldUngroupedNodeNames>k__BackingField: []
@@ -41,17 +45,21 @@ MonoBehaviour:
     - Key: Refuel
       Value:
       - Refuel
+      - Trololol
+      - Colcolcol
+      - Drodrodro
+      - Botbotbot
   references:
     version: 2
     RefIds:
-    - rid: 3212036479956811808
+    - rid: 3212036479956811837
       type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <ID>k__BackingField: dcb2a358-406c-4f2d-b047-6e9887af6118
         <Name>k__BackingField: Refuel
         <Choices>k__BackingField:
-        - rid: 3212036479956811809
-        - rid: 3212036479956811810
+        - rid: 3212036479956811842
+        - rid: 3212036479956811843
         <GroupID>k__BackingField: 1646ecaf-52de-447f-aeda-da6f8e408d37
         <NodeType>k__BackingField: 1
         <Position>k__BackingField: {x: 2100.8, y: -679.2}
@@ -69,19 +77,115 @@ MonoBehaviour:
         <Room>k__BackingField: 1
         <Furniture>k__BackingField: 1
         <IsTaskTutorial>k__BackingField: 0
-    - rid: 3212036479956811809
+    - rid: 3212036479956811838
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: c8b545e7-7587-4902-a984-8c66469a5258
+        <Name>k__BackingField: Trololol
+        <Choices>k__BackingField:
+        - rid: 3212036479956811844
+        <GroupID>k__BackingField: 1646ecaf-52de-447f-aeda-da6f8e408d37
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2444, y: -679.2}
+        <Text>k__BackingField: Node text.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <BarkType>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 3212036479956811839
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: cdee7103-0298-42d3-861c-80176c45e477
+        <Name>k__BackingField: Colcolcol
+        <Choices>k__BackingField:
+        - rid: 3212036479956811845
+        <GroupID>k__BackingField: 1646ecaf-52de-447f-aeda-da6f8e408d37
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2780.8, y: -679.2}
+        <Text>k__BackingField: Node text.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <BarkType>k__BackingField: 2
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 3212036479956811840
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: deb6c0fe-92f0-48b3-a8f0-1d9f46ae935b
+        <Name>k__BackingField: Drodrodro
+        <Choices>k__BackingField:
+        - rid: 3212036479956811846
+        <GroupID>k__BackingField: 1646ecaf-52de-447f-aeda-da6f8e408d37
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2444, y: -460.80002}
+        <Text>k__BackingField: Node text.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <BarkType>k__BackingField: 1
+        <IsDialogueTask>k__BackingField: 1
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 3212036479956811841
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: b83422c8-c944-4593-bd7c-eb2c5fa0b1cb
+        <Name>k__BackingField: Botbotbot
+        <Choices>k__BackingField:
+        - rid: 3212036479956811847
+        <GroupID>k__BackingField: 1646ecaf-52de-447f-aeda-da6f8e408d37
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 2780.8, y: -460.80002}
+        <Text>k__BackingField: Node text.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <BarkType>k__BackingField: 3
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 3212036479956811842
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: FirstChoice
-        <NextNodeID>k__BackingField: 
+        <NextNodeID>k__BackingField: c8b545e7-7587-4902-a984-8c66469a5258
         <Condition>k__BackingField: {fileID: 11400000, guid: 78330f87384ed0d46ab5b73187840a58,
           type: 2}
         <PreviewOutcome>k__BackingField: get a refuel from the nearest station
-    - rid: 3212036479956811810
+    - rid: 3212036479956811843
       type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
       data:
         <Text>k__BackingField: LastChoice
-        <NextNodeID>k__BackingField: 
+        <NextNodeID>k__BackingField: deb6c0fe-92f0-48b3-a8f0-1d9f46ae935b
         <Condition>k__BackingField: {fileID: 11400000, guid: 12e610f6fcc115945acd90ca7aa862af,
           type: 2}
         <PreviewOutcome>k__BackingField: not get...
+    - rid: 3212036479956811844
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: cdee7103-0298-42d3-861c-80176c45e477
+    - rid: 3212036479956811845
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 3212036479956811846
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: b83422c8-c944-4593-bd7c-eb2c5fa0b1cb
+    - rid: 3212036479956811847
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
