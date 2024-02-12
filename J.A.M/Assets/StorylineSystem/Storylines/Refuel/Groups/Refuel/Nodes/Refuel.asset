@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NodeName>k__BackingField: Refuel
   <Choices>k__BackingField:
-  - rid: 3212036479956811831
-  - rid: 3212036479956811832
+  - rid: 4182102707590922240
+  - rid: 4182102707590922241
   <NodeType>k__BackingField: 1
   <IsStartingNode>k__BackingField: 1
   <Description>k__BackingField: We need to get a refuel from the nearest station
@@ -34,7 +34,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 3212036479956811831
+    - rid: 4182102707590922240
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: FirstChoice
@@ -43,7 +43,7 @@ MonoBehaviour:
         <Condition>k__BackingField: {fileID: 11400000, guid: 78330f87384ed0d46ab5b73187840a58,
           type: 2}
         <PreviewOutcome>k__BackingField: get a refuel from the nearest station
-    - rid: 3212036479956811832
+    - rid: 4182102707590922241
       type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
       data:
         <Text>k__BackingField: LastChoice

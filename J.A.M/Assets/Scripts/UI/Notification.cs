@@ -510,7 +510,9 @@ namespace UI {
                 notificationContainer.DisplayNotification();
             }
 
-            spaceshipManager.notificationPool.AddToPool(gameObject);
+            if (launcher.storyline.StorylineContainer.StoryType is SSStoryType.Principal or SSStoryType.Tasks) 
+                spaceshipManager.notificationPool.AddToPool(gameObject);
+            else StartCoroutine(spaceshipManager.notificationPool.AddToPoolLater(gameObject, dialogueSpontaneousDuration));
             IsStarted = false;
 
             if (LeaderCharacters.Count == 0) return;
@@ -571,18 +573,19 @@ namespace UI {
             }
         }
 
-        public void DisplayDialogue(Sprite characterSprite, string characterName, string dialogue) {
-            StopCoroutine(HideDialogue());
+        public void DisplayDialogue(Sprite characterSprite, string characterName, string dialogue, SSDialogueNodeSO nodeSO = null) {
+            StopCoroutine(HideDialogue(nodeSO));
             dialogueMenu.SetActive(true);
             characterImage.sprite = characterSprite;
             characterNameText.text = characterName;
             dialogueText.text = dialogue;
-            StartCoroutine(HideDialogue());
+            StartCoroutine(HideDialogue(nodeSO));
         }
         
-        private IEnumerator HideDialogue() {
+        private IEnumerator HideDialogue(SSDialogueNodeSO nodeSO) {
             yield return new WaitForSeconds(dialogueSpontaneousDuration);
             dialogueMenu.SetActive(false);
+            if (nodeSO) nodeSO.IsCompleted = true;
         }
 
         #region Utilities

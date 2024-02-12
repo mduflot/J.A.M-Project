@@ -619,30 +619,31 @@ namespace SS {
                 GameManager.Instance.UIManager.dialogueManager.AddDialogue(nodeSO, characterName);
             else {
                 if (notificationGO.TryGetComponent(out Notification notification)) {
+                    if (nodeSO.IsDialogueTask) yield return new WaitUntil(() => 1 - nodeSO.PercentageTask / 100.0f >= task.Duration / task.BaseDuration);
                     var spriteIcon = task.leaderCharacters[0].GetCharacterData().characterIcon;
                     var firstName = task.leaderCharacters[0].GetCharacterData().firstName;
                     switch (nodeSO.BarkType) {
                         case SSBarkType.Awaiting:
                             notification.DisplayDialogue(spriteIcon, firstName,
                                 task.leaderCharacters[0].GetCharacterData().awaitingBarks[
-                                    Random.Range(0, task.leaderCharacters[0].GetCharacterData().awaitingBarks.Length)]);
+                                    Random.Range(0, task.leaderCharacters[0].GetCharacterData().awaitingBarks.Length)], nodeSO);
                             break;
                         case SSBarkType.Completing:
                             notification.DisplayDialogue(spriteIcon, firstName,
                                 task.leaderCharacters[0].GetCharacterData().completingBarks[
                                     Random.Range(0,
-                                        task.leaderCharacters[0].GetCharacterData().completingBarks.Length)]);
+                                        task.leaderCharacters[0].GetCharacterData().completingBarks.Length)], nodeSO);
                             break;
                         case SSBarkType.Completed:
                             notification.DisplayDialogue(spriteIcon, firstName,
                                 task.leaderCharacters[0].GetCharacterData().completedBarks[
                                     Random.Range(0,
-                                        task.leaderCharacters[0].GetCharacterData().completedBarks.Length)]);
+                                        task.leaderCharacters[0].GetCharacterData().completedBarks.Length)], nodeSO);
                             break;
                         case SSBarkType.Ignored:
                             notification.DisplayDialogue(spriteIcon, firstName,
                                 task.leaderCharacters[0].GetCharacterData().ignoredBarks[
-                                    Random.Range(0, task.leaderCharacters[0].GetCharacterData().ignoredBarks.Length)]);
+                                    Random.Range(0, task.leaderCharacters[0].GetCharacterData().ignoredBarks.Length)], nodeSO);
                             break;
                     }
                 }
