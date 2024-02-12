@@ -58,7 +58,9 @@ public class CameraController : MonoBehaviour
 
     private void OnCheatPerformed(InputAction.CallbackContext obj) {
         if (!Debug.isDebugBuild) return;
-        if (cheatContainer) cheatContainer.SetActive(!cheatContainer.activeSelf);
+        if (!cheatContainer) return;
+        GameManager.Instance.taskOpened = !cheatContainer.activeSelf;
+        cheatContainer.SetActive(!cheatContainer.activeSelf);
     }
 
     private void OnSpacePerformed(InputAction.CallbackContext obj)

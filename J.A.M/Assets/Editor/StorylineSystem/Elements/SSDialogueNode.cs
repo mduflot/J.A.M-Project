@@ -14,6 +14,7 @@ namespace SS.Elements
         public string Text { get; set; }
         public SSSpeakerType SpeakerType { get; set; }
         public float Duration { get; set; }
+        public SSBarkType BarkType { get; set; }
         public bool IsDialogueTask { get; set; }
         public int PercentageTask { get; set; }
         public TraitsData.Job Job { get; set; }
@@ -27,6 +28,7 @@ namespace SS.Elements
             NodeType = SSNodeType.Dialogue;
             Text = "Node text.";
             Duration = 1.0f;
+            BarkType = SSBarkType.Awaiting;
             IsDialogueTask = false;
             PercentageTask = 50;
             Job = TraitsData.Job.None;
@@ -110,6 +112,11 @@ namespace SS.Elements
                 });
 
             customDataContainer.Add(enumField);
+            
+            EnumField enumFieldBarkType = SSElementUtility.CreateEnumField(BarkType, "Bark Type",
+                callback => { BarkType = (SSBarkType)callback.newValue; });
+            
+            customDataContainer.Add(enumFieldBarkType);
 
             if (SpeakerType == SSSpeakerType.Traits)
             {

@@ -191,6 +191,7 @@ namespace SS.Utilities
                     Text = dialogueNode.Text,
                     SpeakerType = dialogueNode.SpeakerType,
                     Duration = dialogueNode.Duration,
+                    BarkType = dialogueNode.BarkType,
                     IsDialogueTask = dialogueNode.IsDialogueTask,
                     PercentageTask = dialogueNode.PercentageTask,
                     Job = dialogueNode.Job,
@@ -284,7 +285,7 @@ namespace SS.Utilities
                 nodeSO.Initialize(dialogueNode.NodeName, dialogueNode.Text,
                     ConvertNodeChoicesToNodeChoicesData(dialogueNode.Choices), dialogueNode.NodeType,
                     dialogueNode.IsStartingNode(), dialogueNode.SpeakerType, dialogueNode.Duration,
-                    dialogueNode.IsDialogueTask, dialogueNode.PercentageTask, dialogueNode.Job,
+                    dialogueNode.BarkType, dialogueNode.IsDialogueTask, dialogueNode.PercentageTask, dialogueNode.Job,
                     dialogueNode.PositiveTraits, dialogueNode.NegativeTraits);
 
                 createdNodes.Add(dialogueNode.ID, nodeSO);
@@ -535,6 +536,7 @@ namespace SS.Utilities
                     ((SSDialogueNode)node).Text = ((SSDialogueNodeSaveData)nodeData).Text;
                     ((SSDialogueNode)node).SpeakerType = ((SSDialogueNodeSaveData)nodeData).SpeakerType;
                     ((SSDialogueNode)node).Duration = ((SSDialogueNodeSaveData)nodeData).Duration;
+                    ((SSDialogueNode)node).BarkType = ((SSDialogueNodeSaveData)nodeData).BarkType;
                     ((SSDialogueNode)node).IsDialogueTask = ((SSDialogueNodeSaveData)nodeData).IsDialogueTask;
                     ((SSDialogueNode)node).PercentageTask = ((SSDialogueNodeSaveData)nodeData).PercentageTask;
                     ((SSDialogueNode)node).Job = ((SSDialogueNodeSaveData)nodeData).Job;

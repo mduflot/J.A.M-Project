@@ -77,7 +77,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                 case SSStoryType.Principal:
                     principalStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
                     break;
-                case SSStoryType.Secondary:
+                case SSStoryType.Spontaneous:
                     secondaryStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
                     break;
                 case SSStoryType.Leak:
@@ -112,7 +112,7 @@ public class Checker : MonoBehaviour, IDataPersistence
     public void GenerateNewEvent()
     {
         Debug.Log("Generating new secondary event. Maybe nothing will happen.");
-        ChooseNewStoryline(SSStoryType.Secondary);
+        ChooseNewStoryline(SSStoryType.Spontaneous);
     }
 
     public void GenerateNewPrincipalEvent(bool isTutorial)
@@ -150,7 +150,7 @@ public class Checker : MonoBehaviour, IDataPersistence
 
         this.isAlreadyWaiting = false;
         TimeTickSystem.OnTick -= WaitStorylineSecondary;
-        ChooseNewStoryline(SSStoryType.Secondary);
+        ChooseNewStoryline(SSStoryType.Spontaneous);
     }
     
     private void GenerateTrajectoryEvent(object sender, TimeTickSystem.OnTickEventArgs e)
@@ -175,7 +175,7 @@ public class Checker : MonoBehaviour, IDataPersistence
                                            TimeTickSystem.ticksPerHour;
                     TimeTickSystem.OnTick += WaitStorylinePrincipal;
                     break;
-                case SSStoryType.Secondary:
+                case SSStoryType.Spontaneous:
                     isAlreadyWaiting = true;
                     waitingTimeSecondary = (uint)Random.Range(minWaitTimeSecondary, maxWaitTimeSecondary) *
                                                 TimeTickSystem.ticksPerHour;
@@ -216,7 +216,7 @@ public class Checker : MonoBehaviour, IDataPersistence
 
                 break;
             }
-            case SSStoryType.Secondary:
+            case SSStoryType.Spontaneous:
             {
                 for (var index = 0; index < secondaryStorylines.Count; index++)
                 {
@@ -436,7 +436,7 @@ public class Checker : MonoBehaviour, IDataPersistence
             launcher.traitsCharacters = charactersList;
         }
 
-        if (storyline.StorylineContainer.StoryType == SSStoryType.Secondary && !isAlreadyWaiting)
+        if (storyline.StorylineContainer.StoryType == SSStoryType.Spontaneous && !isAlreadyWaiting)
         {
             this.isAlreadyWaiting = true;
             this.waitingTimeSecondary = (uint)Random.Range(minWaitTimeSecondary, maxWaitTimeSecondary) *
