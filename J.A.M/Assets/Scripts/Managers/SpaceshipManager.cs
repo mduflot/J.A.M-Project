@@ -200,7 +200,7 @@ namespace Managers
             if (e.tick % (TimeTickSystem.ticksPerHour * 24) != 0) return;
             if (IsInTutorial) return;
 
-            Checker.Instance.ChooseNewStoryline(SSStoryType.Secondary);
+            Checker.Instance.ChooseNewStoryline(SSStoryType.Spontaneous);
             TimeTickSystem.OnTick -= GenerateSecondaryEventOnFirstDay;
         }
 
