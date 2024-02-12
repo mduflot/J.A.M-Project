@@ -605,7 +605,7 @@ namespace SS {
             }
 
             CanIgnoreDialogueTask = false;
-            if ((!nodeSO.IsDialogueTask && task != null) || (nodeContainer.StoryType == SSStoryType.Principal && task != null))
+            if (!nodeSO.IsDialogueTask && task != null)
                 yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
             if (IsCancelled) {
                 CanIgnoreDialogueTask = true;
@@ -614,39 +614,16 @@ namespace SS {
             }
 
             if (nodeContainer.StoryType is SSStoryType.Principal) {
-                GameManager.Instance.UIManager.dialogueManager.InitializeMenu(storyline.StorylineContainer.name);
-                GameManager.Instance.UIManager.dialogueManager.AddDialogue(nodeSO, characterName);
+                if (nodeSO.IsDialogueTask) {
+                    StartCoroutine(AddDialogueNotification(nodeSO));
+                }
+                else {
+                    GameManager.Instance.UIManager.dialogueManager.InitializeMenu(storyline.StorylineContainer.name);
+                    GameManager.Instance.UIManager.dialogueManager.AddDialogue(nodeSO, characterName);
+                }
             }
             else {
-                if (notificationGO.TryGetComponent(out Notification notification)) {
-                    if (nodeSO.IsDialogueTask) yield return new WaitUntil(() => 1 - nodeSO.PercentageTask / 100.0f >= task.Duration / task.BaseDuration);
-                    var spriteIcon = task.leaderCharacters[0].GetCharacterData().characterIcon;
-                    var firstName = task.leaderCharacters[0].GetCharacterData().firstName;
-                    switch (nodeSO.BarkType) {
-                        case SSBarkType.Awaiting:
-                            notification.DisplayDialogue(spriteIcon, firstName,
-                                task.leaderCharacters[0].GetCharacterData().awaitingBarks[
-                                    Random.Range(0, task.leaderCharacters[0].GetCharacterData().awaitingBarks.Length)], nodeSO);
-                            break;
-                        case SSBarkType.Completing:
-                            notification.DisplayDialogue(spriteIcon, firstName,
-                                task.leaderCharacters[0].GetCharacterData().completingBarks[
-                                    Random.Range(0,
-                                        task.leaderCharacters[0].GetCharacterData().completingBarks.Length)], nodeSO);
-                            break;
-                        case SSBarkType.Completed:
-                            notification.DisplayDialogue(spriteIcon, firstName,
-                                task.leaderCharacters[0].GetCharacterData().completedBarks[
-                                    Random.Range(0,
-                                        task.leaderCharacters[0].GetCharacterData().completedBarks.Length)], nodeSO);
-                            break;
-                        case SSBarkType.Ignored:
-                            notification.DisplayDialogue(spriteIcon, firstName,
-                                task.leaderCharacters[0].GetCharacterData().ignoredBarks[
-                                    Random.Range(0, task.leaderCharacters[0].GetCharacterData().ignoredBarks.Length)], nodeSO);
-                            break;
-                    }
-                }
+                StartCoroutine(AddDialogueNotification(nodeSO));
             }
 
             yield return new WaitUntil(() => nodeSO.IsCompleted);
@@ -670,6 +647,38 @@ namespace SS {
             }
 
             CheckNodeType(nodeSO.Choices.First().NextNode);
+        }
+
+        private IEnumerator AddDialogueNotification(SSDialogueNodeSO nodeSO) {
+            if (notificationGO.TryGetComponent(out Notification notification)) {
+                if (nodeSO.IsDialogueTask) yield return new WaitUntil(() => 1 - nodeSO.PercentageTask / 100.0f >= task.Duration / task.BaseDuration);
+                var spriteIcon = task.leaderCharacters[0].GetCharacterData().characterIcon;
+                var firstName = task.leaderCharacters[0].GetCharacterData().firstName;
+                switch (nodeSO.BarkType) {
+                    case SSBarkType.Awaiting:
+                        notification.DisplayDialogue(spriteIcon, firstName,
+                            task.leaderCharacters[0].GetCharacterData().awaitingBarks[
+                                Random.Range(0, task.leaderCharacters[0].GetCharacterData().awaitingBarks.Length)], nodeSO);
+                        break;
+                    case SSBarkType.Completing:
+                        notification.DisplayDialogue(spriteIcon, firstName,
+                            task.leaderCharacters[0].GetCharacterData().completingBarks[
+                                Random.Range(0,
+                                    task.leaderCharacters[0].GetCharacterData().completingBarks.Length)], nodeSO);
+                        break;
+                    case SSBarkType.Completed:
+                        notification.DisplayDialogue(spriteIcon, firstName,
+                            task.leaderCharacters[0].GetCharacterData().completedBarks[
+                                Random.Range(0,
+                                    task.leaderCharacters[0].GetCharacterData().completedBarks.Length)], nodeSO);
+                        break;
+                    case SSBarkType.Ignored:
+                        notification.DisplayDialogue(spriteIcon, firstName,
+                            task.leaderCharacters[0].GetCharacterData().ignoredBarks[
+                                Random.Range(0, task.leaderCharacters[0].GetCharacterData().ignoredBarks.Length)], nodeSO);
+                        break;
+                }
+            }
         }
 
         #endregion
