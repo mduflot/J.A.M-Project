@@ -2,6 +2,7 @@
 using SS.ScriptableObjects;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour {
@@ -63,6 +64,12 @@ public class Dialogue : MonoBehaviour {
 
         yield return new WaitForSeconds(durationToDisplay);
 
+        nodeSO.IsCompleted = true;
+    }
+
+    public void ApplyText() {
+        StopAllCoroutines();
+        dialogueText.text = nodeSO.Text;
         nodeSO.IsCompleted = true;
     }
 }

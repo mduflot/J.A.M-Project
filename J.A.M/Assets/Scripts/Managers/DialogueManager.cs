@@ -4,9 +4,10 @@ using Managers;
 using SS.ScriptableObjects;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DialogueManager : MonoBehaviour {
+public class DialogueManager : MonoBehaviour, IPointerClickHandler {
     [Header("Dialogue")]
     [SerializeField] private GameObject dialoguePrefab;
     [SerializeField] private Transform dialogueParent;
@@ -78,5 +79,13 @@ public class DialogueManager : MonoBehaviour {
         GameManager.Instance.taskOpened = false;
         TimeTickSystem.ModifyTimeScale(1);
         gameObject.SetActive(false);
+    }
+
+    public void OnPointerClick(PointerEventData eventData) {
+        foreach (var dialogue in dialogues) {
+            if (dialogue.TryGetComponent(out Dialogue dialogueComponent)) {
+                dialogueComponent.ApplyText();
+            }
+        }
     }
 }
