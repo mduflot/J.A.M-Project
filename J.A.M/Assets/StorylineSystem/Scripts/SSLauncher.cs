@@ -585,8 +585,6 @@ namespace SS {
 
         private IEnumerator DisplayDialogue(string characterName, SSDialogueNodeSO nodeSO) {
             nodeSO.IsCompleted = false;
-            if (nodeContainer.StoryType is SSStoryType.Principal)
-                GameManager.Instance.UIManager.dialogueManager.InitializeMenu(storyline.StorylineContainer.name);
             if (CanIgnoreDialogueTask && nodeSO.IsDialogueTask) {
                 if (nodeSO.Choices.First().NextNode == null) {
                     IsRunning = false;
@@ -607,7 +605,7 @@ namespace SS {
             }
 
             CanIgnoreDialogueTask = false;
-            if (!nodeSO.IsDialogueTask && task != null)
+            if ((!nodeSO.IsDialogueTask && task != null) || (nodeContainer.StoryType == SSStoryType.Principal && task != null))
                 yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
             if (IsCancelled) {
                 CanIgnoreDialogueTask = true;
@@ -615,8 +613,10 @@ namespace SS {
                 yield break;
             }
 
-            if (nodeContainer.StoryType is SSStoryType.Principal)
+            if (nodeContainer.StoryType is SSStoryType.Principal) {
+                GameManager.Instance.UIManager.dialogueManager.InitializeMenu(storyline.StorylineContainer.name);
                 GameManager.Instance.UIManager.dialogueManager.AddDialogue(nodeSO, characterName);
+            }
             else {
                 if (notificationGO.TryGetComponent(out Notification notification)) {
                     if (nodeSO.IsDialogueTask) yield return new WaitUntil(() => 1 - nodeSO.PercentageTask / 100.0f >= task.Duration / task.BaseDuration);

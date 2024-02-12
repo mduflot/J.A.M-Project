@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour {
     [SerializeField] private Transform dialogueParent;
     private Pool<GameObject> dialoguesPool;
     private List<GameObject> dialogues = new();
+    private int siblingIndex;
 
     [Header("Sprites")]
     [SerializeField] private Sprite sensor;
@@ -28,16 +29,19 @@ public class DialogueManager : MonoBehaviour {
     }
 
     public void InitializeMenu(string title) {
+        GameManager.Instance.taskOpened = true;
         TimeTickSystem.ModifyTimeScale(0);
         gameObject.SetActive(true);
         button.interactable = false;
         titleText.text = $"{title}";
         buttonText.text = "...";
+        siblingIndex = 0;
     }
 
     public void AddDialogue(SSDialogueNodeSO node, string characterName) {
         var dialogueGO = dialoguesPool.GetFromPool();
         dialogueGO.transform.SetParent(dialogueParent);
+        dialogueParent.SetSiblingIndex(siblingIndex++);
         dialogues.Add(dialogueGO);
         var dialogueComponent = dialogueGO.GetComponent<Dialogue>();
         switch (characterName) {
@@ -67,9 +71,11 @@ public class DialogueManager : MonoBehaviour {
 
     public void CloseDialogueMenu() {
         foreach (var dialogue in dialogues) {
+            dialogue.transform.SetParent(null);
             dialoguesPool.AddToPool(dialogue);
         }
 
+        GameManager.Instance.taskOpened = false;
         TimeTickSystem.ModifyTimeScale(1);
         gameObject.SetActive(false);
     }
