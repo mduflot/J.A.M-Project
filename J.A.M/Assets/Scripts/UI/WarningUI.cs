@@ -35,7 +35,7 @@ public class WarningUI : MonoBehaviour
             var character = c[i];
             if (character.IsTaskLeader())
             {
-                characterWarningDescription.text = character.GetCharacterData().firstName + " is already assigned to " +
+                characterWarningDescription.text += character.GetCharacterData().firstName + " is already assigned to " +
                                                    character.GetTask().Name +
                                                    ". Assigning him here will cancel his current Task. Do you want to proceed?";
             }
