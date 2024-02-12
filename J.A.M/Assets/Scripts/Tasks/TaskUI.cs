@@ -217,8 +217,8 @@ namespace Tasks
                         -GameManager.Instance.SpaceshipManager.moodLossOnTaskStart));
             }
 
-            GameManager.Instance.UIManager.CharacterPreviewGauges(charOutcome);
             charOutcome = characterOutcomes;
+            GameManager.Instance.UIManager.CharacterPreviewGauges(charOutcome);
             duration = assistantCharacters > 0
                 ? notification.Task.Duration /
                   (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
