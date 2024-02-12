@@ -510,10 +510,12 @@ namespace UI {
                 notificationContainer.DisplayNotification();
             }
 
-            if (launcher.storyline.StorylineContainer.StoryType is SSStoryType.Principal)
-                spaceshipManager.notificationPool.AddToPool(gameObject);
-            else if (launcher.storyline.StorylineContainer.StoryType != SSStoryType.Tasks) 
-                StartCoroutine(spaceshipManager.notificationPool.AddToPoolLater(gameObject, dialogueSpontaneousDuration));
+            if (launcher.storyline != null) {
+                if (launcher.storyline.StorylineContainer.StoryType is SSStoryType.Principal)
+                    spaceshipManager.notificationPool.AddToPool(gameObject);
+                else if (launcher.storyline.StorylineContainer.StoryType != SSStoryType.Tasks) 
+                    StartCoroutine(spaceshipManager.notificationPool.AddToPoolLater(gameObject, dialogueSpontaneousDuration));
+            }
             IsStarted = false;
 
             if (LeaderCharacters.Count == 0) return;
