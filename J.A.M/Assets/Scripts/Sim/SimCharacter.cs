@@ -20,6 +20,9 @@ public class SimCharacter : MonoBehaviour
     public uint ticksToNextIdle;
     
     private GameObject taskFurniture;
+
+    [SerializeField] private SpriteRenderer spriteRendererCharacter;
+    [SerializeField] private Animator animatorCharacter;
     
     private void Start()
     {
@@ -69,13 +72,13 @@ public class SimCharacter : MonoBehaviour
             else
                 simStatus = SimStatus.Idle;
             
-            GetComponent<SpriteRenderer>().enabled = true;
+            spriteRendererCharacter.enabled = true;
             return;
         }
         
         uint nextDoor = doorPath.Pop();
 
-        GetComponent<SpriteRenderer>().enabled = SimPathing.FindRoomByDoorID(nextDoor).roomType == currentRoom.roomType;
+        spriteRendererCharacter.enabled = SimPathing.FindRoomByDoorID(nextDoor).roomType == currentRoom.roomType;
         
         currentRoomDoor = nextDoor;
         currentRoom = SimPathing.FindRoomByDoorID(currentRoomDoor);
@@ -111,6 +114,7 @@ public class SimCharacter : MonoBehaviour
     private void IdleInRoom()
     {
         if (currentRoom == null) return;
+        animatorCharacter.SetBool("IsMoving", false);
         
         if(taskRoom == null && simStatus != SimStatus.IdleEat && currentRoom != idleRooms[0])
             SendToIdleRoom();
@@ -137,6 +141,7 @@ public class SimCharacter : MonoBehaviour
             simStatus = SimStatus.Idle;
             return;
         }
+        animatorCharacter.SetBool("IsMoving", true);
         
         //cancel last path
         doorPath.Clear();
@@ -154,6 +159,7 @@ public class SimCharacter : MonoBehaviour
 
     public void SendToIdleRoom()
     {
+        animatorCharacter.SetBool("IsMoving", true);
         simStatus = SimStatus.GoToIdle;
         var randRoom = Random.Range(0f, 1f);
         
