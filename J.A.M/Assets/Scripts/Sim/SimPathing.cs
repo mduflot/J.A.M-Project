@@ -29,25 +29,6 @@ public class SimPathing : MonoBehaviour
         for (uint i = 0; i < instance.doors.Length; i++)
             instance.doors[i].doorID = i+1; 
     }
-    
-    [Obsolete("Call with character and target room as parameters")]
-    public static void CreatePath(SimDoor characterDoor, SimDoor targetDoor, SimCharacter targetCharacter)
-    {
-        if (characterDoor.doorID == targetDoor.doorID) return;
-        
-        //Door hierarchy in current search
-        Stack<SimDoor> doorStack = new Stack<SimDoor>();
-        
-        //Already visited doors
-        List<uint> visitedIDs = new List<uint>();
-
-        if (!FindPath(characterDoor, targetDoor, visitedIDs, doorStack)) 
-        {
-            Debug.LogError("No Path To Target Door");
-            return;
-        }
-        CreateIDStack(doorStack, targetCharacter);
-    }
 
     public static void CreatePath(SimCharacter character, SimRoom targetRoom)
     {
