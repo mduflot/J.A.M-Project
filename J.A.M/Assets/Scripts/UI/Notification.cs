@@ -514,11 +514,12 @@ namespace UI {
             }
 
             if (launcher.storyline != null) {
-                if (launcher.storyline.StorylineContainer.StoryType != SSStoryType.Principal && launcher.storyline.StorylineContainer.StoryType != SSStoryType.Tasks)
+                if (launcher.storyline.StorylineContainer.StoryType != SSStoryType.Principal)
                     StartCoroutine(spaceshipManager.notificationPool.AddToPoolLater(gameObject, dialogueSpontaneousDuration));
+                else
+                    spaceshipManager.notificationPool.AddToPool(gameObject);
             }
-            else spaceshipManager.notificationPool.AddToPool(gameObject);
-            
+
             IsStarted = false;
 
             if (LeaderCharacters.Count == 0) return;
