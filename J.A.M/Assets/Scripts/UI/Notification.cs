@@ -50,6 +50,7 @@ namespace UI {
         private float timeLeft;
         private List<TaskUI.GaugesOutcome> gaugeOutcomes = new();
         private TaskLog taskLog;
+        public UINotification uiNotification { private get; set; }
 
         private bool isHovered;
 
@@ -85,7 +86,7 @@ namespace UI {
             timerSprite.material.SetInt("_Arc2", 360);
             timeLeftSprite.material.SetInt("_Arc1", 360);
             taskLog = taskToPlay;
-
+            if(Task.TaskType != SSTaskType.Compute) GameManager.Instance.UIManager.UINotificationsHandler.CreateTaskNotification(this);
             if (task.TaskType != SSTaskType.Permanent) {
                 pointerArrow.SetActive(true);
                 pointerArrow.GetComponent<PointerArrow>().Init(gameObject, task.TaskType == SSTaskType.Timed);
@@ -180,6 +181,8 @@ namespace UI {
             foreach (var assistant in AssistantCharacters) {
                 assistant.AssignTask(this);
             }
+            
+            GameManager.Instance.UIManager.UINotificationsHandler.RemoveNotification(uiNotification);
         }
 
         private void CheckingCondition(bool validatedCondition) {
@@ -500,7 +503,6 @@ namespace UI {
                     }
                 }
             }
-
             IsCompleted = true;
             ResetCharacters();
             GameManager.Instance.RefreshCharacterIcons();

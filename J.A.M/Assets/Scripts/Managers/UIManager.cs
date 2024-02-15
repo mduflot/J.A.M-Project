@@ -36,6 +36,7 @@ namespace Managers
         public TextMeshProUGUI mainStorylineText;
         public DialogueManager dialogueManager;
         public CheatManager cheatManager;
+        public UINotificationsHandler UINotificationsHandler;
 
         [Serializable]
         public struct Gauges
