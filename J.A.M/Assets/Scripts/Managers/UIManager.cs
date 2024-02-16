@@ -37,6 +37,7 @@ namespace Managers
         public DialogueManager dialogueManager;
         public CheatManager cheatManager;
         public UINotificationsHandler UINotificationsHandler;
+        public RecapUI recapUI;
 
         [Serializable]
         public struct Gauges

@@ -506,6 +506,7 @@ namespace UI {
             IsCompleted = true;
             ResetCharacters();
             GameManager.Instance.RefreshCharacterIcons();
+            GameManager.Instance.UIManager.UINotificationsHandler.CreateRecapNotification(this);
             if (transform.parent != null) {
                 var notificationContainer = transform.parent.GetComponent<NotificationContainer>();
                 transform.parent = null;
