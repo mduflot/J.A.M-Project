@@ -710,8 +710,12 @@ namespace Tasks
             notification.OnCancel();
         }
 
+        /// <summary>
+        /// Cancel the task
+        /// </summary>
         public void CancelTask()
         {
+            // Unassigned characters from the task and reset their mood
             foreach (var slot in characterSlots)
             {
                 if (slot.icon != null) slot.icon.ResetTransform();

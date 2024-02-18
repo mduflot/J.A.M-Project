@@ -1,0 +1,262 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307f940dc740a524cb5593706c38f7b2, type: 3}
+  m_Name: CancelTestGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: CancelTest
+  <ID>k__BackingField: 8a130534-b46c-4a9f-9c89-022d8ab72c9c
+  <StoryStatus>k__BackingField: 0
+  <StoryType>k__BackingField: 0
+  <IsTutorialToPlay>k__BackingField: 0
+  <IsFirstToPlay>k__BackingField: 0
+  <IsReplayable>k__BackingField: 0
+  <Condition>k__BackingField: {fileID: 0}
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: f9837ce0-ba81-4ff5-b42e-2b922e695104
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: TimedTaskTimelime
+    <Position>k__BackingField: {x: 231.2, y: 247.99997}
+  - <ID>k__BackingField: 2fcce1c0-0cde-4b63-bf8b-cf1e7633876e
+    <StoryStatus>k__BackingField: 0
+    <IsFirstToPlay>k__BackingField: 0
+    <minWaitTime>k__BackingField: 5
+    <maxWaitTime>k__BackingField: 10
+    <timeIsOverride>k__BackingField: 0
+    <overrideWaitTime>k__BackingField: 10
+    <Condition>k__BackingField: {fileID: 0}
+    <Name>k__BackingField: UntimedTaskTimeline
+    <Position>k__BackingField: {x: 224.80002, y: 1003.2001}
+  <Nodes>k__BackingField:
+  - rid: 3212036724295991369
+  - rid: 3212036724295991370
+  - rid: 3212036724295991371
+  - rid: 3212036724295991372
+  - rid: 3212036724295991373
+  - rid: 3212036724295991374
+  - rid: 3212036724295991375
+  <OldGroupNames>k__BackingField:
+  - TimedTaskTimelime
+  - UntimedTaskTimeline
+  <OldUngroupedNodeNames>k__BackingField: []
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: TimedTaskTimelime
+      Value:
+      - FirstDialogue
+      - TimedTask
+      - Fail
+      - NotFail
+    - Key: UntimedTaskTimeline
+      Value:
+      - FirstDialogue
+      - UntimedTask
+      - finish
+  references:
+    version: 2
+    RefIds:
+    - rid: 3212036724295991369
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 2d6352b7-6d1e-4916-bb9d-735e5a5830fb
+        <Name>k__BackingField: FirstDialogue
+        <Choices>k__BackingField:
+        - rid: 3212036724295991376
+        <GroupID>k__BackingField: f9837ce0-ba81-4ff5-b42e-2b922e695104
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 256.8, y: 311.19998}
+        <Text>k__BackingField: Node text.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <BarkType>k__BackingField: 0
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 3212036724295991370
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: dc748ff7-4b60-46c1-97a9-4215b7e50ef0
+        <Name>k__BackingField: FirstDialogue
+        <Choices>k__BackingField:
+        - rid: 3212036724295991377
+        <GroupID>k__BackingField: 2fcce1c0-0cde-4b63-bf8b-cf1e7633876e
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 250.4, y: 1063.2001}
+        <Text>k__BackingField: Node text.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <BarkType>k__BackingField: 0
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 3212036724295991371
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 419058c6-3839-4861-8199-d5944d957918
+        <Name>k__BackingField: TimedTask
+        <Choices>k__BackingField:
+        - rid: 3212036724295991378
+        - rid: 3212036724295991379
+        <GroupID>k__BackingField: f9837ce0-ba81-4ff5-b42e-2b922e695104
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 505.6, y: 311.19998}
+        <DescriptionTask>k__BackingField: Timed Task to test
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 1
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 674067cf15d4f3448b518b294ca7432e,
+          type: 3}
+        <TimeLeft>k__BackingField: 5
+        <BaseDuration>k__BackingField: 5
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 1
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 3212036724295991372
+      type: {class: SSTaskNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: ec569592-448c-41bb-ad7a-8ffff71c0f02
+        <Name>k__BackingField: UntimedTask
+        <Choices>k__BackingField:
+        - rid: 3212036724295991380
+        <GroupID>k__BackingField: 2fcce1c0-0cde-4b63-bf8b-cf1e7633876e
+        <NodeType>k__BackingField: 1
+        <Position>k__BackingField: {x: 544, y: 1070.4}
+        <DescriptionTask>k__BackingField: Description
+        <TaskStatus>k__BackingField: 0
+        <TaskType>k__BackingField: 2
+        <TaskIcon>k__BackingField: {fileID: 21300000, guid: 674067cf15d4f3448b518b294ca7432e,
+          type: 3}
+        <TimeLeft>k__BackingField: 5
+        <BaseDuration>k__BackingField: 5
+        <MandatorySlots>k__BackingField: 1
+        <OptionalSlots>k__BackingField: 0
+        <TaskHelpFactor>k__BackingField: 0.75
+        <Room>k__BackingField: 1
+        <Furniture>k__BackingField: 1
+        <IsTaskTutorial>k__BackingField: 0
+    - rid: 3212036724295991373
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: dc341fd8-0c52-4a98-ada5-2ef6270258f3
+        <Name>k__BackingField: Fail
+        <Choices>k__BackingField:
+        - rid: 3212036724295991381
+        <GroupID>k__BackingField: f9837ce0-ba81-4ff5-b42e-2b922e695104
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 956, y: 552}
+        <Text>k__BackingField: Cancel success
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <BarkType>k__BackingField: 0
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 3212036724295991374
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 0f950681-50e7-43b2-903f-c0b49cc52a88
+        <Name>k__BackingField: NotFail
+        <Choices>k__BackingField:
+        - rid: 3212036724295991382
+        <GroupID>k__BackingField: f9837ce0-ba81-4ff5-b42e-2b922e695104
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 956, y: 308}
+        <Text>k__BackingField: Condition success
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <BarkType>k__BackingField: 0
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 3212036724295991375
+      type: {class: SSDialogueNodeSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <ID>k__BackingField: 394310ec-d19b-4857-a5f5-76f9c89d4954
+        <Name>k__BackingField: finish
+        <Choices>k__BackingField:
+        - rid: 3212036724295991383
+        <GroupID>k__BackingField: 2fcce1c0-0cde-4b63-bf8b-cf1e7633876e
+        <NodeType>k__BackingField: 0
+        <Position>k__BackingField: {x: 925.6, y: 1070.4}
+        <Text>k__BackingField: Finish.
+        <SpeakerType>k__BackingField: 0
+        <Duration>k__BackingField: 1
+        <BarkType>k__BackingField: 0
+        <IsDialogueTask>k__BackingField: 0
+        <PercentageTask>k__BackingField: 50
+        <Job>k__BackingField: 0
+        <PositiveTraits>k__BackingField: 0
+        <NegativeTraits>k__BackingField: 0
+    - rid: 3212036724295991376
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 419058c6-3839-4861-8199-d5944d957918
+    - rid: 3212036724295991377
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: ec569592-448c-41bb-ad7a-8ffff71c0f02
+    - rid: 3212036724295991378
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 0f950681-50e7-43b2-903f-c0b49cc52a88
+        <Condition>k__BackingField: {fileID: 11400000, guid: 1681249c6c5ea0c40aafed18c6365b7f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: First
+    - rid: 3212036724295991379
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Fallback
+        <NextNodeID>k__BackingField: dc341fd8-0c52-4a98-ada5-2ef6270258f3
+        <Condition>k__BackingField: {fileID: 11400000, guid: 1681249c6c5ea0c40aafed18c6365b7f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: Second
+    - rid: 3212036724295991380
+      type: {class: SSChoiceTaskSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: FirstChoice
+        <NextNodeID>k__BackingField: 394310ec-d19b-4857-a5f5-76f9c89d4954
+        <Condition>k__BackingField: {fileID: 11400000, guid: 1681249c6c5ea0c40aafed18c6365b7f,
+          type: 2}
+        <PreviewOutcome>k__BackingField: Preview...
+    - rid: 3212036724295991381
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 3212036724295991382
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
+    - rid: 3212036724295991383
+      type: {class: SSChoiceSaveData, ns: SS.Data.Save, asm: Assembly-CSharp-Editor}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNodeID>k__BackingField: 
