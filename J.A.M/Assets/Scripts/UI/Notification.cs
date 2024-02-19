@@ -476,6 +476,7 @@ namespace UI {
                     time.text = TimeTickSystem.GetTicksAsTime((uint)Task.TimeLeft);
                     Task.TimeLeft -= TimeTickSystem.timePerTick;
                     timeLeftSprite.material.SetInt("_Arc1", (int)(360 - Task.TimeLeft / timeLeft * 360));
+                    uiNotification.UpdateFill(Task.TimeLeft / timeLeft);
                 }
                 else if (!IsStarted) {
                     if (taskLog != null) {

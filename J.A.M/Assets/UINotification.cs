@@ -74,6 +74,10 @@ public class UINotification : HoverableObject, IPointerDownHandler
                 hasToMove = false;
             }
         }
+    }
+
+    public virtual void UpdateFill(float value)
+    {
         
     }
 }
