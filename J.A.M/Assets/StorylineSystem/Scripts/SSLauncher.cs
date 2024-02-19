@@ -650,6 +650,7 @@ namespace SS {
         }
 
         private IEnumerator AddDialogueNotification(SSDialogueNodeSO nodeSO) {
+            // TODO - fix problem with cancelling task
             if (notificationGO.TryGetComponent(out Notification notification)) {
                 if (nodeSO.IsDialogueTask) yield return new WaitUntil(() => 1 - nodeSO.PercentageTask / 100.0f >= task.Duration / task.BaseDuration);
                 var spriteIcon = task.leaderCharacters[0].GetCharacterData().characterIcon;
@@ -933,5 +934,6 @@ namespace SS {
         }
 
         #endregion
+        
     }
 }

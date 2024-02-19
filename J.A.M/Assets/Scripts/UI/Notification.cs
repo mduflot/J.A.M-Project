@@ -50,6 +50,7 @@ namespace UI {
         private float timeLeft;
         private List<TaskUI.GaugesOutcome> gaugeOutcomes = new();
         private TaskLog taskLog;
+        public UINotification uiNotification { private get; set; }
 
         private bool isHovered;
 
@@ -85,7 +86,7 @@ namespace UI {
             timerSprite.material.SetInt("_Arc2", 360);
             timeLeftSprite.material.SetInt("_Arc1", 360);
             taskLog = taskToPlay;
-
+            if(Task.TaskType != SSTaskType.Compute) GameManager.Instance.UIManager.UINotificationsHandler.CreateTaskNotification(this);
             if (task.TaskType != SSTaskType.Permanent) {
                 pointerArrow.SetActive(true);
                 pointerArrow.GetComponent<PointerArrow>().Init(gameObject, task.TaskType == SSTaskType.Timed);
@@ -180,6 +181,8 @@ namespace UI {
             foreach (var assistant in AssistantCharacters) {
                 assistant.AssignTask(this);
             }
+            
+            GameManager.Instance.UIManager.UINotificationsHandler.RemoveNotification(uiNotification);
         }
 
         private void CheckingCondition(bool validatedCondition) {
@@ -500,19 +503,22 @@ namespace UI {
                     }
                 }
             }
-
             IsCompleted = true;
             ResetCharacters();
             GameManager.Instance.RefreshCharacterIcons();
+            GameManager.Instance.UIManager.UINotificationsHandler.CreateRecapNotification(this);
             if (transform.parent != null) {
                 var notificationContainer = transform.parent.GetComponent<NotificationContainer>();
                 transform.parent = null;
                 notificationContainer.DisplayNotification();
             }
 
-            if (launcher.storyline.StorylineContainer.StoryType is SSStoryType.Principal or SSStoryType.Tasks) 
-                spaceshipManager.notificationPool.AddToPool(gameObject);
-            else StartCoroutine(spaceshipManager.notificationPool.AddToPoolLater(gameObject, dialogueSpontaneousDuration));
+            if (launcher.storyline != null) {
+                if (launcher.storyline.StorylineContainer.StoryType != SSStoryType.Principal && launcher.storyline.StorylineContainer.StoryType != SSStoryType.Tasks)
+                    StartCoroutine(spaceshipManager.notificationPool.AddToPoolLater(gameObject, dialogueSpontaneousDuration));
+            }
+            else spaceshipManager.notificationPool.AddToPool(gameObject);
+            
             IsStarted = false;
 
             if (LeaderCharacters.Count == 0) return;

@@ -724,7 +724,6 @@ namespace Tasks
             notification.IsCancelled = true;
             previewOutcomeText.text = null;
             characterSlots.Clear();
-            // TODO - Remove preview gauges
             GameManager.Instance.RefreshCharacterIcons();
             GameManager.Instance.taskOpened = false;
             separator.SetActive(false);
