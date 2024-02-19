@@ -181,8 +181,8 @@ namespace UI {
             foreach (var assistant in AssistantCharacters) {
                 assistant.AssignTask(this);
             }
-            
-            if(Task.TaskType != SSTaskType.Permanent && Task.TaskType != SSTaskType.Compute)GameManager.Instance.UIManager.UINotificationsHandler.RemoveNotification(uiNotification);
+
+            if (Task.TaskType == SSTaskType.Permanent) GameManager.Instance.UIManager.UINotificationsHandler.CreateTaskNotification(this);
         }
 
         private void CheckingCondition(bool validatedCondition) {
@@ -465,6 +465,7 @@ namespace UI {
 
                     Task.Duration -= TimeTickSystem.timePerTick;
                     timerSprite.material.SetInt("_Arc2", (int)(Task.Duration / Task.BaseDuration * 360));
+                    uiNotification.UpdateCompletionFill(Task.Duration / Task.BaseDuration);
                 }
                 else {
                     TimeTickSystem.OnTick -= AddOutcomeOnTick;
@@ -476,7 +477,7 @@ namespace UI {
                     time.text = TimeTickSystem.GetTicksAsTime((uint)Task.TimeLeft);
                     Task.TimeLeft -= TimeTickSystem.timePerTick;
                     timeLeftSprite.material.SetInt("_Arc1", (int)(360 - Task.TimeLeft / timeLeft * 360));
-                    uiNotification.UpdateFill(Task.TimeLeft / timeLeft);
+                    uiNotification.UpdateTimeLeftFill(Task.TimeLeft / timeLeft);
                 }
                 else if (!IsStarted) {
                     if (taskLog != null) {
@@ -507,6 +508,7 @@ namespace UI {
             IsCompleted = true;
             ResetCharacters();
             GameManager.Instance.RefreshCharacterIcons();
+            GameManager.Instance.UIManager.UINotificationsHandler.RemoveNotification(uiNotification);
             GameManager.Instance.UIManager.UINotificationsHandler.CreateRecapNotification(this);
             if (transform.parent != null) {
                 var notificationContainer = transform.parent.GetComponent<NotificationContainer>();

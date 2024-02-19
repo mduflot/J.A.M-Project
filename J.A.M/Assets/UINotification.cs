@@ -76,7 +76,12 @@ public class UINotification : HoverableObject, IPointerDownHandler
         }
     }
 
-    public virtual void UpdateFill(float value)
+    public virtual void UpdateTimeLeftFill(float value)
+    {
+        
+    }
+    
+    public virtual void UpdateCompletionFill(float value)
     {
         
     }
