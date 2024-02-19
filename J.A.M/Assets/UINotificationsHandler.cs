@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UI;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class UINotificationsHandler : MonoBehaviour
@@ -10,11 +13,16 @@ public class UINotificationsHandler : MonoBehaviour
     [SerializeField] private UINotification taskNotificationPrefab;
     [SerializeField] private UINotification recapNotificationPrefab;
     [SerializeField] private Transform notificationsParent;
+    [SerializeField] private float maxRightPosX;
+    [SerializeField] private int spacing;
 
     public void CreateTaskNotification(Notification n)
     {
         var note = Instantiate(taskNotificationPrefab, notificationsParent);
-        note.Initialize(n.Task, this, n);
+        var position = new Vector3(maxRightPosX - spacing * notifications.Count - 1,
+            0);
+        note.transform.localPosition = position;
+        note.Initialize(n.Task, this, notifications.Count, n);
         notifications.Add(note);
         n.uiNotification = note;
     }
@@ -22,13 +30,20 @@ public class UINotificationsHandler : MonoBehaviour
     public void CreateRecapNotification(Notification n)
     {
         var note = Instantiate(recapNotificationPrefab, notificationsParent);
-        note.Initialize(n.Task, this);
+        var position = new Vector3(maxRightPosX - (spacing * notifications.Count - 1),
+            0);
+        note.transform.localPosition = position;
+        note.Initialize(n.Task, this, notifications.Count);
         notifications.Add(note);
     }
 
-    public void RemoveNotification(UINotification n)
+    public async void RemoveNotification(UINotification n)
     {
+        await n.Disappear();
         notifications.Remove(n);
-        n.Disappear();
+        for (int i = n.index; i < notifications.Count; i++)
+        {
+            notifications[i].MoveToNewPos(maxRightPosX - (spacing * i - 1));
+        }
     }
 }

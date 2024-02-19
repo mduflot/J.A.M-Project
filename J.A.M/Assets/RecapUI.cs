@@ -10,21 +10,28 @@ public class RecapUI : MonoBehaviour
     [SerializeField] private Image taskIcon;
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI outcomesText;
-    [SerializeField] private TextMeshProUGUI descriptionText;
+    [SerializeField] private Animator animator;
     private RecapUINotification notification;
     public void Initialize(Task task, RecapUINotification n)
     {
         taskIcon.sprite = task.Icon;
         titleText.text = task.Name;
-        descriptionText.text = task.Description;
         outcomesText.text = task.previewText;
         notification = n;
-        gameObject.SetActive(true);
+        Appear(true);
     }
 
-    public void Close()
+    public void Appear(bool state)
     {
-        GameManager.Instance.UIManager.UINotificationsHandler.RemoveNotification(notification);
-        gameObject.SetActive(false);
+        switch (state)
+        {
+            case true :
+                animator.SetBool("Appear", state);
+                break;
+            case false : 
+                animator.SetBool("Appear", state);
+                GameManager.Instance.UIManager.UINotificationsHandler.RemoveNotification(notification);
+                break;
+        }
     }
 }

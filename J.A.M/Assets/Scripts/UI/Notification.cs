@@ -86,8 +86,8 @@ namespace UI {
             timerSprite.material.SetInt("_Arc2", 360);
             timeLeftSprite.material.SetInt("_Arc1", 360);
             taskLog = taskToPlay;
-            if(Task.TaskType != SSTaskType.Compute) GameManager.Instance.UIManager.UINotificationsHandler.CreateTaskNotification(this);
             if (task.TaskType != SSTaskType.Permanent) {
+                if(Task.TaskType != SSTaskType.Compute) GameManager.Instance.UIManager.UINotificationsHandler.CreateTaskNotification(this);
                 pointerArrow.SetActive(true);
                 pointerArrow.GetComponent<PointerArrow>().Init(gameObject, task.TaskType == SSTaskType.Timed);
             }
@@ -182,7 +182,7 @@ namespace UI {
                 assistant.AssignTask(this);
             }
             
-            GameManager.Instance.UIManager.UINotificationsHandler.RemoveNotification(uiNotification);
+            if(Task.TaskType != SSTaskType.Permanent && Task.TaskType != SSTaskType.Compute)GameManager.Instance.UIManager.UINotificationsHandler.RemoveNotification(uiNotification);
         }
 
         private void CheckingCondition(bool validatedCondition) {
