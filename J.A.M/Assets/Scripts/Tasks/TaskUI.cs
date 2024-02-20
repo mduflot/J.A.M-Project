@@ -233,9 +233,11 @@ namespace Tasks
             for (int index = 0; index < notification.Task.Conditions.Count; index++)
             {
                 bool condition = CheckTarget(notification.Task.Conditions[index].Item1) || (!isConditionMet && index == notification.Task.Conditions.Count - 1);
-                if (characterSlots[0].icon == null && notification.Task.TaskType != SSTaskType.Untimed) {
-                    index = notification.Task.Conditions.Count - 1;
-                    condition = true;
+                if (notification.Task.TaskType != SSTaskType.Compute) {
+                    if (characterSlots[0]?.icon == null && notification.Task.TaskType != SSTaskType.Untimed) {
+                        index = notification.Task.Conditions.Count - 1;
+                        condition = true;
+                    }
                 }
 
                 if ((!condition && notification.Task.TaskType == SSTaskType.Compute))
