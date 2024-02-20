@@ -135,7 +135,7 @@ namespace SS.Windows
         private IManipulator CreateGroupContextualMenu()
         {
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
-                menuEvent => menuEvent.menu.AppendAction("Add Group",
+                menuEvent => menuEvent.menu.AppendAction("Add Group (Timeline)",
                     actionEvent => CreateGroup("NodeGroup",
                         GetLocalMousePosition(actionEvent.eventInfo.localMousePosition)))
             );

@@ -69,7 +69,7 @@ namespace UI {
             SSLauncher ssLauncher,
             List<SerializableTuple<string, string>> dialogues = null, TaskLog taskToPlay = null) {
             IsCompleted = false;
-            IsCancelled = false;
+            IsStarted = false;
             Task = task;
             taskNode = ssTaskNode;
             time.text = "";
@@ -91,11 +91,11 @@ namespace UI {
                 pointerArrow.SetActive(true);
                 pointerArrow.GetComponent<PointerArrow>().Init(gameObject, task.TaskType == SSTaskType.Timed);
             }
+            this.spaceshipManager.AddTask(this);
         }
 
         public void InitializeCancelTask() {
             IsCompleted = false;
-            IsCancelled = false;
             taskCondition = Task.Conditions[^1].Item1;
             Task.conditionIndex = Task.Conditions.Count - 1;
             CheckingCondition(true);
@@ -517,11 +517,12 @@ namespace UI {
             }
 
             if (launcher.storyline != null) {
-                if (launcher.storyline.StorylineContainer.StoryType != SSStoryType.Principal && launcher.storyline.StorylineContainer.StoryType != SSStoryType.Tasks)
+                if (launcher.storyline.StorylineContainer.StoryType != SSStoryType.Principal)
                     StartCoroutine(spaceshipManager.notificationPool.AddToPoolLater(gameObject, dialogueSpontaneousDuration));
+                else
+                    spaceshipManager.notificationPool.AddToPool(gameObject);
             }
-            else spaceshipManager.notificationPool.AddToPool(gameObject);
-            
+
             IsStarted = false;
 
             if (LeaderCharacters.Count == 0) return;
@@ -549,13 +550,11 @@ namespace UI {
                 OnComplete();
             }
             else if (Task.TaskType.Equals(SSTaskType.Timed)) {
-                launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunTimedNodeCancel(this, Task, taskNode);
                 ResetCharacters();
             }
             else if (Task.TaskType.Equals(SSTaskType.Untimed)) {
-                launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunUntimedNodeCancel(this, Task, taskNode);
                 ResetCharacters();
