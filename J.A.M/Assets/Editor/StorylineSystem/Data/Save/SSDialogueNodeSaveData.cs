@@ -8,6 +8,7 @@ namespace SS.Data.Save
     [Serializable]
     public class SSDialogueNodeSaveData : SSNodeSaveData
     {
+        [field: SerializeField] public SSDialogueType DialogueType { get; set; }
         [field: SerializeField] public string Text { get; set; }
         [field: SerializeField] public SSSpeakerType SpeakerType { get; set; }
         [field: SerializeField] public float Duration { get; set; }

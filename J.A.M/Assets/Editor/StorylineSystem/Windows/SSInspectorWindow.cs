@@ -25,82 +25,83 @@ namespace SS.Windows
         {
             rootVisualElement.Clear();
             if (graphView == null) return;
+            
+            Foldout textFoldout = SSElementUtility.CreateFoldout("Storyline :");
 
             EnumField enumFieldGraphStatus = SSElementUtility.CreateEnumField(graphView.StoryStatus, "SS Status:",
                 callback => { graphView.StoryStatus = (SSStoryStatus)callback.newValue; });
 
-            rootVisualElement.Add(enumFieldGraphStatus);
+            textFoldout.Add(enumFieldGraphStatus);
 
             EnumField enumFieldGraphType = SSElementUtility.CreateEnumField(graphView.StoryType, "SS Type:",
                 callback => { graphView.StoryType = (SSStoryType)callback.newValue; });
 
-            rootVisualElement.Add(enumFieldGraphType);
+            textFoldout.Add(enumFieldGraphType);
             
             Toggle toggleGraphTutorial = SSElementUtility.CreateToggle(graphView.IsTutorialToPlay, "Is Tutorial To Play:",
                 callback => { graphView.IsTutorialToPlay = callback.newValue; });
             
-            rootVisualElement.Add(toggleGraphTutorial);
+            textFoldout.Add(toggleGraphTutorial);
 
             Toggle toggleGraph = SSElementUtility.CreateToggle(graphView.IsFirstToPlay, "Is First To Play:",
                 callback => { graphView.IsFirstToPlay = callback.newValue; });
 
-            rootVisualElement.Add(toggleGraph);
+            textFoldout.Add(toggleGraph);
             
             Toggle toggleGraphReplayable = SSElementUtility.CreateToggle(graphView.IsReplayable, "Is Replayable:",
                 callback => { graphView.IsReplayable = callback.newValue; });
             
-            rootVisualElement.Add(toggleGraphReplayable);
+            textFoldout.Add(toggleGraphReplayable);
 
             ObjectField objectFieldGraphCondition = SSElementUtility.CreateObjectField(graphView.Condition,
                 typeof(ConditionSO), "SS Condition:",
                 callback => { graphView.Condition = (ConditionSO)callback.newValue; });
 
-            rootVisualElement.Add(objectFieldGraphCondition);
+            textFoldout.Add(objectFieldGraphCondition);
+            
+            rootVisualElement.Add(textFoldout);
 
             foreach (var group in graphView.Groups)
             {
+                Foldout textFoldoutGroup = SSElementUtility.CreateFoldout($"Timeline : {group.Value.Groups[0].title}");
+                
                 EnumField enumFieldGroupStatus = SSElementUtility.CreateEnumField(group.Value.Groups[0].StoryStatus,
-                    $"{group.Value.Groups[0].title} Status:",
+                    $"Status:",
                     callback => { group.Value.Groups[0].StoryStatus = (SSStoryStatus)callback.newValue; });
-
-                rootVisualElement.Add(enumFieldGroupStatus);
+                textFoldoutGroup.Add(enumFieldGroupStatus);
 
                 Toggle toggle = SSElementUtility.CreateToggle(group.Value.Groups[0].IsFirstToPlay,
-                    $"{group.Value.Groups[0].title} Is First To Play:",
+                    $"Is First To Play:",
                     callback => { group.Value.Groups[0].IsFirstToPlay = callback.newValue; });
-
-                rootVisualElement.Add(toggle);
+                textFoldoutGroup.Add(toggle);
 
                 UnsignedIntegerField integerFieldMinWaitTime = SSElementUtility.CreateUnsignedIntegerField(group.Value.Groups[0].minWaitTime,
-                    $"{group.Value.Groups[0].title} Min Wait Time:",
+                    $"Min Wait Time:",
                     callback => { group.Value.Groups[0].minWaitTime = (uint)callback.newValue; });
-
-                rootVisualElement.Add(integerFieldMinWaitTime);
+                textFoldoutGroup.Add(integerFieldMinWaitTime);
 
                 UnsignedIntegerField integerFieldMaxWaitTime = SSElementUtility.CreateUnsignedIntegerField(group.Value.Groups[0].maxWaitTime,
-                    $"{group.Value.Groups[0].title} Max Wait Time:",
+                    $"Max Wait Time:",
                     callback => { group.Value.Groups[0].maxWaitTime = (uint)callback.newValue; });
-
-                rootVisualElement.Add(integerFieldMaxWaitTime);
+                textFoldoutGroup.Add(integerFieldMaxWaitTime);
 
                 Toggle toggleTimeIsOverride = SSElementUtility.CreateToggle(group.Value.Groups[0].timeIsOverride,
-                    $"{group.Value.Groups[0].title} Time Is Override:",
+                    $"Time Is Override:",
                     callback => { group.Value.Groups[0].timeIsOverride = callback.newValue; });
-
-                rootVisualElement.Add(toggleTimeIsOverride);
+                textFoldoutGroup.Add(toggleTimeIsOverride);
 
                 UnsignedIntegerField integerFieldOverrideWaitTime = SSElementUtility.CreateUnsignedIntegerField(group.Value.Groups[0].overrideWaitTime,
-                    $"{group.Value.Groups[0].title} Override Wait Time:",
+                    $"Override Wait Time:",
                     callback => { group.Value.Groups[0].overrideWaitTime = (uint)callback.newValue; });
-
-                rootVisualElement.Add(integerFieldOverrideWaitTime);
+                textFoldoutGroup.Add(integerFieldOverrideWaitTime);
 
                 ObjectField objectField = SSElementUtility.CreateObjectField(group.Value.Groups[0].Condition,
                     typeof(ConditionSO),
-                    $"{group.Value.Groups[0].title} Condition:",
+                    $"Condition:",
                     callback => { group.Value.Groups[0].Condition = (ConditionSO)callback.newValue; });
+                textFoldoutGroup.Add(objectField);
 
-                rootVisualElement.Add(objectField);
+                rootVisualElement.Add(textFoldoutGroup);
             }
         }
     }

@@ -9,7 +9,6 @@ namespace SS.Data.Save
     public class SSTaskNodeSaveData : SSNodeSaveData
     {
         [field: SerializeField] public string DescriptionTask { get; set; }
-        [field: SerializeField] public SSTaskStatus TaskStatus { get; set; }
         [field: SerializeField] public SSTaskType TaskType { get; set; }
         [field: SerializeField] public Sprite TaskIcon { get; set; }
         [field: SerializeField] public float TimeLeft { get; set; }

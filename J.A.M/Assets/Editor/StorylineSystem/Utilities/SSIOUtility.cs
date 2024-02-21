@@ -188,6 +188,7 @@ namespace SS.Utilities
                     GroupID = dialogueNode.Group?.ID,
                     NodeType = dialogueNode.NodeType,
                     Position = dialogueNode.GetPosition().position,
+                    DialogueType = dialogueNode.DialogueType,
                     Text = dialogueNode.Text,
                     SpeakerType = dialogueNode.SpeakerType,
                     Duration = dialogueNode.Duration,
@@ -212,7 +213,6 @@ namespace SS.Utilities
                     NodeType = taskNode.NodeType,
                     Position = taskNode.GetPosition().position,
                     DescriptionTask = taskNode.DescriptionTask,
-                    TaskStatus = taskNode.TaskStatus,
                     TaskType = taskNode.TaskType,
                     TaskIcon = taskNode.TaskIcon,
                     TimeLeft = taskNode.TimeLeft,
@@ -282,7 +282,7 @@ namespace SS.Utilities
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(dialogueNode.NodeName, dialogueNode.Text,
+                nodeSO.Initialize(dialogueNode.NodeName, dialogueNode.DialogueType, dialogueNode.Text,
                     ConvertNodeChoicesToNodeChoicesData(dialogueNode.Choices), dialogueNode.NodeType,
                     dialogueNode.IsStartingNode(), dialogueNode.SpeakerType, dialogueNode.Duration,
                     dialogueNode.BarkType, dialogueNode.IsDialogueTask, dialogueNode.PercentageTask, dialogueNode.Job,
@@ -312,7 +312,7 @@ namespace SS.Utilities
 
                 nodeSO.Initialize(taskNode.NodeName, ConvertNodeChoicesToNodeChoicesData(taskNode.Choices),
                     taskNode.NodeType,
-                    taskNode.IsStartingNode(), taskNode.DescriptionTask, taskNode.TaskStatus, taskNode.TaskType,
+                    taskNode.IsStartingNode(), taskNode.DescriptionTask, taskNode.TaskType,
                     taskNode.TaskIcon, taskNode.TimeLeft,
                     taskNode.BaseDuration, taskNode.MandatorySlots, taskNode.OptionalSlots, taskNode.TaskHelpFactor,
                     taskNode.Room, taskNode.Furniture, taskNode.IsTaskTutorial);
@@ -534,6 +534,7 @@ namespace SS.Utilities
                 if (nodeData.NodeType == SSNodeType.Dialogue)
                 {
                     ((SSDialogueNode)node).Text = ((SSDialogueNodeSaveData)nodeData).Text;
+                    ((SSDialogueNode)node).DialogueType = ((SSDialogueNodeSaveData)nodeData).DialogueType;
                     ((SSDialogueNode)node).SpeakerType = ((SSDialogueNodeSaveData)nodeData).SpeakerType;
                     ((SSDialogueNode)node).Duration = ((SSDialogueNodeSaveData)nodeData).Duration;
                     ((SSDialogueNode)node).BarkType = ((SSDialogueNodeSaveData)nodeData).BarkType;
@@ -546,7 +547,6 @@ namespace SS.Utilities
                 else if (nodeData.NodeType == SSNodeType.Task)
                 {
                     ((SSTaskNode)node).DescriptionTask = ((SSTaskNodeSaveData)nodeData).DescriptionTask;
-                    ((SSTaskNode)node).TaskStatus = ((SSTaskNodeSaveData)nodeData).TaskStatus;
                     ((SSTaskNode)node).TaskType = ((SSTaskNodeSaveData)nodeData).TaskType;
                     ((SSTaskNode)node).TaskIcon = ((SSTaskNodeSaveData)nodeData).TaskIcon;
                     ((SSTaskNode)node).TimeLeft = ((SSTaskNodeSaveData)nodeData).TimeLeft;

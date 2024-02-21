@@ -8,9 +8,8 @@ namespace SS.ScriptableObjects
 
     public class SSDialogueNodeSO : SSNodeSO
     {
-        [field: SerializeField]
-        [field: TextArea()]
-        public string Text { get; set; }
+        [field: SerializeField] public SSDialogueType DialogueType { get; set; }
+        [field: SerializeField] [field: TextArea()] public string Text { get; set; }
         [field: SerializeField] public SSSpeakerType SpeakerType { get; set; }
         [field: SerializeField] public float Duration { get; set; }
         [field: SerializeField] public SSBarkType BarkType { get; set; }
@@ -21,11 +20,12 @@ namespace SS.ScriptableObjects
         [field: SerializeField] public TraitsData.PositiveTraits PositiveTraits { get; set; }
         [field: SerializeField] public TraitsData.NegativeTraits NegativeTraits { get; set; }
 
-        public void Initialize(string nodeName, string text, List<SSNodeChoiceData> choices, SSNodeType nodeType,
+        public void Initialize(string nodeName, SSDialogueType dialogueType, string text, List<SSNodeChoiceData> choices, SSNodeType nodeType,
             bool isStartingNode, SSSpeakerType speakerType, float duration, SSBarkType barkType, bool isDialogueTask, int percentageTask,
             TraitsData.Job job, TraitsData.PositiveTraits positiveTraits, TraitsData.NegativeTraits negativeTraits)
         {
             NodeName = nodeName;
+            DialogueType = dialogueType;
             Text = text;
             Choices = choices;
             NodeType = nodeType;
