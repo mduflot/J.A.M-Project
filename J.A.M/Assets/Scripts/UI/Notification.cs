@@ -69,7 +69,7 @@ namespace UI {
             SSLauncher ssLauncher,
             List<SerializableTuple<string, string>> dialogues = null, TaskLog taskToPlay = null) {
             IsCompleted = false;
-            IsCancelled = false;
+            IsStarted = false;
             Task = task;
             taskNode = ssTaskNode;
             time.text = "";
@@ -86,16 +86,16 @@ namespace UI {
             timerSprite.material.SetInt("_Arc2", 360);
             timeLeftSprite.material.SetInt("_Arc1", 360);
             taskLog = taskToPlay;
-            if(Task.TaskType != SSTaskType.Compute) GameManager.Instance.UIManager.UINotificationsHandler.CreateTaskNotification(this);
             if (task.TaskType != SSTaskType.Permanent) {
+                if(Task.TaskType != SSTaskType.Compute) GameManager.Instance.UIManager.UINotificationsHandler.CreateTaskNotification(this);
                 pointerArrow.SetActive(true);
                 pointerArrow.GetComponent<PointerArrow>().Init(gameObject, task.TaskType == SSTaskType.Timed);
             }
+            this.spaceshipManager.AddTask(this);
         }
 
         public void InitializeCancelTask() {
             IsCompleted = false;
-            IsCancelled = false;
             taskCondition = Task.Conditions[^1].Item1;
             Task.conditionIndex = Task.Conditions.Count - 1;
             CheckingCondition(true);
@@ -181,8 +181,8 @@ namespace UI {
             foreach (var assistant in AssistantCharacters) {
                 assistant.AssignTask(this);
             }
-            
-            GameManager.Instance.UIManager.UINotificationsHandler.RemoveNotification(uiNotification);
+
+            if (Task.TaskType == SSTaskType.Permanent) GameManager.Instance.UIManager.UINotificationsHandler.CreateTaskNotification(this);
         }
 
         private void CheckingCondition(bool validatedCondition) {
@@ -465,6 +465,7 @@ namespace UI {
 
                     Task.Duration -= TimeTickSystem.timePerTick;
                     timerSprite.material.SetInt("_Arc2", (int)(Task.Duration / Task.BaseDuration * 360));
+                    uiNotification.UpdateCompletionFill(Task.Duration / Task.BaseDuration);
                 }
                 else {
                     TimeTickSystem.OnTick -= AddOutcomeOnTick;
@@ -476,6 +477,7 @@ namespace UI {
                     time.text = TimeTickSystem.GetTicksAsTime((uint)Task.TimeLeft);
                     Task.TimeLeft -= TimeTickSystem.timePerTick;
                     timeLeftSprite.material.SetInt("_Arc1", (int)(360 - Task.TimeLeft / timeLeft * 360));
+                    uiNotification.UpdateTimeLeftFill(Task.TimeLeft / timeLeft);
                 }
                 else if (!IsStarted) {
                     if (taskLog != null) {
@@ -506,6 +508,7 @@ namespace UI {
             IsCompleted = true;
             ResetCharacters();
             GameManager.Instance.RefreshCharacterIcons();
+            GameManager.Instance.UIManager.UINotificationsHandler.RemoveNotification(uiNotification);
             GameManager.Instance.UIManager.UINotificationsHandler.CreateRecapNotification(this);
             if (transform.parent != null) {
                 var notificationContainer = transform.parent.GetComponent<NotificationContainer>();
@@ -514,11 +517,12 @@ namespace UI {
             }
 
             if (launcher.storyline != null) {
-                if (launcher.storyline.StorylineContainer.StoryType != SSStoryType.Principal && launcher.storyline.StorylineContainer.StoryType != SSStoryType.Tasks)
+                if (launcher.storyline.StorylineContainer.StoryType != SSStoryType.Principal)
                     StartCoroutine(spaceshipManager.notificationPool.AddToPoolLater(gameObject, dialogueSpontaneousDuration));
+                else
+                    spaceshipManager.notificationPool.AddToPool(gameObject);
             }
-            else spaceshipManager.notificationPool.AddToPool(gameObject);
-            
+
             IsStarted = false;
 
             if (LeaderCharacters.Count == 0) return;
@@ -546,13 +550,11 @@ namespace UI {
                 OnComplete();
             }
             else if (Task.TaskType.Equals(SSTaskType.Timed)) {
-                launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunTimedNodeCancel(this, Task, taskNode);
                 ResetCharacters();
             }
             else if (Task.TaskType.Equals(SSTaskType.Untimed)) {
-                launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunUntimedNodeCancel(this, Task, taskNode);
                 ResetCharacters();
