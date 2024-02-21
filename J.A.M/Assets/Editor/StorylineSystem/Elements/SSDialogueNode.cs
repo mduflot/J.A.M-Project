@@ -68,12 +68,14 @@ namespace SS.Elements {
                     if ((SSDialogueType)callback.newValue == SSDialogueType.Dialogue) {
                         dialogueDataContainer = DrawDialogueType();
                         customDataContainer.Add(dialogueDataContainer);
-                        if (customDataContainer.Contains(barkDataContainer)) customDataContainer.Remove(barkDataContainer);
+                        if (customDataContainer.Contains(barkDataContainer))
+                            customDataContainer.Remove(barkDataContainer);
                     }
                     else {
                         barkDataContainer = DrawBarkType();
                         customDataContainer.Add(barkDataContainer);
-                        if (customDataContainer.Contains(dialogueDataContainer)) customDataContainer.Remove(dialogueDataContainer);
+                        if (customDataContainer.Contains(dialogueDataContainer))
+                            customDataContainer.Remove(dialogueDataContainer);
                     }
                 });
 
@@ -106,6 +108,11 @@ namespace SS.Elements {
             textFoldout.Add(textTextField);
 
             customDataContainer.Add(textFoldout);
+
+            FloatField unsignedIntegerField = SSElementUtility.CreateFloatField(Duration,
+                "Duration", callback => { Duration = callback.newValue; });
+
+            customDataContainer.Add(unsignedIntegerField);
 
             EnumField enumFieldJob = null;
             EnumField enumFieldPositiveTraits = null;
@@ -160,11 +167,6 @@ namespace SS.Elements {
                 customDataContainer.Add(enumFieldNegativeTraits);
             }
 
-            FloatField unsignedIntegerField = SSElementUtility.CreateFloatField(Duration,
-                "Duration", callback => { Duration = callback.newValue; });
-
-            customDataContainer.Add(unsignedIntegerField);
-
             return customDataContainer;
         }
 
@@ -174,11 +176,11 @@ namespace SS.Elements {
             EnumField enumFieldBarkType = SSElementUtility.CreateEnumField(BarkType, "Bark Type",
                 callback => { BarkType = (SSBarkType)callback.newValue; });
             customDataContainer.Add(enumFieldBarkType);
-            
+
             FloatField unsignedIntegerField = SSElementUtility.CreateFloatField(Duration,
                 "Duration", callback => { Duration = callback.newValue; });
             customDataContainer.Add(unsignedIntegerField);
-            
+
             SliderInt sliderInt = null;
 
             Toggle toggle = SSElementUtility.CreateToggle(IsDialogueTask, "DialogueTask", callback => {
@@ -208,7 +210,7 @@ namespace SS.Elements {
 
                 customDataContainer.Add(sliderInt);
             }
-            
+
             return customDataContainer;
         }
     }
