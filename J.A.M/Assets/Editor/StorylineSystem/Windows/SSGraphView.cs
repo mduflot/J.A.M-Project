@@ -17,6 +17,7 @@ namespace SS.Windows
         public string ID;
         public SSStoryStatus StoryStatus;
         public SSStoryType StoryType;
+        public SSSpontaneousType SpontaneousType;
         public bool IsTutorialToPlay;
         public bool IsFirstToPlay;
         public bool IsReplayable;
@@ -60,6 +61,7 @@ namespace SS.Windows
             ID = Guid.NewGuid().ToString();
             StoryStatus = SSStoryStatus.Enabled;
             StoryType = SSStoryType.Principal;
+            SpontaneousType = SSSpontaneousType.Default;
             IsTutorialToPlay = false;
             IsFirstToPlay = false;
             IsReplayable = false;

@@ -58,12 +58,12 @@ namespace SS.Utilities
             SSGraphSaveDataSO graphData =
                 CreateAsset<SSGraphSaveDataSO>("Assets/Editor/StorylineSystem/Graphs", $"{graphFileName}Graph");
 
-            graphData.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.IsTutorialToPlay, graphView.IsFirstToPlay, graphView.IsReplayable,
+            graphData.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.SpontaneousType, graphView.IsTutorialToPlay, graphView.IsFirstToPlay, graphView.IsReplayable,
                 graphView.Condition);
 
             SSNodeContainerSO nodeContainer = CreateAsset<SSNodeContainerSO>(containerFolderPath, graphFileName);
 
-            nodeContainer.Initialize(graphFileName, graphData.ID, graphView.StoryStatus, graphView.StoryType, graphView.IsTutorialToPlay, graphView.IsFirstToPlay, graphView.IsReplayable,
+            nodeContainer.Initialize(graphFileName, graphData.ID, graphView.StoryStatus, graphView.StoryType, graphView.SpontaneousType, graphView.IsTutorialToPlay, graphView.IsFirstToPlay, graphView.IsReplayable,
                 graphView.Condition);
 
             SaveGroups(graphData, nodeContainer);

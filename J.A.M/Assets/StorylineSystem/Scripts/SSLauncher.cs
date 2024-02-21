@@ -738,7 +738,7 @@ namespace SS {
                     notification.Initialize(task, node, spaceshipManager, this, dialogues);
                 }
 
-                if (nodeContainer.StoryType is SSStoryType.Spontaneous or SSStoryType.Leak or SSStoryType.Trajectory) {
+                if (nodeContainer.StoryType is SSStoryType.Spontaneous) {
                     var randomCharacter =
                         spaceshipManager.characters[Random.Range(0, spaceshipManager.characters.Length)];
                     notification.DisplayDialogue(randomCharacter.GetCharacterData().characterIcon,

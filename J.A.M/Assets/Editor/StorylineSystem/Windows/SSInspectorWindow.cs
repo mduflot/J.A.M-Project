@@ -3,17 +3,14 @@ using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
-namespace SS.Windows
-{
+namespace SS.Windows {
     using Enumerations;
 
-    public class SSInspectorWindow : GraphViewToolWindow
-    {
+    public class SSInspectorWindow : GraphViewToolWindow {
         protected override string ToolName => "SS Inspector";
         private SSGraphView graphView;
 
-        public void Initialize(SSGraphView ssGraphView)
-        {
+        public void Initialize(SSGraphView ssGraphView) {
             graphView = ssGraphView;
         }
 
@@ -21,50 +18,63 @@ namespace SS.Windows
 
         protected override void OnGraphViewChanged() { }
 
-        public void DisplayInspector()
-        {
+        public void DisplayInspector() {
             rootVisualElement.Clear();
             if (graphView == null) return;
-            
+
             Foldout textFoldout = SSElementUtility.CreateFoldout("Storyline :");
 
             EnumField enumFieldGraphStatus = SSElementUtility.CreateEnumField(graphView.StoryStatus, "SS Status:",
                 callback => { graphView.StoryStatus = (SSStoryStatus)callback.newValue; });
-
             textFoldout.Add(enumFieldGraphStatus);
 
+            EnumField enumFieldGraphSpontaneousType = null;
+            
             EnumField enumFieldGraphType = SSElementUtility.CreateEnumField(graphView.StoryType, "SS Type:",
-                callback => { graphView.StoryType = (SSStoryType)callback.newValue; });
-
+                callback => {
+                    graphView.StoryType = (SSStoryType)callback.newValue;
+                    if (graphView.StoryType == SSStoryType.Spontaneous) {
+                        enumFieldGraphSpontaneousType = SSElementUtility.CreateEnumField(graphView.SpontaneousType,
+                            "SS Spontaneous Type:",
+                            callback => { graphView.SpontaneousType = (SSSpontaneousType)callback.newValue; });
+                        textFoldout.Insert(2, enumFieldGraphSpontaneousType);
+                    }
+                    else {
+                        textFoldout.Remove(enumFieldGraphSpontaneousType);
+                    }
+                });
             textFoldout.Add(enumFieldGraphType);
-            
-            Toggle toggleGraphTutorial = SSElementUtility.CreateToggle(graphView.IsTutorialToPlay, "Is Tutorial To Play:",
+
+            if (graphView.StoryType == SSStoryType.Spontaneous) {
+                enumFieldGraphSpontaneousType = SSElementUtility.CreateEnumField(graphView.SpontaneousType,
+                    "SS Spontaneous Type:",
+                    callback => { graphView.SpontaneousType = (SSSpontaneousType)callback.newValue; });
+                textFoldout.Insert(2, enumFieldGraphSpontaneousType);
+            }
+
+            Toggle toggleGraphTutorial = SSElementUtility.CreateToggle(graphView.IsTutorialToPlay,
+                "Is Tutorial To Play:",
                 callback => { graphView.IsTutorialToPlay = callback.newValue; });
-            
             textFoldout.Add(toggleGraphTutorial);
 
             Toggle toggleGraph = SSElementUtility.CreateToggle(graphView.IsFirstToPlay, "Is First To Play:",
                 callback => { graphView.IsFirstToPlay = callback.newValue; });
-
             textFoldout.Add(toggleGraph);
-            
+
             Toggle toggleGraphReplayable = SSElementUtility.CreateToggle(graphView.IsReplayable, "Is Replayable:",
                 callback => { graphView.IsReplayable = callback.newValue; });
-            
             textFoldout.Add(toggleGraphReplayable);
 
             ObjectField objectFieldGraphCondition = SSElementUtility.CreateObjectField(graphView.Condition,
                 typeof(ConditionSO), "SS Condition:",
                 callback => { graphView.Condition = (ConditionSO)callback.newValue; });
-
             textFoldout.Add(objectFieldGraphCondition);
-            
+
             rootVisualElement.Add(textFoldout);
 
-            foreach (var group in graphView.Groups)
-            {
+            foreach (var group in graphView.Groups) {
                 Foldout textFoldoutGroup = SSElementUtility.CreateFoldout($"Timeline : {group.Value.Groups[0].title}");
-                
+
                 EnumField enumFieldGroupStatus = SSElementUtility.CreateEnumField(group.Value.Groups[0].StoryStatus,
                     $"Status:",
                     callback => { group.Value.Groups[0].StoryStatus = (SSStoryStatus)callback.newValue; });
@@ -75,12 +85,14 @@ namespace SS.Windows
                     callback => { group.Value.Groups[0].IsFirstToPlay = callback.newValue; });
                 textFoldoutGroup.Add(toggle);
 
-                UnsignedIntegerField integerFieldMinWaitTime = SSElementUtility.CreateUnsignedIntegerField(group.Value.Groups[0].minWaitTime,
+                UnsignedIntegerField integerFieldMinWaitTime = SSElementUtility.CreateUnsignedIntegerField(
+                    group.Value.Groups[0].minWaitTime,
                     $"Min Wait Time:",
                     callback => { group.Value.Groups[0].minWaitTime = (uint)callback.newValue; });
                 textFoldoutGroup.Add(integerFieldMinWaitTime);
 
-                UnsignedIntegerField integerFieldMaxWaitTime = SSElementUtility.CreateUnsignedIntegerField(group.Value.Groups[0].maxWaitTime,
+                UnsignedIntegerField integerFieldMaxWaitTime = SSElementUtility.CreateUnsignedIntegerField(
+                    group.Value.Groups[0].maxWaitTime,
                     $"Max Wait Time:",
                     callback => { group.Value.Groups[0].maxWaitTime = (uint)callback.newValue; });
                 textFoldoutGroup.Add(integerFieldMaxWaitTime);
@@ -90,7 +102,8 @@ namespace SS.Windows
                     callback => { group.Value.Groups[0].timeIsOverride = callback.newValue; });
                 textFoldoutGroup.Add(toggleTimeIsOverride);
 
-                UnsignedIntegerField integerFieldOverrideWaitTime = SSElementUtility.CreateUnsignedIntegerField(group.Value.Groups[0].overrideWaitTime,
+                UnsignedIntegerField integerFieldOverrideWaitTime = SSElementUtility.CreateUnsignedIntegerField(
+                    group.Value.Groups[0].overrideWaitTime,
                     $"Override Wait Time:",
                     callback => { group.Value.Groups[0].overrideWaitTime = (uint)callback.newValue; });
                 textFoldoutGroup.Add(integerFieldOverrideWaitTime);
