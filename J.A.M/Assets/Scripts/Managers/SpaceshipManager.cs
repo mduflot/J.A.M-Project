@@ -95,7 +95,7 @@ namespace Managers
         private void GenerateLeakEvent()
         {
             isLeaked = true;
-            Checker.Instance.ChooseNewStoryline(SSStoryType.Leak);
+            Checker.Instance.ChooseNewStoryline(SSStoryType.Spontaneous, SSSpontaneousType.Leak);
             TimeTickSystem.OnTick += WaitingLeakEvent;
         }
 

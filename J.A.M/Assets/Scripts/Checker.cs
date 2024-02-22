@@ -78,16 +78,17 @@ public class Checker : MonoBehaviour, IDataPersistence
                     principalStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
                     break;
                 case SSStoryType.Spontaneous:
-                    secondaryStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
-                    break;
-                case SSStoryType.Leak:
-                    leakStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
-                    break;
-                case SSStoryType.Trajectory:
-                    trajectoryStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
-                    break;
-                default:
-                    Debug.Log("Storyline type not found.");
+                    switch (storyline.SpontaneousType) {
+                        case SSSpontaneousType.Default:
+                            secondaryStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
+                            break;
+                        case SSSpontaneousType.Leak:
+                            leakStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
+                            break;
+                        case SSSpontaneousType.Trajectory:
+                            trajectoryStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
+                            break;
+                    }
                     break;
             }
         }
@@ -163,10 +164,10 @@ public class Checker : MonoBehaviour, IDataPersistence
 
         TimeTickSystem.OnTick -= GenerateTrajectoryEvent;
         waitingTimeTrajectory = waitTimeTrajectory * TimeTickSystem.ticksPerHour;
-        ChooseNewStoryline(SSStoryType.Trajectory);
+        ChooseNewStoryline(SSStoryType.Spontaneous, SSSpontaneousType.Trajectory);
     }
 
-    public void ChooseNewStoryline(SSStoryType storyType) {
+    public void ChooseNewStoryline(SSStoryType storyType, SSSpontaneousType spontaneousType = SSSpontaneousType.Default) {
         if (IsStopChecker) {
             Debug.Log("Checker is stopped.");
             switch (storyType) {
@@ -176,14 +177,19 @@ public class Checker : MonoBehaviour, IDataPersistence
                     TimeTickSystem.OnTick += WaitStorylinePrincipal;
                     break;
                 case SSStoryType.Spontaneous:
-                    isAlreadyWaiting = true;
-                    waitingTimeSecondary = (uint)Random.Range(minWaitTimeSecondary, maxWaitTimeSecondary) *
-                                                TimeTickSystem.ticksPerHour;
-                    TimeTickSystem.OnTick += WaitStorylineSecondary;
+                    switch (spontaneousType) {
+                        case SSSpontaneousType.Default:
+                            isAlreadyWaiting = true;
+                            waitingTimeSecondary = (uint)Random.Range(minWaitTimeSecondary, maxWaitTimeSecondary) *
+                                                   TimeTickSystem.ticksPerHour;
+                            TimeTickSystem.OnTick += WaitStorylineSecondary;
+                            break;
+                        case SSSpontaneousType.Trajectory:
+                            TimeTickSystem.OnTick += GenerateTrajectoryEvent;
+                            break;
+                    }
                     break;
-                case SSStoryType.Trajectory:
-                    TimeTickSystem.OnTick += GenerateTrajectoryEvent;
-                    break;
+                
             }
             return;
         } 
@@ -218,43 +224,47 @@ public class Checker : MonoBehaviour, IDataPersistence
             }
             case SSStoryType.Spontaneous:
             {
-                for (var index = 0; index < secondaryStorylines.Count; index++)
-                {
-                    var storyline = secondaryStorylines[index];
-                    if (storyline.Status == SSStoryStatus.Completed) continue;
-                    if (storyline.StorylineContainer.Condition)
-                        if (!RouteCondition(storyline.StorylineContainer.Condition))
-                            continue;
-                    if (activeLaunchers.Any(launcher => launcher.storyline == storyline)) continue;
-                    availableStoryLines.Add(storyline);
+                switch (spontaneousType) {
+                    case SSSpontaneousType.Default:
+                        for (var index = 0; index < secondaryStorylines.Count; index++) {
+                            var storyline = secondaryStorylines[index];
+                            if (storyline.Status == SSStoryStatus.Completed) continue;
+                            if (storyline.StorylineContainer.Condition)
+                                if (!RouteCondition(storyline.StorylineContainer.Condition))
+                                    continue;
+                            if (activeLaunchers.Any(launcher => launcher.storyline == storyline)) continue;
+                            availableStoryLines.Add(storyline);
+                        }
+
+                        break;
+                    case SSSpontaneousType.Trajectory:
+                        for (int index = 0; index < trajectoryStorylines.Count; index++)
+                        {
+                            var storyline = trajectoryStorylines[index];
+                            if (storyline.Status == SSStoryStatus.Completed) continue;
+                            if (storyline.StorylineContainer.Condition)
+                                if (!RouteCondition(storyline.StorylineContainer.Condition))
+                                    continue;
+                            if (activeLaunchers.Any(launcher => launcher.storyline == storyline)) continue;
+                            availableStoryLines.Add(storyline);
+                        }
+                        break;
+                    case SSSpontaneousType.Leak:
+                        for (int index = 0; index < leakStorylines.Count; index++)
+                        {
+                            var storyline = leakStorylines[index];
+                            if (storyline.Status == SSStoryStatus.Completed) continue;
+                            if (storyline.StorylineContainer.Condition)
+                                if (!RouteCondition(storyline.StorylineContainer.Condition))
+                                    continue;
+                            if (activeLaunchers.Any(launcher => launcher.storyline == storyline)) continue;
+                            availableStoryLines.Add(storyline);
+                        }
+                        break;
                 }
 
                 break;
             }
-            case SSStoryType.Leak:
-                for (int index = 0; index < leakStorylines.Count; index++)
-                {
-                    var storyline = leakStorylines[index];
-                    if (storyline.Status == SSStoryStatus.Completed) continue;
-                    if (storyline.StorylineContainer.Condition)
-                        if (!RouteCondition(storyline.StorylineContainer.Condition))
-                            continue;
-                    if (activeLaunchers.Any(launcher => launcher.storyline == storyline)) continue;
-                    availableStoryLines.Add(storyline);
-                }
-                break;
-            case SSStoryType.Trajectory:
-                for (int index = 0; index < trajectoryStorylines.Count; index++)
-                {
-                    var storyline = trajectoryStorylines[index];
-                    if (storyline.Status == SSStoryStatus.Completed) continue;
-                    if (storyline.StorylineContainer.Condition)
-                        if (!RouteCondition(storyline.StorylineContainer.Condition))
-                            continue;
-                    if (activeLaunchers.Any(launcher => launcher.storyline == storyline)) continue;
-                    availableStoryLines.Add(storyline);
-                }
-                break;
         }
 
         if (availableStoryLines.Count == 0)
@@ -328,7 +338,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         List<string> assignedCharacters = null, List<string> notAssignedCharacters = null,
         List<string> traitsCharacters = null, uint waitingTime = 0, TaskLog taskLog = null)
     {
-        if (storyline.StorylineContainer.StoryType == SSStoryType.Trajectory) TimeTickSystem.OnTick += GenerateTrajectoryEvent;
+        if (storyline.StorylineContainer.SpontaneousType == SSSpontaneousType.Trajectory) TimeTickSystem.OnTick += GenerateTrajectoryEvent;
         presentationContainer.SetActive(true);
         presentationText.text = "New Storyline : " + storyline.StorylineContainer.FileName;
         StartCoroutine(DisablePresentation());

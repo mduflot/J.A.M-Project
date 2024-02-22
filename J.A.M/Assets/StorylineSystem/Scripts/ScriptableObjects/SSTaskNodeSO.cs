@@ -9,7 +9,6 @@ namespace SS.ScriptableObjects
     public class SSTaskNodeSO : SSNodeSO
     {
         [field: SerializeField] public string Description { get; set; }
-        [field: SerializeField] public SSTaskStatus TaskStatus { get; set; }
         [field: SerializeField] public SSTaskType TaskType { get; set; }
         [field: SerializeField] public Sprite Icon { get; set; }
         [field: SerializeField] public float TimeLeft { get; set; }
@@ -22,7 +21,7 @@ namespace SS.ScriptableObjects
         [field: SerializeField] public bool IsTaskTutorial { get; set; }
 
         public void Initialize(string nodeName, List<SSNodeChoiceData> choices, SSNodeType nodeType,
-            bool isStartingNode, string descriptionTask, SSTaskStatus taskStatus, SSTaskType taskType, Sprite taskIcon, float timeLeft, float duration,
+            bool isStartingNode, string descriptionTask, SSTaskType taskType, Sprite taskIcon, float timeLeft, float duration,
             int mandatorySlots, int optionalSlots, float taskHelpFactor, RoomType room, FurnitureType furniture, bool isTaskTutorial)
         {
             NodeName = nodeName;
@@ -30,7 +29,6 @@ namespace SS.ScriptableObjects
             NodeType = nodeType;
             IsStartingNode = isStartingNode;
             Description = descriptionTask;
-            TaskStatus = taskStatus;
             TaskType = taskType;
             Icon = taskIcon;
             TimeLeft = timeLeft;

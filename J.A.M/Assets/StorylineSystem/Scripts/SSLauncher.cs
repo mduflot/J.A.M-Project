@@ -33,9 +33,9 @@ namespace SS {
         public SpaceshipManager spaceshipManager { get; set; }
 
         /* Node Scriptable Objects */
-        [SerializeField] public SSNodeContainerSO nodeContainer;
-        [SerializeField] public SSNodeGroupSO nodeGroup;
-        [SerializeField] public SSNodeSO node;
+        public SSNodeContainerSO nodeContainer;
+        public SSNodeGroupSO nodeGroup;
+        public SSNodeSO node;
 
         /* Filters */
         [SerializeField] private bool groupedNodes;
@@ -75,11 +75,11 @@ namespace SS {
             if (nodeContainer.StoryType == SSStoryType.Principal)
                 GameManager.Instance.UIManager.mainStorylineText.text = nodeContainer.name;
             spaceshipManager = GameManager.Instance.SpaceshipManager;
-            if (dialogues == null) dialogues = new();
-            if (characters == null) characters = new();
-            if (assignedCharacters == null) assignedCharacters = new();
-            if (notAssignedCharacters == null) notAssignedCharacters = new();
-            if (traitsCharacters == null) traitsCharacters = new();
+            dialogues ??= new();
+            characters ??= new();
+            assignedCharacters ??= new();
+            notAssignedCharacters ??= new();
+            traitsCharacters ??= new();
             IsRunning = true;
             task = null;
             SoundManager.Instance.PlaySound(SoundManager.Instance.notificationChime);
@@ -138,9 +138,7 @@ namespace SS {
         }
 
         private bool IsFinish() {
-            if (storyline.Timelines.Any(timeline => timeline.Status == SSStoryStatus.Enabled))
-                return false;
-            return true;
+            return !storyline.Timelines.Any(timeline => timeline.Status == SSStoryStatus.Enabled);
         }
 
         private void WaitTimeline(object sender, TimeTickSystem.OnTickEventArgs e) {
@@ -338,7 +336,7 @@ namespace SS {
                         SetDialogue(assignedCharacters[1], nodeSO);
                     }
                     else {
-                        if (nodeSO.Choices.First().NextNode == null) {
+                        if (nodeSO.Choices[0].NextNode == null) {
                             IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
                             ResetTimeline();
@@ -355,7 +353,7 @@ namespace SS {
                         SetDialogue(assignedCharacters[2], nodeSO);
                     }
                     else {
-                        if (nodeSO.Choices.First().NextNode == null) {
+                        if (nodeSO.Choices[0].NextNode == null) {
                             IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
                             ResetTimeline();
@@ -372,7 +370,7 @@ namespace SS {
                         SetDialogue(assignedCharacters[3], nodeSO);
                     }
                     else {
-                        if (nodeSO.Choices.First().NextNode == null) {
+                        if (nodeSO.Choices[0].NextNode == null) {
                             IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
                             ResetTimeline();
@@ -389,7 +387,7 @@ namespace SS {
                         SetDialogue(assignedCharacters[4], nodeSO);
                     }
                     else {
-                        if (nodeSO.Choices.First().NextNode == null) {
+                        if (nodeSO.Choices[0].NextNode == null) {
                             IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
                             ResetTimeline();
@@ -406,7 +404,7 @@ namespace SS {
                         SetDialogue(assignedCharacters[5], nodeSO);
                     }
                     else {
-                        if (nodeSO.Choices.First().NextNode == null) {
+                        if (nodeSO.Choices[0].NextNode == null) {
                             IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
                             ResetTimeline();
@@ -546,26 +544,12 @@ namespace SS {
 
                     break;
                 }
-                case SSSpeakerType.IncomingSignal:
-                    for (int index = 0;
-                         index < spaceshipManager.GetRoom(RoomType.Trajectory).roomObjects.Length;
-                         index++) {
-                        var furniture = spaceshipManager.GetRoom(RoomType.Trajectory).roomObjects[index];
-                        if (furniture.furnitureType == FurnitureType.ConsoleSide) {
-                            var signal = furniture.transform;
-                            if (signal.TryGetComponent(out DialogueManager speaker)) {
-                                dialogues.Add(new SerializableTuple<string, string>("Incoming Signal", nodeSO.Text));
-                                StartCoroutine(DisplayDialogue("Incoming Signal", nodeSO));
-                            }
-                            else {
-                                Debug.LogWarning("No speaker on the Incoming Signal");
-                            }
-
-                            break;
-                        }
-                    }
+                case SSSpeakerType.IncomingSignal: {
+                    dialogues.Add(new SerializableTuple<string, string>("Incoming Signal", nodeSO.Text));
+                    StartCoroutine(DisplayDialogue("Incoming Signal", nodeSO));
 
                     break;
+                }
             }
         }
 
@@ -594,7 +578,7 @@ namespace SS {
 
             yield return new WaitUntil(() => nodeSO.IsCompleted);
 
-            if (nodeSO.Choices.First().NextNode == null) {
+            if (nodeSO.Choices[0].NextNode == null) {
                 GameManager.Instance.UIManager.dialogueManager.ActivateButton();
                 IsRunning = false;
                 ResetTimeline();
@@ -612,8 +596,9 @@ namespace SS {
                 yield break;
             }
 
-            if (nodeSO.Choices.First().NextNode is not SSDialogueNodeSO) GameManager.Instance.UIManager.dialogueManager.ActivateButton();
-            CheckNodeType(nodeSO.Choices.First().NextNode);
+            if (nodeSO.Choices[0].NextNode is not SSDialogueNodeSO)
+                GameManager.Instance.UIManager.dialogueManager.ActivateButton();
+            CheckNodeType(nodeSO.Choices[0].NextNode);
         }
 
         private IEnumerator AddDialogueNotification(SSDialogueNodeSO nodeSO) {
@@ -621,31 +606,36 @@ namespace SS {
                 if (nodeSO.IsDialogueTask)
                     yield return new WaitUntil(() =>
                         1 - nodeSO.PercentageTask / 100.0f >= task.Duration / task.BaseDuration);
-                var spriteIcon = task.leaderCharacters[0].GetCharacterData().characterIcon;
-                var firstName = task.leaderCharacters[0].GetCharacterData().firstName;
+                Sprite spriteIcon;
+                string firstName;
                 switch (nodeSO.BarkType) {
                     case SSBarkType.Awaiting:
-                        notification.DisplayDialogue(spriteIcon, firstName,
-                            task.leaderCharacters[0].GetCharacterData().awaitingBarks[
-                                Random.Range(0, task.leaderCharacters[0].GetCharacterData().awaitingBarks.Length)],
-                            nodeSO);
+                        Debug.LogError("Don't use Awaiting bark type for dialogue, is already handled by the system");
                         break;
                     case SSBarkType.Completing:
+                        spriteIcon = task.leaderCharacters[0].GetCharacterData().characterIcon;
+                        firstName = task.leaderCharacters[0].GetCharacterData().firstName;
                         notification.DisplayDialogue(spriteIcon, firstName,
                             task.leaderCharacters[0].GetCharacterData().completingBarks[
                                 Random.Range(0,
                                     task.leaderCharacters[0].GetCharacterData().completingBarks.Length)], nodeSO);
                         break;
                     case SSBarkType.Completed:
+                        spriteIcon = task.leaderCharacters[0].GetCharacterData().characterIcon;
+                        firstName = task.leaderCharacters[0].GetCharacterData().firstName;
                         notification.DisplayDialogue(spriteIcon, firstName,
                             task.leaderCharacters[0].GetCharacterData().completedBarks[
                                 Random.Range(0,
                                     task.leaderCharacters[0].GetCharacterData().completedBarks.Length)], nodeSO);
                         break;
                     case SSBarkType.Ignored:
+                        var randomCharacter =
+                            spaceshipManager.characters[Random.Range(0, spaceshipManager.characters.Length)];
+                        spriteIcon = randomCharacter.GetCharacterData().characterIcon;
+                        firstName = randomCharacter.GetCharacterData().firstName;
                         notification.DisplayDialogue(spriteIcon, firstName,
-                            task.leaderCharacters[0].GetCharacterData().ignoredBarks[
-                                Random.Range(0, task.leaderCharacters[0].GetCharacterData().ignoredBarks.Length)],
+                            randomCharacter.GetCharacterData().ignoredBarks[
+                                Random.Range(0, randomCharacter.GetCharacterData().ignoredBarks.Length)],
                             nodeSO);
                         break;
                 }
@@ -681,7 +671,7 @@ namespace SS {
         private void WaitingTime(object sender, TimeTickSystem.OnTickEventArgs e) {
             durationTimeNode -= TimeTickSystem.timePerTick;
             if (durationTimeNode <= 0) {
-                if (timeNode.Choices.First().NextNode == null) {
+                if (timeNode.Choices[0].NextNode == null) {
                     IsRunning = false;
                     ResetTimeline();
                     if (nodeContainer.StoryType != SSStoryType.Tasks) {
@@ -699,7 +689,7 @@ namespace SS {
                 }
 
                 TimeTickSystem.OnTick -= WaitingTime;
-                CheckNodeType(timeNode.Choices.First().NextNode);
+                CheckNodeType(timeNode.Choices[0].NextNode);
             }
         }
 
@@ -707,23 +697,21 @@ namespace SS {
 
         #region Task
 
-        private IEnumerator RunNode(SSTaskNodeSO nodeSO, CharacterIcon icon = null, TaskLog taskToPlay = null) {
-            // Check if the task is already active
-            if (nodeSO.TaskType.Equals(SSTaskType.Permanent)) {
-                if (spaceshipManager.IsTaskActive(nodeSO.name)) {
+        private IEnumerator RunNode(SSTaskNodeSO node, CharacterIcon icon = null, TaskLog taskToPlay = null) {
+            // Verify if the task is already active
+            if (node.TaskType.Equals(SSTaskType.Permanent))
+                if (spaceshipManager.IsTaskActive(node.name))
                     yield break;
-                }
-            }
 
             if (task != null && taskToPlay == null) yield return new WaitUntil(() => task.Duration <= 0);
             assignedCharacters.Clear();
             notAssignedCharacters.Clear();
-            var room = spaceshipManager.GetRoom(nodeSO.Room);
+            var room = spaceshipManager.GetRoom(node.Room);
             notificationGO = spaceshipManager.notificationPool.GetFromPool();
             if (notificationGO.TryGetComponent(out Notification notification)) {
                 Transform roomTransform;
-                if (room.roomObjects.Any(furniture => furniture.furnitureType == nodeSO.Furniture)) {
-                    roomTransform = room.roomObjects.First(furniture => furniture.furnitureType == nodeSO.Furniture)
+                if (room.roomObjects.Any(furniture => furniture.furnitureType == node.Furniture)) {
+                    roomTransform = room.roomObjects.First(furniture => furniture.furnitureType == node.Furniture)
                         .transform;
                     roomTransform.GetComponent<NotificationContainer>().DisplayNotification();
                 }
@@ -735,33 +723,22 @@ namespace SS {
                 notificationGO.transform.parent = roomTransform;
                 roomTransform.GetComponent<NotificationContainer>().DisplayNotification();
                 var conditions = new List<Tuple<ConditionSO, string>>();
-                foreach (var choiceData in nodeSO.Choices) {
+                foreach (var choiceData in node.Choices) {
                     conditions.Add(new Tuple<ConditionSO, string>(((SSNodeChoiceTaskData)choiceData).Condition,
                         ((SSNodeChoiceTaskData)choiceData).PreviewOutcome));
                 }
 
                 if (taskToPlay != null) {
-                    task = new Task(nodeSO.name, nodeSO.Description,
-                        storyline != null ? storyline.StorylineContainer.FileName : "", nodeSO.TaskStatus,
-                        nodeSO.TaskType, nodeSO.Icon,
-                        taskToPlay.TimeLeft, taskToPlay.Duration,
-                        nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
-                        nodeSO.IsTaskTutorial,
-                        conditions, taskToPlay.IsStarted);
-                    notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues, taskToPlay);
+                    task = new Task(node, storyline != null ? storyline.StorylineContainer.FileName : "", conditions,
+                        taskToPlay.IsStarted);
+                    notification.Initialize(task, node, spaceshipManager, this, dialogues, taskToPlay);
                 }
                 else {
-                    task = new Task(nodeSO.name, nodeSO.Description,
-                        storyline != null ? storyline.StorylineContainer.FileName : "", nodeSO.TaskStatus,
-                        nodeSO.TaskType, nodeSO.Icon,
-                        nodeSO.TimeLeft, nodeSO.Duration,
-                        nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
-                        nodeSO.IsTaskTutorial,
-                        conditions);
-                    notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
+                    task = new Task(node, storyline != null ? storyline.StorylineContainer.FileName : "", conditions);
+                    notification.Initialize(task, node, spaceshipManager, this, dialogues);
                 }
 
-                if (nodeContainer.StoryType is SSStoryType.Spontaneous or SSStoryType.Leak or SSStoryType.Trajectory) {
+                if (nodeContainer.StoryType is SSStoryType.Spontaneous) {
                     var randomCharacter =
                         spaceshipManager.characters[Random.Range(0, spaceshipManager.characters.Length)];
                     notification.DisplayDialogue(randomCharacter.GetCharacterData().characterIcon,
@@ -769,11 +746,11 @@ namespace SS {
                         randomCharacter.GetCharacterData()
                             .awaitingBarks[Random.Range(0, randomCharacter.GetCharacterData().awaitingBarks.Length)]);
                 }
-                
-                if (nodeSO.TaskType.Equals(SSTaskType.Permanent) && icon != null) notification.Display(icon);
-                else if (nodeSO.TaskType.Equals(SSTaskType.Permanent) || nodeSO.TaskType.Equals(SSTaskType.Compute))
+
+                if (node.TaskType.Equals(SSTaskType.Permanent) && icon != null) notification.Display(icon);
+                else if (node.TaskType.Equals(SSTaskType.Permanent) || node.TaskType.Equals(SSTaskType.Compute))
                     notification.Display();
-                StartCoroutine(WaiterTask(nodeSO, task));
+                StartCoroutine(WaiterTask(node, task));
             }
         }
 
@@ -843,7 +820,7 @@ namespace SS {
             yield return new WaitUntil(() => GameManager.Instance.UIManager.PopupTutorial.continueButtonPressed ||
                                              GameManager.Instance.UIManager.PopupTutorial.passTutorialPressed);
 
-            if (nodeSO.Choices.First().NextNode == null ||
+            if (nodeSO.Choices[0].NextNode == null ||
                 GameManager.Instance.UIManager.PopupTutorial.passTutorialPressed) {
                 IsRunning = false;
                 ResetTimeline();
@@ -870,7 +847,7 @@ namespace SS {
                 yield break;
             }
 
-            CheckNodeType(nodeSO.Choices.First().NextNode);
+            CheckNodeType(nodeSO.Choices[0].NextNode);
         }
 
         #endregion

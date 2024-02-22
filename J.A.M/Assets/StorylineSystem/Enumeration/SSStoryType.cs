@@ -4,8 +4,6 @@
     {
         Principal,
         Spontaneous,
-        Tasks,
-        Leak,
-        Trajectory
+        Tasks
     }
 }
