@@ -13,7 +13,6 @@ namespace SS.Elements
     public class SSTaskNode : SSNode
     {
         public string DescriptionTask { get; set; }
-        public SSTaskStatus TaskStatus { get; set; }
         public SSTaskType TaskType { get; set; }
         public Sprite TaskIcon { get; set; }
         public float TimeLeft { get; set; }
@@ -33,9 +32,10 @@ namespace SS.Elements
 
             NodeType = SSNodeType.Task;
             DescriptionTask = "Description";
+            TaskType = SSTaskType.Timed;
             TaskIcon = null;
-            TimeLeft = 0f;
-            BaseDuration = 0f;
+            TimeLeft = 5.0f;
+            BaseDuration = 5.0f;
             MandatorySlots = 1;
             OptionalSlots = 0;
             TaskHelpFactor = 0.75f;
@@ -88,77 +88,57 @@ namespace SS.Elements
             /* EXTENSIONS CONTAINER */
 
             Foldout textFoldout = SSElementUtility.CreateFoldout("Description :");
-
             TextField textTextField =
                 SSElementUtility.CreateTextArea(DescriptionTask, null,
                     callback => { DescriptionTask = callback.newValue; });
-
             textTextField.AddClasses("ss-node__text-field", "ss-node__quote-text-field");
-
             textFoldout.Add(textTextField);
-
             customDataContainer.Add(textFoldout);
-
-            EnumField statusTypeEnumField = SSElementUtility.CreateEnumField(TaskStatus, "Status Type :",
-                callback => { TaskStatus = (SSTaskStatus)callback.newValue; });
-
-            customDataContainer.Add(statusTypeEnumField);
 
             EnumField taskTypeEnumField = SSElementUtility.CreateEnumField(TaskType, "Task Type :",
                 callback => { TaskType = (SSTaskType)callback.newValue; });
-
             customDataContainer.Add(taskTypeEnumField);
 
             ObjectField iconObjectField = SSElementUtility.CreateObjectField(TaskIcon, typeof(Sprite), "Task Icon :",
                 callback => { TaskIcon = (Sprite)callback.newValue; });
-
             customDataContainer.Add(iconObjectField);
 
             FloatField timeLeftFloatField = SSElementUtility.CreateFloatField(TimeLeft, "Time Left :",
                 callback => { TimeLeft = callback.newValue; });
-
             customDataContainer.Add(timeLeftFloatField);
 
             FloatField baseDurationFloatField = SSElementUtility.CreateFloatField(BaseDuration, "Duration :",
                 callback => { BaseDuration = callback.newValue; });
-
             customDataContainer.Add(baseDurationFloatField);
 
             IntegerField mandatorySlotsIntegerField = SSElementUtility.CreateIntegerField(MandatorySlots,
                 "Leader Slots :",
                 callback => { MandatorySlots = callback.newValue; });
-
             customDataContainer.Add(mandatorySlotsIntegerField);
 
             IntegerField optionalSlotsIntegerField = SSElementUtility.CreateIntegerField(OptionalSlots,
                 "Assistant Slots :",
                 callback => { OptionalSlots = callback.newValue; });
-
             customDataContainer.Add(optionalSlotsIntegerField);
 
             FloatField taskHelpFactorFloatField = SSElementUtility.CreateFloatField(TaskHelpFactor,
                 "Task Help Factor :",
                 callback => { TaskHelpFactor = callback.newValue; });
-
             customDataContainer.Add(taskHelpFactorFloatField);
 
             EnumField roomEnumField = SSElementUtility.CreateEnumField(Room, "Room :",
                 callback => { Room = (RoomType)callback.newValue; });
-
             customDataContainer.Add(roomEnumField);
 
             EnumField furnitureEnumField = SSElementUtility.CreateEnumField(Furniture, "Furniture :",
                 callback => { Furniture = (FurnitureType)callback.newValue; });
-
             customDataContainer.Add(furnitureEnumField);
 
             Toggle isTaskTutorialToggle = SSElementUtility.CreateToggle(IsTaskTutorial, "Is Task Tutorial :",
                 callback => { IsTaskTutorial = callback.newValue; });
-
             customDataContainer.Add(isTaskTutorialToggle);
 
             extensionContainer.Add(customDataContainer);
-
             RefreshExpandedState();
         }
 

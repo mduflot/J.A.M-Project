@@ -2,16 +2,14 @@ using System;
 using System.Collections.Generic;
 using SS.Enumerations;
 using CharacterSystem;
+using SS.ScriptableObjects;
 using UnityEngine;
 
-namespace Tasks
-{
-    public class Task
-    {
+namespace Tasks {
+    public class Task {
         public string Name;
         public string Description;
         public string NameStoryline;
-        public SSTaskStatus TaskStatus;
         public SSTaskType TaskType;
         public Sprite Icon;
         public float TimeLeft;
@@ -29,24 +27,21 @@ namespace Tasks
         public string previewText;
         public bool IsStarted;
 
-        public Task(string name, string description, string nameStoryline, SSTaskStatus taskStatus, SSTaskType taskType, Sprite icon,
-            float timeLeft, float duration, int mandatorySlots,
-            int optionalSlots, float helpFactor, RoomType room, bool isTaskTutorial, List<Tuple<ConditionSO, string>> conditions, bool isStarted = false)
-        {
-            Name = name;
-            Description = description;
+        public Task(SSTaskNodeSO node, string nameStoryline, List<Tuple<ConditionSO, string>> conditions,
+            bool isStarted = false) {
+            Name = node.name;
+            Description = node.Description;
             NameStoryline = nameStoryline;
-            TaskStatus = taskStatus;
-            TaskType = taskType;
-            Icon = icon;
-            TimeLeft = timeLeft;
-            Duration = duration;
-            BaseDuration = duration;
-            MandatorySlots = mandatorySlots;
-            OptionalSlots = optionalSlots;
-            HelpFactor = helpFactor;
-            Room = room;
-            IsTaskTutorial = isTaskTutorial;
+            TaskType = node.TaskType;
+            Icon = node.Icon;
+            TimeLeft = node.TimeLeft;
+            Duration = node.Duration;
+            BaseDuration = node.Duration;
+            MandatorySlots = node.MandatorySlots;
+            OptionalSlots = node.OptionalSlots;
+            HelpFactor = node.TaskHelpFactor;
+            Room = node.Room;
+            IsTaskTutorial = node.IsTaskTutorial;
             Conditions = conditions;
             previewText = "";
             IsStarted = isStarted;

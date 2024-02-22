@@ -39,7 +39,7 @@ namespace Tasks
         private Notification notification;
         private List<CharacterUISlot> characterSlots = new();
         private bool taskStarted;
-        private Animator animator;
+        [SerializeField] private Animator animator;
         private List<GaugesOutcome> gaugesOutcomes = new();
         private List<CharacterOutcome> charOutcome = new();
 
@@ -67,11 +67,6 @@ namespace Tasks
                 character = c;
                 this.value = value;
             }
-        }
-
-        private void Start()
-        {
-            animator = GetComponent<Animator>();
         }
 
         public void Initialize(Notification n, CharacterIcon icon = null, bool needToDisplay = true,

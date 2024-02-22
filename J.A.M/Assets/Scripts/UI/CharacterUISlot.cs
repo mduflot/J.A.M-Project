@@ -27,6 +27,8 @@ namespace UI
         public override void OnDrop(PointerEventData eventData)
         {
             CharacterIcon dropped = eventData.pointerDrag.GetComponent<CharacterIcon>();
+            // TODO - need to check if the character is wounded and feedback to the player
+            // if (dropped.character.GetNegativeTraits().HasFlag(TraitsData.NegativeTraits.Old)) return;
             SetupIcon(dropped);
         }
 
