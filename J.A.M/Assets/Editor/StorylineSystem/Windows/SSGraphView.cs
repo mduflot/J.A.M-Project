@@ -130,6 +130,7 @@ namespace SS.Windows
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Task)", SSNodeType.Task));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Time)", SSNodeType.Time));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Popup)", SSNodeType.Popup));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Check Condition)", SSNodeType.CheckCondition));
 
             this.AddManipulator(CreateGroupContextualMenu());
         }
@@ -205,6 +206,16 @@ namespace SS.Windows
                 case SSNodeType.Time:
                 {
                     node = (SSTimeNode)Activator.CreateInstance(nodeTypeSystem);
+                    break;
+                }
+                case SSNodeType.Popup:
+                {
+                    node = (SSPopupNode)Activator.CreateInstance(nodeTypeSystem);
+                    break;
+                }
+                case SSNodeType.CheckCondition:
+                {
+                    node = (SSCheckConditionNode)Activator.CreateInstance(nodeTypeSystem);
                     break;
                 }
             }

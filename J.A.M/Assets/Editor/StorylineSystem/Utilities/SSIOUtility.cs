@@ -58,12 +58,14 @@ namespace SS.Utilities
             SSGraphSaveDataSO graphData =
                 CreateAsset<SSGraphSaveDataSO>("Assets/Editor/StorylineSystem/Graphs", $"{graphFileName}Graph");
 
-            graphData.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.SpontaneousType, graphView.IsTutorialToPlay, graphView.IsFirstToPlay, graphView.IsReplayable,
+            graphData.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.SpontaneousType,
+                graphView.IsTutorialToPlay, graphView.IsFirstToPlay, graphView.IsReplayable,
                 graphView.Condition);
 
             SSNodeContainerSO nodeContainer = CreateAsset<SSNodeContainerSO>(containerFolderPath, graphFileName);
 
-            nodeContainer.Initialize(graphFileName, graphData.ID, graphView.StoryStatus, graphView.StoryType, graphView.SpontaneousType, graphView.IsTutorialToPlay, graphView.IsFirstToPlay, graphView.IsReplayable,
+            nodeContainer.Initialize(graphFileName, graphData.ID, graphView.StoryStatus, graphView.StoryType,
+                graphView.SpontaneousType, graphView.IsTutorialToPlay, graphView.IsFirstToPlay, graphView.IsReplayable,
                 graphView.Condition);
 
             SaveGroups(graphData, nodeContainer);
@@ -119,7 +121,8 @@ namespace SS.Utilities
             SSNodeGroupSO nodeGroup =
                 CreateAsset<SSNodeGroupSO>($"{containerFolderPath}/Groups/{groupName}", groupName);
 
-            nodeGroup.Initialize(groupName, group.ID, group.StoryStatus, group.IsFirstToPlay, group.minWaitTime, group.maxWaitTime, group.timeIsOverride, group.overrideWaitTime, group.Condition);
+            nodeGroup.Initialize(groupName, group.ID, group.StoryStatus, group.IsFirstToPlay, group.minWaitTime,
+                group.maxWaitTime, group.timeIsOverride, group.overrideWaitTime, group.Condition);
 
             createdNodeGroups.Add(group.ID, nodeGroup);
 
@@ -249,7 +252,7 @@ namespace SS.Utilities
                     ID = popupNode.ID,
                     Name = popupNode.NodeName,
                     Choices = choices,
-                    GroupID =popupNode.Group?.ID,
+                    GroupID = popupNode.Group?.ID,
                     NodeType = popupNode.NodeType,
                     Position = popupNode.GetPosition().position,
                     Text = popupNode.Text,
@@ -258,6 +261,19 @@ namespace SS.Utilities
                 };
 
                 graphData.Nodes.Add(nodeData);
+            }
+            else if (node is SSCheckConditionNode checkNode)
+            {
+                SSCheckConditionNodeSaveData nodeData = new SSCheckConditionNodeSaveData()
+                {
+                    ID = checkNode.ID,
+                    Name = checkNode.NodeName,
+                    Choices = choices,
+                    GroupID = checkNode.Group?.ID,
+                    NodeType = checkNode.NodeType,
+                    Position = checkNode.GetPosition().position,
+                    Condition = checkNode.Condition
+                };
             }
         }
 
@@ -371,6 +387,34 @@ namespace SS.Utilities
                     popupNode.IsStartingNode(), popupNode.PopupUIType, popupNode.IsTutorialPopup);
 
                 createdNodes.Add(popupNode.ID, nodeSO);
+
+                SaveAsset(nodeSO);
+            }
+            else if (node is SSCheckConditionNode checkCondition)
+            {
+                SSCheckConditionNodeSO nodeSO;
+
+                if (checkCondition.Group != null)
+                {
+                    nodeSO = CreateAsset<SSCheckConditionNodeSO>(
+                        $"{containerFolderPath}/Groups/{checkCondition.Group.title}/Nodes",
+                        checkCondition.NodeName);
+
+                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[checkCondition.Group.ID], nodeSO);
+                }
+                else
+                {
+                    nodeSO = CreateAsset<SSCheckConditionNodeSO>($"{containerFolderPath}/Global/Nodes",
+                        checkCondition.NodeName);
+
+                    nodeContainer.UngroupedNodes.Add(nodeSO);
+                }
+
+                nodeSO.Initialize(checkCondition.NodeName, ConvertNodeChoicesToNodeChoicesData(checkCondition.Choices),
+                    checkCondition.NodeType,
+                    checkCondition.IsStartingNode(), checkCondition.Condition);
+
+                createdNodes.Add(checkCondition.ID, nodeSO);
 
                 SaveAsset(nodeSO);
             }
@@ -567,6 +611,10 @@ namespace SS.Utilities
                     ((SSPopupNode)node).Text = ((SSPopupNodeSaveData)nodeData).Text;
                     ((SSPopupNode)node).PopupUIType = ((SSPopupNodeSaveData)nodeData).PopupUIType;
                     ((SSPopupNode)node).IsTutorialPopup = ((SSPopupNodeSaveData)nodeData).IsTutorialPopup;
+                }
+                else if (nodeData.NodeType == SSNodeType.CheckCondition)
+                {
+                    ((SSCheckConditionNode)node).Condition = ((SSCheckConditionNodeSaveData)nodeData).Condition;
                 }
 
                 node.Draw();
