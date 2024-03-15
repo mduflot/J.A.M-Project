@@ -8,7 +8,7 @@ namespace SS.ScriptableObjects
 
     public class SSCheckConditionNodeSO : SSNodeSO
     {
-        [field: SerializeField] private ConditionSO Condition { get; set; }
+        [field: SerializeField] public ConditionSO Condition { get; set; }
 
         public void Initialize(string nodeName, List<SSNodeChoiceData> choices, SSNodeType nodeType,
             bool isStartingNode, ConditionSO condition)
