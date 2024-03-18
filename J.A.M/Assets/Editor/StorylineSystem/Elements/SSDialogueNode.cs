@@ -2,13 +2,15 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace SS.Elements {
+namespace SS.Elements
+{
     using Data.Save;
     using Enumerations;
     using Utilities;
     using Windows;
 
-    public class SSDialogueNode : SSNode {
+    public class SSDialogueNode : SSNode
+    {
         public SSDialogueType DialogueType { get; set; }
         public string Text { get; set; }
         public SSSpeakerType SpeakerType { get; set; }
@@ -20,7 +22,8 @@ namespace SS.Elements {
         public TraitsData.PositiveTraits PositiveTraits { get; set; }
         public TraitsData.NegativeTraits NegativeTraits { get; set; }
 
-        public override void Initialize(string nodeName, SSGraphView ssGraphView, Vector2 position) {
+        public override void Initialize(string nodeName, SSGraphView ssGraphView, Vector2 position)
+        {
             base.Initialize(nodeName, ssGraphView, position);
 
             NodeType = SSNodeType.Dialogue;
@@ -34,19 +37,22 @@ namespace SS.Elements {
             PositiveTraits = TraitsData.PositiveTraits.None;
             NegativeTraits = TraitsData.NegativeTraits.None;
 
-            SSChoiceSaveData choiceData = new SSChoiceSaveData() {
+            SSChoiceSaveData choiceData = new SSChoiceSaveData()
+            {
                 Text = "Next Node"
             };
 
             Choices.Add(choiceData);
         }
 
-        public override void Draw() {
+        public override void Draw()
+        {
             base.Draw();
 
             /* OUTPUT CONTAINER */
 
-            foreach (SSChoiceSaveData choice in Choices) {
+            foreach (SSChoiceSaveData choice in Choices)
+            {
                 Port choicePort = this.CreatePort(choice.Text);
 
                 choicePort.userData = choice;
@@ -63,15 +69,18 @@ namespace SS.Elements {
             customDataContainer.AddToClassList("ss-node__custom-data-container");
 
             EnumField enumFieldDialogueType = SSElementUtility.CreateEnumField(DialogueType, "Dialogue Type",
-                callback => {
+                callback =>
+                {
                     DialogueType = (SSDialogueType)callback.newValue;
-                    if ((SSDialogueType)callback.newValue == SSDialogueType.Dialogue) {
+                    if ((SSDialogueType)callback.newValue == SSDialogueType.Dialogue)
+                    {
                         dialogueDataContainer = DrawDialogueType();
                         customDataContainer.Add(dialogueDataContainer);
                         if (customDataContainer.Contains(barkDataContainer))
                             customDataContainer.Remove(barkDataContainer);
                     }
-                    else {
+                    else
+                    {
                         barkDataContainer = DrawBarkType();
                         customDataContainer.Add(barkDataContainer);
                         if (customDataContainer.Contains(dialogueDataContainer))
@@ -79,11 +88,13 @@ namespace SS.Elements {
                     }
                 });
 
-            if (DialogueType == SSDialogueType.Dialogue) {
+            if (DialogueType == SSDialogueType.Dialogue)
+            {
                 dialogueDataContainer = DrawDialogueType();
                 customDataContainer.Add(dialogueDataContainer);
             }
-            else {
+            else
+            {
                 barkDataContainer = DrawBarkType();
                 customDataContainer.Add(barkDataContainer);
             }
@@ -95,7 +106,8 @@ namespace SS.Elements {
             RefreshExpandedState();
         }
 
-        private VisualElement DrawDialogueType() {
+        private VisualElement DrawDialogueType()
+        {
             VisualElement customDataContainer = new VisualElement();
 
             Foldout textFoldout = SSElementUtility.CreateFoldout("Dialogue");
@@ -119,18 +131,22 @@ namespace SS.Elements {
             EnumField enumFieldNegativeTraits = null;
 
             EnumField enumField = SSElementUtility.CreateEnumField(SpeakerType, "Speaker",
-                callback => {
+                callback =>
+                {
                     SpeakerType = (SSSpeakerType)callback.newValue;
-                    if (SpeakerType == SSSpeakerType.Traits) {
+                    if (SpeakerType == SSSpeakerType.Traits)
+                    {
                         enumFieldJob = SSElementUtility.CreateEnumField(Job, "Job",
                             callbackJob => { Job = (TraitsData.Job)callbackJob.newValue; });
                         enumFieldPositiveTraits = SSElementUtility.CreateEnumField(PositiveTraits,
                             "Positive Traits",
-                            callbackPositiveTraits => {
+                            callbackPositiveTraits =>
+                            {
                                 PositiveTraits = (TraitsData.PositiveTraits)callbackPositiveTraits.newValue;
                             });
                         enumFieldNegativeTraits = SSElementUtility.CreateEnumField(NegativeTraits, "Negative Traits",
-                            callbackNegativeTraits => {
+                            callbackNegativeTraits =>
+                            {
                                 NegativeTraits = (TraitsData.NegativeTraits)callbackNegativeTraits.newValue;
                             });
 
@@ -138,7 +154,8 @@ namespace SS.Elements {
                         customDataContainer.Add(enumFieldPositiveTraits);
                         customDataContainer.Add(enumFieldNegativeTraits);
                     }
-                    else {
+                    else
+                    {
                         if (customDataContainer.Contains(enumFieldJob)) customDataContainer.Remove(enumFieldJob);
                         if (customDataContainer.Contains(enumFieldPositiveTraits))
                             customDataContainer.Remove(enumFieldPositiveTraits);
@@ -149,16 +166,19 @@ namespace SS.Elements {
 
             customDataContainer.Add(enumField);
 
-            if (SpeakerType == SSSpeakerType.Traits) {
+            if (SpeakerType == SSSpeakerType.Traits)
+            {
                 enumFieldJob = SSElementUtility.CreateEnumField(Job, "Job",
                     callbackJob => { Job = (TraitsData.Job)callbackJob.newValue; });
                 enumFieldPositiveTraits = SSElementUtility.CreateEnumField(PositiveTraits,
                     "Positive Traits",
-                    callbackPositiveTraits => {
+                    callbackPositiveTraits =>
+                    {
                         PositiveTraits = (TraitsData.PositiveTraits)callbackPositiveTraits.newValue;
                     });
                 enumFieldNegativeTraits = SSElementUtility.CreateEnumField(NegativeTraits, "Negative Traits",
-                    callbackNegativeTraits => {
+                    callbackNegativeTraits =>
+                    {
                         NegativeTraits = (TraitsData.NegativeTraits)callbackNegativeTraits.newValue;
                     });
 
@@ -170,7 +190,8 @@ namespace SS.Elements {
             return customDataContainer;
         }
 
-        private VisualElement DrawBarkType() {
+        private VisualElement DrawBarkType()
+        {
             VisualElement customDataContainer = new VisualElement();
 
             EnumField enumFieldBarkType = SSElementUtility.CreateEnumField(BarkType, "Bark Type",
@@ -183,27 +204,33 @@ namespace SS.Elements {
 
             SliderInt sliderInt = null;
 
-            Toggle toggle = SSElementUtility.CreateToggle(IsDialogueTask, "DialogueTask", callback => {
+            Toggle toggle = SSElementUtility.CreateToggle(IsDialogueTask, "DialogueTask", callback =>
+            {
                 IsDialogueTask = callback.newValue;
-                if (callback.newValue) {
+                if (callback.newValue)
+                {
                     sliderInt = SSElementUtility.CreateSliderIntField(PercentageTask, "PercentageTask : ", 0, 100,
-                        callback => {
+                        callback =>
+                        {
                             PercentageTask = callback.newValue;
                             sliderInt.label = "PercentageTask : " + callback.newValue;
                         });
 
                     customDataContainer.Add(sliderInt);
                 }
-                else {
+                else
+                {
                     customDataContainer.Remove(sliderInt);
                 }
             });
 
             customDataContainer.Add(toggle);
 
-            if (IsDialogueTask) {
+            if (IsDialogueTask)
+            {
                 sliderInt = SSElementUtility.CreateSliderIntField(PercentageTask, "PercentageTask : ", 0, 100,
-                    callback => {
+                    callback =>
+                    {
                         PercentageTask = callback.newValue;
                         sliderInt.label = "PercentageTask : " + callback.newValue;
                     });
