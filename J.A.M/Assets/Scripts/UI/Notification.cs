@@ -11,6 +11,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace UI
 {
@@ -441,6 +442,11 @@ namespace UI
                         case OutcomeData.OutcomeTarget.Assistant:
                             outcomeEventArgs[numberOfBaseOutcomes + i] =
                                 OutcomeSystem.GenerateEventArgs(outcome, AssistantCharacters[0]);
+                            break;
+                        
+                        case OutcomeData.OutcomeTarget.Random:
+                            var randomCharacter = spaceshipManager.characters[Random.Range(0, spaceshipManager.characters.Length)];
+                            outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, randomCharacter);
                             break;
 
                         case OutcomeData.OutcomeTarget.Crew:

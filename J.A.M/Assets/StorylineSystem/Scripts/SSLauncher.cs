@@ -1043,6 +1043,11 @@ namespace SS
                     case OutcomeData.OutcomeTarget.Assistant:
                         outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome, task.assistantCharacters[0]);
                         break;
+                    
+                    case OutcomeData.OutcomeTarget.Random:
+                        var randomCharacter = spaceshipManager.characters[Random.Range(0, spaceshipManager.characters.Length)];
+                        outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome, randomCharacter);
+                        break;
 
                     case OutcomeData.OutcomeTarget.Crew:
                         outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome,
