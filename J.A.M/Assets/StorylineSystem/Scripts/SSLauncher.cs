@@ -675,7 +675,7 @@ namespace SS
 
             if (nodeContainer.StoryType is SSStoryType.Principal)
             {
-                if (nodeSO.IsDialogueTask)
+                if (nodeSO.IsDialogueTask && nodeSO.DialogueType == SSDialogueType.Bark)
                 {
                     StartCoroutine(AddDialogueNotification(nodeSO));
                 }
@@ -1028,10 +1028,10 @@ namespace SS
 
         private void CheckConditionNode(object sender, TimeTickSystem.OnTickEventArgs e)
         {
-            if (RouteCondition(checkNode.Condition))
-            {
-                
-            }
+            if (!RouteCondition(checkNode.Condition)) return;
+
+            // TODO : Give outcomes
+            TimeTickSystem.OnTick -= CheckConditionNode;
         }
 
         #endregion
