@@ -1030,7 +1030,63 @@ namespace SS
         {
             if (!RouteCondition(checkNode.Condition)) return;
 
-            // TODO : Give outcomes
+            var outcomeEventArgs = new OutcomeSystem.OutcomeEventArgs[checkNode.Condition.outcomes.Outcomes.Length];
+            for (int index = 0; index < checkNode.Condition.outcomes.Outcomes.Length; index++)
+            {
+                var outcome = checkNode.Condition.outcomes.Outcomes[index];
+                switch (outcome.OutcomeTarget)
+                {
+                    case OutcomeData.OutcomeTarget.Leader:
+                        outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome, task.leaderCharacters[0]);
+                        break;
+
+                    case OutcomeData.OutcomeTarget.Assistant:
+                        outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome, task.assistantCharacters[0]);
+                        break;
+
+                    case OutcomeData.OutcomeTarget.Crew:
+                        outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome,
+                            GameManager.Instance.SpaceshipManager.characters);
+                        break;
+
+                    case OutcomeData.OutcomeTarget.Ship:
+                        outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome);
+                        break;
+                    case OutcomeData.OutcomeTarget.Gauge:
+                        if (outcome.OutcomeType.Equals(OutcomeData.OutcomeType.Gauge))
+                            outcomeEventArgs[index] =
+                                OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
+                        else
+                        {
+                            if (task.leaderCharacters[0].GetMood() < task.leaderCharacters[0].GetBaseVolition())
+                            {
+                                outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome,
+                                    outcome.OutcomeTargetGauge, task.leaderCharacters[0].GetBaseVolition() / 2);
+                            }
+                            else
+                            {
+                                outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome,
+                                    outcome.OutcomeTargetGauge, task.leaderCharacters[0].GetBaseVolition());
+                            }
+                        }
+
+                        if (task.TaskType == SSTaskType.Permanent) outcomeEventArgs[index].value /= task.Duration;
+
+                        break;
+                }
+            }
+
+            var outcomeEvents = new OutcomeSystem.OutcomeEvent[outcomeEventArgs.Length];
+            for (int i = 0; i < outcomeEventArgs.Length; i++)
+            {
+                outcomeEvents[i] = OutcomeSystem.GenerateOutcomeEvent(outcomeEventArgs[i]);
+            }
+
+            for (uint i = 0; i < outcomeEvents.Length; i++)
+            {
+                outcomeEvents[i].Invoke(outcomeEventArgs[i]);
+            }
+
             TimeTickSystem.OnTick -= CheckConditionNode;
         }
 
