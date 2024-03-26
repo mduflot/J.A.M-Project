@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: Tension
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: Tension
+  <Choices>k__BackingField:
+  - rid: 198649355842355837
+  - rid: 198649355842355838
+  - rid: 198649355842355839
+  - rid: 198649355842355840
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: Things are escalating between the crew and the Network
+    squad. Maybe someone could ease the tension.
+  <TaskType>k__BackingField: 2
+  <Icon>k__BackingField: {fileID: 21300000, guid: 674067cf15d4f3448b518b294ca7432e,
+    type: 3}
+  <TimeLeft>k__BackingField: 5
+  <Duration>k__BackingField: 5
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 0
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 3
+  <Furniture>k__BackingField: 1
+  <IsTaskTutorial>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 198649355842355837
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Captain
+        <NextNode>k__BackingField: {fileID: 11400000, guid: c9d0aa612da85e84ba9402bbba9ab222,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: d2b119c447ca49d4396c4ea0877d316a,
+          type: 2}
+        <PreviewOutcome>k__BackingField: is the ship's captain, she might be able
+          to reason with her crew.
+    - rid: 198649355842355838
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Curious
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 83a8fa2184157e74c8660ffaaa90a7ac,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 74772c0cc88465742ae6243fb71fc6ff,
+          type: 2}
+        <PreviewOutcome>k__BackingField: thinks the crew's curioisity is justified,
+          you could try and use that argument.
+    - rid: 198649355842355839
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Leisin
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 5a8e960232bb23b4582c49b14d8fa4ce,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 52f4ce99abd431740895a44b1096f8ce,
+          type: 2}
+        <PreviewOutcome>k__BackingField: is leading the Network squad, any interferance
+          from the crew will not be tolerated.
+    - rid: 198649355842355840
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Military
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 6e0bfcbcee2058049b83fa03974c34a2,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: a78209d7db44e514191f7154a574a2cd,
+          type: 2}
+        <PreviewOutcome>k__BackingField: thinks their squad should be more careful
+          with their sensitive data, they could share informations that are not too
+          sensitive to east the tension.

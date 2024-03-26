@@ -20,6 +20,5 @@ public class Character : MonoBehaviour
     public TraitsData.PositiveTraits GetPositiveTraits() { return traits.GetPositiveTraits(); }
 
     public TraitsData.NegativeTraits GetNegativeTraits() { return traits.GetNegativeTraits(); }
-
     private void CapMood() { mood = mood > stress ? stress : mood; }
 }
