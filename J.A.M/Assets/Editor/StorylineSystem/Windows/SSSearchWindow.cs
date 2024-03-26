@@ -47,6 +47,11 @@ namespace SS.Windows
                     level = 2,
                     userData = SSNodeType.Popup
                 },
+                new SearchTreeEntry(new GUIContent("Condition", indentationIcon))
+                {
+                    level = 2,
+                    userData = SSNodeType.CheckCondition
+                },
                 new SearchTreeGroupEntry(new GUIContent("Node Group"), 1),
                 new SearchTreeEntry(new GUIContent("Single Group", indentationIcon))
                 {
@@ -99,6 +104,17 @@ namespace SS.Windows
                         (SSPopupNode)graphView.CreateNode("PopupNode", SSNodeType.Popup, localMousePosition);
 
                     graphView.AddElement(popupNode);
+
+                    return true;
+                }
+
+                case SSNodeType.CheckCondition:
+                {
+                    SSCheckConditionNode checkConditionNode =
+                        (SSCheckConditionNode)graphView.CreateNode("CheckConditionNode", SSNodeType.CheckCondition,
+                            localMousePosition);
+
+                    graphView.AddElement(checkConditionNode);
 
                     return true;
                 }
