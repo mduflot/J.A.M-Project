@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: AQuickPeek
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: AQuickPeek
+  <Choices>k__BackingField:
+  - rid: 198649355842355904
+  - rid: 198649355842355905
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: Leisin and their crew have been seen around the ship,
+    looking at their folders and seemingly hell-bent on keeping the content hidden.
+  <TaskType>k__BackingField: 2
+  <Icon>k__BackingField: {fileID: 21300000, guid: 674067cf15d4f3448b518b294ca7432e,
+    type: 3}
+  <TimeLeft>k__BackingField: 5
+  <Duration>k__BackingField: 5
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 0
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 6
+  <Furniture>k__BackingField: 1
+  <IsTaskTutorial>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 198649355842355904
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Civilian
+        <NextNode>k__BackingField: {fileID: 11400000, guid: dcc691ddeaceb5c4aac188b909c1018e,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 0ffc3a5e949b87647b0a352572dd46c7,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will take a quick look at the data.
+    - rid: 198649355842355905
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Military
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 82775bfd8dbb8de45984ef5a093bf31f,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 092bee29a35611647ab4834d528757b5,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will ensure noone looks at their data.

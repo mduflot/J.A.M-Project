@@ -93,6 +93,9 @@ public class TraitsData
         DamagedArtifactRoom = 16777216,
         DamagedCommodities = 33554432,
         Fertilization = 67108864,
+        ElrendaLeisinGrief = 134217728,
+        VarusSeltisGrief = 268435456,
+        LammyMaldaGrief = 536870912
     }
     
     [Flags]

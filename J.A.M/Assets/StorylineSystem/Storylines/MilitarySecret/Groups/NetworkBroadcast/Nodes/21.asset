@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b041d425d661449d8e9f60a620cf0f4a, type: 3}
+  m_Name: 21
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: 21
+  <Choices>k__BackingField:
+  - rid: 198649355842355874
+  <NodeType>k__BackingField: 0
+  <IsStartingNode>k__BackingField: 0
+  <DialogueType>k__BackingField: 0
+  <Text>k__BackingField: Roger. Any other information ?
+  <SpeakerType>k__BackingField: 22
+  <Duration>k__BackingField: 1
+  <BarkType>k__BackingField: 0
+  <IsDialogueTask>k__BackingField: 0
+  <PercentageTask>k__BackingField: 50
+  <IsCompleted>k__BackingField: 0
+  <Job>k__BackingField: 512
+  <PositiveTraits>k__BackingField: 0
+  <NegativeTraits>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 198649355842355874
+      type: {class: SSNodeChoiceData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Next Node
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 2a9c11f1713dd084d88482b5ee63f997,
+          type: 2}
