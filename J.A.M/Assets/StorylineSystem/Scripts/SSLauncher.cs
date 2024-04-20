@@ -825,7 +825,7 @@ namespace SS
 
         private IEnumerator RunNode(SSTaskNodeSO node, CharacterIcon icon = null, TaskLog taskToPlay = null)
         {
-            // Verify if the task is already active
+            // If the task is permanent and already active, we don't run it again
             if (node.TaskType.Equals(SSTaskType.Permanent))
                 if (spaceshipManager.IsTaskActive(node.name))
                     yield break;

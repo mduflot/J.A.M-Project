@@ -638,7 +638,7 @@ namespace SS.Windows
 
             Add(miniMap);
 
-            miniMap.visible = false;
+            miniMap.visible = true;
         }
 
         private void AddGridBackground()
