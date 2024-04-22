@@ -4,6 +4,7 @@
     {
         Principal,
         Spontaneous,
-        Tasks
+        Tasks,
+        Conditional
     }
 }

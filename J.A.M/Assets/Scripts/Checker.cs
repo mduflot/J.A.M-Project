@@ -36,6 +36,7 @@ public class Checker : MonoBehaviour, IDataPersistence
     private List<Storyline> secondaryStorylines;
     private List<Storyline> leakStorylines;
     private List<Storyline> trajectoryStorylines;
+    private List<Storyline> conditionalStorylines;
 
     private List<Storyline> availableStoryLines = new();
     private List<SSNodeGroupSO> availableTimelines = new();
@@ -69,6 +70,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         secondaryStorylines = new();
         leakStorylines = new();
         trajectoryStorylines = new();
+        conditionalStorylines = new();
         for (int i = 0; i < ssCampaign.Storylines.Count; i++)
         {
             var storyline = ssCampaign.Storylines[i];
@@ -90,6 +92,9 @@ public class Checker : MonoBehaviour, IDataPersistence
                             break;
                     }
                     break;
+                case SSStoryType.Conditional:
+                    conditionalStorylines.Add(new Storyline(storyline, storyline.NodeGroups.Keys.ToList()));
+                    break;
             }
         }
 
@@ -97,6 +102,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         allStorylines.AddRange(secondaryStorylines);
         allStorylines.AddRange(leakStorylines);
         allStorylines.AddRange(trajectoryStorylines);
+        allStorylines.AddRange(conditionalStorylines);
         isAlreadyWaiting = false;
         if (!DataPersistenceManager.Instance.IsNewGame) return;
         GameManager.Instance.UIManager.TasksMenu.SetActive(false);
@@ -108,6 +114,7 @@ public class Checker : MonoBehaviour, IDataPersistence
         }
         ChooseNewStoryline(SSStoryType.Principal);
         DataPersistenceManager.Instance.IsNewGame = false;
+        TimeTickSystem.OnTick += CheckingStorylineCondition;
     }
 
     public void GenerateNewEvent()
@@ -127,6 +134,14 @@ public class Checker : MonoBehaviour, IDataPersistence
         else waitingTimePrincipal = (uint)Random.Range(minWaitTimePrincipal, maxWaitTimePrincipal) * TimeTickSystem.ticksPerHour;
         Debug.Log("Generating new principal event. Maybe nothing will happen.");
         TimeTickSystem.OnTick += WaitStorylinePrincipal;
+    }
+
+    private void CheckingStorylineCondition(object sender, TimeTickSystem.OnTickEventArgs e)
+    {
+        if (conditionalStorylines.Any(storyline => RouteCondition(storyline.StorylineContainer.Condition)))
+        {
+            ChooseNewStoryline(SSStoryType.Conditional);
+        }
     }
 
     private void WaitStorylinePrincipal(object sender, TimeTickSystem.OnTickEventArgs e)
@@ -189,7 +204,6 @@ public class Checker : MonoBehaviour, IDataPersistence
                             break;
                     }
                     break;
-                
             }
             return;
         } 
@@ -263,6 +277,20 @@ public class Checker : MonoBehaviour, IDataPersistence
                         break;
                 }
 
+                break;
+            }
+            case SSStoryType.Conditional:
+            {
+                for (var index = 0; index < conditionalStorylines.Count; index++)
+                {
+                    var storyline = conditionalStorylines[index];
+                    if (storyline.Status == SSStoryStatus.Completed) continue;
+                    if (storyline.StorylineContainer.Condition)
+                        if (!RouteCondition(storyline.StorylineContainer.Condition))
+                            continue;
+                    if (activeLaunchers.Any(launcher => launcher.storyline == storyline)) continue;
+                    availableStoryLines.Add(storyline);
+                }
                 break;
             }
         }

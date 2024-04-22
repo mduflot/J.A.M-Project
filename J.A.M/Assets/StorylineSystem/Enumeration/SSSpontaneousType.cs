@@ -1,5 +1,7 @@
-﻿namespace SS.Enumerations {
-    public enum SSSpontaneousType {
+﻿namespace SS.Enumerations
+{
+    public enum SSSpontaneousType
+    {
         Default,
         Leak,
         Trajectory
