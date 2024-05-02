@@ -591,11 +591,17 @@ namespace UI
 
             if (launcher.storyline != null)
             {
+                Debug.Log("je retourne à la pool");
                 if (launcher.storyline.StorylineContainer.StoryType != SSStoryType.Principal)
                     StartCoroutine(
                         spaceshipManager.notificationPool.AddToPoolLater(gameObject, dialogueSpontaneousDuration));
                 else
                     spaceshipManager.notificationPool.AddToPool(gameObject);
+            }
+
+            if (Task.TaskType == SSTaskType.Permanent)
+            {
+                spaceshipManager.notificationPool.AddToPool(gameObject);
             }
 
             IsStarted = false;
@@ -614,6 +620,8 @@ namespace UI
 
                 AssistantCharacters[i].GetSimCharacter().taskRoom = null;
             }
+            
+            
         }
 
         public void OnCancel()
