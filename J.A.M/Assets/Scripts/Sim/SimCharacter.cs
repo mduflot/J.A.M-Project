@@ -79,8 +79,9 @@ public class SimCharacter : MonoBehaviour
         uint nextDoor = doorPath.Pop();
 
         spriteRendererCharacter.enabled = SimPathing.FindRoomByDoorID(nextDoor).roomType == currentRoom.roomType;
-        
+
         currentRoomDoor = nextDoor;
+        
         currentRoom = SimPathing.FindRoomByDoorID(currentRoomDoor);
     }
 
