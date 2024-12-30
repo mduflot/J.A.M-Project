@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Cysharp.Threading.Tasks;
+using System.Linq;
 using UI;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class UINotificationsHandler : MonoBehaviour
@@ -16,32 +13,85 @@ public class UINotificationsHandler : MonoBehaviour
     [SerializeField] private float maxRightPosX;
     [SerializeField] private int spacing;
 
+    private Queue<Notification> notificationsQueue = new();
+    private Queue<Notification> recapNotificationsQueue = new();
+
+    /// <summary>
+    /// Called when task is created
+    /// </summary>
+    /// <param name="n">Notification to display</param>
     public void CreateTaskNotification(Notification n)
     {
+        if (notifications.Count >= maxNotifications)
+        {
+            notificationsQueue.Enqueue(n);
+            return;
+        }
+
         var note = Instantiate(taskNotificationPrefab, notificationsParent);
-        var position = new Vector3(maxRightPosX - spacing * notifications.Count - 1,
-            0);
-        note.transform.localPosition = position;
-        note.Initialize(n.Task, this, notifications.Count, n);
+        note.Initialize(n.Task, this, notifications.Count, true, n);
         notifications.Add(note);
         n.uiNotification = note;
-    }
-    
-    public void CreateRecapNotification(Notification n)
-    {
-        var note = Instantiate(recapNotificationPrefab, notificationsParent);
-        var position = new Vector3(maxRightPosX - (spacing * notifications.Count - 1),
-            0);
-        note.transform.localPosition = position;
-        note.Initialize(n.Task, this, notifications.Count);
-        notifications.Add(note);
+        ReplaceNotifications();
     }
 
+    /// <summary>
+    /// Called when task is completed
+    /// </summary>
+    /// <param name="n">Notification to display</param>
+    public void CreateRecapNotification(Notification n)
+    {
+        if (notifications.Count >= maxNotifications)
+        {
+            recapNotificationsQueue.Enqueue(n);
+            return;
+        }
+
+        var note = Instantiate(recapNotificationPrefab, notificationsParent);
+        note.Initialize(n.Task, this, notifications.Count, true);
+        notifications.Add(note);
+        ReplaceNotifications();
+    }
+
+    /// <summary>
+    /// Called when task needs to be removed
+    /// </summary>
+    /// <param name="n">UINotification to remove</param>
     public async void RemoveNotification(UINotification n)
     {
-        await n.Disappear();
-        notifications.Remove(n);
-        for (int i = n.index; i < notifications.Count; i++)
+        if (n)
+        {
+            if (notifications.Contains(n))
+            {
+                await n.Disappear();
+                notifications.Remove(n);
+            }
+            else if (notificationsQueue.Contains(n.notification))
+                notificationsQueue = new Queue<Notification>(notificationsQueue.Where(x => x != n.notification));
+            else if (recapNotificationsQueue.Contains(n.notification))
+                recapNotificationsQueue = new Queue<Notification>(recapNotificationsQueue.Where(x => x != n.notification));
+        }
+
+        ReplaceNotifications();
+
+        if (notificationsQueue.Count > 0 && notifications.Count < maxNotifications)
+        {
+            var newNotification = notificationsQueue.Dequeue();
+            CreateTaskNotification(newNotification);
+        }
+        else if (recapNotificationsQueue.Count > 0 && notifications.Count < maxNotifications)
+        {
+            var newNotification = recapNotificationsQueue.Dequeue();
+            CreateRecapNotification(newNotification);
+        }
+    }
+
+    /// <summary>
+    /// Called when notifications need to be replaced
+    /// </summary>
+    private void ReplaceNotifications()
+    {
+        for (int i = 0; i < notifications.Count; i++)
         {
             notifications[i].MoveToNewPos(maxRightPosX - (spacing * i - 1));
         }

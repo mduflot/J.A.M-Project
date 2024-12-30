@@ -216,7 +216,7 @@ namespace Tasks
             GameManager.Instance.UIManager.CharacterPreviewGauges(charOutcome);
             duration = assistantCharacters > 0
                 ? notification.Task.Duration /
-                  (Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor))
+                  Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor)
                 : notification.Task.Duration;
 
             durationText.text = TimeTickSystem.GetTicksAsTime((uint) (duration * TimeTickSystem.ticksPerHour));
@@ -227,7 +227,7 @@ namespace Tasks
 
             for (int index = 0; index < notification.Task.Conditions.Count; index++)
             {
-                bool condition = CheckTarget(notification.Task.Conditions[index].Item1) || (!isConditionMet && index == notification.Task.Conditions.Count - 1);
+                bool condition = CheckTarget(notification.Task.Conditions[index].Item1);
                 if (notification.Task.TaskType != SSTaskType.Compute) {
                     if (characterSlots[0]?.icon == null && notification.Task.TaskType != SSTaskType.Untimed) {
                         index = notification.Task.Conditions.Count - 1;
@@ -235,7 +235,7 @@ namespace Tasks
                     }
                 }
 
-                if ((!condition && notification.Task.TaskType == SSTaskType.Compute))
+                if (!condition && notification.Task.TaskType == SSTaskType.Compute)
                 {
                     previewOutcomeText.text = "Condition not met";
                     button.interactable = false;

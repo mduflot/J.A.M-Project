@@ -826,11 +826,11 @@ namespace SS
         private IEnumerator RunNode(SSTaskNodeSO node, CharacterIcon icon = null, TaskLog taskToPlay = null)
         {
             // If the task is permanent and already active, we don't run it again
-            if (node.TaskType.Equals(SSTaskType.Permanent))
-                if (spaceshipManager.IsTaskActive(node.name))
-                    yield break;
+            if (node.TaskType.Equals(SSTaskType.Permanent) && spaceshipManager.IsTaskActive(node.name))
+                yield break;
 
-            if (task != null && taskToPlay == null) yield return new WaitUntil(() => task.Duration <= 0);
+            if (task != null && taskToPlay == null)
+                yield return new WaitUntil(() => task.Duration <= 0);
             assignedCharacters.Clear();
             notAssignedCharacters.Clear();
             var room = spaceshipManager.GetRoom(node.Room);

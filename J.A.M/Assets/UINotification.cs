@@ -22,8 +22,9 @@ public class UINotification : HoverableObject, IPointerDownHandler
     private Vector3 initialPos;
     private Vector3 newPos;
     private float lerpValue = 0;
-    
-    public virtual void Initialize(Task t, UINotificationsHandler h, int i, Notification n = null)
+    public bool isActive;
+
+    public void Initialize(Task t, UINotificationsHandler h, int i, bool b = false, Notification n = null)
     {
         notification = n;
         task = t;
@@ -31,6 +32,7 @@ public class UINotification : HoverableObject, IPointerDownHandler
         handler = h;
         animator.SetBool("Appear", true);
         index = i;
+        isActive = b;
     }
 
     public override void OnHover(PointerEventData eventData)
@@ -45,9 +47,8 @@ public class UINotification : HoverableObject, IPointerDownHandler
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        
     }
-    
+
     public async System.Threading.Tasks.Task Disappear()
     {
         animator.SetBool("Appear", false);
@@ -78,11 +79,9 @@ public class UINotification : HoverableObject, IPointerDownHandler
 
     public virtual void UpdateTimeLeftFill(float value)
     {
-        
     }
-    
+
     public virtual void UpdateCompletionFill(float value)
     {
-        
     }
 }

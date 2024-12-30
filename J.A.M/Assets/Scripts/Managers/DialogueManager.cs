@@ -13,7 +13,6 @@ public class DialogueManager : MonoBehaviour, IPointerClickHandler {
     [SerializeField] private Transform dialogueParent;
     private Pool<GameObject> dialoguesPool;
     private List<GameObject> dialogues = new();
-    private int siblingIndex;
 
     [Header("Sprites")]
     [SerializeField] private Sprite sensor;
@@ -26,7 +25,7 @@ public class DialogueManager : MonoBehaviour, IPointerClickHandler {
     [SerializeField] private TextMeshProUGUI buttonText;
 
     private void Awake() {
-        dialoguesPool = new Pool<GameObject>(dialoguePrefab, 5);
+        dialoguesPool = new Pool<GameObject>(dialoguePrefab, 2);
     }
 
     public void InitializeMenu(string title) {
@@ -36,13 +35,12 @@ public class DialogueManager : MonoBehaviour, IPointerClickHandler {
         button.interactable = false;
         titleText.text = $"{title}";
         buttonText.text = "...";
-        siblingIndex = 0;
     }
 
     public void AddDialogue(SSDialogueNodeSO node, string characterName) {
         var dialogueGO = dialoguesPool.GetFromPool();
         dialogueGO.transform.SetParent(dialogueParent);
-        dialogueParent.SetSiblingIndex(siblingIndex++);
+        dialogueGO.transform.SetSiblingIndex(dialogueParent.childCount);
         dialogues.Add(dialogueGO);
         var dialogueComponent = dialogueGO.GetComponent<Dialogue>();
         switch (characterName) {

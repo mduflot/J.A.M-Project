@@ -871,9 +871,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9069146719774534606, guid: eabfd321868487c4496a6adfa4f43fb3,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9069146719774534606, guid: eabfd321868487c4496a6adfa4f43fb3,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 49519530}
+    - target: {fileID: 9069146719774534606, guid: eabfd321868487c4496a6adfa4f43fb3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 9069146719774534606, guid: eabfd321868487c4496a6adfa4f43fb3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

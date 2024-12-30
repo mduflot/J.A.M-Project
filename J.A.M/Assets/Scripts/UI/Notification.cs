@@ -78,25 +78,27 @@ namespace UI
             Task = task;
             taskNode = ssTaskNode;
             time.text = "";
-            if (taskToPlay == null) Task.TimeLeft *= TimeTickSystem.ticksPerHour;
-            if (task.IsTaskTutorial) popupHelp.SetActive(true);
+            if (taskToPlay == null)
+                Task.TimeLeft *= TimeTickSystem.ticksPerHour;
+            if (task.IsTaskTutorial)
+                popupHelp.SetActive(true);
             timeLeft = Task.TimeLeft;
             icon.sprite = task.Icon;
             Dialogues = dialogues;
             this.spaceshipManager = spaceshipManager;
             launcher = ssLauncher;
-            // TODO - Need to check if dialoguesMenu is open before
-            // TODO - Maybe only for spontaneous
-            // TimeTickSystem.ModifyTimeScale(1);
             timerSprite.material.SetInt("_Arc2", 360);
             timeLeftSprite.material.SetInt("_Arc1", 360);
             taskLog = taskToPlay;
             if (task.TaskType != SSTaskType.Permanent)
             {
-                if (Task.TaskType != SSTaskType.Compute)
-                    GameManager.Instance.UIManager.UINotificationsHandler.CreateTaskNotification(this);
                 pointerArrow.SetActive(true);
                 pointerArrow.GetComponent<PointerArrow>().Init(gameObject, task.TaskType == SSTaskType.Timed);
+            }
+
+            if (task.TaskType != SSTaskType.Permanent && task.TaskType != SSTaskType.Compute)
+            {
+                GameManager.Instance.UIManager.UINotificationsHandler.CreateTaskNotification(this);
             }
 
             this.spaceshipManager.AddTask(this);
@@ -211,8 +213,7 @@ namespace UI
                 assistant.AssignTask(this);
             }
 
-            if (Task.TaskType == SSTaskType.Permanent)
-                GameManager.Instance.UIManager.UINotificationsHandler.CreateTaskNotification(this);
+            GameManager.Instance.UIManager.UINotificationsHandler.CreateTaskNotification(this);
         }
 
         private void CheckingCondition(bool validatedCondition)
@@ -443,9 +444,10 @@ namespace UI
                             outcomeEventArgs[numberOfBaseOutcomes + i] =
                                 OutcomeSystem.GenerateEventArgs(outcome, AssistantCharacters[0]);
                             break;
-                        
+
                         case OutcomeData.OutcomeTarget.Random:
-                            var randomCharacter = spaceshipManager.characters[Random.Range(0, spaceshipManager.characters.Length)];
+                            var randomCharacter =
+                                spaceshipManager.characters[Random.Range(0, spaceshipManager.characters.Length)];
                             outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, randomCharacter);
                             break;
 
@@ -525,7 +527,8 @@ namespace UI
 
                     Task.Duration -= TimeTickSystem.timePerTick;
                     timerSprite.material.SetInt("_Arc2", (int)(Task.Duration / Task.BaseDuration * 360));
-                    uiNotification.UpdateCompletionFill(Task.Duration / Task.BaseDuration);
+                    if (uiNotification.isActive)
+                        uiNotification.UpdateCompletionFill(Task.Duration / Task.BaseDuration);
                 }
                 else
                 {
@@ -540,7 +543,8 @@ namespace UI
                     time.text = TimeTickSystem.GetTicksAsTime((uint)Task.TimeLeft);
                     Task.TimeLeft -= TimeTickSystem.timePerTick;
                     timeLeftSprite.material.SetInt("_Arc1", (int)(360 - Task.TimeLeft / timeLeft * 360));
-                    uiNotification.UpdateTimeLeftFill(Task.TimeLeft / timeLeft);
+                    if (uiNotification.isActive)
+                        uiNotification.UpdateTimeLeftFill(Task.TimeLeft / timeLeft);
                 }
                 else if (!IsStarted)
                 {
@@ -581,7 +585,7 @@ namespace UI
             ResetCharacters();
             GameManager.Instance.RefreshCharacterIcons();
             GameManager.Instance.UIManager.UINotificationsHandler.RemoveNotification(uiNotification);
-            GameManager.Instance.UIManager.UINotificationsHandler.CreateRecapNotification(this);
+            if (IsStarted) GameManager.Instance.UIManager.UINotificationsHandler.CreateRecapNotification(this);
             if (transform.parent != null)
             {
                 var notificationContainer = transform.parent.GetComponent<NotificationContainer>();
@@ -591,7 +595,6 @@ namespace UI
 
             if (launcher.storyline != null)
             {
-                Debug.Log("je retourne à la pool");
                 if (launcher.storyline.StorylineContainer.StoryType != SSStoryType.Principal)
                     StartCoroutine(
                         spaceshipManager.notificationPool.AddToPoolLater(gameObject, dialogueSpontaneousDuration));
@@ -599,7 +602,7 @@ namespace UI
                     spaceshipManager.notificationPool.AddToPool(gameObject);
             }
 
-            if (Task.TaskType == SSTaskType.Permanent)
+            if (Task.TaskType == SSTaskType.Permanent || Task.TaskType == SSTaskType.Compute)
             {
                 spaceshipManager.notificationPool.AddToPool(gameObject);
             }
@@ -620,8 +623,6 @@ namespace UI
 
                 AssistantCharacters[i].GetSimCharacter().taskRoom = null;
             }
-            
-            
         }
 
         public void OnCancel()

@@ -6,6 +6,7 @@ public class TaskUINotification : UINotification
 {
     [SerializeField] private Image timeLeftFill;
     [SerializeField] private Image completionFill;
+
     public override void OnPointerDown(PointerEventData eventData)
     {
         notification.Display();
@@ -16,7 +17,7 @@ public class TaskUINotification : UINotification
         timeLeftFill.enabled = true;
         timeLeftFill.fillAmount = value;
     }
-    
+
     public override void UpdateCompletionFill(float value)
     {
         timeLeftFill.enabled = false;
