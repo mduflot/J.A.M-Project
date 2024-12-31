@@ -17,8 +17,6 @@ namespace SS
 
     public class SSLauncher : MonoBehaviour
     {
-        [HideInInspector] public bool IsCancelled;
-        [HideInInspector] public bool CanIgnoreDialogueTask;
         public bool IsRunning { get; private set; }
         public List<SerializableTuple<string, string>> dialogues { get; set; }
         public SSNodeSO CurrentNode { get; private set; }
@@ -37,9 +35,9 @@ namespace SS
         public SpaceshipManager spaceshipManager { get; set; }
 
         /* Node Scriptable Objects */
-        [SerializeField] public SSNodeContainerSO nodeContainer;
-        [SerializeField] public SSNodeGroupSO nodeGroup;
-        [SerializeField] public SSNodeSO node;
+        public SSNodeContainerSO nodeContainer;
+        public SSNodeGroupSO nodeGroup;
+        public SSNodeSO node;
 
         /* Filters */
         [SerializeField] private bool groupedNodes;
@@ -52,48 +50,45 @@ namespace SS
         /* Nodes */
         private SSTimeNodeSO timeNode;
         private uint durationTimeNode;
+        private SSCheckConditionNodeSO checkNode;
 
         /* Logs */
         public StorylineLog storylineLog;
 
-        [SerializeField] private bool isCheatLauncher;
+        private GameObject notificationGO;
 
         public void StartTimeline()
         {
             if (nodeContainer.StoryType != SSStoryType.Tasks)
             {
-                if (!isCheatLauncher)
+                if (Checker.Instance.allStorylineLogs.Any(storylineLog => storylineLog.storylineID == storyline.ID))
                 {
-                    if (Checker.Instance.allStorylineLogs.Any(storylineLog => storylineLog.storylineID == storyline.ID))
-                    {
-                        storylineLog = Checker.Instance.allStorylineLogs.First(storylineLog =>
-                            storylineLog.storylineID == storyline.ID);
-                    }
-                    else
-                    {
-                        storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName,
-                            GameManager.Instance.UIManager.date.text, "");
-                        Checker.Instance.allStorylineLogs.Add(storylineLog);
-                    }
+                    storylineLog = Checker.Instance.allStorylineLogs.First(storylineLog =>
+                        storylineLog.storylineID == storyline.ID);
+                }
+                else
+                {
+                    storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName,
+                        GameManager.Instance.UIManager.date.text, "");
+                    Checker.Instance.allStorylineLogs.Add(storylineLog);
+                }
 
-                    if (timeline.Status == SSStoryStatus.Completed)
-                    {
-                        TimeTickSystem.OnTick += WaitTimeline;
-                        return;
-                    }
+                if (timeline.Status == SSStoryStatus.Completed)
+                {
+                    TimeTickSystem.OnTick += WaitTimeline;
+                    return;
                 }
             }
 
-            if (nodeContainer.StoryType == SSStoryType.Principal) GameManager.Instance.UIManager.mainStorylineText.text = nodeContainer.name;
+            if (nodeContainer.StoryType == SSStoryType.Principal)
+                GameManager.Instance.UIManager.mainStorylineText.text = nodeContainer.name;
             spaceshipManager = GameManager.Instance.SpaceshipManager;
-            if (dialogues == null) dialogues = new();
-            if (characters == null) characters = new();
-            if (assignedCharacters == null) assignedCharacters = new();
-            if (notAssignedCharacters == null) notAssignedCharacters = new();
-            if (traitsCharacters == null) traitsCharacters = new();
+            dialogues ??= new();
+            characters ??= new();
+            assignedCharacters ??= new();
+            notAssignedCharacters ??= new();
+            traitsCharacters ??= new();
             IsRunning = true;
-            IsCancelled = false;
-            CanIgnoreDialogueTask = false;
             task = null;
             SoundManager.Instance.PlaySound(SoundManager.Instance.notificationChime);
             CheckNodeType(node);
@@ -101,7 +96,8 @@ namespace SS
 
         public void StartTimelineOnDrop(CharacterIcon icon)
         {
-            if (nodeContainer.StoryType == SSStoryType.Principal) GameManager.Instance.UIManager.mainStorylineText.text = nodeContainer.name;
+            if (nodeContainer.StoryType == SSStoryType.Principal)
+                GameManager.Instance.UIManager.mainStorylineText.text = nodeContainer.name;
             spaceshipManager = GameManager.Instance.SpaceshipManager;
             dialogues = new();
             characters = new();
@@ -109,8 +105,6 @@ namespace SS
             notAssignedCharacters = new();
             traitsCharacters = new();
             IsRunning = true;
-            IsCancelled = false;
-            CanIgnoreDialogueTask = false;
             task = null;
             StartCoroutine(RunNode(node as SSTaskNodeSO, icon));
         }
@@ -126,25 +120,20 @@ namespace SS
                 }
                 else
                 {
-                    if (!isCheatLauncher)
-                    {
-                        storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName,
-                            GameManager.Instance.UIManager.date.text, "");
-                        Checker.Instance.allStorylineLogs.Add(storylineLog);
-                    }
+                    storylineLog = new StorylineLog(storyline.ID, storyline.StorylineContainer.FileName,
+                        GameManager.Instance.UIManager.date.text, "");
+                    Checker.Instance.allStorylineLogs.Add(storylineLog);
                 }
 
-                if (!isCheatLauncher)
+                if (timeline.Status == SSStoryStatus.Completed)
                 {
-                    if (timeline.Status == SSStoryStatus.Completed)
-                    {
-                        TimeTickSystem.OnTick += WaitTimeline;
-                        return;
-                    }
+                    TimeTickSystem.OnTick += WaitTimeline;
+                    return;
                 }
             }
 
-            if (nodeContainer.StoryType == SSStoryType.Principal) GameManager.Instance.UIManager.mainStorylineText.text = nodeContainer.name;
+            if (nodeContainer.StoryType == SSStoryType.Principal)
+                GameManager.Instance.UIManager.mainStorylineText.text = nodeContainer.name;
             spaceshipManager = GameManager.Instance.SpaceshipManager;
             dialogues = new();
             characters = new();
@@ -152,8 +141,6 @@ namespace SS
             notAssignedCharacters = new();
             traitsCharacters = new();
             IsRunning = true;
-            IsCancelled = false;
-            CanIgnoreDialogueTask = false;
             CurrentNode = node;
             task = null;
             StartCoroutine(RunNode(node as SSTaskNodeSO, null, taskLog));
@@ -161,14 +148,13 @@ namespace SS
 
         private void ResetTimeline()
         {
-            if (nodeContainer.StoryType == SSStoryType.Principal) GameManager.Instance.UIManager.mainStorylineText.text = "No Storyline";
+            if (nodeContainer.StoryType == SSStoryType.Principal)
+                GameManager.Instance.UIManager.mainStorylineText.text = "No Storyline";
         }
 
         private bool IsFinish()
         {
-            if (storyline.Timelines.Any(timeline => timeline.Status == SSStoryStatus.Enabled))
-                return false;
-            return true;
+            return !storyline.Timelines.Any(timeline => timeline.Status == SSStoryStatus.Enabled);
         }
 
         private void WaitTimeline(object sender, TimeTickSystem.OnTickEventArgs e)
@@ -179,11 +165,13 @@ namespace SS
                 return;
             }
 
+            TimeTickSystem.OnTick -= CheckConditionNode;
+            TimeTickSystem.OnTick -= WaitTimeline;
             Checker.Instance.allStorylineLogs.First(storylineLog => storylineLog.storylineID == storyline.ID)
                 .timelineLogs.Add(new TimelineLog(timeline.ID, timeline.TimelineContainer.GroupName,
                     GameManager.Instance.UIManager.date.text));
 
-            List<Timeline> availablesTimelines = new();
+            List<Timeline> availableTimelines = new();
             for (var i = 0; i < storyline.Timelines.Count; i++)
             {
                 var timeline = storyline.Timelines[i];
@@ -191,10 +179,10 @@ namespace SS
                 if (timeline.TimelineContainer.Condition)
                     if (RouteCondition(timeline.TimelineContainer.Condition))
                         continue;
-                availablesTimelines.Add(timeline);
+                availableTimelines.Add(timeline);
             }
 
-            if (availablesTimelines.Count == 0)
+            if (availableTimelines.Count == 0)
             {
                 if (!nodeContainer.IsReplayable) storyline.Status = SSStoryStatus.Completed;
                 else
@@ -206,15 +194,15 @@ namespace SS
                     }
                 }
 
-                if (nodeContainer.StoryType == SSStoryType.Principal) Checker.Instance.GenerateNewPrincipalEvent(nodeContainer.IsTutorialToPlay);
-                Checker.Instance.launcherPool.AddToPool(this.gameObject);
+                if (nodeContainer.StoryType == SSStoryType.Principal)
+                    Checker.Instance.GenerateNewPrincipalEvent(nodeContainer.IsTutorialToPlay);
                 Checker.Instance.activeLaunchers.Remove(this);
+                Checker.Instance.launcherPool.AddToPool(gameObject);
                 Debug.Log("No more timeline available / Storyline completed");
-                TimeTickSystem.OnTick -= WaitTimeline;
                 return;
             }
 
-            timeline = availablesTimelines[Random.Range(0, availablesTimelines.Count)];
+            timeline = availableTimelines[Random.Range(0, availableTimelines.Count)];
             nodeGroup = timeline.TimelineContainer;
             for (int index = 0;
                  index < storyline.StorylineContainer.NodeGroups[timeline.TimelineContainer].Count;
@@ -227,7 +215,6 @@ namespace SS
                 }
             }
 
-            TimeTickSystem.OnTick -= WaitTimeline;
             StartTimeline();
         }
 
@@ -286,6 +273,11 @@ namespace SS
                 case SSNodeType.Popup:
                 {
                     RunNode(nodeSO as SSPopupNodeSO);
+                    break;
+                }
+                case SSNodeType.CheckCondition:
+                {
+                    RunNode(nodeSO as SSCheckConditionNodeSO);
                     break;
                 }
             }
@@ -405,7 +397,7 @@ namespace SS
                     }
                     else
                     {
-                        if (nodeSO.Choices.First().NextNode == null)
+                        if (nodeSO.Choices[0].NextNode == null)
                         {
                             IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
@@ -426,7 +418,7 @@ namespace SS
                     }
                     else
                     {
-                        if (nodeSO.Choices.First().NextNode == null)
+                        if (nodeSO.Choices[0].NextNode == null)
                         {
                             IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
@@ -447,7 +439,7 @@ namespace SS
                     }
                     else
                     {
-                        if (nodeSO.Choices.First().NextNode == null)
+                        if (nodeSO.Choices[0].NextNode == null)
                         {
                             IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
@@ -468,7 +460,7 @@ namespace SS
                     }
                     else
                     {
-                        if (nodeSO.Choices.First().NextNode == null)
+                        if (nodeSO.Choices[0].NextNode == null)
                         {
                             IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
@@ -489,7 +481,7 @@ namespace SS
                     }
                     else
                     {
-                        if (nodeSO.Choices.First().NextNode == null)
+                        if (nodeSO.Choices[0].NextNode == null)
                         {
                             IsRunning = false;
                             nodeGroup.StoryStatus = SSStoryStatus.Completed;
@@ -660,27 +652,12 @@ namespace SS
                     break;
                 }
                 case SSSpeakerType.IncomingSignal:
-                    for (int index = 0; index < spaceshipManager.GetRoom(RoomType.Trajectory).roomObjects.Length; index++)
-                    {
-                        var furniture = spaceshipManager.GetRoom(RoomType.Trajectory).roomObjects[index];
-                        if (furniture.furnitureType == FurnitureType.ConsoleSide)
-                        {
-                            var signal = furniture.transform;
-                            if (signal.TryGetComponent(out DialogueManager speaker))
-                            {
-                                dialogues.Add(new SerializableTuple<string, string>("Incoming Signal", nodeSO.Text));
-                                StartCoroutine(DisplayDialogue("Incoming Signal", nodeSO));
-                            }
-                            else
-                            {
-                                Debug.LogWarning("No speaker on the Incoming Signal");
-                            }
+                {
+                    dialogues.Add(new SerializableTuple<string, string>("Incoming Signal", nodeSO.Text));
+                    StartCoroutine(DisplayDialogue("Incoming Signal", nodeSO));
 
-                            break;
-                        }
-                    }
-                    
                     break;
+                }
             }
         }
 
@@ -693,68 +670,95 @@ namespace SS
         private IEnumerator DisplayDialogue(string characterName, SSDialogueNodeSO nodeSO)
         {
             nodeSO.IsCompleted = false;
-            if (CanIgnoreDialogueTask && nodeSO.IsDialogueTask)
-            {
-                if (nodeSO.Choices.First().NextNode == null)
-                {
-                    IsRunning = false;
-                    ResetTimeline();
-                    if (nodeContainer.StoryType != SSStoryType.Tasks)
-                    {
-                        if (!isCheatLauncher)
-                        {
-                            timeline.Status = SSStoryStatus.Completed;
-                            if (nodeGroup.TimeIsOverride)
-                                waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                            else
-                                waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
-                                                     TimeTickSystem.ticksPerHour);
-                            if (IsFinish()) waitingTime = 0;
-                            TimeTickSystem.OnTick += WaitTimeline;
-                        }
-                    }
 
-                    yield break;
+            if (!nodeSO.IsDialogueTask && task != null) yield return new WaitUntil(() => task.Duration <= 0);
+
+            if (nodeContainer.StoryType is SSStoryType.Principal)
+            {
+                if (nodeSO.IsDialogueTask && nodeSO.DialogueType == SSDialogueType.Bark)
+                {
+                    StartCoroutine(AddDialogueNotification(nodeSO));
+                }
+                else
+                {
+                    GameManager.Instance.UIManager.dialogueManager.InitializeMenu(storyline.StorylineContainer.name);
+                    GameManager.Instance.UIManager.dialogueManager.AddDialogue(nodeSO, characterName);
                 }
             }
-
-            CanIgnoreDialogueTask = false;
-            if (!nodeSO.IsDialogueTask && task != null)
-                yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
-            if (IsCancelled)
+            else
             {
-                CanIgnoreDialogueTask = true;
-                IsCancelled = false;
-                yield break;
+                StartCoroutine(AddDialogueNotification(nodeSO));
             }
-
-            GameManager.Instance.UIManager.dialogueManager.AddDialogue(task, nodeSO, characterName);
 
             yield return new WaitUntil(() => nodeSO.IsCompleted);
 
-            if (nodeSO.Choices.First().NextNode == null)
+            if (nodeSO.Choices[0].NextNode == null)
             {
+                GameManager.Instance.UIManager.dialogueManager.ActivateButton();
                 IsRunning = false;
                 ResetTimeline();
                 if (nodeContainer.StoryType != SSStoryType.Tasks)
                 {
-                    if (!isCheatLauncher)
-                    {
-                        timeline.Status = SSStoryStatus.Completed;
-                        if (nodeGroup.TimeIsOverride)
-                            waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                        else
-                            waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
-                                                 TimeTickSystem.ticksPerHour);
-                        if (IsFinish()) waitingTime = 0;
-                        TimeTickSystem.OnTick += WaitTimeline;
-                    }
+                    timeline.Status = SSStoryStatus.Completed;
+                    if (nodeGroup.TimeIsOverride)
+                        waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                    else
+                        waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                             TimeTickSystem.ticksPerHour);
+                    if (IsFinish()) waitingTime = 0;
+                    TimeTickSystem.OnTick += WaitTimeline;
                 }
 
                 yield break;
             }
 
-            CheckNodeType(nodeSO.Choices.First().NextNode);
+            if (nodeSO.Choices[0].NextNode is not SSDialogueNodeSO)
+                GameManager.Instance.UIManager.dialogueManager.ActivateButton();
+            CheckNodeType(nodeSO.Choices[0].NextNode);
+        }
+
+        private IEnumerator AddDialogueNotification(SSDialogueNodeSO nodeSO)
+        {
+            if (notificationGO.TryGetComponent(out Notification notification))
+            {
+                if (nodeSO.IsDialogueTask)
+                    yield return new WaitUntil(() =>
+                        1 - nodeSO.PercentageTask / 100.0f >= task.Duration / task.BaseDuration);
+                Sprite spriteIcon;
+                string firstName;
+                switch (nodeSO.BarkType)
+                {
+                    case SSBarkType.Awaiting:
+                        Debug.LogError("Don't use Awaiting bark type for dialogue, is already handled by the system");
+                        break;
+                    case SSBarkType.Completing:
+                        spriteIcon = task.leaderCharacters[0].GetCharacterData().characterIcon;
+                        firstName = task.leaderCharacters[0].GetCharacterData().firstName;
+                        notification.DisplayDialogue(spriteIcon, firstName,
+                            task.leaderCharacters[0].GetCharacterData().completingBarks[
+                                Random.Range(0,
+                                    task.leaderCharacters[0].GetCharacterData().completingBarks.Length)], nodeSO);
+                        break;
+                    case SSBarkType.Completed:
+                        spriteIcon = task.leaderCharacters[0].GetCharacterData().characterIcon;
+                        firstName = task.leaderCharacters[0].GetCharacterData().firstName;
+                        notification.DisplayDialogue(spriteIcon, firstName,
+                            task.leaderCharacters[0].GetCharacterData().completedBarks[
+                                Random.Range(0,
+                                    task.leaderCharacters[0].GetCharacterData().completedBarks.Length)], nodeSO);
+                        break;
+                    case SSBarkType.Ignored:
+                        var randomCharacter =
+                            spaceshipManager.characters[Random.Range(0, spaceshipManager.characters.Length)];
+                        spriteIcon = randomCharacter.GetCharacterData().characterIcon;
+                        firstName = randomCharacter.GetCharacterData().firstName;
+                        notification.DisplayDialogue(spriteIcon, firstName,
+                            randomCharacter.GetCharacterData().ignoredBarks[
+                                Random.Range(0, randomCharacter.GetCharacterData().ignoredBarks.Length)],
+                            nodeSO);
+                        break;
+                }
+            }
         }
 
         #endregion
@@ -763,25 +767,14 @@ namespace SS
 
         public void RunTimedNodeCancel(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
         {
-            StartCoroutine(WaitTimedRunCancelNode(notification, actualTask, taskNode));
-        }
-
-        public void RunUntimedNodeCancel(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
-        {
-            StartCoroutine(WaitUntimedRunCancelNode(notification, actualTask, taskNode));
-        }
-
-        private IEnumerator WaitTimedRunCancelNode(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
-        {
-            yield return new WaitUntil(() => IsCancelled == false);
+            StopAllCoroutines();
             notification.InitializeCancelTask();
             StartCoroutine(WaiterTask(taskNode, actualTask));
         }
 
-        private IEnumerator WaitUntimedRunCancelNode(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
+        public void RunUntimedNodeCancel(Notification notification, Task actualTask, SSTaskNodeSO taskNode)
         {
-            yield return new WaitUntil(() => IsCancelled == false);
-            CanIgnoreDialogueTask = false;
+            StopAllCoroutines();
             notification.Initialize(actualTask, taskNode, spaceshipManager, this, dialogues);
             StartCoroutine(WaiterTask(taskNode, actualTask));
         }
@@ -802,38 +795,27 @@ namespace SS
             durationTimeNode -= TimeTickSystem.timePerTick;
             if (durationTimeNode <= 0)
             {
-                if (timeNode.Choices.First().NextNode == null)
+                if (timeNode.Choices[0].NextNode == null)
                 {
                     IsRunning = false;
                     ResetTimeline();
                     if (nodeContainer.StoryType != SSStoryType.Tasks)
                     {
-                        if (!isCheatLauncher)
-                        {
-                            timeline.Status = SSStoryStatus.Completed;
-                            if (nodeGroup.TimeIsOverride)
-                                waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                            else
-                                waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
-                                                     TimeTickSystem.ticksPerHour);
-                            if (IsFinish()) waitingTime = 0;
-                            TimeTickSystem.OnTick += WaitTimeline;
-                        }
+                        timeline.Status = SSStoryStatus.Completed;
+                        if (nodeGroup.TimeIsOverride)
+                            waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                        else
+                            waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                                 TimeTickSystem.ticksPerHour);
+                        if (IsFinish()) waitingTime = 0;
+                        TimeTickSystem.OnTick += WaitTimeline;
                     }
 
                     return;
                 }
 
-                if (IsCancelled)
-                {
-                    CanIgnoreDialogueTask = true;
-                    IsCancelled = false;
-                    TimeTickSystem.OnTick -= WaitingTime;
-                    return;
-                }
-
                 TimeTickSystem.OnTick -= WaitingTime;
-                CheckNodeType(timeNode.Choices.First().NextNode);
+                CheckNodeType(timeNode.Choices[0].NextNode);
             }
         }
 
@@ -841,27 +823,24 @@ namespace SS
 
         #region Task
 
-        private IEnumerator RunNode(SSTaskNodeSO nodeSO, CharacterIcon icon = null, TaskLog taskToPlay = null)
+        private IEnumerator RunNode(SSTaskNodeSO node, CharacterIcon icon = null, TaskLog taskToPlay = null)
         {
-            if (nodeSO.TaskType.Equals(SSTaskType.Permanent))
-            {
-                if (spaceshipManager.IsTaskActive(nodeSO.name))
-                {
-                    yield break;
-                }
-            }
+            // If the task is permanent and already active, we don't run it again
+            if (node.TaskType.Equals(SSTaskType.Permanent) && spaceshipManager.IsTaskActive(node.name))
+                yield break;
 
-            if (task != null && taskToPlay == null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
+            if (task != null && taskToPlay == null)
+                yield return new WaitUntil(() => task.Duration <= 0);
             assignedCharacters.Clear();
             notAssignedCharacters.Clear();
-            var room = spaceshipManager.GetRoom(nodeSO.Room);
-            var notificationGO = spaceshipManager.notificationPool.GetFromPool();
+            var room = spaceshipManager.GetRoom(node.Room);
+            notificationGO = spaceshipManager.notificationPool.GetFromPool();
             if (notificationGO.TryGetComponent(out Notification notification))
             {
                 Transform roomTransform;
-                if (room.roomObjects.Any(furniture => furniture.furnitureType == nodeSO.Furniture))
+                if (room.roomObjects.Any(furniture => furniture.furnitureType == node.Furniture))
                 {
-                    roomTransform = room.roomObjects.First(furniture => furniture.furnitureType == nodeSO.Furniture)
+                    roomTransform = room.roomObjects.First(furniture => furniture.furnitureType == node.Furniture)
                         .transform;
                     roomTransform.GetComponent<NotificationContainer>().DisplayNotification();
                 }
@@ -874,7 +853,7 @@ namespace SS
                 notificationGO.transform.parent = roomTransform;
                 roomTransform.GetComponent<NotificationContainer>().DisplayNotification();
                 var conditions = new List<Tuple<ConditionSO, string>>();
-                foreach (var choiceData in nodeSO.Choices)
+                foreach (var choiceData in node.Choices)
                 {
                     conditions.Add(new Tuple<ConditionSO, string>(((SSNodeChoiceTaskData)choiceData).Condition,
                         ((SSNodeChoiceTaskData)choiceData).PreviewOutcome));
@@ -882,59 +861,53 @@ namespace SS
 
                 if (taskToPlay != null)
                 {
-                    task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
-                        taskToPlay.TimeLeft, taskToPlay.Duration,
-                        nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
-                        nodeSO.IsTaskTutorial,
-                        conditions, taskToPlay.IsStarted);
-                    notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues, taskToPlay);
+                    task = new Task(node, storyline != null ? storyline.StorylineContainer.FileName : "", conditions,
+                        taskToPlay.IsStarted);
+                    notification.Initialize(task, node, spaceshipManager, this, dialogues, taskToPlay);
                 }
                 else
                 {
-                    task = new Task(nodeSO.name, nodeSO.Description, nodeSO.TaskStatus, nodeSO.TaskType, nodeSO.Icon,
-                        nodeSO.TimeLeft, nodeSO.Duration,
-                        nodeSO.MandatorySlots, nodeSO.OptionalSlots, nodeSO.TaskHelpFactor, nodeSO.Room,
-                        nodeSO.IsTaskTutorial,
-                        conditions);
-                    notification.Initialize(task, nodeSO, spaceshipManager, this, dialogues);
+                    task = new Task(node, storyline != null ? storyline.StorylineContainer.FileName : "", conditions);
+                    notification.Initialize(task, node, spaceshipManager, this, dialogues);
                 }
 
-                spaceshipManager.AddTask(notification);
-                if (nodeSO.TaskType.Equals(SSTaskType.Permanent) && icon != null) notification.Display(icon);
-                else if (nodeSO.TaskType.Equals(SSTaskType.Permanent) || nodeSO.TaskType.Equals(SSTaskType.Compute))
+                if (nodeContainer.StoryType is SSStoryType.Spontaneous)
+                {
+                    var randomCharacter =
+                        spaceshipManager.characters[Random.Range(0, spaceshipManager.characters.Length)];
+                    notification.DisplayDialogue(randomCharacter.GetCharacterData().characterIcon,
+                        randomCharacter.GetCharacterData().firstName,
+                        randomCharacter.GetCharacterData()
+                            .awaitingBarks[Random.Range(0, randomCharacter.GetCharacterData().awaitingBarks.Length)]);
+                }
+
+                if (node.TaskType.Equals(SSTaskType.Permanent) && icon != null) notification.Display(icon);
+                else if (node.TaskType.Equals(SSTaskType.Permanent) || node.TaskType.Equals(SSTaskType.Compute))
                     notification.Display();
-                StartCoroutine(WaiterTask(nodeSO, task));
+                StartCoroutine(WaiterTask(node, task));
             }
         }
 
         private IEnumerator WaiterTask(SSTaskNodeSO nodeSO, Task task)
         {
             var notification = spaceshipManager.GetTaskNotification(task);
-            yield return new WaitUntil(() => notification.IsStarted || notification.IsCancelled);
-            if (notification.IsCancelled)
-            {
-                if (task.TaskType.Equals(SSTaskType.Permanent)) spaceshipManager.RemoveTask(notification);
-                yield break;
-            }
+            yield return new WaitUntil(() => notification.IsStarted);
 
             if (nodeSO.Choices[task.conditionIndex].NextNode == null)
             {
-                yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
+                yield return new WaitUntil(() => task.Duration <= 0);
                 IsRunning = false;
                 ResetTimeline();
                 if (nodeContainer.StoryType != SSStoryType.Tasks)
                 {
-                    if (!isCheatLauncher)
-                    {
-                        timeline.Status = SSStoryStatus.Completed;
-                        if (nodeGroup.TimeIsOverride)
-                            waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                        else
-                            waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
-                                                 TimeTickSystem.ticksPerHour);
-                        if (IsFinish()) waitingTime = 0;
-                        TimeTickSystem.OnTick += WaitTimeline;
-                    }
+                    timeline.Status = SSStoryStatus.Completed;
+                    if (nodeGroup.TimeIsOverride)
+                        waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                    else
+                        waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                             TimeTickSystem.ticksPerHour);
+                    if (IsFinish()) waitingTime = 0;
+                    TimeTickSystem.OnTick += WaitTimeline;
                 }
 
                 yield break;
@@ -942,13 +915,6 @@ namespace SS
 
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).LeaderCharacters);
             assignedCharacters.AddRange(spaceshipManager.GetTaskNotification(task).AssistantCharacters);
-
-            if (IsCancelled)
-            {
-                CanIgnoreDialogueTask = true;
-                IsCancelled = false;
-                yield break;
-            }
 
             CheckNodeType(nodeSO.Choices[task.conditionIndex].NextNode);
         }
@@ -964,7 +930,7 @@ namespace SS
 
         private IEnumerator WaitingPopup(SSPopupNodeSO nodeSO)
         {
-            if (task != null) yield return new WaitUntil(() => task.Duration <= 0 || IsCancelled);
+            if (task != null) yield return new WaitUntil(() => task.Duration <= 0);
 
             if (nodeSO.IsTutorialPopup) GameManager.Instance.UIManager.PopupTutorial.Initialize(nodeSO.Text);
             else
@@ -996,7 +962,7 @@ namespace SS
             yield return new WaitUntil(() => GameManager.Instance.UIManager.PopupTutorial.continueButtonPressed ||
                                              GameManager.Instance.UIManager.PopupTutorial.passTutorialPressed);
 
-            if (nodeSO.Choices.First().NextNode == null ||
+            if (nodeSO.Choices[0].NextNode == null ||
                 GameManager.Instance.UIManager.PopupTutorial.passTutorialPressed)
             {
                 IsRunning = false;
@@ -1012,24 +978,121 @@ namespace SS
                 GameManager.Instance.UIManager.SpaceshipMenu.SetActive(true);
                 if (nodeContainer.StoryType != SSStoryType.Tasks)
                 {
-                    if (!isCheatLauncher)
-                    {
-                        timeline.Status = SSStoryStatus.Completed;
-                        if (nodeGroup.TimeIsOverride)
-                            waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
-                        else
-                            waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
-                                                 TimeTickSystem.ticksPerHour);
-                        if (IsFinish()) waitingTime = 0;
-                        TimeTickSystem.OnTick += WaitTimeline;
-                    }
+                    timeline.Status = SSStoryStatus.Completed;
+                    if (nodeGroup.TimeIsOverride)
+                        waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                    else
+                        waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                             TimeTickSystem.ticksPerHour);
+                    if (IsFinish()) waitingTime = 0;
+                    TimeTickSystem.OnTick += WaitTimeline;
                 }
 
                 if (nodeSO.IsTutorialPopup) Debug.Log("End of tutorial");
                 yield break;
             }
 
-            CheckNodeType(nodeSO.Choices.First().NextNode);
+            CheckNodeType(nodeSO.Choices[0].NextNode);
+        }
+
+        #endregion
+
+        #region CheckCondition
+
+        private void RunNode(SSCheckConditionNodeSO nodeSO)
+        {
+            checkNode = nodeSO;
+            TimeTickSystem.OnTick += CheckConditionNode;
+
+            if (timeNode.Choices[0].NextNode == null)
+            {
+                IsRunning = false;
+                ResetTimeline();
+                if (nodeContainer.StoryType != SSStoryType.Tasks)
+                {
+                    timeline.Status = SSStoryStatus.Completed;
+                    if (nodeGroup.TimeIsOverride)
+                        waitingTime = nodeGroup.OverrideWaitTime * TimeTickSystem.ticksPerHour;
+                    else
+                        waitingTime = (uint)(Random.Range(nodeGroup.MinWaitTime, nodeGroup.MaxWaitTime) *
+                                             TimeTickSystem.ticksPerHour);
+                    if (IsFinish()) waitingTime = 0;
+                    TimeTickSystem.OnTick += WaitTimeline;
+                }
+
+                return;
+            }
+
+            CheckNodeType(nodeSO.Choices[0].NextNode);
+        }
+
+        private void CheckConditionNode(object sender, TimeTickSystem.OnTickEventArgs e)
+        {
+            if (!RouteCondition(checkNode.Condition)) return;
+
+            var outcomeEventArgs = new OutcomeSystem.OutcomeEventArgs[checkNode.Condition.outcomes.Outcomes.Length];
+            for (int index = 0; index < checkNode.Condition.outcomes.Outcomes.Length; index++)
+            {
+                var outcome = checkNode.Condition.outcomes.Outcomes[index];
+                switch (outcome.OutcomeTarget)
+                {
+                    case OutcomeData.OutcomeTarget.Leader:
+                        outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome, task.leaderCharacters[0]);
+                        break;
+
+                    case OutcomeData.OutcomeTarget.Assistant:
+                        outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome, task.assistantCharacters[0]);
+                        break;
+                    
+                    case OutcomeData.OutcomeTarget.Random:
+                        var randomCharacter = spaceshipManager.characters[Random.Range(0, spaceshipManager.characters.Length)];
+                        outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome, randomCharacter);
+                        break;
+
+                    case OutcomeData.OutcomeTarget.Crew:
+                        outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome,
+                            GameManager.Instance.SpaceshipManager.characters);
+                        break;
+
+                    case OutcomeData.OutcomeTarget.Ship:
+                        outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome);
+                        break;
+                    case OutcomeData.OutcomeTarget.Gauge:
+                        if (outcome.OutcomeType.Equals(OutcomeData.OutcomeType.Gauge))
+                            outcomeEventArgs[index] =
+                                OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
+                        else
+                        {
+                            if (task.leaderCharacters[0].GetMood() < task.leaderCharacters[0].GetBaseVolition())
+                            {
+                                outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome,
+                                    outcome.OutcomeTargetGauge, task.leaderCharacters[0].GetBaseVolition() / 2);
+                            }
+                            else
+                            {
+                                outcomeEventArgs[index] = OutcomeSystem.GenerateEventArgs(outcome,
+                                    outcome.OutcomeTargetGauge, task.leaderCharacters[0].GetBaseVolition());
+                            }
+                        }
+
+                        if (task.TaskType == SSTaskType.Permanent) outcomeEventArgs[index].value /= task.Duration;
+
+                        break;
+                }
+            }
+
+            var outcomeEvents = new OutcomeSystem.OutcomeEvent[outcomeEventArgs.Length];
+            for (int i = 0; i < outcomeEventArgs.Length; i++)
+            {
+                outcomeEvents[i] = OutcomeSystem.GenerateOutcomeEvent(outcomeEventArgs[i]);
+            }
+
+            for (uint i = 0; i < outcomeEvents.Length; i++)
+            {
+                outcomeEvents[i].Invoke(outcomeEventArgs[i]);
+            }
+
+            TimeTickSystem.OnTick -= CheckConditionNode;
         }
 
         #endregion

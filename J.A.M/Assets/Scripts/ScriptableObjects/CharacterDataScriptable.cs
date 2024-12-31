@@ -13,6 +13,11 @@ public class CharacterDataScriptable : ScriptableObject
     public Sprite characterBody;
     public string firstName, lastName;
     [TextArea(5, 10)] public string description;
+    
+    public string[] awaitingBarks;
+    public string[] completingBarks;
+    public string[] completedBarks;
+    public string[] ignoredBarks;
 
     [ContextMenu("Initialize GUID")]
     public void Initialize()

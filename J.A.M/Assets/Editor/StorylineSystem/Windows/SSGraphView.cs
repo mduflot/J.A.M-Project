@@ -17,6 +17,7 @@ namespace SS.Windows
         public string ID;
         public SSStoryStatus StoryStatus;
         public SSStoryType StoryType;
+        public SSSpontaneousType SpontaneousType;
         public bool IsTutorialToPlay;
         public bool IsFirstToPlay;
         public bool IsReplayable;
@@ -60,6 +61,7 @@ namespace SS.Windows
             ID = Guid.NewGuid().ToString();
             StoryStatus = SSStoryStatus.Enabled;
             StoryType = SSStoryType.Principal;
+            SpontaneousType = SSSpontaneousType.Default;
             IsTutorialToPlay = false;
             IsFirstToPlay = false;
             IsReplayable = false;
@@ -128,6 +130,7 @@ namespace SS.Windows
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Task)", SSNodeType.Task));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Time)", SSNodeType.Time));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Popup)", SSNodeType.Popup));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Check Condition)", SSNodeType.CheckCondition));
 
             this.AddManipulator(CreateGroupContextualMenu());
         }
@@ -135,7 +138,7 @@ namespace SS.Windows
         private IManipulator CreateGroupContextualMenu()
         {
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
-                menuEvent => menuEvent.menu.AppendAction("Add Group",
+                menuEvent => menuEvent.menu.AppendAction("Add Group (Timeline)",
                     actionEvent => CreateGroup("NodeGroup",
                         GetLocalMousePosition(actionEvent.eventInfo.localMousePosition)))
             );
@@ -203,6 +206,16 @@ namespace SS.Windows
                 case SSNodeType.Time:
                 {
                     node = (SSTimeNode)Activator.CreateInstance(nodeTypeSystem);
+                    break;
+                }
+                case SSNodeType.Popup:
+                {
+                    node = (SSPopupNode)Activator.CreateInstance(nodeTypeSystem);
+                    break;
+                }
+                case SSNodeType.CheckCondition:
+                {
+                    node = (SSCheckConditionNode)Activator.CreateInstance(nodeTypeSystem);
                     break;
                 }
             }
@@ -625,7 +638,7 @@ namespace SS.Windows
 
             Add(miniMap);
 
-            miniMap.visible = false;
+            miniMap.visible = true;
         }
 
         private void AddGridBackground()

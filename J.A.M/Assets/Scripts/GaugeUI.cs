@@ -17,7 +17,7 @@ public abstract class GaugeUI : HoverableObject, IPointerDownHandler
         {
             text1 = systemType.ToString(),
             text2 = "Decrease : " + GameManager.Instance.SpaceshipManager.systems
-                .First(system => system.type == systemType).decreaseSpeed,
+                .First(system => system.type == systemType).decreaseValues[0],
             baseParent = parentGauge.transform,
             parent = transform
         };
@@ -27,7 +27,7 @@ public abstract class GaugeUI : HoverableObject, IPointerDownHandler
 
     public abstract void UpdateGauge(float value, float previewValue);
 
-    public abstract void PreviewOutcomeGauge(float value);
+    public abstract void AddPreviewGauge(float value);
 
     public abstract void ResetPreviewGauge();
 

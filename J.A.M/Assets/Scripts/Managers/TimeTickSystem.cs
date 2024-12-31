@@ -122,6 +122,10 @@ namespace Managers
                 button.DeselectButton();
             }
             timeButtons[index].SelectButton();
+            for (int indexCharacter = 0; index < GameManager.Instance.SpaceshipManager.characters.Length; index++) {
+                var character = GameManager.Instance.SpaceshipManager.characters[indexCharacter];
+                character.GetSimCharacter().SetSpeedAnimator(timeScale);
+            }
         }
 
         public void LoadData(GameData gameData)

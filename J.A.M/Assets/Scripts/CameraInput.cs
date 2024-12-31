@@ -82,6 +82,33 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseTime"",
+                    ""type"": ""Button"",
+                    ""id"": ""c1489c5a-87b0-4db0-8f6a-c51dd9035f3a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NormalTime"",
+                    ""type"": ""Button"",
+                    ""id"": ""0f98d6a7-6073-4417-bf2c-28a0b1f2ed4d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DoubleTime"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc2cbcb0-51aa-43b4-889c-596137da4cfa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -271,6 +298,39 @@ namespace UnityEngine.InputSystem
                     ""action"": ""Space"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a8a45fb-b99f-4ab1-ae7e-42be9d742b71"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aea58442-14df-489c-814e-22c1dcdfc6ea"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NormalTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61b9cb23-558b-4ba1-8e8a-ee240e58ac24"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DoubleTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -346,6 +406,9 @@ namespace UnityEngine.InputSystem
             m_Camera_Cheat = m_Camera.FindAction("Cheat", throwIfNotFound: true);
             m_Camera_Drag = m_Camera.FindAction("Drag", throwIfNotFound: true);
             m_Camera_Space = m_Camera.FindAction("Space", throwIfNotFound: true);
+            m_Camera_PauseTime = m_Camera.FindAction("PauseTime", throwIfNotFound: true);
+            m_Camera_NormalTime = m_Camera.FindAction("NormalTime", throwIfNotFound: true);
+            m_Camera_DoubleTime = m_Camera.FindAction("DoubleTime", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -413,6 +476,9 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Camera_Cheat;
         private readonly InputAction m_Camera_Drag;
         private readonly InputAction m_Camera_Space;
+        private readonly InputAction m_Camera_PauseTime;
+        private readonly InputAction m_Camera_NormalTime;
+        private readonly InputAction m_Camera_DoubleTime;
         public struct CameraActions
         {
             private @CameraInput m_Wrapper;
@@ -423,6 +489,9 @@ namespace UnityEngine.InputSystem
             public InputAction @Cheat => m_Wrapper.m_Camera_Cheat;
             public InputAction @Drag => m_Wrapper.m_Camera_Drag;
             public InputAction @Space => m_Wrapper.m_Camera_Space;
+            public InputAction @PauseTime => m_Wrapper.m_Camera_PauseTime;
+            public InputAction @NormalTime => m_Wrapper.m_Camera_NormalTime;
+            public InputAction @DoubleTime => m_Wrapper.m_Camera_DoubleTime;
             public InputActionMap Get() { return m_Wrapper.m_Camera; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -450,6 +519,15 @@ namespace UnityEngine.InputSystem
                 @Space.started += instance.OnSpace;
                 @Space.performed += instance.OnSpace;
                 @Space.canceled += instance.OnSpace;
+                @PauseTime.started += instance.OnPauseTime;
+                @PauseTime.performed += instance.OnPauseTime;
+                @PauseTime.canceled += instance.OnPauseTime;
+                @NormalTime.started += instance.OnNormalTime;
+                @NormalTime.performed += instance.OnNormalTime;
+                @NormalTime.canceled += instance.OnNormalTime;
+                @DoubleTime.started += instance.OnDoubleTime;
+                @DoubleTime.performed += instance.OnDoubleTime;
+                @DoubleTime.canceled += instance.OnDoubleTime;
             }
 
             private void UnregisterCallbacks(ICameraActions instance)
@@ -472,6 +550,15 @@ namespace UnityEngine.InputSystem
                 @Space.started -= instance.OnSpace;
                 @Space.performed -= instance.OnSpace;
                 @Space.canceled -= instance.OnSpace;
+                @PauseTime.started -= instance.OnPauseTime;
+                @PauseTime.performed -= instance.OnPauseTime;
+                @PauseTime.canceled -= instance.OnPauseTime;
+                @NormalTime.started -= instance.OnNormalTime;
+                @NormalTime.performed -= instance.OnNormalTime;
+                @NormalTime.canceled -= instance.OnNormalTime;
+                @DoubleTime.started -= instance.OnDoubleTime;
+                @DoubleTime.performed -= instance.OnDoubleTime;
+                @DoubleTime.canceled -= instance.OnDoubleTime;
             }
 
             public void RemoveCallbacks(ICameraActions instance)
@@ -542,6 +629,9 @@ namespace UnityEngine.InputSystem
             void OnCheat(InputAction.CallbackContext context);
             void OnDrag(InputAction.CallbackContext context);
             void OnSpace(InputAction.CallbackContext context);
+            void OnPauseTime(InputAction.CallbackContext context);
+            void OnNormalTime(InputAction.CallbackContext context);
+            void OnDoubleTime(InputAction.CallbackContext context);
         }
     }
 }

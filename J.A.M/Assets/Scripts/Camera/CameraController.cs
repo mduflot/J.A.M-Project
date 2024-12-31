@@ -55,12 +55,15 @@ public class CameraController : MonoBehaviour
     {
         if (menuContainer) menuContainer.SetActive(!menuContainer.activeSelf);
     }
-    
+
     private void OnCheatPerformed(InputAction.CallbackContext obj)
     {
-        if (cheatContainer) cheatContainer.SetActive(!cheatContainer.activeSelf);
+        if (!Debug.isDebugBuild) return;
+        if (!cheatContainer) return;
+        GameManager.Instance.taskOpened = !cheatContainer.activeSelf;
+        cheatContainer.SetActive(!cheatContainer.activeSelf);
     }
-    
+
     private void OnSpacePerformed(InputAction.CallbackContext obj)
     {
         if (TimeTickSystem.timeScale == 0)
@@ -68,7 +71,23 @@ public class CameraController : MonoBehaviour
             TimeTickSystem.ModifyTimeScale(1);
             return;
         }
+
         TimeTickSystem.ModifyTimeScale(0);
+    }
+
+    private void OnPauseTimePerformed(InputAction.CallbackContext obj)
+    {
+        TimeTickSystem.ModifyTimeScale(0);
+    }
+
+    private void OnNormalTimePerformed(InputAction.CallbackContext obj)
+    {
+        TimeTickSystem.ModifyTimeScale(1);
+    }
+
+    private void OnDoubleTimePerformed(InputAction.CallbackContext obj)
+    {
+        TimeTickSystem.ModifyTimeScale(2);
     }
 
     private void OnDrag(InputAction.CallbackContext ctx)
@@ -77,20 +96,21 @@ public class CameraController : MonoBehaviour
         {
             origin = GetMousePosition;
         }
+
         isDragging = ctx.started || ctx.performed;
     }
-    
+
 
     private void LateUpdate()
     {
-        if(GameManager.Instance.taskOpened) return;
+        if (GameManager.Instance.taskOpened) return;
         CameraMovement();
         transform.position = ClampCameraToBounds(transform.position);
     }
 
     private void FixedUpdate()
     {
-        if(GameManager.Instance.taskOpened) return;
+        if (GameManager.Instance.taskOpened) return;
         transform.Translate(moveVector * moveSpeed);
     }
 
@@ -112,7 +132,7 @@ public class CameraController : MonoBehaviour
         transform.position -= difference * 0.6f;
         origin = mouse;
     }
-    
+
     private void OnEnable()
     {
         movement.Enable();
@@ -126,6 +146,9 @@ public class CameraController : MonoBehaviour
         cameraMovement.Drag.performed += OnDrag;
         cameraMovement.Drag.canceled += OnDrag;
         cameraMovement.Space.performed += OnSpacePerformed;
+        cameraMovement.PauseTime.performed += OnPauseTimePerformed;
+        cameraMovement.NormalTime.performed += OnNormalTimePerformed;
+        cameraMovement.DoubleTime.performed += OnDoubleTimePerformed;
     }
 
     private void OnDisable()
@@ -141,9 +164,13 @@ public class CameraController : MonoBehaviour
         cameraMovement.Drag.performed -= OnDrag;
         cameraMovement.Drag.canceled -= OnDrag;
         cameraMovement.Space.performed -= OnSpacePerformed;
+        cameraMovement.PauseTime.performed -= OnPauseTimePerformed;
+        cameraMovement.NormalTime.performed -= OnNormalTimePerformed;
+        cameraMovement.DoubleTime.performed -= OnDoubleTimePerformed;
     }
-    
-    private Vector2 GetMousePosition => camera.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, -500));
+
+    private Vector2 GetMousePosition => camera.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x,
+        Mouse.current.position.ReadValue().y, -500));
 
     public Vector2 GetZoomVector()
     {

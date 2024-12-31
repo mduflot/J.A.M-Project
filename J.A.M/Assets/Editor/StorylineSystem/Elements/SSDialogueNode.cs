@@ -11,9 +11,11 @@ namespace SS.Elements
 
     public class SSDialogueNode : SSNode
     {
+        public SSDialogueType DialogueType { get; set; }
         public string Text { get; set; }
         public SSSpeakerType SpeakerType { get; set; }
         public float Duration { get; set; }
+        public SSBarkType BarkType { get; set; }
         public bool IsDialogueTask { get; set; }
         public int PercentageTask { get; set; }
         public TraitsData.Job Job { get; set; }
@@ -25,8 +27,10 @@ namespace SS.Elements
             base.Initialize(nodeName, ssGraphView, position);
 
             NodeType = SSNodeType.Dialogue;
+            DialogueType = SSDialogueType.Dialogue;
             Text = "Node text.";
             Duration = 1.0f;
+            BarkType = SSBarkType.Awaiting;
             IsDialogueTask = false;
             PercentageTask = 50;
             Job = TraitsData.Job.None;
@@ -59,8 +63,52 @@ namespace SS.Elements
             /* EXTENSIONS CONTAINER */
 
             VisualElement customDataContainer = new VisualElement();
+            VisualElement dialogueDataContainer = new VisualElement();
+            VisualElement barkDataContainer = new VisualElement();
 
             customDataContainer.AddToClassList("ss-node__custom-data-container");
+
+            EnumField enumFieldDialogueType = SSElementUtility.CreateEnumField(DialogueType, "Dialogue Type",
+                callback =>
+                {
+                    DialogueType = (SSDialogueType)callback.newValue;
+                    if ((SSDialogueType)callback.newValue == SSDialogueType.Dialogue)
+                    {
+                        dialogueDataContainer = DrawDialogueType();
+                        customDataContainer.Add(dialogueDataContainer);
+                        if (customDataContainer.Contains(barkDataContainer))
+                            customDataContainer.Remove(barkDataContainer);
+                    }
+                    else
+                    {
+                        barkDataContainer = DrawBarkType();
+                        customDataContainer.Add(barkDataContainer);
+                        if (customDataContainer.Contains(dialogueDataContainer))
+                            customDataContainer.Remove(dialogueDataContainer);
+                    }
+                });
+
+            if (DialogueType == SSDialogueType.Dialogue)
+            {
+                dialogueDataContainer = DrawDialogueType();
+                customDataContainer.Add(dialogueDataContainer);
+            }
+            else
+            {
+                barkDataContainer = DrawBarkType();
+                customDataContainer.Add(barkDataContainer);
+            }
+
+            customDataContainer.Insert(0, enumFieldDialogueType);
+
+            extensionContainer.Add(customDataContainer);
+
+            RefreshExpandedState();
+        }
+
+        private VisualElement DrawDialogueType()
+        {
+            VisualElement customDataContainer = new VisualElement();
 
             Foldout textFoldout = SSElementUtility.CreateFoldout("Dialogue");
 
@@ -73,10 +121,15 @@ namespace SS.Elements
 
             customDataContainer.Add(textFoldout);
 
+            FloatField unsignedIntegerField = SSElementUtility.CreateFloatField(Duration,
+                "Duration", callback => { Duration = callback.newValue; });
+
+            customDataContainer.Add(unsignedIntegerField);
+
             EnumField enumFieldJob = null;
             EnumField enumFieldPositiveTraits = null;
             EnumField enumFieldNegativeTraits = null;
-            
+
             EnumField enumField = SSElementUtility.CreateEnumField(SpeakerType, "Speaker",
                 callback =>
                 {
@@ -96,7 +149,7 @@ namespace SS.Elements
                             {
                                 NegativeTraits = (TraitsData.NegativeTraits)callbackNegativeTraits.newValue;
                             });
-                        
+
                         customDataContainer.Add(enumFieldJob);
                         customDataContainer.Add(enumFieldPositiveTraits);
                         customDataContainer.Add(enumFieldNegativeTraits);
@@ -104,8 +157,10 @@ namespace SS.Elements
                     else
                     {
                         if (customDataContainer.Contains(enumFieldJob)) customDataContainer.Remove(enumFieldJob);
-                        if (customDataContainer.Contains(enumFieldPositiveTraits)) customDataContainer.Remove(enumFieldPositiveTraits);
-                        if (customDataContainer.Contains(enumFieldNegativeTraits)) customDataContainer.Remove(enumFieldNegativeTraits);
+                        if (customDataContainer.Contains(enumFieldPositiveTraits))
+                            customDataContainer.Remove(enumFieldPositiveTraits);
+                        if (customDataContainer.Contains(enumFieldNegativeTraits))
+                            customDataContainer.Remove(enumFieldNegativeTraits);
                     }
                 });
 
@@ -126,15 +181,25 @@ namespace SS.Elements
                     {
                         NegativeTraits = (TraitsData.NegativeTraits)callbackNegativeTraits.newValue;
                     });
-                        
+
                 customDataContainer.Add(enumFieldJob);
                 customDataContainer.Add(enumFieldPositiveTraits);
                 customDataContainer.Add(enumFieldNegativeTraits);
             }
 
+            return customDataContainer;
+        }
+
+        private VisualElement DrawBarkType()
+        {
+            VisualElement customDataContainer = new VisualElement();
+
+            EnumField enumFieldBarkType = SSElementUtility.CreateEnumField(BarkType, "Bark Type",
+                callback => { BarkType = (SSBarkType)callback.newValue; });
+            customDataContainer.Add(enumFieldBarkType);
+
             FloatField unsignedIntegerField = SSElementUtility.CreateFloatField(Duration,
                 "Duration", callback => { Duration = callback.newValue; });
-
             customDataContainer.Add(unsignedIntegerField);
 
             SliderInt sliderInt = null;
@@ -173,9 +238,7 @@ namespace SS.Elements
                 customDataContainer.Add(sliderInt);
             }
 
-            extensionContainer.Add(customDataContainer);
-
-            RefreshExpandedState();
+            return customDataContainer;
         }
     }
 }

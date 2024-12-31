@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,5 +12,4 @@ public class DialogueLine : MonoBehaviour
         characterIcon.sprite = icon;
         dialogueText.text = text;
     }
-    
 }

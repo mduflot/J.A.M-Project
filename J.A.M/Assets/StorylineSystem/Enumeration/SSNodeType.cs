@@ -6,6 +6,7 @@ namespace SS.Enumerations
         Task,
         Time,
         Sound,
-        Popup
+        Popup,
+        CheckCondition
     }
 }

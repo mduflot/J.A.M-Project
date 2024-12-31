@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using SS.Enumerations;
 using CharacterSystem;
@@ -9,6 +10,8 @@ using Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace UI
 {
@@ -28,17 +31,20 @@ namespace UI
         [SerializeField] private SpriteRenderer timerSprite;
         [SerializeField] private SpriteRenderer timeLeftSprite;
         [SerializeField] private Animator animator;
-
         [SerializeField] private Sprite hoveredSprite;
         [SerializeField] private Sprite defaultSprite;
-
         [SerializeField] private GameObject popupHelp;
-
         [SerializeField] private GameObject pointerArrow;
-        
-        private Camera camera;
+
+        [Header("Dialogue")] [SerializeField] private GameObject dialogueMenu;
+        [SerializeField] private Image characterImage;
+        [SerializeField] private TextMeshProUGUI characterNameText;
+        [SerializeField] private TextMeshProUGUI dialogueText;
+        [SerializeField] private float dialogueSpontaneousDuration = 5.0f;
+
+        [HideInInspector] public ConditionSO taskCondition;
+
         private SpaceshipManager spaceshipManager;
-        private ConditionSO taskCondition;
         private OutcomeSystem.OutcomeEvent[] outcomeEvents;
         private OutcomeSystem.OutcomeEventArgs[] outcomeEventArgs;
         private SSLauncher launcher;
@@ -46,12 +52,12 @@ namespace UI
         private float timeLeft;
         private List<TaskUI.GaugesOutcome> gaugeOutcomes = new();
         private TaskLog taskLog;
+        public UINotification uiNotification { private get; set; }
 
         private bool isHovered;
 
         private void Start()
         {
-            camera = Camera.main;
             data = new HoverMenuData();
             data.parent = transform;
             data.baseParent = transform;
@@ -63,43 +69,44 @@ namespace UI
             popupHelp.SetActive(false);
         }
 
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            Display();
-        }
-
         public void Initialize(Task task, SSTaskNodeSO ssTaskNode, SpaceshipManager spaceshipManager,
             SSLauncher ssLauncher,
             List<SerializableTuple<string, string>> dialogues = null, TaskLog taskToPlay = null)
         {
             IsCompleted = false;
-            IsCancelled = false;
+            IsStarted = false;
             Task = task;
             taskNode = ssTaskNode;
             time.text = "";
-            if (taskToPlay == null) Task.TimeLeft *= TimeTickSystem.ticksPerHour;
-            if (task.IsTaskTutorial) popupHelp.SetActive(true);
+            if (taskToPlay == null)
+                Task.TimeLeft *= TimeTickSystem.ticksPerHour;
+            if (task.IsTaskTutorial)
+                popupHelp.SetActive(true);
             timeLeft = Task.TimeLeft;
             icon.sprite = task.Icon;
             Dialogues = dialogues;
             this.spaceshipManager = spaceshipManager;
             launcher = ssLauncher;
-            TimeTickSystem.ModifyTimeScale(TimeTickSystem.lastActiveTimeScale);
             timerSprite.material.SetInt("_Arc2", 360);
             timeLeftSprite.material.SetInt("_Arc1", 360);
             taskLog = taskToPlay;
-
             if (task.TaskType != SSTaskType.Permanent)
             {
                 pointerArrow.SetActive(true);
                 pointerArrow.GetComponent<PointerArrow>().Init(gameObject, task.TaskType == SSTaskType.Timed);
             }
+
+            if (task.TaskType != SSTaskType.Permanent && task.TaskType != SSTaskType.Compute)
+            {
+                GameManager.Instance.UIManager.UINotificationsHandler.CreateTaskNotification(this);
+            }
+
+            this.spaceshipManager.AddTask(this);
         }
 
         public void InitializeCancelTask()
         {
             IsCompleted = false;
-            IsCancelled = false;
             taskCondition = Task.Conditions[^1].Item1;
             Task.conditionIndex = Task.Conditions.Count - 1;
             CheckingCondition(true);
@@ -137,7 +144,6 @@ namespace UI
                     {
                         Task.leaderCharacters.Add(character.icon.character);
                         LeaderCharacters.Add(character.icon.character);
-                        character.icon.character.AssignTask(this, true);
                     }
                 }
                 else
@@ -146,7 +152,6 @@ namespace UI
                     {
                         Task.assistantCharacters.Add(character.icon.character);
                         AssistantCharacters.Add(character.icon.character);
-                        character.icon.character.AssignTask(this);
                     }
                 }
             }
@@ -166,7 +171,7 @@ namespace UI
                 for (int i = 0; i < Task.Conditions.Count; i++)
                 {
                     taskCondition = Task.Conditions[i].Item1;
-                    validatedCondition = RouteCondition(taskCondition.BaseCondition.target);
+                    validatedCondition = ConditionSystem.RouteCondition(taskCondition.BaseCondition.target, this);
                     if (validatedCondition)
                     {
                         Task.conditionIndex = i;
@@ -181,7 +186,7 @@ namespace UI
             }
 
             CheckingCondition(validatedCondition);
-            
+
             pointerArrow.SetActive(false);
 
             for (int index = 0; index < GameManager.Instance.UIManager.gauges.Length; index++)
@@ -197,6 +202,18 @@ namespace UI
                     }
                 }
             }
+
+            foreach (var leader in LeaderCharacters)
+            {
+                leader.AssignTask(this, true);
+            }
+
+            foreach (var assistant in AssistantCharacters)
+            {
+                assistant.AssignTask(this);
+            }
+
+            GameManager.Instance.UIManager.UINotificationsHandler.CreateTaskNotification(this);
         }
 
         private void CheckingCondition(bool validatedCondition)
@@ -312,8 +329,7 @@ namespace UI
                     switch (cond.BaseCondition.target)
                     {
                         case OutcomeData.OutcomeTarget.Leader:
-                            if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0],
-                                    AssistantCharacters.ToArray(), cond))
+                            if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], cond))
                                 continue;
                             break;
 
@@ -322,9 +338,7 @@ namespace UI
                             for (int j = 0; j < AssistantCharacters.Count; j++)
                             {
                                 if (AssistantCharacters[j] == null)
-                                    if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0],
-                                            AssistantCharacters.ToArray(),
-                                            cond))
+                                    if (!ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], cond))
                                         condition = true;
                                     else
                                     {
@@ -431,6 +445,12 @@ namespace UI
                                 OutcomeSystem.GenerateEventArgs(outcome, AssistantCharacters[0]);
                             break;
 
+                        case OutcomeData.OutcomeTarget.Random:
+                            var randomCharacter =
+                                spaceshipManager.characters[Random.Range(0, spaceshipManager.characters.Length)];
+                            outcomeEventArgs[i] = OutcomeSystem.GenerateEventArgs(outcome, randomCharacter);
+                            break;
+
                         case OutcomeData.OutcomeTarget.Crew:
                             outcomeEventArgs[numberOfBaseOutcomes + i] = OutcomeSystem.GenerateEventArgs(outcome,
                                 GameManager.Instance.SpaceshipManager.characters);
@@ -484,42 +504,6 @@ namespace UI
             if (Task.TaskType == SSTaskType.Permanent) TimeTickSystem.OnTick += AddOutcomeOnTick;
         }
 
-        private bool RouteCondition(OutcomeData.OutcomeTarget target)
-        {
-            bool validateCondition = false;
-            switch (target)
-            {
-                case OutcomeData.OutcomeTarget.Leader:
-                    validateCondition =
-                        ConditionSystem.CheckCharacterCondition(LeaderCharacters[0], AssistantCharacters.ToArray(),
-                            taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.Assistant:
-                    if (AssistantCharacters.Count >= 1)
-                        validateCondition =
-                            ConditionSystem.CheckCharacterCondition(AssistantCharacters[0],
-                                AssistantCharacters.ToArray(), taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.Gauge:
-                    validateCondition = ConditionSystem.CheckGaugeCondition(taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.GaugeValue:
-                    validateCondition = ConditionSystem.CheckGaugeValueCondition(taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.Crew:
-                    validateCondition = ConditionSystem.CheckCrewCondition(taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.Ship:
-                    validateCondition = ConditionSystem.CheckSpaceshipCondition(taskCondition);
-                    break;
-                case OutcomeData.OutcomeTarget.None:
-                    validateCondition = true;
-                    break;
-            }
-
-            return validateCondition;
-        }
-
         private void AddOutcomeOnTick(object sender, TimeTickSystem.OnTickEventArgs e)
         {
             for (uint i = 0; i < outcomeEvents.Length; i++)
@@ -540,8 +524,11 @@ namespace UI
                         data.text2 = time.text;
                         hoverMenu.UpdateMenu(data);
                     }
+
                     Task.Duration -= TimeTickSystem.timePerTick;
                     timerSprite.material.SetInt("_Arc2", (int)(Task.Duration / Task.BaseDuration * 360));
+                    if (uiNotification.isActive)
+                        uiNotification.UpdateCompletionFill(Task.Duration / Task.BaseDuration);
                 }
                 else
                 {
@@ -556,6 +543,8 @@ namespace UI
                     time.text = TimeTickSystem.GetTicksAsTime((uint)Task.TimeLeft);
                     Task.TimeLeft -= TimeTickSystem.timePerTick;
                     timeLeftSprite.material.SetInt("_Arc1", (int)(360 - Task.TimeLeft / timeLeft * 360));
+                    if (uiNotification.isActive)
+                        uiNotification.UpdateTimeLeftFill(Task.TimeLeft / timeLeft);
                 }
                 else if (!IsStarted)
                 {
@@ -594,16 +583,30 @@ namespace UI
 
             IsCompleted = true;
             ResetCharacters();
-            GameManager.Instance.UIManager.ResetPreviewGauges();
             GameManager.Instance.RefreshCharacterIcons();
+            GameManager.Instance.UIManager.UINotificationsHandler.RemoveNotification(uiNotification);
+            if (IsStarted) GameManager.Instance.UIManager.UINotificationsHandler.CreateRecapNotification(this);
             if (transform.parent != null)
             {
                 var notificationContainer = transform.parent.GetComponent<NotificationContainer>();
                 transform.parent = null;
                 notificationContainer.DisplayNotification();
             }
-            spaceshipManager.notificationPool.AddToPool(gameObject);
-            spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
+
+            if (launcher.storyline != null)
+            {
+                if (launcher.storyline.StorylineContainer.StoryType != SSStoryType.Principal)
+                    StartCoroutine(
+                        spaceshipManager.notificationPool.AddToPoolLater(gameObject, dialogueSpontaneousDuration));
+                else
+                    spaceshipManager.notificationPool.AddToPool(gameObject);
+            }
+
+            if (Task.TaskType == SSTaskType.Permanent || Task.TaskType == SSTaskType.Compute)
+            {
+                spaceshipManager.notificationPool.AddToPool(gameObject);
+            }
+
             IsStarted = false;
 
             if (LeaderCharacters.Count == 0) return;
@@ -636,18 +639,14 @@ namespace UI
             }
             else if (Task.TaskType.Equals(SSTaskType.Timed))
             {
-                launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunTimedNodeCancel(this, Task, taskNode);
-                spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
                 ResetCharacters();
             }
             else if (Task.TaskType.Equals(SSTaskType.Untimed))
             {
-                launcher.IsCancelled = true;
                 IsStarted = false;
                 launcher.RunUntimedNodeCancel(this, Task, taskNode);
-                spaceshipManager.RemoveGaugeOutcomes(gaugeOutcomes);
                 ResetCharacters();
             }
 
@@ -676,6 +675,31 @@ namespace UI
             }
         }
 
+        public void DisplayDialogue(Sprite characterSprite, string characterName, string dialogue,
+            SSDialogueNodeSO nodeSO = null)
+        {
+            StopCoroutine(HideDialogue(nodeSO));
+            dialogueMenu.SetActive(true);
+            characterImage.sprite = characterSprite;
+            characterNameText.text = characterName;
+            dialogueText.text = dialogue;
+            StartCoroutine(HideDialogue(nodeSO));
+        }
+
+        private IEnumerator HideDialogue(SSDialogueNodeSO nodeSO)
+        {
+            yield return new WaitForSeconds(dialogueSpontaneousDuration);
+            dialogueMenu.SetActive(false);
+            if (nodeSO) nodeSO.IsCompleted = true;
+        }
+
+        #region Utilities
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            Display();
+        }
+
         public override void OnHover(PointerEventData eventData)
         {
             outlineSprite.sprite = hoveredSprite;
@@ -694,5 +718,7 @@ namespace UI
             animator.SetBool("Selected", false);
             base.OnExit(eventData);
         }
+
+        #endregion
     }
 }

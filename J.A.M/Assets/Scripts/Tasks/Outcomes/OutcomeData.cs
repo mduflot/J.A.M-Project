@@ -32,7 +32,8 @@ public class OutcomeData : MonoBehaviour
         Crew,
         Ship,
         Gauge,
-        GaugeValue
+        GaugeValue,
+        Random
     }
 
 }

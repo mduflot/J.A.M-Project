@@ -41,7 +41,7 @@ namespace Managers
 
         public bool IsInTutorial;
 
-        [Header("Leak")] [SerializeField] private uint baseTimeToWaitLeak;
+        [Header("Leak")] [SerializeField] private uint baseTimeToWaitLeak = 12;
         private uint timeToWaitLeak;
         private uint waitingTimeLeak;
         private bool isLeaked;
@@ -95,7 +95,7 @@ namespace Managers
         private void GenerateLeakEvent()
         {
             isLeaked = true;
-            Checker.Instance.ChooseNewStoryline(SSStoryType.Leak);
+            Checker.Instance.ChooseNewStoryline(SSStoryType.Spontaneous, SSSpontaneousType.Leak);
             TimeTickSystem.OnTick += WaitingLeakEvent;
         }
 
@@ -139,37 +139,12 @@ namespace Managers
                     }
                 }
 
-                if (system.gaugeValue <= 0) system.gaugeValue = 0;
-                else
-                {
-                    float decreaseValue = system.decreaseSpeed;
-                    switch (system.type)
-                    {
-                        case SystemType.Food:
-                            if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.Rot))
-                                decreaseValue += system.decreaseSpeed * 3 / 10;
-                            if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.Restriction))
-                                decreaseValue += system.decreaseSpeed / 10;
-                            if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.DamagedRations))
-                                decreaseValue += system.decreaseSpeed * 3 / 10;
-                            break;
-
-                        case SystemType.Hull:
-                            if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.WeakenedHull))
-                                decreaseValue += system.decreaseSpeed * 3 / 10;
-                            break;
-
-                        case SystemType.Power:
-                            if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.BadInsulation))
-                                decreaseValue += system.decreaseSpeed * 3 / 10;
-                            break;
-
-                        case SystemType.Trajectory:
-                            if (SpaceshipTraits.HasFlag(TraitsData.SpaceshipTraits.Leak))
-                                decreaseValue += .2f;
-                            break;
+                if (system.gaugeValue <= 0) system.gaugeValue = 0.0f;
+                else {
+                    float decreaseValue = 0.0f;
+                    for (int index = 0; index < system.decreaseValues.Count; index++) {
+                        decreaseValue += system.decreaseValues[index];
                     }
-
                     system.gaugeValue -= decreaseValue / TimeTickSystem.ticksPerHour;
                 }
 
@@ -196,21 +171,6 @@ namespace Managers
             }
         }
 
-        public void RemoveGaugeOutcomes(List<TaskUI.GaugesOutcome> outcomes)
-        {
-            foreach (var system in systems)
-            {
-                var valueToAdd = 0f;
-                foreach (var outcome in outcomes)
-                {
-                    if (outcome.gauge == system.type) valueToAdd -= outcome.value;
-                }
-
-                if (system.type == SystemType.Trajectory) system.previewGaugeValue -= valueToAdd;
-                else system.previewGaugeValue += valueToAdd;
-            }
-        }
-
         public float GetGaugeValue(SystemType systemType)
         {
             return systemsDictionary[systemType].gaugeValue;
@@ -230,6 +190,8 @@ namespace Managers
                 gaugeValue = 0;
             }
 
+            if (systemType == SystemType.Trajectory) systemsDictionary[systemType].previewGaugeValue += value;
+            else systemsDictionary[systemType].previewGaugeValue -= value;
             systemsDictionary[systemType].gaugeValue = gaugeValue;
         }
 
@@ -238,7 +200,7 @@ namespace Managers
             if (e.tick % (TimeTickSystem.ticksPerHour * 24) != 0) return;
             if (IsInTutorial) return;
 
-            Checker.Instance.ChooseNewStoryline(SSStoryType.Secondary);
+            Checker.Instance.ChooseNewStoryline(SSStoryType.Spontaneous);
             TimeTickSystem.OnTick -= GenerateSecondaryEventOnFirstDay;
         }
 
@@ -342,7 +304,7 @@ namespace Managers
                         case SimCharacter.SimStatus.IdleEat:
                             if (simCharacter.tick >= simEatThreshold * TimeTickSystem.ticksPerHour)
                             {
-                                if (character.IsWorking() || simCharacter.taskRoom != null)
+                                if (character.IsWorking() && simCharacter.taskRoom != null)
                                 {
                                     simCharacter.SendToRoom(simCharacter.taskRoom.roomType);
                                 }

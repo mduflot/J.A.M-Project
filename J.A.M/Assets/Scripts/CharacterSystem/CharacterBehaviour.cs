@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
-using Managers;
 using Tasks;
 using UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace CharacterSystem
 {
@@ -14,7 +11,7 @@ namespace CharacterSystem
         [SerializeField] private float moveSpeed;
 
         [SerializeField] private SimCharacter simCharacter;
-        
+
         private const float MaxMood = 20.0f;
 
         [Range(0, 100)] private float mood = 50.0f;
@@ -27,7 +24,6 @@ namespace CharacterSystem
         private bool isTaskLeader;
 
         private bool isMoodIncreasing;
-        
         private Notification currentNotification;
 
         private void Start()
@@ -145,8 +141,7 @@ namespace CharacterSystem
 
         public float GetMood()
         {
-            float finalMood = mood;
-            return finalMood;
+            return mood;
         }
 
         public float GetMaxMood()

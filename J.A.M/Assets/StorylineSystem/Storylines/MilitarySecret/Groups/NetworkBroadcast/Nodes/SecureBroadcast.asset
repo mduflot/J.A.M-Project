@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a93fc94d9d43ad8373de455f0c62dd, type: 3}
+  m_Name: SecureBroadcast
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: SecureBroadcast
+  <Choices>k__BackingField:
+  - rid: 198649355842355892
+  - rid: 198649355842355893
+  - rid: 198649355842355894
+  <NodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Description>k__BackingField: There's an incoming signal on a secure channel. The
+    civilians might want to listen, whereas the military might want to keep the channel
+    secure.
+  <TaskType>k__BackingField: 2
+  <Icon>k__BackingField: {fileID: 21300000, guid: 674067cf15d4f3448b518b294ca7432e,
+    type: 3}
+  <TimeLeft>k__BackingField: 5
+  <Duration>k__BackingField: 5
+  <MandatorySlots>k__BackingField: 1
+  <OptionalSlots>k__BackingField: 0
+  <TaskHelpFactor>k__BackingField: 0.75
+  <Room>k__BackingField: 0
+  <Furniture>k__BackingField: 1
+  <IsTaskTutorial>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 198649355842355892
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: CivilianScientist
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 8050ccb005abc6b488e8670ce883ea72,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 340a5a6f2438cee4cbb0ae1fd404a04d,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will try and patch the crew to onto the
+          Network transmission.
+    - rid: 198649355842355893
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Military
+        <NextNode>k__BackingField: {fileID: 11400000, guid: 36830b41304fef3409b8e2b9b1b8261b,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: 2ada7602094785548b03bb84d266a074,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will make sure the channel is secure.
+    - rid: 198649355842355894
+      type: {class: SSNodeChoiceTaskData, ns: SS.Data, asm: Assembly-CSharp}
+      data:
+        <Text>k__BackingField: Default
+        <NextNode>k__BackingField: {fileID: 11400000, guid: b5384e68f0eb73d4a9ed87b13348514c,
+          type: 2}
+        <Condition>k__BackingField: {fileID: 11400000, guid: a5938e3b18156ba4da4d3e871c9d5698,
+          type: 2}
+        <PreviewOutcome>k__BackingField: will try and patch the crew to onto the
+          Network transmission.

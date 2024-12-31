@@ -58,12 +58,14 @@ namespace SS.Utilities
             SSGraphSaveDataSO graphData =
                 CreateAsset<SSGraphSaveDataSO>("Assets/Editor/StorylineSystem/Graphs", $"{graphFileName}Graph");
 
-            graphData.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.IsTutorialToPlay, graphView.IsFirstToPlay, graphView.IsReplayable,
+            graphData.Initialize(graphFileName, graphView.StoryStatus, graphView.StoryType, graphView.SpontaneousType,
+                graphView.IsTutorialToPlay, graphView.IsFirstToPlay, graphView.IsReplayable,
                 graphView.Condition);
 
             SSNodeContainerSO nodeContainer = CreateAsset<SSNodeContainerSO>(containerFolderPath, graphFileName);
 
-            nodeContainer.Initialize(graphFileName, graphData.ID, graphView.StoryStatus, graphView.StoryType, graphView.IsTutorialToPlay, graphView.IsFirstToPlay, graphView.IsReplayable,
+            nodeContainer.Initialize(graphFileName, graphData.ID, graphView.StoryStatus, graphView.StoryType,
+                graphView.SpontaneousType, graphView.IsTutorialToPlay, graphView.IsFirstToPlay, graphView.IsReplayable,
                 graphView.Condition);
 
             SaveGroups(graphData, nodeContainer);
@@ -119,7 +121,8 @@ namespace SS.Utilities
             SSNodeGroupSO nodeGroup =
                 CreateAsset<SSNodeGroupSO>($"{containerFolderPath}/Groups/{groupName}", groupName);
 
-            nodeGroup.Initialize(groupName, group.ID, group.StoryStatus, group.IsFirstToPlay, group.minWaitTime, group.maxWaitTime, group.timeIsOverride, group.overrideWaitTime, group.Condition);
+            nodeGroup.Initialize(groupName, group.ID, group.StoryStatus, group.IsFirstToPlay, group.minWaitTime,
+                group.maxWaitTime, group.timeIsOverride, group.overrideWaitTime, group.Condition);
 
             createdNodeGroups.Add(group.ID, nodeGroup);
 
@@ -188,9 +191,11 @@ namespace SS.Utilities
                     GroupID = dialogueNode.Group?.ID,
                     NodeType = dialogueNode.NodeType,
                     Position = dialogueNode.GetPosition().position,
+                    DialogueType = dialogueNode.DialogueType,
                     Text = dialogueNode.Text,
                     SpeakerType = dialogueNode.SpeakerType,
                     Duration = dialogueNode.Duration,
+                    BarkType = dialogueNode.BarkType,
                     IsDialogueTask = dialogueNode.IsDialogueTask,
                     PercentageTask = dialogueNode.PercentageTask,
                     Job = dialogueNode.Job,
@@ -211,7 +216,6 @@ namespace SS.Utilities
                     NodeType = taskNode.NodeType,
                     Position = taskNode.GetPosition().position,
                     DescriptionTask = taskNode.DescriptionTask,
-                    TaskStatus = taskNode.TaskStatus,
                     TaskType = taskNode.TaskType,
                     TaskIcon = taskNode.TaskIcon,
                     TimeLeft = taskNode.TimeLeft,
@@ -248,7 +252,7 @@ namespace SS.Utilities
                     ID = popupNode.ID,
                     Name = popupNode.NodeName,
                     Choices = choices,
-                    GroupID =popupNode.Group?.ID,
+                    GroupID = popupNode.Group?.ID,
                     NodeType = popupNode.NodeType,
                     Position = popupNode.GetPosition().position,
                     Text = popupNode.Text,
@@ -257,6 +261,19 @@ namespace SS.Utilities
                 };
 
                 graphData.Nodes.Add(nodeData);
+            }
+            else if (node is SSCheckConditionNode checkNode)
+            {
+                SSCheckConditionNodeSaveData nodeData = new SSCheckConditionNodeSaveData()
+                {
+                    ID = checkNode.ID,
+                    Name = checkNode.NodeName,
+                    Choices = choices,
+                    GroupID = checkNode.Group?.ID,
+                    NodeType = checkNode.NodeType,
+                    Position = checkNode.GetPosition().position,
+                    Condition = checkNode.Condition
+                };
             }
         }
 
@@ -281,10 +298,10 @@ namespace SS.Utilities
                     nodeContainer.UngroupedNodes.Add(nodeSO);
                 }
 
-                nodeSO.Initialize(dialogueNode.NodeName, dialogueNode.Text,
+                nodeSO.Initialize(dialogueNode.NodeName, dialogueNode.DialogueType, dialogueNode.Text,
                     ConvertNodeChoicesToNodeChoicesData(dialogueNode.Choices), dialogueNode.NodeType,
                     dialogueNode.IsStartingNode(), dialogueNode.SpeakerType, dialogueNode.Duration,
-                    dialogueNode.IsDialogueTask, dialogueNode.PercentageTask, dialogueNode.Job,
+                    dialogueNode.BarkType, dialogueNode.IsDialogueTask, dialogueNode.PercentageTask, dialogueNode.Job,
                     dialogueNode.PositiveTraits, dialogueNode.NegativeTraits);
 
                 createdNodes.Add(dialogueNode.ID, nodeSO);
@@ -311,7 +328,7 @@ namespace SS.Utilities
 
                 nodeSO.Initialize(taskNode.NodeName, ConvertNodeChoicesToNodeChoicesData(taskNode.Choices),
                     taskNode.NodeType,
-                    taskNode.IsStartingNode(), taskNode.DescriptionTask, taskNode.TaskStatus, taskNode.TaskType,
+                    taskNode.IsStartingNode(), taskNode.DescriptionTask, taskNode.TaskType,
                     taskNode.TaskIcon, taskNode.TimeLeft,
                     taskNode.BaseDuration, taskNode.MandatorySlots, taskNode.OptionalSlots, taskNode.TaskHelpFactor,
                     taskNode.Room, taskNode.Furniture, taskNode.IsTaskTutorial);
@@ -370,6 +387,34 @@ namespace SS.Utilities
                     popupNode.IsStartingNode(), popupNode.PopupUIType, popupNode.IsTutorialPopup);
 
                 createdNodes.Add(popupNode.ID, nodeSO);
+
+                SaveAsset(nodeSO);
+            }
+            else if (node is SSCheckConditionNode checkCondition)
+            {
+                SSCheckConditionNodeSO nodeSO;
+
+                if (checkCondition.Group != null)
+                {
+                    nodeSO = CreateAsset<SSCheckConditionNodeSO>(
+                        $"{containerFolderPath}/Groups/{checkCondition.Group.title}/Nodes",
+                        checkCondition.NodeName);
+
+                    nodeContainer.NodeGroups.AddItem(createdNodeGroups[checkCondition.Group.ID], nodeSO);
+                }
+                else
+                {
+                    nodeSO = CreateAsset<SSCheckConditionNodeSO>($"{containerFolderPath}/Global/Nodes",
+                        checkCondition.NodeName);
+
+                    nodeContainer.UngroupedNodes.Add(nodeSO);
+                }
+
+                nodeSO.Initialize(checkCondition.NodeName, ConvertNodeChoicesToNodeChoicesData(checkCondition.Choices),
+                    checkCondition.NodeType,
+                    checkCondition.IsStartingNode(), checkCondition.Condition);
+
+                createdNodes.Add(checkCondition.ID, nodeSO);
 
                 SaveAsset(nodeSO);
             }
@@ -533,8 +578,10 @@ namespace SS.Utilities
                 if (nodeData.NodeType == SSNodeType.Dialogue)
                 {
                     ((SSDialogueNode)node).Text = ((SSDialogueNodeSaveData)nodeData).Text;
+                    ((SSDialogueNode)node).DialogueType = ((SSDialogueNodeSaveData)nodeData).DialogueType;
                     ((SSDialogueNode)node).SpeakerType = ((SSDialogueNodeSaveData)nodeData).SpeakerType;
                     ((SSDialogueNode)node).Duration = ((SSDialogueNodeSaveData)nodeData).Duration;
+                    ((SSDialogueNode)node).BarkType = ((SSDialogueNodeSaveData)nodeData).BarkType;
                     ((SSDialogueNode)node).IsDialogueTask = ((SSDialogueNodeSaveData)nodeData).IsDialogueTask;
                     ((SSDialogueNode)node).PercentageTask = ((SSDialogueNodeSaveData)nodeData).PercentageTask;
                     ((SSDialogueNode)node).Job = ((SSDialogueNodeSaveData)nodeData).Job;
@@ -544,7 +591,6 @@ namespace SS.Utilities
                 else if (nodeData.NodeType == SSNodeType.Task)
                 {
                     ((SSTaskNode)node).DescriptionTask = ((SSTaskNodeSaveData)nodeData).DescriptionTask;
-                    ((SSTaskNode)node).TaskStatus = ((SSTaskNodeSaveData)nodeData).TaskStatus;
                     ((SSTaskNode)node).TaskType = ((SSTaskNodeSaveData)nodeData).TaskType;
                     ((SSTaskNode)node).TaskIcon = ((SSTaskNodeSaveData)nodeData).TaskIcon;
                     ((SSTaskNode)node).TimeLeft = ((SSTaskNodeSaveData)nodeData).TimeLeft;
@@ -565,6 +611,10 @@ namespace SS.Utilities
                     ((SSPopupNode)node).Text = ((SSPopupNodeSaveData)nodeData).Text;
                     ((SSPopupNode)node).PopupUIType = ((SSPopupNodeSaveData)nodeData).PopupUIType;
                     ((SSPopupNode)node).IsTutorialPopup = ((SSPopupNodeSaveData)nodeData).IsTutorialPopup;
+                }
+                else if (nodeData.NodeType == SSNodeType.CheckCondition)
+                {
+                    ((SSCheckConditionNode)node).Condition = ((SSCheckConditionNodeSaveData)nodeData).Condition;
                 }
 
                 node.Draw();
