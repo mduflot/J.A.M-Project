@@ -7,7 +7,7 @@ It emphasizes the psychological dimension of an interstellar journey.
 
 ## 🏎️ Main feature
 
-I had the chance to develop a storytelling tool during the production of this project, using the Unity UI and mainly the shader window and its mechanics.  
+I had the chance to develop a narration tool during the production of this project, using the Unity UI and mainly the shader window and its mechanics.  
 It allows you to integrate lines of dialogue or tasks with which the player will have to interact.  
 So it became the central structure of our project, and we took advantage of the ease that windows provide, precise visibility and tasks all in one place, to make the production of our tasks more fluid. 
 
