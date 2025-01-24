@@ -149,7 +149,7 @@ namespace Tasks
                 Appear(true);
                 GameManager.Instance.taskOpened = true;
             }
-            
+
             UpdatePreview();
         }
 

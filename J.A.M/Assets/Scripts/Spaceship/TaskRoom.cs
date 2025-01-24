@@ -21,13 +21,10 @@ namespace Spaceship
         public void OnDrop(PointerEventData eventData)
         {
             if (GameManager.Instance.SpaceshipManager.IsInTutorial) return;
-            GameObject dropped = eventData.pointerDrag;
-            var icon = dropped.GetComponent<CharacterIcon>();
-            if (icon != null)
-            {
-                launcher.StartTimelineOnDrop(icon);
-                GameManager.Instance.SpaceshipManager.DisplayRooms(false);
-            }
+            var icon = eventData.pointerDrag.GetComponent<CharacterIcon>();
+            if (icon == null) return;
+            launcher.StartTimelineOnDrop(icon);
+            GameManager.Instance.SpaceshipManager.DisplayRooms(false);
         }
 
         public void OnPointerDown(PointerEventData eventData)

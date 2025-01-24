@@ -36,7 +36,8 @@ namespace UI
         [SerializeField] private GameObject popupHelp;
         [SerializeField] private GameObject pointerArrow;
 
-        [Header("Dialogue")] [SerializeField] private GameObject dialogueMenu;
+        [Header("Dialogue")]
+        [SerializeField] private GameObject dialogueMenu;
         [SerializeField] private Image characterImage;
         [SerializeField] private TextMeshProUGUI characterNameText;
         [SerializeField] private TextMeshProUGUI dialogueText;
@@ -61,6 +62,8 @@ namespace UI
             data = new HoverMenuData();
             data.parent = transform;
             data.baseParent = transform;
+            LeaderCharacters = new();
+            AssistantCharacters = new();
         }
 
         private void OnDisable()
@@ -73,6 +76,8 @@ namespace UI
             SSLauncher ssLauncher,
             List<SerializableTuple<string, string>> dialogues = null, TaskLog taskToPlay = null)
         {
+            LeaderCharacters = new();
+            AssistantCharacters = new();
             IsCompleted = false;
             IsStarted = false;
             Task = task;
