@@ -218,6 +218,9 @@ namespace UI
                 assistant.AssignTask(this);
             }
 
+            // Remove Task notification
+            GameManager.Instance.UIManager.UINotificationsHandler.RemoveNotification(uiNotification);
+            // Add Recap notification
             GameManager.Instance.UIManager.UINotificationsHandler.CreateTaskNotification(this);
         }
 
