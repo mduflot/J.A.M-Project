@@ -13,9 +13,9 @@ namespace Managers
 
         public static int pauseScale = 0;
 
-        public static int playScale = 1;
+        public static int playScale = 2;
 
-        public static int quickPlayScale = 5;
+        public static int quickPlayScale = 10;
         //[SerializeField] private const uint ticksPerTenMinutes = 5;
 
         [SerializeField] private TimeButton[] timeButtons;
