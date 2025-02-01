@@ -51,7 +51,6 @@ namespace UI
         private SSLauncher launcher;
         private SSTaskNodeSO taskNode;
         private float timeLeft;
-        private List<TaskUI.GaugesOutcome> gaugeOutcomes = new();
         private TaskLog taskLog;
         public UINotification uiNotification { private get; set; }
 
@@ -136,7 +135,7 @@ namespace UI
             }
         }
 
-        public void OnStart(List<CharacterUISlot> characters, List<TaskUI.GaugesOutcome> go)
+        public void OnStart(List<CharacterUISlot> characters)
         {
             popupHelp.SetActive(false);
             TimeTickSystem.ModifyTimeScale(TimeTickSystem.lastActiveTimeScale);
@@ -183,11 +182,6 @@ namespace UI
                         break;
                     }
                 }
-            }
-
-            foreach (var outcome in go)
-            {
-                gaugeOutcomes.Add(outcome);
             }
 
             CheckingCondition(validatedCondition);

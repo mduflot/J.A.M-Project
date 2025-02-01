@@ -141,9 +141,10 @@ namespace Managers
 
                 if (system.gaugeValue <= 0) system.gaugeValue = 0.0f;
                 else {
-                    float decreaseValue = 0.0f;
-                    for (int index = 0; index < system.decreaseValues.Count; index++) {
-                        decreaseValue += system.decreaseValues[index];
+                    var decreaseValue = 0.0f;
+                    foreach (var value in system.decreaseValues)
+                    {
+                        decreaseValue += value;
                     }
                     system.gaugeValue -= decreaseValue / TimeTickSystem.ticksPerHour;
                 }
@@ -160,7 +161,7 @@ namespace Managers
         {
             foreach (var system in systems)
             {
-                var valueToAdd = 0f;
+                var valueToAdd = 0.0f;
                 foreach (var outcome in outcomes)
                 {
                     if (outcome.gauge == system.type) valueToAdd += outcome.value;
@@ -182,16 +183,21 @@ namespace Managers
             var maxGauge = systemsDictionary[systemType].maxGauge;
             gaugeValue += value;
             if (gaugeValue > maxGauge)
-            {
                 gaugeValue = maxGauge;
-            }
             else if (gaugeValue < 0)
-            {
                 gaugeValue = 0;
-            }
 
-            if (systemType == SystemType.Trajectory) systemsDictionary[systemType].previewGaugeValue += value;
-            else systemsDictionary[systemType].previewGaugeValue -= value;
+            if (systemType == SystemType.Trajectory)
+            {
+                systemsDictionary[systemType].previewGaugeValue += value;
+            }
+            else
+            {
+                if (value < 0)
+                    systemsDictionary[systemType].previewGaugeValue += value;
+                else
+                    systemsDictionary[systemType].previewGaugeValue -= value;
+            }
             systemsDictionary[systemType].gaugeValue = gaugeValue;
         }
 

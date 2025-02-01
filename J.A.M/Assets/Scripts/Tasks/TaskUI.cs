@@ -15,8 +15,7 @@ namespace Tasks
 {
     public class TaskUI : MonoBehaviour
     {
-        [Header("Task")]
-        [SerializeField] private TextMeshProUGUI titleText;
+        [Header("Task")] [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private TextMeshProUGUI timeLeftText;
         [SerializeField] private GameObject timeLeftObject;
         [SerializeField] private Transform startButtonObject;
@@ -32,8 +31,7 @@ namespace Tasks
         [SerializeField] private GameObject separator;
         [SerializeField] private GameObject popupHelp;
 
-        [Header("Values")]
-        [SerializeField] private float timeLeft;
+        [Header("Values")] [SerializeField] private float timeLeft;
         [SerializeField] private float duration;
 
         private Notification notification;
@@ -161,7 +159,7 @@ namespace Tasks
             StartCoroutine(DisplayText(descriptionText, notification.Task.Description, 0.02f));
             StartCoroutine(DisplayText(previewOutcomeText, notification.Task.previewText, 0.02f));
             duration = notification.Task.Duration;
-            durationText.SetText(TimeTickSystem.GetTicksAsTime((uint) duration));
+            durationText.SetText(TimeTickSystem.GetTicksAsTime((uint)duration));
 
             for (int i = 0; i < notification.Task.leaderCharacters.Count; i++)
             {
@@ -219,7 +217,7 @@ namespace Tasks
                   Mathf.Pow(assistantCharacters + 1, notification.Task.HelpFactor)
                 : notification.Task.Duration;
 
-            durationText.text = TimeTickSystem.GetTicksAsTime((uint) (duration * TimeTickSystem.ticksPerHour));
+            durationText.text = TimeTickSystem.GetTicksAsTime((uint)(duration * TimeTickSystem.ticksPerHour));
             var button = startButton.GetComponentInChildren<Button>();
             var text = button.GetComponentInChildren<TextMeshProUGUI>();
             var image = button.GetComponent<Image>();
@@ -228,8 +226,10 @@ namespace Tasks
             for (int index = 0; index < notification.Task.Conditions.Count; index++)
             {
                 bool condition = CheckTarget(notification.Task.Conditions[index].Item1);
-                if (notification.Task.TaskType != SSTaskType.Compute) {
-                    if (characterSlots[0]?.icon == null && notification.Task.TaskType != SSTaskType.Untimed) {
+                if (notification.Task.TaskType != SSTaskType.Compute)
+                {
+                    if (characterSlots[0]?.icon == null && notification.Task.TaskType != SSTaskType.Untimed)
+                    {
                         index = notification.Task.Conditions.Count - 1;
                         condition = true;
                     }
@@ -650,7 +650,7 @@ namespace Tasks
             }
 
             if (CharactersWorking()) return;
-            notification.OnStart(characterSlots, gaugesOutcomes);
+            notification.OnStart(characterSlots);
             taskStarted = true;
             GameManager.Instance.UIManager.ResetCharactersPreviewGauges();
             GameManager.Instance.SpaceshipManager.ApplyGaugeOutcomes(gaugesOutcomes);
