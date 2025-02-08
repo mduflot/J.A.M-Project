@@ -40,6 +40,7 @@ public class SimCharacter : MonoBehaviour
     private void Update()
     {
         Simulate();
+        SetSpeedAnimator(TimeTickSystem.timeScale);
     }
 
     public void Simulate()
@@ -108,7 +109,10 @@ public class SimCharacter : MonoBehaviour
             }
         SimDoor door = SimPathing.FindDoorByID(currentRoomDoor);
         Vector3 pos = transform.position;
-        pos += TimeTickSystem.timeScale * GameManager.Instance.SpaceshipManager.simMoveSpeed * (door.transform.position - transform.position).normalized;
+        if (simStatus == SimStatus.GoToRoom)
+            pos += TimeTickSystem.timeScale * GameManager.Instance.SpaceshipManager.simMoveSpeed * (door.transform.position - transform.position).normalized * 2;
+        else
+            pos += TimeTickSystem.timeScale * GameManager.Instance.SpaceshipManager.simMoveSpeed * (door.transform.position - transform.position).normalized;
         transform.position = pos;
     }
 
@@ -116,7 +120,6 @@ public class SimCharacter : MonoBehaviour
     {
         if (currentRoom == null) return;
         animatorCharacter.SetBool("IsMoving", false);
-        SetSpeedAnimator(TimeTickSystem.timeScale);
         
         if(taskRoom == null && simStatus != SimStatus.IdleEat && currentRoom != idleRooms[0])
             SendToIdleRoom();
@@ -144,7 +147,6 @@ public class SimCharacter : MonoBehaviour
             return;
         }
         animatorCharacter.SetBool("IsMoving", true);
-        SetSpeedAnimator(TimeTickSystem.timeScale * 2);
         
         //cancel last path
         doorPath.Clear();
@@ -163,7 +165,6 @@ public class SimCharacter : MonoBehaviour
     public void SendToIdleRoom()
     {
         animatorCharacter.SetBool("IsMoving", true);
-        SetSpeedAnimator(TimeTickSystem.timeScale);
         simStatus = SimStatus.GoToIdle;
         var randRoom = Random.Range(0f, 1f);
         
