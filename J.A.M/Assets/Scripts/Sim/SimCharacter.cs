@@ -144,7 +144,7 @@ public class SimCharacter : MonoBehaviour
             return;
         }
         animatorCharacter.SetBool("IsMoving", true);
-        SetSpeedAnimator(TimeTickSystem.timeScale);
+        SetSpeedAnimator(TimeTickSystem.timeScale * 2);
         
         //cancel last path
         doorPath.Clear();
