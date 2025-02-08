@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using SS.Enumerations;
 using CharacterSystem;
 using Managers;
@@ -425,7 +426,14 @@ namespace UI
                                 }
                             }
 
-                            if (Task.TaskType == SSTaskType.Permanent) outcomeEventArgs[i].value /= Task.Duration;
+                            if (Task.TaskType == SSTaskType.Permanent)
+                            {
+                                outcomeEventArgs[i].value /= Task.Duration;
+                                if (outcomeEventArgs[i].value > 0)
+                                    GameManager.Instance.UIManager.gaugeReferences[outcome.OutcomeTargetGauge].hoverMenu.UpdateMenu("\nIncrease: " + outcomeEventArgs[i].value.ToString("F2"));
+                                else if (outcomeEventArgs[i].value < 0)
+                                    GameManager.Instance.UIManager.gaugeReferences[outcome.OutcomeTargetGauge].hoverMenu.UpdateMenu("\nDecrease: " + outcomeEventArgs[i].value.ToString("F2"));
+                            }
 
                             break;
                     }
@@ -466,7 +474,13 @@ namespace UI
                             outcomeEventArgs[numberOfBaseOutcomes + i] =
                                 OutcomeSystem.GenerateEventArgs(outcome, outcome.OutcomeTargetGauge);
                             if (Task.TaskType == SSTaskType.Permanent)
+                            {
                                 outcomeEventArgs[numberOfBaseOutcomes + i].value /= Task.Duration;
+                                if (outcomeEventArgs[numberOfBaseOutcomes + i].value > 0)
+                                    GameManager.Instance.UIManager.gaugeReferences[outcome.OutcomeTargetGauge].hoverMenu.UpdateMenu("\nIncrease: " + outcomeEventArgs[numberOfBaseOutcomes + i].value.ToString("F2"));
+                                else if (outcomeEventArgs[numberOfBaseOutcomes + i].value < 0)
+                                    GameManager.Instance.UIManager.gaugeReferences[outcome.OutcomeTargetGauge].hoverMenu.UpdateMenu("\nDecrease: " + outcomeEventArgs[numberOfBaseOutcomes + i].value.ToString("F2"));
+                            }
                             break;
                     }
                 }
@@ -580,6 +594,13 @@ namespace UI
                             break;
                         }
                     }
+                }
+            }
+            else if (Task.TaskType == SSTaskType.Permanent)
+            {
+                for (uint i = 0; i < outcomeEventArgs.Length; i++)
+                {
+                    GameManager.Instance.UIManager.gaugeReferences[outcomeEventArgs[i].gauge].hoverMenu.ResetMenu();
                 }
             }
 

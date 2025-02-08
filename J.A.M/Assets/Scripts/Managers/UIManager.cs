@@ -15,7 +15,7 @@ namespace Managers
     public class UIManager : MonoBehaviour
     {
         public GaugeUI[] gauges;
-        private Dictionary<SystemType, GaugeUI> gaugeReferences = new();
+        public Dictionary<SystemType, GaugeUI> gaugeReferences = new();
         public Transform charactersUIParent;
         public List<CharacterUI> charactersUI;
         public List<CharacterIcon> characterIcons = new();

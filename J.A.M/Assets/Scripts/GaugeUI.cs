@@ -16,7 +16,7 @@ public abstract class GaugeUI : HoverableObject, IPointerDownHandler
         data = new HoverMenuData
         {
             text1 = systemType.ToString(),
-            text2 = "Decrease : " + GameManager.Instance.SpaceshipManager.systems
+            text2 = "Decrease: " + GameManager.Instance.SpaceshipManager.systems
                 .First(system => system.type == systemType).decreaseValues[0],
             baseParent = parentGauge.transform,
             parent = transform
